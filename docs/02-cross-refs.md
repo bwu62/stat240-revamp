@@ -20,7 +20,7 @@ Figures and tables *with captions* can also be cross-referenced from elsewhere i
 See Figure \@ref(fig:nice-fig).
 
 
-```r
+``` r
 par(mar = c(4, 4, .1, .1))
 plot(pressure, type = 'b', pch = 19)
 ```
@@ -33,7 +33,7 @@ plot(pressure, type = 'b', pch = 19)
 Don't miss Table \@ref(tab:nice-tab).
 
 
-```r
+``` r
 knitr::kable(
   head(pressure, 10), caption = 'Here is a nice table!',
   booktabs = TRUE
