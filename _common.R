@@ -6,3 +6,41 @@ knitr::opts_chunk$set(
   comment = "#>",
   collapse = TRUE
   )
+
+library(tidyverse)
+library(lubridate)
+library(rvest)
+
+# detect which semester we're headed into
+# and fix an R-version to use
+
+today = today()
+
+season = case_when(
+  month(today)<5~"Spring",
+  month(today)<8~"Summer",
+  TRUE~"Fall"
+)
+
+semester = str_c(year(today),"-",season)
+
+r.date = case_when(
+  season=="Spring"~"1-19",
+  season=="Summer"~"6-14",
+  TRUE~"9-2"
+) %>% paste(year(today)) %>% 
+  mdy %>% min(today)
+
+r.releases = 
+  "https://en.wikipedia.org/wiki/R_(programming_language)" %>% 
+  read_html %>% 
+  html_nodes(xpath="//table[contains(caption,'codenames')]") %>%
+  {html_table(.)[[1]][1:2]} %>% 
+  setNames(c("version","date")) %>% 
+  head(10) %>% mutate(date=ymd(date))
+
+r.latest = r.releases %>% 
+  filter(date<=r.date) %>% slice_max(date,n=1)
+
+r.version = r.latest$version
+r.date = r.latest$date
