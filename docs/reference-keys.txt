@@ -1,2 +1,7 @@
 intro
 setup
+setup-install
+setup-win
+setup-mac
+setup-configure
+setup-files
