@@ -12,3 +12,6 @@ pre {
 pre code {
   white-space: inherit;
 }
+main p a, main li a {
+  text-decoration: underline;
+}
