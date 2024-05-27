@@ -1,9 +1,10 @@
+
 # Setup {#setup}
 
 This page will take you through all steps necessary to fully setup your computer. There are several things we need to do:
 
  1. First, in section \@ref(setup-install) we will install both R and Rstudio.
- 2. Next, in section \@ref(setup-configure) we will configure Rstudio and install some necessary R packages.
+ 2. Next, in section \@ref(setup-config) we will configure Rstudio and install some necessary R packages.
  3. Finally, in section \@ref(setup-files) we will setup an organization system for your files.
 
 
@@ -16,25 +17,54 @@ We will be using both R and Rstudio throughout the course.
    - If you prefer, you can also use a different IDE like [Visual Studio](https://code.visualstudio.com/docs/languages/r) or [Jupyter](https://docs.anaconda.com/free/navigator/tutorials/r-lang/).
 
 ::: {.rmdnote}
-Note: R and Rstudio are two different programs that both need to be installed!
+Note: R and Rstudio are two different programs that both need to be installed! Also, if you have previously installed R or Rstudio, it is highly recommended to first completely uninstall it before reinstalling the latest version to avoid conflicts.
 :::
 
-The instructions below are separated by operating system, depending on if you have a [Windows](#setup-win) or [Mac](#setup-mac) machine.
+We will first install the latest release of R, which is version `r r.version` released on `r format(r.date,"%b %d, %Y")`; then we will install Rstudio. The instructions below are separated by operating system, depending on if you have a [Windows](#setup-win) or [Mac](#setup-mac) machine.
 
  - If you have a Linux system, follow one of the linked instructions [here](https://cloud.r-project.org/bin/linux/).
  - If you have a Chromebook, try [these steps](https://levente.littvay.hu/chromebook/).
 
+
 ### Windows instructions {#setup-win}
 
-`r lorem::ipsum(3)`
+ 1. Download [R-`r r.version`-win.exe](`r str_glue("https://cloud.r-project.org/bin/windows/base/old/{r.version}/R-{r.version}-win.exe")`) and run it, accepting all default settings.
+ 2. Download [Rstudio-latest.exe](	https://rstudio.org/download/latest/stable/desktop/windows/RStudio-latest.exe) and run it, again accepting all default settings.
+ 3. (Optional but highly recommended) Sometimes, if precompiled binaries of a requested package are not available for your machine, R may need to compile it from source, which will require the Rtools utility. To download the right version, check your system's [about page](ms-settings:about) and look at the "System type" line.
+    - If it shows "... x64-based processor", download this [Rtools installer](`r apache.find("https://cran.r-project.org/bin/windows/Rtools/rtools44/files/","rtools44-\\d")`) and run it, accepting all default settings.
+    - If it shows "... ARM-based processor", download this [Rtools installer](`r apache.find("https://cran.r-project.org/bin/windows/Rtools/rtools44/files/","rtools44-aarch")`) and run it, accepting all default settings.
+
+Now, you should have both R and Rstudio setup. To check the installation, find "Rstudio" in your start menu and run it. If you get a window that looks [like this](https://i.imgur.com/qmt5IHj.png), you're all set!
+
 
 ### Mac instructions {#setup-mac}
 
-`r lorem::ipsum(3)`
+ 1. First, we need to determine the right R installer file for your specific machine. Open the Apple menu in the top left corner of your screen and open ["About this mac"](https://upload.wikimedia.org/wikipedia/en/a/a6/Apple_menu_screenshot.png).
+    - If it shows "Chip: Apple M1/M2/M3", download [R-`r r.version`-arm64.pkg](`r str_glue("https://cloud.r-project.org/bin/macosx/big-sur-arm64/base/R-{r.version}-arm64.pkg")`) and run it, accepting all default settings.
+    - If it shows "Processor: ...Intel Core", download [R-`r r.version`-x86_64.pkg](`r str_glue("https://cloud.r-project.org/bin/macosx/big-sur-x86_64/base/R-{r.version}-x86_64.pkg")`) and run it, accepting all default settings.
+    - If you get an error, check your OS version in the About window. If it's older (i.e. <11) you may need to either upgrade your OS or download an older version [here](https://cloud.r-project.org/bin/macosx/).
+ 2. Now, download [Rstudio-latest.dmg](https://rstudio.org/download/latest/stable/desktop/mac/RStudio-latest.dmg) and install it. Note this is a dmg or virtual disk image file, so you need to follow these steps to install it:
+    a. Double click the file to open it. This will mount a virtual drive to your desktop and then open it in a new Finder window.
+    b. In the new window, drag the Rstudio icon into the Applications folder. This will install it to your computer.
+    c. Open a new Finder window, go to the Applications folder, find the new Rstudio program and drag it into your dock for easy access.
+    d. (Optional) You can now unmount the virtual disk. Right click the mounted virtual disk on your desktop and choose "Unmount", or alternatively find the mounted drive on the right side of your dock and drag it to the trash bin. You can also delete the .dmg install file.
+ 3. On many (but not all) systems, two additional programs need to be installed for everything to run smoothly. It is recommended for everyone to install these just in case (there's no harm if you didn't actually need them).
+    a. Download `r page.find("https://www.xquartz.org/","\\.pkg",T)` and run it, accepting all default settings. This installs a tool that Rstudio uses to display certain outputs.
+    b. Go to either Spotlight, Launchpad, or the Applications folder, find "Terminal" and run it. This will open a new command line window. Type in or copy this line `xcode-select --install` and hit enter, then follow on-screen instructions. You may be asked for your fingerprint or password (note your password will not show as you type, this is normal and done for security purposes).
 
-## R configuration/packages {#setup-configure}
+On some machines, R or Rstudio may be blocked by your OS out of caution. Follow [these steps](https://support.apple.com/en-us/102445#openanyway) to unblock and then try again.
 
-`r lorem::ipsum(3)`
+Now, assuming everything went smoothly, you should have both R and Rstudio setup. To check the installation, find "Rstudio" in your Dock or Applications folder and run it. If you get a window that looks [like this](https://i.imgur.com/qmt5IHj.png), you're all set!
+
+
+## Config/packages {#setup-config}
+
+::: {.rmdnote}
+Note: before continuing, make sure that you can [open Rstudio](https://i.imgur.com/qmt5IHj.png) and have the correct latest version (R-`r r.version`) installed!
+:::
+
+
+
 
 ## File organization {#setup-files}
 
