@@ -1,7 +1,7 @@
 --- 
 title: "STAT 240 Revamp"
 author: "Bi Cheng Wu, Bret Larget, Cameron Jones"
-date: "2024-05-22"
+date: "2024-05-27"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
