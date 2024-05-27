@@ -44,3 +44,34 @@ r.latest = r.releases %>%
 
 r.version = r.latest$version
 r.date = r.latest$date
+
+apache.find = function(url,pattern,n=1){
+  matching = url %>% 
+    read_html() %>% 
+    html_nodes("a") %>% 
+    html_attrs %>% 
+    unlist %>% 
+    unname %>% 
+    str_subset("^[:alnum:]") %>% 
+    str_subset(pattern)
+  if(length(matching)>n) stop("Wrong match length!")
+  paste0(url,matching)
+}
+
+page.find = function(url,pattern,md=F,n=1){
+  matching = url %>% 
+    read_html() %>% 
+    html_nodes("a") %>% 
+    html_attrs %>% 
+    unlist %>% 
+    unname %>% 
+    str_subset("\\.[:alnum:]+$") %>% 
+    str_subset(pattern) %>% 
+    {ifelse(str_starts(.,"http"),.,paste0(url,.))}
+  if(length(matching)>n) stop("Wrong match length!")
+  if(!md){
+    matching
+  } else{
+    paste0("[",str_replace(matching,".*/",""),"](",matching,")")
+  }
+}
