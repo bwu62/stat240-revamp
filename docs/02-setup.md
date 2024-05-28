@@ -16,8 +16,8 @@ We will be using both R and Rstudio throughout the course.
  - [Rstudio](https://posit.co/products/open-source/rstudio/) is an IDE (integrated development environment) that makes developing in R much easier.
    - If you prefer, you can also use a different IDE like [Visual Studio](https://code.visualstudio.com/docs/languages/r) or [Jupyter](https://docs.anaconda.com/free/navigator/tutorials/r-lang/).
 
-::: {.rmdnote}
-Note: R and Rstudio are two different programs that both need to be installed! Also, if you have previously installed R or Rstudio, it is highly recommended to first completely uninstall it before reinstalling the latest version to avoid conflicts.
+::: {.note}
+R and Rstudio are two different programs that both need to be installed! Also, if you have previously installed R or Rstudio, it is highly recommended to first completely uninstall it before reinstalling the latest version to avoid conflicts.
 :::
 
 We will first install the latest release of R, which is version 4.4.0 released on Apr 24, 2024; then we will install Rstudio. The instructions below are separated by operating system, depending on if you have a [Windows](#setup-win) or [Mac](#setup-mac) machine.
@@ -45,27 +45,27 @@ Now, you should have both R and Rstudio setup. To check the installation, find "
     - If you get an error, check your OS version in the About window. If it's older (i.e. <11) you may need to either upgrade your OS or download an older version [here](https://cloud.r-project.org/bin/macosx/).
  2. Now, download [Rstudio-latest.dmg](https://rstudio.org/download/latest/stable/desktop/mac/RStudio-latest.dmg) and install it. Note this is a dmg or virtual disk image file, so you need to follow these steps to install it:
     a. Double click the file to open it. This will mount a virtual drive to your desktop and then open it in a new Finder window.
-    b. In the new window, drag the Rstudio icon into the Applications folder. This will install it to your computer.
-    c. Open a new Finder window, go to the Applications folder, find the new Rstudio program and drag it into your dock for easy access.
+    b. In the new window, drag the Rstudio icon into the Applications directory. This will install it to your computer.
+    c. Open a new Finder window, go to the Applications directory, find the new Rstudio program and drag it into your dock for easy access.
     d. (Optional) You can now unmount the virtual disk. Right click the mounted virtual disk on your desktop and choose "Unmount", or alternatively find the mounted drive on the right side of your dock and drag it to the trash bin. You can also delete the .dmg install file.
  3. On many (but not all) systems, two additional programs need to be installed for everything to run smoothly. It is recommended for everyone to install these just in case (there's no harm if you didn't actually need them).
     a. Download [XQuartz-2.8.5.pkg](https://github.com/XQuartz/XQuartz/releases/download/XQuartz-2.8.5/XQuartz-2.8.5.pkg) and run it, accepting all default settings. This installs a tool that Rstudio uses to display certain outputs.
-    b. Go to either Spotlight, Launchpad, or the Applications folder, find "Terminal" and run it. This will open a new command line window. Type in or copy this line `xcode-select --install` and hit enter, then follow on-screen instructions. You may be asked for your fingerprint or password (note your password will not show as you type, this is normal and done for security purposes).
+    b. Using either Spotlight, Launchpad, or the Applications folder, open "Terminal" and type in or copy this line `xcode-select --install`{.zsh} and hit enter, then follow on-screen instructions. You may be asked for your fingerprint or password (note your password will not show as you type, this is normal and done for security purposes).
 
-On some machines, R or Rstudio may be blocked by your OS out of caution. Follow [these steps](https://support.apple.com/en-us/102445#openanyway) to unblock and then try again.
+On some machines, R or Rstudio may be blocked by your OS out of an overabundance of caution. Follow [these steps](https://support.apple.com/en-us/102445#openanyway) to unblock and then try again.
 
-Now, assuming everything went smoothly, you should have both R and Rstudio setup. To check the installation, find "Rstudio" in your Dock or Applications folder and run it. If you get a window that looks [like this](https://i.imgur.com/qmt5IHj.png), you're all set!
+Now, assuming everything went smoothly, you should have both R and Rstudio setup. To check the installation, find "Rstudio" in your Dock or Applications directory and run it. If you get a window that looks [like this](https://i.imgur.com/qmt5IHj.png), you're all set!
 
 
 ## Packages/config {#setup-packs-config}
 
-::: {.rmdnote}
-Note: before continuing, make sure that you can [open Rstudio](https://i.imgur.com/qmt5IHj.png) and have the correct latest version (R-4.4.0) installed!
+::: {.note}
+Before continuing, make sure that you can [open Rstudio](https://i.imgur.com/qmt5IHj.png) and have the correct latest version (R-4.4.0) installed!
 :::
 
 Next, we will install some necessary packages and configure some recommended options to improve workflow.
 
- 1. Open Rstudio. In the Console window, type in or copy this line `install.packages(c("tidyverse","rmarkdown"))` and hit enter.
+ 1. Open Rstudio. In the Console window, type in or copy this line `install.packages(c("tidyverse","rmarkdown"))`{.R} and hit enter.
     - If Rstudio asks you whether to "use a personal library", choose yes.
     - If Rstudio asks you whether to "install from source", first try choosing no which should work for most people. If that fails, try reinstalling but this time choose yes.
     - Make sure you see either "successfully unpacked" or "downloaded binary packages are in" in the console messages to confirm installation succeeded.
@@ -91,8 +91,36 @@ Now you R/Rstudio should be properly setup.
 
 ## File organization {#setup-files}
 
-Ipsum scelerisque suspendisse lectus consequat venenatis pretium penatibus parturient. Id magnis justo condimentum fusce, nisi egestas suspendisse. Vivamus fames tellus dictumst risus, nunc posuere sem, consequat dui tempus lobortis duis, duis habitasse dictum cursus senectus tempus nulla?
+There will be a lot of files to keep track of in this course, so it is highly recommended you create a neat directory structure on your computer to help organize your files. We recommend a directory structure similar to this:
 
-Amet quisque conubia et dapibus enim curabitur pulvinar orci eget dictum ligula interdum.
+    ..
+    └── STAT240
+        ├── data
+        ├── discussion
+        │   ├── ds01
+        │   ├── ds02
+        │   └── ds03
+        |         ⋮
+        ├── homework
+        │   ├── hw01
+        │   ├── hw02
+        │   └── hw03
+        |         ⋮
+        ├── notes
+        └── project
 
-Adipiscing cubilia ad penatibus, leo orci quisque aliquam ut pellentesque ridiculus, sociis nibh nibh? Phasellus malesuada laoreet, habitant est massa vulputate hac. Phasellus congue proin!
+This tree diagram shows somewhere in your computer ("..") you should make a "STAT240" directory. Inside, you should have directories like "homework" and "discussion" with a subdirectory for each specific assignment (e.g. "hw01", "hw02", "ds01", "ds02", etc..).
+
+We also recommend creating directories "data", where you should place all the datasets you download; "notes", where you can place any other notes you download or take; and "project", where you can place your project files when those are assigned later. If necessary, you can also create further directories at your own discretion.
+
+:::{.note}
+Make sure your STAT240 folder is NOT backed up by a cloud synchronized app like OneDrive, Box, or iCloud. These programs sometimes interfere with R/Rstudio and may also cut off larger datasets.    
+
+We recommend you pick a different parent directory ("..") than "Desktop" or "Documents" since these are often backed up by default on many modern systems.
+:::
+
+
+## Setup troubleshooting FAQ
+
+\*\*FAQ will be added here as we collect more commonly encountered problems\*\*
+

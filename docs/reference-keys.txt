@@ -1,8 +1,8 @@
-intro
 setup
 setup-install
 setup-win
 setup-mac
 setup-packs-config
 setup-files
+setup-troubleshooting-faq
 rstudio-basics

@@ -21,24 +21,48 @@ main p a, main li a {
 @media (min-width: 576px) {
   .nav {
     display: flex !important;
-    display: -webkit-flex !important
+    display: -webkit-flex !important;
   }
   .nav:not(.nav-stacked):not(.flex-column) {
-    float: none !important
+    float: none !important;
   }
   .nav:not(.nav-stacked):not(.flex-column)>.bslib-nav-spacer {
-    margin-left: auto !important
+    margin-left: auto !important;
   }
   .nav:not(.nav-stacked):not(.flex-column)>.form-inline {
     margin-top: auto;
-    margin-bottom: auto
+    margin-bottom: auto;
   }
   .nav.nav-stacked {
     flex-direction: column;
     -webkit-flex-direction: column;
-    height: 100%
+    height: 100%;
   }
   .nav.nav-stacked>.bslib-nav-spacer {
-    margin-top: auto !important
+    margin-top: auto !important;
   }
+}
+
+main p a, main li a {
+  text-decoration: underline;
+}
+
+a.footnote-ref{
+  text-decoration: none !important;
+}
+
+.note>:first-child::before {
+  content:"Note: ";
+  font-weight: bold;
+  padding-right: .2em;
+}
+
+.tip>:first-child::before {
+  content:"Tip: ";
+  font-weight: bold;
+  padding-right: .2em;
+}
+
+.alert>:last-child {
+  margin-bottom:0rem;
 }
