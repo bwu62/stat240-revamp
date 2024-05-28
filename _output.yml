@@ -1,5 +1,6 @@
 bookdown::bs4_book:
   includes:
+    in_header: in_header.html
     after_body: after_body.html
   css: style.css
   theme:
