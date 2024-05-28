@@ -91,4 +91,36 @@ Now you R/Rstudio should be properly setup.
 
 ## File organization {#setup-files}
 
-`r lorem::ipsum(3)`
+There will be a lot of files to keep track of in this course, so it is highly recommended you create a neat directory structure on your computer to help organize your files. We recommend a directory structure similar to this:
+
+    ..
+    └── STAT240
+        ├── data
+        ├── discussion
+        │   ├── ds01
+        │   ├── ds02
+        │   └── ds03
+        |         ⋮
+        ├── homework
+        │   ├── hw01
+        │   ├── hw02
+        │   └── hw03
+        |         ⋮
+        ├── notes
+        └── project
+
+This tree diagram shows somewhere in your computer ("..") you should make a "STAT240" directory. Inside, you should have directories like "homework" and "discussion" with a subdirectory for each specific assignment (e.g. "hw01", "hw02", "ds01", "ds02", etc..).
+
+We also recommend creating directories "data", where you should place all the datasets you download; "notes", where you can place any other notes you download or take; and "project", where you can place your project files when those are assigned later. If necessary, you can also create further directories at your own discretion.
+
+:::{.note}
+Make sure your STAT240 folder is NOT backed up by a cloud synchronized app like OneDrive, Box, or iCloud. These programs sometimes interfere with R/Rstudio and may also cut off larger datasets.    
+
+We recommend you pick a different parent directory ("..") than "Desktop" or "Documents" since these are often backed up by default on many modern systems.
+:::
+
+
+## Setup troubleshooting FAQ
+
+\*\*FAQ will be added here as we collect more commonly encountered problems\*\*
+
