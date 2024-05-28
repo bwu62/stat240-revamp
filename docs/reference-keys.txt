@@ -3,5 +3,6 @@ setup
 setup-install
 setup-win
 setup-mac
-setup-config
+setup-packs-config
 setup-files
+rstudio-basics

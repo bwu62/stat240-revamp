@@ -15,3 +15,30 @@ pre code {
 main p a, main li a {
   text-decoration: underline;
 }
+
+/* https://forum.posit.co/t/set-non-collapsed-right-navigation-in-bs4-book/184739/2 */
+
+@media (min-width: 576px) {
+  .nav {
+    display: flex !important;
+    display: -webkit-flex !important
+  }
+  .nav:not(.nav-stacked):not(.flex-column) {
+    float: none !important
+  }
+  .nav:not(.nav-stacked):not(.flex-column)>.bslib-nav-spacer {
+    margin-left: auto !important
+  }
+  .nav:not(.nav-stacked):not(.flex-column)>.form-inline {
+    margin-top: auto;
+    margin-bottom: auto
+  }
+  .nav.nav-stacked {
+    flex-direction: column;
+    -webkit-flex-direction: column;
+    height: 100%
+  }
+  .nav.nav-stacked>.bslib-nav-spacer {
+    margin-top: auto !important
+  }
+}
