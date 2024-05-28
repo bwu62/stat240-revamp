@@ -4,7 +4,7 @@
 This page will take you through all steps necessary to fully setup your computer. There are several things we need to do:
 
  1. First, in section \@ref(setup-install) we will install both R and Rstudio.
- 2. Next, in section \@ref(setup-config) we will configure Rstudio and install some necessary R packages.
+ 2. Next, in section \@ref(setup-packs-config) we will install some necessary R packages and configure some recommended Rstudio settings.
  3. Finally, in section \@ref(setup-files) we will setup an organization system for your files.
 
 
@@ -57,13 +57,36 @@ On some machines, R or Rstudio may be blocked by your OS out of caution. Follow 
 Now, assuming everything went smoothly, you should have both R and Rstudio setup. To check the installation, find "Rstudio" in your Dock or Applications folder and run it. If you get a window that looks [like this](https://i.imgur.com/qmt5IHj.png), you're all set!
 
 
-## Config/packages {#setup-config}
+## Packages/config {#setup-packs-config}
 
 ::: {.rmdnote}
 Note: before continuing, make sure that you can [open Rstudio](https://i.imgur.com/qmt5IHj.png) and have the correct latest version (R-`r r.version`) installed!
 :::
 
+Next, we will install some necessary packages and configure some recommended options to improve workflow.
 
+ 1. Open Rstudio. In the Console window, type in or copy this line `install.packages(c("tidyverse","rmarkdown"))` and hit enter.
+    - If Rstudio asks you whether to "use a personal library", choose yes.
+    - If Rstudio asks you whether to "install from source", first try choosing no which should work for most people. If that fails, try reinstalling but this time choose yes.
+    - Make sure you see either "successfully unpacked" or "downloaded binary packages are in" in the console messages to confirm installation succeeded.
+ 2. Next, from the menu bar at the top, go to "Tools" > "Global Options".
+    a. On this first page, under the ["Workspace" section](https://i.imgur.com/Of5lBYT.png), set the following:
+       i.  Turn off "Restore .RData into workspace at startup"
+           - This ensures every time we close and reopen Rstudio that we start with a fresh session uncluttered with junk from previous sessions.
+       ii. Change "Save workspace to .Rdata on exit:" to "Never"
+           - This stops Rstudio from asking you during shutdown if you want to save your session, also preventing clutter.
+    b. Next, on the ["R Markdown" page](https://i.imgur.com/HjuJ0hm.png) of the Options window, set the following:
+       i.  Change "Show output preview in:" to "Viewer Pane"
+           - This improves workflow by displaying plots in the Viewer pane instead of opening a new window.
+       ii. Turn off "Show output inline for all R Markdown documents"
+           - This also improves workflow by displaying output in the console instead of inline in documents.
+    c. (Optional) If you wish to customize the interface, you can go to the ["Appearance" page](https://i.imgur.com/WsnSWNM.png) and change your font or theme. ^[If you like working in the dark and have an OLED-screen, you may want to check out the [synthwaveBLACK](https://github.com/roshandarji/synthwaveBLACK) theme.]
+    d. There are LOTS of other options you can feel free to explore later on your own, but for now we will move on.
+ 3. Due to dumb design, we need to repeat the previous R Markdown configuration steps again because Rstudio duplicates these settings in another menu.
+    a. From the menu bar at the top, go to "File" > "New File" > "R Markdown". Ignore the options in the new window and click "OK" to create a new R Markdown file (we will learn more about R Markdown files later).
+    b. In the new editor pane, open the [gear-icon dropdown menu](https://i.imgur.com/yr0jdxa.png) and make sure to reselect the same options (highlighted in red).
+
+Now you R/Rstudio should be properly setup.
 
 
 ## File organization {#setup-files}
