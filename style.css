@@ -42,4 +42,13 @@ main p a, main li a {
     margin-top: auto !important;
   }
 }
+
+main p a, main li a {
+  text-decoration: underline;
+}
+
+a.footnote-ref{
+  text-decoration: none !important;
+}
+
 }
