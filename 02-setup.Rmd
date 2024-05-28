@@ -50,7 +50,7 @@ Now, you should have both R and Rstudio setup. To check the installation, find "
     d. (Optional) You can now unmount the virtual disk. Right click the mounted virtual disk on your desktop and choose "Unmount", or alternatively find the mounted drive on the right side of your dock and drag it to the trash bin. You can also delete the .dmg install file.
  3. On many (but not all) systems, two additional programs need to be installed for everything to run smoothly. It is recommended for everyone to install these just in case (there's no harm if you didn't actually need them).
     a. Download `r page.find("https://www.xquartz.org/","\\.pkg",T)` and run it, accepting all default settings. This installs a tool that Rstudio uses to display certain outputs.
-    b. Go to either Spotlight, Launchpad, or the Applications folder, find "Terminal" and run it. This will open a new command line window. Type in or copy this line `xcode-select --install` and hit enter, then follow on-screen instructions. You may be asked for your fingerprint or password (note your password will not show as you type, this is normal and done for security purposes).
+    b. Using either Spotlight, Launchpad, or the Applications folder, open "Terminal" and type in or copy this line `xcode-select --install`{.zsh} and hit enter, then follow on-screen instructions. You may be asked for your fingerprint or password (note your password will not show as you type, this is normal and done for security purposes).
 
 On some machines, R or Rstudio may be blocked by your OS out of an overabundance of caution. Follow [these steps](https://support.apple.com/en-us/102445#openanyway) to unblock and then try again.
 
@@ -65,7 +65,7 @@ Before continuing, make sure that you can [open Rstudio](https://i.imgur.com/qmt
 
 Next, we will install some necessary packages and configure some recommended options to improve workflow.
 
- 1. Open Rstudio. In the Console window, type in or copy this line `install.packages(c("tidyverse","rmarkdown"))` and hit enter.
+ 1. Open Rstudio. In the Console window, type in or copy this line `install.packages(c("tidyverse","rmarkdown"))`{.R} and hit enter.
     - If Rstudio asks you whether to "use a personal library", choose yes.
     - If Rstudio asks you whether to "install from source", first try choosing no which should work for most people. If that fails, try reinstalling but this time choose yes.
     - Make sure you see either "successfully unpacked" or "downloaded binary packages are in" in the console messages to confirm installation succeeded.
