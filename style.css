@@ -51,4 +51,18 @@ a.footnote-ref{
   text-decoration: none !important;
 }
 
+.note>:first-child::before {
+  content:"Note: ";
+  font-weight: bold;
+  padding-right: .2em;
+}
+
+.tip>:first-child::before {
+  content:"Tip: ";
+  font-weight: bold;
+  padding-right: .2em;
+}
+
+.alert>:last-child {
+  margin-bottom:0rem;
 }

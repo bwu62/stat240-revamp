@@ -1,4 +1,6 @@
 bookdown::bs4_book:
+  includes:
+    after_body: after_body.html
   css: style.css
   theme:
     primary: "#9B0000"
