@@ -16,8 +16,8 @@ We will be using both R and Rstudio throughout the course.
  - [Rstudio](https://posit.co/products/open-source/rstudio/) is an IDE (integrated development environment) that makes developing in R much easier.
    - If you prefer, you can also use a different IDE like [Visual Studio](https://code.visualstudio.com/docs/languages/r) or [Jupyter](https://docs.anaconda.com/free/navigator/tutorials/r-lang/).
 
-::: {.rmdnote}
-Note: R and Rstudio are two different programs that both need to be installed! Also, if you have previously installed R or Rstudio, it is highly recommended to first completely uninstall it before reinstalling the latest version to avoid conflicts.
+::: {.note}
+R and Rstudio are two different programs that both need to be installed! Also, if you have previously installed R or Rstudio, it is highly recommended to first completely uninstall it before reinstalling the latest version to avoid conflicts.
 :::
 
 We will first install the latest release of R, which is version `r r.version` released on `r format(r.date,"%b %d, %Y")`; then we will install Rstudio. The instructions below are separated by operating system, depending on if you have a [Windows](#setup-win) or [Mac](#setup-mac) machine.
@@ -59,8 +59,8 @@ Now, assuming everything went smoothly, you should have both R and Rstudio setup
 
 ## Packages/config {#setup-packs-config}
 
-::: {.rmdnote}
-Note: before continuing, make sure that you can [open Rstudio](https://i.imgur.com/qmt5IHj.png) and have the correct latest version (R-`r r.version`) installed!
+::: {.note}
+Before continuing, make sure that you can [open Rstudio](https://i.imgur.com/qmt5IHj.png) and have the correct latest version (R-`r r.version`) installed!
 :::
 
 Next, we will install some necessary packages and configure some recommended options to improve workflow.
