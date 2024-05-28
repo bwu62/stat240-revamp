@@ -1,3 +1,12 @@
 
 # Rstudio basics {#rstudio-basics}
 
+
+
+<details><summary>Exercise solutions</summary>
+
+```{r}
+head(mtcars)
+```
+
+</details> 
