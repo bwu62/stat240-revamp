@@ -10,6 +10,7 @@ knitr::opts_chunk$set(
 library(tidyverse)
 library(lubridate)
 library(rvest)
+library(downlit)
 
 # detect which semester we're headed into
 # and fix an R-version to use
