@@ -45,16 +45,16 @@ Now, you should have both R and Rstudio setup. To check the installation, find "
     - If you get an error, check your OS version in the About window. If it's older (i.e. <11) you may need to either upgrade your OS or download an older version [here](https://cloud.r-project.org/bin/macosx/).
  2. Now, download [Rstudio-latest.dmg](https://rstudio.org/download/latest/stable/desktop/mac/RStudio-latest.dmg) and install it. Note this is a dmg or virtual disk image file, so you need to follow these steps to install it:
     a. Double click the file to open it. This will mount a virtual drive to your desktop and then open it in a new Finder window.
-    b. In the new window, drag the Rstudio icon into the Applications folder. This will install it to your computer.
-    c. Open a new Finder window, go to the Applications folder, find the new Rstudio program and drag it into your dock for easy access.
+    b. In the new window, drag the Rstudio icon into the Applications directory. This will install it to your computer.
+    c. Open a new Finder window, go to the Applications directory, find the new Rstudio program and drag it into your dock for easy access.
     d. (Optional) You can now unmount the virtual disk. Right click the mounted virtual disk on your desktop and choose "Unmount", or alternatively find the mounted drive on the right side of your dock and drag it to the trash bin. You can also delete the .dmg install file.
  3. On many (but not all) systems, two additional programs need to be installed for everything to run smoothly. It is recommended for everyone to install these just in case (there's no harm if you didn't actually need them).
     a. Download `r page.find("https://www.xquartz.org/","\\.pkg",T)` and run it, accepting all default settings. This installs a tool that Rstudio uses to display certain outputs.
     b. Go to either Spotlight, Launchpad, or the Applications folder, find "Terminal" and run it. This will open a new command line window. Type in or copy this line `xcode-select --install` and hit enter, then follow on-screen instructions. You may be asked for your fingerprint or password (note your password will not show as you type, this is normal and done for security purposes).
 
-On some machines, R or Rstudio may be blocked by your OS out of caution. Follow [these steps](https://support.apple.com/en-us/102445#openanyway) to unblock and then try again.
+On some machines, R or Rstudio may be blocked by your OS out of an overabundance of caution. Follow [these steps](https://support.apple.com/en-us/102445#openanyway) to unblock and then try again.
 
-Now, assuming everything went smoothly, you should have both R and Rstudio setup. To check the installation, find "Rstudio" in your Dock or Applications folder and run it. If you get a window that looks [like this](https://i.imgur.com/qmt5IHj.png), you're all set!
+Now, assuming everything went smoothly, you should have both R and Rstudio setup. To check the installation, find "Rstudio" in your Dock or Applications directory and run it. If you get a window that looks [like this](https://i.imgur.com/qmt5IHj.png), you're all set!
 
 
 ## Packages/config {#setup-packs-config}
