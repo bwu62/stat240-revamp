@@ -67,7 +67,7 @@ Next, we will install some necessary packages and configure some recommended opt
 
  1. Open Rstudio. In the Console window, type in or copy this line `install.packages(c("tidyverse","rmarkdown"))`{.R} and hit enter.
     - If Rstudio asks you whether to "use a personal library", choose yes.
-    - If Rstudio asks you whether to "install from source", first try choosing no which should work for most people. If that fails, try reinstalling but this time choose yes.
+    - If Rstudio asks you whether to "install from source", first try choosing no which should work for most people. If that fails, try repeating step 1, but this time choose yes.
     - Make sure you see either "successfully unpacked" or "downloaded binary packages are in" in the console messages to confirm installation succeeded.
  2. Next, from the menu bar at the top, go to "Tools" > "Global Options".
     a. On this first page, under the ["Workspace" section](https://i.imgur.com/Of5lBYT.png), set the following:
