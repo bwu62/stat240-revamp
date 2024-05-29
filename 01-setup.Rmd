@@ -86,7 +86,7 @@ Next, we will install some necessary packages and configure some recommended opt
     a. From the menu bar at the top, go to "File" > "New File" > "R Markdown". Ignore the options in the new window and click "OK" to create a new R Markdown file (we will learn more about R Markdown files later).
     b. In the new editor pane, open the [gear-icon dropdown menu](https://i.imgur.com/yr0jdxa.png) and make sure to reselect the same options (highlighted in red).
 
-Now you R/Rstudio should be properly setup.
+Now your R/Rstudio should be properly setup.
 
 
 ## File organization {#setup-files}
