@@ -1,7 +1,7 @@
 
 # Setup {#setup}
 
-This page will take you through all steps necessary to fully setup your computer. There are several things we need to do:
+This chapter will take you through all steps necessary to fully setup your computer. There are several things we need to do:
 
  1. First, in section \@ref(setup-install) we will install both R and Rstudio.
  2. Next, in section \@ref(setup-packs-config) we will install some necessary R packages and configure some recommended Rstudio settings.

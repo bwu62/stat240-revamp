@@ -6,3 +6,5 @@ setup-packs-config
 setup-files
 setup-troubleshooting-faq
 rstudio-basics
+rstudio-interface
+rstudio-rmarkdown
