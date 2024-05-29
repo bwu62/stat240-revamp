@@ -17,7 +17,7 @@ We will be using both R and Rstudio throughout the course.
    - If you prefer, you can also use a different IDE like [Visual Studio](https://code.visualstudio.com/docs/languages/r) or [Jupyter](https://docs.anaconda.com/free/navigator/tutorials/r-lang/).
 
 ::: {.note}
-R and Rstudio are two different programs that both need to be installed! Also, if you have previously installed R or Rstudio, it is highly recommended to first completely uninstall it before reinstalling the latest version to avoid conflicts.
+R and Rstudio are two different programs that both need to be installed! Also, if you have previously installed R or Rstudio, it is highly recommended to first completely uninstall it before reinstalling the latest version to avoid conflicts (instructions for [Windows](https://www.pcmag.com/how-to/how-to-uninstall-programs-in-windows-10) and [Mac](https://support.apple.com/en-us/102610)).
 :::
 
 We will first install the latest release of R, which is version `r r.version` released on `r format(r.date,"%b %d, %Y")`; then we will install Rstudio. The instructions below are separated by operating system, depending on if you have a [Windows](#setup-win) or [Mac](#setup-mac) machine.
@@ -30,11 +30,13 @@ We will first install the latest release of R, which is version `r r.version` re
 
  1. Download [R-`r r.version`-win.exe](`r str_glue("https://cloud.r-project.org/bin/windows/base/old/{r.version}/R-{r.version}-win.exe")`) and run it, accepting all default settings.
  2. Download [Rstudio-latest.exe](	https://rstudio.org/download/latest/stable/desktop/windows/RStudio-latest.exe) and run it, again accepting all default settings.
- 3. (Optional but highly recommended) Sometimes, if precompiled binaries of a requested package are not available for your machine, R may need to compile it from source, which will require the Rtools utility. To download the right version, check your system's [about page](ms-settings:about) and look at the "System type" line.
+ 3. Sometimes, R may need to recompile a package during installation, which will require the Rtools utility. To download the right version, check your system's [about page](ms-settings:about) and look at the "System type" line.
     - If it shows "... x64-based processor", download this [Rtools installer](`r apache.find("https://cran.r-project.org/bin/windows/Rtools/rtools44/files/","rtools44-\\d")`) and run it, accepting all default settings.
     - If it shows "... ARM-based processor", download this [Rtools installer](`r apache.find("https://cran.r-project.org/bin/windows/Rtools/rtools44/files/","rtools44-aarch")`) and run it, accepting all default settings.
 
-Now, you should have both R and Rstudio setup. To check the installation, find "Rstudio" in your start menu and run it. If you get a window that looks [like this](https://i.imgur.com/qmt5IHj.png), you're all set!
+Now, you should have both R and Rstudio setup. To check the installation, find "Rstudio" in your start menu and run it. If asked to choose an installation, just accept the default and click OK.
+
+If you get a window that looks [like this](https://i.imgur.com/qmt5IHj.png), you're all set and are ready to move on to the [next section](#setup-packs-config)!
 
 
 ### Mac instructions {#setup-mac}
@@ -54,7 +56,9 @@ Now, you should have both R and Rstudio setup. To check the installation, find "
 
 On some machines, R or Rstudio may be blocked by your OS out of an overabundance of caution. Follow [these steps](https://support.apple.com/en-us/102445#openanyway) to unblock and then try again.
 
-Now, assuming everything went smoothly, you should have both R and Rstudio setup. To check the installation, find "Rstudio" in your Dock or Applications directory and run it. If you get a window that looks [like this](https://i.imgur.com/qmt5IHj.png), you're all set!
+Now, assuming everything went smoothly, you should have both R and Rstudio setup. To check the installation, find "Rstudio" in your Dock or Applications directory and run it. If asked to choose an installation, just accept the default and click OK.
+
+If you get a window that looks [like this](https://i.imgur.com/qmt5IHj.png), you're all set!
 
 
 ## Packages/config {#setup-packs-config}
@@ -82,7 +86,7 @@ Next, we will install some necessary packages and configure some recommended opt
            - This also improves workflow by displaying output in the console instead of inline in documents.
     c. (Optional) If you wish to customize the interface, you can go to the ["Appearance" page](https://i.imgur.com/WsnSWNM.png) and change your font or theme. ^[If you like working in the dark and have an OLED-screen, you may want to check out the [synthwaveBLACK](https://github.com/roshandarji/synthwaveBLACK) theme.]
     d. Press OK to save your changes. 
-           - There are LOTS of other options you can feel free to explore later on your own, but for now we will move on.
+       - There are LOTS of other options you can feel free to explore later on your own, but for now we will move on.
  3. Due to poor design, we need to repeat the previous R Markdown configuration steps again because Rstudio duplicates these settings in another menu.
     a. From the menu bar at the top, go to "File" > "New File" > "R Markdown". Ignore the options in the new window and click "OK" to create a new R Markdown file (we will learn more about R Markdown files later).
     b. In the new editor pane, open the [gear-icon dropdown menu](https://i.imgur.com/yr0jdxa.png) and make sure to reselect the same options (highlighted in red).
@@ -115,9 +119,11 @@ This tree diagram shows somewhere in your computer ("..") you should make a "STA
 We also recommend creating directories "data", where you should place all the datasets you download; "notes", where you can place any other notes you download or take; and "project", where you can place your project files when those are assigned later. If necessary, you can also create further directories at your own discretion.
 
 :::{.note}
-Make sure your STAT240 folder is NOT backed up by a cloud synchronized app like OneDrive, Box, or iCloud. These programs sometimes interfere with R/Rstudio and may also cut off larger datasets.    
+Make sure your STAT240 folder is NOT backed up by a cloud synchronized app like OneDrive, Box, or iCloud. These programs sometimes interfere with R/Rstudio and may also cut off larger datasets.
 
-We recommend you pick a different parent directory ("..") than "Desktop" or "Documents" since these are often backed up by default on many modern systems.
+We recommend you pick a different parent directory ("..") than "Desktop" or "Documents" since these are often backed up by default on many modern systems. A good alternative is either the "Downloads" directory which is usually not backed up, or your user's home directory (instructions for [Windows](https://www.addictivetips.com/windows-tips/access-the-user-folder-on-windows-10/) and [Mac](https://www.cnet.com/tech/computing/how-to-find-your-macs-home-folder-and-add-it-to-finder/)).
+
+After creation, you can make this folder more convenient to access by [making a shortcut](https://support.motlow.edu/TDClient/274/Portal/KB/ArticleDet?ID=12451) on your desktop, or pinning it to somewhere accessible like [Quick Access](https://www.pcmag.com/how-to/how-to-retrieve-folders-files-with-windows-10-quick-access) for Windows or your [Dock](https://www.howtogeek.com/712237/how-to-pin-a-folder-or-a-file-to-your-macs-dock/) for Macs.
 :::
 
 
