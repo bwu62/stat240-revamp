@@ -1,7 +1,21 @@
 
 # Rstudio basics {#rstudio-basics}
 
+This chapter will teach you the basics of Rstudio and help you develop a workflow for testing R code and producing beautiful R Markdown documents, which we will be using throughout the semester.
 
+ 1. We will start in section \@ref(rstudio-interface) with a brief tour of the user interface, and learn to run a few simple R commands.
+ 2. Then, in section \@ref(rstudio-rmarkdown) we will learn how to use R Markdown documents to make
+
+
+
+
+## Interface {#rstudio-interface}
+
+
+## R Markdown {#rstudio-rmarkdown}
+
+
+<!--
 
 <details><summary>Exercise solutions</summary>
 
@@ -10,3 +24,5 @@ head(mtcars)
 ```
 
 </details> 
+
+-->
