@@ -16,6 +16,22 @@ csl: chicago-fullnote-bibliography.csl
 
 Intro (maybe write this last?)
 
+thins to hit:
+
+- how to use this book
+  - book conventions
+  - search
+  - syntax highlighting
+  - auto link of help pages
+- view source & edit contributions
+- prerequisites
+- will not teach everything, just provide foundation for further learning
+- acknowledgments
+
+features to add:
+
+- dark mode?
+
 
 ```{r include=FALSE}
 # automatically create a bib database for R packages
