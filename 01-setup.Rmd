@@ -81,7 +81,8 @@ Next, we will install some necessary packages and configure some recommended opt
        ii. Turn off "Show output inline for all R Markdown documents"
            - This also improves workflow by displaying output in the console instead of inline in documents.
     c. (Optional) If you wish to customize the interface, you can go to the ["Appearance" page](https://i.imgur.com/WsnSWNM.png) and change your font or theme. ^[If you like working in the dark and have an OLED-screen, you may want to check out the [synthwaveBLACK](https://github.com/roshandarji/synthwaveBLACK) theme.]
-    d. There are LOTS of other options you can feel free to explore later on your own, but for now we will move on.
+    d. Press OK to save your changes. 
+           - There are LOTS of other options you can feel free to explore later on your own, but for now we will move on.
  3. Due to poor design, we need to repeat the previous R Markdown configuration steps again because Rstudio duplicates these settings in another menu.
     a. From the menu bar at the top, go to "File" > "New File" > "R Markdown". Ignore the options in the new window and click "OK" to create a new R Markdown file (we will learn more about R Markdown files later).
     b. In the new editor pane, open the [gear-icon dropdown menu](https://i.imgur.com/yr0jdxa.png) and make sure to reselect the same options (highlighted in red).
