@@ -31,6 +31,8 @@ thins to hit:
 features to add:
 
 - dark mode?
+- auto-index generator in _common.R?
+- cheatsheet repository
 
 
 ```{r include=FALSE}
