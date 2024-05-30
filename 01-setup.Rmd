@@ -29,7 +29,9 @@ We will first install the latest release of R, which is version `r r.version` re
 ### Windows instructions {#setup-win}
 
  1. Download [R-`r r.version`-win.exe](`r str_glue("https://cloud.r-project.org/bin/windows/base/old/{r.version}/R-{r.version}-win.exe")`) and run it, accepting all default settings.
+ 
  2. Download [Rstudio-latest.exe](	https://rstudio.org/download/latest/stable/desktop/windows/RStudio-latest.exe) and run it, again accepting all default settings.
+ 
  3. Sometimes, R may need to recompile a package during installation, which will require the Rtools utility. To download the right version, check your system's [about page](ms-settings:about) and look at the "System type" line.
     - If it shows "... x64-based processor", download this [Rtools installer](`r apache.find("https://cran.r-project.org/bin/windows/Rtools/rtools44/files/","rtools44-\\d")`) and run it, accepting all default settings.
     - If it shows "... ARM-based processor", download this [Rtools installer](`r apache.find("https://cran.r-project.org/bin/windows/Rtools/rtools44/files/","rtools44-aarch")`) and run it, accepting all default settings.
@@ -45,11 +47,13 @@ If you get a window that looks [like this](https://i.imgur.com/qmt5IHj.png), you
     - If it shows "Chip: Apple M1/M2/M3", download [R-`r r.version`-arm64.pkg](`r str_glue("https://cloud.r-project.org/bin/macosx/big-sur-arm64/base/R-{r.version}-arm64.pkg")`) and run it, accepting all default settings.
     - If it shows "Processor: ...Intel Core", download [R-`r r.version`-x86_64.pkg](`r str_glue("https://cloud.r-project.org/bin/macosx/big-sur-x86_64/base/R-{r.version}-x86_64.pkg")`) and run it, accepting all default settings.
     - If you get an error, check your OS version in the About window. If it's older (i.e. <11) you may need to either upgrade your OS or download an older version [here](https://cloud.r-project.org/bin/macosx/).
+    
  2. Now, download [Rstudio-latest.dmg](https://rstudio.org/download/latest/stable/desktop/mac/RStudio-latest.dmg) and install it. Note this is a dmg or virtual disk image file, so you need to follow these steps to install it:
     a. Double click the file to open it. This will mount a virtual drive to your desktop and then open it in a new Finder window.
     b. In the new window, drag the Rstudio icon into the Applications directory. This will install it to your computer.
     c. Open a new Finder window, go to the Applications directory, find the new Rstudio program and drag it into your dock for easy access.
     d. (Optional) You can now unmount the virtual disk. Right click the mounted virtual disk on your desktop and choose "Unmount", or alternatively find the mounted drive on the right side of your dock and drag it to the trash bin. You can also delete the .dmg install file.
+    
  3. On many (but not all) systems, two additional programs need to be installed for everything to run smoothly. It is recommended for everyone to install these just in case (there's no harm if you didn't actually need them).
     a. Download `r page.find("https://www.xquartz.org/","\\.pkg",T)` and run it, accepting all default settings. This installs a tool that Rstudio uses to display certain outputs.
     b. Using either Spotlight, Launchpad, or the Applications folder, open "Terminal" and type in or copy this line `xcode-select --install`{.zsh} and hit enter, then follow on-screen instructions. You may be asked for your fingerprint or password (note your password will not show as you type, this is normal and done for security purposes).
@@ -71,8 +75,10 @@ Next, we will install some necessary packages and configure some recommended opt
 
  1. Open Rstudio. In the Console window, type in or copy this line `install.packages(c("tidyverse","rmarkdown"))`{.R} and hit enter.
     - If Rstudio asks you whether to "use a personal library", choose yes.
-    - If Rstudio asks you whether to "install from source", first try choosing no which should work for most people. If that fails, try repeating step 1, but this time choose yes.
-    - Make sure you see either "successfully unpacked" or "downloaded binary packages are in" in the console messages to confirm installation succeeded.
+    - If Rstudio asks you whether to "install from source", first try choosing no which should work for most people. If that fails, try repeating step 1, but this time choose yes.  
+    
+    Make sure you see either "successfully unpacked" or "downloaded binary packages are in" in the console messages to confirm installation succeeded.
+    
  2. Next, from the menu bar at the top, go to "Tools" > "Global Options".
     a. On this first page, under the ["Workspace" section](https://i.imgur.com/Of5lBYT.png), set the following:
        i.  Turn off "Restore .RData into workspace at startup"
@@ -85,8 +91,10 @@ Next, we will install some necessary packages and configure some recommended opt
        ii. Turn off "Show output inline for all R Markdown documents"
            - This also improves workflow by displaying output in the console instead of inline in documents.
     c. (Optional) If you wish to customize the interface, you can go to the ["Appearance" page](https://i.imgur.com/WsnSWNM.png) and change your font or theme. ^[If you like working in the dark and have an OLED-screen, you may want to check out the [synthwaveBLACK](https://github.com/roshandarji/synthwaveBLACK) theme.]
-    d. Press OK to save your changes. 
-       - There are LOTS of other options you can feel free to explore later on your own, but for now we will move on.
+    d. Press OK to save your changes.  
+    
+    There are LOTS of other options you can feel free to explore later on your own, but for now we will move on.
+    
  3. Due to poor design, we need to repeat the previous R Markdown configuration steps again because Rstudio duplicates these settings in another menu.
     a. From the menu bar at the top, go to "File" > "New File" > "R Markdown". Ignore the options in the new window and click "OK" to create a new R Markdown file (we will learn more about R Markdown files later).
     b. In the new editor pane, open the [gear-icon dropdown menu](https://i.imgur.com/yr0jdxa.png) and make sure to reselect the same options (highlighted in red).
