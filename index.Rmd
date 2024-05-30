@@ -34,6 +34,11 @@ features to add:
 - auto-index generator in _common.R?
 - cheatsheet repository
 
+other notes to self:
+- use [params](https://bookdown.org/yihui/rmarkdown/params-declare.html) to control:
+  - course directory
+  - hw/ds solution generation in files (in separate private repo?)
+
 
 ```{r include=FALSE}
 # automatically create a bib database for R packages
