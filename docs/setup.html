@@ -18,7 +18,8 @@
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.7.0.9000/transition.js"></script><script src="libs/bs3compat-0.7.0.9000/tabs.js"></script><script src="libs/bs3compat-0.7.0.9000/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-E0YDB40HWY"></script><script>
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link href="libs/panelset-0.3.0/panelset.css" rel="stylesheet">
+<script src="libs/panelset-0.3.0/panelset.js"></script><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-E0YDB40HWY"></script><script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
@@ -52,7 +53,7 @@
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Welcome</a></li>
 <li><a class="active" href="setup.html"><span class="header-section-number">1</span> Setup</a></li>
-<li><a class="" href="rstudio-basics.html"><span class="header-section-number">2</span> Rstudio basics</a></li>
+<li><a class="" href="rstudio-intro.html"><span class="header-section-number">2</span> Intro to Rstudio</a></li>
 </ul>
 
         <div class="book-extra">
@@ -86,7 +87,7 @@
 </li>
 </ul>
 <div class="note">
-<p>R and Rstudio are two different programs that both need to be installed! Also, if you have previously installed R or Rstudio, it is highly recommended to first completely uninstall it before reinstalling the latest version to avoid conflicts.</p>
+<p>R and Rstudio are two different programs that both need to be installed! Also, if you have previously installed R or Rstudio, it is highly recommended to first completely uninstall it before reinstalling the latest version to avoid conflicts (instructions for <a href="https://www.pcmag.com/how-to/how-to-uninstall-programs-in-windows-10">Windows</a> and <a href="https://support.apple.com/en-us/102610">Mac</a>).</p>
 </div>
 <p>We will first install the latest release of R, which is version 4.4.0 released on Apr 24, 2024; then we will install Rstudio. The instructions below are separated by operating system, depending on if you have a <a href="setup.html#setup-win">Windows</a> or <a href="setup.html#setup-mac">Mac</a> machine.</p>
 <ul>
@@ -98,16 +99,18 @@
 <span class="header-section-number">1.1.1</span> Windows instructions<a class="anchor" aria-label="anchor" href="#setup-win"><i class="fas fa-link"></i></a>
 </h3>
 <ol style="list-style-type: decimal">
-<li>Download <a href="https://cloud.r-project.org/bin/windows/base/old/4.4.0/R-4.4.0-win.exe">R-4.4.0-win.exe</a> and run it, accepting all default settings.</li>
-<li>Download <a href="https://rstudio.org/download/latest/stable/desktop/windows/RStudio-latest.exe">Rstudio-latest.exe</a> and run it, again accepting all default settings.</li>
-<li>(Optional but highly recommended) Sometimes, if precompiled binaries of a requested package are not available for your machine, R may need to compile it from source, which will require the Rtools utility. To download the right version, check your system’s <a href="ms-settings:about">about page</a> and look at the “System type” line.
+<li><p>Download <a href="https://cloud.r-project.org/bin/windows/base/old/4.4.0/R-4.4.0-win.exe">R-4.4.0-win.exe</a> and run it, accepting all default settings.</p></li>
+<li><p>Download <a href="https://rstudio.org/download/latest/stable/desktop/windows/RStudio-latest.exe">Rstudio-latest.exe</a> and run it, again accepting all default settings.</p></li>
+<li>
+<p>Sometimes, R may need to recompile a package during installation, which will require the Rtools utility. To download the right version, check your system’s <a href="ms-settings:about">about page</a> and look at the “System type” line.</p>
 <ul>
 <li>If it shows “… x64-based processor”, download this <a href="https://cran.r-project.org/bin/windows/Rtools/rtools44/files/rtools44-6104-6039.exe">Rtools installer</a> and run it, accepting all default settings.</li>
 <li>If it shows “… ARM-based processor”, download this <a href="https://cran.r-project.org/bin/windows/Rtools/rtools44/files/rtools44-aarch64-6104-6039.exe">Rtools installer</a> and run it, accepting all default settings.</li>
 </ul>
 </li>
 </ol>
-<p>Now, you should have both R and Rstudio setup. To check the installation, find “Rstudio” in your start menu and run it. If you get a window that looks <a href="https://i.imgur.com/qmt5IHj.png">like this</a>, you’re all set!</p>
+<p>Now, you should have both R and Rstudio setup. To check the installation, find “Rstudio” in your start menu and run it. If asked to choose an installation, just accept the default and click OK.</p>
+<p>If you get a window that looks <a href="https://i.imgur.com/qmt5IHj.png">like this</a>, you’re all set and are ready to move on to the <a href="setup.html#setup-packs-config">next section</a>!</p>
 </div>
 <div id="setup-mac" class="section level3" number="1.1.2">
 <h3>
@@ -137,7 +140,8 @@
 </li>
 </ol>
 <p>On some machines, R or Rstudio may be blocked by your OS out of an overabundance of caution. Follow <a href="https://support.apple.com/en-us/102445#openanyway">these steps</a> to unblock and then try again.</p>
-<p>Now, assuming everything went smoothly, you should have both R and Rstudio setup. To check the installation, find “Rstudio” in your Dock or Applications directory and run it. If you get a window that looks <a href="https://i.imgur.com/qmt5IHj.png">like this</a>, you’re all set!</p>
+<p>Now, assuming everything went smoothly, you should have both R and Rstudio setup. To check the installation, find “Rstudio” in your Dock or Applications directory and run it. If asked to choose an installation, just accept the default and click OK.</p>
+<p>If you get a window that looks <a href="https://i.imgur.com/qmt5IHj.png">like this</a>, you’re all set!</p>
 </div>
 </div>
 <div id="setup-packs-config" class="section level2" number="1.2">
@@ -149,14 +153,16 @@
 </div>
 <p>Next, we will install some necessary packages and configure some recommended options to improve workflow.</p>
 <ol style="list-style-type: decimal">
-<li>Open Rstudio. In the Console window, type in or copy this line <code class="sourceCode r"><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">"tidyverse"</span>,<span class="st">"rmarkdown"</span>))</code> and hit enter.
+<li>
+<p>Open Rstudio. In the Console window, type in or copy this line <code class="sourceCode r"><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">"tidyverse"</span>,<span class="st">"rmarkdown"</span>))</code> and hit enter.</p>
 <ul>
 <li>If Rstudio asks you whether to “use a personal library”, choose yes.</li>
-<li>If Rstudio asks you whether to “install from source”, first try choosing no which should work for most people. If that fails, try reinstalling but this time choose yes.</li>
-<li>Make sure you see either “successfully unpacked” or “downloaded binary packages are in” in the console messages to confirm installation succeeded.</li>
+<li>If Rstudio asks you whether to “install from source”, first try choosing no which should work for most people. If that fails, try repeating step 1, but this time choose yes.</li>
 </ul>
+<p>Make sure you see either “successfully unpacked” or “downloaded binary packages are in” in the console messages to confirm installation succeeded.</p>
 </li>
-<li>Next, from the menu bar at the top, go to “Tools” &gt; “Global Options”.
+<li>
+<p>Next, from the menu bar at the top, go to “Tools” &gt; “Global Options”.</p>
 <ol style="list-style-type: lower-alpha">
 <li>On this first page, under the <a href="https://i.imgur.com/Of5lBYT.png">“Workspace” section</a>, set the following:
 <ol style="list-style-type: lower-roman">
@@ -188,17 +194,19 @@
 </li>
 <li>(Optional) If you wish to customize the interface, you can go to the <a href="https://i.imgur.com/WsnSWNM.png">“Appearance” page</a> and change your font or theme. <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;If you like working in the dark and have an OLED-screen, you may want to check out the &lt;a href="https://github.com/roshandarji/synthwaveBLACK"&gt;synthwaveBLACK&lt;/a&gt; theme.&lt;/p&gt;'><sup>1</sup></a>
 </li>
-<li>There are LOTS of other options you can feel free to explore later on your own, but for now we will move on.</li>
+<li>Press OK to save your changes.</li>
 </ol>
+<p>There are LOTS of other options you can feel free to explore later on your own, but for now we will move on.</p>
 </li>
-<li>Due to dumb design, we need to repeat the previous R Markdown configuration steps again because Rstudio duplicates these settings in another menu.
+<li>
+<p>Due to poor design, we need to repeat the previous R Markdown configuration steps again because Rstudio duplicates these settings in another menu.</p>
 <ol style="list-style-type: lower-alpha">
 <li>From the menu bar at the top, go to “File” &gt; “New File” &gt; “R Markdown”. Ignore the options in the new window and click “OK” to create a new R Markdown file (we will learn more about R Markdown files later).</li>
 <li>In the new editor pane, open the <a href="https://i.imgur.com/yr0jdxa.png">gear-icon dropdown menu</a> and make sure to reselect the same options (highlighted in red).</li>
 </ol>
 </li>
 </ol>
-<p>Now you R/Rstudio should be properly setup.</p>
+<p>Now your R/Rstudio should be properly setup.</p>
 </div>
 <div id="setup-files" class="section level2" number="1.3">
 <h2>
@@ -224,7 +232,8 @@
 <p>We also recommend creating directories “data”, where you should place all the datasets you download; “notes”, where you can place any other notes you download or take; and “project”, where you can place your project files when those are assigned later. If necessary, you can also create further directories at your own discretion.</p>
 <div class="note">
 <p>Make sure your STAT240 folder is NOT backed up by a cloud synchronized app like OneDrive, Box, or iCloud. These programs sometimes interfere with R/Rstudio and may also cut off larger datasets.</p>
-<p>We recommend you pick a different parent directory (“..”) than “Desktop” or “Documents” since these are often backed up by default on many modern systems.</p>
+<p>We recommend you pick a different parent directory (“..”) than “Desktop” or “Documents” since these are often backed up by default on many modern systems. A good alternative is either the “Downloads” directory which is usually not backed up, or your user’s home directory (instructions for <a href="https://www.addictivetips.com/windows-tips/access-the-user-folder-on-windows-10/">Windows</a> and <a href="https://www.cnet.com/tech/computing/how-to-find-your-macs-home-folder-and-add-it-to-finder/">Mac</a>).</p>
+<p>After creation, you can make this folder more convenient to access by <a href="https://support.motlow.edu/TDClient/274/Portal/KB/ArticleDet?ID=12451">making a shortcut</a> on your desktop, or pinning it to somewhere accessible like <a href="https://www.pcmag.com/how-to/how-to-retrieve-folders-files-with-windows-10-quick-access">Quick Access</a> for Windows or your <a href="https://www.howtogeek.com/712237/how-to-pin-a-folder-or-a-file-to-your-macs-dock/">Dock</a> for Macs.</p>
 </div>
 </div>
 <div id="setup-troubleshooting-faq" class="section level2" number="1.4">
@@ -245,7 +254,7 @@
   });
 </script><div class="chapter-nav">
 <div class="prev"><a href="index.html">Welcome</a></div>
-<div class="next"><a href="rstudio-basics.html"><span class="header-section-number">2</span> Rstudio basics</a></div>
+<div class="next"><a href="rstudio-intro.html"><span class="header-section-number">2</span> Intro to Rstudio</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
@@ -276,7 +285,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, Bret Larget, Cameron Jones. It was last built on 2024-05-28.</p>
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, Bret Larget, Cameron Jones. It was last built on 2024-05-31.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

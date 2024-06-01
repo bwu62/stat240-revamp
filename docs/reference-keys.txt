@@ -5,6 +5,9 @@ setup-mac
 setup-packs-config
 setup-files
 setup-troubleshooting-faq
-rstudio-basics
+rstudio-intro
+rstudio-whatis
 rstudio-interface
+run-some-r-code
 rstudio-rmarkdown
+rstudio-wd

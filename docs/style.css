@@ -66,3 +66,8 @@ a.footnote-ref{
 .alert>:last-child {
   margin-bottom:0rem;
 }
+
+img{
+  width:90%;
+  margin-left:5%;
+}
