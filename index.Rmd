@@ -26,18 +26,24 @@ thins to hit:
 - view source & edit contributions
 - prerequisites
 - will not teach everything, just provide foundation for further learning
-- acknowledgments
+- acknowledgments for impact of contributions
 
-features to add:
+stuff to add:
 
 - dark mode?
 - auto-index generator in _common.R?
 - cheatsheet repository
+- sample of graded, commentated papers (example of an A, AB, B, BC, C, D, F)
+- grade by comparing with reference papers
+- conditional stratified sample of papers based on distribution of grades in group
+- after paring down samples, ask Derek & Cameron to help with grading evaluation for calibrating papers
+- pare down more, use focused sample to calibrate TAs/instructors if needed?
 
 other notes to self:
 - use [params](https://bookdown.org/yihui/rmarkdown/params-declare.html) to control:
   - course directory
   - hw/ds solution generation in files (in separate private repo?)
+- build db of past 240 stats
 
 
 ```{r include=FALSE}
