@@ -71,3 +71,7 @@ img{
   width:90%;
   margin-left:5%;
 }
+
+.inline-figure{
+  border: none !important;
+}
