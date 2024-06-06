@@ -90,38 +90,60 @@
 <div class="inline-figure"><img src="https://i.imgur.com/V9PAoE2.png"></div>
 <p>Below is a brief description of the purpose of each tab. The ones we will be using most frequently in this course are highlighted in <strong>bold</strong>.</p>
 <ol style="list-style-type: upper-alpha">
-<li>In section A you will find the Console, Terminal, and Background Jobs tabs
+<li>In section A you will find the <strong>Console</strong>, Terminal, and Background Jobs tabs
 <ul>
 <li>
-<p><strong>Console</strong>: This is arguably the most important tab in Rstudio. It provides direct access to the R interpreter, allowing you to run code and see outputs.</p>
-<p>There are a few other useful tips for working in the console:</p>
+<strong>Console</strong>: This is arguably the most important tab in Rstudio. It provides direct access to the R interpreter, allowing you to run code and see outputs.</li>
+</ul>
+There are a few other useful tips for working in the console:
 <ul>
 <li>You can use the TAB key to autocomplete code as you type. This works both for built in functions, user-defined objects, or even file paths (more on this later). It is <em>highly recommended</em> to make use of autocomplete as much as possible because it can help prevent typo errors in your code.</li>
 <li>You can also easily rerun previously executed commands by either using the keyboard UP and DOWN arrow keys to navigate through your history, or even search your history by using CTRL/CMD + R.</li>
+<li>Terminal: This tab opens a terminal in your current working directory (see section <a href="rstudio-intro.html#rstudio-wd">2.4.1</a>). By default, this is a <a href="https://gitforwindows.org/">Git Bash</a> terminal on Windows and a <a href="https://medium.com/@luzhenna/getting-started-with-zsh-on-a-macbook-bd1c98c6f383">zsh</a> terminal on Macs, but this can be easily changed in the Options menu.</li>
+<li>Background Jobs: Rstudio may sometimes run certain operations as background jobs here. Alternatively, you can also run background R scripts here if you desire.</li>
 </ul>
 </li>
-<li><p>Terminal: This tab opens a terminal in your current working directory (see section <a href="rstudio-intro.html#rstudio-wd">2.4.1</a>). By default, this is a <a href="https://gitforwindows.org/">Git Bash</a> terminal on Windows and a <a href="https://medium.com/@luzhenna/getting-started-with-zsh-on-a-macbook-bd1c98c6f383">zsh</a> terminal on Macs, but this can be easily changed in the Options menu.</p></li>
-<li><p>Background Jobs: Rstudio will sometimes run certain setup operations here as a background job. Alternatively, you can also use this tab to run an R script in the background if you desire.</p></li>
-</ul>
-</li>
-<li>In section B you will find the Environment, History, Connections, and Tutorial tabs
+<li>In section B we have the <strong>Environment</strong>, History, Connections, and Tutorial tabs
 <ul>
 <li>
-<strong>Environment</strong>: This is probably the second most important tab in Rstudio. Any created variables, defined functions, imported datasets, or other objects used in your current session will appear here, along with some other brief descriptions about them.
+<strong>Environment</strong>: This is probably the second most important tab in Rstudio. Any created variables, defined functions, imported datasets, or other objects used in your current session will appear here, along with some brief descriptions about them.
 <ul>
-<li>Note: the <a href="https://i.imgur.com/llL6kyv.png">broomstick icon</a> in this tab can be used to clear the current session environment, removing all defined objects. This is basically equivalent to restarting Rstudio.</li>
+<li>The <a href="https://i.imgur.com/llL6kyv.png">broomstick icon</a> in this tab can be used to clear the current session environment, removing all defined objects. This is basically equivalent to restarting Rstudio.</li>
+<li>Next to the broomstick, there’s an icon that shows the memory usage of your current R session, as well as an “Import Dataset” option that can help you load datasets, although we will primarily try to write this code by hand for learning purposes.</li>
 </ul>
 </li>
-<li>History</li>
+<li>History: In this tab, you will find a history of previous commands from your current session, if you want to edit and rerun something. You can also search through this history, which will search through not just your current session but ALL previous commands anytime you opened Rstudio in the past.</li>
+<li>Connections/Tutorial: You can start special data connections, or find some extra R tutorials here if you wish.</li>
+</ul>
+</li>
+<li>In section C are the Files, <strong>Plots</strong>, Packages, <strong>Help</strong>, <strong>Viewer</strong>, and Presentation tabs.
+<ul>
+<li>Files: This tab gives you a small, integrated file explorer. You can navigate around your computer, create/delete/rename files, copy/move files, etc.</li>
+<li>
+<strong>Plots</strong>: Any plots/graphs you make will show up here (if you set the options right, otherwise they may show in a pop-up). There are a few other useful features to know:
+<ul>
+<li>In the top left corner of this tab, there are left/right arrows for navigating between previous and next plots (if you made multiple plots)</li>
+<li>Next to the arrows, there’s a “Zoom” button which opens the plot in a larger pop-up window.</li>
+<li>Next, there’s an “Export” button which allows you to export the plot to image/pdf/clipboard. This will open a window with further export configuration options.</li>
+<li>Next, there are buttons to remove the current plot, or clear all plots.</li>
+</ul>
+</li>
+<li>Packages: Here you can view/install/update/load/unload packages. Note you can also install packages using the console, like we did in the previous section.</li>
+<li>
+<strong>Help</strong>: This is one of the other most frequently useful tabs in Rstudio. Here you can access R’s built in help pages. This is one of the FIRST places you should visit for help with R functions/objects.</li>
 </ul>
 </li>
 </ol>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code></pre></div>
+<p>test <code class="sourceCode r"><span class="fu">library</span>(tidyverse)</code></p>
 </div>
 <div id="run-some-r-code" class="section level2" number="2.3">
 <h2>
 <span class="header-section-number">2.3</span> run some r code<a class="anchor" aria-label="anchor" href="#run-some-r-code"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
+<li>basic rundown of R commands</li>
 <li>add notes about common console issues
 <ul>
 <li>
@@ -129,7 +151,7 @@
 <li>
 <code>+</code> prompt when line not ended</li>
 <li>white space and splitting lines</li>
-<li>saving doesnt return</li>
+<li>saving doesn’t return</li>
 <li>practice using tab</li>
 <li>practice using console history</li>
 </ul>
@@ -140,6 +162,35 @@
 <h2>
 <span class="header-section-number">2.4</span> R Markdown<a class="anchor" aria-label="anchor" href="#rstudio-rmarkdown"><i class="fas fa-link"></i></a>
 </h2>
+<ul>
+<li>things to cover
+<ul>
+<li>rmd document overview
+<ul>
+<li>knit and view</li>
+<li>yaml</li>
+<li>code chunks
+<ul>
+<li>setup chunk</li>
+<li>name</li>
+<li>options</li>
+</ul>
+</li>
+<li>markdown</li>
+</ul>
+</li>
+<li>testing code interactively</li>
+<li>libraries</li>
+<li>troubleshooting tips</li>
+</ul>
+</li>
+</ul>
+<div class="tip">
+<p>You only need to install a package to your computer once, but you need to load it every time you want to use it in an R session.</p>
+<p>To install a package, either use the “Install” button in the Packages tab, or copy the following into the console, replacing “packageName” with the name of the package you want to install.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"packageName"</span><span class="op">)</span></span></code></pre></div>
+</div>
 <div id="rstudio-wd" class="section level3" number="2.4.1">
 <h3>
 <span class="header-section-number">2.4.1</span> Working directory<a class="anchor" aria-label="anchor" href="#rstudio-wd"><i class="fas fa-link"></i></a>
@@ -217,7 +268,7 @@ head(mtcars)
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, Bret Larget, Cameron Jones. It was last built on 2024-05-31.</p>
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, Bret Larget, Cameron Jones. It was last built on 2024-06-05.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

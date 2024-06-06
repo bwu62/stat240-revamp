@@ -68,7 +68,7 @@ If you get a window that looks [like this](https://i.imgur.com/qmt5IHj.png), you
 ## Packages/config {#setup-packs-config}
 
 ::: {.note}
-Before continuing, make sure that you can [open Rstudio](https://i.imgur.com/qmt5IHj.png) and have the correct latest version (R-4.4.0) installed!
+Before continuing, make sure that you can [open Rstudio](https://i.imgur.com/qmt5IHj.png) and have the correct version (R-4.4.0) installed!
 :::
 
 Next, we will install some necessary packages and configure some recommended options to improve workflow.

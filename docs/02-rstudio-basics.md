@@ -28,36 +28,82 @@ This is the default interface setup of Rstudio. Of course you can customize it, 
 
 Below is a brief description of the purpose of each tab. The ones we will be using most frequently in this course are highlighted in **bold**.
 
- A.  In section A you will find the Console, Terminal, and Background Jobs tabs
+ A.  In section A you will find the **Console**, Terminal, and Background Jobs tabs
      - **Console**: This is arguably the most important tab in Rstudio. It provides direct access to the R interpreter, allowing you to run code and see outputs.
      
-       There are a few other useful tips for working in the console:
-       - You can use the TAB key to autocomplete code as you type. This works both for built in functions, user-defined objects, or even file paths (more on this later). It is *highly recommended* to make use of autocomplete as much as possible because it can help prevent typo errors in your code.
-       - You can also easily rerun previously executed commands by either using the keyboard UP and DOWN arrow keys to navigate through your history, or even search your history by using CTRL/CMD + R.
+     There are a few other useful tips for working in the console:
+     - You can use the TAB key to autocomplete code as you type. This works both for built in functions, user-defined objects, or even file paths (more on this later). It is *highly recommended* to make use of autocomplete as much as possible because it can help prevent typo errors in your code.
+     - You can also easily rerun previously executed commands by either using the keyboard UP and DOWN arrow keys to navigate through your history, or even search your history by using CTRL/CMD + R.
      - Terminal: This tab opens a terminal in your current working directory (see section \@ref(rstudio-wd)). By default, this is a [Git Bash](https://gitforwindows.org/) terminal on Windows and a [zsh](https://medium.com/@luzhenna/getting-started-with-zsh-on-a-macbook-bd1c98c6f383) terminal on Macs, but this can be easily changed in the Options menu.
-     - Background Jobs: Rstudio will sometimes run certain setup operations here as a background job. Alternatively, you can also use this tab to run an R script in the background if you desire.
+     - Background Jobs: Rstudio may sometimes run certain operations as background jobs here. Alternatively, you can also run background R scripts here if you desire.
      
- B.  In section B you will find the Environment, History, Connections, and Tutorial tabs
-     - **Environment**: This is probably the second most important tab in Rstudio. Any created variables, defined functions, imported datasets, or other objects used in your current session will appear here, along with some other brief descriptions about them.
-       - Note: the [broomstick icon](https://i.imgur.com/llL6kyv.png) in this tab can be used to clear the current session environment, removing all defined objects. This is basically equivalent to restarting Rstudio.
-     - History
+ B.  In section B we have the **Environment**, History, Connections, and Tutorial tabs
+     - **Environment**: This is probably the second most important tab in Rstudio. Any created variables, defined functions, imported datasets, or other objects used in your current session will appear here, along with some brief descriptions about them.
+       - The [broomstick icon](https://i.imgur.com/llL6kyv.png) in this tab can be used to clear the current session environment, removing all defined objects. This is basically equivalent to restarting Rstudio.
+       - Next to the broomstick, there's an icon that shows the memory usage of your current R session, as well as an "Import Dataset" option that can help you load datasets, although we will primarily try to write this code by hand for learning purposes.
+     - History: In this tab, you will find a history of previous commands from your current session, if you want to edit and rerun something. You can also search through this history, which will search through not just your current session but ALL previous commands anytime you opened Rstudio in the past.
+     - Connections/Tutorial: You can start special data connections, or find some extra R tutorials here if you wish.
+     
+ C.  In section C are the Files, **Plots**, Packages, **Help**, **Viewer**, and Presentation tabs.
+     - Files: This tab gives you a small, integrated file explorer. You can navigate around your computer, create/delete/rename files, copy/move files, etc.
+     - **Plots**: Any plots/graphs you make will show up here (if you set the options right, otherwise they may show in a pop-up). There are a few other useful features to know:
+       - In the top left corner of this tab, there are left/right arrows for navigating between previous and next plots (if you made multiple plots)
+       - Next to the arrows, there's a "Zoom" button which opens the plot in a larger pop-up window.
+       - Next, there's an "Export" button which allows you to export the plot to image/pdf/clipboard. This will open a window with further export configuration options.
+       - Next, there are buttons to remove the current plot, or clear all plots.
+     - Packages: Here you can view/install/update/load/unload packages. Note you can also install packages using the console, like we did in the previous section.
+     - **Help**: This is one of the other most frequently useful tabs in Rstudio. Here you can access R's built in help pages. This is one of the FIRST places you should visit for help with R functions/objects.
 
 
 
+
+``` r
+library(tidyverse)
+```
+
+test `library(tidyverse)`{.R}
 
 
 ## run some r code
 
+- basic rundown of R commands
 - add notes about common console issues
   - `>` prompt character
   - `+` prompt when line not ended
   - white space and splitting lines
-  - saving doesnt return
+  - saving doesn't return
   - practice using tab
   - practice using console history
 
 
 ## R Markdown {#rstudio-rmarkdown}
+
+- things to cover
+  - rmd document overview
+    - knit and view
+    - yaml
+    - code chunks
+      - setup chunk
+      - name
+      - options
+    - markdown
+
+  - testing code interactively
+  - libraries
+  - troubleshooting tips
+
+
+
+::: {.tip}
+You only need to install a package to your computer once, but you need to load it every time you want to use it in an R session.
+
+To install a package, either use the "Install" button in the Packages tab, or copy the following into the console, replacing "packageName" with the name of the package you want to install.
+
+
+``` r
+install.packages("packageName")
+```
+:::
 
 
 
