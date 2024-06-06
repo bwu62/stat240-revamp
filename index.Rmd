@@ -44,6 +44,7 @@ other notes to self:
   - course directory
   - hw/ds solution generation in files (in separate private repo?)
 - build db of past 240 stats
+- rethink discord management
 
 
 ```{r include=FALSE}
