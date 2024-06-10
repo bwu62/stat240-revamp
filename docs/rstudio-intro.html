@@ -4,22 +4,21 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 2 Intro to Rstudio | STAT 240 Revamp</title>
+<title>Chapter 2 Intro to R/Rstudio | STAT 240 Revamp</title>
 <meta name="author" content="Bi Cheng Wu, Bret Larget, Cameron Jones">
 <meta name="description" content="This chapter will introduce to you the basics of Rstudio and help you develop a workflow for testing R code and producing beautiful R Markdown documents, which we will be using throughout the...">
 <meta name="generator" content="bookdown 0.39.1 with bs4_book()">
-<meta property="og:title" content="Chapter 2 Intro to Rstudio | STAT 240 Revamp">
+<meta property="og:title" content="Chapter 2 Intro to R/Rstudio | STAT 240 Revamp">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://bwu62.github.io/stat240-revamp/rstudio-intro.html">
 <meta property="og:description" content="This chapter will introduce to you the basics of Rstudio and help you develop a workflow for testing R code and producing beautiful R Markdown documents, which we will be using throughout the...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 2 Intro to Rstudio | STAT 240 Revamp">
+<meta name="twitter:title" content="Chapter 2 Intro to R/Rstudio | STAT 240 Revamp">
 <meta name="twitter:description" content="This chapter will introduce to you the basics of Rstudio and help you develop a workflow for testing R code and producing beautiful R Markdown documents, which we will be using throughout the...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.7.0.9000/transition.js"></script><script src="libs/bs3compat-0.7.0.9000/tabs.js"></script><script src="libs/bs3compat-0.7.0.9000/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link href="libs/panelset-0.3.0/panelset.css" rel="stylesheet">
-<script src="libs/panelset-0.3.0/panelset.js"></script><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-E0YDB40HWY"></script><script>
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-E0YDB40HWY"></script><script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
@@ -53,7 +52,7 @@
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Welcome</a></li>
 <li><a class="" href="setup.html"><span class="header-section-number">1</span> Setup</a></li>
-<li><a class="active" href="rstudio-intro.html"><span class="header-section-number">2</span> Intro to Rstudio</a></li>
+<li><a class="active" href="rstudio-intro.html"><span class="header-section-number">2</span> Intro to R/Rstudio</a></li>
 </ul>
 
         <div class="book-extra">
@@ -63,17 +62,17 @@
 </div>
   </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="rstudio-intro" class="section level1" number="2">
 <h1>
-<span class="header-section-number">2</span> Intro to Rstudio<a class="anchor" aria-label="anchor" href="#rstudio-intro"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2</span> Intro to R/Rstudio<a class="anchor" aria-label="anchor" href="#rstudio-intro"><i class="fas fa-link"></i></a>
 </h1>
 <p>This chapter will introduce to you the basics of Rstudio and help you develop a workflow for testing R code and producing beautiful R Markdown documents, which we will be using throughout the semester.</p>
-<div id="rstudio-whatis" class="section level2" number="2.1">
+<div id="rstudio-why" class="section level2" number="2.1">
 <h2>
-<span class="header-section-number">2.1</span> What is Rstudio?<a class="anchor" aria-label="anchor" href="#rstudio-whatis"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.1</span> Why Rstudio?<a class="anchor" aria-label="anchor" href="#rstudio-why"><i class="fas fa-link"></i></a>
 </h2>
 <p>Rstudio is a free and <a href="https://github.com/rstudio/rstudio">open-source</a> IDE (integrated development environment) that is designed to help facilitate development of R code. Of course you don’t need it (you can write R code using any text editor and execute it with a terminal) but using Rstudio gives you access to a host of modern conveniences, just to name a few:</p>
 <ul>
-<li>syntax completion &amp; highlighting</li>
-<li>easy access to code, plots, history, help, etc.</li>
+<li>R code completion &amp; highlighting</li>
+<li>easy access to interpreter console, plots, history, help, etc.</li>
 <li>robust debugging tools</li>
 <li>easy package/environment management</li>
 <li>custom project workflows (e.g. building websites, presentations, packages, etc.)</li>
@@ -84,7 +83,7 @@
 </div>
 <div id="rstudio-interface" class="section level2" number="2.2">
 <h2>
-<span class="header-section-number">2.2</span> Interface<a class="anchor" aria-label="anchor" href="#rstudio-interface"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.2</span> Rstudio interface<a class="anchor" aria-label="anchor" href="#rstudio-interface"><i class="fas fa-link"></i></a>
 </h2>
 <p>This is the default interface setup of Rstudio. Of course you can customize it, but this is what you should see out-of-the-box:</p>
 <div class="inline-figure"><img src="https://i.imgur.com/V9PAoE2.png"></div>
@@ -99,7 +98,7 @@ There are a few other useful tips for working in the console:
 <ul>
 <li>You can use the TAB key to autocomplete code as you type. This works both for built in functions, user-defined objects, or even file paths (more on this later). It is <em>highly recommended</em> to make use of autocomplete as much as possible because it can help prevent typo errors in your code.</li>
 <li>You can also easily rerun previously executed commands by either using the keyboard UP and DOWN arrow keys to navigate through your history, or even search your history by using CTRL/CMD + R.</li>
-<li>Terminal: This tab opens a terminal in your current working directory (see section <a href="rstudio-intro.html#rstudio-wd">2.4.1</a>). By default, this is a <a href="https://gitforwindows.org/">Git Bash</a> terminal on Windows and a <a href="https://medium.com/@luzhenna/getting-started-with-zsh-on-a-macbook-bd1c98c6f383">zsh</a> terminal on Macs, but this can be easily changed in the Options menu.</li>
+<li>Terminal: This tab opens a terminal in your current working directory (see section <a href="#rstudio-wd"><strong>??</strong></a>). By default, this is a <a href="https://gitforwindows.org/">Git Bash</a> terminal on Windows and a <a href="https://medium.com/@luzhenna/getting-started-with-zsh-on-a-macbook-bd1c98c6f383">zsh</a> terminal on Macs, but this can be easily changed in the Options menu.</li>
 <li>Background Jobs: Rstudio may sometimes run certain operations as background jobs here. Alternatively, you can also run background R scripts here if you desire.</li>
 </ul>
 </li>
@@ -123,79 +122,102 @@ There are a few other useful tips for working in the console:
 <strong>Plots</strong>: Any plots/graphs you make will show up here (if you set the options right, otherwise they may show in a pop-up). There are a few other useful features to know:
 <ul>
 <li>In the top left corner of this tab, there are left/right arrows for navigating between previous and next plots (if you made multiple plots)</li>
-<li>Next to the arrows, there’s a “Zoom” button which opens the plot in a larger pop-up window.</li>
-<li>Next, there’s an “Export” button which allows you to export the plot to image/pdf/clipboard. This will open a window with further export configuration options.</li>
+<li>Next to that, there’s a “Zoom” button which opens the plot in a larger window.</li>
+<li>Next, there’s an “Export” button which allows you to export the plot to image/pdf/clipboard. This opens a window with additional export options.</li>
 <li>Next, there are buttons to remove the current plot, or clear all plots.</li>
 </ul>
 </li>
 <li>Packages: Here you can view/install/update/load/unload packages. Note you can also install packages using the console, like we did in the previous section.</li>
 <li>
-<strong>Help</strong>: This is one of the other most frequently useful tabs in Rstudio. Here you can access R’s built in help pages. This is one of the FIRST places you should visit for help with R functions/objects.</li>
+<strong>Help</strong>: This is one of the other most useful tabs in Rstudio. Here, you can access the built in R help pages. This is one of the FIRST places you should visit for help with R functions/objects.
+<ul>
+<li>There are several ways to access the help pages. Suppose you want help with the <code class="sourceCode r"><span class="fu">install.packages</span>()</code> function. You can either run <code class="sourceCode r"><a href="https://rdrr.io/r/utils/install.packages.html">?install.packages</a></code> or <code class="sourceCode r"><span class="fu">help</span>(install.packages)</code> in the console, or put your cursor on the function in your code and hit the F1 key.</li>
+<li>The help page may contain these following sections, each of which presents different types of information:
+<ol style="list-style-type: lower-roman">
+<li>
+<em>Description</em>, showing a brief summary of the purpose of the function</li>
+<li>
+<em>Usage</em>, listing available arguments (i.e. options). If an argument has an <code>=</code> sign and a value, this denotes the default value</li>
+<li>
+<em>Arguments</em>, where more details about the arguments can be found</li>
+<li>
+<em>Details</em>, where further details on the function can be found</li>
+<li>
+<em>Value</em>, which gives info on what the function returns as an output</li>
+<li>Sometimes, other sections may appear here with more specialized info</li>
+<li>At the end, you may also find some advanced notes, links to related functions, additional references, and example code demos.</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<strong>Viewer</strong>: This is where a preview of your Rmd document output will appear when knitting (which we learn very soon).
+<ul>
+<li>In the top corner, there are buttons letting you clear current or all viewer items, as well a button to open the viewer in a new window in your default web browser, which can also be useful sometimes for checking your work or printing/exporting.</li>
+</ul>
+</li>
 </ul>
 </li>
 </ol>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code></pre></div>
-<p>test <code class="sourceCode r"><span class="fu">library</span>(tidyverse)</code></p>
+<p>That concludes the tour of the basic Rstudio interface. There is also a file editor window (also known as the source panel/window) which we will discuss later in section <a href="#rstudio-rmarkdown"><strong>??</strong></a>, but for now, let’s learn to run some basic R commands!</p>
 </div>
-<div id="run-some-r-code" class="section level2" number="2.3">
+<div id="basics-of-r" class="section level2" number="2.3">
 <h2>
-<span class="header-section-number">2.3</span> run some r code<a class="anchor" aria-label="anchor" href="#run-some-r-code"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.3</span> Basics of R<a class="anchor" aria-label="anchor" href="#basics-of-r"><i class="fas fa-link"></i></a>
 </h2>
-<ul>
-<li>basic rundown of R commands</li>
-<li>add notes about common console issues
-<ul>
-<li>
-<code>&gt;</code> prompt character</li>
-<li>
-<code>+</code> prompt when line not ended</li>
-<li>white space and splitting lines</li>
-<li>saving doesn’t return</li>
-<li>practice using tab</li>
-<li>practice using console history</li>
-</ul>
-</li>
-</ul>
-</div>
-<div id="rstudio-rmarkdown" class="section level2" number="2.4">
-<h2>
-<span class="header-section-number">2.4</span> R Markdown<a class="anchor" aria-label="anchor" href="#rstudio-rmarkdown"><i class="fas fa-link"></i></a>
-</h2>
-<ul>
-<li>things to cover
-<ul>
-<li>rmd document overview
-<ul>
-<li>knit and view</li>
-<li>yaml</li>
-<li>code chunks
-<ul>
-<li>setup chunk</li>
-<li>name</li>
-<li>options</li>
-</ul>
-</li>
-<li>markdown</li>
-</ul>
-</li>
-<li>testing code interactively</li>
-<li>libraries</li>
-<li>troubleshooting tips</li>
-</ul>
-</li>
-</ul>
-<div class="tip">
-<p>You only need to install a package to your computer once, but you need to load it every time you want to use it in an R session.</p>
-<p>To install a package, either use the “Install” button in the Packages tab, or copy the following into the console, replacing “packageName” with the name of the package you want to install.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"packageName"</span><span class="op">)</span></span></code></pre></div>
-</div>
-<div id="rstudio-wd" class="section level3" number="2.4.1">
+<p>In this section, we will give you a brief introduction to working with R. No prior programming experience is assumed. You are <em>highly encouraged</em> to copy and run the examples provided as you read, as well as to read the extra references and try the exercises at the end of each subsection.</p>
+<div id="running-r-code" class="section level3" number="2.3.1">
 <h3>
-<span class="header-section-number">2.4.1</span> Working directory<a class="anchor" aria-label="anchor" href="#rstudio-wd"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.3.1</span> Running R code<a class="anchor" aria-label="anchor" href="#running-r-code"><i class="fas fa-link"></i></a>
 </h3>
+<p>The main way to run R code is to type or copy into the console. If there is output, it will be displayed either in the console directly if it’s text, or in the plot window if it’s visual.</p>
 <!--
+
+- basic rundown of R commands
+- add notes about common console issues
+  - `>` prompt character
+  - `+` prompt when line not ended
+  - white space and splitting lines
+  - saving doesn't return
+  - practice using tab
+  - practice using console history
+
+
+## R Markdown {#rstudio-rmarkdown}
+
+- things to cover
+  - rmd document overview
+    - knit and view
+    - yaml
+    - code chunks
+      - setup chunk
+      - name
+      - options
+    - markdown
+
+  - testing code interactively
+  - libraries
+  - troubleshooting tips
+
+
+
+::: {.tip}
+You only need to install a package to your computer once, but you need to load it every time you want to use it in an R session.
+
+To install a package, either use the "Install" button in the Packages tab, or copy the following into the console, replacing "packageName" with the name of the package you want to install.
+
+
+``` r
+install.packages("packageName")
+```
+:::
+
+
+
+### Working directory {#rstudio-wd}
+
+
+
 
 <details><summary>Exercise solutions</summary>
 
@@ -244,12 +266,11 @@ head(mtcars)
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#rstudio-intro"><span class="header-section-number">2</span> Intro to Rstudio</a></li>
-<li><a class="nav-link" href="#rstudio-whatis"><span class="header-section-number">2.1</span> What is Rstudio?</a></li>
-<li><a class="nav-link" href="#rstudio-interface"><span class="header-section-number">2.2</span> Interface</a></li>
-<li><a class="nav-link" href="#run-some-r-code"><span class="header-section-number">2.3</span> run some r code</a></li>
+<li><a class="nav-link" href="#rstudio-intro"><span class="header-section-number">2</span> Intro to R/Rstudio</a></li>
+<li><a class="nav-link" href="#rstudio-why"><span class="header-section-number">2.1</span> Why Rstudio?</a></li>
+<li><a class="nav-link" href="#rstudio-interface"><span class="header-section-number">2.2</span> Rstudio interface</a></li>
 <li>
-<a class="nav-link" href="#rstudio-rmarkdown"><span class="header-section-number">2.4</span> R Markdown</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#rstudio-wd"><span class="header-section-number">2.4.1</span> Working directory</a></li></ul>
+<a class="nav-link" href="#basics-of-r"><span class="header-section-number">2.3</span> Basics of R</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#running-r-code"><span class="header-section-number">2.3.1</span> Running R code</a></li></ul>
 </li>
 </ul>
 
@@ -268,7 +289,7 @@ head(mtcars)
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, Bret Larget, Cameron Jones. It was last built on 2024-06-05.</p>
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, Bret Larget, Cameron Jones. It was last built on 2024-06-10.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

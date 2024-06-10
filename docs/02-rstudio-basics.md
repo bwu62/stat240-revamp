@@ -1,16 +1,20 @@
 
 
-# Intro to Rstudio {#rstudio-intro}
+# Intro to R/Rstudio {#rstudio-intro}
+
 
 This chapter will introduce to you the basics of Rstudio and help you develop a workflow for testing R code and producing beautiful R Markdown documents, which we will be using throughout the semester.
 
 
-## What is Rstudio? {#rstudio-whatis}
+
+
+## Why Rstudio? {#rstudio-why}
+
 
 Rstudio is a free and [open-source](https://github.com/rstudio/rstudio) IDE (integrated development environment) that is designed to help facilitate development of R code. Of course you don't need it (you can write R code using any text editor and execute it with a terminal) but using Rstudio gives you access to a host of modern conveniences, just to name a few:
 
- - syntax completion & highlighting
- - easy access to code, plots, history, help, etc.
+ - R code completion & highlighting
+ - easy access to interpreter console, plots, history, help, etc.
  - robust debugging tools
  - easy package/environment management
  - custom project workflows (e.g. building websites, presentations, packages, etc.)
@@ -20,13 +24,18 @@ Rstudio is a free and [open-source](https://github.com/rstudio/rstudio) IDE (int
 We will only learn a small fraction of what Rstudio has to offer in this course. As always, you are encouraged to explore more on your own.
 
 
-## Interface {#rstudio-interface}
+
+
+
+## Rstudio interface {#rstudio-interface}
+
 
 This is the default interface setup of Rstudio. Of course you can customize it, but this is what you should see out-of-the-box:
 
 ![](https://i.imgur.com/V9PAoE2.png)
 
 Below is a brief description of the purpose of each tab. The ones we will be using most frequently in this course are highlighted in **bold**.
+
 
  A.  In section A you will find the **Console**, Terminal, and Background Jobs tabs
      - **Console**: This is arguably the most important tab in Rstudio. It provides direct access to the R interpreter, allowing you to run code and see outputs.
@@ -48,23 +57,65 @@ Below is a brief description of the purpose of each tab. The ones we will be usi
      - Files: This tab gives you a small, integrated file explorer. You can navigate around your computer, create/delete/rename files, copy/move files, etc.
      - **Plots**: Any plots/graphs you make will show up here (if you set the options right, otherwise they may show in a pop-up). There are a few other useful features to know:
        - In the top left corner of this tab, there are left/right arrows for navigating between previous and next plots (if you made multiple plots)
-       - Next to the arrows, there's a "Zoom" button which opens the plot in a larger pop-up window.
-       - Next, there's an "Export" button which allows you to export the plot to image/pdf/clipboard. This will open a window with further export configuration options.
+       - Next to that, there's a "Zoom" button which opens the plot in a larger window.
+       - Next, there's an "Export" button which allows you to export the plot to image/pdf/clipboard. This opens a window with additional export options.
        - Next, there are buttons to remove the current plot, or clear all plots.
      - Packages: Here you can view/install/update/load/unload packages. Note you can also install packages using the console, like we did in the previous section.
-     - **Help**: This is one of the other most frequently useful tabs in Rstudio. Here you can access R's built in help pages. This is one of the FIRST places you should visit for help with R functions/objects.
+     - **Help**: This is one of the other most useful tabs in Rstudio. Here, you can access the built in R help pages. This is one of the FIRST places you should visit for help with R functions/objects.
+       - There are several ways to access the help pages. Suppose you want help with the `install.packages()`{.R} function. You can either run `?install.packages`{.R} or `help(install.packages)`{.R} in the console, or put your cursor on the function in your code and hit the F1 key.
+       - The help page may contain these following sections, each of which presents different types of information:
+         i.   *Description*, showing a brief summary of the purpose of the function
+         ii.  *Usage*, listing available arguments (i.e. options). If an argument has an ` = ` sign and a value, this denotes the default value
+         iii. *Arguments*, where more details about the arguments can be found
+         iv.  *Details*, where further details on the function can be found
+         v.   *Value*, which gives info on what the function returns as an output
+         vi.  Sometimes, other sections may appear here with more specialized info
+         vii. At the end, you may also find some advanced notes, links to related functions, additional references, and example code demos.
+     - **Viewer**: This is where a preview of your Rmd document output will appear when knitting (which we learn very soon).
+       - In the top corner, there are buttons letting you clear current or all viewer items, as well a button to open the viewer in a new window in your default web browser, which can also be useful sometimes for checking your work or printing/exporting.
+
+
+That concludes the tour of the basic Rstudio interface. There is also a file editor window (also known as the source panel/window) which we will discuss later in section \@ref(rstudio-rmarkdown), but for now, let's learn to run some basic R commands!
 
 
 
 
-``` r
-library(tidyverse)
-```
+## Basics of R
 
-test `library(tidyverse)`{.R}
+In this section, we will give you a brief introduction to working with R. No prior programming experience is assumed. You are *highly encouraged* to copy and run the examples provided as you read, as well as to read the extra references and try the exercises at the end of each subsection.
 
 
-## run some r code
+### Running R code
+
+The main way to run R code is to type or copy into the console. If there is output, it will be displayed either in the console directly if it's text, or in the plot window if it's visual.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
 
 - basic rundown of R commands
 - add notes about common console issues
@@ -111,7 +162,6 @@ install.packages("packageName")
 
 
 
-<!--
 
 <details><summary>Exercise solutions</summary>
 

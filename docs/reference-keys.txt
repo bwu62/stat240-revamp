@@ -6,8 +6,7 @@ setup-packs-config
 setup-files
 setup-troubleshooting-faq
 rstudio-intro
-rstudio-whatis
+rstudio-why
 rstudio-interface
-run-some-r-code
-rstudio-rmarkdown
-rstudio-wd
+basics-of-r
+running-r-code

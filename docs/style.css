@@ -76,10 +76,21 @@ img{
   border: none !important;
 }
 
-ul{
+main ul{
   list-style-type: disc !important;
 }
 
-ul ul{
+main ul ul{
   list-style-type: circle !important;
+}
+
+@media (min-width: 1200px) {
+    .container-fluid main {
+        max-width: 50rem;
+    }
+}
+
+/***** REMEMBER TO REMOVE LATER!! *****/
+main div:first-child{
+  padding-bottom:750px;
 }
