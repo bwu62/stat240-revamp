@@ -1,4 +1,5 @@
 
+
 # Setup {#setup}
 
 This chapter will take you through all steps necessary to fully setup your computer. There are several things we need to do:
@@ -8,17 +9,23 @@ This chapter will take you through all steps necessary to fully setup your compu
  3. Finally, in section \@ref(setup-files) we will setup an organization system for your files.
 
 
+
+
 ## R/Rstudio setup {#setup-install}
 
+
 We will be using both R and Rstudio throughout the course.
+
 
  - [R](https://www.r-project.org/) is a free and open-source statistical computing software.
  - [Rstudio](https://posit.co/products/open-source/rstudio/) is an IDE (integrated development environment) that makes developing in R much easier.
    - If you prefer, you can also use a different IDE like [Visual Studio](https://code.visualstudio.com/docs/languages/r) or [Jupyter](https://docs.anaconda.com/free/navigator/tutorials/r-lang/).
 
+
 ::: {.note}
 R and Rstudio are two different programs that both need to be installed! Also, if you have previously installed R or Rstudio, it is highly recommended to first completely uninstall it before reinstalling the latest version to avoid conflicts (instructions for [Windows](https://www.pcmag.com/how-to/how-to-uninstall-programs-in-windows-10) and [Mac](https://support.apple.com/en-us/102610)).
 :::
+
 
 We will first install the latest release of R, which is version `r r.version` released on `r format(r.date,"%b %d, %Y")`; then we will install Rstudio. The instructions below are separated by operating system, depending on if you have a [Windows](#setup-win) or [Mac](#setup-mac) machine.
 
@@ -26,7 +33,10 @@ We will first install the latest release of R, which is version `r r.version` re
  - If you have a Chromebook, try [these steps](https://levente.littvay.hu/chromebook/).
 
 
+
+
 ### Windows instructions {#setup-win}
+
 
  1. Download [R-`r r.version`-win.exe](`r str_glue("https://cloud.r-project.org/bin/windows/base/old/{r.version}/R-{r.version}-win.exe")`) and run it, accepting all default settings.
  
@@ -41,7 +51,10 @@ Now, you should have both R and Rstudio setup. To check the installation, find "
 If you get a window that looks [like this](https://i.imgur.com/qmt5IHj.png), you're all set and are ready to move on to the [next section](#setup-packs-config)!
 
 
+
+
 ### Mac instructions {#setup-mac}
+
 
  1. First, we need to determine the right R installer file for your specific machine. Open the Apple menu in the top left corner of your screen and open ["About this mac"](https://upload.wikimedia.org/wikipedia/en/a/a6/Apple_menu_screenshot.png).
     - If it shows "Chip: Apple M1/M2/M3", download [R-`r r.version`-arm64.pkg](`r str_glue("https://cloud.r-project.org/bin/macosx/big-sur-arm64/base/R-{r.version}-arm64.pkg")`) and run it, accepting all default settings.
@@ -60,18 +73,24 @@ If you get a window that looks [like this](https://i.imgur.com/qmt5IHj.png), you
 
 On some machines, R or Rstudio may be blocked by your OS out of an overabundance of caution. Follow [these steps](https://support.apple.com/en-us/102445#openanyway) to unblock and then try again.
 
+
 Now, assuming everything went smoothly, you should have both R and Rstudio setup. To check the installation, find "Rstudio" in your Dock or Applications directory and run it. If asked to choose an installation, just accept the default and click OK.
+
 
 If you get a window that looks [like this](https://i.imgur.com/qmt5IHj.png), you're all set!
 
 
+
+
 ## Packages/config {#setup-packs-config}
+
 
 ::: {.note}
 Before continuing, make sure that you can [open Rstudio](https://i.imgur.com/qmt5IHj.png) and have the correct version (R-`r r.version`) installed!
 :::
 
 Next, we will install some necessary packages and configure some recommended options to improve workflow.
+
 
  1. Open Rstudio. In the Console window, type in or copy this line `install.packages(c("tidyverse","rmarkdown"))`{.R} and hit enter.
     - If Rstudio asks you whether to "use a personal library", choose yes.
@@ -102,7 +121,10 @@ Next, we will install some necessary packages and configure some recommended opt
 Now your R/Rstudio should be properly setup.
 
 
+
+
 ## File organization {#setup-files}
+
 
 There will be a lot of files to keep track of in this course, so it is highly recommended you create a neat directory structure on your computer to help organize your files. We recommend a directory structure similar to this:
 
@@ -135,7 +157,10 @@ After creation, you can make this folder more convenient to access by [making a 
 :::
 
 
+
+
 ## Setup troubleshooting FAQ
+
 
 \*\*FAQ will be added here as we collect more commonly encountered problems\*\*
 
