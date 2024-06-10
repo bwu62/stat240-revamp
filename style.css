@@ -90,4 +90,7 @@ main ul ul{
     }
 }
 
+/***** REMEMBER TO REMOVE LATER!! *****/
+main div:first-child{
+  padding-bottom:750px;
 }
