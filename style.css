@@ -83,3 +83,11 @@ main ul{
 main ul ul{
   list-style-type: circle !important;
 }
+
+@media (min-width: 1200px) {
+    .container-fluid main {
+        max-width: 50rem;
+    }
+}
+
+}
