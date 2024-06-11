@@ -40,53 +40,59 @@ pre code {
   }
 }
 
+/* underline links... */
 main p a, main li a {
   text-decoration: underline;
 }
 
+/* ...except in footnotes */
 a.footnote-ref{
   text-decoration: none !important;
 }
 
+/* adjust spacing in alert boxes */
 .note>:first-child::before {
   content:"Note: ";
   font-weight: bold;
   padding-right: .2em;
 }
-
 .tip>:first-child::before {
   content:"Tip: ";
   font-weight: bold;
   padding-right: .2em;
 }
-
 .alert>:last-child {
   margin-bottom:0rem;
 }
 
+/* center images */
 img{
   width:90%;
   margin-left:5%;
   margin-right:5%;
 }
 
+/* deborder images */
 .inline-figure{
   border: none !important;
 }
 
+/* tweak bullets */
 main ul{
   list-style-type: disc !important;
 }
-
 main ul ul{
   list-style-type: circle !important;
 }
 
+/* increase body width */
 @media (min-width: 1200px) {
     .container-fluid main {
         max-width: 50rem;
     }
 }
+
+
 
 /***** REMEMBER TO REMOVE LATER!! *****/
 main > div[class*="section level1"] {
