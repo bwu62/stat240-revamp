@@ -165,23 +165,32 @@ There are a few other useful tips for working in the console:
 <h2>
 <span class="header-section-number">2.3</span> Basics of R<a class="anchor" aria-label="anchor" href="#basics-of-r"><i class="fas fa-link"></i></a>
 </h2>
-<p>In this section, we will give you a brief introduction to working with R. No prior programming experience is assumed. You are <em>highly encouraged</em> to copy and run the examples provided as you read, as well as to read the extra references and try the exercises at the end of each subsection.</p>
+<p>In this section, we will give you a brief introduction to working with R. No prior coding experience is assumed. You are <em>highly encouraged</em> to copy and run the examples provided as you read, as well as to try the exercises and peruse the extra references when provided.</p>
 <div id="running-r-code" class="section level3" number="2.3.1">
 <h3>
 <span class="header-section-number">2.3.1</span> Running R code<a class="anchor" aria-label="anchor" href="#running-r-code"><i class="fas fa-link"></i></a>
 </h3>
-<p>The main way to run R code is to type or copy into the console. If there is output, it will be displayed either in the console directly if it’s text, or in the plot window if it’s visual.</p>
-<p>Comments can be written after a hashtag <code>#</code> and will not be run. Remember that in these notes, <strong>console output is shown on a newline starting with <code>#&gt;</code></strong> . This makes it easy to copy and run the entire code chunk using the copy button in the top right corner.</p>
+<p>The main way to run R code is to type or copy into the console. Comments can be written after a hashtag <code>#</code> and will not be run.</p>
+<p>If there is output, it will be displayed either in the console directly if it’s text, or in the plot window if it’s visual. In these notes, output is shown in a separate box below, starting with <code>##</code> .</p>
 <p>Try running these examples below in your console and observe the output:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># this line is a comment and will not be run</span></span>
 <span><span class="co"># use the copy button in the corner to easily run this example ---&gt;</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"output is shown here"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "output is shown here"</span></span></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># </span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"output is shown here"</span><span class="op">)</span>   <span class="co"># you can also add comments</span></span></code></pre></div>
+<pre><code>## [1] "output is shown here"</code></pre>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># a VERY simple barplot</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="02-rstudio-basics_files/figure-html/visual%20output-1.png" width="672"></div>
+<div class="inline-figure"><img src="02-rstudio-basics_files/figure-html/visual-output-1.svg" width="576"></div>
+<div class="tip">
+<p>All functions inside code blocks should automatically have links to their online help pages (these are the same help pages inside Rstudio that we saw in the previous section). Try clicking on the <code>barplot</code> function in the code block above to see its help page.</p>
+</div>
+</div>
+<div id="section" class="section level3" number="2.3.2">
+<h3>
+<span class="header-section-number">2.3.2</span> <a class="anchor" aria-label="anchor" href="#section"><i class="fas fa-link"></i></a>
+</h3>
 <!--
 
 - basic rundown of R commands
@@ -235,20 +244,23 @@ install.packages("packageName")
 
 ``` r
 head(mtcars)
-#>                    mpg cyl disp  hp drat    wt  qsec vs am
-#> Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1
-#> Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1
-#> Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1
-#> Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0
-#> Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0
-#> Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0
-#>                   gear carb
-#> Mazda RX4            4    4
-#> Mazda RX4 Wag        4    4
-#> Datsun 710           4    1
-#> Hornet 4 Drive       3    1
-#> Hornet Sportabout    3    2
-#> Valiant              3    1
+```
+
+```
+##                    mpg cyl disp  hp drat    wt  qsec vs am
+## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1
+## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1
+## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1
+## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0
+## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0
+## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0
+##                   gear carb
+## Mazda RX4            4    4
+## Mazda RX4 Wag        4    4
+## Datsun 710           4    1
+## Hornet 4 Drive       3    1
+## Hornet Sportabout    3    2
+## Valiant              3    1
 ```
 
 </details> 
@@ -281,7 +293,10 @@ head(mtcars)
 <li><a class="nav-link" href="#rstudio-why"><span class="header-section-number">2.1</span> Why Rstudio?</a></li>
 <li><a class="nav-link" href="#rstudio-interface"><span class="header-section-number">2.2</span> Rstudio interface</a></li>
 <li>
-<a class="nav-link" href="#basics-of-r"><span class="header-section-number">2.3</span> Basics of R</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#running-r-code"><span class="header-section-number">2.3.1</span> Running R code</a></li></ul>
+<a class="nav-link" href="#basics-of-r"><span class="header-section-number">2.3</span> Basics of R</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#running-r-code"><span class="header-section-number">2.3.1</span> Running R code</a></li>
+<li><a class="nav-link" href="#section"><span class="header-section-number">2.3.2</span></a></li>
+</ul>
 </li>
 </ul>
 

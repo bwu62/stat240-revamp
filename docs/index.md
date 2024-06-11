@@ -12,7 +12,9 @@ biblio-style: apalike
 csl: chicago-fullnote-bibliography.csl
 ---
 
+
 # Welcome {#welcome .unnumbered}
+
 
 Intro (maybe write this last?)
 
@@ -28,6 +30,7 @@ thins to hit:
 - will not teach everything, just provide foundation for further learning
 - acknowledgments for impact of contributions
 
+
 stuff to add:
 
 - dark mode?
@@ -40,7 +43,9 @@ stuff to add:
 - pare down more, use focused sample to calibrate TAs/instructors if needed?
 - glossary?
 
+
 other notes to self:
+
 - use [params](https://bookdown.org/yihui/rmarkdown/params-declare.html) to control:
   - course directory
   - hw/ds solution generation in files (in separate private repo?)

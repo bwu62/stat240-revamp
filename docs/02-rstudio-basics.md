@@ -80,16 +80,16 @@ That concludes the tour of the basic Rstudio interface. There is also a file edi
 ## Basics of R
 
 
-In this section, we will give you a brief introduction to working with R. No prior programming experience is assumed. You are *highly encouraged* to copy and run the examples provided as you read, as well as to read the extra references and try the exercises at the end of each subsection.
+In this section, we will give you a brief introduction to working with R. No prior coding experience is assumed. You are *highly encouraged* to copy and run the examples provided as you read, as well as to try the exercises and peruse the extra references when provided.
 
 
 
 ### Running R code
 
 
-The main way to run R code is to type or copy into the console. If there is output, it will be displayed either in the console directly if it's text, or in the plot window if it's visual.
+The main way to run R code is to type or copy into the console. Comments can be written after a hashtag `#` and will not be run.
 
-Comments can be written after a hashtag `#` and will not be run. Remember that in these notes, **console output is shown on a newline starting with `#>`** . This makes it easy to copy and run the entire code chunk using the copy button in the top right corner.
+If there is output, it will be displayed either in the console directly if it's text, or in the plot window if it's visual. In these notes, output is shown in a separate box below, starting with `##` .
 
 Try running these examples below in your console and observe the output:
 
@@ -97,21 +97,31 @@ Try running these examples below in your console and observe the output:
 ``` r
 # this line is a comment and will not be run
 # use the copy button in the corner to easily run this example --->
-print("output is shown here")
-#> [1] "output is shown here"
+
+print("output is shown here")   # you can also add comments
 ```
+
+```
+## [1] "output is shown here"
+```
+
+
 
 
 ``` r
-# 
+# a VERY simple barplot
 barplot(c(1,3,2))
 ```
 
-<img src="02-rstudio-basics_files/figure-html/visual output-1.png" width="672" />
+<img src="02-rstudio-basics_files/figure-html/visual-output-1.svg" width="576" />
 
 
+:::{.tip}
+All functions inside code blocks should automatically have links to their online help pages (these are the same help pages inside Rstudio that we saw in the previous section). Try clicking on the `barplot` function in the code block above to see its help page.
+:::
 
 
+### 
 
 
 
@@ -186,20 +196,23 @@ install.packages("packageName")
 
 ``` r
 head(mtcars)
-#>                    mpg cyl disp  hp drat    wt  qsec vs am
-#> Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1
-#> Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1
-#> Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1
-#> Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0
-#> Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0
-#> Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0
-#>                   gear carb
-#> Mazda RX4            4    4
-#> Mazda RX4 Wag        4    4
-#> Datsun 710           4    1
-#> Hornet 4 Drive       3    1
-#> Hornet Sportabout    3    2
-#> Valiant              3    1
+```
+
+```
+##                    mpg cyl disp  hp drat    wt  qsec vs am
+## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1
+## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1
+## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1
+## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0
+## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0
+## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0
+##                   gear carb
+## Mazda RX4            4    4
+## Mazda RX4 Wag        4    4
+## Datsun 710           4    1
+## Hornet 4 Drive       3    1
+## Hornet Sportabout    3    2
+## Valiant              3    1
 ```
 
 </details> 
