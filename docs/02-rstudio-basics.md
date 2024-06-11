@@ -96,9 +96,8 @@ Try running these examples below in your console and observe the output:
 
 ``` r
 # this line is a comment and will not be run
-# use the copy button in the corner to easily run this example --->
-
-print("output is shown here")   # you can also add comments
+# use the copy button in the top corner to easily run this example --->
+print("output is shown here")     # you can also add comments here
 ```
 
 ```
