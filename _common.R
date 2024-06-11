@@ -3,9 +3,12 @@ options(width = 60)
 
 # example chunk options set globally
 knitr::opts_chunk$set(
-  comment = "#>",
-  collapse = TRUE
-  )
+  eval=T, echo=T, comment="##", 
+  warning=F, message=F, tidy=T,
+  fig.dim=c(6,4), dev="svg"
+)
+
+knitr::opts_knit$set(global.par=T)
 
 library(tidyverse)
 library(lubridate)
