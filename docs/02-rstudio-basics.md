@@ -7,7 +7,6 @@ This chapter will introduce to you the basics of Rstudio and help you develop a 
 
 
 
-
 ## Why Rstudio? {#rstudio-why}
 
 
@@ -22,8 +21,6 @@ Rstudio is a free and [open-source](https://github.com/rstudio/rstudio) IDE (int
  - and so much more...
 
 We will only learn a small fraction of what Rstudio has to offer in this course. As always, you are encouraged to explore more on your own.
-
-
 
 
 
@@ -82,14 +79,35 @@ That concludes the tour of the basic Rstudio interface. There is also a file edi
 
 ## Basics of R
 
+
 In this section, we will give you a brief introduction to working with R. No prior programming experience is assumed. You are *highly encouraged* to copy and run the examples provided as you read, as well as to read the extra references and try the exercises at the end of each subsection.
+
 
 
 ### Running R code
 
+
 The main way to run R code is to type or copy into the console. If there is output, it will be displayed either in the console directly if it's text, or in the plot window if it's visual.
 
+Comments can be written after a hashtag `#` and will not be run. Remember that in these notes, **console output is shown on a newline starting with `#>`** . This makes it easy to copy and run the entire code chunk using the copy button in the top right corner.
 
+Try running these examples below in your console and observe the output:
+
+
+``` r
+# this line is a comment and will not be run
+# use the copy button in the corner to easily run this example --->
+print("output is shown here")
+#> [1] "output is shown here"
+```
+
+
+``` r
+# 
+barplot(c(1,3,2))
+```
+
+<img src="02-rstudio-basics_files/figure-html/visual output-1.png" width="672" />
 
 
 

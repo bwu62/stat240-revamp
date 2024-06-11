@@ -171,6 +171,17 @@ There are a few other useful tips for working in the console:
 <span class="header-section-number">2.3.1</span> Running R code<a class="anchor" aria-label="anchor" href="#running-r-code"><i class="fas fa-link"></i></a>
 </h3>
 <p>The main way to run R code is to type or copy into the console. If there is output, it will be displayed either in the console directly if it’s text, or in the plot window if it’s visual.</p>
+<p>Comments can be written after a hashtag <code>#</code> and will not be run. Remember that in these notes, <strong>console output is shown on a newline starting with <code>#&gt;</code></strong> . This makes it easy to copy and run the entire code chunk using the copy button in the top right corner.</p>
+<p>Try running these examples below in your console and observe the output:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># this line is a comment and will not be run</span></span>
+<span><span class="co"># use the copy button in the corner to easily run this example ---&gt;</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"output is shown here"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "output is shown here"</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># </span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="02-rstudio-basics_files/figure-html/visual%20output-1.png" width="672"></div>
 <!--
 
 - basic rundown of R commands

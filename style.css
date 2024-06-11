@@ -70,6 +70,7 @@ a.footnote-ref{
 img{
   width:90%;
   margin-left:5%;
+  margin-right:5%;
 }
 
 .inline-figure{
@@ -90,7 +91,7 @@ main ul ul{
     }
 }
 
-/***** REMEMBER TO REMOVE LATER!! *****/
+/***** REMEMBER TO REMOVE LATER!! 
 main div:first-child{
   padding-bottom:750px;
 }
