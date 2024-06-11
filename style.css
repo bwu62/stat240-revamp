@@ -93,6 +93,26 @@ main ul ul{
 }
 
 
+/* tweak code+output style */
+pre{
+  background-color: unset !important;
+  background-image: unset !important;
+}
+pre.sourceCode{
+  background-color: #f6f6f6 !important;
+}
+div.sourceCode > pre.sourceCode{
+  margin-bottom: 0rem !important;
+}
+div.sourceCode + pre{
+  margin-top: 0.3rem !important;
+}
+div.sourceCode + p{
+  margin-top: 1rem !important}
+
+.alert code{
+  background-color: rgba(255,255,255,.6) !important;
+}
 
 /***** REMEMBER TO REMOVE LATER!! *****/
 main > div[class*="section level1"] {
