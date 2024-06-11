@@ -12,9 +12,6 @@ pre {
 pre code {
   white-space: inherit;
 }
-main p a, main li a {
-  text-decoration: underline;
-}
 
 /* https://forum.posit.co/t/set-non-collapsed-right-navigation-in-bs4-book/184739/2 */
 
