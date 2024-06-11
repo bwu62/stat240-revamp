@@ -2,5 +2,6 @@
 .Rhistory
 .RData
 .Ruserdata
+_bookdown_files
 ./*_files
 *.rds
