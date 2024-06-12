@@ -10,4 +10,4 @@ rstudio-why
 rstudio-interface
 basics-of-r
 running-r-code
-section
+basic-math
