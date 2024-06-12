@@ -59,7 +59,7 @@ Below is a brief description of the purpose of each tab. The ones we will be usi
        - Next, there are buttons to remove the current plot, or clear all plots.
      - Packages: Here you can view/install/update/load/unload packages. Note you can also install packages using the console, like we did in the previous section.
      - **Help**: This is one of the other most useful tabs in Rstudio. Here, you can access the built in R help pages. This is one of the FIRST places you should visit for help with R functions/objects.
-       - There are several ways to access the help pages. Suppose you want help with the `install.packages()`{.R} function. You can either run `?install.packages`{.R} or `help(install.packages)`{.R} in the console, or put your cursor on the function in your code and hit the F1 key.
+       - There are several ways to access the help pages. Suppose you want help with the `install.packages()` function. You can either run `?install.packages` or `help(install.packages)` in the console, or put your cursor on the function in your code and hit the F1 key.
        - The help page may contain these following sections, each of which presents different types of information:
          i.   *Description*, showing a brief summary of the purpose of the function
          ii.  *Usage*, listing available arguments (i.e. options). If an argument has an ` = ` sign and a value, this denotes the default value
@@ -105,21 +105,31 @@ par(mar=c(1.5,2,1.5,1))
 
 ```{r visual-output}
 # a VERY simple barplot
+# the c() function creates a vector of numbers
 barplot(c(1,3,2))
 ```
 
 
 :::{.tip}
-All functions inside code blocks should automatically have links to their online help pages (these are the same help pages inside Rstudio that we saw in the previous section). Try clicking on the `barplot` function in the code block above to see its help page.
+All functions in these notes should automatically link to their online help pages (these are the same help pages inside Rstudio that we saw in the previous section). Try clicking on the `barplot()` function here or in the previous code block to see its help page.
 :::
 
 
-### 
+### Basic math
 
+One of the first things you should learn about R is how to use it as a calculator to do basic math. Operators like `+`, `-`, `*`, `/`, `^`, and parentheses `( )` work just like how you'd expect and respect order of operations:
 
+```{r}
+( 5 * 2 ^ 3 - 4 ) / 9 + 1
+```
 
+Trigonometric functions like `sin()`, `cos()`, `tan()`, (and their `asin()`, `acos()`, `atan()` where the a-- prefix means arc--), also work as you'd expect and use radian units. Note `pi` is conveniently predefined too.
 
+```{r}
+cos(2 * pi) * atan(-1) * 4
+```
 
+Exponential and logarithm functions `exp()`, `log()`, also work as you'd expect and default to natural base $e$.
 
 
 
