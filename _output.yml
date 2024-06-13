@@ -6,7 +6,7 @@ bookdown::bs4_book:
   theme:
     primary: "#9B0000"
     code_font:
-      google: "JetBrains Mono"
+      google: "Roboto Mono"
   repo: https://github.com/bwu62/stat240-revamp
 # bookdown::pdf_book:
 #   includes:
