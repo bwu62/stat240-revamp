@@ -10,7 +10,6 @@ knitr::opts_chunk$set(
   fig.dim=c(6,4), dev="svg"
 )
 
-knitr::opts_knit$set(global.par=T)
 
 library(tidyverse)
 library(lubridate)
