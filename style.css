@@ -116,3 +116,15 @@ div.sourceCode + p{
 main > div[class*="section level1"] {
     padding-bottom: 500px;
 }
+
+/* improve heading margins for legibility */
+h2{
+  margin-top: 3rem !important;
+  margin-bottom: 1rem !important;
+  font-size: 1.7rem !important;
+}
+h3{
+  margin-top: 2.5rem !important;
+  margin-bottom: 1rem !important;
+  font-size: 1.4rem !important;
+}
