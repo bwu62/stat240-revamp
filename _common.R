@@ -6,7 +6,7 @@ knitr::opts_knit$set(global.par=T)
 # example chunk options set globally
 knitr::opts_chunk$set(
   eval=T, echo=T, comment="##", 
-  warning=F, message=F, tidy=T,
+  warning=F, message=F, 
   fig.dim=c(6,4), dev="svg"
 )
 
