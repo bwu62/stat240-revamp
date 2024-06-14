@@ -14,6 +14,7 @@ Rstudio is a free and [open-source](https://github.com/rstudio/rstudio) IDE (int
 
  - R code completion & highlighting
  - easy access to interpreter console, plots, history, help, etc.
+ - integration with scientific communication tools (e.g. R Markdown, Shiny, etc.)
  - robust debugging tools
  - easy package/environment management
  - custom project workflows (e.g. building websites, presentations, packages, etc.)
@@ -80,7 +81,7 @@ That concludes the tour of the basic Rstudio interface. There is also a file edi
 ## Basics of R {#r-basics}
 
 
-In this section, we will give you a brief introduction to working with R. No prior coding experience is assumed. You are *highly encouraged* to copy and run the examples provided as you read, as well as to try the exercises and peruse the extra references when provided.
+In this section, we will give you a brief introduction to working with R. No prior coding experience is assumed. You are **highly encouraged** to copy and **run the examples** as you read. If you have time and capacity, you are also encouraged to peruse the linked help pages and extra reference links, but this is not mandatory.
 
 
 
@@ -96,6 +97,12 @@ Try running these examples below in your console and observe the output:
 # use the copy button in the top corner to easily run this example --->
 print("output is shown here") # you can also add comments here
 ```
+
+
+:::{.note}
+The ` [1] ` that appears at the start of the output line just means this is the first output value. These bracketed numbers are not part of the actual output and should be ignored.
+:::
+
 
 ```{r set-par,include=F}
 knitr::opts_knit$set(global.par = T)
@@ -189,6 +196,13 @@ T
 true
 ```
 
+An important thing to note is that in R, doing any kind of **math turns `TRUE` into 1 and `FALSE` into 0**.
+
+```{r}
+exp(FALSE) * (TRUE + sqrt(TRUE))
+```
+
+
 Mathematical expressions may also return `NaN` for **N**ot **a** **N**umber, i.e. undefined; or `Inf` for infinite. Note R differentiates between positive infinity `Inf` and negative infinity `-Inf`.
 
 ```{r nan-inf-na}
@@ -227,10 +241,10 @@ There are convenient keyboard shortcuts for the assignment `<-` operator: ALT + 
 
 Generally, `=` is reserved for setting arguments inside functions, e.g. like the previous code chunk where we computed `log()` with a custom base by setting the `base` argument.
 
-```{r,ref.label=I('log-base')}
+```{r reuse-log-chunk,ref.label=I('log-base')}
 ```
 
-Variable names can be any combination of upper and lower-case letters, numbers, or period `.` and underscore `_` (which are both treated similar to letters), with one caveat: **variables must begin with a letter or period**, not a number or underscore. You may not use any other characters in variable names. ^[This is only a short summary. Technically, other than a few <a href="https://rdrr.io/r/base/Reserved.html" target="_blank">reserved words</a> which are disallowed, any set of ANY characters]
+Variable names can be any combination of upper and lower-case letters, numbers, or period `.` and underscore `_` (which are both treated similar to letters), with one caveat: **variables must begin with a letter or period**, not a number or underscore. You may not use any other characters in variable names. ^[This is only a short summary. Technically, any set of ANY characters can be used to create a [non-syntactic name](https://adv-r.hadley.nz/names-values.html#non-syntactic), but this is beyond our current scope.]
 
 ```{r valid-names}
 # these variable names are ok,
@@ -252,7 +266,7 @@ var1 + Var1 + .OtherVariable + another.variable_42
 . + .. + ._ + ._..__
 ```
 
-```{r invalid-names,eval=F}
+```{r invalid-names,eval=F,tidy=F}
 # these variable names will raise errors,
 # so evaluation for this code chunk has been disabled
 1var <- 1
@@ -263,37 +277,130 @@ bad-var <- 3
 
 :::{.note}
 Observe that if the results of an expression are saved to a variable, R will NOT print it by default. This is often confusing to first time R users, since it may seem like nothing happened. For example, running the following:
-```{r}
+```{r assignment-no-output}
 result <- 3 * 4 - 5
 ```
 produces no visible output. This is normal behavior, since the output has been redirected into a variable. To inspect the result, you must explicitly call or `print()` the object again:
-```{r}
+```{r print-output}
 result
 ```
 :::
 
 
 
+### Summary functions
+
+So far, we've only seen functions that run on individual values, but there are also functions in R that run on and summarize a dataset. These are often statistical in nature. We will only give a brief summary here of how to compute these in R. A more in-depth discussion of their meaning and applications will be saved for later in the course.
+
+Suppose we gather a sample and observe the following values: 3, 6, 6, 2, 4, 1, 5 (don't worry about what these mean, we're just using it as a demo). We can create a vector using the `c()` function to store our data and save it:
+
+```{r data-example}
+data <- c(3, 6, 6, 2, 4, 1, 5)
+data
+```
+
+The `sum()` and `length()` functions work like you expect and produce the sum and length of the sample. You can use them to compute the [mean](https://www.mathsisfun.com/mean.html) of your sample, which can also be done directly using `mean()`.
+
+```{r sum-length-mean}
+sum(data) / length(data)
+mean(data)
+```
+
+We can also find the [median](https://www.mathsisfun.com/median.html) (i.e. middle number) with the `median()` function. (Sadly, there's no built-in [mode](https://www.mathsisfun.com/mode.html) function in R, but this can be achieved with [other packages](https://rdrr.io/cran/DescTools/man/Mode.html).)
+
+```{r median}
+median(data)
+```
+
+We can generalize from the median (which is the 50-th percentile) to compute [any percentile](https://www.mathsisfun.com/data/percentiles.html) using the `quantile()` function, e.g. suppose we want to compute the 30-th percentile:
+
+```{r}
+quantile(data, 0.3)
+```
+
+The [standard deviation](https://www.mathsisfun.com/data/standard-deviation.html) is another important statistic (think of it as the distance of the average observation from the mean) and can be computed using `sd()`. Note this is equivalent to the square root of the variance which can be found with `var()`.
+
+```{r var-sd}
+sqrt(var(data))
+sd(data)
+```
+
+We can also find the `min()` and `max()` of the sample (which together give us the `range()` of the dataset).
+
+```{r min-max}
+min(data)
+max(data)
+```
+
+Another important function for working with samples is the `%in%` operator, which lets us check if a value exists in the dataset.
+
+```{r in-operator}
+# 6 appears in the sample
+6 %in% data
+# 7 does not appear in the sample
+7 %in% data
+```
+
+There are other miscellaneous functions for working with vectors that are sometimes useful that we won't cover in detail now, but you can explore them on your own, such as `prod()` for computing the product of all numbers in a vector, `sort()` for sorting a vector, `rev()` for reversing a vector, `unique()` for getting the unique values in a vector, `scale()` for linearly shifting and scaling the data to have mean 0 and standard deviation 1, and `cumsum()` and `cumprod()` for the cumulative sum and product along a vector, and many many more...
+
+
 
 ### Logical comparison
 
+Finally, let's learn some basic logical comparisons. These will be crucial for data cleaning and filtering operations later on.
 
-### Summary statistics
+In R, equality comparison is done using the `==` operator. **Note the double equal sign**; single equal is for assignments and arguments. Inequality can be checked using `!=`.
+
+```{r equality}
+x <- (2 + 3)^2
+x == 25
+# if instead we ask "is x not equal to 25", we should get FALSE
+x != 25
+```
+
+Note `!` used individually is the NOT operator, i.e. it turns `TRUE` into `FALSE` and vice versa.
+
+```{r not}
+# this is equivalent to the code chunk above
+!(x == 25)
+```
+
+Inequalities are done using `<`, `<=`, `>`, `>=`, for less than (or equal to) and greater than (or equal to).
+
+```{r}
+x < 30
+x >= 25
+```
+
+Logical statements can be chained together using the `&` AND operator as well as the `|` OR operator (this vertical bar character is typed on most keyboards by using SHIFT + BACKSLASH (`\`)). The `&` (AND) will only return true if the expressions on both sides are both true; the `|` (OR) will return true if at least one of the expressions on both sides is true. Note that `&` appears higher on R's [order of operations](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Syntax.html) than `|`.
+
+```{r}
+(x > 20) & (x <= 30)
+(x > 20) | (x != 25)
+```
+
+You can of course chain these together with other R commands to compare more complicated expressions. The sky is the limit!
+
+```{r}
+# check if x² is even OR if mean of data + 2 * sd is greater than the max
+# note order of operations means we don't need extra parentheses
+# of course, you can add extra parentheses for readability if you wish!
+x^2 %% 2 == 0 | mean(data) + 2 * sd(data) > max(data)
+```
+
+
 
 
 
 
 ### R cheat sheets
 
-
-<https://cran.r-project.org/doc/contrib/Baggott-refcard-v2.pdf>
-
-<https://iqss.github.io/dss-workshops/R/Rintro/base-r-cheat-sheet.pdf>
-
-<https://herba.msu.ru/shipunov/school/biol_240/en/supp/refcard/rrefc_en.pdf>
-
-<https://cran.r-project.org/doc/contrib/Short-refcard.pdf>
-
+<https://cran.r-project.org/doc/contrib/Short-refcard.pdf>    
+<https://cran.r-project.org/doc/contrib/Baggott-refcard-v2.pdf>   
+<https://iqss.github.io/dss-workshops/R/Rintro/base-r-cheat-sheet.pdf>    
+<https://herba.msu.ru/shipunov/school/biol_240/en/supp/refcard/rrefc_en.pdf>    
+<https://www.maths.usyd.edu.au/u/jchan/Rcommands.pdf>
+<https://cran.r-project.org/doc/contrib/Paradis-rdebuts_en.pdf>   
 
 
 
