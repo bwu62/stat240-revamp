@@ -1,8 +1,6 @@
 # example R options set globally
 options(width = 60)
 
-knitr::opts_knit$set(global.par=T)
-
 # example chunk options set globally
 knitr::opts_chunk$set(
   eval=T, echo=T, comment="##", 
