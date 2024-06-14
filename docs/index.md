@@ -1,7 +1,7 @@
 --- 
 title: "STAT 240 Revamp"
 author: "Bi Cheng Wu, Bret Larget, Cameron Jones"
-date: "2024-06-13"
+date: "2024-06-14"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -34,6 +34,7 @@ thins to hit:
 stuff to add:
 
 - dark mode?
+- add exercises to each page
 - auto-index generator in _common.R?
 - cheatsheet repository
 - sample of graded, commentated papers (example of an A, AB, B, BC, C, D, F)

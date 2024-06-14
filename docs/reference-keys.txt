@@ -13,6 +13,6 @@ r-running
 r-math
 r-specials
 assignment
+summary-functions
 logical-comparison
-summary-statistics
 r-cheat-sheets
