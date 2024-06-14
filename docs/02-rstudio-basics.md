@@ -271,7 +271,6 @@ exp(FALSE) * (TRUE + sqrt(TRUE))
 ## [1] 2
 ```
 
-
 Mathematical expressions may also return `NaN` for **N**ot **a** **N**umber, i.e. undefined; or `Inf` for infinite. Note R differentiates between positive infinity `Inf` and negative infinity `-Inf`.
 
 
@@ -560,7 +559,15 @@ Note `!` used individually is the NOT operator, i.e. it turns `TRUE` into `FALSE
 
 
 ``` r
-# this is equivalent to the code chunk above
+!TRUE
+```
+
+```
+## [1] FALSE
+```
+
+``` r
+# this is equivalent to x != 25
 !(x == 25)
 ```
 
@@ -587,7 +594,9 @@ x >= 25
 ## [1] TRUE
 ```
 
-Logical statements can be chained together using the `&` AND operator as well as the `|` OR operator (this vertical bar character is typed on most keyboards by using SHIFT + BACKSLASH (`\`)). The `&` (AND) will only return true if the expressions on both sides are both true; the `|` (OR) will return true if at least one of the expressions on both sides is true. Note that `&` appears higher on R's [order of operations](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Syntax.html) than `|`.
+Logical statements can be chained together using the `&` AND operator as well as the `|` OR operator (this vertical bar character is typed on most keyboards using SHIFT + `\`).
+
+`&` will only return true if the expressions on both sides are both true; `|` will return true if at least one of the expressions on both sides is true. Note that `&` appears higher on R's [order of operations](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Syntax.html) than `|`.
 
 
 ``` r

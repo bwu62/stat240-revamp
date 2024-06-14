@@ -388,25 +388,29 @@ There are a few other useful tips for working in the console:
 <pre><code>## [1] FALSE</code></pre>
 <p>Note <code>!</code> used individually is the NOT operator, i.e. it turns <code>TRUE</code> into <code>FALSE</code> and vice versa.</p>
 <div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># this is equivalent to the code chunk above</span></span>
+<code class="sourceCode R"><span><span class="op">!</span><span class="cn">TRUE</span></span></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># this is equivalent to x != 25</span></span>
 <span><span class="op">!</span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="fl">25</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
 <p>Inequalities are done using <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>, <code>&gt;=</code>, for less than (or equal to) and greater than (or equal to).</p>
-<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;</span> <span class="fl">30</span></span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&gt;=</span> <span class="fl">25</span></span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<p>Logical statements can be chained together using the <code>&amp;</code> AND operator as well as the <code>|</code> OR operator (this vertical bar character is typed on most keyboards by using SHIFT + BACKSLASH (<code>\</code>)). The <code>&amp;</code> (AND) will only return true if the expressions on both sides are both true; the <code>|</code> (OR) will return true if at least one of the expressions on both sides is true. Note that <code>&amp;</code> appears higher on R’s <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/Syntax.html">order of operations</a> than <code>|</code>.</p>
-<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
+<p>Logical statements can be chained together using the <code>&amp;</code> AND operator as well as the <code>|</code> OR operator (this vertical bar character is typed on most keyboards using SHIFT + <code>\</code>).</p>
+<p><code>&amp;</code> will only return true if the expressions on both sides are both true; <code>|</code> will return true if at least one of the expressions on both sides is true. Note that <code>&amp;</code> appears higher on R’s <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/Syntax.html">order of operations</a> than <code>|</code>.</p>
+<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;</span> <span class="fl">20</span><span class="op">)</span> <span class="op">&amp;</span> <span class="op">(</span><span class="va">x</span> <span class="op">&lt;=</span> <span class="fl">30</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;</span> <span class="fl">20</span><span class="op">)</span> <span class="op">|</span> <span class="op">(</span><span class="va">x</span> <span class="op">!=</span> <span class="fl">25</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p>You can of course chain these together with other R commands to compare more complicated expressions. The sky is the limit!</p>
-<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># check if x² is even OR if mean of data + 2 * sd is greater than the max</span></span>
 <span><span class="co"># note order of operations means we don't need extra parentheses</span></span>
 <span><span class="co"># of course, you can add extra parentheses for readability if you wish!</span></span>
