@@ -92,14 +92,24 @@ main ul ul{
     }
 }
 
+@media (max-width: 767.98px) {
+  .section > .sourceCode > pre {
+    margin-left: 0rem !important;
+    margin-right: 0rem !important;
+    width: unset !important;
+  }
+}
 
 /* tweak code+output style */
 div.sourceCode{
-  margin-left: 0rem;
+  margin-left: 0rem !important;
+  margin-right: 0rem !important;
 }
 pre{
   margin-left: 0rem;
+  margin-right: 0rem;
 }
+
 pre.sourceCode{
   background-color: #f6f6f6 !important;
 }
