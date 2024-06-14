@@ -87,16 +87,14 @@ In this section, we will give you a brief introduction to working with R. No pri
 ### Running R code {#r-running}
 
 
-The main way to run R code is to type or copy into the console. Comments can be written after a hashtag `#` and will not be run.
-
-If there is output, it will be displayed either in the console directly if it's text, or in the plot window if it's visual. In these notes, output is shown in a separate box below, starting with `##` .
+The main way to run R code is to type or copy into the console. Comments can be written after a hashtag `#` and will not be run. If there is output, it will be displayed either in the console directly if it's text, or in the plot window if it's visual. In these notes, output is shown in a separate box below, starting with `##` .
 
 Try running these examples below in your console and observe the output:
 
 ```{r text-output}
 # this line is a comment and will not be run
 # use the copy button in the top corner to easily run this example --->
-print("output is shown here")     # you can also add comments here
+print("output is shown here") # you can also add comments here
 ```
 
 ```{r set-par,include=F}
@@ -107,7 +105,9 @@ par(mar = c(1.5, 2, 1.5, 1))
 ```{r visual-output}
 # a VERY simple barplot
 # the c() function creates a vector of numbers
-barplot(c(1,3,2))
+barplot(c(1, 3, 2))
+```
+
 ```{r reset-par,include=F}
 knitr::opts_knit$set(global.par = F)
 ```
@@ -118,33 +118,181 @@ All functions in these notes should automatically link to their online help page
 :::
 
 
-### Basic math
 
-One of the first things you should learn about R is how to use it as a calculator to do basic math. Operators like `+`, `-`, `*`, `/`, `^`, and parentheses `( )` work just like how you'd expect and respect order of operations:
 
-```{r}
-( 5 * 2 ^ 3 - 4 ) / 9 + 1
+### Basic math {#r-math}
+
+One of the first things you should learn about R is how to use it as a calculator to do basic math. Operators like `+`, `-`, `*`, `/`, `^`, and parentheses `( )` work just like how you'd expect. Note **R respects standard order of operations** (see [this page on operation order](https://rdrr.io/r/base/Syntax.html) for more details).
+
+```{r arithmetic}
+(-5 * -3^2 + 4) / 7 - 6
 ```
 
-Trigonometric functions like `sin()`, `cos()`, `tan()`, (and their `asin()`, `acos()`, `atan()` where the a-- prefix means arc--), also work as you'd expect and use radian units. Note `pi` is conveniently predefined too.
+R also supports scientific notation using the `e` infix (note this has higher order of precedence than exponentiation). R supports a variety of rounding functions, see this [help page on rounding](https://rdrr.io/r/base/Round.html) for more details.
 
-```{r}
-cos(2 * pi) * atan(-1) * 4
+```{r scientific-notation}
+# surface area of Earth in square miles using 4πr² (to 3 sig figs)
+signif(4 * 3.14 * 3.96e3^2, 3)
 ```
 
-Exponential and logarithm functions `exp()`, `log()`, also work as you'd expect and default to natural base $e$.
+
+:::{.note}
+Due to limits of [how computers represent numbers](https://en.wikipedia.org/wiki/IEEE_754), R cannot distinguish between 2 numbers that differ by less than about $2\times10^{-16}$, or 0.0000000000000002.
+:::
+
+
+You can also perform integer division in R, i.e. dividing to get the quotient and remainder, by using `%/%` for the quotient and `%%` for the remainder. This allows you to check, for example, if a number is even or odd.
+
+```{r integer-division}
+13 %/% 2
+13 %% 2
+```
+
+
+:::{.note}
+Operators like `%/%` or `%%` may seem strange at first, but they work just like any other [binary operators](https://www.datacamp.com/tutorial/operators-in-r) in R such as `+` or `^` . There are other examples of such operators like `%in%` and `%>%` which we will learn about later.
+:::
+
+
+Trigonometric functions `sin()`, `cos()`, `tan()`, (and their inverses `asin()`, `acos()`, `atan()` where the a-- prefix means arc--), also work as you'd expect and use radian units. Note `pi` is conveniently predefined as $\pi$. [Hyperbolic trig functions](https://rdrr.io/r/base/Hyperbolic.html) also exist if you need them.
+
+```{r trig}
+cos(2 * pi)
+atan(-1) * 4
+```
+
+Exponential and logarithm functions `exp()` and `log()`, also work as you'd expect and default to the natural base $e$. Note the log function has an optional `base` argument for using a different base. There are also special base 10 and 2 versions `log10()` and `log2()` .
+
+```{r log}
+log(exp(2)) * log10(100)
+```
+
+```{r log-base}
+log(3^5, base = 3)
+```
+
+Additionally, `abs()` computes the absolute value and `sqrt()` the square root (note by convention, ONLY the positive root is returned). Taking the square root of a negative number will return `NaN`.
+
+```{r sqrt-abs}
+sqrt(abs(-9))
+```
 
 
 
 
+### Special values {#r-specials}
+
+We already mentioned `pi` is predefined. There are a few other important special values in R. `TRUE` and `FALSE`, along with their abbreviations `T` and `F` are also predefined. Note the capitalization; **R is a case-sensitive language** so `true`, `True`, and `t` are NOT the same as `TRUE` (the first two are not defined, while `t()` is the matrix transpose function).
+
+```{r true-false,error=T}
+T
+true
+```
+
+Mathematical expressions may also return `NaN` for **N**ot **a** **N**umber, i.e. undefined; or `Inf` for infinite. Note R differentiates between positive infinity `Inf` and negative infinity `-Inf`.
+
+```{r nan-inf-na}
+sqrt(-4)
+1 / 0
+log(0)
+```
+
+Additionally, `NA` is used to represent missing values, i.e. when data is not available. **Note `NA` and `NaN` are NOT the same**. We will learn later about how to handle `NA` missing values.
 
 
 
 
+### Assignment
+
+
+In R, variables are typically assigned using the `<-` operator, which is just a less than `<` and minus `-` put together. You can also use `=` but `<-` is recommended for stylistic reasons (see [this blog post](https://colinfay.me/r-assignment/) for more details). For this class, **both are acceptable** but we will prefer `<-` in the notes. ^[A comprehensive R style guide written by Hadley Wickham can be found here: <https://style.tidyverse.org/>{target="_blank"}]
+
+```{r assignment-good}
+# this is preferred
+x <- 5
+print(x)
+```
+
+```{r assignment-bad, tidy=F}
+# this is equivalent and acceptable, but discouraged
+x = 5
+print(x)
+```
+
+
+:::{.tip}
+There are convenient keyboard shortcuts for the assignment `<-` operator: ALT + -- on Windows and Option (⌥) + -- on Mac.
+:::
+
+
+Generally, `=` is reserved for setting arguments inside functions, e.g. like the previous code chunk where we computed `log()` with a custom base by setting the `base` argument.
+
+```{r,ref.label=I('log-base')}
+```
+
+Variable names can be any combination of upper and lower-case letters, numbers, or period `.` and underscore `_` (which are both treated similar to letters), with one caveat: **variables must begin with a letter or period**, not a number or underscore. You may not use any other characters in variable names. ^[This is only a short summary. Technically, other than a few <a href="https://rdrr.io/r/base/Reserved.html" target="_blank">reserved words</a> which are disallowed, any set of ANY characters]
+
+```{r valid-names}
+# these variable names are ok,
+# also remember R is case sensitive!
+var1 <- 1
+Var1 <- 2
+.OtherVariable <- 3
+another.variable_42 <- 4
+
+var1 + Var1 + .OtherVariable + another.variable_42
+
+# even these morse code looking variable names,
+# while not recommended, are technically ok:
+. <- 1
+.. <- 2
+._ <- 3
+._..__ <- 4
+
+. + .. + ._ + ._..__
+```
+
+```{r invalid-names,eval=F}
+# these variable names will raise errors,
+# so evaluation for this code chunk has been disabled
+1var <- 1
+_var <- 2
+bad-var <- 3
+```
+
+
+:::{.note}
+Observe that if the results of an expression are saved to a variable, R will NOT print it by default. This is often confusing to first time R users, since it may seem like nothing happened. For example, running the following:
+```{r}
+result <- 3 * 4 - 5
+```
+produces no visible output. This is normal behavior, since the output has been redirected into a variable. To inspect the result, you must explicitly call or `print()` the object again:
+```{r}
+result
+```
+:::
 
 
 
 
+### Logical comparison
+
+
+### Summary statistics
+
+
+
+
+### R cheat sheets
+
+
+<https://cran.r-project.org/doc/contrib/Baggott-refcard-v2.pdf>
+
+<https://iqss.github.io/dss-workshops/R/Rintro/base-r-cheat-sheet.pdf>
+
+<https://herba.msu.ru/shipunov/school/biol_240/en/supp/refcard/rrefc_en.pdf>
+
+<https://cran.r-project.org/doc/contrib/Short-refcard.pdf>
 
 
 
