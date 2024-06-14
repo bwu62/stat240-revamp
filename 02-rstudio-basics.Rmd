@@ -390,16 +390,15 @@ x^2 %% 2 == 0 | mean(data) + 2 * sd(data) > max(data)
 
 
 
-
-
-
 ### R cheat sheets
+
+
 
 <https://cran.r-project.org/doc/contrib/Short-refcard.pdf>    
 <https://cran.r-project.org/doc/contrib/Baggott-refcard-v2.pdf>   
 <https://iqss.github.io/dss-workshops/R/Rintro/base-r-cheat-sheet.pdf>    
 <https://herba.msu.ru/shipunov/school/biol_240/en/supp/refcard/rrefc_en.pdf>    
-<https://www.maths.usyd.edu.au/u/jchan/Rcommands.pdf>
+<https://www.maths.usyd.edu.au/u/jchan/Rcommands.pdf>   
 <https://cran.r-project.org/doc/contrib/Paradis-rdebuts_en.pdf>   
 
 
