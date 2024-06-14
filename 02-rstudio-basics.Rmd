@@ -198,10 +198,9 @@ true
 
 An important thing to note is that in R, doing any kind of **math turns `TRUE` into 1 and `FALSE` into 0**.
 
-```{r}
+```{r true-false-math}
 exp(FALSE) * (TRUE + sqrt(TRUE))
 ```
-
 
 Mathematical expressions may also return `NaN` for **N**ot **a** **N**umber, i.e. undefined; or `Inf` for infinite. Note R differentiates between positive infinity `Inf` and negative infinity `-Inf`.
 
@@ -314,7 +313,7 @@ median(data)
 
 We can generalize from the median (which is the 50-th percentile) to compute [any percentile](https://www.mathsisfun.com/data/percentiles.html) using the `quantile()` function, e.g. suppose we want to compute the 30-th percentile:
 
-```{r}
+```{r quantile}
 quantile(data, 0.3)
 ```
 
@@ -361,27 +360,30 @@ x != 25
 Note `!` used individually is the NOT operator, i.e. it turns `TRUE` into `FALSE` and vice versa.
 
 ```{r not}
-# this is equivalent to the code chunk above
+!TRUE
+# this is equivalent to x != 25
 !(x == 25)
 ```
 
 Inequalities are done using `<`, `<=`, `>`, `>=`, for less than (or equal to) and greater than (or equal to).
 
-```{r}
+```{r inequalities}
 x < 30
 x >= 25
 ```
 
-Logical statements can be chained together using the `&` AND operator as well as the `|` OR operator (this vertical bar character is typed on most keyboards by using SHIFT + BACKSLASH (`\`)). The `&` (AND) will only return true if the expressions on both sides are both true; the `|` (OR) will return true if at least one of the expressions on both sides is true. Note that `&` appears higher on R's [order of operations](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Syntax.html) than `|`.
+Logical statements can be chained together using the `&` AND operator as well as the `|` OR operator (this vertical bar character is typed on most keyboards using SHIFT + `\`).
 
-```{r}
+`&` will only return true if the expressions on both sides are both true; `|` will return true if at least one of the expressions on both sides is true. Note that `&` appears higher on R's [order of operations](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Syntax.html) than `|`.
+
+```{r and-or}
 (x > 20) & (x <= 30)
 (x > 20) | (x != 25)
 ```
 
 You can of course chain these together with other R commands to compare more complicated expressions. The sky is the limit!
 
-```{r}
+```{r longer-logical-example}
 # check if x² is even OR if mean of data + 2 * sd is greater than the max
 # note order of operations means we don't need extra parentheses
 # of course, you can add extra parentheses for readability if you wish!
