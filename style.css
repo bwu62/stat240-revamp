@@ -94,6 +94,12 @@ main ul ul{
 
 
 /* tweak code+output style */
+div.sourceCode{
+  margin-left: 0rem;
+}
+pre{
+  margin-left: 0rem;
+}
 pre.sourceCode{
   background-color: #f6f6f6 !important;
 }
