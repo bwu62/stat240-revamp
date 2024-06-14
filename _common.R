@@ -35,9 +35,11 @@ r.date = case_when(
   mdy %>% min(today)
 
 r.releases = 
-  "https://en.wikipedia.org/wiki/R_(programming_language)" %>% 
+  paste0("https://en.wikipedia.org/",
+         "wiki/R_(programming_language)") %>% 
   read_html %>% 
-  html_nodes(xpath="//table[contains(caption,'codenames')]") %>%
+  html_nodes(
+    xpath="//table[contains(caption,'codenames')]") %>%
   {html_table(.)[[1]][1:2]} %>% 
   setNames(c("version","date")) %>% 
   head(10) %>% mutate(date=ymd(date))
@@ -75,6 +77,8 @@ page.find = function(url,pattern,md=F,n=1){
   if(!md){
     matching
   } else{
-    paste0("[",str_replace(matching,".*/",""),"](",matching,")")
+    paste0(
+      "[", str_replace(matching,".*/",""),
+      "](",matching,")")
   }
 }
