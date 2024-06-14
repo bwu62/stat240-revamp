@@ -112,8 +112,11 @@ div.sourceCode + pre{
   margin-top: 0.2rem !important;
 }
 div.sourceCode + p{
-  margin-top: 1rem !important}
-
+  margin-top: 1rem !important
+}
+.sourceCode + .alert{
+  margin-top: 1rem !important;
+}
 .alert code{
   background-color: rgba(255,255,255,.6) !important;
 }
