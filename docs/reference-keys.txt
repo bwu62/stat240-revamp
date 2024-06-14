@@ -8,6 +8,11 @@ setup-troubleshooting-faq
 rstudio-intro
 rstudio-why
 rstudio-interface
-basics-of-r
-running-r-code
-basic-math
+r-basics
+r-running
+r-math
+r-specials
+assignment
+logical-comparison
+summary-statistics
+r-cheat-sheets

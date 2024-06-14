@@ -94,9 +94,11 @@ main ul ul{
 
 
 /* tweak code+output style */
+div.sourceCode{
+  margin-left: 0rem;
+}
 pre{
-  background-color: unset !important;
-  background-image: unset !important;
+  margin-left: 0rem;
 }
 pre.sourceCode{
   background-color: #f6f6f6 !important;
@@ -105,16 +107,39 @@ div.sourceCode > pre.sourceCode{
   margin-bottom: 0rem !important;
 }
 div.sourceCode + pre{
-  margin-top: 0.3rem !important;
+  background-color: unset !important;
+  background-image: unset !important;
+  margin-top: 0.2rem !important;
 }
 div.sourceCode + p{
-  margin-top: 1rem !important}
-
+  margin-top: 1rem !important
+}
+.sourceCode + .alert{
+  margin-top: 1rem !important;
+}
 .alert code{
   background-color: rgba(255,255,255,.6) !important;
+}
+.alert .sourceCode .sourceCode code.sourceCode{
+  background-color: unset !important;
+}
+div.alert pre{
+  background-color: rgba(255,255,255,.7) !important;
 }
 
 /***** REMEMBER TO REMOVE LATER!! *****/
 main > div[class*="section level1"] {
     padding-bottom: 500px;
+}
+
+/* improve heading margins for legibility */
+h2{
+  margin-top: 3rem !important;
+  margin-bottom: 1rem !important;
+  font-size: 1.7rem !important;
+}
+h3{
+  margin-top: 2.5rem !important;
+  margin-bottom: 1rem !important;
+  font-size: 1.4rem !important;
 }
