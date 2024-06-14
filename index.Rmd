@@ -34,6 +34,7 @@ thins to hit:
 stuff to add:
 
 - dark mode?
+- add exercises to each page
 - auto-index generator in _common.R?
 - cheatsheet repository
 - sample of graded, commentated papers (example of an A, AB, B, BC, C, D, F)
