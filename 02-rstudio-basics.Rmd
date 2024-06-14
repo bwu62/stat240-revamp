@@ -77,14 +77,14 @@ That concludes the tour of the basic Rstudio interface. There is also a file edi
 
 
 
-## Basics of R
+## Basics of R {#r-basics}
 
 
 In this section, we will give you a brief introduction to working with R. No prior coding experience is assumed. You are *highly encouraged* to copy and run the examples provided as you read, as well as to try the exercises and peruse the extra references when provided.
 
 
 
-### Running R code
+### Running R code {#r-running}
 
 
 The main way to run R code is to type or copy into the console. Comments can be written after a hashtag `#` and will not be run.
