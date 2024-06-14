@@ -160,6 +160,11 @@ Exponential and logarithm functions `exp()`, `log()`, also work as you'd expect 
   - practice using tab
   - practice using console history
 
+* remember:
+  - set %in% operations
+  - floor/ceil/round
+  - c, :, seq
+
 
 ## R Markdown {#rstudio-rmarkdown}
 
@@ -176,6 +181,9 @@ Exponential and logarithm functions `exp()`, `log()`, also work as you'd expect 
   - testing code interactively
   - libraries
   - troubleshooting tips
+
+
+## Extra: if/else, for/while
 
 
 
