@@ -135,16 +135,14 @@ One of the first things you should learn about R is how to use it as a calculato
 (-5 * -3^2 + 4) / 7 - 6
 ```
 
-R also supports scientific notation using the `e` infix (note this has higher order of precedence than exponentiation). R supports a variety of rounding functions, see this [help page on rounding](https://rdrr.io/r/base/Round.html) for more details.
-
-```{r scientific-notation}
-# surface area of Earth in square miles using 4πr² (to 3 sig figs)
-signif(4 * 3.14 * 3.96e3^2, 3)
-```
-
 
 :::{.note}
-Due to limits of [how computers represent numbers](https://en.wikipedia.org/wiki/IEEE_754), R cannot distinguish between 2 numbers that differ by less than about $2\times10^{-16}$, or 0.0000000000000002.
+R will sometimes output in scientific notation, especially if the number cannot be exactly numerically represented due to computing limitations. For example, if you compute `2^50` R will show the result as `1.1259e+15`, i.e. $1.1259\times10^{15}$. You can also type in this scientific notation and R will understand it.
+```{r}
+2^50
+```
+
+Also note that due to the limitations of [how computers represent numbers](https://en.wikipedia.org/wiki/IEEE_754), R cannot distinguish between 2 numbers that differ by less than about $2\times10^{-16}$, or 0.0000000000000002.
 :::
 
 
@@ -218,7 +216,7 @@ Additionally, `NA` is used to represent missing values, i.e. when data is not av
 ### Assignment
 
 
-In R, variables are typically assigned using the `<-` operator, which is just a less than `<` and minus `-` put together. You can also use `=` but `<-` is recommended for stylistic reasons (see [this blog post](https://colinfay.me/r-assignment/) for more details). For this class, **both are acceptable** but we will prefer `<-` in the notes. ^[A comprehensive R style guide written by Hadley Wickham can be found here: <https://style.tidyverse.org/>{target="_blank"}]
+In R, variables are typically assigned using the `<-` operator, which is just a less than `<` and minus `-` put together. You can also use `=` but `<-` is recommended for stylistic reasons (see [this blog post](https://colinfay.me/r-assignment/) for more details). For this class, **both are acceptable** but we will prefer `<-` in the notes. ^[A comprehensive R style guide written by Hadley Wickham can be found here: <https://style.tidyverse.org/>{target="_blank"}.]
 
 ```{r assignment-good}
 # this is preferred
@@ -265,12 +263,13 @@ var1 + Var1 + .OtherVariable + another.variable_42
 . + .. + ._ + ._..__
 ```
 
-```{r invalid-names,eval=F,tidy=F}
-# these variable names will raise errors,
-# so evaluation for this code chunk has been disabled
+```{r invalid-names,tidy=F,eval=F}
+# these variable names will raise errors:
+#   1var, _var, bad-var,   e.g.:
 1var <- 1
-_var <- 2
-bad-var <- 3
+```
+```{r invalid-names-2,echo=F,eval=T,message=T}
+message('Error: unexpected symbol in "1var"')
 ```
 
 
@@ -391,13 +390,62 @@ x^2 %% 2 == 0 | mean(data) + 2 * sd(data) > max(data)
 ```
 
 
+### Packages
+
+As a last topic, let's briefly discuss packages. One of the best features of R is the ability for anyone to easily write and distribute packages on [CRAN](https://cran.r-project.org/) (**C**omprehensive **R** **A**rchive **N**etwork). Currently, there are `r read_html("https://cran.r-project.org/web/packages/") %>% html_text() %>% str_match("features \\d+ available packages") %>% str_extract("\\d+")` packages available on CRAN. There are also a further `r read_html("https://www.bioconductor.org/") %>% html_text() %>% str_match("Discover \\d+ software packages") %>% str_extract("\\d+")` packages on the bioinformatics-specific package archive [Bioconductor](https://www.bioconductor.org/), as well as countless more on [GitHub](https://github.com/topics/r-package).
+
+In this course, we will primarily make use of the [Tidyverse](https://www.tidyverse.org/) suite of packages, which contains several important packages for data science: `readr` for reading in data, `ggplot2` for plotting data, `dplyr` and `tidyr` for cleaning data, and `lubridate` and `stringr` for working with dates and strings. We will learn each of these as the course progresses.
+
+The most important thing you need to remember about packages is this:
+
+> ***install once; load daily***
+
+I.e. you only need to install a package *once* to your computer, but you need to load it *every time* you reopen Rstudio and want to use it (unless you're one of those people that never closes any programs). Of course if you want to setup R/Rstudio on a new computer, you need to install it again there as well.
+
+
+#### Install a package
+
+Unless you're doing extremely niche work, generally any packages you want to use will be on CRAN and can be easily installed one at a time by running the following.
+
+```{r install,eval=F}
+# you should have already installed tidyverse from last chapter
+# note the package name MUST be in quotes
+install.packages("tidyverse")
+```
+
+It's important to check the output messages to see if the install was successful, and if not, to find important "Error:..." keywords to use for troubleshooting. Sometimes R will ask you different things during install:
+
+ - If R asks you to use a "personal library", say yes. This just means it can't store the package files in your system folder due to system permissions, so it will store it somewhere else (typically in your user directory).
+ - If R asks you to install "from source", try no first; if that fails, retry with yes. This just means if you want R to prioritize using precompiled executable files when installing, which is generally much faster.
+ - If R asks you to update existing packages before installing a new package, this is entirely up to you. I like to update my packages regularly, but there's usually no harm if you don't want update immediately.
+   - If you try to update packages that are currently loaded, R may ask you to first "restart R", which is usually a good idea.
+
+#### Loading a package
+
+You can load a package by using either `library()` or `require()`, which are basically the same. ^[The only difference is `require()` can be used to check if a package exists and will return `FALSE` if it doesn't, whereas `library()` will just error out, see <https://www.geeksforgeeks.org/the-difference-between-require-and-library-in-r/>{target="_blank"} for more details.]
+
+```{r unload-tidyverse,include=F}
+detach("package:tidyverse", unload=T)
+```
+```{r library,message=T,warning=T}
+library(tidyverse)
+```
+
+Upon loading, many packages will print various diagnostic messages to the console. These are generally completely ignorable. Sometimes these will warn about "Conflicts", this is standard and just means it has overridden other default functions. E.g. You can see above the `filter()` function from the package `dplyr` has overwritten the pre-loaded [`filter()`{.R}](https://rdrr.io/r/stats/filter.html) function from the `stats` package.
+
+:::{.tip}
+You may have already guessed from the message in the output above, but you can also access a function from another package without loading the entire package by using the syntax `package::function()`. This is often done to either avoid name conflicts or to clarify to the reader which functions come from which packages.
+:::
+
 
 ### R cheat sheets
 
+Those are probably the most important R commands you need to know for now. Below I have curated a selection of R "cheat sheets" for your reference should you need it.
 
+<!--<https://cran.r-project.org/doc/contrib/Short-refcard.pdf>    -->
 
-<https://cran.r-project.org/doc/contrib/Short-refcard.pdf>    
-<https://cran.r-project.org/doc/contrib/Baggott-refcard-v2.pdf>   
+ - Matt Baggott's [R Reference Card v2.0](https://cran.r-project.org/doc/contrib/Baggott-refcard-v2.pdf) is a nice one-stop-shop for all of R's built-in functions.
+   
 <https://iqss.github.io/dss-workshops/R/Rintro/base-r-cheat-sheet.pdf>    
 <https://herba.msu.ru/shipunov/school/biol_240/en/supp/refcard/rrefc_en.pdf>    
 <https://www.maths.usyd.edu.au/u/jchan/Rcommands.pdf>   
