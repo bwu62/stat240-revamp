@@ -27,7 +27,7 @@ R and Rstudio are two different programs that both need to be installed! Also, i
 :::
 
 
-We will first install the latest release of R, which is version `r r.version` released on `r format(r.date,"%b %d, %Y")`; then we will install Rstudio. The instructions below are separated by operating system, depending on if you have a [Windows](#setup-win) or [Mac](#setup-mac) machine.
+First, we will install the latest R release, **version `r r.version` released on `r format(r.date,"%b %d, %Y")`**; then we will install Rstudio. The instructions below are separated by operating system, depending on if you have a [Windows](#setup-win) or [Mac](#setup-mac) machine.
 
  - If you have a Linux system, follow one of the linked instructions [here](https://cloud.r-project.org/bin/linux/).
  - If you have a Chromebook, try [these steps](https://levente.littvay.hu/chromebook/).
