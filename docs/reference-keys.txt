@@ -15,4 +15,7 @@ r-specials
 assignment
 summary-functions
 logical-comparison
+packages
+install-a-package
+loading-a-package
 r-cheat-sheets
