@@ -339,6 +339,8 @@ Another important function for working with samples is the `%in%` operator, whic
 7 %in% data
 ```
 
+One final statistical function that is common is `cor()` which computes the correlation between 2 vectors. E.g. suppose you had the following $(x,y)$ points: ()
+
 There are other miscellaneous functions for working with vectors that are sometimes useful that we won't cover in detail now, but you can explore them on your own, such as `prod()` for computing the product of all numbers in a vector, `sort()` for sorting a vector, `rev()` for reversing a vector, `unique()` for getting the unique values in a vector, `scale()` for linearly shifting and scaling the data to have mean 0 and standard deviation 1, and `cumsum()` and `cumprod()` for the cumulative sum and product along a vector, and many many more...
 
 
@@ -440,22 +442,19 @@ You may have already guessed from the message in the output above, but you can a
 
 ### R cheat sheets
 
-Those are probably the most important R commands you need to know for now. Below I have curated a selection of R "cheat sheets" for your reference should you need it.
+Those are probably the most important R commands you need to know for now. Below I have curated a short selection of R "cheat sheets" for your reference should you need it, in rough order of how useful I think it will be for a first time R learner.
 
-<!--<https://cran.r-project.org/doc/contrib/Short-refcard.pdf>    -->
+ - Matt Baggott's [R Reference Card v2.0](https://cran.r-project.org/doc/contrib/Baggott-refcard-v2.pdf) is a nice complete one-stop-shop for all of R's built-in functions.
+ - IQSS's [Base R Cheat Sheet](https://iqss.github.io/dss-workshops/R/Rintro/base-r-cheat-sheet.pdf) and Alexey Shipunov's [One Page R Reference Card](https://herba.msu.ru/shipunov/school/biol_240/en/supp/refcard/rrefc_en.pdf) are both slightly shorter and more curated, but offer a nice, tighter set of the most critical R commands, along with useful examples of their syntax.
+ - For a slightly longer but more complete reference manual on R, especially with more details of how R works and different object types and data structures, Emmanuel Paradis's [R for Beginners](https://cran.r-project.org/doc/contrib/Paradis-rdebuts_en.pdf) may be helpful.
 
- - Matt Baggott's [R Reference Card v2.0](https://cran.r-project.org/doc/contrib/Baggott-refcard-v2.pdf) is a nice one-stop-shop for all of R's built-in functions.
-   
-<https://iqss.github.io/dss-workshops/R/Rintro/base-r-cheat-sheet.pdf>    
-<https://herba.msu.ru/shipunov/school/biol_240/en/supp/refcard/rrefc_en.pdf>    
-<https://www.maths.usyd.edu.au/u/jchan/Rcommands.pdf>   
-<https://cran.r-project.org/doc/contrib/Paradis-rdebuts_en.pdf>   
+<!--https://cran.r-project.org/doc/contrib/Short-refcard.pdf-->
+<!--https://www.maths.usyd.edu.au/u/jchan/Rcommands.pdf-->
 
 
 
 <!--
 
-- basic rundown of R commands
 - add notes about common console issues
   - `>` prompt character
   - `+` prompt when line not ended
