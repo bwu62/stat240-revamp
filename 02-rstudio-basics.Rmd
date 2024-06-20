@@ -71,6 +71,7 @@ Below is a brief description of the purpose of each tab. The ones we will be usi
          vii. At the end, you may also find some advanced notes, links to related functions, additional references, and example code demos.
      - **Viewer**: This is where a preview of your Rmd document output will appear when knitting (which we learn very soon).
        - In the top corner, there are buttons letting you clear current or all viewer items, as well a button to open the viewer in a new window in your default web browser, which can also be useful sometimes for checking your work or printing/exporting.
+     - Presentation: This final tab is useful if you ever make presentations in Rstudio, e.g. using R's [Beamer](https://bookdown.org/yihui/rmarkdown/beamer-presentation.html) or [reveal.js](https://github.com/rstudio/revealjs) integrations.
 
 
 That concludes the tour of the basic Rstudio interface. There is also a file editor window (also known as the source panel/window) which we will discuss later in section \@ref(rstudio-rmarkdown), but for now, let's learn to run some basic R commands!
@@ -129,6 +130,7 @@ All functions in these notes should automatically link to their online help page
 
 ### Basic math {#r-math}
 
+
 One of the first things you should learn about R is how to use it as a calculator to do basic math. Operators like `+`, `-`, `*`, `/`, `^`, and parentheses `( )` work just like how you'd expect. Note **R respects standard order of operations** (see [this page on operation order](https://rdrr.io/r/base/Syntax.html) for more details).
 
 ```{r arithmetic}
@@ -138,7 +140,7 @@ One of the first things you should learn about R is how to use it as a calculato
 
 :::{.note}
 R will sometimes output in scientific notation, especially if the number cannot be exactly numerically represented due to computing limitations. For example, if you compute `2^50` R will show the result as `1.1259e+15`, i.e. $1.1259\times10^{15}$. You can also type in this scientific notation and R will understand it.
-```{r}
+```{r scientific-notation}
 2^50
 ```
 
@@ -186,6 +188,7 @@ sqrt(abs(-9))
 
 
 ### Special values {#r-specials}
+
 
 We already mentioned `pi` is predefined. There are a few other important special values in R. `TRUE` and `FALSE`, along with their abbreviations `T` and `F` are also predefined. Note the capitalization; **R is a case-sensitive language** so `true`, `True`, and `t` are NOT the same as `TRUE` (the first two are not defined, while `t()` is the matrix transpose function).
 
@@ -286,7 +289,9 @@ result
 
 
 
+
 ### Summary functions
+
 
 So far, we've only seen functions that run on individual values, but there are also functions in R that run on and summarize a dataset. These are often statistical in nature. We will only give a brief summary here of how to compute these in R. A more in-depth discussion of their meaning and applications will be saved for later in the course.
 
@@ -339,13 +344,20 @@ Another important function for working with samples is the `%in%` operator, whic
 7 %in% data
 ```
 
-One final statistical function that is common is `cor()` which computes the correlation between 2 vectors. E.g. suppose you had the following $(x,y)$ points: ()
+One final statistical function that is extremely common is `cor()` which computes the correlation between 2 vectors. E.g. suppose you had the following $(x,y)$ points: (3.4,1), (5,4.6), (5.7,6.8), (6.5,5.3). You can compute the correlation between the $x$ and $y$ points like so:
+
+```{r correlation}
+x = c(5, 6.5, 3.4, 5.7)
+y = c(4.6, 5.3, 1, 6.8)
+cor(x,y)
+```
 
 There are other miscellaneous functions for working with vectors that are sometimes useful that we won't cover in detail now, but you can explore them on your own, such as `prod()` for computing the product of all numbers in a vector, `sort()` for sorting a vector, `rev()` for reversing a vector, `unique()` for getting the unique values in a vector, `scale()` for linearly shifting and scaling the data to have mean 0 and standard deviation 1, and `cumsum()` and `cumprod()` for the cumulative sum and product along a vector, and many many more...
 
 
 
 ### Logical comparison
+
 
 Finally, let's learn some basic logical comparisons. These will be crucial for data cleaning and filtering operations later on.
 
@@ -392,7 +404,10 @@ x^2 %% 2 == 0 | mean(data) + 2 * sd(data) > max(data)
 ```
 
 
+
+
 ### Packages
+
 
 As a last topic, let's briefly discuss packages. One of the best features of R is the ability for anyone to easily write and distribute packages on [CRAN](https://cran.r-project.org/) (**C**omprehensive **R** **A**rchive **N**etwork). Currently, there are `r read_html("https://cran.r-project.org/web/packages/") %>% html_text() %>% str_match("features \\d+ available packages") %>% str_extract("\\d+")` packages available on CRAN. There are also a further `r read_html("https://www.bioconductor.org/") %>% html_text() %>% str_match("Discover \\d+ software packages") %>% str_extract("\\d+")` packages on the bioinformatics-specific package archive [Bioconductor](https://www.bioconductor.org/), as well as countless more on [GitHub](https://github.com/topics/r-package).
 
@@ -405,7 +420,10 @@ The most important thing you need to remember about packages is this:
 I.e. you only need to install a package *once* to your computer, but you need to load it *every time* you reopen Rstudio and want to use it (unless you're one of those people that never closes any programs). Of course if you want to setup R/Rstudio on a new computer, you need to install it again there as well.
 
 
+
+
 #### Install a package
+
 
 Unless you're doing extremely niche work, generally any packages you want to use will be on CRAN and can be easily installed one at a time by running the following.
 
@@ -422,7 +440,11 @@ It's important to check the output messages to see if the install was successful
  - If R asks you to update existing packages before installing a new package, this is entirely up to you. I like to update my packages regularly, but there's usually no harm if you don't want update immediately.
    - If you try to update packages that are currently loaded, R may ask you to first "restart R", which is usually a good idea.
 
+
+
+
 #### Loading a package
+
 
 You can load a package by using either `library()` or `require()`, which are basically the same. ^[The only difference is `require()` can be used to check if a package exists and will return `FALSE` if it doesn't, whereas `library()` will just error out, see <https://www.geeksforgeeks.org/the-difference-between-require-and-library-in-r/>{target="_blank"} for more details.]
 
@@ -440,7 +462,10 @@ You may have already guessed from the message in the output above, but you can a
 :::
 
 
+
+
 ### R cheat sheets
+
 
 Those are probably the most important R commands you need to know for now. Below I have curated a short selection of R "cheat sheets" for your reference should you need it, in rough order of how useful I think it will be for a first time R learner.
 
@@ -450,6 +475,18 @@ Those are probably the most important R commands you need to know for now. Below
 
 <!--https://cran.r-project.org/doc/contrib/Short-refcard.pdf-->
 <!--https://www.maths.usyd.edu.au/u/jchan/Rcommands.pdf-->
+
+
+
+
+## R Markdown
+
+
+In the final section of this chapter, we will introduce you to R Markdown, which is a document format that allows you to seamlessly organize and integrate text and R code/output in an easily readable and editable way. It also supports [many output formats](https://rmarkdown.rstudio.com/lesson-9.html), including reports, articles, presentations, ebooks, and even websites (in fact, this entire website is written in (and the GitHub repo maintained using) R Markdown and Rstudio).
+
+Let's start with an example! 
+
+
 
 
 
