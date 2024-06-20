@@ -18,7 +18,7 @@ csl: chicago-fullnote-bibliography.csl
 
 Intro (maybe write this last?)
 
-thins to hit:
+things to hit:
 
 - how to use this book
   - book conventions
