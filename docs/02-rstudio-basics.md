@@ -632,7 +632,7 @@ x^2 %% 2 == 0 | mean(data) + 2 * sd(data) > max(data)
 
 ### Packages
 
-As a last topic, let's briefly discuss packages. One of the best features of R is the ability for anyone to easily write and distribute packages on [CRAN](https://cran.r-project.org/) (**C**omprehensive **R** **A**rchive **N**etwork). Currently, there are 20954 packages available on CRAN. There are also a further 2300 packages on the bioinformatics-specific package archive [Bioconductor](https://www.bioconductor.org/), as well as countless more on [GitHub](https://github.com/topics/r-package).
+As a last topic, let's briefly discuss packages. One of the best features of R is the ability for anyone to easily write and distribute packages on [CRAN](https://cran.r-project.org/) (**C**omprehensive **R** **A**rchive **N**etwork). Currently, there are 20956 packages available on CRAN. There are also a further 2300 packages on the bioinformatics-specific package archive [Bioconductor](https://www.bioconductor.org/), as well as countless more on [GitHub](https://github.com/topics/r-package).
 
 In this course, we will primarily make use of the [Tidyverse](https://www.tidyverse.org/) suite of packages, which contains several important packages for data science: `readr` for reading in data, `ggplot2` for plotting data, `dplyr` and `tidyr` for cleaning data, and `lubridate` and `stringr` for working with dates and strings. We will learn each of these as the course progresses.
 
@@ -690,16 +690,14 @@ You may have already guessed from the message in the output above, but you can a
 
 ### R cheat sheets
 
-Those are probably the most important R commands you need to know for now. Below I have curated a selection of R "cheat sheets" for your reference should you need it.
+Those are probably the most important R commands you need to know for now. Below I have curated a short selection of R "cheat sheets" for your reference should you need it, in rough order of how useful I think it will be for a first time R learner.
 
-<!--<https://cran.r-project.org/doc/contrib/Short-refcard.pdf>    -->
+ - Matt Baggott's [R Reference Card v2.0](https://cran.r-project.org/doc/contrib/Baggott-refcard-v2.pdf) is a nice complete one-stop-shop for all of R's built-in functions.
+ - IQSS's [Base R Cheat Sheet](https://iqss.github.io/dss-workshops/R/Rintro/base-r-cheat-sheet.pdf) and Alexey Shipunov's [One Page R Reference Card](https://herba.msu.ru/shipunov/school/biol_240/en/supp/refcard/rrefc_en.pdf) are both slightly shorter and more curated, but offer a nice, tighter set of the most critical R commands, along with useful examples of their syntax.
+ - For a slightly longer but more complete reference manual on R, especially with more details of how R works and different object types and data structures, Emmanuel Paradis's [R for Beginners](https://cran.r-project.org/doc/contrib/Paradis-rdebuts_en.pdf) may be helpful.
 
- - Matt Baggott's [R Reference Card v2.0](https://cran.r-project.org/doc/contrib/Baggott-refcard-v2.pdf) is a nice one-stop-shop for all of R's built-in functions.
-   
-<https://iqss.github.io/dss-workshops/R/Rintro/base-r-cheat-sheet.pdf>    
-<https://herba.msu.ru/shipunov/school/biol_240/en/supp/refcard/rrefc_en.pdf>    
-<https://www.maths.usyd.edu.au/u/jchan/Rcommands.pdf>   
-<https://cran.r-project.org/doc/contrib/Paradis-rdebuts_en.pdf>   
+<!--https://cran.r-project.org/doc/contrib/Short-refcard.pdf-->
+<!--https://www.maths.usyd.edu.au/u/jchan/Rcommands.pdf-->
 
 
 
