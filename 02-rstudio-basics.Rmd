@@ -482,9 +482,15 @@ Those are probably the most important R commands you need to know for now. Below
 ## R Markdown
 
 
-In the final section of this chapter, we will introduce you to R Markdown, which is a document format that allows you to seamlessly organize and integrate text and R code/output in an easily readable and editable way. It also supports [many output formats](https://rmarkdown.rstudio.com/lesson-9.html), including reports, articles, presentations, ebooks, and even websites (in fact, this entire website is written in (and the GitHub repo maintained using) R Markdown and Rstudio).
+In the final section of this chapter, we will introduce you to R Markdown, which is a document format that allows you to seamlessly organize and integrate text and R code/output in an easily readable and editable way. It also supports [many output formats](https://rmarkdown.rstudio.com/lesson-9.html), including reports, articles, presentations, ebooks, and even websites (in fact, this entire website is written in R Markdown, and the GitHub repo even maintained using Rstudio; you can view the source code of any page using the "View source" button in the right sidebar).
 
-Let's start with an example! 
+Let's start with an example! Below is a basic R Markdown demo file:
+
+
+
+
+```{embed, file="demo.Rmd"}
+```
 
 
 
