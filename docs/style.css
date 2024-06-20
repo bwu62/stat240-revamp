@@ -13,7 +13,7 @@ pre code {
   white-space: inherit;
 }
 
-/* https://forum.posit.co/t/set-non-collapsed-right-navigation-in-bs4-book/184739/2 */
+/* https://forum.posit.co/t/set-non-collapsed-right-navigation-in-bs4-book/184739/2
 
 @media (min-width: 576px) {
   .nav {
@@ -39,6 +39,7 @@ pre code {
     margin-top: auto !important;
   }
 }
+*/
 
 /* underline links... */
 main p a, main li a {

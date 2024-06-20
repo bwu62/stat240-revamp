@@ -66,6 +66,8 @@ If you get a window that looks [like this](https://i.imgur.com/qmt5IHj.png), you
     b. In the new window, drag the Rstudio icon into the Applications directory. This will install it to your computer.
     c. Open a new Finder window, go to the Applications directory, find the new Rstudio program and drag it into your dock for easy access.
     d. (Optional) You can now unmount the virtual disk. Right click the mounted virtual disk on your desktop and choose "Unmount", or alternatively find the mounted drive on the right side of your dock and drag it to the trash bin. You can also delete the .dmg install file.
+
+<!--https://i.imgur.com/1NMFdL9.jpeg-->
     
  3. On many (but not all) systems, two additional programs need to be installed for everything to run smoothly. It is recommended for everyone to install these just in case (there's no harm if you didn't actually need them).
     a. Download [XQuartz-2.8.5.pkg](https://github.com/XQuartz/XQuartz/releases/download/XQuartz-2.8.5/XQuartz-2.8.5.pkg) and run it, accepting all default settings. This installs a tool that Rstudio uses to display certain outputs.
