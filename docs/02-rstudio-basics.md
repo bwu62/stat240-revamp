@@ -93,7 +93,7 @@ The main way to run R code is to type or copy into the console. Comments can be 
 Try running these examples below in your console and observe the output:
 
 
-``` r
+```r
 # this line is a comment and will not be run
 # use the copy button in the top corner to easily run this example --->
 print("output is shown here") # you can also add comments here
@@ -112,7 +112,7 @@ The ` [1] ` that appears at the start of the output line just means this is the 
 
 
 
-``` r
+```r
 # a VERY simple barplot
 # the c() function creates a vector of numbers
 barplot(c(1, 3, 2))
@@ -132,10 +132,11 @@ All functions in these notes should automatically link to their online help page
 
 ### Basic math {#r-math}
 
+
 One of the first things you should learn about R is how to use it as a calculator to do basic math. Operators like `+`, `-`, `*`, `/`, `^`, and parentheses `( )` work just like how you'd expect. Note **R respects standard order of operations** (see [this page on operation order](https://rdrr.io/r/base/Syntax.html) for more details).
 
 
-``` r
+```r
 (-5 * -3^2 + 4) / 7 - 6
 ```
 
@@ -147,7 +148,7 @@ One of the first things you should learn about R is how to use it as a calculato
 :::{.note}
 R will sometimes output in scientific notation, especially if the number cannot be exactly numerically represented due to computing limitations. For example, if you compute `2^50` R will show the result as `1.1259e+15`, i.e. $1.1259\times10^{15}$. You can also type in this scientific notation and R will understand it.
 
-``` r
+```r
 2^50
 ```
 
@@ -162,7 +163,7 @@ Also note that due to the limitations of [how computers represent numbers](https
 You can also perform integer division in R, i.e. dividing to get the quotient and remainder, by using `%/%` for the quotient and `%%` for the remainder. This allows you to check, for example, if a number is even or odd.
 
 
-``` r
+```r
 13 %/% 2
 ```
 
@@ -170,7 +171,7 @@ You can also perform integer division in R, i.e. dividing to get the quotient an
 ## [1] 6
 ```
 
-``` r
+```r
 13 %% 2
 ```
 
@@ -187,7 +188,7 @@ Operators like `%/%` or `%%` may seem strange at first, but they work just like 
 Trigonometric functions `sin()`, `cos()`, `tan()`, (and their inverses `asin()`, `acos()`, `atan()` where the a-- prefix means arc--), also work as you'd expect and use radian units. Note `pi` is conveniently predefined as $\pi$. [Hyperbolic trig functions](https://rdrr.io/r/base/Hyperbolic.html) also exist if you need them.
 
 
-``` r
+```r
 cos(2 * pi)
 ```
 
@@ -195,7 +196,7 @@ cos(2 * pi)
 ## [1] 1
 ```
 
-``` r
+```r
 atan(-1) * 4
 ```
 
@@ -206,7 +207,7 @@ atan(-1) * 4
 Exponential and logarithm functions `exp()` and `log()`, also work as you'd expect and default to the natural base $e$. Note the log function has an optional `base` argument for using a different base. There are also special base 10 and 2 versions `log10()` and `log2()` .
 
 
-``` r
+```r
 log(exp(2)) * log10(100)
 ```
 
@@ -215,7 +216,7 @@ log(exp(2)) * log10(100)
 ```
 
 
-``` r
+```r
 log(3^5, base = 3)
 ```
 
@@ -226,7 +227,7 @@ log(3^5, base = 3)
 Additionally, `abs()` computes the absolute value and `sqrt()` the square root (note by convention, ONLY the positive root is returned). Taking the square root of a negative number will return `NaN`.
 
 
-``` r
+```r
 sqrt(abs(-9))
 ```
 
@@ -239,10 +240,11 @@ sqrt(abs(-9))
 
 ### Special values {#r-specials}
 
+
 We already mentioned `pi` is predefined. There are a few other important special values in R. `TRUE` and `FALSE`, along with their abbreviations `T` and `F` are also predefined. Note the capitalization; **R is a case-sensitive language** so `true`, `True`, and `t` are NOT the same as `TRUE` (the first two are not defined, while `t()` is the matrix transpose function).
 
 
-``` r
+```r
 T
 ```
 
@@ -250,7 +252,7 @@ T
 ## [1] TRUE
 ```
 
-``` r
+```r
 true
 ```
 
@@ -261,7 +263,7 @@ true
 An important thing to note is that in R, doing any kind of **math turns `TRUE` into 1 and `FALSE` into 0**.
 
 
-``` r
+```r
 exp(FALSE) * (TRUE + sqrt(TRUE))
 ```
 
@@ -272,7 +274,7 @@ exp(FALSE) * (TRUE + sqrt(TRUE))
 Mathematical expressions may also return `NaN` for **N**ot **a** **N**umber, i.e. undefined; or `Inf` for infinite. Note R differentiates between positive infinity `Inf` and negative infinity `-Inf`.
 
 
-``` r
+```r
 sqrt(-4)
 ```
 
@@ -280,7 +282,7 @@ sqrt(-4)
 ## [1] NaN
 ```
 
-``` r
+```r
 1 / 0
 ```
 
@@ -288,7 +290,7 @@ sqrt(-4)
 ## [1] Inf
 ```
 
-``` r
+```r
 log(0)
 ```
 
@@ -307,7 +309,7 @@ Additionally, `NA` is used to represent missing values, i.e. when data is not av
 In R, variables are typically assigned using the `<-` operator, which is just a less than `<` and minus `-` put together. You can also use `=` but `<-` is recommended for stylistic reasons (see [this blog post](https://colinfay.me/r-assignment/) for more details). For this class, **both are acceptable** but we will prefer `<-` in the notes. ^[A comprehensive R style guide written by Hadley Wickham can be found here: <https://style.tidyverse.org/>{target="_blank"}.]
 
 
-``` r
+```r
 # this is preferred
 x <- 5
 print(x)
@@ -318,7 +320,7 @@ print(x)
 ```
 
 
-``` r
+```r
 # this is equivalent and acceptable, but discouraged
 x = 5
 print(x)
@@ -337,7 +339,7 @@ There are convenient keyboard shortcuts for the assignment `<-` operator: ALT + 
 Generally, `=` is reserved for setting arguments inside functions, e.g. like the previous code chunk where we computed `log()` with a custom base by setting the `base` argument.
 
 
-``` r
+```r
 log(3^5, base = 3)
 ```
 
@@ -348,7 +350,7 @@ log(3^5, base = 3)
 Variable names can be any combination of upper and lower-case letters, numbers, or period `.` and underscore `_` (which are both treated similar to letters), with one caveat: **variables must begin with a letter or period**, not a number or underscore. You may not use any other characters in variable names. ^[This is only a short summary. Technically, any set of ANY characters can be used to create a [non-syntactic name](https://adv-r.hadley.nz/names-values.html#non-syntactic), but this is beyond our current scope.]
 
 
-``` r
+```r
 # these variable names are ok,
 # also remember R is case sensitive!
 var1 <- 1
@@ -363,7 +365,7 @@ var1 + Var1 + .OtherVariable + another.variable_42
 ## [1] 10
 ```
 
-``` r
+```r
 # even these morse code looking variable names,
 # while not recommended, are technically ok:
 . <- 1
@@ -379,7 +381,7 @@ var1 + Var1 + .OtherVariable + another.variable_42
 ```
 
 
-``` r
+```r
 # these variable names will raise errors:
 #   1var, _var, bad-var,   e.g.:
 1var <- 1
@@ -393,12 +395,12 @@ var1 + Var1 + .OtherVariable + another.variable_42
 :::{.note}
 Observe that if the results of an expression are saved to a variable, R will NOT print it by default. This is often confusing to first time R users, since it may seem like nothing happened. For example, running the following:
 
-``` r
+```r
 result <- 3 * 4 - 5
 ```
 produces no visible output. This is normal behavior, since the output has been redirected into a variable. To inspect the result, you must explicitly call or `print()` the object again:
 
-``` r
+```r
 result
 ```
 
@@ -409,14 +411,16 @@ result
 
 
 
+
 ### Summary functions
+
 
 So far, we've only seen functions that run on individual values, but there are also functions in R that run on and summarize a dataset. These are often statistical in nature. We will only give a brief summary here of how to compute these in R. A more in-depth discussion of their meaning and applications will be saved for later in the course.
 
 Suppose we gather a sample and observe the following values: 3, 6, 6, 2, 4, 1, 5 (don't worry about what these mean, we're just using it as a demo). We can create a vector using the `c()` function to store our data and save it:
 
 
-``` r
+```r
 data <- c(3, 6, 6, 2, 4, 1, 5)
 data
 ```
@@ -428,7 +432,7 @@ data
 The `sum()` and `length()` functions work like you expect and produce the sum and length of the sample. You can use them to compute the [mean](https://www.mathsisfun.com/mean.html) of your sample, which can also be done directly using `mean()`.
 
 
-``` r
+```r
 sum(data) / length(data)
 ```
 
@@ -436,7 +440,7 @@ sum(data) / length(data)
 ## [1] 3.857143
 ```
 
-``` r
+```r
 mean(data)
 ```
 
@@ -447,7 +451,7 @@ mean(data)
 We can also find the [median](https://www.mathsisfun.com/median.html) (i.e. middle number) with the `median()` function. (Sadly, there's no built-in [mode](https://www.mathsisfun.com/mode.html) function in R, but this can be achieved with [other packages](https://rdrr.io/cran/DescTools/man/Mode.html).)
 
 
-``` r
+```r
 median(data)
 ```
 
@@ -458,7 +462,7 @@ median(data)
 We can generalize from the median (which is the 50-th percentile) to compute [any percentile](https://www.mathsisfun.com/data/percentiles.html) using the `quantile()` function, e.g. suppose we want to compute the 30-th percentile:
 
 
-``` r
+```r
 quantile(data, 0.3)
 ```
 
@@ -470,7 +474,7 @@ quantile(data, 0.3)
 The [standard deviation](https://www.mathsisfun.com/data/standard-deviation.html) is another important statistic (think of it as the distance of the average observation from the mean) and can be computed using `sd()`. Note this is equivalent to the square root of the variance which can be found with `var()`.
 
 
-``` r
+```r
 sqrt(var(data))
 ```
 
@@ -478,7 +482,7 @@ sqrt(var(data))
 ## [1] 1.9518
 ```
 
-``` r
+```r
 sd(data)
 ```
 
@@ -489,7 +493,7 @@ sd(data)
 We can also find the `min()` and `max()` of the sample (which together give us the `range()` of the dataset).
 
 
-``` r
+```r
 min(data)
 ```
 
@@ -497,7 +501,7 @@ min(data)
 ## [1] 1
 ```
 
-``` r
+```r
 max(data)
 ```
 
@@ -508,7 +512,7 @@ max(data)
 Another important function for working with samples is the `%in%` operator, which lets us check if a value exists in the dataset.
 
 
-``` r
+```r
 # 6 appears in the sample
 6 %in% data
 ```
@@ -517,7 +521,7 @@ Another important function for working with samples is the `%in%` operator, whic
 ## [1] TRUE
 ```
 
-``` r
+```r
 # 7 does not appear in the sample
 7 %in% data
 ```
@@ -526,18 +530,32 @@ Another important function for working with samples is the `%in%` operator, whic
 ## [1] FALSE
 ```
 
+One final statistical function that is extremely common is `cor()` which computes the correlation between 2 vectors. E.g. suppose you had the following $(x,y)$ points: (3.4,1), (5,4.6), (5.7,6.8), (6.5,5.3). You can compute the correlation between the $x$ and $y$ points like so:
+
+
+```r
+x = c(5, 6.5, 3.4, 5.7)
+y = c(4.6, 5.3, 1, 6.8)
+cor(x,y)
+```
+
+```
+## [1] 0.8690548
+```
+
 There are other miscellaneous functions for working with vectors that are sometimes useful that we won't cover in detail now, but you can explore them on your own, such as `prod()` for computing the product of all numbers in a vector, `sort()` for sorting a vector, `rev()` for reversing a vector, `unique()` for getting the unique values in a vector, `scale()` for linearly shifting and scaling the data to have mean 0 and standard deviation 1, and `cumsum()` and `cumprod()` for the cumulative sum and product along a vector, and many many more...
 
 
 
 ### Logical comparison
 
+
 Finally, let's learn some basic logical comparisons. These will be crucial for data cleaning and filtering operations later on.
 
 In R, equality comparison is done using the `==` operator. **Note the double equal sign**; single equal is for assignments and arguments. Inequality can be checked using `!=`.
 
 
-``` r
+```r
 x <- (2 + 3)^2
 x == 25
 ```
@@ -546,7 +564,7 @@ x == 25
 ## [1] TRUE
 ```
 
-``` r
+```r
 # if instead we ask "is x not equal to 25", we should get FALSE
 x != 25
 ```
@@ -558,7 +576,7 @@ x != 25
 Note `!` used individually is the NOT operator, i.e. it turns `TRUE` into `FALSE` and vice versa.
 
 
-``` r
+```r
 !TRUE
 ```
 
@@ -566,7 +584,7 @@ Note `!` used individually is the NOT operator, i.e. it turns `TRUE` into `FALSE
 ## [1] FALSE
 ```
 
-``` r
+```r
 # this is equivalent to x != 25
 !(x == 25)
 ```
@@ -578,7 +596,7 @@ Note `!` used individually is the NOT operator, i.e. it turns `TRUE` into `FALSE
 Inequalities are done using `<`, `<=`, `>`, `>=`, for less than (or equal to) and greater than (or equal to).
 
 
-``` r
+```r
 x < 30
 ```
 
@@ -586,7 +604,7 @@ x < 30
 ## [1] TRUE
 ```
 
-``` r
+```r
 x >= 25
 ```
 
@@ -599,7 +617,7 @@ Logical statements can be chained together using the `&` AND operator as well as
 `&` will only return true if the expressions on both sides are both true; `|` will return true if at least one of the expressions on both sides is true. Note that `&` appears higher on R's [order of operations](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Syntax.html) than `|`.
 
 
-``` r
+```r
 (x > 20) & (x <= 30)
 ```
 
@@ -607,7 +625,7 @@ Logical statements can be chained together using the `&` AND operator as well as
 ## [1] TRUE
 ```
 
-``` r
+```r
 (x > 20) | (x != 25)
 ```
 
@@ -618,7 +636,7 @@ Logical statements can be chained together using the `&` AND operator as well as
 You can of course chain these together with other R commands to compare more complicated expressions. The sky is the limit!
 
 
-``` r
+```r
 # check if x² is even OR if mean of data + 2 * sd is greater than the max
 # note order of operations means we don't need extra parentheses
 # of course, you can add extra parentheses for readability if you wish!
@@ -630,7 +648,10 @@ x^2 %% 2 == 0 | mean(data) + 2 * sd(data) > max(data)
 ```
 
 
+
+
 ### Packages
+
 
 As a last topic, let's briefly discuss packages. One of the best features of R is the ability for anyone to easily write and distribute packages on [CRAN](https://cran.r-project.org/) (**C**omprehensive **R** **A**rchive **N**etwork). Currently, there are 20956 packages available on CRAN. There are also a further 2300 packages on the bioinformatics-specific package archive [Bioconductor](https://www.bioconductor.org/), as well as countless more on [GitHub](https://github.com/topics/r-package).
 
@@ -643,12 +664,15 @@ The most important thing you need to remember about packages is this:
 I.e. you only need to install a package *once* to your computer, but you need to load it *every time* you reopen Rstudio and want to use it (unless you're one of those people that never closes any programs). Of course if you want to setup R/Rstudio on a new computer, you need to install it again there as well.
 
 
+
+
 #### Install a package
+
 
 Unless you're doing extremely niche work, generally any packages you want to use will be on CRAN and can be easily installed one at a time by running the following.
 
 
-``` r
+```r
 # you should have already installed tidyverse from last chapter
 # note the package name MUST be in quotes
 install.packages("tidyverse")
@@ -661,13 +685,17 @@ It's important to check the output messages to see if the install was successful
  - If R asks you to update existing packages before installing a new package, this is entirely up to you. I like to update my packages regularly, but there's usually no harm if you don't want update immediately.
    - If you try to update packages that are currently loaded, R may ask you to first "restart R", which is usually a good idea.
 
+
+
+
 #### Loading a package
+
 
 You can load a package by using either `library()` or `require()`, which are basically the same. ^[The only difference is `require()` can be used to check if a package exists and will return `FALSE` if it doesn't, whereas `library()` will just error out, see <https://www.geeksforgeeks.org/the-difference-between-require-and-library-in-r/>{target="_blank"} for more details.]
 
 
 
-``` r
+```r
 library(tidyverse)
 ```
 
@@ -688,7 +716,10 @@ You may have already guessed from the message in the output above, but you can a
 :::
 
 
+
+
 ### R cheat sheets
+
 
 Those are probably the most important R commands you need to know for now. Below I have curated a short selection of R "cheat sheets" for your reference should you need it, in rough order of how useful I think it will be for a first time R learner.
 
@@ -703,7 +734,6 @@ Those are probably the most important R commands you need to know for now. Below
 
 <!--
 
-- basic rundown of R commands
 - add notes about common console issues
   - `>` prompt character
   - `+` prompt when line not ended
@@ -745,7 +775,7 @@ You only need to install a package to your computer once, but you need to load i
 To install a package, either use the "Install" button in the Packages tab, or copy the following into the console, replacing "packageName" with the name of the package you want to install.
 
 
-``` r
+```r
 install.packages("packageName")
 ```
 :::
@@ -760,7 +790,7 @@ install.packages("packageName")
 <details><summary>Exercise solutions</summary>
 
 
-``` r
+```r
 head(mtcars)
 ```
 
