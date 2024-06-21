@@ -739,7 +739,7 @@ Those are probably the most important R commands you need to know for now. Below
 
 In the final section of this chapter, we will introduce you to R Markdown, which is a document format that allows you to seamlessly organize and integrate text and R code/output in an easily readable and editable way. It supports many [output file types](https://rmarkdown.rstudio.com/lesson-9.html) including HTML, PDF, and DOCX, and can be used to write reports, articles, presentations, ebooks, and even websites (in fact, this entire website is written in R Markdown, and the GitHub repo even maintained using Rstudio; you can view the source code of any page using the "View source" button in the right sidebar).
 
-Let's start with an example! Below is a basic R Markdown demo file called <a href="demo.Rmd" download>`demo.Rmd`</a>, which produces [`demo.html`](demo.html){target="_blank"} as output (feel free to download the demo to test it out). We will use this example below to learn how to work with Rmd files.
+Let's start with an example! Below is a basic R Markdown demo file called [`demo.Rmd`](demo.Rmd), which produces [`demo.html`](demo.html){target="_blank"} as output (feel free to download the demo to test it out). We will use this example below to learn how to work with Rmd files.
 
 
 ````{.md .wrapCode}
