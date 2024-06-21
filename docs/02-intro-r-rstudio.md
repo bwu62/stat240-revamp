@@ -119,7 +119,7 @@ The ` [1] ` that appears at the start of the output line just means this is the 
 barplot(c(1, 3, 2))
 ```
 
-<img src="02-rstudio-basics_files/figure-html/visual-output-1.svg" width="576" />
+<img src="02-intro-r-rstudio_files/figure-html/visual-output-1.svg" width="576" />
 
 
 
@@ -737,15 +737,12 @@ Those are probably the most important R commands you need to know for now. Below
 ## R Markdown
 
 
-In the final section of this chapter, we will introduce you to R Markdown, which is a document format that allows you to seamlessly organize and integrate text and R code/output in an easily readable and editable way. It also supports [many output formats](https://rmarkdown.rstudio.com/lesson-9.html), including reports, articles, presentations, ebooks, and even websites (in fact, this entire website is written in R Markdown, and the GitHub repo even maintained using Rstudio; you can view the source code of any page using the "View source" button in the right sidebar).
+In the final section of this chapter, we will introduce you to R Markdown, which is a document format that allows you to seamlessly organize and integrate text and R code/output in an easily readable and editable way. It supports many [output file types](https://rmarkdown.rstudio.com/lesson-9.html) including HTML, PDF, and DOCX, and can be used to write reports, articles, presentations, ebooks, and even websites (in fact, this entire website is written in R Markdown, and the GitHub repo even maintained using Rstudio; you can view the source code of any page using the "View source" button in the right sidebar).
 
-Let's start with an example! Below is a basic R Markdown demo file:
-
-
+Let's start with an example! Below is a basic R Markdown demo file called <a href="demo.Rmd" download>`demo.Rmd`</a>, which produces [`demo.html`](demo.html){target="_blank"} as output (feel free to download the demo to test it out). We will use this example below to learn how to work with Rmd files.
 
 
-
-```` md
+````{.md .wrapCode}
 ---
 title: "Demo Rmd file"
 author: "Jane Doe"
@@ -754,30 +751,42 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
+# this is a standard "setup" chunk usually found at the top of Rmd files,
+# often used for setting options, loading files, and importing libraries
 knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
 ```
 
-# Heading
+# Section 1
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+## Subsection A
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+Here's some ordinary text. You can use Markdown syntax to add more features, e.g. here's a [link](https://markdownguide.org/cheat-sheet), here's some **bold text**, and here's some `inline code`.
 
-```{r cars}
-summary(cars)
+ 1. Lists are also east to add!
+ 2. Here's a second item.
+ 3. You can even add sublists:
+    - Here's a sublist with bullets.
+    - Another bullet?
+
+## Subsection B
+
+You can easily incorporate R code into an Rmd file, with outputs and plots that auto-update. Here's an example code chunk named "chunk1".
+
+```{r chunk1, fig.align="center"}
+data <- c(3, 6, 6, 2, 4, 1, 5)
+mean(data)
+hist(data)
 ```
 
-## Including Plots
+You can even refer to R objects inside text, e.g. the sample mean and standard deviation are `r mean(data)` and `r sd(data)`.
 
-You can also embed plots, for example:
+# Section 2
 
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
+Here's a second section.
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+<!-- comments in an Rmd file must use HTML-style syntax -->
 ````
-
 
 
 

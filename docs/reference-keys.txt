@@ -20,5 +20,3 @@ install-a-package
 loading-a-package
 r-cheat-sheets
 r-markdown
-heading
-including-plots
