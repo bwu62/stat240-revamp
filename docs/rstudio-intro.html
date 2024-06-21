@@ -535,6 +535,19 @@ There are a few other useful tips for working in the console:
 <span id="cb95-41"><a href="rstudio-intro.html#cb95-41" tabindex="-1"></a>Here's a second section.</span>
 <span id="cb95-42"><a href="rstudio-intro.html#cb95-42" tabindex="-1"></a></span>
 <span id="cb95-43"><a href="rstudio-intro.html#cb95-43" tabindex="-1"></a><span class="co">&lt;!-- comments in an Rmd file must use HTML-style syntax --&gt;</span></span></code></pre></div>
+<p>Let’s briefly break down this file and talk about some of the major pieces.</p>
+<div id="yaml-header" class="section level3" number="2.4.1">
+<h3>
+<span class="header-section-number">2.4.1</span> YAML header<a class="anchor" aria-label="anchor" href="#yaml-header"><i class="fas fa-link"></i></a>
+</h3>
+<p>Rmd files usually start with a <a href="https://yaml.org/">YAML</a> header:</p>
+<div class="sourceCode" id="cb96"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb96-1"><a href="rstudio-intro.html#cb96-1" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb96-2"><a href="rstudio-intro.html#cb96-2" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Demo Rmd file"</span></span>
+<span id="cb96-3"><a href="rstudio-intro.html#cb96-3" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Jane Doe"</span></span>
+<span id="cb96-4"><a href="rstudio-intro.html#cb96-4" tabindex="-1"></a><span class="an">date:</span><span class="co"> "2024-06-20"</span></span>
+<span id="cb96-5"><a href="rstudio-intro.html#cb96-5" tabindex="-1"></a><span class="an">output:</span><span class="co"> html_document</span></span>
+<span id="cb96-6"><a href="rstudio-intro.html#cb96-6" tabindex="-1"></a><span class="co">---</span></span></code></pre></div>
+<p>This contains some important metadata about the file, like title, author, and date. The <code>output:</code> option sets the output format R uses</p>
 <!--
 
 - add notes about common console issues
@@ -620,6 +633,7 @@ head(mtcars)
 
 </div>
 </div>
+</div>
 
 
 
@@ -658,7 +672,9 @@ head(mtcars)
 <li><a class="nav-link" href="#r-cheat-sheets"><span class="header-section-number">2.3.8</span> R cheat sheets</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#r-markdown"><span class="header-section-number">2.4</span> R Markdown</a></li>
+<li>
+<a class="nav-link" href="#r-markdown"><span class="header-section-number">2.4</span> R Markdown</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#yaml-header"><span class="header-section-number">2.4.1</span> YAML header</a></li></ul>
+</li>
 </ul>
 
       <div class="book-extra">
@@ -676,7 +692,7 @@ head(mtcars)
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, Bret Larget, Cameron Jones. It was last built on 2024-06-20.</p>
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, Bret Larget, Cameron Jones. It was last built on 2024-06-21.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

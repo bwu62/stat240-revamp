@@ -789,6 +789,28 @@ Here's a second section.
 ````
 
 
+Let's briefly break down this file and talk about some of the major pieces.
+
+
+### YAML header
+
+Rmd files usually start with a [YAML](https://yaml.org/) header:
+
+
+``` markdown
+---
+title: "Demo Rmd file"
+author: "Jane Doe"
+date: "2024-06-20"
+output: html_document
+---
+```
+
+This contains some important metadata about the file, like title, author, and date. The `output:` option sets the output format R uses 
+
+
+
+
 
 
 <!--
