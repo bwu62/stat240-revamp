@@ -145,7 +145,7 @@ main > div[class*="section level1"] {
 
 /* improve heading margins for legibility */
 h2{
-  margin-top: 3rem !important;
+  margin-top: 3.5rem !important;
   margin-bottom: 1rem !important;
   font-size: 1.7rem !important;
 }
