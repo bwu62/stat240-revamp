@@ -171,3 +171,23 @@ span.k {
   background-color: #fafafa;
 }
 
+tr.header th[align="center"]{
+  line-height:1.2;
+}
+
+/* https://stackoverflow.com/questions/36121672/set-table-column-width-via-markdown */
+#knitr-options table colgroup col:first-of-type{
+    width: 13% !important;
+}
+#knitr-options table colgroup col:nth-of-type(2){
+    width: 22% !important;
+}
+#knitr-options table colgroup col:nth-of-type(3){
+    width: 65% !important;
+}
+#knitr-options th[align="left"]{
+  text-align: center;
+}
+#knitr-options td[align="left"]{
+  text-align: justify;
+}
