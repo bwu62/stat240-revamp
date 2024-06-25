@@ -71,7 +71,7 @@ If you get a window that looks [like this](https://i.imgur.com/qmt5IHj.png), you
     
  3. On many (but not all) systems, two additional programs need to be installed for everything to run smoothly. It is recommended for everyone to install these just in case (there's no harm if you didn't actually need them).
     a. Download `r page.find("https://www.xquartz.org/","\\.pkg",T)` and run it, accepting all default settings. This installs a tool that Rstudio uses to display certain outputs.
-    b. Using either Spotlight, Launchpad, or the Applications folder, open "Terminal" and type in or copy this line `xcode-select --install`{.zsh} and hit enter, then follow on-screen instructions. You may be asked for your fingerprint or password (note your password will not show as you type, this is normal and done for security purposes).
+    b. Using either Spotlight, Launchpad, or the Applications directory, open "Terminal" and type in or copy this line `xcode-select --install`{.zsh} and hit enter, then follow on-screen instructions. You may be asked for your fingerprint or password (note your password will not show as you type, this is normal and done for security purposes).
 
 On some machines, R or Rstudio may be blocked by your OS out of an overabundance of caution. Follow [these steps](https://support.apple.com/en-us/102445#openanyway) to unblock and then try again.
 
@@ -146,16 +146,22 @@ There will be a lot of files to keep track of in this course, so it is highly re
         ├── notes
         └── project
 
+
+:::{.note}
+"Directory" is synonymous with "folder". In technical spaces, "directory" is often the preferred term.
+:::
+
+
 This tree diagram shows somewhere in your computer ("..") you should make a "STAT240" directory. Inside, you should have directories like "homework" and "discussion" with a subdirectory for each specific assignment (e.g. "hw01", "hw02", "ds01", "ds02", etc..).
 
 We also recommend creating directories "data", where you should place all the datasets you download; "notes", where you can place any other notes you download or take; and "project", where you can place your project files when those are assigned later. If necessary, you can also create further directories at your own discretion.
 
 :::{.note}
-Make sure your STAT240 folder is NOT backed up by a cloud synchronized app like OneDrive, Box, or iCloud. These programs sometimes interfere with R/Rstudio and may also cut off larger datasets.
+Make sure your STAT240 directory is NOT backed up by a cloud synchronized app like OneDrive, Box, or iCloud. These programs sometimes interfere with R/Rstudio and may also cut off larger datasets.
 
 We recommend you pick a different parent directory ("..") than "Desktop" or "Documents" since these are often backed up by default on many modern systems. A good alternative is either the "Downloads" directory which is usually not backed up, or your user's home directory (instructions for [Windows](https://www.addictivetips.com/windows-tips/access-the-user-folder-on-windows-10/) and [Mac](https://www.cnet.com/tech/computing/how-to-find-your-macs-home-folder-and-add-it-to-finder/)).
 
-After creation, you can make this folder more convenient to access by [making a shortcut](https://support.motlow.edu/TDClient/274/Portal/KB/ArticleDet?ID=12451) on your desktop, or pinning it to somewhere accessible like [Quick Access](https://www.pcmag.com/how-to/how-to-retrieve-folders-files-with-windows-10-quick-access) for Windows or your [Dock](https://www.howtogeek.com/712237/how-to-pin-a-folder-or-a-file-to-your-macs-dock/) for Macs.
+After creation, you can make this directory more convenient to access by [making a shortcut](https://support.motlow.edu/TDClient/274/Portal/KB/ArticleDet?ID=12451) on your desktop, or pinning it to somewhere accessible like [Quick Access](https://www.pcmag.com/how-to/how-to-retrieve-folders-files-with-windows-10-quick-access) for Windows or your [Dock](https://www.howtogeek.com/712237/how-to-pin-a-folder-or-a-file-to-your-macs-dock/) for Macs.
 :::
 
 
