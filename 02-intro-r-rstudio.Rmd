@@ -38,10 +38,10 @@ Below is a brief description of the purpose of each tab. The ones we will be usi
  A.  In section A you will find the **Console**, Terminal, and Background Jobs tabs
      - **Console**: This is arguably the most important tab in Rstudio. It provides direct access to the R interpreter, allowing you to run code and see outputs.
      
-     There are a few other useful tips for working in the console:
-     - You can use the TAB key to autocomplete code as you type. This works both for built in functions, user-defined objects, or even file paths (more on this later). It is *highly recommended* to make use of autocomplete as much as possible because it can help prevent typo errors in your code.
-     - You can also easily rerun previously executed commands by either using the keyboard UP and DOWN arrow keys to navigate through your history, or even search your history by using CTRL/CMD + R.
-     - Terminal: This tab opens a terminal in your current working directory (see section \@ref(rstudio-wd)). By default, this is a [Git Bash](https://gitforwindows.org/) terminal on Windows and a [zsh](https://medium.com/@luzhenna/getting-started-with-zsh-on-a-macbook-bd1c98c6f383) terminal on Macs, but this can be easily changed in the Options menu.
+       There are a few other useful tips for working in the console:
+       - You can use the [TAB]{.k} key to autocomplete code as you type. This works both for built in functions, user-defined objects, or even file paths (more on this later). It is *highly recommended* to make use of autocomplete as much as possible because it can help prevent typo errors in your code.
+       - You can also easily rerun previously executed commands by either using the up [↑]{.k} and down [↓]{.k} arrow keys to navigate through your history, or even search your history by using [CTRL]{.k}+[R]{.k} or [⌘]{.k}+[R]{.k}.
+     - Terminal: This tab opens a terminal in your current working directory (more on this later). By default, this is a [Git Bash](https://gitforwindows.org/) terminal on Windows and a [zsh](https://medium.com/@luzhenna/getting-started-with-zsh-on-a-macbook-bd1c98c6f383) terminal on Macs, but this can be easily changed in the Options menu.
      - Background Jobs: Rstudio may sometimes run certain operations as background jobs here. Alternatively, you can also run background R scripts here if you desire.
      
  B.  In section B we have the **Environment**, History, Connections, and Tutorial tabs
@@ -60,7 +60,7 @@ Below is a brief description of the purpose of each tab. The ones we will be usi
        - Next, there are buttons to remove the current plot, or clear all plots.
      - Packages: Here you can view/install/update/load/unload packages. Note you can also install packages using the console, like we did in the previous section.
      - **Help**: This is one of the other most useful tabs in Rstudio. Here, you can access the built in R help pages. This is one of the FIRST places you should visit for help with R functions/objects.
-       - There are several ways to access the help pages. Suppose you want help with the `install.packages()` function. You can either run `?install.packages` or `help(install.packages)` in the console, or put your cursor on the function in your code and hit the F1 key.
+       - There are several ways to access the help pages. Suppose you want help with the `install.packages()` function. You can either run `?install.packages` or `help(install.packages)` in the console, or put your cursor on the function in your code and hit the [F1]{.k} key.
        - The help page may contain these following sections, each of which presents different types of information:
          i.   *Description*, showing a brief summary of the purpose of the function
          ii.  *Usage*, listing available arguments (i.e. options). If an argument has an ` = ` sign and a value, this denotes the default value
@@ -235,7 +235,7 @@ print(x)
 
 
 :::{.tip}
-There are convenient keyboard shortcuts for the assignment `<-` operator: ALT + -- on Windows and Option (⌥) + -- on Mac.
+You can quickly insert the assignment `<-` operator with [ALT]{.k}+[-]{.k} on Windows or [⌥]{.k}+[-]{.k} on Mac.
 :::
 
 
@@ -385,7 +385,7 @@ x < 30
 x >= 25
 ```
 
-Logical statements can be chained together using the `&` AND operator as well as the `|` OR operator (this vertical bar character is typed on most keyboards using SHIFT + `\`).
+Logical statements can be chained together using the `&` AND operator as well as the `|` OR operator (on most keyboards, this vertical bar character is typed using [SHIFT]{.k}+[\\]{.k}).
 
 `&` will only return true if the expressions on both sides are both true; `|` will return true if at least one of the expressions on both sides is true. Note that `&` appears higher on R's [order of operations](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Syntax.html) than `|`.
 
