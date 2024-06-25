@@ -657,14 +657,6 @@ You can do this by either of these methods:
 
 
 
-```{r}
-dirname(rstudioapi::getSourceEditorContext()$path)
-```
-
-
-
-
-
 
 
 
