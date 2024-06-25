@@ -18,6 +18,7 @@ logical-comparison
 packages
 install-a-package
 loading-a-package
+whitespace
 r-cheat-sheets
 r-markdown
 source-window
@@ -29,4 +30,5 @@ inline-code
 code-chunks
 workflow
 working-directory
-knitting-v.-execution
+knitting-v.-console-execution
+tips

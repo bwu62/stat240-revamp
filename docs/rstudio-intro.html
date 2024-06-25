@@ -97,7 +97,12 @@
 <p><strong>Console</strong>: This is arguably the most important tab in Rstudio. It provides direct access to the R interpreter, allowing you to run code and see outputs.</p>
 <p>There are a few other useful tips for working in the console:</p>
 <ul>
-<li>You can use the <span class="k">TAB</span> key to autocomplete code as you type. This works both for built in functions, user-defined objects, or even file paths (more on this later). It is <em>highly recommended</em> to make use of autocomplete as much as possible because it can help prevent typo errors in your code.</li>
+<li>You can use the <span class="k">TAB</span> key to autocomplete code as you type. This works both for built in functions, user-defined objects, or even file paths (more on this later).</li>
+</ul>
+<div class="tip">
+<p>It is <strong>highly recommended</strong> to use <span class="k">TAB</span> as often as you can, not because it can save you keystrokes, but because it helps avoid typos!</p>
+</div>
+<ul>
 <li>You can also easily rerun previously executed commands by either using the up <span class="k">↑</span> and down <span class="k">↓</span> arrow keys to navigate through your history, or even search your history by using <span class="k">CTRL</span>+<span class="k">R</span> or <span class="k">⌘</span>+<span class="k">R</span>.</li>
 </ul>
 </li>
@@ -427,7 +432,7 @@
 <h3>
 <span class="header-section-number">2.3.7</span> Packages<a class="anchor" aria-label="anchor" href="#packages"><i class="fas fa-link"></i></a>
 </h3>
-<p>As a last topic, let’s briefly discuss packages. One of the best features of R is the ability for anyone to easily write and distribute packages on <a href="https://cran.r-project.org/">CRAN</a> (<strong>C</strong>omprehensive <strong>R</strong> <strong>A</strong>rchive <strong>N</strong>etwork). Currently, there are 21003 packages available on CRAN. There are also a further 2300 packages on the bioinformatics-specific package archive <a href="https://www.bioconductor.org/">Bioconductor</a>, as well as countless more on <a href="https://github.com/topics/r-package">GitHub</a>.</p>
+<p>Now, let’s briefly discuss packages. One of the best features of R is the ability for anyone to easily write and distribute packages on <a href="https://cran.r-project.org/">CRAN</a> (<strong>C</strong>omprehensive <strong>R</strong> <strong>A</strong>rchive <strong>N</strong>etwork). Currently, there are 21003 packages available on CRAN. There are also a further 2300 packages on the bioinformatics-specific package archive <a href="https://www.bioconductor.org/">Bioconductor</a>, as well as countless more on <a href="https://github.com/topics/r-package">GitHub</a>.</p>
 <p>In this course, we will primarily make use of the <a href="https://www.tidyverse.org/">Tidyverse</a> suite of packages, which contains several important packages for data science: <code>readr</code> for reading in data, <code>ggplot2</code> for plotting data, <code>dplyr</code> and <code>tidyr</code> for cleaning data, and <code>lubridate</code> and <code>stringr</code> for working with dates and strings. We will learn each of these as the course progresses.</p>
 <p>The most important thing you need to remember about packages is this:</p>
 <blockquote>
@@ -479,9 +484,30 @@
 </div>
 </div>
 </div>
-<div id="r-cheat-sheets" class="section level3" number="2.3.8">
+<div id="whitespace" class="section level3" number="2.3.8">
 <h3>
-<span class="header-section-number">2.3.8</span> R cheat sheets<a class="anchor" aria-label="anchor" href="#r-cheat-sheets"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.3.8</span> Whitespace<a class="anchor" aria-label="anchor" href="#whitespace"><i class="fas fa-link"></i></a>
+</h3>
+<p>As a final topic, let’s briefly discuss spacing. “Whitespace” refers to any sequence of space-type characters, which can be a mix of spaces, tabs, and line breaks (i.e. when you hit <span class="k">ENTER</span>).</p>
+<p>R ignores whitespace between variable names, functions, and punctuation characters. E.g. the following are all equivalent:</p>
+<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># these are all the same</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 3.857143</code></pre>
+<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span> <span class="op">(</span> <span class="va">data</span> <span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 3.857143</code></pre>
+<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span> <span class="op">(</span></span>
+<span>  <span class="va">data</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 3.857143</code></pre>
+<p>A long line of code is often broken across several lines for readability. We will see many examples of this shortly in the data visualization chapter.</p>
+<p>However, make sure if you break a line up to finish the line eventually, otherwise you’ll get an error. For example, if you type <code>mean(data</code> in the console but forget to close the parenthesis (try this!) you will see the prompt character <code>&gt;</code> be replaced with <code>+</code>. It will continue to do this, patiently waiting for you to finish the line, until you either close it by typing <code>)</code> OR cancel the line by hitting <span class="k">ESC</span>.</p>
+</div>
+<div id="r-cheat-sheets" class="section level3" number="2.3.9">
+<h3>
+<span class="header-section-number">2.3.9</span> R cheat sheets<a class="anchor" aria-label="anchor" href="#r-cheat-sheets"><i class="fas fa-link"></i></a>
 </h3>
 <p>Those are probably the most important R commands you need to know for now. Below I have curated a short selection of R “cheat sheets” for your reference should you need it, in rough order of how useful I think it will be for a first time R learner.</p>
 <ul>
@@ -498,49 +524,49 @@
 </h2>
 <p>In this next section, we will introduce you to R Markdown, which is a document format that allows you to seamlessly organize and integrate text and R code/output in an easily readable and editable way. It supports many <a href="https://rmarkdown.rstudio.com/lesson-9.html">output file types</a> including HTML, PDF, and DOCX, and can be used to write reports, articles, presentations, ebooks, and even websites (in fact, this entire website is written in R Markdown, and the GitHub repo even maintained using Rstudio; you can view the source code of any page using the “View source” button in the right sidebar).</p>
 <p>Let’s start with an example! Below is a basic R Markdown demo file called <a href="demo.Rmd"><code>demo.Rmd</code></a>, which produces <a href="demo.html" target="_blank"><code>demo.html</code></a> as output. We will use this example below to learn how to work with Rmd files.</p>
-<div class="sourceCode" id="cb95"><pre class="sourceCode md wrapCode"><code class="sourceCode markdown"><span id="cb95-1"><a href="rstudio-intro.html#cb95-1" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb95-2"><a href="rstudio-intro.html#cb95-2" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Demo Rmd file"</span></span>
-<span id="cb95-3"><a href="rstudio-intro.html#cb95-3" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Jane Doe"</span></span>
-<span id="cb95-4"><a href="rstudio-intro.html#cb95-4" tabindex="-1"></a><span class="an">date:</span><span class="co"> "2024-06-20"</span></span>
-<span id="cb95-5"><a href="rstudio-intro.html#cb95-5" tabindex="-1"></a><span class="an">output:</span><span class="co"> html_document</span></span>
-<span id="cb95-6"><a href="rstudio-intro.html#cb95-6" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb95-7"><a href="rstudio-intro.html#cb95-7" tabindex="-1"></a></span>
-<span id="cb95-8"><a href="rstudio-intro.html#cb95-8" tabindex="-1"></a><span class="in">```{r setup, include=FALSE}</span></span>
-<span id="cb95-9"><a href="rstudio-intro.html#cb95-9" tabindex="-1"></a><span class="in"># this is a standard "setup" chunk usually found at the top of Rmd files,</span></span>
-<span id="cb95-10"><a href="rstudio-intro.html#cb95-10" tabindex="-1"></a><span class="in"># often used for setting options, loading files, and importing libraries</span></span>
-<span id="cb95-11"><a href="rstudio-intro.html#cb95-11" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(echo = TRUE)</span></span>
-<span id="cb95-12"><a href="rstudio-intro.html#cb95-12" tabindex="-1"></a><span class="in">library(tidyverse)</span></span>
-<span id="cb95-13"><a href="rstudio-intro.html#cb95-13" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb95-14"><a href="rstudio-intro.html#cb95-14" tabindex="-1"></a></span>
-<span id="cb95-15"><a href="rstudio-intro.html#cb95-15" tabindex="-1"></a><span class="fu"># Section 1</span></span>
-<span id="cb95-16"><a href="rstudio-intro.html#cb95-16" tabindex="-1"></a></span>
-<span id="cb95-17"><a href="rstudio-intro.html#cb95-17" tabindex="-1"></a><span class="fu">## Subsection A</span></span>
-<span id="cb95-18"><a href="rstudio-intro.html#cb95-18" tabindex="-1"></a></span>
-<span id="cb95-19"><a href="rstudio-intro.html#cb95-19" tabindex="-1"></a>Here's some ordinary text. You can use Markdown syntax to add more features, e.g. here's a <span class="co">[</span><span class="ot">link</span><span class="co">](https://markdownguide.org/cheat-sheet)</span>, here's some **bold text**, and here's some <span class="in">`inline code`</span>. You can also add images, footnotes, blockquotes, and more. See linked cheat sheet above for more.</span>
-<span id="cb95-20"><a href="rstudio-intro.html#cb95-20" tabindex="-1"></a></span>
-<span id="cb95-21"><a href="rstudio-intro.html#cb95-21" tabindex="-1"></a><span class="ss"> 1. </span>Lists are also east to add!</span>
-<span id="cb95-22"><a href="rstudio-intro.html#cb95-22" tabindex="-1"></a><span class="ss"> 2. </span>Here's a second item.</span>
-<span id="cb95-23"><a href="rstudio-intro.html#cb95-23" tabindex="-1"></a><span class="ss"> 3. </span>You can even add sublists:</span>
-<span id="cb95-24"><a href="rstudio-intro.html#cb95-24" tabindex="-1"></a><span class="ss">    - </span>Here's a sublist with bullets.</span>
-<span id="cb95-25"><a href="rstudio-intro.html#cb95-25" tabindex="-1"></a><span class="ss">    - </span>Another bullet?</span>
-<span id="cb95-26"><a href="rstudio-intro.html#cb95-26" tabindex="-1"></a></span>
-<span id="cb95-27"><a href="rstudio-intro.html#cb95-27" tabindex="-1"></a><span class="fu">## Subsection B</span></span>
-<span id="cb95-28"><a href="rstudio-intro.html#cb95-28" tabindex="-1"></a></span>
-<span id="cb95-29"><a href="rstudio-intro.html#cb95-29" tabindex="-1"></a>You can easily incorporate R code into an Rmd file, with outputs and plots that auto-update. Here's an example code chunk named "chunk1".</span>
-<span id="cb95-30"><a href="rstudio-intro.html#cb95-30" tabindex="-1"></a></span>
-<span id="cb95-31"><a href="rstudio-intro.html#cb95-31" tabindex="-1"></a><span class="in">```{r example-chunk, fig.height=5, fig.align="center"}</span></span>
-<span id="cb95-32"><a href="rstudio-intro.html#cb95-32" tabindex="-1"></a><span class="in">data &lt;- c(3, 6, 6, 2, 4, 1, 5)</span></span>
-<span id="cb95-33"><a href="rstudio-intro.html#cb95-33" tabindex="-1"></a><span class="in">mean(data)</span></span>
-<span id="cb95-34"><a href="rstudio-intro.html#cb95-34" tabindex="-1"></a><span class="in">hist(data)</span></span>
-<span id="cb95-35"><a href="rstudio-intro.html#cb95-35" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb95-36"><a href="rstudio-intro.html#cb95-36" tabindex="-1"></a></span>
-<span id="cb95-37"><a href="rstudio-intro.html#cb95-37" tabindex="-1"></a>You can even refer to R objects inside text, e.g. the sample mean and standard deviation are <span class="in">`r mean(data)`</span> and <span class="in">`r sd(data)`</span>.</span>
-<span id="cb95-38"><a href="rstudio-intro.html#cb95-38" tabindex="-1"></a></span>
-<span id="cb95-39"><a href="rstudio-intro.html#cb95-39" tabindex="-1"></a><span class="fu"># Section 2</span></span>
-<span id="cb95-40"><a href="rstudio-intro.html#cb95-40" tabindex="-1"></a></span>
-<span id="cb95-41"><a href="rstudio-intro.html#cb95-41" tabindex="-1"></a>Here's a second section.</span>
-<span id="cb95-42"><a href="rstudio-intro.html#cb95-42" tabindex="-1"></a></span>
-<span id="cb95-43"><a href="rstudio-intro.html#cb95-43" tabindex="-1"></a><span class="co">&lt;!-- comments in an Rmd file must use HTML-style syntax --&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode md wrapCode"><code class="sourceCode markdown"><span id="cb101-1"><a href="rstudio-intro.html#cb101-1" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb101-2"><a href="rstudio-intro.html#cb101-2" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Demo Rmd file"</span></span>
+<span id="cb101-3"><a href="rstudio-intro.html#cb101-3" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Jane Doe"</span></span>
+<span id="cb101-4"><a href="rstudio-intro.html#cb101-4" tabindex="-1"></a><span class="an">date:</span><span class="co"> "2024-06-20"</span></span>
+<span id="cb101-5"><a href="rstudio-intro.html#cb101-5" tabindex="-1"></a><span class="an">output:</span><span class="co"> html_document</span></span>
+<span id="cb101-6"><a href="rstudio-intro.html#cb101-6" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb101-7"><a href="rstudio-intro.html#cb101-7" tabindex="-1"></a></span>
+<span id="cb101-8"><a href="rstudio-intro.html#cb101-8" tabindex="-1"></a><span class="in">```{r setup, include=FALSE}</span></span>
+<span id="cb101-9"><a href="rstudio-intro.html#cb101-9" tabindex="-1"></a><span class="in"># this is a standard "setup" chunk usually found at the top of Rmd files,</span></span>
+<span id="cb101-10"><a href="rstudio-intro.html#cb101-10" tabindex="-1"></a><span class="in"># often used for setting options, loading files, and importing libraries</span></span>
+<span id="cb101-11"><a href="rstudio-intro.html#cb101-11" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(echo = TRUE)</span></span>
+<span id="cb101-12"><a href="rstudio-intro.html#cb101-12" tabindex="-1"></a><span class="in">library(tidyverse)</span></span>
+<span id="cb101-13"><a href="rstudio-intro.html#cb101-13" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb101-14"><a href="rstudio-intro.html#cb101-14" tabindex="-1"></a></span>
+<span id="cb101-15"><a href="rstudio-intro.html#cb101-15" tabindex="-1"></a><span class="fu"># Section 1</span></span>
+<span id="cb101-16"><a href="rstudio-intro.html#cb101-16" tabindex="-1"></a></span>
+<span id="cb101-17"><a href="rstudio-intro.html#cb101-17" tabindex="-1"></a><span class="fu">## Subsection A</span></span>
+<span id="cb101-18"><a href="rstudio-intro.html#cb101-18" tabindex="-1"></a></span>
+<span id="cb101-19"><a href="rstudio-intro.html#cb101-19" tabindex="-1"></a>Here's some ordinary text. You can use Markdown syntax to add more features, e.g. here's a <span class="co">[</span><span class="ot">link</span><span class="co">](https://markdownguide.org/cheat-sheet)</span>, here's some **bold text**, and here's some <span class="in">`inline code`</span>. You can also add images, footnotes, blockquotes, and more. See linked cheat sheet above for more.</span>
+<span id="cb101-20"><a href="rstudio-intro.html#cb101-20" tabindex="-1"></a></span>
+<span id="cb101-21"><a href="rstudio-intro.html#cb101-21" tabindex="-1"></a><span class="ss"> 1. </span>Lists are also east to add!</span>
+<span id="cb101-22"><a href="rstudio-intro.html#cb101-22" tabindex="-1"></a><span class="ss"> 2. </span>Here's a second item.</span>
+<span id="cb101-23"><a href="rstudio-intro.html#cb101-23" tabindex="-1"></a><span class="ss"> 3. </span>You can even add sublists:</span>
+<span id="cb101-24"><a href="rstudio-intro.html#cb101-24" tabindex="-1"></a><span class="ss">    - </span>Here's a sublist with bullets.</span>
+<span id="cb101-25"><a href="rstudio-intro.html#cb101-25" tabindex="-1"></a><span class="ss">    - </span>Another bullet?</span>
+<span id="cb101-26"><a href="rstudio-intro.html#cb101-26" tabindex="-1"></a></span>
+<span id="cb101-27"><a href="rstudio-intro.html#cb101-27" tabindex="-1"></a><span class="fu">## Subsection B</span></span>
+<span id="cb101-28"><a href="rstudio-intro.html#cb101-28" tabindex="-1"></a></span>
+<span id="cb101-29"><a href="rstudio-intro.html#cb101-29" tabindex="-1"></a>You can easily incorporate R code into an Rmd file, with outputs and plots that auto-update. Here's an example code chunk named "chunk1".</span>
+<span id="cb101-30"><a href="rstudio-intro.html#cb101-30" tabindex="-1"></a></span>
+<span id="cb101-31"><a href="rstudio-intro.html#cb101-31" tabindex="-1"></a><span class="in">```{r example-chunk, fig.height=5, fig.align="center"}</span></span>
+<span id="cb101-32"><a href="rstudio-intro.html#cb101-32" tabindex="-1"></a><span class="in">data &lt;- c(3, 6, 6, 2, 4, 1, 5)</span></span>
+<span id="cb101-33"><a href="rstudio-intro.html#cb101-33" tabindex="-1"></a><span class="in">mean(data)</span></span>
+<span id="cb101-34"><a href="rstudio-intro.html#cb101-34" tabindex="-1"></a><span class="in">hist(data)</span></span>
+<span id="cb101-35"><a href="rstudio-intro.html#cb101-35" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb101-36"><a href="rstudio-intro.html#cb101-36" tabindex="-1"></a></span>
+<span id="cb101-37"><a href="rstudio-intro.html#cb101-37" tabindex="-1"></a>You can even refer to R objects inside text, e.g. the sample mean and standard deviation are <span class="in">`r mean(data)`</span> and <span class="in">`r sd(data)`</span>.</span>
+<span id="cb101-38"><a href="rstudio-intro.html#cb101-38" tabindex="-1"></a></span>
+<span id="cb101-39"><a href="rstudio-intro.html#cb101-39" tabindex="-1"></a><span class="fu"># Section 2</span></span>
+<span id="cb101-40"><a href="rstudio-intro.html#cb101-40" tabindex="-1"></a></span>
+<span id="cb101-41"><a href="rstudio-intro.html#cb101-41" tabindex="-1"></a>Here's a second section.</span>
+<span id="cb101-42"><a href="rstudio-intro.html#cb101-42" tabindex="-1"></a></span>
+<span id="cb101-43"><a href="rstudio-intro.html#cb101-43" tabindex="-1"></a><span class="co">&lt;!-- comments in an Rmd file must use HTML-style syntax --&gt;</span></span></code></pre></div>
 <div id="source-window" class="section level3" number="2.4.1">
 <h3>
 <span class="header-section-number">2.4.1</span> Source window<a class="anchor" aria-label="anchor" href="#source-window"><i class="fas fa-link"></i></a>
@@ -566,12 +592,12 @@
 </h3>
 <p>Rmd files usually start with a <a href="https://yaml.org/">YAML</a> header with some important metadata about the file:</p>
 <blockquote>
-<div class="sourceCode" id="cb96"><pre class="sourceCode md wrapCode"><code class="sourceCode markdown"><span id="cb96-1"><a href="rstudio-intro.html#cb96-1" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb96-2"><a href="rstudio-intro.html#cb96-2" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Demo Rmd file"</span></span>
-<span id="cb96-3"><a href="rstudio-intro.html#cb96-3" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Jane Doe"</span></span>
-<span id="cb96-4"><a href="rstudio-intro.html#cb96-4" tabindex="-1"></a><span class="an">date:</span><span class="co"> "2024-06-20"</span></span>
-<span id="cb96-5"><a href="rstudio-intro.html#cb96-5" tabindex="-1"></a><span class="an">output:</span><span class="co"> html_document</span></span>
-<span id="cb96-6"><a href="rstudio-intro.html#cb96-6" tabindex="-1"></a><span class="co">---</span></span></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode md wrapCode"><code class="sourceCode markdown"><span id="cb102-1"><a href="rstudio-intro.html#cb102-1" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb102-2"><a href="rstudio-intro.html#cb102-2" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Demo Rmd file"</span></span>
+<span id="cb102-3"><a href="rstudio-intro.html#cb102-3" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Jane Doe"</span></span>
+<span id="cb102-4"><a href="rstudio-intro.html#cb102-4" tabindex="-1"></a><span class="an">date:</span><span class="co"> "2024-06-20"</span></span>
+<span id="cb102-5"><a href="rstudio-intro.html#cb102-5" tabindex="-1"></a><span class="an">output:</span><span class="co"> html_document</span></span>
+<span id="cb102-6"><a href="rstudio-intro.html#cb102-6" tabindex="-1"></a><span class="co">---</span></span></code></pre></div>
 </blockquote>
 <p>Title, author, and date are self explanatory. The <code>output:</code> option sets the output format R uses when knitting. We <strong>highly recommend</strong> using the default <code>html_document</code> output format since it is lightweight, portable, and easy for us to view in Canvas when grading.</p>
 <p>There are lots of other <a href="https://github.com/hao203/rmarkdown-YAML">YAML options</a> you can explore, but <strong>minimally, you should always have these 4: title, author, date, and <code>output: html_document</code></strong> set at the beginning of each Rmd document.</p>
@@ -611,11 +637,11 @@ which becomes 3.86 is much better.</p>
 </h4>
 <p>The other prominent way to include R code inside an R Markdown document is by using so-called code “chunks” or “blocks”. The basic structure is this:</p>
 <blockquote>
-<div class="sourceCode" id="cb97"><pre class="sourceCode md wrapCode"><code class="sourceCode markdown"><span id="cb97-1"><a href="rstudio-intro.html#cb97-1" tabindex="-1"></a><span class="in">```{r example-chunk, fig.height=5, fig.align="center"}</span></span>
-<span id="cb97-2"><a href="rstudio-intro.html#cb97-2" tabindex="-1"></a><span class="in">data &lt;- c(3, 6, 6, 2, 4, 1, 5)</span></span>
-<span id="cb97-3"><a href="rstudio-intro.html#cb97-3" tabindex="-1"></a><span class="in">mean(data)</span></span>
-<span id="cb97-4"><a href="rstudio-intro.html#cb97-4" tabindex="-1"></a><span class="in">hist(data)</span></span>
-<span id="cb97-5"><a href="rstudio-intro.html#cb97-5" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode md wrapCode"><code class="sourceCode markdown"><span id="cb103-1"><a href="rstudio-intro.html#cb103-1" tabindex="-1"></a><span class="in">```{r example-chunk, fig.height=5, fig.align="center"}</span></span>
+<span id="cb103-2"><a href="rstudio-intro.html#cb103-2" tabindex="-1"></a><span class="in">data &lt;- c(3, 6, 6, 2, 4, 1, 5)</span></span>
+<span id="cb103-3"><a href="rstudio-intro.html#cb103-3" tabindex="-1"></a><span class="in">mean(data)</span></span>
+<span id="cb103-4"><a href="rstudio-intro.html#cb103-4" tabindex="-1"></a><span class="in">hist(data)</span></span>
+<span id="cb103-5"><a href="rstudio-intro.html#cb103-5" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 </blockquote>
 <div class="tip">
 <p>You can quickly insert a chunk by using <span class="k">CTRL</span>+<span class="k">ALT</span>+<span class="k">I</span> on Windows, and either <span class="k">CTRL</span>+<span class="k">⌥</span>+<span class="k">I</span>, or <span class="k">⌘</span>+<span class="k">⌥</span>+<span class="k">I</span> on Mac.</p>
@@ -696,18 +722,21 @@ which becomes 3.86 is much better.</p>
 </div>
 <p>One last note: remember the “setup” chunk at the top of the demo file? Here it is again:</p>
 <blockquote>
-<div class="sourceCode" id="cb98"><pre class="sourceCode md wrapCode"><code class="sourceCode markdown"><span id="cb98-1"><a href="rstudio-intro.html#cb98-1" tabindex="-1"></a><span class="in">```{r setup, include=FALSE}</span></span>
-<span id="cb98-2"><a href="rstudio-intro.html#cb98-2" tabindex="-1"></a><span class="in"># this is a standard "setup" chunk usually found at the top of Rmd files,</span></span>
-<span id="cb98-3"><a href="rstudio-intro.html#cb98-3" tabindex="-1"></a><span class="in"># often used for setting options, loading files, and importing libraries</span></span>
-<span id="cb98-4"><a href="rstudio-intro.html#cb98-4" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(echo = TRUE)</span></span>
-<span id="cb98-5"><a href="rstudio-intro.html#cb98-5" tabindex="-1"></a><span class="in">library(tidyverse)</span></span>
-<span id="cb98-6"><a href="rstudio-intro.html#cb98-6" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode md wrapCode"><code class="sourceCode markdown"><span id="cb104-1"><a href="rstudio-intro.html#cb104-1" tabindex="-1"></a><span class="in">```{r setup, include=FALSE}</span></span>
+<span id="cb104-2"><a href="rstudio-intro.html#cb104-2" tabindex="-1"></a><span class="in"># this is a standard "setup" chunk usually found at the top of Rmd files,</span></span>
+<span id="cb104-3"><a href="rstudio-intro.html#cb104-3" tabindex="-1"></a><span class="in"># often used for setting options, loading files, and importing libraries</span></span>
+<span id="cb104-4"><a href="rstudio-intro.html#cb104-4" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(echo = TRUE)</span></span>
+<span id="cb104-5"><a href="rstudio-intro.html#cb104-5" tabindex="-1"></a><span class="in">library(tidyverse)</span></span>
+<span id="cb104-6"><a href="rstudio-intro.html#cb104-6" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 </blockquote>
 <p>The function <a href="https://rdrr.io/cran/knitr/man/opts_chunk.html"><code>knitr::opts_chunk$set()</code></a> here can be used to set default chunk options for ALL chunks in that document, e.g. you can center all figures by adding <code>fig.align = "center"</code> here instead of copying it to every chunk header.</p>
 </li>
 <li><p>After closing the header with <code>}</code> and starting a new line, you can now put whatever code you want inside the chunk. All code here gets run one line at a time and output displayed.</p></li>
 <li><p>At the end, the chunk is closed by another set of <code>```</code>.</p></li>
 </ol>
+<div class="tip">
+<p>Remember you can also use <span class="k">TAB</span> autocomplete in Rmd code chunks to save keystrokes and avoid typos!</p>
+</div>
 <p>This concludes the discussion of code chunks in R Markdown.</p>
 </div>
 </div>
@@ -716,13 +745,13 @@ which becomes 3.86 is much better.</p>
 <h2>
 <span class="header-section-number">2.5</span> Workflow<a class="anchor" aria-label="anchor" href="#workflow"><i class="fas fa-link"></i></a>
 </h2>
-<p>In this final section, we will briefly discuss some workflow considerations for R/Rstudio that are important to know for development and troubleshooting purposes.</p>
+<p>In this final section, we will briefly discuss some workflow considerations for working with Rstudio and R Markdown that are important to know for troubleshooting purposes.</p>
 <div id="working-directory" class="section level3" number="2.5.1">
 <h3>
 <span class="header-section-number">2.5.1</span> Working directory<a class="anchor" aria-label="anchor" href="#working-directory"><i class="fas fa-link"></i></a>
 </h3>
 <p>The “working directory” is a concept first-time R users always struggle with. Simply put, <strong>R always runs as if it’s inside a directory</strong>. The current directory R is running from inside of is called the “working directory”. You can check your current working directory with the <code><a href="https://rdrr.io/r/base/getwd.html">getwd()</a></code> function:</p>
-<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb105"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># check current working directory</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "C:/Users/bi/Desktop/stat240-revamp"</code></pre>
@@ -741,29 +770,77 @@ which becomes 3.86 is much better.</p>
 <li>You can also set it manually by running <code><a href="https://rdrr.io/r/base/getwd.html">setwd()</a></code> in the console if you prefer.</li>
 </ul>
 <div class="note">
-<p>Whenever you open Rstudio, OR switch to a different file, it is <strong>highly recommended</strong> that you set your working directory again. You should also remember to (re-)load any packages and (re-)import any datasets you need.</p>
+<p>Whenever you open Rstudio, OR switch to a different file, you should <strong>ALWAYS do the following</strong>:</p>
+<ol style="list-style-type: decimal">
+<li>Set your working directory,</li>
+<li>Load any necessary packages,</li>
+<li>Read in any necessary datasets.</li>
+</ol>
 </div>
 </div>
-<div id="knitting-v.-execution" class="section level3" number="2.5.2">
+<div id="knitting-v.-console-execution" class="section level3" number="2.5.2">
 <h3>
-<span class="header-section-number">2.5.2</span> Knitting v. execution<a class="anchor" aria-label="anchor" href="#knitting-v.-execution"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.5.2</span> Knitting v. console execution<a class="anchor" aria-label="anchor" href="#knitting-v.-console-execution"><i class="fas fa-link"></i></a>
 </h3>
+<p>But why do we need to match the working directory to our Rmd file location? This is where the difference between knitting and execution comes into play.</p>
+<p>It turns out, <strong>code runs differently in an Rstudio console than when being knit in an Rmd file</strong>. Code in the console will always run in your current working directory, and any objects created will be added to your current session Environment. They will stay there until you clear the Environment.</p>
+<p>However, when you Knit a document, it will create a <strong>new R session in the background</strong> with the working directory set to the same location as the Rmd file, and <strong>run the entire document from scratch, top to bottom</strong> and then produce an output file. This means if your working directory in Rstudio is not set to the same place, it can break file references if you need to load any datasets.</p>
+<p>This may seem overly complicated right now, but it will quickly become intuitive as you practice more.</p>
+</div>
+<div id="tips" class="section level3" number="2.5.3">
+<h3>
+<span class="header-section-number">2.5.3</span> Tips<a class="anchor" aria-label="anchor" href="#tips"><i class="fas fa-link"></i></a>
+</h3>
+<p>Before I end this chapter, I want to offer a few tips for your workflow that I find myself repeating over and over to nearly every student, especially when errors arise.</p>
+<ol style="list-style-type: decimal">
+<li>The MOST important tip for avoiding/fixing errors is <strong>knit often, and <em>check the output</em></strong>! Why?
+<ul>
+<li>Knitting is the best way to catch errors, and the more often you knit, the easier it will be to identify the source of the error (since there’s less new code to check).</li>
+<li>Knitting will automatically save your document for you, helping avoid lost work due to crashes.</li>
+<li>You can check the formatting of new document elements, whether they are bodies of text, markdown features, plot outputs, code, etc..</li>
+<li>If you run into unexpected computer or Rstudio problems, you’ll have a more recently-knit output you can submit in the interim while you troubleshoot.</li>
+</ul>
+</li>
+<li>Another tip is in general, think of Rstudio’s console as a place to “test out” a new line of code you’re trying to add. Continue to test it until you’re satisfied with it, then <strong>immediately copy it into your Rmd</strong>. Work that you do in <strong>the console is NOT saved</strong>! Your Rmd file is where all your work is saved and then knit into a final output.
+<ul>
+<li>You can easily run a line of code in an Rmd file in the console by putting your cursor anywhere on that line and using <span class="k">CTRL</span>+<span class="k">ENTER</span> on Windows and either <span class="k">CTRL</span>+<span class="k">ENTER</span> or <span class="k">⌘</span>+<span class="k">ENTER</span> on Mac. To run an entire chunk, add <span class="k">SHIFT</span> to the previous shortcut combo. You can also use the top-right <a href="https://bio723-class.github.io/Bio723-book/figures/fig-run-code-chunk.png">chunk shortcut buttons</a>.</li>
+</ul>
+</li>
+<li>Remember <strong>knitting always creates a NEW, empty background R session, sets the working directory to the Rmd file location, then runs the entire file top to bottom</strong>. This means:
+<ul>
+<li>If you run a line in the console without copying it into the Rmd file, that line will NOT be run when you knit.</li>
+<li>If you define an object in the console, forgot to copy it into the Rmd file, then try to use it somewhere else in the file, you WILL get an error.</li>
+<li>Objects must be defined BEFORE they are used in an Rmd file. If you define <code>data</code> on line 20 but try computing <code>mean(data)</code> on line 10, you WILL get an error. <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;For sake of pedantry, technically you can refer to an object before defining it, but this is an extremely advanced R Markdown technique and is not recommended since it’s nonintuitive, harder to debug, and just generally clumsy and bad practice. See &lt;a href="https://bookdown.org/yihui/rmarkdown-cookbook/load-cache.html" target="_blank"&gt;https://bookdown.org/yihui/rmarkdown-cookbook/load-cache.html&lt;/a&gt; for more.&lt;/p&gt;'><sup>7</sup></a>
+</li>
+<li>If your working directory does not match the location of your current Rmd file, this may also cause errors if you need to load any datasets. Remember to always set your working directory!</li>
+</ul>
+</li>
+<li>You have an error? Have you tried the following?
+<ol style="list-style-type: lower-alpha">
+<li>Read the error message! Look for “Error:…” and read it or search it in a browser! If you’re knitting, there should also be a line number or chunk name (remember to name your chunks!) that should help you find where the problem code is.</li>
+<li>Check you’re using the function correctly. Read the built-in help page for the function, or search online for some example usages.</li>
+<li>Check if your input object (this is often the output from an earlier line or chunk) is actually correct. E.g. if <code>data</code> wasn’t properly created in chunk-1, it might not show an error until you try to compute <code>mean(data)</code> in chunk-2 below. Be paranoid! Check each input and output as you go along!</li>
+<li>If you imported lots of packages, check if your function names have conflicts. E.g. if both <code>package1</code> and <code>package2</code> have a function <code>func1</code>, you may accidentally be using the wrong one. You can check this by also opening the help page for <code>func1</code> and checking to see which help page it directs to.</li>
+<li>If you still can’t identify the problem, restart your R session by going to the top menu bar &gt; “Session” &gt; “Restart R”, then <strong>run your entire Rmd ONE function at a time, checking EACH function’s output along the way</strong>. This may take longer, but will almost always work.</li>
+<li>If you tried everything and STILL can’t figure it out, ask us for help.</li>
+</ol>
+</li>
+</ol>
+<p><br></p>
+<p>Phew, that was a lot, but that wraps up the introduction to working with R/Rstudio! Below, I have linked a few bonus readings if you want to learn a bit more about control and looping in R, which we will not need in this class but may be good to know if you plan to take further data science classes or build a career in data science.</p>
+<p>In the next chapter, we will explore data types and structures in R, as well as learn to read in and write out datasets.</p>
+<p><br><br></p>
+<div id="optional-bonus-topic-controllooping" class="section level4 unnumbered">
+<h4>Optional bonus topic: control/looping<a class="anchor" aria-label="anchor" href="#optional-bonus-topic-controllooping"><i class="fas fa-link"></i></a>
+</h4>
+<p>This includes <code>if</code>/<code>else</code> statements and <code>for</code>/<code>while</code> loops. If you’re interested, see these suggested readings:</p>
+<ul>
+<li>
+<a href="https://bookdown.org/rdpeng/rprogdatascience/control-structures.html">This page by Yihui Xie</a> from the bookdown documentation offers a good &amp; quick overview of control and looping in R.</li>
+<li>For a more in-depth discussion, check out <a href="https://adv-r.hadley.nz/control-flow.html">this page by Hadley Wickham</a> from his Advanced R book.</li>
+</ul>
 <!--
-
-- add notes about common console issues
-  - `>` prompt character
-  - `+` prompt when line not ended
-  - white space and splitting lines
-- practice using tab
-- practice using console history
-- testing code interactively
-- troubleshooting tips
-
-## Extra: if/else, for/while
-
-
 <details><summary>Exercise solutions</summary>
-
 
 ``` r
 head(mtcars)
@@ -785,14 +862,13 @@ head(mtcars)
 ## Hornet Sportabout    3    2
 ## Valiant              3    1
 ```
-
 </details> 
-
 -->
+</div>
+</div>
+</div>
+</div>
 
-</div>
-</div>
-</div>
 
 
 
@@ -830,7 +906,8 @@ head(mtcars)
 <li><a class="nav-link" href="#summary-functions"><span class="header-section-number">2.3.5</span> Summary functions</a></li>
 <li><a class="nav-link" href="#logical-comparison"><span class="header-section-number">2.3.6</span> Logical comparison</a></li>
 <li><a class="nav-link" href="#packages"><span class="header-section-number">2.3.7</span> Packages</a></li>
-<li><a class="nav-link" href="#r-cheat-sheets"><span class="header-section-number">2.3.8</span> R cheat sheets</a></li>
+<li><a class="nav-link" href="#whitespace"><span class="header-section-number">2.3.8</span> Whitespace</a></li>
+<li><a class="nav-link" href="#r-cheat-sheets"><span class="header-section-number">2.3.9</span> R cheat sheets</a></li>
 </ul>
 </li>
 <li>
@@ -845,7 +922,8 @@ head(mtcars)
 <li>
 <a class="nav-link" href="#workflow"><span class="header-section-number">2.5</span> Workflow</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#working-directory"><span class="header-section-number">2.5.1</span> Working directory</a></li>
-<li><a class="nav-link" href="#knitting-v.-execution"><span class="header-section-number">2.5.2</span> Knitting v. execution</a></li>
+<li><a class="nav-link" href="#knitting-v.-console-execution"><span class="header-section-number">2.5.2</span> Knitting v. console execution</a></li>
+<li><a class="nav-link" href="#tips"><span class="header-section-number">2.5.3</span> Tips</a></li>
 </ul>
 </li>
 </ul>

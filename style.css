@@ -138,11 +138,6 @@ div.alert pre{
   background-color: rgba(255,255,255,.7) !important;
 }
 
-/***** REMEMBER TO REMOVE LATER!! *****/
-main > div[class*="section level1"] {
-    padding-bottom: 500px;
-}
-
 /* improve heading margins for legibility */
 h2{
   margin-top: 3.5rem !important;
@@ -190,4 +185,13 @@ tr.header th[align="center"]{
 }
 #knitr-options td[align="left"]{
   text-align: justify;
+}
+
+
+
+
+
+/* REMEMBER TO REMOVE LATER!!
+main > div[class*="section level1"] {
+    padding-bottom: 500px;
 }
