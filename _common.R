@@ -8,77 +8,82 @@ knitr::opts_chunk$set(
   fig.dim=c(6,4), dev="svg"
 )
 
-
-library(tidyverse)
-library(lubridate)
-library(rvest)
-library(downlit)
+# library(tidyverse)
+# library(lubridate)
+# library(rvest)
+# library(downlit)
 
 # detect which semester we're headed into
 # and fix an R-version to use
 
-today = today()
+today = lubridate::today()
 
-season = case_when(
-  month(today)<5~"Spring",
-  month(today)<8~"Summer",
+season = dplyr::case_when(
+  lubridate::month(today)<5~"Spring",
+  lubridate::month(today)<8~"Summer",
   TRUE~"Fall"
 )
 
-semester = str_c(year(today),"-",season)
+semester = stringr::str_c(
+  lubridate::year(today),"-",season)
 
-r.date = case_when(
+r.date = dplyr::case_when(
   season=="Spring"~"1-19",
   season=="Summer"~"6-14",
   TRUE~"9-2"
-) %>% paste(year(today)) %>% 
-  mdy %>% min(today)
+) %>% paste(lubridate::year(today)) %>% 
+  lubridate::mdy() %>% min(today)
 
 r.releases = 
   paste0("https://en.wikipedia.org/",
          "wiki/R_(programming_language)") %>% 
-  read_html %>% 
-  html_nodes(
-    xpath="//table[contains(caption,'codenames')]") %>%
-  {html_table(.)[[1]][1:2]} %>% 
+  rvest::read_html() %>% 
+  rvest::html_nodes(
+    xpath=
+      "//table[contains(caption,'codenames')]")%>%
+  {rvest::html_table(.)[[1]][1:2]} %>% 
   setNames(c("version","date")) %>% 
-  head(10) %>% mutate(date=ymd(date))
+  head(10) %>% 
+  dplyr::mutate(date=lubridate::ymd(date))
 
 r.latest = r.releases %>% 
-  filter(date<=r.date) %>% slice_max(date,n=1)
+  dplyr::filter(date<=r.date) %>% 
+  dplyr::slice_max(date,n=1)
 
 r.version = r.latest$version
 r.date = r.latest$date
 
 apache.find = function(url,pattern,n=1){
   matching = url %>% 
-    read_html() %>% 
-    html_nodes("a") %>% 
-    html_attrs %>% 
+    rvest::read_html() %>% 
+    rvest::html_nodes("a") %>% 
+    rvest::html_attrs() %>% 
     unlist %>% 
     unname %>% 
-    str_subset("^[:alnum:]") %>% 
-    str_subset(pattern)
-  if(length(matching)>n) stop("Wrong match length!")
+    stringr::str_subset("^[:alnum:]") %>% 
+    stringr::str_subset(pattern)
+  if(length(matching)>n) stop("Wrong length!")
   paste0(url,matching)
 }
 
 page.find = function(url,pattern,md=F,n=1){
   matching = url %>% 
-    read_html() %>% 
-    html_nodes("a") %>% 
-    html_attrs %>% 
+    rvest::read_html() %>% 
+    rvest::html_nodes("a") %>% 
+    rvest::html_attrs() %>% 
     unlist %>% 
     unname %>% 
-    str_subset("\\.[:alnum:]+$") %>% 
-    str_subset(pattern) %>% 
-    {ifelse(str_starts(.,"http"),.,paste0(url,.))}
-  if(length(matching)>n) stop("Wrong match length!")
+    stringr::str_subset("\\.[:alnum:]+$") %>% 
+    stringr::str_subset(pattern) %>% 
+    {ifelse(stringr::str_starts(.,"http"),
+            .,paste0(url,.))}
+  if(length(matching)>n) stop("Wrong length!")
   if(!md){
     matching
   } else{
     paste0(
-      "[", str_replace(matching,".*/",""),
+      "[",
+      stringr::str_replace(matching,".*/",""),
       "](",matching,")")
   }
 }
