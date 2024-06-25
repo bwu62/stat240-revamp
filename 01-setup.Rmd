@@ -38,7 +38,7 @@ First, we will install the latest R release, **version `r r.version` released on
 ### Windows instructions {#setup-win}
 
 
- 1. Download [R-`r r.version`-win.exe](`r str_glue("https://cloud.r-project.org/bin/windows/base/old/{r.version}/R-{r.version}-win.exe")`) and run it, accepting all default settings.
+ 1. Download [R-`r r.version`-win.exe](`r stringr::str_glue("https://cloud.r-project.org/bin/windows/base/old/{r.version}/R-{r.version}-win.exe")`) and run it, accepting all default settings.
  
  2. Download [Rstudio-latest.exe](	https://rstudio.org/download/latest/stable/desktop/windows/RStudio-latest.exe) and run it, again accepting all default settings.
  
@@ -57,8 +57,8 @@ If you get a window that looks [like this](https://i.imgur.com/qmt5IHj.png), you
 
 
  1. First, we need to determine the right R installer file for your specific machine. Open the Apple menu in the top left corner of your screen and open ["About this mac"](https://upload.wikimedia.org/wikipedia/en/a/a6/Apple_menu_screenshot.png).
-    - If it shows "Chip: Apple M1/M2/M3", download [R-`r r.version`-arm64.pkg](`r str_glue("https://cloud.r-project.org/bin/macosx/big-sur-arm64/base/R-{r.version}-arm64.pkg")`) and run it, accepting all default settings.
-    - If it shows "Processor: ...Intel Core", download [R-`r r.version`-x86_64.pkg](`r str_glue("https://cloud.r-project.org/bin/macosx/big-sur-x86_64/base/R-{r.version}-x86_64.pkg")`) and run it, accepting all default settings.
+    - If it shows "Chip: Apple M1/M2/M3", download [R-`r r.version`-arm64.pkg](`r stringr::str_glue("https://cloud.r-project.org/bin/macosx/big-sur-arm64/base/R-{r.version}-arm64.pkg")`) and run it, accepting all default settings.
+    - If it shows "Processor: ...Intel Core", download [R-`r r.version`-x86_64.pkg](`r stringr::str_glue("https://cloud.r-project.org/bin/macosx/big-sur-x86_64/base/R-{r.version}-x86_64.pkg")`) and run it, accepting all default settings.
     - If you get an error, check your OS version in the About window. If it's older (i.e. <11) you may need to either upgrade your OS or download an older version [here](https://cloud.r-project.org/bin/macosx/).
     
  2. Now, download [Rstudio-latest.dmg](https://rstudio.org/download/latest/stable/desktop/mac/RStudio-latest.dmg) and install it. Note this is a dmg or virtual disk image file, so you need to follow these steps to install it:
