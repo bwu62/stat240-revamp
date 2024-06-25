@@ -655,7 +655,7 @@ x^2 %% 2 == 0 | mean(data) + 2 * sd(data) > max(data)
 ### Packages
 
 
-As a last topic, let's briefly discuss packages. One of the best features of R is the ability for anyone to easily write and distribute packages on [CRAN](https://cran.r-project.org/) (**C**omprehensive **R** **A**rchive **N**etwork). Currently, there are 20987 packages available on CRAN. There are also a further 2300 packages on the bioinformatics-specific package archive [Bioconductor](https://www.bioconductor.org/), as well as countless more on [GitHub](https://github.com/topics/r-package).
+As a last topic, let's briefly discuss packages. One of the best features of R is the ability for anyone to easily write and distribute packages on [CRAN](https://cran.r-project.org/) (**C**omprehensive **R** **A**rchive **N**etwork). Currently, there are 21003 packages available on CRAN. There are also a further 2300 packages on the bioinformatics-specific package archive [Bioconductor](https://www.bioconductor.org/), as well as countless more on [GitHub](https://github.com/topics/r-package).
 
 In this course, we will primarily make use of the [Tidyverse](https://www.tidyverse.org/) suite of packages, which contains several important packages for data science: `readr` for reading in data, `ggplot2` for plotting data, `dplyr` and `tidyr` for cleaning data, and `lubridate` and `stringr` for working with dates and strings. We will learn each of these as the course progresses.
 
@@ -682,7 +682,7 @@ install.packages("tidyverse")
 
 It's important to check the output messages to see if the install was successful, and if not, to find important "Error:..." keywords to use for troubleshooting. Sometimes R will ask you different things during install:
 
- - If R asks you to use a "personal library", say yes. This just means it can't store the package files in your system folder due to system permissions, so it will store it somewhere else (typically in your user directory).
+ - If R asks you to use a "personal library", say yes. This just means it can't store the package files in your system directory due to system permissions, so it will store it somewhere else (typically in your user directory).
  - If R asks you to install "from source", try no first; if that fails, retry with yes. This just means if you want R to prioritize using precompiled executable files when installing, which is generally much faster.
  - If R asks you to update existing packages before installing a new package, this is entirely up to you. I like to update my packages regularly, but there's usually no harm if you don't want update immediately.
    - If you try to update packages that are currently loaded, R may ask you to first "restart R", which is usually a good idea.
@@ -696,18 +696,22 @@ It's important to check the output messages to see if the install was successful
 You can load a package by using either `library()` or `require()`, which are basically the same. ^[The only difference is `require()` can be used to check if a package exists and will return `FALSE` if it doesn't, whereas `library()` will just error out, see <https://www.geeksforgeeks.org/the-difference-between-require-and-library-in-r/>{target="_blank"} for more details.]
 
 
-
 ``` r
 library(tidyverse)
 ```
 
 ```
+## ── Attaching core tidyverse packages ──── tidyverse 2.0.0 ──
+## ✔ dplyr     1.1.4     ✔ readr     2.1.5
+## ✔ forcats   1.0.0     ✔ stringr   1.5.1
+## ✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+## ✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+## ✔ purrr     1.0.2     
 ## ── Conflicts ────────────────────── tidyverse_conflicts() ──
-## ✖ tidyr::extract()        masks magrittr::extract()
-## ✖ dplyr::filter()         masks stats::filter()
-## ✖ rvest::guess_encoding() masks readr::guess_encoding()
-## ✖ dplyr::lag()            masks stats::lag()
-## ✖ purrr::set_names()      masks magrittr::set_names()
+## ✖ tidyr::extract()   masks magrittr::extract()
+## ✖ dplyr::filter()    masks stats::filter()
+## ✖ dplyr::lag()       masks stats::lag()
+## ✖ purrr::set_names() masks magrittr::set_names()
 ## ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
 ```
 
@@ -738,7 +742,7 @@ Those are probably the most important R commands you need to know for now. Below
 ## R Markdown
 
 
-In the final section of this chapter, we will introduce you to R Markdown, which is a document format that allows you to seamlessly organize and integrate text and R code/output in an easily readable and editable way. It supports many [output file types](https://rmarkdown.rstudio.com/lesson-9.html) including HTML, PDF, and DOCX, and can be used to write reports, articles, presentations, ebooks, and even websites (in fact, this entire website is written in R Markdown, and the GitHub repo even maintained using Rstudio; you can view the source code of any page using the "View source" button in the right sidebar).
+In this next section, we will introduce you to R Markdown, which is a document format that allows you to seamlessly organize and integrate text and R code/output in an easily readable and editable way. It supports many [output file types](https://rmarkdown.rstudio.com/lesson-9.html) including HTML, PDF, and DOCX, and can be used to write reports, articles, presentations, ebooks, and even websites (in fact, this entire website is written in R Markdown, and the GitHub repo even maintained using Rstudio; you can view the source code of any page using the "View source" button in the right sidebar).
 
 Let's start with an example! Below is a basic R Markdown demo file called [`demo.Rmd`](demo.Rmd), which produces [`demo.html`](demo.html){target="_blank"} as output. We will use this example below to learn how to work with Rmd files.
 
@@ -791,6 +795,7 @@ Here's a second section.
 
 
 
+
 ### Source window
 
 Download the [`demo.Rmd`](demo.Rmd) example file and open it; it should automatically open in Rstudio in a new panel in the top left called the source window, which is actually just a basic text editor like Notepad or TextEdit, but with some additional R-aware features (more on this later).
@@ -803,7 +808,11 @@ Download the [`demo.Rmd`](demo.Rmd) example file and open it; it should automati
 
 The first think you should learn about R Markdown is how to "Knit", or generate an output document. Think of an Rmd file as a "recipe" that tells Rstudio how to create and format a nice output for your audience.
 
-At the top of the source window, find the [Knit](https://i.imgur.com/Mwi8iug.png) button and click it. You'll see a bunch of messages scroll by in a new tab below called "Render" while Rstudio executes and processes the document. If there are no errors, Rstudio will then produce the output document "demo.html" in the same folder where you saved "demo.Rmd" and open a preview of the file in the "Viewer" tab.
+At the top of the source window, find the [Knit](https://i.imgur.com/Mwi8iug.png) button and click it. You'll see a bunch of messages scroll by in a new tab below called "Render" while Rstudio executes and processes the document. If there are no errors, Rstudio will then produce the output document "demo.html" in the same directory where you saved "demo.Rmd" and open a preview of the file in the "Viewer" tab.
+
+:::{.tip}
+You can also knit by pressing [CTRL]{.k}+[SHIFT]{.k}+[K]{.k} on Windows, and either [CTRL]{.k}+[SHIFT]{.k}+[K]{.k}, or [⌘]{.k}+[SHIFT]{.k}+[K]{.k} on Mac.
+:::
 
 If you do run into errors, look for a line with the keyword "Error: ...". Usually, **searching this error message** in your favorite search engine is a **good way to diagnose the problem**.
 
@@ -844,6 +853,7 @@ We will not expect you to learn ALL of markdown, but minimally **you should lear
 ### Code
 
 There are two main ways to include code in an R Markdown file: inline and chunks.
+
 
 
 #### Inline code
@@ -888,6 +898,7 @@ You can quickly insert a chunk by using [CTRL]{.k}+[ALT]{.k}+[I]{.k} on Windows,
 
 A code chunk has this basic structure:
 
+
  1. Chunks always start with ```` ```{r ```` where the `r` indicates this will contain R code to be executed.
  2. This is then optionally followed by a space and a name for the chunk, e.g. `example-chunk`. While a name is not necessary, it is recommend for 2 reasons:
     a. If your code has errors and you name all your chunks, R will tell you the name of the chunk with the error, which can help you troubleshoot faster.
@@ -899,7 +910,7 @@ A code chunk has this basic structure:
     | :--: | :--: | :--- |
     | `eval` | **TRUE**, FALSE | Controls whether code in chunk is evaluated. |
     | `echo` | **TRUE**, FALSE | Controls whether code in chunk is echoed (i.e. displayed). Note code can be evaluated without echoed, echoed without evaluated, or both/neither. |
-    | `include` | **TRUE**, FALSE | Setting this to FALSE will run the chunk, but hide both the code AND output. This is often used in a "setup chunk" near the top of a document to import libraries, load datasets, and do other "setup tasks"  that you want to hide. |
+    | `include` | **TRUE**, FALSE | Setting this to FALSE will run the chunk, but hide both the code AND output. This is often used in a "setup chunk" near the top of a document to import packages, load datasets, and do other "setup tasks"  that you want to hide. |
     | `error` | TRUE, **FALSE** | Controls whether to allow errors and continue knitting. Note this option is FALSE by default, meaning R will halt and not produce output if it encounters any errors. |
     | `fig.width`, `fig.height` | any number; default: **7**, **5** | These control the size of the plot output, if there is one. |
     | `fig.align` | **"default"**, "left", "right", "center" | This controls the alignment of the plot output, if there is one. Note this option MUST be set with quotes. "default" does not set an alignment. |
@@ -918,9 +929,65 @@ A code chunk has this basic structure:
     > ```
     > ````
     
-    The function [`knitr::opts_chunk$set()`](https://rdrr.io/cran/knitr/man/opts_chunk.html) here can be used to set default chunk options for ALL chunks in that document, so for example you can make all figures centered by adding `fig.align = "center"` here instead of needing to add it to every chunk in the document.
+    The function [`knitr::opts_chunk$set()`](https://rdrr.io/cran/knitr/man/opts_chunk.html) here can be used to set default chunk options for ALL chunks in that document, e.g. you can center all figures by adding `fig.align = "center"` here instead of copying it to every chunk header.
     
- 4. code
+ 4. After closing the header with `}` and starting a new line, you can now put whatever code you want inside the chunk. All code here gets run one line at a time and output displayed.
+ 5. At the end, the chunk is closed by another set of ```` ``` ````.
+
+
+This concludes the discussion of code chunks in R Markdown.
+
+
+
+
+## Workflow
+
+In this final section, we will briefly discuss some workflow considerations for R/Rstudio that are important to know for development and troubleshooting purposes.
+
+
+### Working directory
+
+The "working directory" is a concept first-time R users always struggle with. Simply put, **R always runs as if it's inside a directory**. The current directory R is running from inside of is called the "working directory". You can check your current working directory with the `getwd()` function:
+
+
+``` r
+# check current working directory
+getwd()
+```
+
+```
+## [1] "C:/Users/bi/Desktop/stat240-revamp"
+```
+
+You can see my current Rstudio session (while writing these notes) is running from the `` stat240-revamp `` directory which is itself located in `` C:/Users/bi/Desktop ``.
+
+Generally, when you start a new Rstudio session, the working directory will default to `C:/Users/username/` for Windows and `/Users/username/` for Mac, where `username` is your account name (my working directory is different because I have it intentionally set to my notes project folder).
+
+This default working directory actually presents a problem, because it is usually different from where your current Rmd file is. For example, suppose you're working on homework 1. If you organized your files properly---which you should!---your Rmd file is probably located at `.../STAT240/homework/hw01/hw01.Rmd`. For reasons explained in the next section, your working directory should **always match the location of your current Rmd file**.
+
+You can do this by either of these methods:
+
+ - Recommended: Using the top menu bar, go to "Session" > "Set Working Directory" > "To Source File Location". This sets the working directory to where the location of the current file being edited.
+   - For Windows users, the shortcut for this is [ALT]{.k}+[S]{.k}, then release both keys and type [W]{.k} and [S]{.k} one at a time.
+   - For both Windows and Mac, you can also setup a custom shortcut for this action. From the top menu bar, go to "Tools" > "Modify Keyboard Shortcuts...", find "Set Working Directory to Current Document's Directory" and set your preferred shortcut. Mine is set to [CTRL]{.k}+[SHIFT]{.k}+[D]{.k} but feel free to choose your own.
+ - You can also set it automatically to your current Rmd file location with  `try(setwd(dirname(rstudioapi::getSourceEditorContext()$path)),silent=T)` which can be run either in the console, or copied into any Rmd file (e.g. in the setup chunk) and run whenever you open the file.
+ - You can also set it manually by running `setwd()` in the console if you prefer.
+
+:::{.note}
+Whenever you open Rstudio, OR switch to a different file, it is **highly recommended** that you set your working directory again. You should also remember to (re-)load any packages and (re-)import any datasets you need.
+:::
+
+
+
+
+### Knitting v. execution
+
+
+
+
+
+
+
 
 
 <!--
@@ -929,53 +996,12 @@ A code chunk has this basic structure:
   - `>` prompt character
   - `+` prompt when line not ended
   - white space and splitting lines
-  - saving doesn't return
-  - practice using tab
-  - practice using console history
-
-* remember:
-  - set %in% operations
-  - floor/ceil/round
-  - c, :, seq
-
-
-## R Markdown {#rstudio-rmarkdown}
-
-- things to cover
-  - rmd document overview
-    - knit and view
-    - yaml
-    - code chunks
-      - setup chunk
-      - name
-      - options
-    - markdown
-
-  - testing code interactively
-  - libraries
-  - troubleshooting tips
-
+- practice using tab
+- practice using console history
+- testing code interactively
+- troubleshooting tips
 
 ## Extra: if/else, for/while
-
-
-
-::: {.tip}
-You only need to install a package to your computer once, but you need to load it every time you want to use it in an R session.
-
-To install a package, either use the "Install" button in the Packages tab, or copy the following into the console, replacing "packageName" with the name of the package you want to install.
-
-
-``` r
-install.packages("packageName")
-```
-:::
-
-
-
-### Working directory {#rstudio-wd}
-
-
 
 
 <details><summary>Exercise solutions</summary>

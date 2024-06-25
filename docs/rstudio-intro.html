@@ -427,7 +427,7 @@
 <h3>
 <span class="header-section-number">2.3.7</span> Packages<a class="anchor" aria-label="anchor" href="#packages"><i class="fas fa-link"></i></a>
 </h3>
-<p>As a last topic, let’s briefly discuss packages. One of the best features of R is the ability for anyone to easily write and distribute packages on <a href="https://cran.r-project.org/">CRAN</a> (<strong>C</strong>omprehensive <strong>R</strong> <strong>A</strong>rchive <strong>N</strong>etwork). Currently, there are 20987 packages available on CRAN. There are also a further 2300 packages on the bioinformatics-specific package archive <a href="https://www.bioconductor.org/">Bioconductor</a>, as well as countless more on <a href="https://github.com/topics/r-package">GitHub</a>.</p>
+<p>As a last topic, let’s briefly discuss packages. One of the best features of R is the ability for anyone to easily write and distribute packages on <a href="https://cran.r-project.org/">CRAN</a> (<strong>C</strong>omprehensive <strong>R</strong> <strong>A</strong>rchive <strong>N</strong>etwork). Currently, there are 21003 packages available on CRAN. There are also a further 2300 packages on the bioinformatics-specific package archive <a href="https://www.bioconductor.org/">Bioconductor</a>, as well as countless more on <a href="https://github.com/topics/r-package">GitHub</a>.</p>
 <p>In this course, we will primarily make use of the <a href="https://www.tidyverse.org/">Tidyverse</a> suite of packages, which contains several important packages for data science: <code>readr</code> for reading in data, <code>ggplot2</code> for plotting data, <code>dplyr</code> and <code>tidyr</code> for cleaning data, and <code>lubridate</code> and <code>stringr</code> for working with dates and strings. We will learn each of these as the course progresses.</p>
 <p>The most important thing you need to remember about packages is this:</p>
 <blockquote>
@@ -445,7 +445,7 @@
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"tidyverse"</span><span class="op">)</span></span></code></pre></div>
 <p>It’s important to check the output messages to see if the install was successful, and if not, to find important “Error:…” keywords to use for troubleshooting. Sometimes R will ask you different things during install:</p>
 <ul>
-<li>If R asks you to use a “personal library”, say yes. This just means it can’t store the package files in your system folder due to system permissions, so it will store it somewhere else (typically in your user directory).</li>
+<li>If R asks you to use a “personal library”, say yes. This just means it can’t store the package files in your system directory due to system permissions, so it will store it somewhere else (typically in your user directory).</li>
 <li>If R asks you to install “from source”, try no first; if that fails, retry with yes. This just means if you want R to prioritize using precompiled executable files when installing, which is generally much faster.</li>
 <li>If R asks you to update existing packages before installing a new package, this is entirely up to you. I like to update my packages regularly, but there’s usually no harm if you don’t want update immediately.
 <ul>
@@ -461,12 +461,17 @@
 <p>You can load a package by using either <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> or <code><a href="https://rdrr.io/r/base/library.html">require()</a></code>, which are basically the same. <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;The only difference is &lt;code&gt;require()&lt;/code&gt; can be used to check if a package exists and will return &lt;code&gt;FALSE&lt;/code&gt; if it doesn’t, whereas &lt;code&gt;library()&lt;/code&gt; will just error out, see &lt;a href="https://www.geeksforgeeks.org/the-difference-between-require-and-library-in-r/" target="_blank"&gt;https://www.geeksforgeeks.org/the-difference-between-require-and-library-in-r/&lt;/a&gt; for more details.&lt;/p&gt;'><sup>4</sup></a></p>
 <div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code></pre></div>
-<pre><code>## ── Conflicts ────────────────────── tidyverse_conflicts() ──
-## ✖ tidyr::extract()        masks magrittr::extract()
-## ✖ dplyr::filter()         masks stats::filter()
-## ✖ rvest::guess_encoding() masks readr::guess_encoding()
-## ✖ dplyr::lag()            masks stats::lag()
-## ✖ purrr::set_names()      masks magrittr::set_names()
+<pre><code>## ── Attaching core tidyverse packages ──── tidyverse 2.0.0 ──
+## ✔ dplyr     1.1.4     ✔ readr     2.1.5
+## ✔ forcats   1.0.0     ✔ stringr   1.5.1
+## ✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+## ✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+## ✔ purrr     1.0.2     
+## ── Conflicts ────────────────────── tidyverse_conflicts() ──
+## ✖ tidyr::extract()   masks magrittr::extract()
+## ✖ dplyr::filter()    masks stats::filter()
+## ✖ dplyr::lag()       masks stats::lag()
+## ✖ purrr::set_names() masks magrittr::set_names()
 ## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 <p>Upon loading, many packages will print various diagnostic messages to the console. These are generally completely ignorable. Sometimes these will warn about “Conflicts”, this is standard and just means it has overridden other default functions. E.g. You can see above the <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code> function from the package <code>dplyr</code> has overwritten the pre-loaded <a href="https://rdrr.io/r/stats/filter.html"><code class="sourceCode r"><span class="fu">filter</span>()</code></a> function from the <code>stats</code> package.</p>
 <div class="tip">
@@ -491,7 +496,7 @@
 <h2>
 <span class="header-section-number">2.4</span> R Markdown<a class="anchor" aria-label="anchor" href="#r-markdown"><i class="fas fa-link"></i></a>
 </h2>
-<p>In the final section of this chapter, we will introduce you to R Markdown, which is a document format that allows you to seamlessly organize and integrate text and R code/output in an easily readable and editable way. It supports many <a href="https://rmarkdown.rstudio.com/lesson-9.html">output file types</a> including HTML, PDF, and DOCX, and can be used to write reports, articles, presentations, ebooks, and even websites (in fact, this entire website is written in R Markdown, and the GitHub repo even maintained using Rstudio; you can view the source code of any page using the “View source” button in the right sidebar).</p>
+<p>In this next section, we will introduce you to R Markdown, which is a document format that allows you to seamlessly organize and integrate text and R code/output in an easily readable and editable way. It supports many <a href="https://rmarkdown.rstudio.com/lesson-9.html">output file types</a> including HTML, PDF, and DOCX, and can be used to write reports, articles, presentations, ebooks, and even websites (in fact, this entire website is written in R Markdown, and the GitHub repo even maintained using Rstudio; you can view the source code of any page using the “View source” button in the right sidebar).</p>
 <p>Let’s start with an example! Below is a basic R Markdown demo file called <a href="demo.Rmd"><code>demo.Rmd</code></a>, which produces <a href="demo.html" target="_blank"><code>demo.html</code></a> as output. We will use this example below to learn how to work with Rmd files.</p>
 <div class="sourceCode" id="cb95"><pre class="sourceCode md wrapCode"><code class="sourceCode markdown"><span id="cb95-1"><a href="rstudio-intro.html#cb95-1" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb95-2"><a href="rstudio-intro.html#cb95-2" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Demo Rmd file"</span></span>
@@ -548,7 +553,10 @@
 <span class="header-section-number">2.4.2</span> Knitting<a class="anchor" aria-label="anchor" href="#knitting"><i class="fas fa-link"></i></a>
 </h3>
 <p>The first think you should learn about R Markdown is how to “Knit”, or generate an output document. Think of an Rmd file as a “recipe” that tells Rstudio how to create and format a nice output for your audience.</p>
-<p>At the top of the source window, find the <a href="https://i.imgur.com/Mwi8iug.png">Knit</a> button and click it. You’ll see a bunch of messages scroll by in a new tab below called “Render” while Rstudio executes and processes the document. If there are no errors, Rstudio will then produce the output document “demo.html” in the same folder where you saved “demo.Rmd” and open a preview of the file in the “Viewer” tab.</p>
+<p>At the top of the source window, find the <a href="https://i.imgur.com/Mwi8iug.png">Knit</a> button and click it. You’ll see a bunch of messages scroll by in a new tab below called “Render” while Rstudio executes and processes the document. If there are no errors, Rstudio will then produce the output document “demo.html” in the same directory where you saved “demo.Rmd” and open a preview of the file in the “Viewer” tab.</p>
+<div class="tip">
+<p>You can also knit by pressing <span class="k">CTRL</span>+<span class="k">SHIFT</span>+<span class="k">K</span> on Windows, and either <span class="k">CTRL</span>+<span class="k">SHIFT</span>+<span class="k">K</span>, or <span class="k">⌘</span>+<span class="k">SHIFT</span>+<span class="k">K</span> on Mac.</p>
+</div>
 <p>If you do run into errors, look for a line with the keyword “Error: …”. Usually, <strong>searching this error message</strong> in your favorite search engine is a <strong>good way to diagnose the problem</strong>.</p>
 <p>As we continue learning more about R Markdown below, feel free to play around with this demo Rmd file and re-knit to see the resulting changes.</p>
 </div>
@@ -654,7 +662,7 @@ which becomes 3.86 is much better.</p>
 <td align="center"><code>include</code></td>
 <td align="center">
 <strong>TRUE</strong>, FALSE</td>
-<td align="left">Setting this to FALSE will run the chunk, but hide both the code AND output. This is often used in a “setup chunk” near the top of a document to import libraries, load datasets, and do other “setup tasks” that you want to hide.</td>
+<td align="left">Setting this to FALSE will run the chunk, but hide both the code AND output. This is often used in a “setup chunk” near the top of a document to import packages, load datasets, and do other “setup tasks” that you want to hide.</td>
 </tr>
 <tr class="even">
 <td align="center"><code>error</code></td>
@@ -695,63 +703,63 @@ which becomes 3.86 is much better.</p>
 <span id="cb98-5"><a href="rstudio-intro.html#cb98-5" tabindex="-1"></a><span class="in">library(tidyverse)</span></span>
 <span id="cb98-6"><a href="rstudio-intro.html#cb98-6" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 </blockquote>
-<p>The function <a href="https://rdrr.io/cran/knitr/man/opts_chunk.html"><code>knitr::opts_chunk$set()</code></a> here can be used to set default chunk options for ALL chunks in that document, so for example you can make all figures centered by adding <code>fig.align = "center"</code> here instead of needing to add it to every chunk in the document.</p>
+<p>The function <a href="https://rdrr.io/cran/knitr/man/opts_chunk.html"><code>knitr::opts_chunk$set()</code></a> here can be used to set default chunk options for ALL chunks in that document, e.g. you can center all figures by adding <code>fig.align = "center"</code> here instead of copying it to every chunk header.</p>
 </li>
-<li><p>code</p></li>
+<li><p>After closing the header with <code>}</code> and starting a new line, you can now put whatever code you want inside the chunk. All code here gets run one line at a time and output displayed.</p></li>
+<li><p>At the end, the chunk is closed by another set of <code>```</code>.</p></li>
 </ol>
+<p>This concludes the discussion of code chunks in R Markdown.</p>
+</div>
+</div>
+</div>
+<div id="workflow" class="section level2" number="2.5">
+<h2>
+<span class="header-section-number">2.5</span> Workflow<a class="anchor" aria-label="anchor" href="#workflow"><i class="fas fa-link"></i></a>
+</h2>
+<p>In this final section, we will briefly discuss some workflow considerations for R/Rstudio that are important to know for development and troubleshooting purposes.</p>
+<div id="working-directory" class="section level3" number="2.5.1">
+<h3>
+<span class="header-section-number">2.5.1</span> Working directory<a class="anchor" aria-label="anchor" href="#working-directory"><i class="fas fa-link"></i></a>
+</h3>
+<p>The “working directory” is a concept first-time R users always struggle with. Simply put, <strong>R always runs as if it’s inside a directory</strong>. The current directory R is running from inside of is called the “working directory”. You can check your current working directory with the <code><a href="https://rdrr.io/r/base/getwd.html">getwd()</a></code> function:</p>
+<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># check current working directory</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] "C:/Users/bi/Desktop/stat240-revamp"</code></pre>
+<p>You can see my current Rstudio session (while writing these notes) is running from the <code>stat240-revamp</code> directory which is itself located in <code>C:/Users/bi/Desktop</code>.</p>
+<p>Generally, when you start a new Rstudio session, the working directory will default to <code>C:/Users/username/</code> for Windows and <code>/Users/username/</code> for Mac, where <code>username</code> is your account name (my working directory is different because I have it intentionally set to my notes project folder).</p>
+<p>This default working directory actually presents a problem, because it is usually different from where your current Rmd file is. For example, suppose you’re working on homework 1. If you organized your files properly—which you should!—your Rmd file is probably located at <code>.../STAT240/homework/hw01/hw01.Rmd</code>. For reasons explained in the next section, your working directory should <strong>always match the location of your current Rmd file</strong>.</p>
+<p>You can do this by either of these methods:</p>
+<ul>
+<li>Recommended: Using the top menu bar, go to “Session” &gt; “Set Working Directory” &gt; “To Source File Location”. This sets the working directory to where the location of the current file being edited.
+<ul>
+<li>For Windows users, the shortcut for this is <span class="k">ALT</span>+<span class="k">S</span>, then release both keys and type <span class="k">W</span> and <span class="k">S</span> one at a time.</li>
+<li>For both Windows and Mac, you can also setup a custom shortcut for this action. From the top menu bar, go to “Tools” &gt; “Modify Keyboard Shortcuts…”, find “Set Working Directory to Current Document’s Directory” and set your preferred shortcut. Mine is set to <span class="k">CTRL</span>+<span class="k">SHIFT</span>+<span class="k">D</span> but feel free to choose your own.</li>
+</ul>
+</li>
+<li>You can also set it automatically to your current Rmd file location with <code>try(setwd(dirname(rstudioapi::getSourceEditorContext()$path)),silent=T)</code> which can be run either in the console, or copied into any Rmd file (e.g. in the setup chunk) and run whenever you open the file.</li>
+<li>You can also set it manually by running <code><a href="https://rdrr.io/r/base/getwd.html">setwd()</a></code> in the console if you prefer.</li>
+</ul>
+<div class="note">
+<p>Whenever you open Rstudio, OR switch to a different file, it is <strong>highly recommended</strong> that you set your working directory again. You should also remember to (re-)load any packages and (re-)import any datasets you need.</p>
+</div>
+</div>
+<div id="knitting-v.-execution" class="section level3" number="2.5.2">
+<h3>
+<span class="header-section-number">2.5.2</span> Knitting v. execution<a class="anchor" aria-label="anchor" href="#knitting-v.-execution"><i class="fas fa-link"></i></a>
+</h3>
 <!--
 
 - add notes about common console issues
   - `>` prompt character
   - `+` prompt when line not ended
   - white space and splitting lines
-  - saving doesn't return
-  - practice using tab
-  - practice using console history
-
-* remember:
-  - set %in% operations
-  - floor/ceil/round
-  - c, :, seq
-
-
-## R Markdown {#rstudio-rmarkdown}
-
-- things to cover
-  - rmd document overview
-    - knit and view
-    - yaml
-    - code chunks
-      - setup chunk
-      - name
-      - options
-    - markdown
-
-  - testing code interactively
-  - libraries
-  - troubleshooting tips
-
+- practice using tab
+- practice using console history
+- testing code interactively
+- troubleshooting tips
 
 ## Extra: if/else, for/while
-
-
-
-::: {.tip}
-You only need to install a package to your computer once, but you need to load it every time you want to use it in an R session.
-
-To install a package, either use the "Install" button in the Packages tab, or copy the following into the console, replacing "packageName" with the name of the package you want to install.
-
-
-``` r
-install.packages("packageName")
-```
-:::
-
-
-
-### Working directory {#rstudio-wd}
-
-
 
 
 <details><summary>Exercise solutions</summary>
@@ -781,7 +789,7 @@ head(mtcars)
 </details> 
 
 -->
-</div>
+
 </div>
 </div>
 </div>
@@ -834,6 +842,12 @@ head(mtcars)
 <li><a class="nav-link" href="#code"><span class="header-section-number">2.4.5</span> Code</a></li>
 </ul>
 </li>
+<li>
+<a class="nav-link" href="#workflow"><span class="header-section-number">2.5</span> Workflow</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#working-directory"><span class="header-section-number">2.5.1</span> Working directory</a></li>
+<li><a class="nav-link" href="#knitting-v.-execution"><span class="header-section-number">2.5.2</span> Knitting v. execution</a></li>
+</ul>
+</li>
 </ul>
 
       <div class="book-extra">
@@ -851,7 +865,7 @@ head(mtcars)
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, Bret Larget, Cameron Jones. It was last built on 2024-06-24.</p>
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, Bret Larget, Cameron Jones. It was last built on 2024-06-25.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

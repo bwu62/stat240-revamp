@@ -27,3 +27,6 @@ markdown
 code
 inline-code
 code-chunks
+workflow
+working-directory
+knitting-v.-execution
