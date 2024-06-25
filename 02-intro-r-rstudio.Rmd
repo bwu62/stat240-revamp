@@ -39,7 +39,11 @@ Below is a brief description of the purpose of each tab. The ones we will be usi
      - **Console**: This is arguably the most important tab in Rstudio. It provides direct access to the R interpreter, allowing you to run code and see outputs.
      
        There are a few other useful tips for working in the console:
-       - You can use the [TAB]{.k} key to autocomplete code as you type. This works both for built in functions, user-defined objects, or even file paths (more on this later). It is *highly recommended* to make use of autocomplete as much as possible because it can help prevent typo errors in your code.
+       - You can use the [TAB]{.k} key to autocomplete code as you type. This works both for built in functions, user-defined objects, or even file paths (more on this later).
+       
+       :::{.tip}
+       It is **highly recommended** to use [TAB]{.k} as often as you can, not because it can save you keystrokes, but because it helps avoid typos!
+       :::
        - You can also easily rerun previously executed commands by either using the up [↑]{.k} and down [↓]{.k} arrow keys to navigate through your history, or even search your history by using [CTRL]{.k}+[R]{.k} or [⌘]{.k}+[R]{.k}.
      - Terminal: This tab opens a terminal in your current working directory (more on this later). By default, this is a [Git Bash](https://gitforwindows.org/) terminal on Windows and a [zsh](https://medium.com/@luzhenna/getting-started-with-zsh-on-a-macbook-bd1c98c6f383) terminal on Macs, but this can be easily changed in the Options menu.
      - Background Jobs: Rstudio may sometimes run certain operations as background jobs here. Alternatively, you can also run background R scripts here if you desire.
@@ -415,7 +419,7 @@ x^2 %% 2 == 0 | mean(data) + 2 * sd(data) > max(data)
 ### Packages
 
 
-As a last topic, let's briefly discuss packages. One of the best features of R is the ability for anyone to easily write and distribute packages on [CRAN](https://cran.r-project.org/) (**C**omprehensive **R** **A**rchive **N**etwork). Currently, there are `r rvest::read_html("https://cran.r-project.org/web/packages/") %>% rvest::html_text() %>% stringr::str_match("features \\d+ available packages") %>% stringr::str_extract("\\d+")` packages available on CRAN. There are also a further `r rvest::read_html("https://www.bioconductor.org/") %>% rvest::html_text() %>% stringr::str_match("Discover \\d+ software packages") %>% stringr::str_extract("\\d+")` packages on the bioinformatics-specific package archive [Bioconductor](https://www.bioconductor.org/), as well as countless more on [GitHub](https://github.com/topics/r-package).
+Now, let's briefly discuss packages. One of the best features of R is the ability for anyone to easily write and distribute packages on [CRAN](https://cran.r-project.org/) (**C**omprehensive **R** **A**rchive **N**etwork). Currently, there are `r rvest::read_html("https://cran.r-project.org/web/packages/") %>% rvest::html_text() %>% stringr::str_match("features \\d+ available packages") %>% stringr::str_extract("\\d+")` packages available on CRAN. There are also a further `r rvest::read_html("https://www.bioconductor.org/") %>% rvest::html_text() %>% stringr::str_match("Discover \\d+ software packages") %>% stringr::str_extract("\\d+")` packages on the bioinformatics-specific package archive [Bioconductor](https://www.bioconductor.org/), as well as countless more on [GitHub](https://github.com/topics/r-package).
 
 In this course, we will primarily make use of the [Tidyverse](https://www.tidyverse.org/) suite of packages, which contains several important packages for data science: `readr` for reading in data, `ggplot2` for plotting data, `dplyr` and `tidyr` for cleaning data, and `lubridate` and `stringr` for working with dates and strings. We will learn each of these as the course progresses.
 
@@ -424,7 +428,6 @@ The most important thing you need to remember about packages is this:
 > ***install once; load daily***
 
 I.e. you only need to install a package *once* to your computer, but you need to load it *every time* you reopen Rstudio and want to use it (unless you're one of those people that never closes any programs). Of course if you want to setup R/Rstudio on a new computer, you need to install it again there as well.
-
 
 
 
@@ -467,6 +470,27 @@ You may have already guessed from the message in the output above, but you can a
 
 
 
+### Whitespace
+
+As a final topic, let's briefly discuss spacing. "Whitespace" refers to any sequence of space-type characters, which can be a mix of spaces, tabs, and line breaks (i.e. when you hit [ENTER]{.k}).
+
+R ignores whitespace between variable names, functions, and punctuation characters. E.g. the following are all equivalent:
+
+```{r whitespace,tidy=F}
+# these are all the same
+mean(data)
+mean ( data )
+mean (
+  data
+)
+```
+
+A long line of code is often broken across several lines for readability. We will see many examples of this shortly in the data visualization chapter.
+
+However, make sure if you break a line up to finish the line eventually, otherwise you'll get an error. For example, if you type `mean(data` in the console but forget to close the parenthesis (try this!) you will see the prompt character `>` be replaced with `+`. It will continue to do this, patiently waiting for you to finish the line, until you either close it by typing `)` OR cancel the line by hitting [ESC]{.k}.
+
+
+
 ### R cheat sheets
 
 
@@ -497,7 +521,9 @@ rmarkdown::render("demo.Rmd", "html_document")
 
 
 
+
 ### Source window
+
 
 Download the [`demo.Rmd`](demo.Rmd) example file and open it; it should automatically open in Rstudio in a new panel in the top left called the source window, which is actually just a basic text editor like Notepad or TextEdit, but with some additional R-aware features (more on this later).
 
@@ -505,7 +531,9 @@ Download the [`demo.Rmd`](demo.Rmd) example file and open it; it should automati
 
 
 
+
 ### Knitting
+
 
 The first think you should learn about R Markdown is how to "Knit", or generate an output document. Think of an Rmd file as a "recipe" that tells Rstudio how to create and format a nice output for your audience.
 
@@ -521,7 +549,9 @@ As we continue learning more about R Markdown below, feel free to play around wi
 
 
 
+
 ### YAML header
+
 
 Rmd files usually start with a [YAML](https://yaml.org/) header with some important metadata about the file:
 
@@ -534,13 +564,16 @@ There are lots of other [YAML options](https://github.com/hao203/rmarkdown-YAML)
 
 
 
+
 ### Markdown
+
 
 R Markdown is based on
   [Markdown](https://markdownguide.offshoot.io/cheat-sheet/) ^[Fun fact: Markdown was co-created by computer prodigy [Aaron Swartz](https://en.wikipedia.org/wiki/Aaron_Swartz){target="_blank"} who also famously co-founded Reddit. He was an earlier pioneer of the [Open Access](https://en.wikipedia.org/wiki/Open_access){target="_blank"} movement and was persecuted by the government for sharing journal articles. If you're interested in learning more, I highly recommend the excellent biopic [The Internet's Own Boy: The Story of Aaron Swartz](https://www.imdb.com/title/tt3268458/){target="_blank"}]
   which is a simple syntax for "marking up" text with additional formatting. You can see mixed in with paragraphs of ordinary text, there are `# Section` and `## Subsection` headings, `[links](url)` and `**bold text**`, lists and sublists, and both inline and separate "chunks" of source code.
 
 We will not expect you to learn ALL of markdown, but minimally **you should learn to use section and subsection headings, links and lists, and both inline code and code chunks**.
+
 
 
 
@@ -551,6 +584,7 @@ There are two main ways to include code in an R Markdown file: inline and chunks
 
 
 #### Inline code
+
 
 If you want to quote R code inside a paragraph of text, surround it with the backtick character [\`]{.k}, which can be found on most keyboards in the top left next to the [1]{.k} key. Note this character is NOT the same as a single quote character [']{.k}. For example, this: `` `mean(data)` `` will render as: `mean(data)`{.R}.
 
@@ -573,7 +607,9 @@ Generally, I recommend rounding to either the **same precision as your data, or 
 
 
 
+
 #### Code chunks
+
 
 The other prominent way to include R code inside an R Markdown document is by using so-called code "chunks" or "blocks". The basic structure is this:
 
@@ -616,6 +652,11 @@ A code chunk has this basic structure:
  5. At the end, the chunk is closed by another set of ```` ``` ````.
 
 
+:::{.tip}
+Remember you can also use [TAB]{.k} autocomplete in Rmd code chunks to save keystrokes and avoid typos!
+:::
+
+
 This concludes the discussion of code chunks in R Markdown.
 
 
@@ -623,10 +664,14 @@ This concludes the discussion of code chunks in R Markdown.
 
 ## Workflow
 
-In this final section, we will briefly discuss some workflow considerations for R/Rstudio that are important to know for development and troubleshooting purposes.
+
+In this final section, we will briefly discuss some workflow considerations for working with Rstudio and R Markdown that are important to know for troubleshooting purposes.
+
+
 
 
 ### Working directory
+
 
 The "working directory" is a concept first-time R users always struggle with. Simply put, **R always runs as if it's inside a directory**. The current directory R is running from inside of is called the "working directory". You can check your current working directory with the `getwd()` function:
 
@@ -650,42 +695,84 @@ You can do this by either of these methods:
  - You can also set it manually by running `setwd()` in the console if you prefer.
 
 :::{.note}
-Whenever you open Rstudio, OR switch to a different file, it is **highly recommended** that you set your working directory again. You should also remember to (re-)load any packages and (re-)import any datasets you need.
+Whenever you open Rstudio, OR switch to a different file, you should **ALWAYS do the following**:
+
+1. Set your working directory,
+2. Load any necessary packages,
+3. Read in any necessary datasets.
 :::
 
 
 
 
-### Knitting v. execution
+### Knitting v. console execution
+
+
+But why do we need to match the working directory to our Rmd file location? This is where the difference between knitting and execution comes into play.
+
+It turns out, **code runs differently in an Rstudio console than when being knit in an Rmd file**. Code in the console will always run in your current working directory, and any objects created will be added to your current session Environment. They will stay there until you clear the Environment.
+
+However, when you Knit a document, it will create a **new R session in the background** with the working directory set to the same location as the Rmd file, and **run the entire document from scratch, top to bottom** and then produce an output file. This means if your working directory in Rstudio is not set to the same place, it can break file references if you need to load any datasets.
+
+This may seem overly complicated right now, but it will quickly become intuitive as you practice more.
 
 
 
 
+### Tips
 
 
+Before I end this chapter, I want to offer a few tips for your workflow that I find myself repeating over and over to nearly every student, especially when errors arise.
+
+
+ 1. The MOST important tip for avoiding/fixing errors is **knit often, and *check the output***! Why?
+    - Knitting is the best way to catch errors, and the more often you knit, the easier it will be to identify the source of the error (since there's less new code to check).
+    - Knitting will automatically save your document for you, helping avoid lost work due to crashes.
+    - You can check the formatting of new document elements, whether they are bodies of text, markdown features, plot outputs, code, etc..
+    - If you run into unexpected computer or Rstudio problems, you'll have a more recently-knit output you can submit in the interim while you troubleshoot.
+ 
+ 2. Another tip is in general, think of Rstudio's console as a place to "test out" a new line of code you're trying to add. Continue to test it until you're satisfied with it, then **immediately copy it into your Rmd**. Work that you do in **the console is NOT saved**! Your Rmd file is where all your work is saved and then knit into a final output.
+    - You can easily run a line of code in an Rmd file in the console by putting your cursor anywhere on that line and using [CTRL]{.k}+[ENTER]{.k} on Windows and either [CTRL]{.k}+[ENTER]{.k} or [⌘]{.k}+[ENTER]{.k} on Mac. To run an entire chunk, add [SHIFT]{.k} to the previous shortcut combo. You can also use the top-right [chunk shortcut buttons](https://bio723-class.github.io/Bio723-book/figures/fig-run-code-chunk.png).
+ 
+ 3. Remember **knitting always creates a NEW, empty background R session, sets the working directory to the Rmd file location, then runs the entire file top to bottom**. This means:
+    - If you run a line in the console without copying it into the Rmd file, that line will NOT be run when you knit.
+    - If you define an object in the console, forgot to copy it into the Rmd file, then try to use it somewhere else in the file, you WILL get an error.
+    - Objects must be defined BEFORE they are used in an Rmd file. If you define `data` on line 20 but try computing `mean(data)` on line 10, you WILL get an error. ^[For sake of pedantry, technically you can refer to an object before defining it, but this is an extremely advanced R Markdown technique and is not recommended since it's nonintuitive, harder to debug, and just generally clumsy and bad practice. See <https://bookdown.org/yihui/rmarkdown-cookbook/load-cache.html>{target="_blank"} for more.]
+    - If your working directory does not match the location of your current Rmd file, this may also cause errors if you need to load any datasets. Remember to always set your working directory!
+ 
+ 4. You have an error? Have you tried the following?
+    a. Read the error message! Look for "Error:..." and read it or search it in a browser! If you're knitting, there should also be a line number or chunk name (remember to name your chunks!) that should help you find where the problem code is.
+    b. Check you're using the function correctly. Read the built-in help page for the function, or search online for some example usages.
+    c. Check if your input object (this is often the output from an earlier line or chunk) is actually correct. E.g. if `data` wasn't properly created in chunk-1, it might not show an error until you try to compute `mean(data)` in chunk-2 below. Be paranoid! Check each input and output as you go along!
+    d. If you imported lots of packages, check if your function names have conflicts. E.g. if both `package1` and `package2` have a function `func1`, you may accidentally be using the wrong one. You can check this by also opening the help page for `func1` and checking to see which help page it directs to.
+    e. If you still can't identify the problem, restart your R session by going to the top menu bar > "Session" > "Restart R", then **run your entire Rmd ONE function at a time, checking EACH function's output along the way**. This may take longer, but will almost always work.
+    f. If you tried everything and STILL can't figure it out, ask us for help.
+
+
+<br/>
+
+
+Phew, that was a lot, but that wraps up the introduction to working with R/Rstudio! Below, I have linked a few bonus readings if you want to learn a bit more about control and looping in R, which we will not need in this class but may be good to know if you plan to take further data science classes or build a career in data science.
+
+In the next chapter, we will explore data types and structures in R, as well as learn to read in and write out datasets.
+
+
+<br/><br/>
+
+
+#### Optional bonus topic: control/looping {.unnumbered}
+
+This includes `if`/`else` statements and `for`/`while` loops. If you're interested, see these suggested readings:
+
+ - [This page by Yihui Xie](https://bookdown.org/rdpeng/rprogdatascience/control-structures.html) from the bookdown documentation offers a good & quick overview of control and looping in R.
+ - For a more in-depth discussion, check out [this page by Hadley Wickham](https://adv-r.hadley.nz/control-flow.html) from his Advanced R book.
 
 
 
 <!--
-
-- add notes about common console issues
-  - `>` prompt character
-  - `+` prompt when line not ended
-  - white space and splitting lines
-- practice using tab
-- practice using console history
-- testing code interactively
-- troubleshooting tips
-
-## Extra: if/else, for/while
-
-
 <details><summary>Exercise solutions</summary>
-
 ```{r}
 head(mtcars)
 ```
-
 </details> 
-
 -->
