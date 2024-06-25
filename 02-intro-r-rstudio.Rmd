@@ -598,7 +598,7 @@ A code chunk has this basic structure:
     | :--: | :--: | :--- |
     | `eval` | **TRUE**, FALSE | Controls whether code in chunk is evaluated. |
     | `echo` | **TRUE**, FALSE | Controls whether code in chunk is echoed (i.e. displayed). Note code can be evaluated without echoed, echoed without evaluated, or both/neither. |
-    | `include` | **TRUE**, FALSE | Setting this to FALSE will run the chunk, but hide both the code AND output. This is often used in a "setup chunk" near the top of a document to import libraries, load datasets, and do other "setup tasks"  that you want to hide. |
+    | `include` | **TRUE**, FALSE | Setting this to FALSE will run the chunk, but hide both the code AND output. This is often used in a "setup chunk" near the top of a document to import packages, load datasets, and do other "setup tasks"  that you want to hide. |
     | `error` | TRUE, **FALSE** | Controls whether to allow errors and continue knitting. Note this option is FALSE by default, meaning R will halt and not produce output if it encounters any errors. |
     | `fig.width`, `fig.height` | any number; default: **7**, **5** | These control the size of the plot output, if there is one. |
     | `fig.align` | **"default"**, "left", "right", "center" | This controls the alignment of the plot output, if there is one. Note this option MUST be set with quotes. "default" does not set an alignment. |
