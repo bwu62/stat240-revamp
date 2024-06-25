@@ -63,7 +63,7 @@ Below is a brief description of the purpose of each tab. The ones we will be usi
        - There are several ways to access the help pages. Suppose you want help with the `install.packages()` function. You can either run `?install.packages` or `help(install.packages)` in the console, or put your cursor on the function in your code and hit the [F1]{.k} key.
        - The help page may contain these following sections, each of which presents different types of information:
          i.   *Description*, showing a brief summary of the purpose of the function
-         ii.  *Usage*, listing available arguments (i.e. options). If an argument has an ` = ` sign and a value, this denotes the default value
+         ii.  *Usage*, listing available arguments (i.e. options). If an argument has an `=` sign and a value, this denotes the default value
          iii. *Arguments*, where more details about the arguments can be found
          iv.  *Details*, where further details on the function can be found
          v.   *Value*, which gives info on what the function returns as an output
@@ -74,7 +74,7 @@ Below is a brief description of the purpose of each tab. The ones we will be usi
      - Presentation: This final tab is useful if you ever make presentations in Rstudio, e.g. using R's [Beamer](https://bookdown.org/yihui/rmarkdown/beamer-presentation.html) or [reveal.js](https://github.com/rstudio/revealjs) integrations.
 
 
-That concludes the tour of the basic Rstudio interface. There is also a file editor window (also known as the source panel/window) which we will discuss later in section \@ref(rstudio-rmarkdown), but for now, let's learn to run some basic R commands!
+That concludes the tour of the basic Rstudio interface. There is also a file editor window (also known as the source panel/window) which we will discuss later on, but for now, let's learn to run some basic R commands!
 
 
 
@@ -192,10 +192,16 @@ sqrt(abs(-9))
 
 We already mentioned `pi` is predefined. There are a few other important special values in R. `TRUE` and `FALSE`, along with their abbreviations `T` and `F` are also predefined. Note the capitalization; **R is a case-sensitive language** so `true`, `True`, and `t` are NOT the same as `TRUE` (the first two are not defined, while `t()` is the matrix transpose function).
 
-```{r true-false,error=T}
+```{r true}
 T
+```
+```{r true-error,eval=F}
 true
 ```
+```{r true-error-2,echo=F,message=T}
+message("Error: object 'true' not found")
+```
+
 
 An important thing to note is that in R, doing any kind of **math turns `TRUE` into 1 and `FALSE` into 0**.
 
@@ -347,9 +353,9 @@ Another important function for working with samples is the `%in%` operator, whic
 One final statistical function that is extremely common is `cor()` which computes the correlation between 2 vectors. E.g. suppose you had the following $(x,y)$ points: (3.4,1), (5,4.6), (5.7,6.8), (6.5,5.3). You can compute the correlation between the $x$ and $y$ points like so:
 
 ```{r correlation}
-x = c(5, 6.5, 3.4, 5.7)
-y = c(4.6, 5.3, 1, 6.8)
-cor(x,y)
+x <- c(5, 6.5, 3.4, 5.7)
+y <- c(4.6, 5.3, 1, 6.8)
+cor(x, y)
 ```
 
 There are other miscellaneous functions for working with vectors that are sometimes useful that we won't cover in detail now, but you can explore them on your own, such as `prod()` for computing the product of all numbers in a vector, `sort()` for sorting a vector, `rev()` for reversing a vector, `unique()` for getting the unique values in a vector, `scale()` for linearly shifting and scaling the data to have mean 0 and standard deviation 1, and `cumsum()` and `cumprod()` for the cumulative sum and product along a vector, and many many more...
@@ -449,7 +455,7 @@ It's important to check the output messages to see if the install was successful
 You can load a package by using either `library()` or `require()`, which are basically the same. ^[The only difference is `require()` can be used to check if a package exists and will return `FALSE` if it doesn't, whereas `library()` will just error out, see <https://www.geeksforgeeks.org/the-difference-between-require-and-library-in-r/>{target="_blank"} for more details.]
 
 ```{r unload-tidyverse,include=F}
-detach("package:tidyverse", unload=T)
+detach("package:tidyverse", unload = TRUE)
 ```
 ```{r library,message=T,warning=T}
 library(tidyverse)
@@ -484,35 +490,125 @@ Those are probably the most important R commands you need to know for now. Below
 
 In the final section of this chapter, we will introduce you to R Markdown, which is a document format that allows you to seamlessly organize and integrate text and R code/output in an easily readable and editable way. It supports many [output file types](https://rmarkdown.rstudio.com/lesson-9.html) including HTML, PDF, and DOCX, and can be used to write reports, articles, presentations, ebooks, and even websites (in fact, this entire website is written in R Markdown, and the GitHub repo even maintained using Rstudio; you can view the source code of any page using the "View source" button in the right sidebar).
 
-Let's start with an example! Below is a basic R Markdown demo file called [`demo.Rmd`](demo.Rmd), which produces [`demo.html`](demo.html){target="_blank"} as output (feel free to download the demo to test it out). We will use this example below to learn how to work with Rmd files.
+Let's start with an example! Below is a basic R Markdown demo file called [`demo.Rmd`](demo.Rmd), which produces [`demo.html`](demo.html){target="_blank"} as output. We will use this example below to learn how to work with Rmd files.
 
-```{embed, file="demo.Rmd", class.source="wrapCode"}
+```{embed embed.demo, file="demo.Rmd", class.source="wrapCode"}
 ```
-```{r,include=F,cache=T}
-rmarkdown::render("demo.Rmd","html_document")
+```{r reknit demo.Rmd,include=F,cache=T}
+rmarkdown::render("demo.Rmd", "html_document")
 ```
 
-Let's briefly break down this file and talk about some of the major pieces.
+
+### Source window
+
+Download the [`demo.Rmd`](demo.Rmd) example file and open it; it should automatically open in Rstudio in a new panel in the top left called the source window, which is actually just a basic text editor like Notepad or TextEdit, but with some additional R-aware features (more on this later).
+
+![](https://i.imgur.com/qFJ3MrS.png)
+
+
+
+### Knitting
+
+The first think you should learn about R Markdown is how to "Knit", or generate an output document. Think of an Rmd file as a "recipe" that tells Rstudio how to create and format a nice output for your audience.
+
+At the top of the source window, find the [Knit](https://i.imgur.com/Mwi8iug.png) button and click it. You'll see a bunch of messages scroll by in a new tab below called "Render" while Rstudio executes and processes the document. If there are no errors, Rstudio will then produce the output document "demo.html" in the same folder where you saved "demo.Rmd" and open a preview of the file in the "Viewer" tab.
+
+If you do run into errors, look for a line with the keyword "Error: ...". Usually, **searching this error message** in your favorite search engine is a **good way to diagnose the problem**.
+
+As we continue learning more about R Markdown below, feel free to play around with this demo Rmd file and re-knit to see the resulting changes.
+
 
 
 ### YAML header
 
-Rmd files usually start with a [YAML](https://yaml.org/) header:
+Rmd files usually start with a [YAML](https://yaml.org/) header with some important metadata about the file:
 
-```{markdown}
----
-title: "Demo Rmd file"
-author: "Jane Doe"
-date: "2024-06-20"
-output: html_document
----
-```
+> ```{embed demo.yaml, file="demo.Rmd", echo=1:6, class.source="wrapCode"}
+> ```
 
-This contains some important metadata about the file, like title, author, and date. The `output:` option sets the output format R uses 
+Title, author, and date are self explanatory. The `output:` option sets the output format R uses when knitting. We **highly recommend** using the default `html_document` output format since it is lightweight, portable, and easy for us to view in Canvas when grading.
+
+There are lots of other [YAML options](https://github.com/hao203/rmarkdown-YAML) you can explore, but **minimally, you should always have these 4: title, author, date, and `output: html_document`** set at the beginning of each Rmd document.
 
 
 
+### Markdown
 
+R Markdown is based on
+  [Markdown](https://markdownguide.offshoot.io/cheat-sheet/) ^[Fun fact: Markdown was co-created by computer prodigy [Aaron Swartz](https://en.wikipedia.org/wiki/Aaron_Swartz){target="_blank"} who also famously co-founded Reddit. He was an earlier pioneer of the [Open Access](https://en.wikipedia.org/wiki/Open_access){target="_blank"} movement and was persecuted by the government for sharing journal articles. If you're interested in learning more, I highly recommend the excellent biopic [The Internet's Own Boy: The Story of Aaron Swartz](https://www.imdb.com/title/tt3268458/){target="_blank"}]
+  which is a simple syntax for "marking up" text with additional formatting. You can see mixed in with paragraphs of ordinary text, there are `# Section` and `## Subsection` headings, `[links](url)` and `**bold text**`, lists and sublists, and both inline and separate "chunks" of source code.
+
+We will not expect you to learn ALL of markdown, but minimally **you should learn to use section and subsection headings, links and lists, and both inline code and code chunks**.
+
+
+
+### Code
+
+There are two main ways to include code in an R Markdown file: inline and chunks.
+
+
+#### Inline code
+
+If you want to quote R code inside a paragraph of text, surround it with the backtick character [\`]{.k}, which can be found on most keyboards in the top left next to the [1]{.k} key. Note this character is NOT the same as a single quote character [']{.k}. For example, this: `` `mean(data)` `` will render as: `mean(data)`{.R}.
+
+You can also easily refer to R variables and substitute their values, or apply other functions to them and display the output inside text. For example, remember how the `data` vector was defined above in section \@ref(summary-functions)? This: `` `r
+median(data)` ``
+will render as: `r median(data)`. Note the `` `r `` prefix here, which triggers evaluation and substitute of the code. This helps avoid "hard-coding", letting values and references update to always stay in sync.
+
+
+:::{.tip}
+If a value has too many digits after the decimal, e.g. `` `r
+mean(data)` ``
+becomes: `r mean(data)`, it is ***highly recommended to round the result*** off to a reasonable number of digits using either `round()` or `signif()`. So in this case, `` `r
+round(mean(data),2)` ``
+which becomes `r round(mean(data),2)` is much better.
+
+It is also important to only **round at the END**, when you present your analysis. Do NOT round your original dataset or an intermediate value used in another computation, as this will introduce errors that can compound.
+
+Generally, I recommend rounding to either the **same precision as your data, or 2-3 significant figures**; we will not be too picky about the exact number of digits. See [this page](https://ecampusontario.pressbooks.pub/prehealthsciencesmath1/chapter/2-2-accuracy-precision-and-rounding-rules/) for more discussion about precision and rounding.
+:::
+
+
+
+#### Code chunks
+
+The other prominent way to include R code inside an R Markdown document is by using so-called code "chunks" or "blocks". The basic structure is this:
+
+> ```{embed demo.chunk, file="demo.Rmd", echo=31:35, class.source="wrapCode"}
+> ```
+
+:::{.tip}
+You can quickly insert a chunk by using [CTRL]{.k}+[ALT]{.k}+[I]{.k} on Windows, and either [CTRL]{.k}+[⌥]{.k}+[I]{.k}, or [⌘]{.k}+[⌥]{.k}+[I]{.k} on Mac.
+:::
+
+A code chunk has this basic structure:
+
+ 1. Chunks always start with ```` ```{r ```` where the `r` indicates this will contain R code to be executed.
+ 2. This is then optionally followed by a space and a name for the chunk, e.g. `example-chunk`. While a name is not necessary, it is recommend for 2 reasons:
+    a. If your code has errors and you name all your chunks, R will tell you the name of the chunk with the error, which can help you troubleshoot faster.
+    b. R will also use chunk names (along with section headings) to generate a [document outline](https://i.imgur.com/sT1jJHU.png) at the bottom left of the source window. You can click on this outline button and quickly navigate to another part of a long Rmd file.
+ 3. This name can also optionally be followed by a comma `,` followed by additional "chunk options", which are extra settings you can set to control the behavior of the chunk and output. There is a VERY long [list of available options](https://yihui.org/knitr/options/), but here is a short list of some of the MOST important:
+    
+    :::{#knitr-options}
+    | Option | Possible values <br/> <small>(default values in **bold**)<small> | Description |
+    | :--: | :--: | :--- |
+    | `eval` | **TRUE**, FALSE | Controls whether code in chunk is evaluated. |
+    | `echo` | **TRUE**, FALSE | Controls whether code in chunk is echoed (i.e. displayed). Note code can be evaluated without echoed, echoed without evaluated, or both/neither. |
+    | `include` | **TRUE**, FALSE | Setting this to FALSE will run the chunk, but hide both the code AND output. This is often used in a "setup chunk" near the top of a document to import libraries, load datasets, and do other "setup tasks"  that you want to hide. |
+    | `error` | TRUE, **FALSE** | Controls whether to allow errors and continue knitting. Note this option is FALSE by default, meaning R will halt and not produce output if it encounters any errors. |
+    | `fig.width`, `fig.height` | any number; default: **7**, **5** | These control the size of the plot output, if there is one. |
+    | `fig.align` | **"default"**, "left", "right", "center" | This controls the alignment of the plot output, if there is one. Note this option MUST be set with quotes. "default" does not set an alignment. |
+    | `cache` | TRUE, **FALSE** | If a chunk is time consuming, you can "cache" it. Cached chunks will not be rerun unless the code inside is modified. Note this is set FALSE by default. This option should be **used with caution**! Improper usage may cause code chunks to not update properly. ^[Phil Karlton, developer at Xerox and Netscape, [famously said](https://www.karlton.org/2017/12/naming-things-hard/) *"There are only two hard things in Computer Science: cache invalidation and naming things."* For a more detailed discussion on caching in R, see <a href="https://bookdown.org/yihui/rmarkdown-cookbook/cache.html" target="_blank">this intro page</a> and <a href="https://yihui.org/en/2018/06/cache-invalidation" target="_blank">this follow-up discussion</a> for more info.] |
+    :::
+    
+    One last note: remember the "setup" chunk at the top of the demo file? Here it is again:
+    
+    > ```{embed demo.setup, file="demo.Rmd", echo=8:13, class.source="wrapCode"}
+    > ```
+    
+    The function [`knitr::opts_chunk$set()`](https://rdrr.io/cran/knitr/man/opts_chunk.html) here can be used to set default chunk options for ALL chunks in that document, so for example you can make all figures centered by adding `fig.align = "center"` here instead of needing to add it to every chunk in the document.
+    
+ 4. code
 
 
 <!--
