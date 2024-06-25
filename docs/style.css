@@ -42,7 +42,7 @@ pre code {
 */
 
 /* underline links... */
-main p a, main li a {
+main p a, main li a, div.popover a{
   text-decoration: underline;
 }
 
@@ -157,4 +157,37 @@ h3{
 
 .wrapCode{
   text-wrap: wrap;
+}
+
+/* https://codepen.io/dudleystorey/pen/gkrsq */
+span.k {
+  font-family: "Roboto Mono","Georgia",serif;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 0 0.3em;
+  margin: 0 0.1em;
+  box-shadow: 0 1px 0px rgba(0, 0, 0, 0.2), 0 0 0 2px #fff inset;
+  background-color: #fafafa;
+}
+
+tr.header th[align="center"]{
+  line-height:1.2;
+}
+
+/* https://stackoverflow.com/questions/36121672/set-table-column-width-via-markdown */
+#knitr-options table colgroup col:first-of-type{
+    width: 13% !important;
+}
+#knitr-options table colgroup col:nth-of-type(2){
+    width: 22% !important;
+}
+#knitr-options table colgroup col:nth-of-type(3){
+    width: 65% !important;
+}
+#knitr-options th[align="left"]{
+  text-align: center;
+}
+#knitr-options td[align="left"]{
+  text-align: justify;
 }

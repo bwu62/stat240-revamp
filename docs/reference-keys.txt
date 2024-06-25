@@ -20,4 +20,10 @@ install-a-package
 loading-a-package
 r-cheat-sheets
 r-markdown
+source-window
+knitting
 yaml-header
+markdown
+code
+inline-code
+code-chunks
