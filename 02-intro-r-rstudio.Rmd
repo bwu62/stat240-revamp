@@ -623,10 +623,43 @@ This concludes the discussion of code chunks in R Markdown.
 
 ## Workflow
 
-In this final section, we will discuss
+In this final section, we will briefly discuss some workflow considerations for R/Rstudio that are important to know for development and troubleshooting purposes.
+
+
+### Working directory
+
+The "working directory" is a concept first-time R users always struggle with. Simply put, **R always runs as if it's inside a directory**. The current directory R is running from inside of is called the "working directory". You can check your current working directory with the `getwd()` function:
+
+```{r get-wd}
+# check current working directory
+getwd()
+```
+
+You can see my current Rstudio session (while writing these notes) is running from the `` `r basename(getwd())` `` directory which is itself located in `` `r dirname(getwd())` ``.
+
+Generally, when you start a new Rstudio session, the working directory will default to `C:/Users/username/` for Windows and `/Users/username/` for Mac, where `username` is your account name (my working directory is different because I have it intentionally set to my notes project folder).
+
+This default working directory actually presents a problem, because it is usually different from where your current Rmd file is. For example, suppose you're working on homework 1. If you organized your files properly---which you should!---your Rmd file is probably located at `.../STAT240/homework/hw01/hw01.Rmd`. For reasons explained in the next section, your working directory should **always match the location of your current Rmd file**.
+
+You can do this by either of these methods:
+
+ - Recommended: Using the top menu bar, go to "Session" > "Set Working Directory" > "To Source File Location". This sets the working directory to where the location of the current file being edited.
+   - For Windows users, the shortcut for this is [ALT]{.k}+[S]{.k}, then release both keys and type [W]{.k} and [S]{.k} one at a time.
+   - For both Windows and Mac, you can also setup a custom shortcut for this action. From the top menu bar, go to "Tools" > "Modify Keyboard Shortcuts...", find "Set Working Directory to Current Document's Directory" and set your preferred shortcut. Mine is set to [CTRL]{.k}+[SHIFT]{.k}+[D]{.k} but feel free to choose your own.
+ - You can also set it automatically to your current Rmd file location by running `try(setwd(dirname(rstudioapi::getSourceEditorContext()$path)),silent=T)`.
 
 
 
+### Knitting v. execution
+
+
+
+
+
+
+```{r}
+dirname(rstudioapi::getSourceEditorContext()$path)
+```
 
 
 
@@ -641,52 +674,12 @@ In this final section, we will discuss
   - `>` prompt character
   - `+` prompt when line not ended
   - white space and splitting lines
-  - saving doesn't return
-  - practice using tab
-  - practice using console history
-
-* remember:
-  - set %in% operations
-  - floor/ceil/round
-  - c, :, seq
-
-
-## R Markdown {#rstudio-rmarkdown}
-
-- things to cover
-  - rmd document overview
-    - knit and view
-    - yaml
-    - code chunks
-      - setup chunk
-      - name
-      - options
-    - markdown
-
-  - testing code interactively
-  - libraries
-  - troubleshooting tips
-
+- practice using tab
+- practice using console history
+- testing code interactively
+- troubleshooting tips
 
 ## Extra: if/else, for/while
-
-
-
-::: {.tip}
-You only need to install a package to your computer once, but you need to load it every time you want to use it in an R session.
-
-To install a package, either use the "Install" button in the Packages tab, or copy the following into the console, replacing "packageName" with the name of the package you want to install.
-
-```{r,eval=F}
-install.packages("packageName")
-```
-:::
-
-
-
-### Working directory {#rstudio-wd}
-
-
 
 
 <details><summary>Exercise solutions</summary>
