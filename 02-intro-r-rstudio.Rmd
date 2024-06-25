@@ -485,7 +485,7 @@ Those are probably the most important R commands you need to know for now. Below
 ## R Markdown
 
 
-In the final section of this chapter, we will introduce you to R Markdown, which is a document format that allows you to seamlessly organize and integrate text and R code/output in an easily readable and editable way. It supports many [output file types](https://rmarkdown.rstudio.com/lesson-9.html) including HTML, PDF, and DOCX, and can be used to write reports, articles, presentations, ebooks, and even websites (in fact, this entire website is written in R Markdown, and the GitHub repo even maintained using Rstudio; you can view the source code of any page using the "View source" button in the right sidebar).
+In this next section, we will introduce you to R Markdown, which is a document format that allows you to seamlessly organize and integrate text and R code/output in an easily readable and editable way. It supports many [output file types](https://rmarkdown.rstudio.com/lesson-9.html) including HTML, PDF, and DOCX, and can be used to write reports, articles, presentations, ebooks, and even websites (in fact, this entire website is written in R Markdown, and the GitHub repo even maintained using Rstudio; you can view the source code of any page using the "View source" button in the right sidebar).
 
 Let's start with an example! Below is a basic R Markdown demo file called [`demo.Rmd`](demo.Rmd), which produces [`demo.html`](demo.html){target="_blank"} as output. We will use this example below to learn how to work with Rmd files.
 
@@ -494,6 +494,7 @@ Let's start with an example! Below is a basic R Markdown demo file called [`demo
 ```{r reknit demo.Rmd,include=F,cache=T}
 rmarkdown::render("demo.Rmd", "html_document")
 ```
+
 
 
 ### Source window
@@ -544,6 +545,7 @@ We will not expect you to learn ALL of markdown, but minimally **you should lear
 There are two main ways to include code in an R Markdown file: inline and chunks.
 
 
+
 #### Inline code
 
 If you want to quote R code inside a paragraph of text, surround it with the backtick character [\`]{.k}, which can be found on most keyboards in the top left next to the [1]{.k} key. Note this character is NOT the same as a single quote character [']{.k}. For example, this: `` `mean(data)` `` will render as: `mean(data)`{.R}.
@@ -580,6 +582,7 @@ You can quickly insert a chunk by using [CTRL]{.k}+[ALT]{.k}+[I]{.k} on Windows,
 
 A code chunk has this basic structure:
 
+
  1. Chunks always start with ```` ```{r ```` where the `r` indicates this will contain R code to be executed.
  2. This is then optionally followed by a space and a name for the chunk, e.g. `example-chunk`. While a name is not necessary, it is recommend for 2 reasons:
     a. If your code has errors and you name all your chunks, R will tell you the name of the chunk with the error, which can help you troubleshoot faster.
@@ -603,9 +606,29 @@ A code chunk has this basic structure:
     > ```{embed demo.setup, file="demo.Rmd", echo=8:13, class.source="wrapCode"}
     > ```
     
-    The function [`knitr::opts_chunk$set()`](https://rdrr.io/cran/knitr/man/opts_chunk.html) here can be used to set default chunk options for ALL chunks in that document, so for example you can make all figures centered by adding `fig.align = "center"` here instead of needing to add it to every chunk in the document.
+    The function [`knitr::opts_chunk$set()`](https://rdrr.io/cran/knitr/man/opts_chunk.html) here can be used to set default chunk options for ALL chunks in that document, e.g. you can center all figures by adding `fig.align = "center"` here instead of copying it to every chunk header.
     
- 4. code
+ 4. After closing the header with `}` and starting a new line, you can now put whatever code you want inside the chunk. All code here gets run one line at a time and output displayed.
+ 5. At the end, the chunk is closed by another set of ```` ``` ````.
+
+
+This concludes the discussion of code chunks in R Markdown.
+
+
+
+
+## Workflow
+
+In this final section, we will discuss
+
+
+
+
+
+
+
+
+
 
 
 <!--
