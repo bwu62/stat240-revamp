@@ -42,7 +42,7 @@ pre code {
 */
 
 /* underline links... */
-main p a, main li a {
+main p a, main li a, div.popover a{
   text-decoration: underline;
 }
 
