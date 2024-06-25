@@ -87,3 +87,36 @@ page.find = function(url,pattern,md=F,n=1){
       "](",matching,")")
   }
 }
+
+
+# ## make STAT240 folder for downloading
+# dirs.vec = stringr::str_c(
+#   "STAT240/",
+#   c(
+#     "","data/",
+#     str_c(
+#       "discussion/",
+#       c("",
+#         stringr::str_glue(
+#           "ds{sprintf(1:12,fmt='%02d')}"
+#         )
+#       )
+#     ),
+#     str_c(
+#       "homework/",
+#       c("",
+#         stringr::str_glue(
+#           "hw{sprintf(1:12,fmt='%02d')}"
+#         )
+#       )
+#     ),
+#     "notes/","project/"
+#   )
+# )
+# for(dir in dirs.vec){
+#   if(!dir.exists(dir)){
+#     dir.create(dir)
+#   }
+# }
+
+
