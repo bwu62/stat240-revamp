@@ -441,7 +441,7 @@ install.packages("tidyverse")
 
 It's important to check the output messages to see if the install was successful, and if not, to find important "Error:..." keywords to use for troubleshooting. Sometimes R will ask you different things during install:
 
- - If R asks you to use a "personal library", say yes. This just means it can't store the package files in your system folder due to system permissions, so it will store it somewhere else (typically in your user directory).
+ - If R asks you to use a "personal library", say yes. This just means it can't store the package files in your system directory due to system permissions, so it will store it somewhere else (typically in your user directory).
  - If R asks you to install "from source", try no first; if that fails, retry with yes. This just means if you want R to prioritize using precompiled executable files when installing, which is generally much faster.
  - If R asks you to update existing packages before installing a new package, this is entirely up to you. I like to update my packages regularly, but there's usually no harm if you don't want update immediately.
    - If you try to update packages that are currently loaded, R may ask you to first "restart R", which is usually a good idea.
