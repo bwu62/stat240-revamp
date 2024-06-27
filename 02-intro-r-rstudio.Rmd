@@ -516,7 +516,7 @@ Let's start with an example! Below is a basic R Markdown demo file called [`demo
 ```{embed embed.demo, file="demo.Rmd", class.source="wrapCode"}
 ```
 ```{r reknit demo.Rmd,include=F,cache=T}
-rmarkdown::render("demo.Rmd", "html_document")
+# rmarkdown::render("demo.Rmd", "html_document")
 ```
 
 
