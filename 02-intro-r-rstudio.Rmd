@@ -143,7 +143,7 @@ One of the first things you should learn about R is how to use it as a calculato
 
 
 :::{.note}
-R will sometimes output in scientific notation, especially if the number cannot be exactly numerically represented due to computing limitations. For example, if you compute `2^50` R will show the result as `1.1259e+15`, i.e. $1.1259\times10^{15}$. You can also type in this scientific notation and R will understand it.
+R will sometimes output in scientific notation, especially if the number cannot be exactly numerically represented due to limitations of computers. For example, if you compute `2^50` R will show the result as `1.1259e+15`, i.e. 1.1259×10^15^. You can also type in `1.1259e+15` and R will understand it as 1.1259×10^15^.
 ```{r scientific-notation}
 2^50
 ```
