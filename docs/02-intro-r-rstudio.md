@@ -151,7 +151,7 @@ One of the first things you should learn about R is how to use it as a calculato
 
 
 :::{.note}
-R will sometimes output in scientific notation, especially if the number cannot be exactly numerically represented due to computing limitations. For example, if you compute `2^50` R will show the result as `1.1259e+15`, i.e. $1.1259\times10^{15}$. You can also type in this scientific notation and R will understand it.
+R will sometimes output in scientific notation, especially if the number cannot be exactly numerically represented due to limitations of computers. For example, if you compute `2^50` R will show the result as `1.1259e+15`, i.e. 1.1259×10^15^. You can also type in `1.1259e+15` and R will understand it as 1.1259×10^15^.
 
 ``` r
 2^50
@@ -161,11 +161,11 @@ R will sometimes output in scientific notation, especially if the number cannot 
 ## [1] 1.1259e+15
 ```
 
-Also note that due to the limitations of [how computers represent numbers](https://en.wikipedia.org/wiki/IEEE_754), R cannot distinguish between 2 numbers that differ by less than about $2\times10^{-16}$, or 0.0000000000000002.
+Also note due to limitations of [how computers represent numbers](https://en.wikipedia.org/wiki/IEEE_754), R often cannot distinguish between numbers that differ by less than about 10^-15^, i.e. 0.000000000000001. ^[This is a MASSIVE oversimplification, but it'll have to suffice because the rabbit-hole on ["machine precision"](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/.Machine){target="_blank"} and [floating-point arithmetic errors](https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html){target="_blank"} is---like the nights in ASOIAF---dark and full of terrors.]
 :::
 
 
-You can also perform integer division in R, i.e. dividing to get the quotient and remainder, by using `%/%` for the quotient and `%%` for the remainder. This allows you to check, for example, if a number is even or odd.
+You can also perform integer division in R, i.e. dividing to get the quotient and remainder, by using [`%/%`{.R}](https://rdrr.io/r/base/Arithmetic.html) for the quotient and [`%%`{.R}](https://rdrr.io/r/base/Arithmetic.html) for the remainder. This allows you to check, for example, if a number is even or odd.
 
 
 ``` r
@@ -186,11 +186,11 @@ You can also perform integer division in R, i.e. dividing to get the quotient an
 
 
 :::{.note}
-Operators like `%/%` or `%%` may seem strange at first, but they work just like any other [binary operators](https://www.datacamp.com/tutorial/operators-in-r) in R such as `+` or `^` . There are other examples of such operators like `%in%` and `%>%` which we will learn about later.
+Operators like [`%/%`{.R}](https://rdrr.io/r/base/Arithmetic.html) or [`%%`{.R}](https://rdrr.io/r/base/Arithmetic.html) may seem strange at first, but they work just like any other [binary operators](https://www.datacamp.com/tutorial/operators-in-r) in R such as `+` or `^` . There are other examples of such operators like [`%in%`{.R}](https://rdrr.io/r/base/match.html) and [`%>%`{.R}](https://magrittr.tidyverse.org/reference/pipe.html) which we will learn about later.
 :::
 
 
-Trigonometric functions `sin()`, `cos()`, `tan()`, (and their inverses `asin()`, `acos()`, `atan()` where the a-- prefix means arc--), also work as you'd expect and use radian units. Note `pi` is conveniently predefined as $\pi$. [Hyperbolic trig functions](https://rdrr.io/r/base/Hyperbolic.html) also exist if you need them.
+Trigonometric functions `sin()`, `cos()`, `tan()`, (and their inverses `asin()`, `acos()`, `atan()` where the a-- prefix means arc--), also work as you'd expect and use radian units. Note [`pi`{.R}](https://rdrr.io/r/base/Constants.html) is conveniently predefined as $\pi$. [Hyperbolic trig functions](https://rdrr.io/r/base/Hyperbolic.html) also exist if you need them.
 
 
 ``` r
@@ -246,7 +246,7 @@ sqrt(abs(-9))
 ### Special values {#r-specials}
 
 
-We already mentioned `pi` is predefined. There are a few other important special values in R. `TRUE` and `FALSE`, along with their abbreviations `T` and `F` are also predefined. Note the capitalization; **R is a case-sensitive language** so `true`, `True`, and `t` are NOT the same as `TRUE` (the first two are not defined, while `t()` is the matrix transpose function).
+We already mentioned [`pi`{.R}](https://rdrr.io/r/base/Constants.html) is predefined. There are a few other important special values in R. [`TRUE`{.R}](https://rdrr.io/r/base/logical.html) and [`FALSE`{.R}](https://rdrr.io/r/base/logical.html), along with their abbreviations `T` and `F` are also predefined. Note the capitalization; **R is a case-sensitive language** so `true`, `True`, and `t` are NOT the same as `TRUE` (the first two are not defined, while `t()` is the matrix transpose function).
 
 
 ``` r
@@ -277,7 +277,7 @@ exp(FALSE) * (TRUE + sqrt(TRUE))
 ## [1] 2
 ```
 
-Mathematical expressions may also return `NaN` for **N**ot **a** **N**umber, i.e. undefined; or `Inf` for infinite. Note R differentiates between positive infinity `Inf` and negative infinity `-Inf`.
+Mathematical expressions may also return [`NaN`{.R}](https://rdrr.io/r/base/is.finite.html) for **N**ot **a** **N**umber, i.e. undefined; or [`Inf`{.R}](https://rdrr.io/r/base/is.finite.html) for infinite. Note R differentiates between positive infinity [`Inf`{.R}](https://rdrr.io/r/base/is.finite.html) and negative infinity [`-Inf`{.R}](https://rdrr.io/r/base/is.finite.html).
 
 
 ``` r
@@ -304,7 +304,7 @@ log(0)
 ## [1] -Inf
 ```
 
-Additionally, `NA` is used to represent missing values, i.e. when data is not available. **Note `NA` and `NaN` are NOT the same**. We will learn later about how to handle `NA` missing values.
+Additionally, [`NA`{.R}](https://rdrr.io/r/base/NA.html) is used to represent missing values, i.e. when data is not available. **Note [`NA`{.R}](https://rdrr.io/r/base/NA.html) and [`NaN`{.R}](https://rdrr.io/r/base/is.finite.html) are NOT the same**. We will learn later about how to handle [`NA`{.R}](https://rdrr.io/r/base/NA.html) missing values.
 
 
 
@@ -312,7 +312,7 @@ Additionally, `NA` is used to represent missing values, i.e. when data is not av
 ### Assignment
 
 
-In R, variables are typically assigned using the `<-` operator, which is just a less than `<` and minus `-` put together. You can also use `=` but `<-` is recommended for stylistic reasons (see [this blog post](https://colinfay.me/r-assignment/) for more details). For this class, **both are acceptable** but we will prefer `<-` in the notes. ^[A comprehensive R style guide written by Hadley Wickham can be found here: <https://style.tidyverse.org/>{target="_blank"}.]
+In R, variables are typically assigned using the [`<-`{.R}](https://rdrr.io/r/base/assignOps.html) operator, which is just a less than `<` and minus `-` put together. You can also use [`=`{.R}](https://rdrr.io/r/base/assignOps.html) but [`<-`{.R}](https://rdrr.io/r/base/assignOps.html) is recommended for stylistic reasons (see [this blog post](https://colinfay.me/r-assignment/) for more details). For this class, **both are acceptable** but we will prefer [`<-`{.R}](https://rdrr.io/r/base/assignOps.html) in the notes. ^[A comprehensive R style guide written by Hadley Wickham can be found here: <https://style.tidyverse.org/>{target="_blank"}.]
 
 
 ``` r
@@ -338,7 +338,7 @@ print(x)
 
 
 :::{.tip}
-You can quickly insert the assignment `<-` operator with [ALT]{.k}+[-]{.k} on Windows or [⌥]{.k}+[-]{.k} on Mac.
+You can quickly insert the assignment [`<-`{.R}](https://rdrr.io/r/base/assignOps.html) operator with [ALT]{.k}+[-]{.k} on Windows or [⌥]{.k}+[-]{.k} on Mac.
 :::
 
 
@@ -654,12 +654,66 @@ x^2 %% 2 == 0 | mean(data) + 2 * sd(data) > max(data)
 ```
 
 
+:::{.note}
+Since computers don't have infinite precision, some arithmetic operations can introduce small errors, especially those producing repeating-decimal or irrational numbers:
+
+``` r
+1/2 + 1/3 == 5/6
+```
+
+```
+## [1] FALSE
+```
+
+``` r
+1/2 + 1/3 - 5/6
+```
+
+```
+## [1] -1.110223e-16
+```
+
+``` r
+sqrt(2)^2 == 2
+```
+
+```
+## [1] FALSE
+```
+
+``` r
+sqrt(2)^2 - 2
+```
+
+```
+## [1] 4.440892e-16
+```
+These imprecisions usually result in errors of 10^-15^ or less. Generally values around this magnitude in R should be treated as indistinguishable from 0. When comparing inexact values like these, it's recommended to use `all.equal()` instead of `==`, which allows for a small tolerance.
+
+``` r
+all.equal(1/2 + 1/3, 5/6)
+```
+
+```
+## [1] TRUE
+```
+
+``` r
+all.equal(sqrt(2)^2, 2)
+```
+
+```
+## [1] TRUE
+```
+:::
+
+
 
 
 ### Packages
 
 
-Now, let's briefly discuss packages. One of the best features of R is the ability for anyone to easily write and distribute packages on [CRAN](https://cran.r-project.org/) (**C**omprehensive **R** **A**rchive **N**etwork). Currently, there are 21013 packages available on CRAN. There are also a further 2300 packages on the bioinformatics-specific package archive [Bioconductor](https://www.bioconductor.org/), as well as countless more on [GitHub](https://github.com/topics/r-package).
+Now, let's briefly discuss packages. One of the best features of R is the ability for anyone to easily write and distribute packages on [CRAN](https://cran.r-project.org/) (**C**omprehensive **R** **A**rchive **N**etwork). Currently, there are 21019 packages available on CRAN. There are also a further 2300 packages on the bioinformatics-specific package archive [Bioconductor](https://www.bioconductor.org/), as well as countless more on [GitHub](https://github.com/topics/r-package).
 
 In this course, we will primarily make use of the [Tidyverse](https://www.tidyverse.org/) suite of packages, which contains several important packages for data science: `readr` for reading in data, `ggplot2` for plotting data, `dplyr` and `tidyr` for cleaning data, and `lubridate` and `stringr` for working with dates and strings. We will learn each of these as the course progresses.
 
@@ -704,13 +758,13 @@ library(tidyverse)
 ```
 
 ```
-## ── Attaching core tidyverse packages ──── tidyverse 2.0.0 ──
+## ── Attaching core tidyverse packages ───────── tidyverse 2.0.0 ──
 ## ✔ dplyr     1.1.4     ✔ readr     2.1.5
 ## ✔ forcats   1.0.0     ✔ stringr   1.5.1
 ## ✔ ggplot2   3.5.1     ✔ tibble    3.2.1
 ## ✔ lubridate 1.9.3     ✔ tidyr     1.3.1
 ## ✔ purrr     1.0.2     
-## ── Conflicts ────────────────────── tidyverse_conflicts() ──
+## ── Conflicts ─────────────────────────── tidyverse_conflicts() ──
 ## ✖ tidyr::extract()   masks magrittr::extract()
 ## ✖ dplyr::filter()    masks stats::filter()
 ## ✖ dplyr::lag()       masks stats::lag()
@@ -969,7 +1023,7 @@ A code chunk has this basic structure:
     | `error` | TRUE, **FALSE** | Controls whether to allow errors and continue knitting. Note this option is FALSE by default, meaning R will halt and not produce output if it encounters any errors. |
     | `fig.width`, `fig.height` | any number; default: **7**, **5** | These control the size of the plot output, if there is one. |
     | `fig.align` | **"default"**, "left", "right", "center" | This controls the alignment of the plot output, if there is one. Note this option MUST be set with quotes. "default" does not set an alignment. |
-    | `cache` | TRUE, **FALSE** | If a chunk is time consuming, you can "cache" it. Cached chunks will not be rerun unless the code inside is modified. Note this is set FALSE by default. This option should be **used with caution**! Improper usage may cause code chunks to not update properly. ^[Phil Karlton, developer at Xerox and Netscape, [famously said](https://www.karlton.org/2017/12/naming-things-hard/) *"There are only two hard things in Computer Science: cache invalidation and naming things."* For a more detailed discussion on caching in R, see <a href="https://bookdown.org/yihui/rmarkdown-cookbook/cache.html" target="_blank">this intro page</a> and <a href="https://yihui.org/en/2018/06/cache-invalidation" target="_blank">this follow-up discussion</a> for more info.] |
+    | `cache` | TRUE, **FALSE** | If a chunk is time consuming, you can "cache" it. Cached chunks will not be rerun unless the code inside is modified. Note this is set FALSE by default. This option should be **used with caution**! Improper usage may cause code chunks to not update properly. ^[Phil Karlton, developer at Xerox and Netscape, [famously said](https://www.karlton.org/2017/12/naming-things-hard/) *"There are only two hard things in Computer Science: cache invalidation and naming things."* For a more detailed discussion on caching in R, see [this intro page](https://bookdown.org/yihui/rmarkdown-cookbook/cache.html){target="_blank"} and [this follow-up discussion](https://yihui.org/en/2018/06/cache-invalidation){target="_blank"} for more info.] |
     :::
     
     One last note: remember the "setup" chunk at the top of the demo file? Here it is again:
@@ -991,7 +1045,7 @@ A code chunk has this basic structure:
 
 
 :::{.tip}
-Remember you can also use [TAB]{.k} autocomplete in Rmd code chunks to save keystrokes and avoid typos!
+Remember you can also use [TAB]{.k} autocomplete in Rmd code chunks to save keystrokes and avoid typos! You can even [TAB]{.k} autocomplete chunk options.
 :::
 
 
@@ -1120,20 +1174,20 @@ head(mtcars)
 ```
 
 ```
-##                    mpg cyl disp  hp drat    wt  qsec vs am
-## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1
-## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1
-## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1
-## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0
-## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0
-## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0
-##                   gear carb
-## Mazda RX4            4    4
-## Mazda RX4 Wag        4    4
-## Datsun 710           4    1
-## Hornet 4 Drive       3    1
-## Hornet Sportabout    3    2
-## Valiant              3    1
+##                    mpg cyl disp  hp drat    wt  qsec vs am gear
+## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4
+## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4
+## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4
+## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3
+## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3
+## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3
+##                   carb
+## Mazda RX4            4
+## Mazda RX4 Wag        4
+## Datsun 710           1
+## Hornet 4 Drive       1
+## Hornet Sportabout    2
+## Valiant              1
 ```
 </details> 
 -->

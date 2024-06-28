@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 3 Handling Data | STAT 240 Revamp</title>
+<meta name="author" content="Bi Cheng Wu, Bret Larget, Cameron Jones">
+<meta name="description" content="In this chapter we will discuss handling data in R. We will begin with a discussion of the different data types and structures in R, learn some basic ways of manipulating them, then end with a...">
+<meta name="generator" content="bookdown 0.39.1 with bs4_book()">
+<meta property="og:title" content="Chapter 3 Handling Data | STAT 240 Revamp">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://bwu62.github.io/stat240-revamp/handling-data.html">
+<meta property="og:description" content="In this chapter we will discuss handling data in R. We will begin with a discussion of the different data types and structures in R, learn some basic ways of manipulating them, then end with a...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 3 Handling Data | STAT 240 Revamp">
+<meta name="twitter:description" content="In this chapter we will discuss handling data in R. We will begin with a discussion of the different data types and structures in R, learn some basic ways of manipulating them, then end with a...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Roboto_Mono-0.4.9/font.css" rel="stylesheet">
+<script src="libs/bs3compat-0.7.0.9000/transition.js"></script><script src="libs/bs3compat-0.7.0.9000/tabs.js"></script><script src="libs/bs3compat-0.7.0.9000/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-E0YDB40HWY"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-E0YDB40HWY');
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">STAT 240 Revamp</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Welcome</a></li>
+<li><a class="" href="setup.html"><span class="header-section-number">1</span> Setup</a></li>
+<li><a class="" href="rstudio-intro.html"><span class="header-section-number">2</span> Intro to R/Rstudio</a></li>
+<li><a class="active" href="handling-data.html"><span class="header-section-number">3</span> Handling Data</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/bwu62/stat240-revamp">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="handling-data" class="section level1" number="3">
+<h1>
+<span class="header-section-number">3</span> Handling Data<a class="anchor" aria-label="anchor" href="#handling-data"><i class="fas fa-link"></i></a>
+</h1>
+<p>In this chapter we will discuss handling data in R. We will begin with a discussion of the different data types and structures in R, learn some basic ways of manipulating them, then end with a discussion of reading and writing data files.</p>
+<div id="vectors" class="section level2" number="3.1">
+<h2>
+<span class="header-section-number">3.1</span> Vectors<a class="anchor" aria-label="anchor" href="#vectors"><i class="fas fa-link"></i></a>
+</h2>
+<p>First, let’s discuss vectors. <strong>Vectors are arguably the MOST fundamental data structure in R</strong>. We briefly saw an example of vectors last chapter in section <a href="rstudio-intro.html#summary-functions">2.3.5</a> on summary functions:</p>
+<div class="sourceCode" id="cb119"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># create an example dataset of a small sample of numbers</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">6</span>, <span class="fl">6</span>, <span class="fl">2</span>, <span class="fl">4</span>, <span class="fl">1</span>, <span class="fl">5</span><span class="op">)</span></span>
+<span><span class="va">data</span></span></code></pre></div>
+<pre><code>## [1] 3 6 6 2 4 1 5</code></pre>
+<p>Last chapter, we mostly used vectors to demonstrate summary functions like <code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code>, <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code>, or <code><a href="https://rdrr.io/r/stats/sd.html">sd()</a></code>, but this is just the tip of the iceberg. In fact, <strong>most functions in R run on vectors directly, <em>one value at a time</em></strong>, and are actually most efficient when used this way.</p>
+<div class="note">
+<p>In R, a vector can only have ONE “type” (or “class”) of object at a time, e.g. a vector of ALL numbers, or a vector of ALL characters, or a vector of ALL dates, etc. Vectors of mixed-type are NOT allowed in R.</p>
+<p>Also, we have actually been working with vectors all along. That’s because single values in R are in fact vectors of length 1. E.g. take any number, let’s say 5; we can use <code><a href="https://rdrr.io/r/base/vector.html">is.vector()</a></code> to show that this is in fact a vector of length 1.</p>
+<div class="sourceCode" id="cb121"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">5</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">is.vector</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb123"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<p>This is why vectors are the most fundamental structure. It may be useful going forward to think of numbers instead as numeric vectors, logicals (TRUE/FALSE) as logical vectors, characters (i.e. strings) as character vectors, etc. <strong>Everything runs on vectors</strong>!</p>
+</div>
+<div id="types-of-vectors" class="section level3" number="3.1.1">
+<h3>
+<span class="header-section-number">3.1.1</span> Types of vectors<a class="anchor" aria-label="anchor" href="#types-of-vectors"><i class="fas fa-link"></i></a>
+</h3>
+<p>There are LOTS of types of vectors, everything from numeric to character to complex number and raw objects. In this class, we will only need to learn the following 4 types of vectors:</p>
+<ul>
+<li>
+<strong>Numeric</strong> vectors, which contain real numbers. Generally, R functions don’t distinguish between integers and decimal numbers (also called “doubles” or “floats”) so treat all numbers as decimal-valued real numbers. <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;To be pedantic, R represents all numbers by default as double-precision floating-point numbers, as per &lt;a href="https://www.iso.org/standard/80985.html"&gt;IEC 60559&lt;/a&gt; specifications, which is identical to &lt;a href="https://en.wikipedia.org/wiki/IEEE_754"&gt;IEEE 754&lt;/a&gt; specs.&lt;/p&gt;'><sup>9</sup></a>
+</li>
+</ul>
+<!--
+
+
+## Data types
+
+In R, there are 4 main data types (also called classes) we will commonly work with: numeric, character, logical, and date. We will briefly discuss each of these below, as well as cover some common functions for working with each data type.
+
+
+
+### Numeric
+
+Numeric values are the most common data type in R. Generally, R does not distinguish between integer and decimal numbers, so treat all numbers as decimal-valued real numbers.
+
+-->
+</div>
+<div id="numeric-vectors" class="section level3" number="3.1.2">
+<h3>
+<span class="header-section-number">3.1.2</span> Numeric vectors<a class="anchor" aria-label="anchor" href="#numeric-vectors"><i class="fas fa-link"></i></a>
+</h3>
+<p>Let’s start with numeric vectors. For example, suppose we want to double, or square, or take the arc-tangent, or find the rounded base-2 logarithm of each <code>data</code> value, we can just do so directly on the vector, and it runs one value at a time:</p>
+<div class="sourceCode" id="cb125"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op">*</span> <span class="fl">2</span></span></code></pre></div>
+<pre><code>## [1]  6 12 12  4  8  2 10</code></pre>
+<div class="sourceCode" id="cb127"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">data</span><span class="op">^</span><span class="fl">2</span></span></code></pre></div>
+<pre><code>## [1]  9 36 36  4 16  1 25</code></pre>
+<div class="sourceCode" id="cb129"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Trig.html">atan</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 1.2490458 1.4056476 1.4056476 1.1071487 1.3258177 0.7853982
+## [7] 1.3734008</code></pre>
+<div class="sourceCode" id="cb131"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log2</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 2 3 3 1 2 0 2</code></pre>
+<p>Note you can also use <code>data</code> on the other side of these operators, or as the argument to certain functions:</p>
+<div class="sourceCode" id="cb133"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fl">2</span><span class="op">^</span><span class="va">data</span></span></code></pre></div>
+<pre><code>## [1]  8 64 64  4 16  2 32</code></pre>
+<div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># log(10) with various bases; note the Inf due to base 1</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fl">10</span>, base <span class="op">=</span> <span class="va">data</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 2.095903 1.285097 1.285097 3.321928 1.660964      Inf
+## [7] 1.430677</code></pre>
+<p>We can combine these with summary functions to do some neat things. For example, suppose we want to manually calculate the <a href="https://www.mathsisfun.com/data/standard-deviation.html">standard deviation</a>—i.e. the average deviation from the mean—of the sample. Again, we will discuss this in more detail later in the course, but for now here is the formula:</p>
+<p><span class="math display">\[SD = \sqrt{\frac1{n-1}\sum_{i=x}^n(x_i-\bar x)^2}\qquad\text{where $\bar{x}=\frac1n\sum_{x=i}^nx_i$}\]</span></p>
+<p>In other words, the standard deviation is the square root of 1/(n-1) times the sum of the squared differences between the sample mean and each <code>data</code> value. This is very easy to do with vector arithmetic in R:</p>
+<div class="sourceCode" id="cb137"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># implementing sd() using vector arithmetic syntax</span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="op">(</span><span class="fl">1</span> <span class="op">/</span> <span class="op">(</span><span class="va">n</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">(</span><span class="va">data</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 1.9518</code></pre>
+<p>Let’s break this down. On the inside, <code>data - mean(data)</code> subtracts the mean from each data value one at a time:</p>
+<div class="sourceCode" id="cb139"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] -0.8571429  2.1428571  2.1428571 -1.8571429  0.1428571
+## [6] -2.8571429  1.1428571</code></pre>
+<p>This is then squared <code>( ... )^2</code> and again, this operates one at a time:</p>
+<div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">data</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span></span></code></pre></div>
+<pre><code>## [1] 0.73469388 4.59183673 4.59183673 3.44897959 0.02040816
+## [6] 8.16326531 1.30612245</code></pre>
+<p>Finally, this vector is summed, scaled by 1/(n-1), and square rooted to get the standard deviation. We can check this is correct by comparing with the built-in <code><a href="https://rdrr.io/r/stats/sd.html">sd()</a></code> function.</p>
+<div class="sourceCode" id="cb143"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 1.9518</code></pre>
+</div>
+<div id="logical-vectors" class="section level3" number="3.1.3">
+<h3>
+<span class="header-section-number">3.1.3</span> Logical vectors<a class="anchor" aria-label="anchor" href="#logical-vectors"><i class="fas fa-link"></i></a>
+</h3>
+<p>These <a href="https://osu-codeclub.github.io/posts/basics_04/">“vectorized”</a> operations also work with logical comparisons, and these produce <strong>logical vectors</strong>. For example, we can ask R which observations are even:</p>
+<div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># recall %% gives the division remainder</span></span>
+<span><span class="va">data</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html">%%</a></span> <span class="fl">2</span> <span class="op">==</span> <span class="fl">0</span></span></code></pre></div>
+<pre><code>## [1] FALSE  TRUE  TRUE  TRUE  TRUE FALSE FALSE</code></pre>
+<p>Or we can ask which of our values are within 1 standard deviation of the mean:</p>
+<div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># recall &amp; is the AND operator</span></span>
+<span><span class="co"># note the inequality checks EACH value of data against the other side</span></span>
+<span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">&lt;=</span> <span class="va">data</span><span class="op">)</span> <span class="op">&amp;</span> <span class="op">(</span><span class="va">data</span> <span class="op">&lt;=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1]  TRUE FALSE FALSE  TRUE  TRUE FALSE  TRUE</code></pre>
+<p>Remember from section <a href="rstudio-intro.html#r-specials">2.3.3</a> how doing any kind of <strong>math turns <code>TRUE</code> into 1 and <code>FALSE</code> into 0</strong>? This turns out to be extremely useful. For example, we can use <code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code> to count how many values are even:</p>
+<div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># sum(logical vector) counts the number of TRUEs</span></span>
+<span><span class="co"># here, we find 4 data values are even</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">data</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html">%%</a></span> <span class="fl">2</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 4</code></pre>
+<p>Or we can ask what <em>proportion</em> of our data is within 1 standard deviation of the mean, which involves taking the sum of a logical comparison and dividing by the length, i.e. computing the mean:</p>
+<div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># mean(logical vector) = sum(logical vector) / length(logical vector)</span></span>
+<span><span class="co"># thus, it's a shortcut for calculating proportion of TRUEs</span></span>
+<span><span class="co"># here, we find 57% of the data is within 1 sd of the mean</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span></span>
+<span>  <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">&lt;=</span> <span class="va">data</span><span class="op">)</span> <span class="op">&amp;</span> <span class="op">(</span><span class="va">data</span> <span class="op">&lt;=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 0.5714286</code></pre>
+<div class="tip">
+<p>Remember: whenever you have a vector of <code>TRUE</code>/<code>FALSE</code> values—usually as a result of some logical comparison—you can use <code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code> to count how many are <code>TRUE</code>, or <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code> to compute the proportion of <code>TRUE</code> values. You can of course also use these in other numeric operations, just remember <code>TRUE</code><span class="math inline">\(\rightarrow1\)</span>, <code>FALSE</code><span class="math inline">\(\rightarrow0\)</span>.</p>
+</div>
+</div>
+<div id="other-constructors" class="section level3" number="3.1.4">
+<h3>
+<span class="header-section-number">3.1.4</span> Other constructors<a class="anchor" aria-label="anchor" href="#other-constructors"><i class="fas fa-link"></i></a>
+</h3>
+<p>So far we only learned to construct vectors with the <code><a href="https://rdrr.io/r/base/c.html">c()</a></code> function, e.g. <code>data&lt;-c(3,6,6,2,4,1,5)</code>. There are a few other common ways to construct them.</p>
+<p>One of the easiest, if you just need a sequence of integers, is to use the <code>:</code> operator:</p>
+<div class="sourceCode" id="cb153"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span></span></code></pre></div>
+<pre><code>## [1] 1 2 3 4 5</code></pre>
+<div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fl">10</span><span class="op">:</span><span class="op">-</span><span class="fl">10</span></span></code></pre></div>
+<pre><code>##  [1]  10   9   8   7   6   5   4   3   2   1   0  -1  -2  -3  -4
+## [16]  -5  -6  -7  -8  -9 -10</code></pre>
+<p>The <code><a href="https://rdrr.io/r/base/seq.html">seq()</a></code> function does something similar, except it also has additional arguments <code>by</code> to specify the step size and <code>length.out</code> which specifies how many numbers to have in total (note only ONE of these arguments can be set at a time).</p>
+<div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 1 2 3 4 5</code></pre>
+<div class="sourceCode" id="cb159"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">100</span>, by <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##  [1]   0  10  20  30  40  50  60  70  80  90 100</code></pre>
+<div class="sourceCode" id="cb161"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, length.out <span class="op">=</span> <span class="fl">101</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##   [1] 0.00 0.01 0.02 0.03 0.04 0.05 0.06 0.07 0.08 0.09 0.10 0.11
+##  [13] 0.12 0.13 0.14 0.15 0.16 0.17 0.18 0.19 0.20 0.21 0.22 0.23
+##  [25] 0.24 0.25 0.26 0.27 0.28 0.29 0.30 0.31 0.32 0.33 0.34 0.35
+##  [37] 0.36 0.37 0.38 0.39 0.40 0.41 0.42 0.43 0.44 0.45 0.46 0.47
+##  [49] 0.48 0.49 0.50 0.51 0.52 0.53 0.54 0.55 0.56 0.57 0.58 0.59
+##  [61] 0.60 0.61 0.62 0.63 0.64 0.65 0.66 0.67 0.68 0.69 0.70 0.71
+##  [73] 0.72 0.73 0.74 0.75 0.76 0.77 0.78 0.79 0.80 0.81 0.82 0.83
+##  [85] 0.84 0.85 0.86 0.87 0.88 0.89 0.90 0.91 0.92 0.93 0.94 0.95
+##  [97] 0.96 0.97 0.98 0.99 1.00</code></pre>
+<p>Vectors can also be created with the <code><a href="https://rdrr.io/r/base/rep.html">rep()</a></code> function which lets you repeat the contents. There are two arguments: <code>times</code> which controls how many times to repeat the entire input, and <code>each</code> which controls how many times to repeat each element if the input is a vector. You can specify either or both of these arguments. Note <code><a href="https://rdrr.io/r/base/rep.html">rep()</a></code> can be used to repeat other objects too, not just numbers.</p>
+<div class="sourceCode" id="cb163"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># repeat a single number</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 2 2 2 2 2</code></pre>
+<div class="sourceCode" id="cb165"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># repeat a vector, specifying both times and each</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, times <span class="op">=</span> <span class="fl">3</span>, each <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##  [1] 1 1 1 1 2 2 2 2 3 3 3 3 1 1 1 1 2 2 2 2 3 3 3 3 1 1 1 1 2 2
+## [31] 2 2 3 3 3 3</code></pre>
+<div class="sourceCode" id="cb167"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># you can also let times be a vector, as well as repeat other objects</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>, times <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1]  TRUE  TRUE FALSE FALSE FALSE FALSE</code></pre>
+<p>Finally, you can mix and match all these constructors, using a combination of <code><a href="https://rdrr.io/r/base/c.html">c()</a></code>, <code>:</code>, <code><a href="https://rdrr.io/r/base/seq.html">seq()</a></code>, and <code><a href="https://rdrr.io/r/base/rep.html">rep()</a></code> to your heart’s content.</p>
+<div class="sourceCode" id="cb169"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span>, <span class="fl">7</span><span class="op">:</span><span class="fl">9</span>, <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">12</span>, by <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span>, each <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##  [1]  1.0  1.0  3.0  3.0  7.0  7.0  8.0  8.0  9.0  9.0 10.0 10.0
+## [13] 10.5 10.5 11.0 11.0 11.5 11.5 12.0 12.0</code></pre>
+</div>
+<div id="multiple-vectors-vector-recycling" class="section level3" number="3.1.5">
+<h3>
+<span class="header-section-number">3.1.5</span> Multiple vectors + vector recycling<a class="anchor" aria-label="anchor" href="#multiple-vectors-vector-recycling"><i class="fas fa-link"></i></a>
+</h3>
+<p>It may not surprise you to learn all these vectorized operations also work on multiple vectors! If the vectors aren’t the same length, <strong>the shorter vectors will be repeated</strong> until they matches the length of the longest vector. This is called <a href="https://www.geeksforgeeks.org/vector-recycling-in-r/"><strong>recycling</strong></a>. Example:</p>
+<div class="sourceCode" id="cb171"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># define some vectors for demo</span></span>
+<span><span class="co"># x1, x2 are both length 6 vectors</span></span>
+<span><span class="co"># y and z have lengths 3 and 2</span></span>
+<span><span class="va">x1</span> <span class="op">&lt;-</span> <span class="fl">0</span><span class="op">:</span><span class="fl">5</span>         <span class="co"># x1:  0, 1, 2, 3, 4, 5</span></span>
+<span><span class="va">x2</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span>        <span class="co"># x2: -2,-1, 0, 1, 2, 3</span></span>
+<span><span class="va">y</span>  <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>         <span class="co">#  y:  1, 2, 3</span></span>
+<span><span class="va">z</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>    <span class="co">#  z: -1, 1</span></span></code></pre></div>
+<div class="sourceCode" id="cb172"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># sum vectors one element at a time</span></span>
+<span><span class="va">x1</span> <span class="op">+</span> <span class="va">x2</span></span></code></pre></div>
+<pre><code>## [1] -2  0  2  4  6  8</code></pre>
+<div class="sourceCode" id="cb174"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># take powers, again one element at a time from each vector</span></span>
+<span><span class="va">x2</span><span class="op">^</span><span class="va">x1</span></span></code></pre></div>
+<pre><code>## [1]   1  -1   0   1  16 243</code></pre>
+<div class="sourceCode" id="cb176"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># take differences, one element at a time, recycling y</span></span>
+<span><span class="va">x1</span> <span class="op">-</span> <span class="va">y</span></span></code></pre></div>
+<pre><code>## [1] -1 -1 -1  2  2  2</code></pre>
+<div class="sourceCode" id="cb178"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># log y with x1+2 as base, again recycling y</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">y</span>, base <span class="op">=</span> <span class="va">x1</span> <span class="op">+</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 0.0000000 0.6309298 0.7924813 0.0000000 0.3868528 0.5645750</code></pre>
+<div class="sourceCode" id="cb180"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># more complex operation that recycles multiple vectors,</span></span>
+<span><span class="co"># as well as some numbers (which are just length-1 vectors)</span></span>
+<span><span class="fl">2</span><span class="op">^</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">x1</span> <span class="op">*</span> <span class="va">z</span><span class="op">)</span> <span class="op">-</span> <span class="va">x2</span><span class="op">^</span><span class="va">y</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] -1 -3  0  3  8  1</code></pre>
+<div class="sourceCode" id="cb182"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># these also work with other numeric/logical functions we've seen so far</span></span>
+<span><span class="co"># here, left side is a length-6 vector, right side is a length-2 vector,</span></span>
+<span><span class="co"># so right side is recycled three times then compared with left</span></span>
+<span><span class="va">x2</span> <span class="op">&lt;=</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html">atan</a></span><span class="op">(</span><span class="va">z</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x1</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1]  TRUE  TRUE FALSE  TRUE FALSE FALSE</code></pre>
+<div class="note">
+<p>In this class, <strong>you should <em>never</em> need a for loop</strong> for any exercises (hence why it’s considered a bonus topic and not covered in the notes but instead left as optional additional reading).</p>
+<p>Instead, <strong><em>always</em> look for a solution using vectorized operations</strong>. In R, vectorized operations are basically always <a href="https://datakuity.com/2018/01/17/for-loop-vs-vectorization-in-r/">MUCH faster than for loops</a>, due to low-level parallelization optimizations.</p>
+</div>
+</div>
+<div id="in-vector-membership" class="section level3" number="3.1.6">
+<h3>
+<span class="header-section-number">3.1.6</span> <code>%in%</code> (Vector membership)<a class="anchor" aria-label="anchor" href="#in-vector-membership"><i class="fas fa-link"></i></a>
+</h3>
+<p>One notable exception to all this is the <a href="https://rdrr.io/r/base/match.html"><code class="sourceCode r"><span class="sc">%in%</span></code></a> operator, which only “vectorizes” on the left side. For example, suppose we want to know which elements of <code>z</code> are in <code>x1</code>. Here’s how:</p>
+<div class="sourceCode" id="cb184"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">z</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">x1</span></span></code></pre></div>
+<pre><code>## [1] FALSE  TRUE</code></pre>
+<p>Note the difference between this and <code>z == x1</code>, which <strong>recycles <code>z</code>, then checks element-wise equality</strong>:</p>
+<div class="sourceCode" id="cb186"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">z</span> <span class="op">==</span> <span class="va">x1</span></span></code></pre></div>
+<pre><code>## [1] FALSE  TRUE FALSE FALSE FALSE FALSE</code></pre>
+<p>This is another common point of confusion for first time R users. Make sure you understand the <strong>difference between checking vector membership</strong>, i.e. if each element of one vector is also contained in another vector, <strong>vs checking element-by-element equality</strong>, i.e. checking if the 1<sup>st</sup> elements are the same, and the 2<sup>nd</sup> elements are the same, and the 3<sup>rd</sup> elements are the same, etc. (possibly with recycling). See <a href="https://stackoverflow.com/a/42637186/25278020">this StackOverflow page</a> for more examples.</p>
+<div class="note">
+<p>Going forward, we will continue to implicitly use vectorized functions and vector recycling in code examples without drawing attention to it, for sake of brevity. Pretty soon, these concepts should feel like second nature to you!</p>
+</div>
+</div>
+<div id="vector-subsetting" class="section level3" number="3.1.7">
+<h3>
+<span class="header-section-number">3.1.7</span> Vector subsetting<a class="anchor" aria-label="anchor" href="#vector-subsetting"><i class="fas fa-link"></i></a>
+</h3>
+<p>Let’s quickly also talk about</p>
+<!--
+
+### Character vectors
+
+Another important data type in R is **character vectors** (i.e. strings in some other programming languages).
+
+-->
+
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/@xiee/utils/js/external-link.min.js" defer></script><script>
+  $(function(){
+    $(".note").addClass("alert alert-warning");
+  });
+  $(function(){
+    $(".tip").addClass("alert alert-success");
+  });
+</script><div class="chapter-nav">
+<div class="prev"><a href="rstudio-intro.html"><span class="header-section-number">2</span> Intro to R/Rstudio</a></div>
+<div class="empty"></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#handling-data"><span class="header-section-number">3</span> Handling Data</a></li>
+<li>
+<a class="nav-link" href="#vectors"><span class="header-section-number">3.1</span> Vectors</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#types-of-vectors"><span class="header-section-number">3.1.1</span> Types of vectors</a></li>
+<li><a class="nav-link" href="#numeric-vectors"><span class="header-section-number">3.1.2</span> Numeric vectors</a></li>
+<li><a class="nav-link" href="#logical-vectors"><span class="header-section-number">3.1.3</span> Logical vectors</a></li>
+<li><a class="nav-link" href="#other-constructors"><span class="header-section-number">3.1.4</span> Other constructors</a></li>
+<li><a class="nav-link" href="#multiple-vectors-vector-recycling"><span class="header-section-number">3.1.5</span> Multiple vectors + vector recycling</a></li>
+<li><a class="nav-link" href="#in-vector-membership"><span class="header-section-number">3.1.6</span> %in% (Vector membership)</a></li>
+<li><a class="nav-link" href="#vector-subsetting"><span class="header-section-number">3.1.7</span> Vector subsetting</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/bwu62/stat240-revamp/blob/master/03-handling-data.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/bwu62/stat240-revamp/edit/master/03-handling-data.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, Bret Larget, Cameron Jones. It was last built on 2024-06-28.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

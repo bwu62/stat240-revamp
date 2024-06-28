@@ -32,3 +32,12 @@ workflow
 working-directory
 knitting-v.-console-execution
 tips
+handling-data
+vectors
+types-of-vectors
+numeric-vectors
+logical-vectors
+other-constructors
+multiple-vectors-vector-recycling
+in-vector-membership
+vector-subsetting
