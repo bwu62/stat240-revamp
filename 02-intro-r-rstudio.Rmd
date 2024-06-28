@@ -669,7 +669,7 @@ A code chunk has this basic structure:
 
 
 :::{.tip}
-Remember you can also use [TAB]{.k} autocomplete in Rmd code chunks to save keystrokes and avoid typos!
+Remember you can also use [TAB]{.k} autocomplete in Rmd code chunks to save keystrokes and avoid typos! You can even [TAB]{.k} autocomplete chunk options.
 :::
 
 
