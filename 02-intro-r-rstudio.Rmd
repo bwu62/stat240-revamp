@@ -152,7 +152,7 @@ Also note due to limitations of [how computers represent numbers](https://en.wik
 :::
 
 
-You can also perform integer division in R, i.e. dividing to get the quotient and remainder, by using `%/%` for the quotient and `%%` for the remainder. This allows you to check, for example, if a number is even or odd.
+You can also perform integer division in R, i.e. dividing to get the quotient and remainder, by using [`%/%`{.R}](https://rdrr.io/r/base/Arithmetic.html) for the quotient and [`%%`{.R}](https://rdrr.io/r/base/Arithmetic.html) for the remainder. This allows you to check, for example, if a number is even or odd.
 
 ```{r integer-division}
 13 %/% 2
@@ -161,11 +161,11 @@ You can also perform integer division in R, i.e. dividing to get the quotient an
 
 
 :::{.note}
-Operators like `%/%` or `%%` may seem strange at first, but they work just like any other [binary operators](https://www.datacamp.com/tutorial/operators-in-r) in R such as `+` or `^` . There are other examples of such operators like `%in%` and `%>%` which we will learn about later.
+Operators like [`%/%`{.R}](https://rdrr.io/r/base/Arithmetic.html) or [`%%`{.R}](https://rdrr.io/r/base/Arithmetic.html) may seem strange at first, but they work just like any other [binary operators](https://www.datacamp.com/tutorial/operators-in-r) in R such as `+` or `^` . There are other examples of such operators like [`%in%`{.R}](https://rdrr.io/r/base/match.html) and [`%>%`{.R}](https://magrittr.tidyverse.org/reference/pipe.html) which we will learn about later.
 :::
 
 
-Trigonometric functions `sin()`, `cos()`, `tan()`, (and their inverses `asin()`, `acos()`, `atan()` where the a-- prefix means arc--), also work as you'd expect and use radian units. Note `pi` is conveniently predefined as $\pi$. [Hyperbolic trig functions](https://rdrr.io/r/base/Hyperbolic.html) also exist if you need them.
+Trigonometric functions `sin()`, `cos()`, `tan()`, (and their inverses `asin()`, `acos()`, `atan()` where the a-- prefix means arc--), also work as you'd expect and use radian units. Note [`pi`{.R}](https://rdrr.io/r/base/Constants.html) is conveniently predefined as $\pi$. [Hyperbolic trig functions](https://rdrr.io/r/base/Hyperbolic.html) also exist if you need them.
 
 ```{r trig}
 cos(2 * pi)
@@ -194,7 +194,7 @@ sqrt(abs(-9))
 ### Special values {#r-specials}
 
 
-We already mentioned `pi` is predefined. There are a few other important special values in R. `TRUE` and `FALSE`, along with their abbreviations `T` and `F` are also predefined. Note the capitalization; **R is a case-sensitive language** so `true`, `True`, and `t` are NOT the same as `TRUE` (the first two are not defined, while `t()` is the matrix transpose function).
+We already mentioned [`pi`{.R}](https://rdrr.io/r/base/Constants.html) is predefined. There are a few other important special values in R. [`TRUE`{.R}](https://rdrr.io/r/base/logical.html) and [`FALSE`{.R}](https://rdrr.io/r/base/logical.html), along with their abbreviations `T` and `F` are also predefined. Note the capitalization; **R is a case-sensitive language** so `true`, `True`, and `t` are NOT the same as `TRUE` (the first two are not defined, while `t()` is the matrix transpose function).
 
 ```{r true}
 T
@@ -213,7 +213,7 @@ An important thing to note is that in R, doing any kind of **math turns `TRUE` i
 exp(FALSE) * (TRUE + sqrt(TRUE))
 ```
 
-Mathematical expressions may also return `NaN` for **N**ot **a** **N**umber, i.e. undefined; or `Inf` for infinite. Note R differentiates between positive infinity `Inf` and negative infinity `-Inf`.
+Mathematical expressions may also return [`NaN`{.R}](https://rdrr.io/r/base/is.finite.html) for **N**ot **a** **N**umber, i.e. undefined; or [`Inf`{.R}](https://rdrr.io/r/base/is.finite.html) for infinite. Note R differentiates between positive infinity [`Inf`{.R}](https://rdrr.io/r/base/is.finite.html) and negative infinity [`-Inf`{.R}](https://rdrr.io/r/base/is.finite.html).
 
 ```{r nan-inf-na}
 sqrt(-4)
@@ -221,7 +221,7 @@ sqrt(-4)
 log(0)
 ```
 
-Additionally, `NA` is used to represent missing values, i.e. when data is not available. **Note `NA` and `NaN` are NOT the same**. We will learn later about how to handle `NA` missing values.
+Additionally, [`NA`{.R}](https://rdrr.io/r/base/NA.html) is used to represent missing values, i.e. when data is not available. **Note [`NA`{.R}](https://rdrr.io/r/base/NA.html) and [`NaN`{.R}](https://rdrr.io/r/base/is.finite.html) are NOT the same**. We will learn later about how to handle [`NA`{.R}](https://rdrr.io/r/base/NA.html) missing values.
 
 
 
