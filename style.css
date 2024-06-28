@@ -137,6 +137,10 @@ div.sourceCode + p{
 div.alert pre{
   background-color: rgba(255,255,255,.7) !important;
 }
+div.sourceCode + div.sourceCode{
+  margin-top: 0.5rem !important;
+}
+
 
 /* improve heading margins for legibility */
 h2{
