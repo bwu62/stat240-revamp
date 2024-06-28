@@ -120,3 +120,4 @@ page.find = function(url,pattern,md=F,n=1){
 # }
 
 
+options(width=65)
