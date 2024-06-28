@@ -111,7 +111,7 @@ Next, we will install some necessary packages and configure some recommended opt
            - This improves workflow by displaying plots in the Viewer pane instead of opening a new window.
        ii. Turn off "Show output inline for all R Markdown documents"
            - This also improves workflow by displaying output in the console instead of inline in documents.
-    c. (Optional) If you wish to customize the interface, you can go to the ["Appearance" page](https://i.imgur.com/WsnSWNM.png) and change your font or theme. ^[If you like working in the dark and have an OLED-screen, you may want to check out the <a href="https://github.com/roshandarji/synthwaveBLACK" target="_blank">synthwaveBLACK</a> theme.]
+    c. (Optional) If you wish to customize the interface, you can go to the ["Appearance" page](https://i.imgur.com/WsnSWNM.png) and change your font or theme. ^[If you like working in the dark and have an OLED-screen, you may want to check out the [synthwaveBLACK](https://github.com/roshandarji/synthwaveBLACK){target="_blank"} theme.]
     d. Press OK to save your changes.  
     
     There are LOTS of other options you can feel free to explore later on your own, but for now we will move on.
