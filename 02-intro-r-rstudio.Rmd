@@ -148,7 +148,7 @@ R will sometimes output in scientific notation, especially if the number cannot 
 2^50
 ```
 
-Also note that due to the limitations of [how computers represent numbers](https://en.wikipedia.org/wiki/IEEE_754), R cannot distinguish between 2 numbers that differ by less than about $2\times10^{-16}$, or 0.0000000000000002.
+Also note due to limitations of [how computers represent numbers](https://en.wikipedia.org/wiki/IEEE_754), R often cannot distinguish between numbers that differ by less than about 10^-15^, i.e. 0.000000000000001. ^[This is a MASSIVE oversimplification, but it'll have to suffice because the rabbit-hole on ["machine precision"](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/.Machine){target="_blank"} and [floating-point arithmetic errors](https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html){target="_blank"} is---like the nights in ASOIAF---dark and full of terrors.]
 :::
 
 
