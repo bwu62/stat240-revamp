@@ -237,7 +237,7 @@ One notable exception to all this is the [`%in%`{.R}](https://rdrr.io/r/base/mat
 z %in% x1
 ```
 
-Note the difference between this and `z == x1`, which **recycles `z`, then checks element-wise equality**:
+Note the difference between this and `z == x1`, which recycles `z`, *then* checks element-wise equality:
 
 ```{r}
 z == x1
