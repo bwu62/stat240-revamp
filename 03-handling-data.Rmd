@@ -158,7 +158,7 @@ One of the easiest, if you just need a sequence of integers, is to use the `:` o
 10:-10
 ```
 
-The `seq()` function does something similar, except it also has additional arguments `by` to specify the step size and `length.out` which specifies how many numbers to have in total (note only ONE of these arguments can be set at a time).
+The `seq()` function does something similar, except it also has additional arguments `by` to specify the step size and `length.out` which specifies how many numbers to have in total (note: only ONE of these arguments can be set at a time).
 
 ```{r}
 seq(1, 5)
