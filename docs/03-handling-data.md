@@ -248,7 +248,7 @@ Remember: whenever you have a vector of `TRUE`/`FALSE` values---usually as a res
 ### Other constructors
 
 
-So far we only learned to construct vectors with the `c()` function, e.g. `data<-c(3,6,6,2,4,1,5)`. There are a few other common ways to construct them.
+So far, we've only learned how to construct vectors by using the `c()` function, for example `data<-c(3,6,6,2,4,1,5)`. There are a few other common ways to construct them.
 
 One of the easiest, if you just need a sequence of integers, is to use the `:` operator:
 
