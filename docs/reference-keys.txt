@@ -41,3 +41,6 @@ other-constructors
 multiple-vectors-vector-recycling
 in-vector-membership
 vector-subsetting
+character-vectors
+basic-string-function
+pattern-string-functions

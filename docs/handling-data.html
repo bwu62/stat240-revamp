@@ -178,7 +178,7 @@
 <span><span class="co"># note the inequality checks EACH value of data against the other side</span></span>
 <span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">&lt;=</span> <span class="va">data</span><span class="op">)</span> <span class="op">&amp;</span> <span class="op">(</span><span class="va">data</span> <span class="op">&lt;=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1]  TRUE FALSE FALSE  TRUE  TRUE FALSE  TRUE</code></pre>
-<p>Remember from section <a href="rstudio-intro.html#r-specials">2.3.3</a> how doing any kind of <strong>math turns <code>TRUE</code> into 1 and <code>FALSE</code> into 0</strong>? This turns out to be extremely useful. For example, we can use <code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code> to count how many values are even:</p>
+<p>Remember from section <a href="rstudio-intro.html#r-specials">2.3.3</a> how any <strong>math turns <code>TRUE</code> into 1 and <code>FALSE</code> into 0</strong>? This turns out to be extremely useful. For example, we can use <code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code> to count how many values are even:</p>
 <div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># sum(logical vector) counts the number of TRUEs</span></span>
 <span><span class="co"># here, we find 4 data values are even</span></span>
@@ -314,15 +314,150 @@
 <h3>
 <span class="header-section-number">3.1.7</span> Vector subsetting<a class="anchor" aria-label="anchor" href="#vector-subsetting"><i class="fas fa-link"></i></a>
 </h3>
-<p>Let’s quickly also talk about</p>
+<p>Let’s also quickly cover vector subsetting. In R, there are many ways to extract a subset (i.e. just a portion) of a vector. There are 2 important things to remember throughout R when subsetting objects:</p>
+<ol style="list-style-type: decimal">
+<li>
+<strong>R indexes from 1, not 0</strong>. In other words, R starts counting the position of objects from 1.</li>
+<li>
+<strong>Bounds are inclusive</strong>. In other words, R generally includes both start and end bounds when subsetting.</li>
+</ol>
+<p>Knowing this, let’s learn subsetting with some examples. A pair of useful built-in objects are the vectors <code>letters</code> and <code>LETTERS</code>, which contain respectively the 26 lowercase and uppercase letters of the English alphabet. These letters make up a character vector (which we will discuss in detail in the next section).</p>
+<div class="sourceCode" id="cb188"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">letters</span></span></code></pre></div>
+<pre><code>##  [1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o"
+## [16] "p" "q" "r" "s" "t" "u" "v" "w" "x" "y" "z"</code></pre>
+<p>You can extract elements form a vector with the <code>[]</code> operator, giving either a vector of numeric positions, a vector of <code>TRUE</code>/<code>FALSE</code> values, or a negative vector for exclusions (i.e. anything <em>except</em>). Examples:</p>
+<div class="sourceCode" id="cb190"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># giving numeric positions of desired elements</span></span>
+<span><span class="co"># remember numbers are numeric vectors of length-1</span></span>
+<span><span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span></code></pre></div>
+<pre><code>## [1] "a"</code></pre>
+<div class="sourceCode" id="cb192"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># of course this also works with longer vectors</span></span>
+<span><span class="va">letters</span><span class="op">[</span><span class="fl">5</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span></span></code></pre></div>
+<pre><code>## [1] "e" "f" "g" "h" "i" "j"</code></pre>
+<div class="sourceCode" id="cb194"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># naturally you can use more complex syntax if needed,</span></span>
+<span><span class="co"># as long as the result is a numeric vector,</span></span>
+<span><span class="co"># repeating indices give duplicate values</span></span>
+<span><span class="va">letters</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">24</span><span class="op">:</span><span class="fl">26</span>,<span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">8</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
+<pre><code>##  [1] "a" "x" "y" "z" "e" "e" "e" "e" "e" "e" "e" "e"</code></pre>
+<div class="sourceCode" id="cb196"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># you can also use a logical vector, here we check if</span></span>
+<span><span class="co"># each position is even, returning every second letter</span></span>
+<span><span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">26</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html">%%</a></span> <span class="fl">2</span> <span class="op">==</span> <span class="fl">0</span><span class="op">]</span></span></code></pre></div>
+<pre><code>##  [1] "b" "d" "f" "h" "j" "l" "n" "p" "r" "t" "v" "x" "z"</code></pre>
+<div class="sourceCode" id="cb198"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># logical vectors will be recycled if necessary, so this also works</span></span>
+<span><span class="va">letters</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">FALSE</span>,<span class="cn">TRUE</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
+<pre><code>##  [1] "b" "d" "f" "h" "j" "l" "n" "p" "r" "t" "v" "x" "z"</code></pre>
+<div class="sourceCode" id="cb200"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># using negative vectors is like saying "anything EXCEPT"</span></span>
+<span><span class="va">letters</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span></span></code></pre></div>
+<pre><code>##  [1] "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p"
+## [16] "q" "r" "s" "t" "u" "v" "w" "x" "y" "z"</code></pre>
+<div class="sourceCode" id="cb202"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># again, this also works with vectors of negatives</span></span>
+<span><span class="va">letters</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">:</span><span class="op">-</span><span class="fl">10</span><span class="op">]</span></span></code></pre></div>
+<pre><code>##  [1] "k" "l" "m" "n" "o" "p" "q" "r" "s" "t" "u" "v" "w" "x" "y"
+## [16] "z"</code></pre>
+<div class="sourceCode" id="cb204"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># of course this is equivalent to</span></span>
+<span><span class="va">letters</span><span class="op">[</span><span class="op">-</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
+<pre><code>##  [1] "k" "l" "m" "n" "o" "p" "q" "r" "s" "t" "u" "v" "w" "x" "y"
+## [16] "z"</code></pre>
+<div class="sourceCode" id="cb206"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># note the parentheses there, without it you get -1,0,1,...,10</span></span>
+<span><span class="co"># which raises an error (what we want is -1,-2,...,-10)</span></span>
+<span><span class="co"># this is because positive and negative position syntax cannot be mixed</span></span>
+<span><span class="va">letters</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span></span></code></pre></div>
+<pre><code>## Error in letters[-1:10] : only 0's may be mixed with negative subscripts</code></pre>
+</div>
+<div id="character-vectors" class="section level3" number="3.1.8">
+<h3>
+<span class="header-section-number">3.1.8</span> Character vectors<a class="anchor" aria-label="anchor" href="#character-vectors"><i class="fas fa-link"></i></a>
+</h3>
+<p>The <code>letters</code> vector in the last section was one example of a <strong>character vector</strong>. You can create a character vector also with <code><a href="https://rdrr.io/r/base/c.html">c()</a></code> or <code><a href="https://rdrr.io/r/base/rep.html">rep()</a></code> which we’ve seen before.</p>
+<div class="sourceCode" id="cb208"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># creating a demo character vector, e.g. these are my friends!</span></span>
+<span><span class="va">friends</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Alice"</span>, <span class="st">"Bob"</span>, <span class="st">"Charlie"</span>, <span class="st">"Doug"</span>, <span class="st">"Elizabeth"</span>, <span class="st">"Francine"</span><span class="op">)</span></span>
+<span><span class="va">friends</span></span></code></pre></div>
+<pre><code>## [1] "Alice"     "Bob"       "Charlie"   "Doug"      "Elizabeth"
+## [6] "Francine"</code></pre>
+<div class="sourceCode" id="cb210"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># you can also use rep, e.g. I can assign my friends into 2 groups</span></span>
+<span><span class="va">groups</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="va">LETTERS</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span>,time<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span>
+<span><span class="va">groups</span></span></code></pre></div>
+<pre><code>## [1] "A" "B" "A" "B" "A" "B"</code></pre>
+<div id="basic-string-function" class="section level4" number="3.1.8.1">
+<h4>
+<span class="header-section-number">3.1.8.1</span> Basic string function<a class="anchor" aria-label="anchor" href="#basic-string-function"><i class="fas fa-link"></i></a>
+</h4>
+<p>Base R has a number of common functions for working with strings: <code><a href="https://rdrr.io/r/base/nchar.html">nchar()</a></code> for getting the number of characters, <code><a href="https://rdrr.io/r/base/chartr.html">tolower()</a></code>/<code><a href="https://rdrr.io/r/base/chartr.html">toupper()</a></code> to convert case, <code><a href="https://rdrr.io/r/base/substr.html">substr()</a></code> for extracting substrings, <code><a href="https://rdrr.io/r/base/paste.html">paste()</a></code>/<code><a href="https://rdrr.io/r/base/paste.html">paste0()</a></code> to concatenate (e.g. “glue” together) strings</p>
+<div class="sourceCode" id="cb212"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># get the number of characters in each name</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/nchar.html">nchar</a></span><span class="op">(</span><span class="va">friends</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 5 3 7 4 9 8</code></pre>
+<div class="sourceCode" id="cb214"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># convert names to all upper or all lower</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/chartr.html">toupper</a></span><span class="op">(</span><span class="va">friends</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] "ALICE"     "BOB"       "CHARLIE"   "DOUG"      "ELIZABETH"
+## [6] "FRANCINE"</code></pre>
+<div class="sourceCode" id="cb216"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/chartr.html">tolower</a></span><span class="op">(</span><span class="va">friends</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] "alice"     "bob"       "charlie"   "doug"      "elizabeth"
+## [6] "francine"</code></pre>
+<div class="sourceCode" id="cb218"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># get the first 3 characters of each name</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/substr.html">substr</a></span><span class="op">(</span><span class="va">friends</span>,<span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] "Ali" "Bob" "Cha" "Dou" "Eli" "Fra"</code></pre>
+<div class="sourceCode" id="cb220"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># get the last 3 characters of each name;</span></span>
+<span><span class="co"># remember R always includes bounds, so to get the last three,</span></span>
+<span><span class="co"># we want to get n-2,n-1,n where n is the number of characters</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/substr.html">substr</a></span><span class="op">(</span><span class="va">friends</span>,<span class="fu"><a href="https://rdrr.io/r/base/nchar.html">nchar</a></span><span class="op">(</span><span class="va">friends</span><span class="op">)</span><span class="op">-</span><span class="fl">2</span>,<span class="fu"><a href="https://rdrr.io/r/base/nchar.html">nchar</a></span><span class="op">(</span><span class="va">friends</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] "ice" "Bob" "lie" "oug" "eth" "ine"</code></pre>
+<div class="sourceCode" id="cb222"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># remove the first and last characters of each name</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/substr.html">substr</a></span><span class="op">(</span><span class="va">friends</span>,<span class="fl">2</span>,<span class="fu"><a href="https://rdrr.io/r/base/nchar.html">nchar</a></span><span class="op">(</span><span class="va">friends</span><span class="op">)</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] "lic"     "o"       "harli"   "ou"      "lizabet" "rancin"</code></pre>
+<div class="sourceCode" id="cb224"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># paste can "glue" on single or (recycled) vectors of strings</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">friends</span>,<span class="st">"is my friend"</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] "Alice is my friend"     "Bob is my friend"      
+## [3] "Charlie is my friend"   "Doug is my friend"     
+## [5] "Elizabeth is my friend" "Francine is my friend"</code></pre>
+<div class="sourceCode" id="cb226"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"friend"</span>,<span class="va">friends</span>,<span class="st">"is in group"</span>,<span class="va">groups</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] "friend Alice is in group A"    
+## [2] "friend Bob is in group B"      
+## [3] "friend Charlie is in group A"  
+## [4] "friend Doug is in group B"     
+## [5] "friend Elizabeth is in group A"
+## [6] "friend Francine is in group B"</code></pre>
+<div class="sourceCode" id="cb228"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># paste0(...) is a shortcut for paste(..., sep="")</span></span>
+<span><span class="co"># sep sets the separator between each string (default: a single space " ")</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">friends</span>,<span class="st">"123"</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] "Alice123"     "Bob123"       "Charlie123"   "Doug123"     
+## [5] "Elizabeth123" "Francine123"</code></pre>
+<div class="sourceCode" id="cb230"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># paste also has an argument called collapse, which sets a separator,</span></span>
+<span><span class="co"># then uses that separator to collapse the vector into a single string</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">friends</span>,collapse<span class="op">=</span><span class="st">", "</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] "Alice, Bob, Charlie, Doug, Elizabeth, Francine"</code></pre>
+</div>
+<div id="pattern-string-functions" class="section level4" number="3.1.8.2">
+<h4>
+<span class="header-section-number">3.1.8.2</span> Pattern string functions<a class="anchor" aria-label="anchor" href="#pattern-string-functions"><i class="fas fa-link"></i></a>
+</h4>
 <!--
 
-### Character vectors
-
-Another important data type in R is **character vectors** (i.e. strings in some other programming languages).
+`grep()`/`grepl()` for pattern matching, and `sub()`/`gsub()` for pattern replacing. We will demonstrate a number of common usages of these functions.
 
 -->
 
+</div>
 </div>
 </div>
 </div>
@@ -369,6 +504,7 @@ Another important data type in R is **character vectors** (i.e. strings in some 
 <li><a class="nav-link" href="#multiple-vectors-vector-recycling"><span class="header-section-number">3.1.5</span> Multiple vectors + vector recycling</a></li>
 <li><a class="nav-link" href="#in-vector-membership"><span class="header-section-number">3.1.6</span> %in% (Vector membership)</a></li>
 <li><a class="nav-link" href="#vector-subsetting"><span class="header-section-number">3.1.7</span> Vector subsetting</a></li>
+<li><a class="nav-link" href="#character-vectors"><span class="header-section-number">3.1.8</span> Character vectors</a></li>
 </ul>
 </li>
 </ul>
@@ -388,7 +524,7 @@ Another important data type in R is **character vectors** (i.e. strings in some 
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, Bret Larget, Cameron Jones. It was last built on 2024-06-28.</p>
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, Bret Larget, Cameron Jones. It was last built on 2024-06-29.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

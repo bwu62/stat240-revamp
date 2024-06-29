@@ -209,7 +209,7 @@ Or we can ask which of our values are within 1 standard deviation of the mean:
 ## [1]  TRUE FALSE FALSE  TRUE  TRUE FALSE  TRUE
 ```
 
-Remember from section \@ref(r-specials) how doing any kind of **math turns `TRUE` into 1 and `FALSE` into 0**? This turns out to be extremely useful. For example, we can use `sum()` to count how many values are even:
+Remember from section \@ref(r-specials) how any **math turns `TRUE` into 1 and `FALSE` into 0**? This turns out to be extremely useful. For example, we can use `sum()` to count how many values are even:
 
 
 ``` r
@@ -471,17 +471,260 @@ Going forward, we will continue to implicitly use vectorized functions and vecto
 
 ### Vector subsetting
 
-Let's quickly also talk about
+
+Let's also quickly cover vector subsetting. In R, there are many ways to extract a subset (i.e. just a portion) of a vector. There are 2 important things to remember throughout R when subsetting objects:
+
+ 1. **R indexes from 1, not 0**. In other words, R starts counting the position of objects from 1.
+ 2. **Bounds are inclusive**. In other words, R generally includes both start and end bounds when subsetting.
+
+Knowing this, let's learn subsetting with some examples. A pair of useful built-in objects are the vectors `letters` and `LETTERS`, which contain respectively the 26 lowercase and uppercase letters of the English alphabet. These letters make up a character vector (which we will discuss in detail in the next section).
+
+
+``` r
+letters
+```
+
+```
+##  [1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o"
+## [16] "p" "q" "r" "s" "t" "u" "v" "w" "x" "y" "z"
+```
+
+You can extract elements form a vector with the `[]` operator, giving either a vector of numeric positions, a vector of `TRUE`/`FALSE` values, or a negative vector for exclusions (i.e. anything *except*). Examples:
+
+
+``` r
+# giving numeric positions of desired elements
+# remember numbers are numeric vectors of length-1
+letters[1]
+```
+
+```
+## [1] "a"
+```
+
+``` r
+# of course this also works with longer vectors
+letters[5:10]
+```
+
+```
+## [1] "e" "f" "g" "h" "i" "j"
+```
+
+``` r
+# naturally you can use more complex syntax if needed,
+# as long as the result is a numeric vector,
+# repeating indices give duplicate values
+letters[c(1,24:26,rep(5,8))]
+```
+
+```
+##  [1] "a" "x" "y" "z" "e" "e" "e" "e" "e" "e" "e" "e"
+```
+
+``` r
+# you can also use a logical vector, here we check if
+# each position is even, returning every second letter
+letters[1:26 %% 2 == 0]
+```
+
+```
+##  [1] "b" "d" "f" "h" "j" "l" "n" "p" "r" "t" "v" "x" "z"
+```
+
+``` r
+# logical vectors will be recycled if necessary, so this also works
+letters[c(FALSE,TRUE)]
+```
+
+```
+##  [1] "b" "d" "f" "h" "j" "l" "n" "p" "r" "t" "v" "x" "z"
+```
+
+``` r
+# using negative vectors is like saying "anything EXCEPT"
+letters[-1]
+```
+
+```
+##  [1] "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p"
+## [16] "q" "r" "s" "t" "u" "v" "w" "x" "y" "z"
+```
+
+``` r
+# again, this also works with vectors of negatives
+letters[-1:-10]
+```
+
+```
+##  [1] "k" "l" "m" "n" "o" "p" "q" "r" "s" "t" "u" "v" "w" "x" "y"
+## [16] "z"
+```
+
+``` r
+# of course this is equivalent to
+letters[-(1:10)]
+```
+
+```
+##  [1] "k" "l" "m" "n" "o" "p" "q" "r" "s" "t" "u" "v" "w" "x" "y"
+## [16] "z"
+```
+
+``` r
+# note the parentheses there, without it you get -1,0,1,...,10
+# which raises an error (what we want is -1,-2,...,-10)
+# this is because positive and negative position syntax cannot be mixed
+letters[-1:10]
+```
+
+```
+## Error in letters[-1:10] : only 0's may be mixed with negative subscripts
+```
 
 
 
+
+### Character vectors
+
+The `letters` vector in the last section was one example of a **character vector**. You can create a character vector also with `c()` or `rep()` which we've seen before.
+
+
+``` r
+# creating a demo character vector, e.g. these are my friends!
+friends = c("Alice", "Bob", "Charlie", "Doug", "Elizabeth", "Francine")
+friends
+```
+
+```
+## [1] "Alice"     "Bob"       "Charlie"   "Doug"      "Elizabeth"
+## [6] "Francine"
+```
+
+``` r
+# you can also use rep, e.g. I can assign my friends into 2 groups
+groups = rep(LETTERS[1:2],time=3)
+groups
+```
+
+```
+## [1] "A" "B" "A" "B" "A" "B"
+```
+
+
+#### Basic string function
+
+Base R has a number of common functions for working with strings: `nchar()` for getting the number of characters, `tolower()`/`toupper()` to convert case, `substr()` for extracting substrings, `paste()`/`paste0()` to concatenate (e.g. "glue" together) strings
+
+
+``` r
+# get the number of characters in each name
+nchar(friends)
+```
+
+```
+## [1] 5 3 7 4 9 8
+```
+
+``` r
+# convert names to all upper or all lower
+toupper(friends)
+```
+
+```
+## [1] "ALICE"     "BOB"       "CHARLIE"   "DOUG"      "ELIZABETH"
+## [6] "FRANCINE"
+```
+
+``` r
+tolower(friends)
+```
+
+```
+## [1] "alice"     "bob"       "charlie"   "doug"      "elizabeth"
+## [6] "francine"
+```
+
+``` r
+# get the first 3 characters of each name
+substr(friends,1,3)
+```
+
+```
+## [1] "Ali" "Bob" "Cha" "Dou" "Eli" "Fra"
+```
+
+``` r
+# get the last 3 characters of each name;
+# remember R always includes bounds, so to get the last three,
+# we want to get n-2,n-1,n where n is the number of characters
+substr(friends,nchar(friends)-2,nchar(friends))
+```
+
+```
+## [1] "ice" "Bob" "lie" "oug" "eth" "ine"
+```
+
+``` r
+# remove the first and last characters of each name
+substr(friends,2,nchar(friends)-1)
+```
+
+```
+## [1] "lic"     "o"       "harli"   "ou"      "lizabet" "rancin"
+```
+
+``` r
+# paste can "glue" on single or (recycled) vectors of strings
+paste(friends,"is my friend")
+```
+
+```
+## [1] "Alice is my friend"     "Bob is my friend"      
+## [3] "Charlie is my friend"   "Doug is my friend"     
+## [5] "Elizabeth is my friend" "Francine is my friend"
+```
+
+``` r
+paste("friend",friends,"is in group",groups)
+```
+
+```
+## [1] "friend Alice is in group A"    
+## [2] "friend Bob is in group B"      
+## [3] "friend Charlie is in group A"  
+## [4] "friend Doug is in group B"     
+## [5] "friend Elizabeth is in group A"
+## [6] "friend Francine is in group B"
+```
+
+``` r
+# paste0(...) is a shortcut for paste(..., sep="")
+# sep sets the separator between each string (default: a single space " ")
+paste0(friends,"123")
+```
+
+```
+## [1] "Alice123"     "Bob123"       "Charlie123"   "Doug123"     
+## [5] "Elizabeth123" "Francine123"
+```
+
+``` r
+# paste also has an argument called collapse, which sets a separator,
+# then uses that separator to collapse the vector into a single string
+paste(friends,collapse=", ")
+```
+
+```
+## [1] "Alice, Bob, Charlie, Doug, Elizabeth, Francine"
+```
+
+
+#### Pattern string functions
 
 
 <!--
 
-### Character vectors
-
-Another important data type in R is **character vectors** (i.e. strings in some other programming languages).
+`grep()`/`grepl()` for pattern matching, and `sub()`/`gsub()` for pattern replacing. We will demonstrate a number of common usages of these functions.
 
 -->
-
