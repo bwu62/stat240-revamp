@@ -25,6 +25,7 @@ things to hit:
   - search
   - syntax highlighting
   - auto link of help pages
+  - footnotes and other bonus content
 - view source & edit contributions
 - prerequisites
 - will not teach everything, just provide foundation for further learning

@@ -55,27 +55,14 @@ This is why vectors are the most fundamental structure. It may be useful going f
 
 ### Types of vectors
 
-There are LOTS of types of vectors, everything from numeric to character to complex number and raw objects. In this class, we will only need to learn the following 4 types of vectors:
+There are LOTS of types of data that vectors can hold, from real to complex numbers, characters to raw byte-data, and even dates and times.^[Technically, there are only 6 fundamental, or ["atomic"](https://cran.r-project.org/doc/manuals/r-release/R-lang.html#:~:text=R%20has,%20table){target="_blank"} types, but some of these can represent multiple "classes" of objects. See the section on [Vectors](https://adv-r.hadley.nz/vectors-chap.html){target="_blank"} from Hadley Wickham's excellent "*Advanced R*" book for the minutiae. I know this footnote is overly pedantic and technical, but I don't want to incur the wrath of CS nerds.] In this class, we will only deal with the following 4 types of vectors:
 
- - **Numeric** vectors, which contain real numbers. Generally, R functions don't distinguish between integers and decimal numbers (also called "doubles" or "floats") so treat all numbers as decimal-valued real numbers. ^[To be pedantic, R represents all numbers by default as double-precision floating-point numbers, as per [IEC 60559](https://www.iso.org/standard/80985.html) specifications, which is identical to [IEEE 754](https://en.wikipedia.org/wiki/IEEE_754) specs.]
+ - **Numeric** vectors, which contain real numbers. Generally, R functions don't distinguish between integers and decimal numbers (also called "doubles" or "floats") so treat all numbers as decimal-valued real numbers. ^[For the CS students, R represents all numbers by default as double-precision floating-point numbers as per [IEC 60559/IEEE 754](https://en.wikipedia.org/wiki/IEEE_754){target="_blank"} specifications. There are no single precision values in R. You can force a number to be a [32-bit signed integer](https://rdrr.io/r/base/integer.html){target="_blank"} by adding an `L` to the end, e.g. `1L`, but this is extremely rare in data science and generally offers no real, tangible advantages.]
+ - **Logical** vectors, which contain only `TRUE`/`FALSE` values. Usually, these arise from logical comparison operators or other functions that check if some condition is satisfied. Remember that in computations, TRUE becomes 1 and FALSE becomes 0. ^[Again, for the CS nerds, 0 in R is considered "falsy" and all other numbers are considered "truthy". E.g. try running `x & TRUE` for zero and non-zero x and observe the output.]
+ - **Character** vectors, which contain characters (often also called "strings"). These are basically categorical or text data. E.g. you may have groups "A" and "B", or sex "Male" and "Female". You can even have sentences, paragraphs, or entire bodies of text in a character. We will only briefly touch on processing text data in this class. ^[CS people, looking at you again. Some languages distinguish between "character" type, which can only be just a single character; and "string" type, which are sequences of characters. In R, there is no such distinction; characters and strings are synonymous. Note this means you cannot "slice" through a string as if it's just a list of characters in R like some other languages.]
+ - Lastly, we will also discuss **date** vectors, which are actually closely related to numeric vectors (more on this later). These are ubiquitous in data science and thus deserving of inclusion. ^[I don't have anything pedantic to add here, but all the other vectors got footnotes so I didn't want dates to feel left out :( ... <br/><br/> ...well ok, since you bothered to click this, I'll give you something. Dates in R, like in many other languages, are stored as [number of days after Jan 1^st^ 1970](https://rdrr.io/r/base/Dates.html){target="_blank"}, which is often ominously referred to as the "Epoch". Why 1/1/70? Because reportedly it ["*seemed to be as good as any*"](https://retrocomputing.stackexchange.com/a/25599){target="_blank"}. <br/><br/> This is why dates are basically numeric vectors with extra steps. However, like with anything, the devil's in the details, and learning to work efficiently with dates is not trivial.]
+   - Note: we only cover dates themselves, not date + time values (also called datetime) since these are actually quite different data types and we only have so many lectures. ^[Similar-ish to dates, datetimes are often stored as a (possibly decimal) [number of seconds after midnight of Jan 1^st^ 1970](https://rdrr.io/r/base/DateTimeClasses.html){target="_blank"} called a POSIXct object, although R confusingly also has a whole other type of datetime object called POSIXlt where each date/time component is stored as an element of a [list](https://jennybc.github.io/purrr-tutorial/bk00_vectors-and-lists.html) (which is a whole other giant beast we don't even remotely have time to get into). See Hadley Wickham's page on [datetime](https://r4ds.hadley.nz/datetimes.html){target="_blank"} from his book "*R for Data Science*" for more info on datetime objects.]
 
-
-
-
-<!--
-
-
-## Data types
-
-In R, there are 4 main data types (also called classes) we will commonly work with: numeric, character, logical, and date. We will briefly discuss each of these below, as well as cover some common functions for working with each data type.
-
-
-
-### Numeric
-
-Numeric values are the most common data type in R. Generally, R does not distinguish between integer and decimal numbers, so treat all numbers as decimal-valued real numbers.
-
--->
 
 
 
