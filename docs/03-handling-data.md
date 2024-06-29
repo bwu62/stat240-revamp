@@ -270,7 +270,7 @@ One of the easiest, if you just need a sequence of integers, is to use the `:` o
 ## [16]  -5  -6  -7  -8  -9 -10
 ```
 
-The `seq()` function does something similar, except it also has additional arguments `by` to specify the step size and `length.out` which specifies how many numbers to have in total (note only ONE of these arguments can be set at a time).
+The `seq()` function does something similar, except it also has additional arguments `by` to specify the step size and `length.out` which specifies how many numbers to have in total (note: only ONE of these arguments can be set at a time).
 
 
 ``` r
@@ -448,7 +448,7 @@ z %in% x1
 ## [1] FALSE  TRUE
 ```
 
-Note the difference between this and `z == x1`, which **recycles `z`, then checks element-wise equality**:
+Note the difference between this and `z == x1`, which recycles `z`, *then* checks element-wise equality:
 
 
 ``` r
@@ -459,11 +459,11 @@ z == x1
 ## [1] FALSE  TRUE FALSE FALSE FALSE FALSE
 ```
 
-This is another common point of confusion for first time R users. Make sure you understand the **difference between checking vector membership**, i.e. if each element of one vector is also contained in another vector, **vs checking element-by-element equality**, i.e. checking if the 1^st^ elements are the same, and the 2^nd^ elements are the same, and the 3^rd^ elements are the same, etc. (possibly with recycling). See [this StackOverflow page](https://stackoverflow.com/a/42637186/25278020) for more examples.
+This is another common point of confusion for first time R users. Make sure you understand the **difference between checking vector membership**, i.e. if each element of one vector is also contained *somewhere* in another vector, **vs checking element-by-element equality**, i.e. checking if the 1^st^ elements are the same, and the 2^nd^ elements are the same, and the 3^rd^ elements are the same, etc. (possibly with recycling). See [this StackOverflow page](https://stackoverflow.com/a/42637186/25278020) for more examples.
 
 
 :::{.note}
-Going forward, we will continue to implicitly use vectorized functions and vector recycling in code examples without drawing attention to it, for sake of brevity. Pretty soon, these concepts should feel like second nature to you!
+Going forward, we will continue to implicitly use vectorized functions and vector recycling in code examples without drawing attention to it, for sake of brevity. Pretty soon, these concepts should also feel like second nature to you!
 :::
 
 
