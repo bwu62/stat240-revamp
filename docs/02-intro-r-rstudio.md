@@ -724,7 +724,7 @@ all.equal(sqrt(2)^2, 2)
 ### Packages
 
 
-Now, let's briefly discuss packages. One of the best features of R is the ability for anyone to easily write and distribute packages on [CRAN](https://cran.r-project.org/) (**C**omprehensive **R** **A**rchive **N**etwork). Currently, there are 21018 packages available on CRAN. There are also a further 2300 packages on the bioinformatics-specific package archive [Bioconductor](https://www.bioconductor.org/), as well as countless more on [GitHub](https://github.com/topics/r-package).
+Now, let's briefly discuss packages. One of the best features of R is the ability for anyone to easily write and distribute packages on [CRAN](https://cran.r-project.org/) (**C**omprehensive **R** **A**rchive **N**etwork). Currently, there are 21017 packages available on CRAN. There are also a further 2300 packages on the bioinformatics-specific package archive [Bioconductor](https://www.bioconductor.org/), as well as countless more on [GitHub](https://github.com/topics/r-package).
 
 In this course, we will primarily make use of the [Tidyverse](https://www.tidyverse.org/) suite of packages, which contains several important packages for data science: `readr` for reading in data, `ggplot2` for plotting data, `dplyr` and `tidyr` for cleaning data, and `lubridate` and `stringr` for working with dates and strings. We will learn each of these as the course progresses.
 
@@ -918,7 +918,7 @@ Download the [`demo.Rmd`](demo.Rmd) example file and open it; it should automati
 ### Knitting
 
 
-The first think you should learn about R Markdown is how to "Knit", or generate an output document. Think of an Rmd file as a "recipe" that tells Rstudio how to create and format a nice output for your audience.
+The first thing you should learn about R Markdown is how to "Knit", or generate an output document. Think of an Rmd file as a "recipe" that tells Rstudio how to create and format a nice output for your audience.
 
 At the top of the source window, find the [Knit](https://i.imgur.com/Mwi8iug.png) button and click it. You'll see a bunch of messages scroll by in a new tab below called "Render" while Rstudio executes and processes the document. If there are no errors, Rstudio will then produce the output document "demo.html" in the same directory where you saved "demo.Rmd" and open a preview of the file in the "Viewer" tab.
 
