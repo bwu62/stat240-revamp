@@ -179,13 +179,13 @@ tr.header th[align="center"]{
 
 /* https://stackoverflow.com/questions/36121672/set-table-column-width-via-markdown */
 #knitr-options table colgroup col:first-of-type{
-    width: 12% !important;
+    width: 15% !important;
 }
 #knitr-options table colgroup col:nth-of-type(2){
-    width: 24% !important;
+    width: 25% !important;
 }
 #knitr-options table colgroup col:nth-of-type(3){
-    width: 64% !important;
+    width: 60% !important;
 }
 #knitr-options th[align="left"]{
   text-align: center;
