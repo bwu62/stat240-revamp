@@ -482,7 +482,7 @@ It's important to check the output messages to see if the install was successful
 #### Loading a package
 
 
-You can load a package by using either `library()` or `require()`, which are basically the same. ^[The only difference is `require()` can be used to check if a package exists and will return `FALSE` if it doesn't, whereas `library()` will just error out, see <https://www.geeksforgeeks.org/the-difference-between-require-and-library-in-r/>{target="_blank"} for more details.]
+You can load a package with either `library()` or `require()`, which are basically the same. ^[The only difference is `require()` can be used to check if a package exists and will return `FALSE` if it doesn't, whereas `library()` will just error out, see <https://www.geeksforgeeks.org/the-difference-between-require-and-library-in-r/>{target="_blank"} for more details.]
 
 ```{r library,message=T,warning=T}
 library(tidyverse)
@@ -564,7 +564,7 @@ Download the [`demo.Rmd`](demo.Rmd) example file and open it; it should automati
 
 The first thing you should learn about R Markdown is how to "Knit", or generate an output document. Think of an Rmd file as a "recipe" that tells Rstudio how to create and format a nice output for your audience.
 
-At the top of the source window, find the [Knit](https://i.imgur.com/Mwi8iug.png) button and click it. You'll see a bunch of messages scroll by in a new tab below called "Render" while Rstudio executes and processes the document. If there are no errors, Rstudio will then produce the output document "demo.html" in the same directory where you saved "demo.Rmd" and open a preview of the file in the "Viewer" tab.
+At the top of the source window, find the [Knit button](https://i.imgur.com/Mwi8iug.png) and click it. You'll see a bunch of messages scroll by in a new tab below called "Render" while Rstudio executes and processes the document. If there are no errors, Rstudio will then produce the output document "demo.html" in the same directory where you saved "demo.Rmd" and open a preview of the file in the "Viewer" tab.
 
 :::{.tip}
 You can also knit by pressing [CTRL]{.k}+[SHIFT]{.k}+[K]{.k} on Windows, and either [CTRL]{.k}+[SHIFT]{.k}+[K]{.k}, or [⌘]{.k}+[SHIFT]{.k}+[K]{.k} on Mac.
