@@ -407,3 +407,18 @@ str_to_title(toupper(friends))
 # "pad" a vector of strings to a constant length
 str_pad(friends, width = 12, side = "right", pad = ".")
 ```
+
+
+
+#### Comparing strings
+
+
+### Date vectors
+
+ - parse, getters/setters, math, comparisons, etc.
+
+### Sorting vectors
+
+ - examples from all types
+
+
