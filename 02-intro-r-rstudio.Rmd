@@ -191,6 +191,17 @@ sqrt(abs(-9))
 
 
 
+### Aside: function arguments
+
+A quick aside about function "arguments" (i.e. additional options that can be set). In R, all arguments to functions have names (see each function's help page for details) but depending on how the function is needed, you might not have to set them explicitly.
+
+In the previous section, we used `base = 3` inside the `log()` function to explicitly set the `base` argument as 3. However, `log(3^5, 3)` will also work, since `base` is the second argument (again, see the help page). **Without explicit naming, arguments are passed in order to the function**.
+
+Explicitly naming an argument is often used to clarify for teaching purposes, improve debugging legibility, or skip certain preceding arguments that are either unnecessary or whose default values are acceptable. E.g. suppose a function `f()` has 3 arguments, `a`, `b`, and `c` in that order. If you only wish to set `a=0` and `c=1` while leaving `b` blank, you can write `f(0, c=1)`.
+
+
+
+
 ### Special values {#r-specials}
 
 
