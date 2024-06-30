@@ -377,6 +377,8 @@ sub("y", "ie", friends)
 # but gsub() can replace ALL occurrences
 sub("n", "m", friends)
 gsub("n", "m", friends)
+# check which string endsWith() a pattern (startsWith() does the opposite)
+endsWith(friends, "y")
 ```
 
 Each of these functions (as well as several more listed in the `grep()` help page), actually accept more complex pattern syntax for the search pattern. This advanced search pattern syntax is called "regular expressions" or "regex" for short. You can do things like match groups of characters, match repeated characters or groups, match to specific locations in words or sentences, and more.
@@ -389,7 +391,7 @@ In this class we will NOT cover regular expressions to any real detail again due
 
 The [stringr](https://stringr.tidyverse.org/) package (which is a subset of the [Tidyverse](https://www.tidyverse.org/)) contains an alternative set of functions for working with strings. Many of these are similar in purpose to base R versions (although some have subtle differences). E.g. `str_length()` is the same as `nchar()`, `str_to_lower()`/`str_to_upper()` replicate `tolower()`/`toupper()`, `str_replace()` is similar to `sub()`, `str_sub()` extends `substr()`, etc. Here's a full list of these [doppelgänger stringr functions](https://stringr.tidyverse.org/articles/from-base.html).
 
-However, there are a few useful stringr functions that do not have counterparts in base R.
+However, there are a few useful stringr functions that do not have counterparts in base R (or at least whose counterparts require much more complex expressions). Here is a *small* curation of them.
 
 ```{r}
 # you can import either all of tidyverse with library(tidyverse)
@@ -402,4 +404,6 @@ library(stringr)
 str_count(friends, "e")
 # change strings to title case, i.e. first letter uppercase, all else lower
 str_to_title(toupper(friends))
+# "pad" a vector of strings to a constant length
+str_pad(friends, width = 12, side = "right", pad = ".")
 ```
