@@ -562,7 +562,7 @@ Download the [`demo.Rmd`](demo.Rmd) example file and open it; it should automati
 ### Knitting
 
 
-The first think you should learn about R Markdown is how to "Knit", or generate an output document. Think of an Rmd file as a "recipe" that tells Rstudio how to create and format a nice output for your audience.
+The first thing you should learn about R Markdown is how to "Knit", or generate an output document. Think of an Rmd file as a "recipe" that tells Rstudio how to create and format a nice output for your audience.
 
 At the top of the source window, find the [Knit](https://i.imgur.com/Mwi8iug.png) button and click it. You'll see a bunch of messages scroll by in a new tab below called "Render" while Rstudio executes and processes the document. If there are no errors, Rstudio will then produce the output document "demo.html" in the same directory where you saved "demo.Rmd" and open a preview of the file in the "Viewer" tab.
 
