@@ -86,7 +86,7 @@ That concludes the tour of the basic Rstudio interface. There is also a file edi
 ## Basics of R {#r-basics}
 
 
-In this section, we will give you a brief introduction to working with R. No prior coding experience is assumed. You are **highly encouraged** to copy and **run the examples** as you read. If you have time and capacity, you are also encouraged to peruse the linked help pages and extra reference links, but this is not mandatory.
+In this section, we will give you a brief introduction to working with R. No prior coding experience is assumed. You are highly encouraged to **copy and run the examples as you read**. If you have time and capacity, you are also encouraged to peruse the linked help pages and extra reference links, but this is not mandatory.
 
 
 
