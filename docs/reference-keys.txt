@@ -11,6 +11,7 @@ rstudio-interface
 r-basics
 r-running
 r-math
+aside-function-arguments
 r-specials
 assignment
 summary-functions
@@ -42,5 +43,6 @@ multiple-vectors-vector-recycling
 in-vector-membership
 vector-subsetting
 character-vectors
-basic-string-function
+basic-string-functions
 pattern-string-functions
+additional-stringr-functions

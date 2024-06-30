@@ -243,9 +243,17 @@
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="op">-</span><span class="fl">9</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 3</code></pre>
 </div>
-<div id="r-specials" class="section level3" number="2.3.3">
+<div id="aside-function-arguments" class="section level3" number="2.3.3">
 <h3>
-<span class="header-section-number">2.3.3</span> Special values<a class="anchor" aria-label="anchor" href="#r-specials"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.3.3</span> Aside: function arguments<a class="anchor" aria-label="anchor" href="#aside-function-arguments"><i class="fas fa-link"></i></a>
+</h3>
+<p>A quick aside about function “arguments” (i.e. additional options that can be set). In R, all arguments to functions have names (see each function’s help page for details) but depending on how the function is needed, you might not have to set them explicitly.</p>
+<p>In the previous section, we used <code>base = 3</code> inside the <code><a href="https://rdrr.io/r/base/Log.html">log()</a></code> function to explicitly set the <code>base</code> argument as 3. However, <code>log(3^5, 3)</code> will also work, since <code>base</code> is the second argument (again, see the help page). <strong>Without explicit naming, arguments are passed in order to the function</strong>.</p>
+<p>Explicitly naming an argument is often used to clarify for teaching purposes, improve debugging legibility, or skip certain preceding arguments that are either unnecessary or whose default values are acceptable. E.g. suppose a function <code>f()</code> has 3 arguments, <code>a</code>, <code>b</code>, and <code>c</code> in that order. If you only wish to set <code>a=0</code> and <code>c=1</code> while leaving <code>b</code> blank, you can write <code>f(0, c=1)</code>.</p>
+</div>
+<div id="r-specials" class="section level3" number="2.3.4">
+<h3>
+<span class="header-section-number">2.3.4</span> Special values<a class="anchor" aria-label="anchor" href="#r-specials"><i class="fas fa-link"></i></a>
 </h3>
 <p>We already mentioned <a href="https://rdrr.io/r/base/Constants.html"><code class="sourceCode r">pi</code></a> is predefined. There are a few other important special values in R. <a href="https://rdrr.io/r/base/logical.html"><code class="sourceCode r"><span class="cn">TRUE</span></code></a> and <a href="https://rdrr.io/r/base/logical.html"><code class="sourceCode r"><span class="cn">FALSE</span></code></a>, along with their abbreviations <code>T</code> and <code>F</code> are also predefined. Note the capitalization; <strong>R is a case-sensitive language</strong> so <code>true</code>, <code>True</code>, and <code>t</code> are NOT the same as <code>TRUE</code> (the first two are not defined, while <code><a href="https://rdrr.io/r/base/t.html">t()</a></code> is the matrix transpose function).</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
@@ -270,9 +278,9 @@
 <pre><code>## [1] -Inf</code></pre>
 <p>Additionally, <a href="https://rdrr.io/r/base/NA.html"><code class="sourceCode r"><span class="cn">NA</span></code></a> is used to represent missing values, i.e. when data is not available. <strong>Note <a href="https://rdrr.io/r/base/NA.html"><code class="sourceCode r"><span class="cn">NA</span></code></a> and <a href="https://rdrr.io/r/base/is.finite.html"><code class="sourceCode r"><span class="cn">NaN</span></code></a> are NOT the same</strong>. We will learn later about how to handle <a href="https://rdrr.io/r/base/NA.html"><code class="sourceCode r"><span class="cn">NA</span></code></a> missing values.</p>
 </div>
-<div id="assignment" class="section level3" number="2.3.4">
+<div id="assignment" class="section level3" number="2.3.5">
 <h3>
-<span class="header-section-number">2.3.4</span> Assignment<a class="anchor" aria-label="anchor" href="#assignment"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.3.5</span> Assignment<a class="anchor" aria-label="anchor" href="#assignment"><i class="fas fa-link"></i></a>
 </h3>
 <p>In R, variables are typically assigned using the <code>&lt;-</code> operator, which is just a less than <code>&lt;</code> and minus <code>-</code> put together. You can also use <code>=</code> but <code>&lt;-</code> is recommended for stylistic reasons (see <a href="https://colinfay.me/r-assignment/">this blog post</a> for more details). For this class, <strong>both are acceptable</strong> but we will prefer <code>&lt;-</code> in the notes. <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;A comprehensive R style guide written by Hadley Wickham can be found here: &lt;a href="https://style.tidyverse.org/" target="_blank"&gt;https://style.tidyverse.org/&lt;/a&gt;.&lt;/p&gt;'><sup>3</sup></a></p>
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
@@ -327,9 +335,9 @@
 <pre><code>## [1] 7</code></pre>
 </div>
 </div>
-<div id="summary-functions" class="section level3" number="2.3.5">
+<div id="summary-functions" class="section level3" number="2.3.6">
 <h3>
-<span class="header-section-number">2.3.5</span> Summary functions<a class="anchor" aria-label="anchor" href="#summary-functions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.3.6</span> Summary functions<a class="anchor" aria-label="anchor" href="#summary-functions"><i class="fas fa-link"></i></a>
 </h3>
 <p>So far, we’ve only seen functions that run on individual values, but there are also functions in R that run on and summarize a dataset. These are often statistical in nature. We will only give a brief summary here of how to compute these in R. A more in-depth discussion of their meaning and applications will be saved for later in the course.</p>
 <p>Suppose we gather a sample and observe the following values: 3, 6, 6, 2, 4, 1, 5 (don’t worry about what these mean, we’re just using it as a demo). We can create a vector using the <code><a href="https://rdrr.io/r/base/c.html">c()</a></code> function to store our data and save it:</p>
@@ -384,9 +392,9 @@
 <pre><code>## [1] 0.8690548</code></pre>
 <p>There are other miscellaneous functions for working with vectors that are sometimes useful that we won’t cover in detail now, but you can explore them on your own, such as <code><a href="https://rdrr.io/r/base/prod.html">prod()</a></code> for computing the product of all numbers in a vector, <code><a href="https://rdrr.io/r/base/sort.html">sort()</a></code> for sorting a vector, <code><a href="https://rdrr.io/r/base/rev.html">rev()</a></code> for reversing a vector, <code><a href="https://rdrr.io/r/base/unique.html">unique()</a></code> for getting the unique values in a vector, <code><a href="https://rdrr.io/r/base/scale.html">scale()</a></code> for linearly shifting and scaling the data to have mean 0 and standard deviation 1, and <code><a href="https://rdrr.io/r/base/cumsum.html">cumsum()</a></code> and <code><a href="https://rdrr.io/r/base/cumsum.html">cumprod()</a></code> for the cumulative sum and product along a vector, and many many more…</p>
 </div>
-<div id="logical-comparison" class="section level3" number="2.3.6">
+<div id="logical-comparison" class="section level3" number="2.3.7">
 <h3>
-<span class="header-section-number">2.3.6</span> Logical comparison<a class="anchor" aria-label="anchor" href="#logical-comparison"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.3.7</span> Logical comparison<a class="anchor" aria-label="anchor" href="#logical-comparison"><i class="fas fa-link"></i></a>
 </h3>
 <p>Finally, let’s learn some basic logical comparisons. These will be crucial for data cleaning and filtering operations later on.</p>
 <p>In R, equality comparison is done using the <code>==</code> operator. <strong>Note the double equal sign</strong>; single equal is for assignments and arguments. Inequality can be checked using <code>!=</code>.</p>
@@ -451,9 +459,9 @@
 <pre><code>## [1] TRUE</code></pre>
 </div>
 </div>
-<div id="packages" class="section level3" number="2.3.7">
+<div id="packages" class="section level3" number="2.3.8">
 <h3>
-<span class="header-section-number">2.3.7</span> Packages<a class="anchor" aria-label="anchor" href="#packages"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.3.8</span> Packages<a class="anchor" aria-label="anchor" href="#packages"><i class="fas fa-link"></i></a>
 </h3>
 <p>Now, let’s briefly discuss packages. One of the best features of R is the ability for anyone to easily write and distribute packages on <a href="https://cran.r-project.org/">CRAN</a> (<strong>C</strong>omprehensive <strong>R</strong> <strong>A</strong>rchive <strong>N</strong>etwork). Currently, there are 21018 packages available on CRAN. There are also a further 2300 packages on the bioinformatics-specific package archive <a href="https://www.bioconductor.org/">Bioconductor</a>, as well as countless more on <a href="https://github.com/topics/r-package">GitHub</a>.</p>
 <p>In this course, we will primarily make use of the <a href="https://www.tidyverse.org/">Tidyverse</a> suite of packages, which contains several important packages for data science: <code>readr</code> for reading in data, <code>ggplot2</code> for plotting data, <code>dplyr</code> and <code>tidyr</code> for cleaning data, and <code>lubridate</code> and <code>stringr</code> for working with dates and strings. We will learn each of these as the course progresses.</p>
@@ -462,9 +470,9 @@
 <p><strong><em>install once; load daily</em></strong></p>
 </blockquote>
 <p>I.e. you only need to install a package <em>once</em> to your computer, but you need to load it <em>every time</em> you reopen Rstudio and want to use it (unless you’re one of those people that never closes any programs). Of course if you want to setup R/Rstudio on a new computer, you need to install it again there as well.</p>
-<div id="install-a-package" class="section level4" number="2.3.7.1">
+<div id="install-a-package" class="section level4" number="2.3.8.1">
 <h4>
-<span class="header-section-number">2.3.7.1</span> Install a package<a class="anchor" aria-label="anchor" href="#install-a-package"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.3.8.1</span> Install a package<a class="anchor" aria-label="anchor" href="#install-a-package"><i class="fas fa-link"></i></a>
 </h4>
 <p>Unless you’re doing extremely niche work, generally any packages you want to use will be on CRAN and can be easily installed one at a time by running the following.</p>
 <div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
@@ -482,9 +490,9 @@
 </li>
 </ul>
 </div>
-<div id="loading-a-package" class="section level4" number="2.3.7.2">
+<div id="loading-a-package" class="section level4" number="2.3.8.2">
 <h4>
-<span class="header-section-number">2.3.7.2</span> Loading a package<a class="anchor" aria-label="anchor" href="#loading-a-package"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.3.8.2</span> Loading a package<a class="anchor" aria-label="anchor" href="#loading-a-package"><i class="fas fa-link"></i></a>
 </h4>
 <p>You can load a package by using either <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> or <code><a href="https://rdrr.io/r/base/library.html">require()</a></code>, which are basically the same. <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;The only difference is &lt;code&gt;require()&lt;/code&gt; can be used to check if a package exists and will return &lt;code&gt;FALSE&lt;/code&gt; if it doesn’t, whereas &lt;code&gt;library()&lt;/code&gt; will just error out, see &lt;a href="https://www.geeksforgeeks.org/the-difference-between-require-and-library-in-r/" target="_blank"&gt;https://www.geeksforgeeks.org/the-difference-between-require-and-library-in-r/&lt;/a&gt; for more details.&lt;/p&gt;'><sup>5</sup></a></p>
 <div class="sourceCode" id="cb105"><pre class="downlit sourceCode r">
@@ -507,9 +515,9 @@
 </div>
 </div>
 </div>
-<div id="whitespace" class="section level3" number="2.3.8">
+<div id="whitespace" class="section level3" number="2.3.9">
 <h3>
-<span class="header-section-number">2.3.8</span> Whitespace<a class="anchor" aria-label="anchor" href="#whitespace"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.3.9</span> Whitespace<a class="anchor" aria-label="anchor" href="#whitespace"><i class="fas fa-link"></i></a>
 </h3>
 <p>As a final topic, let’s briefly discuss spacing. “Whitespace” refers to any sequence of space-type characters, which can be a mix of spaces, tabs, and line breaks (i.e. when you hit <span class="k">ENTER</span>).</p>
 <p>R ignores whitespace between variable names, functions, and punctuation characters. E.g. the following are all equivalent:</p>
@@ -528,9 +536,9 @@
 <p>A long line of code is often broken across several lines for readability. We will see many examples of this shortly in the data visualization chapter.</p>
 <p>However, make sure if you break a line up to finish the line eventually, otherwise you’ll get an error. For example, if you type <code>mean(data</code> in the console but forget to close the parenthesis (try this!) you will see the prompt character <code>&gt;</code> be replaced with <code>+</code>. It will continue to do this, patiently waiting for you to finish the line, until you either close it by typing <code>)</code> OR cancel the line by hitting <span class="k">ESC</span>.</p>
 </div>
-<div id="r-cheat-sheets" class="section level3" number="2.3.9">
+<div id="r-cheat-sheets" class="section level3" number="2.3.10">
 <h3>
-<span class="header-section-number">2.3.9</span> R cheat sheets<a class="anchor" aria-label="anchor" href="#r-cheat-sheets"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.3.10</span> R cheat sheets<a class="anchor" aria-label="anchor" href="#r-cheat-sheets"><i class="fas fa-link"></i></a>
 </h3>
 <p>Those are probably the most important R commands you need to know for now. Below I have curated a short selection of R “cheat sheets” for your reference should you need it, in rough order of how useful I think it will be for a first time R learner.</p>
 <ul>
@@ -643,7 +651,7 @@ which is a simple syntax for “marking up” text with additional formatting. Y
 <span class="header-section-number">2.4.5.1</span> Inline code<a class="anchor" aria-label="anchor" href="#inline-code"><i class="fas fa-link"></i></a>
 </h4>
 <p>If you want to quote R code inside a paragraph of text, surround it with the backtick character <span class="k">`</span>, which can be found on most keyboards in the top left next to the <span class="k">1</span> key. Note this character is NOT the same as a single quote character <span class="k">’</span>. For example, this: <code>`mean(data)`</code> will render as: <code class="sourceCode r"><span class="fu">mean</span>(data)</code>.</p>
-<p>You can also easily refer to R variables and substitute their values, or apply other functions to them and display the output inside text. For example, remember how the <code>data</code> vector was defined above in section <a href="rstudio-intro.html#summary-functions">2.3.5</a>? This: <code>`r median(data)`</code>
+<p>You can also easily refer to R variables and substitute their values, or apply other functions to them and display the output inside text. For example, remember how the <code>data</code> vector was defined above in section <a href="rstudio-intro.html#summary-functions">2.3.6</a>? This: <code>`r median(data)`</code>
 will render as: 4. Note the <code>`r</code> prefix here, which triggers evaluation and substitute of the code. This helps avoid “hard-coding”, letting values and references update to always stay in sync.</p>
 <div class="tip">
 <p>If a value has too many digits after the decimal, e.g. <code>`r mean(data)`</code>
@@ -911,13 +919,14 @@ head(mtcars)
 <a class="nav-link" href="#r-basics"><span class="header-section-number">2.3</span> Basics of R</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#r-running"><span class="header-section-number">2.3.1</span> Running R code</a></li>
 <li><a class="nav-link" href="#r-math"><span class="header-section-number">2.3.2</span> Basic math</a></li>
-<li><a class="nav-link" href="#r-specials"><span class="header-section-number">2.3.3</span> Special values</a></li>
-<li><a class="nav-link" href="#assignment"><span class="header-section-number">2.3.4</span> Assignment</a></li>
-<li><a class="nav-link" href="#summary-functions"><span class="header-section-number">2.3.5</span> Summary functions</a></li>
-<li><a class="nav-link" href="#logical-comparison"><span class="header-section-number">2.3.6</span> Logical comparison</a></li>
-<li><a class="nav-link" href="#packages"><span class="header-section-number">2.3.7</span> Packages</a></li>
-<li><a class="nav-link" href="#whitespace"><span class="header-section-number">2.3.8</span> Whitespace</a></li>
-<li><a class="nav-link" href="#r-cheat-sheets"><span class="header-section-number">2.3.9</span> R cheat sheets</a></li>
+<li><a class="nav-link" href="#aside-function-arguments"><span class="header-section-number">2.3.3</span> Aside: function arguments</a></li>
+<li><a class="nav-link" href="#r-specials"><span class="header-section-number">2.3.4</span> Special values</a></li>
+<li><a class="nav-link" href="#assignment"><span class="header-section-number">2.3.5</span> Assignment</a></li>
+<li><a class="nav-link" href="#summary-functions"><span class="header-section-number">2.3.6</span> Summary functions</a></li>
+<li><a class="nav-link" href="#logical-comparison"><span class="header-section-number">2.3.7</span> Logical comparison</a></li>
+<li><a class="nav-link" href="#packages"><span class="header-section-number">2.3.8</span> Packages</a></li>
+<li><a class="nav-link" href="#whitespace"><span class="header-section-number">2.3.9</span> Whitespace</a></li>
+<li><a class="nav-link" href="#r-cheat-sheets"><span class="header-section-number">2.3.10</span> R cheat sheets</a></li>
 </ul>
 </li>
 <li>

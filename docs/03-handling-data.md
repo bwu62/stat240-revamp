@@ -463,7 +463,7 @@ This is another common point of confusion for first time R users. Make sure you 
 
 
 :::{.note}
-Going forward, we will continue to implicitly use vectorized functions and vector recycling in code examples without drawing attention to it, for sake of brevity. Pretty soon, these concepts should also feel like second nature to you!
+Going forward, we will continue to use vectorized functions and vector recycling in code examples, sometimes without drawing attention to it, for sake of brevity. Pretty soon, these concepts should also feel like second nature to you!
 :::
 
 
@@ -477,7 +477,7 @@ Let's also quickly cover vector subsetting. In R, there are many ways to extract
  1. **R indexes from 1, not 0**. In other words, R starts counting the position of objects from 1.
  2. **Bounds are inclusive**. In other words, R generally includes both start and end bounds when subsetting.
 
-Knowing this, let's learn subsetting with some examples. A pair of useful built-in objects are the vectors `letters` and `LETTERS`, which contain respectively the 26 lowercase and uppercase letters of the English alphabet. These letters make up a character vector (which we will discuss in detail in the next section).
+Knowing this, let's learn subsetting with some examples. A pair of useful built-in objects are the vectors [`letters`{.R}](https://rdrr.io/r/base/Constants.html) and [`LETTERS`{.R}](https://rdrr.io/r/base/Constants.html), which contain respectively the 26 lowercase and uppercase letters of the English alphabet. These letters make up a character vector (which we will discuss in detail in the next section).
 
 
 ``` r
@@ -515,7 +515,7 @@ letters[5:10]
 # naturally you can use more complex syntax if needed,
 # as long as the result is a numeric vector,
 # repeating indices give duplicate values
-letters[c(1,24:26,rep(5,8))]
+letters[c(1, 24:26, rep(5, 8))]
 ```
 
 ```
@@ -534,7 +534,7 @@ letters[1:26 %% 2 == 0]
 
 ``` r
 # logical vectors will be recycled if necessary, so this also works
-letters[c(FALSE,TRUE)]
+letters[c(FALSE, TRUE)]
 ```
 
 ```
@@ -587,34 +587,34 @@ letters[-1:10]
 
 ### Character vectors
 
-The `letters` vector in the last section was one example of a **character vector**. You can create a character vector also with `c()` or `rep()` which we've seen before.
+The [`letters`{.R}](https://rdrr.io/r/base/Constants.html) vector in the last section was one example of a **character vector**. You can create a character vector also with `c()` or `rep()` which we've seen before. When creating characters, you can use either the single [`'`]{.k} or double [`"`]{.k} quote character, no difference.
 
 
 ``` r
 # creating a demo character vector, e.g. these are my friends!
-friends = c("Alice", "Bob", "Charlie", "Doug", "Elizabeth", "Francine")
+friends <- c("Alice", "Bob", "Charlie", "Donny", "Emmy", "Francine", "Genevieve", "Heinemann")
 friends
 ```
 
 ```
-## [1] "Alice"     "Bob"       "Charlie"   "Doug"      "Elizabeth"
-## [6] "Francine"
+## [1] "Alice"     "Bob"       "Charlie"   "Donny"     "Emmy"     
+## [6] "Francine"  "Genevieve" "Heinemann"
 ```
 
 ``` r
 # you can also use rep, e.g. I can assign my friends into 2 groups
-groups = rep(LETTERS[1:2],time=3)
+groups <- rep(LETTERS[1:2], time = 4)
 groups
 ```
 
 ```
-## [1] "A" "B" "A" "B" "A" "B"
+## [1] "A" "B" "A" "B" "A" "B" "A" "B"
 ```
 
 
-#### Basic string function
+#### Basic string functions
 
-Base R has a number of common functions for working with strings: `nchar()` for getting the number of characters, `tolower()`/`toupper()` to convert case, `substr()` for extracting substrings, `paste()`/`paste0()` to concatenate (e.g. "glue" together) strings
+Base R has a number of common functions for working with strings: `nchar()` for getting the number of characters, `tolower()`/`toupper()` to convert case, `substr()` for extracting substrings, `paste()`/`paste0()` to concatenate (e.g. "glue" together) strings, and `strrep()` for repeating the characters in a string.
 
 
 ``` r
@@ -623,7 +623,7 @@ nchar(friends)
 ```
 
 ```
-## [1] 5 3 7 4 9 8
+## [1] 5 3 7 5 4 8 9 9
 ```
 
 ``` r
@@ -632,8 +632,8 @@ toupper(friends)
 ```
 
 ```
-## [1] "ALICE"     "BOB"       "CHARLIE"   "DOUG"      "ELIZABETH"
-## [6] "FRANCINE"
+## [1] "ALICE"     "BOB"       "CHARLIE"   "DONNY"     "EMMY"     
+## [6] "FRANCINE"  "GENEVIEVE" "HEINEMANN"
 ```
 
 ``` r
@@ -641,90 +641,239 @@ tolower(friends)
 ```
 
 ```
-## [1] "alice"     "bob"       "charlie"   "doug"      "elizabeth"
-## [6] "francine"
+## [1] "alice"     "bob"       "charlie"   "donny"     "emmy"     
+## [6] "francine"  "genevieve" "heinemann"
 ```
 
 ``` r
 # get the first 3 characters of each name
-substr(friends,1,3)
+substr(friends, 1, 3)
 ```
 
 ```
-## [1] "Ali" "Bob" "Cha" "Dou" "Eli" "Fra"
+## [1] "Ali" "Bob" "Cha" "Don" "Emm" "Fra" "Gen" "Hei"
 ```
 
 ``` r
 # get the last 3 characters of each name;
 # remember R always includes bounds, so to get the last three,
 # we want to get n-2,n-1,n where n is the number of characters
-substr(friends,nchar(friends)-2,nchar(friends))
+# note this is done once again with our old friend, vectorization!
+substr(friends, nchar(friends) - 2, nchar(friends))
 ```
 
 ```
-## [1] "ice" "Bob" "lie" "oug" "eth" "ine"
+## [1] "ice" "Bob" "lie" "nny" "mmy" "ine" "eve" "ann"
 ```
 
 ``` r
 # remove the first and last characters of each name
-substr(friends,2,nchar(friends)-1)
+substr(friends, 2, nchar(friends) - 1)
 ```
 
 ```
-## [1] "lic"     "o"       "harli"   "ou"      "lizabet" "rancin"
+## [1] "lic"     "o"       "harli"   "onn"     "mm"      "rancin" 
+## [7] "eneviev" "eineman"
 ```
 
 ``` r
 # paste can "glue" on single or (recycled) vectors of strings
-paste(friends,"is my friend")
+paste(friends, "is my friend")
 ```
 
 ```
 ## [1] "Alice is my friend"     "Bob is my friend"      
-## [3] "Charlie is my friend"   "Doug is my friend"     
-## [5] "Elizabeth is my friend" "Francine is my friend"
+## [3] "Charlie is my friend"   "Donny is my friend"    
+## [5] "Emmy is my friend"      "Francine is my friend" 
+## [7] "Genevieve is my friend" "Heinemann is my friend"
 ```
 
 ``` r
-paste("friend",friends,"is in group",groups)
+paste("My friend", friends, "is in group", groups)
 ```
 
 ```
-## [1] "friend Alice is in group A"    
-## [2] "friend Bob is in group B"      
-## [3] "friend Charlie is in group A"  
-## [4] "friend Doug is in group B"     
-## [5] "friend Elizabeth is in group A"
-## [6] "friend Francine is in group B"
+## [1] "My friend Alice is in group A"    
+## [2] "My friend Bob is in group B"      
+## [3] "My friend Charlie is in group A"  
+## [4] "My friend Donny is in group B"    
+## [5] "My friend Emmy is in group A"     
+## [6] "My friend Francine is in group B" 
+## [7] "My friend Genevieve is in group A"
+## [8] "My friend Heinemann is in group B"
 ```
 
 ``` r
 # paste0(...) is a shortcut for paste(..., sep="")
 # sep sets the separator between each string (default: a single space " ")
-paste0(friends,"123")
+paste0(friends, "123")
 ```
 
 ```
-## [1] "Alice123"     "Bob123"       "Charlie123"   "Doug123"     
-## [5] "Elizabeth123" "Francine123"
+## [1] "Alice123"     "Bob123"       "Charlie123"   "Donny123"    
+## [5] "Emmy123"      "Francine123"  "Genevieve123" "Heinemann123"
+```
+
+``` r
+paste(friends, "123", sep = "_")
+```
+
+```
+## [1] "Alice_123"     "Bob_123"       "Charlie_123"  
+## [4] "Donny_123"     "Emmy_123"      "Francine_123" 
+## [7] "Genevieve_123" "Heinemann_123"
 ```
 
 ``` r
 # paste also has an argument called collapse, which sets a separator,
 # then uses that separator to collapse the vector into a single string
-paste(friends,collapse=", ")
+paste(friends, collapse = ", ")
 ```
 
 ```
-## [1] "Alice, Bob, Charlie, Doug, Elizabeth, Francine"
+## [1] "Alice, Bob, Charlie, Donny, Emmy, Francine, Genevieve, Heinemann"
 ```
+
+``` r
+# repeat characters in each string a set number of times
+strrep(friends, 3)
+```
+
+```
+## [1] "AliceAliceAlice"             "BobBobBob"                  
+## [3] "CharlieCharlieCharlie"       "DonnyDonnyDonny"            
+## [5] "EmmyEmmyEmmy"                "FrancineFrancineFrancine"   
+## [7] "GenevieveGenevieveGenevieve" "HeinemannHeinemannHeinemann"
+```
+
+``` r
+# of course, this can also be vectorized!
+strrep(friends, 1:8)
+```
+
+```
+## [1] "Alice"                                                                   
+## [2] "BobBob"                                                                  
+## [3] "CharlieCharlieCharlie"                                                   
+## [4] "DonnyDonnyDonnyDonny"                                                    
+## [5] "EmmyEmmyEmmyEmmyEmmy"                                                    
+## [6] "FrancineFrancineFrancineFrancineFrancineFrancine"                        
+## [7] "GenevieveGenevieveGenevieveGenevieveGenevieveGenevieveGenevieve"         
+## [8] "HeinemannHeinemannHeinemannHeinemannHeinemannHeinemannHeinemannHeinemann"
+```
+
 
 
 #### Pattern string functions
 
+There are also functions for working with patterns. You don't need to master these functions, but a few basic demos of them may prove helpful. Primarily, we have `grep()`/`grepl()` for pattern matching, and `sub()`/`gsub()` for pattern replacing. The prefix/suffix matching `startsWith()`/`endsWith()` are also occasionally useful.
 
-<!--
+It should be noted the patterns below are all fairly short (mostly one single character) for simplicity of example, but patterns can be as many characters long as necessary.
 
-`grep()`/`grepl()` for pattern matching, and `sub()`/`gsub()` for pattern replacing. We will demonstrate a number of common usages of these functions.
 
--->
+``` r
+# which friends (by position) have a lowercase "e" in their name?
+grep("e", friends)
+```
+
+```
+## [1] 1 3 6 7 8
+```
+
+``` r
+# alternatively, return a TRUE/FALSE vector result instead for each element
+grepl("e", friends)
+```
+
+```
+## [1]  TRUE FALSE  TRUE FALSE FALSE  TRUE  TRUE  TRUE
+```
+
+``` r
+# you can use either of these to subset the original vector to get actual names
+friends[grep("e", friends)]
+```
+
+```
+## [1] "Alice"     "Charlie"   "Francine"  "Genevieve" "Heinemann"
+```
+
+``` r
+# you can disable case sensitivity, which adds Emmy to the results
+friends[grep("e", friends, ignore.case = TRUE)]
+```
+
+```
+## [1] "Alice"     "Charlie"   "Emmy"      "Francine"  "Genevieve"
+## [6] "Heinemann"
+```
+
+``` r
+# you can use sub() to replace patterns
+# here we can create a set of variant spellings, changing -y to -ie
+sub("y", "ie", friends)
+```
+
+```
+## [1] "Alice"     "Bob"       "Charlie"   "Donnie"    "Emmie"    
+## [6] "Francine"  "Genevieve" "Heinemann"
+```
+
+``` r
+# sub() can only replace once (inside each element),
+# but gsub() can replace ALL occurrences
+sub("n", "m", friends)
+```
+
+```
+## [1] "Alice"     "Bob"       "Charlie"   "Domny"     "Emmy"     
+## [6] "Framcine"  "Gemevieve" "Heimemann"
+```
+
+``` r
+gsub("n", "m", friends)
+```
+
+```
+## [1] "Alice"     "Bob"       "Charlie"   "Dommy"     "Emmy"     
+## [6] "Framcime"  "Gemevieve" "Heimemamm"
+```
+
+Each of these functions (as well as several more listed in the `grep()` help page), actually accept more complex pattern syntax for the search pattern. This advanced search pattern syntax is called "regular expressions" or "regex" for short. You can do things like match groups of characters, match repeated characters or groups, match to specific locations in words or sentences, and more.
+
+In this class we will NOT cover regular expressions to any real detail again due to limited time, but feel free to explore [this cheat sheet](https://paulvanderlaken.com/wp-content/uploads/2017/08/r-regular-expression-cheetsheat.pdf) as well as [these](https://paulvanderlaken.com/2017/10/03/regular-expressions-in-r-part-1-introduction-and-base-r-functions/) [two](https://bookdown.org/rdpeng/rprogdatascience/regular-expressions.html) additional articles on the matter.
+
+
+
+#### Additional stringr functions
+
+The [stringr](https://stringr.tidyverse.org/) package (which is a subset of the [Tidyverse](https://www.tidyverse.org/)) contains an alternative set of functions for working with strings. Many of these are similar in purpose to base R versions (although some have subtle differences). E.g. `str_length()` is the same as `nchar()`, `str_to_lower()`/`str_to_upper()` replicate `tolower()`/`toupper()`, `str_replace()` is similar to `sub()`, `str_sub()` extends `substr()`, etc. Here's a full list of these [doppelgänger stringr functions](https://stringr.tidyverse.org/articles/from-base.html).
+
+However, there are a few useful stringr functions that do not have counterparts in base R.
+
+
+``` r
+# you can import either all of tidyverse with library(tidyverse)
+# or just stringr by itself if that's all you need
+library(stringr)
+```
+
+
+``` r
+# count how many times a pattern occurs
+str_count(friends, "e")
+```
+
+```
+## [1] 1 0 1 0 0 1 4 2
+```
+
+``` r
+# change strings to title case, i.e. first letter uppercase, all else lower
+str_to_title(toupper(friends))
+```
+
+```
+## [1] "Alice"     "Bob"       "Charlie"   "Donny"     "Emmy"     
+## [6] "Francine"  "Genevieve" "Heinemann"
+```
