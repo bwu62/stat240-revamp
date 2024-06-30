@@ -46,3 +46,6 @@ character-vectors
 basic-string-functions
 pattern-string-functions
 additional-stringr-functions
+comparing-strings
+date-vectors
+sorting-vectors

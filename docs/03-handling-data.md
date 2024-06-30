@@ -839,6 +839,15 @@ gsub("n", "m", friends)
 ## [6] "Framcime"  "Gemevieve" "Heimemamm"
 ```
 
+``` r
+# check which string endsWith() a pattern (startsWith() does the opposite)
+endsWith(friends, "y")
+```
+
+```
+## [1] FALSE FALSE FALSE  TRUE  TRUE FALSE FALSE FALSE
+```
+
 Each of these functions (as well as several more listed in the `grep()` help page), actually accept more complex pattern syntax for the search pattern. This advanced search pattern syntax is called "regular expressions" or "regex" for short. You can do things like match groups of characters, match repeated characters or groups, match to specific locations in words or sentences, and more.
 
 In this class we will NOT cover regular expressions to any real detail again due to limited time, but feel free to explore [this cheat sheet](https://paulvanderlaken.com/wp-content/uploads/2017/08/r-regular-expression-cheetsheat.pdf) as well as [these](https://paulvanderlaken.com/2017/10/03/regular-expressions-in-r-part-1-introduction-and-base-r-functions/) [two](https://bookdown.org/rdpeng/rprogdatascience/regular-expressions.html) additional articles on the matter.
@@ -849,7 +858,7 @@ In this class we will NOT cover regular expressions to any real detail again due
 
 The [stringr](https://stringr.tidyverse.org/) package (which is a subset of the [Tidyverse](https://www.tidyverse.org/)) contains an alternative set of functions for working with strings. Many of these are similar in purpose to base R versions (although some have subtle differences). E.g. `str_length()` is the same as `nchar()`, `str_to_lower()`/`str_to_upper()` replicate `tolower()`/`toupper()`, `str_replace()` is similar to `sub()`, `str_sub()` extends `substr()`, etc. Here's a full list of these [doppelgänger stringr functions](https://stringr.tidyverse.org/articles/from-base.html).
 
-However, there are a few useful stringr functions that do not have counterparts in base R.
+However, there are a few useful stringr functions that do not have counterparts in base R (or at least whose counterparts require much more complex expressions). Here is a *small* curation of them.
 
 
 ``` r
@@ -877,3 +886,28 @@ str_to_title(toupper(friends))
 ## [1] "Alice"     "Bob"       "Charlie"   "Donny"     "Emmy"     
 ## [6] "Francine"  "Genevieve" "Heinemann"
 ```
+
+``` r
+# "pad" a vector of strings to a constant length
+str_pad(friends, width = 12, side = "right", pad = ".")
+```
+
+```
+## [1] "Alice......." "Bob........." "Charlie....." "Donny......."
+## [5] "Emmy........" "Francine...." "Genevieve..." "Heinemann..."
+```
+
+
+
+#### Comparing strings
+
+
+### Date vectors
+
+ - parse, getters/setters, math, comparisons, etc.
+
+### Sorting vectors
+
+ - examples from all types
+
+

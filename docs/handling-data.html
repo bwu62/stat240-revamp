@@ -514,6 +514,10 @@
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">"n"</span>, <span class="st">"m"</span>, <span class="va">friends</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "Alice"     "Bob"       "Charlie"   "Dommy"     "Emmy"     
 ## [6] "Framcime"  "Gemevieve" "Heimemamm"</code></pre>
+<div class="sourceCode" id="cb252"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># check which string endsWith() a pattern (startsWith() does the opposite)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/startsWith.html">endsWith</a></span><span class="op">(</span><span class="va">friends</span>, <span class="st">"y"</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] FALSE FALSE FALSE  TRUE  TRUE FALSE FALSE FALSE</code></pre>
 <p>Each of these functions (as well as several more listed in the <code><a href="https://rdrr.io/r/base/grep.html">grep()</a></code> help page), actually accept more complex pattern syntax for the search pattern. This advanced search pattern syntax is called “regular expressions” or “regex” for short. You can do things like match groups of characters, match repeated characters or groups, match to specific locations in words or sentences, and more.</p>
 <p>In this class we will NOT cover regular expressions to any real detail again due to limited time, but feel free to explore <a href="https://paulvanderlaken.com/wp-content/uploads/2017/08/r-regular-expression-cheetsheat.pdf">this cheat sheet</a> as well as <a href="https://paulvanderlaken.com/2017/10/03/regular-expressions-in-r-part-1-introduction-and-base-r-functions/">these</a> <a href="https://bookdown.org/rdpeng/rprogdatascience/regular-expressions.html">two</a> additional articles on the matter.</p>
 </div>
@@ -522,22 +526,47 @@
 <span class="header-section-number">3.1.8.3</span> Additional stringr functions<a class="anchor" aria-label="anchor" href="#additional-stringr-functions"><i class="fas fa-link"></i></a>
 </h4>
 <p>The <a href="https://stringr.tidyverse.org/">stringr</a> package (which is a subset of the <a href="https://www.tidyverse.org/">Tidyverse</a>) contains an alternative set of functions for working with strings. Many of these are similar in purpose to base R versions (although some have subtle differences). E.g. <code><a href="https://stringr.tidyverse.org/reference/str_length.html">str_length()</a></code> is the same as <code><a href="https://rdrr.io/r/base/nchar.html">nchar()</a></code>, <code><a href="https://stringr.tidyverse.org/reference/case.html">str_to_lower()</a></code>/<code><a href="https://stringr.tidyverse.org/reference/case.html">str_to_upper()</a></code> replicate <code><a href="https://rdrr.io/r/base/chartr.html">tolower()</a></code>/<code><a href="https://rdrr.io/r/base/chartr.html">toupper()</a></code>, <code><a href="https://stringr.tidyverse.org/reference/str_replace.html">str_replace()</a></code> is similar to <code><a href="https://rdrr.io/r/base/grep.html">sub()</a></code>, <code><a href="https://stringr.tidyverse.org/reference/str_sub.html">str_sub()</a></code> extends <code><a href="https://rdrr.io/r/base/substr.html">substr()</a></code>, etc. Here’s a full list of these <a href="https://stringr.tidyverse.org/articles/from-base.html">doppelgänger stringr functions</a>.</p>
-<p>However, there are a few useful stringr functions that do not have counterparts in base R.</p>
-<div class="sourceCode" id="cb252"><pre class="downlit sourceCode r">
+<p>However, there are a few useful stringr functions that do not have counterparts in base R (or at least whose counterparts require much more complex expressions). Here is a <em>small</em> curation of them.</p>
+<div class="sourceCode" id="cb254"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># you can import either all of tidyverse with library(tidyverse)</span></span>
 <span><span class="co"># or just stringr by itself if that's all you need</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://stringr.tidyverse.org">stringr</a></span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb253"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb255"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># count how many times a pattern occurs</span></span>
 <span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_count.html">str_count</a></span><span class="op">(</span><span class="va">friends</span>, <span class="st">"e"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 1 0 1 0 0 1 4 2</code></pre>
-<div class="sourceCode" id="cb255"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb257"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># change strings to title case, i.e. first letter uppercase, all else lower</span></span>
 <span><span class="fu"><a href="https://stringr.tidyverse.org/reference/case.html">str_to_title</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/chartr.html">toupper</a></span><span class="op">(</span><span class="va">friends</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "Alice"     "Bob"       "Charlie"   "Donny"     "Emmy"     
 ## [6] "Francine"  "Genevieve" "Heinemann"</code></pre>
-
+<div class="sourceCode" id="cb259"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># "pad" a vector of strings to a constant length</span></span>
+<span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_pad.html">str_pad</a></span><span class="op">(</span><span class="va">friends</span>, width <span class="op">=</span> <span class="fl">12</span>, side <span class="op">=</span> <span class="st">"right"</span>, pad <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] "Alice......." "Bob........." "Charlie....." "Donny......."
+## [5] "Emmy........" "Francine...." "Genevieve..." "Heinemann..."</code></pre>
 </div>
+<div id="comparing-strings" class="section level4" number="3.1.8.4">
+<h4>
+<span class="header-section-number">3.1.8.4</span> Comparing strings<a class="anchor" aria-label="anchor" href="#comparing-strings"><i class="fas fa-link"></i></a>
+</h4>
+</div>
+</div>
+<div id="date-vectors" class="section level3" number="3.1.9">
+<h3>
+<span class="header-section-number">3.1.9</span> Date vectors<a class="anchor" aria-label="anchor" href="#date-vectors"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>parse, getters/setters, math, comparisons, etc.</li>
+</ul>
+</div>
+<div id="sorting-vectors" class="section level3" number="3.1.10">
+<h3>
+<span class="header-section-number">3.1.10</span> Sorting vectors<a class="anchor" aria-label="anchor" href="#sorting-vectors"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>examples from all types</li>
+</ul>
 </div>
 </div>
 </div>
@@ -585,6 +614,8 @@
 <li><a class="nav-link" href="#in-vector-membership"><span class="header-section-number">3.1.6</span> %in% (Vector membership)</a></li>
 <li><a class="nav-link" href="#vector-subsetting"><span class="header-section-number">3.1.7</span> Vector subsetting</a></li>
 <li><a class="nav-link" href="#character-vectors"><span class="header-section-number">3.1.8</span> Character vectors</a></li>
+<li><a class="nav-link" href="#date-vectors"><span class="header-section-number">3.1.9</span> Date vectors</a></li>
+<li><a class="nav-link" href="#sorting-vectors"><span class="header-section-number">3.1.10</span> Sorting vectors</a></li>
 </ul>
 </li>
 </ul>
@@ -604,7 +635,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, Bret Larget, Cameron Jones. It was last built on 2024-06-29.</p>
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, Bret Larget, Cameron Jones. It was last built on 2024-06-30.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
