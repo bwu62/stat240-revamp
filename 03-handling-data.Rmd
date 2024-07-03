@@ -228,7 +228,7 @@ Instead, ***always* look for a solution using vectorized operations**. In R, vec
 
 
 
-### `%in%` (Vector membership)
+### `%in%` (Membership)
 
 
 One notable exception to all this is the [`%in%`{.R}](https://rdrr.io/r/base/match.html) operator, which only "vectorizes" on the left side. For example, suppose we want to know which elements of `z` are in `x1`. Here's how:
@@ -304,7 +304,7 @@ message("Error in letters[-1:10] : only 0's may be mixed with negative subscript
 
 
 
-### Sorting/reordering vectors
+### Sorting/reordering
 
 Sometimes, you may need to sort/reorder vectors. We already saw in the previous section you can reorder vectors by subsetting with a vector of positions. If the vector of positions exhausts the vector without repeating (i.e. returns each element of the vector exactly once), the result is a reordering of the vector.
 
@@ -520,6 +520,7 @@ head(sort(state.name, decreasing=TRUE))
 
 
 
+### Coercion (converting types)
 ### Date vectors
 
  - parse, getters/setters, math, comparisons, etc.
