@@ -427,13 +427,14 @@ In this class we will NOT cover regular expressions to any real detail again due
 
 #### Additional stringr functions
 
-The [stringr](https://stringr.tidyverse.org/) package (which is a subset of the [Tidyverse](https://www.tidyverse.org/)) contains an alternative set of functions for working with strings. Many of these are similar in purpose to base R versions (although some have subtle differences). E.g. `str_length()` is the same as `nchar()`, `str_to_lower()`/`str_to_upper()` replicate `tolower()`/`toupper()`, `str_replace()` is similar to `sub()`, `str_sub()` extends `substr()`, etc. Here's a full list of these [doppelgänger stringr functions](https://stringr.tidyverse.org/articles/from-base.html).
+[stringr](https://stringr.tidyverse.org/), one of the [core Tidyverse](https://www.tidyverse.org/packages/#core-tidyverse) packages, contains an alternative set of functions for working with strings. Many of these are similar in purpose to base R versions (although some have subtle differences). E.g. `str_length()` is the same as `nchar()`, `str_to_lower()`/`str_to_upper()` replicate `tolower()`/`toupper()`, `str_replace()` is similar to `sub()`, `str_sub()` extends `substr()`, etc. Here's a full list of these [doppelgänger stringr functions](https://stringr.tidyverse.org/articles/from-base.html).
 
 However, there are a few useful stringr functions that do not have counterparts in base R (or at least whose counterparts require much more complex expressions). Here is a *small* curation of them.
 
 ```{r}
-# you can import either all of tidyverse with library(tidyverse)
-# or just stringr by itself if that's all you need
+# since stringr is a "core" tidyverse package,
+# you can load it (+other core packages) with library(tidyverse)
+# you can also just load stringr by itself if that's all you need
 library(stringr)
 ```
 
