@@ -1,4 +1,8 @@
 
+<!-- add later when there's more chapters to style with
+# (PART) R Crash Course
+-->
+
 
 # Setup {#setup}
 
