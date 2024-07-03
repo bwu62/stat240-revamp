@@ -1065,9 +1065,12 @@ This concludes the discussion of code chunks in R Markdown.
 
 ### Aside: $\LaTeX$
 
-Quick aside. This is outside the scope of this scope as well, so you **do not need to learn this**, but R Markdown also natively supports $\LaTeX$ code. It's rendered using [MathJax](https://www.mathjax.org/), an open-source Javascript engine for typesetting math expressions in webpages. For example, `$$x={-b\pm\sqrt{b^2-4ac} \over 2a}$$`{.latex} becomes:
+This is also outside the scope of this course, so you **do NOT need to learn it**, but R Markdown natively supports $\LaTeX$ code as well. It's rendered using [MathJax](https://www.mathjax.org/), an open-source Javascript engine for typesetting mathematical expressions in webpages. For example, `$$x={-b\pm\sqrt{b^2-4ac} \over 2a}$$`{.latex} becomes:
 
 $$x={-b\pm\sqrt{b^2-4ac} \over 2a}$$
+
+You will see lots of $\LaTeX$ later in the notes when we need to write math, so I just wanted to mention it here. If you wish to read more, start with Rong Zhuang's [MathJax cheat sheet](https://jojozhuang.github.io/tutorial/mathjax-cheat-sheet-for-mathematical-notation/) or David Richeson's [quick guide](https://users.dickinson.edu/~richesod/latex/latexcheatsheet.pdf) which both have lots of great beginner-friendly examples. For a slightly more complete list of symbols, Eric Torrence's [cheat sheet](https://pages.uoregon.edu/torrence/391/labs/LaTeX-cheat-sheet.pdf) may also be useful. 
+
 
 
 
