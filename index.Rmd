@@ -13,7 +13,7 @@ csl: chicago-fullnote-bibliography.csl
 ---
 
 
-# Welcome {#welcome .unnumbered}
+# Welcome {-}
 
 
 Intro (maybe write this last?)
