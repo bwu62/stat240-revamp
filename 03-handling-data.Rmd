@@ -379,7 +379,7 @@ substr(friends, 2, nchar(friends) - 1)
 paste(friends, "is my friend")
 paste("My friend", friends, "is in group", groups)
 # paste0(...) is a shortcut for paste(..., sep="")
-# sep sets the separator between each string (default: a single space " ")
+# sep sets the separator between each string (default: a space " ")
 paste0(friends, "123")
 paste(friends, "123", sep = "_")
 # paste also has an argument called collapse, which sets a separator,
@@ -404,7 +404,7 @@ It should be noted the patterns below are all fairly short (mostly one single ch
 grep("e", friends)
 # alternatively, return a TRUE/FALSE vector result instead for each element
 grepl("e", friends)
-# you can use either of these to subset the original vector to get actual names
+# you can use either one to subset the original vector to get actual names
 friends[grep("e", friends)]
 # you can disable case sensitivity, which adds Emmy to the results
 friends[grep("e", friends, ignore.case = TRUE)]
@@ -415,7 +415,7 @@ sub("y", "ie", friends)
 # but gsub() can replace ALL occurrences
 sub("n", "m", friends)
 gsub("n", "m", friends)
-# check which string endsWith() a pattern (startsWith() does the opposite)
+# check if endsWith() a pattern (startsWith() does the opposite)
 endsWith(friends, "y")
 ```
 
