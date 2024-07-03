@@ -29,6 +29,7 @@ markdown
 code
 inline-code
 code-chunks
+aside-latex
 workflow
 working-directory
 knitting-v.-console-execution

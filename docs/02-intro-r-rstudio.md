@@ -1063,6 +1063,13 @@ This concludes the discussion of code chunks in R Markdown.
 
 
 
+### Aside: $\LaTeX$
+
+Quick aside. This is outside the scope of this scope as well, so you **do not need to learn this**, but R Markdown also natively supports $\LaTeX$ code. It's rendered using [MathJax](https://www.mathjax.org/), an open-source Javascript engine for typesetting math expressions in webpages. For example, `$$x={-b\pm\sqrt{b^2-4ac} \over 2a}$$`{.latex} becomes:
+
+$$x={-b\pm\sqrt{b^2-4ac} \over 2a}$$
+
+
 
 ## Workflow
 

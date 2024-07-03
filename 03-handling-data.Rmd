@@ -543,11 +543,9 @@ as.numeric(prices_raw)
 
 In R, it's important to remember **not to reinvent the wheel**; most actions already have an associated package/function, and it's probably better than what you can write (if you're a beginner). Here, it may be tempting to write your own parsing function by using `sub()`/`gsub()` to replace the dollar and commas then coerce, but there's a better option.
 
-[readr](https://readr.tidyverse.org/index.html) is another one of the [core Tidyverse](https://www.tidyverse.org/packages/#core-tidyverse) packages, and it's focused on
+[readr](https://readr.tidyverse.org/index.html) is another one of the [core Tidyverse](https://www.tidyverse.org/packages/#core-tidyverse) packages. It's designed to make ingesting data as easy as possible.
 
-
-
-
+One set of readr functions useful here are the
 
 
 

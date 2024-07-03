@@ -695,7 +695,8 @@
 <pre class="warning"><code>## Warning: NAs introduced by coercion</code></pre>
 <pre><code>## [1] NA NA NA NA</code></pre>
 <p>In R, it’s important to remember <strong>not to reinvent the wheel</strong>; most actions already have an associated package/function, and it’s probably better than what you can write (if you’re a beginner). Here, it may be tempting to write your own parsing function by using <code><a href="https://rdrr.io/r/base/grep.html">sub()</a></code>/<code><a href="https://rdrr.io/r/base/grep.html">gsub()</a></code> to replace the dollar and commas then coerce, but there’s a better option.</p>
-<p><a href="https://readr.tidyverse.org/index.html">readr</a> is another one of the <a href="https://www.tidyverse.org/packages/#core-tidyverse">core Tidyverse</a> packages, and it’s focused on</p>
+<p><a href="https://readr.tidyverse.org/index.html">readr</a> is another one of the <a href="https://www.tidyverse.org/packages/#core-tidyverse">core Tidyverse</a> packages. It’s designed to make ingesting data as easy as possible.</p>
+<p>One set of readr functions useful here are the</p>
 <!--
 
 ### Date vectors
