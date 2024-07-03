@@ -304,6 +304,44 @@ message("Error in letters[-1:10] : only 0's may be mixed with negative subscript
 
 
 
+### Sorting/reordering vectors
+
+Sometimes, you may need to sort/reorder vectors. We already saw in the previous section you can reorder vectors by subsetting with a vector of positions. If the vector of positions exhausts the vector without repeating (i.e. returns each element of the vector exactly once), the result is a reordering of the vector.
+
+```{r, tidy=F}
+# defining a new data2 vector to use for examples,
+# trust me, this will REALLY help clarify what's happening in a minute
+data2 <- data * 10
+data2
+# ok, now let's proceed with the demos, first up:
+# manual reordering, e.g. swapping the first and last elements
+n <- length(data2)
+data2[c(n, 2:(n-1), 1)]
+```
+
+You can of course also have R sort a vector for you automatically. There are two main functions for sorting: `sort()`, which does what you expect and returns a vector with the elements rearranged from lowest to highest (unless you set the argument `decreasing = TRUE` which does the opposite); and `order()`, which simply returns the order the elements would go in (i.e. a vector of positions where they belong) if they were to be sorted lowest to highest (again, unless you set `decreasing = TRUE`).
+
+```{r}
+# simply sort the data in ascending order
+sort(data2)
+# sort in descending order
+sort(data2, decreasing = TRUE)
+# return the order of positions that WOULD sort it
+order(data2)
+# passing this as a subsetting vector gives the sorted vector
+data2[order(data2)]
+```
+
+A final function that is sometimes handy is the `rev()` function, which exactly reverses the order.
+
+```{r}
+# reverse the vector
+rev(data2)
+```
+
+
+
+
 ### Character vectors
 
 The [`letters`{.R}](https://rdrr.io/r/base/Constants.html) vector in the last section was one example of a **character vector**. You can create a character vector also with `c()` or `rep()` which we've seen before. When creating characters, you can use either the single [`'`]{.k} or double [`"`]{.k} quote character, no difference.
