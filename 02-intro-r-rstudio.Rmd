@@ -482,7 +482,7 @@ It's important to check the output messages to see if the install was successful
 #### Loading a package
 
 
-You can load a package with either `library()` or `require()`, which are basically the same. ^[The only difference is `require()` can be used to check if a package exists and will return `FALSE` if it doesn't, whereas `library()` will just error out, see <https://www.geeksforgeeks.org/the-difference-between-require-and-library-in-r/>{target="_blank"} for more details.]
+You can load a package with either `library()` or `require()`, which are basically the same. ^[The only difference is `require()` can be used to check if a package exists and will return `FALSE` if it doesn't, whereas `library()` will just error out, see <https://www.geeksforgeeks.org/the-difference-between-require-and-library-in-r/>{target="_blank"} for more details.] Some package names actually load a group of other packages, e.g. `library(tidyverse)` will load all the ["core" Tidyverse](https://www.tidyverse.org/packages/#core-tidyverse) packages, which include [ggplot2](https://ggplot2.tidyverse.org/), [dplyr](https://dplyr.tidyverse.org/), [tidyr](https://tidyr.tidyverse.org/), [readr](https://readr.tidyverse.org/), [purrr](https://purrr.tidyverse.org/), [tibble](https://tibble.tidyverse.org/), [stringr](https://stringr.tidyverse.org/), and [forcats](https://forcats.tidyverse.org/).
 
 ```{r library,message=T,warning=T}
 library(tidyverse)
