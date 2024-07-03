@@ -521,6 +521,44 @@ head(sort(state.name, decreasing=TRUE))
 
 
 ### Coercion (converting types)
+
+Sometimes, we read data in and it may need to be converted before it's usable. E.g. let's say you read in a list of prices from some catalog and you get the following vector:
+
+```{r}
+prices_raw = c("$1,000","$1,500","$850","$2,000")
+prices_raw
+```
+
+Since R doesn't natively understand dollar signs or comma grouping, this will read in as a character vector. You can check the type of a vector by using the `is.numeric()`, `is.logical()`, `is.character()` functions.
+
+```{r}
+is.character(prices_raw)
+```
+
+If the data has been "cleaned-up" then you can coerce (i.e. convert) the vector into other types with the corresponding `as.numeric()`, `as.logical()`, `as.character()` functions. In this case however, the data is not yet "cleaned-up" so this coercion operation will give an error.
+
+```{r,warning=T,class.warning="warning"}
+as.numeric(prices_raw)
+```
+
+In R, it's important to remember **not to reinvent the wheel**; most actions already have an associated package/function, and it's probably better than what you can write (if you're a beginner). Here, it may be tempting to write your own parsing function by using `sub()`/`gsub()` to replace the dollar and commas then coerce, but there's a better option.
+
+[readr](https://readr.tidyverse.org/index.html) is another one of the [core Tidyverse](https://www.tidyverse.org/packages/#core-tidyverse) packages, and it's focused on
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+
 ### Date vectors
 
  - parse, getters/setters, math, comparisons, etc.
@@ -529,4 +567,4 @@ head(sort(state.name, decreasing=TRUE))
 
  - examples from all types
 
-
+-->
