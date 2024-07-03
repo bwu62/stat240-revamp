@@ -122,6 +122,21 @@ div.sourceCode + pre{
   background-image: unset !important;
   margin-top: 0.2rem !important;
 }
+pre.message,pre.warning{
+  background-color: unset !important;
+  background-image: unset !important;
+  margin-top: 0.2rem !important;
+  margin-bottom: 0 !important;
+  border-bottom: none !important;
+  padding-bottom: 0 !important;
+}
+pre.message+pre,pre.warning+pre{
+  background-color: unset !important;
+  background-image: unset !important;
+  margin-top: 0 !important;
+  border-top: none !important;
+  padding-top: 0 !important;
+}
 div.sourceCode + p{
   margin-top: 1rem !important
 }
@@ -152,6 +167,11 @@ h3{
   margin-top: 2.5rem !important;
   margin-bottom: 1rem !important;
   font-size: 1.4rem !important;
+}
+h4{
+  margin-top: 2rem !important;
+  font-size: 1.2rem !important;
+  font-style: italic;
 }
 h2+div>h3{
   margin-top: 1em !important;

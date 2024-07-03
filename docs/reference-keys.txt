@@ -40,12 +40,12 @@ numeric-vectors
 logical-vectors
 other-constructors
 multiple-vectors-vector-recycling
-in-vector-membership
+in-membership
 vector-subsetting
+sortingreordering
 character-vectors
 basic-string-functions
 pattern-string-functions
 additional-stringr-functions
 comparing-strings
-date-vectors
-sorting-vectors
+coercion-converting-types

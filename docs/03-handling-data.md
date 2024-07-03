@@ -434,7 +434,7 @@ Instead, ***always* look for a solution using vectorized operations**. In R, vec
 
 
 
-### `%in%` (Vector membership)
+### `%in%` (Membership)
 
 
 One notable exception to all this is the [`%in%`{.R}](https://rdrr.io/r/base/match.html) operator, which only "vectorizes" on the left side. For example, suppose we want to know which elements of `z` are in `x1`. Here's how:
@@ -585,6 +585,87 @@ letters[-1:10]
 
 
 
+### Sorting/reordering
+
+Sometimes, you may need to sort/reorder vectors. We already saw in the previous section you can reorder vectors by subsetting with a vector of positions. If the vector of positions exhausts the vector without repeating (i.e. returns each element of the vector exactly once), the result is a reordering of the vector.
+
+
+``` r
+# defining a new data2 vector to use for examples,
+# trust me, this will REALLY help clarify what's happening in a minute
+data2 <- data * 10
+data2
+```
+
+```
+## [1] 30 60 60 20 40 10 50
+```
+
+``` r
+# ok, now let's proceed with the demos, first up:
+# manual reordering, e.g. swapping the first and last elements
+n <- length(data2)
+data2[c(n, 2:(n-1), 1)]
+```
+
+```
+## [1] 50 60 60 20 40 10 30
+```
+
+You can of course also have R sort a vector for you automatically. There are two main functions for sorting: `sort()`, which does what you expect and returns a vector with the elements rearranged from lowest to highest (unless you set the argument `decreasing = TRUE` which does the opposite); and `order()`, which simply returns the order the elements would go in (i.e. a vector of positions where they belong) if they were to be sorted lowest to highest (again, unless you set `decreasing = TRUE`).
+
+
+``` r
+# simply sort the data in ascending order
+sort(data2)
+```
+
+```
+## [1] 10 20 30 40 50 60 60
+```
+
+``` r
+# sort in descending order
+sort(data2, decreasing = TRUE)
+```
+
+```
+## [1] 60 60 50 40 30 20 10
+```
+
+``` r
+# return the order of positions that WOULD sort it
+order(data2)
+```
+
+```
+## [1] 6 4 1 5 7 2 3
+```
+
+``` r
+# passing this as a subsetting vector gives the sorted vector
+data2[order(data2)]
+```
+
+```
+## [1] 10 20 30 40 50 60 60
+```
+
+A final function that is sometimes handy is the `rev()` function, which exactly reverses the order.
+
+
+``` r
+# reverse the vector
+rev(data2)
+```
+
+```
+## [1] 50 10 40 20 60 60 30
+```
+
+
+
+
 ### Character vectors
 
 The [`letters`{.R}](https://rdrr.io/r/base/Constants.html) vector in the last section was one example of a **character vector**. You can create a character vector also with `c()` or `rep()` which we've seen before. When creating characters, you can use either the single [`'`]{.k} or double [`"`]{.k} quote character, no difference.
@@ -705,7 +786,7 @@ paste("My friend", friends, "is in group", groups)
 
 ``` r
 # paste0(...) is a shortcut for paste(..., sep="")
-# sep sets the separator between each string (default: a single space " ")
+# sep sets the separator between each string (default: a space " ")
 paste0(friends, "123")
 ```
 
@@ -790,7 +871,7 @@ grepl("e", friends)
 ```
 
 ``` r
-# you can use either of these to subset the original vector to get actual names
+# you can use either one to subset the original vector to get actual names
 friends[grep("e", friends)]
 ```
 
@@ -840,7 +921,7 @@ gsub("n", "m", friends)
 ```
 
 ``` r
-# check which string endsWith() a pattern (startsWith() does the opposite)
+# check if endsWith() a pattern (startsWith() does the opposite)
 endsWith(friends, "y")
 ```
 
@@ -856,14 +937,15 @@ In this class we will NOT cover regular expressions to any real detail again due
 
 #### Additional stringr functions
 
-The [stringr](https://stringr.tidyverse.org/) package (which is a subset of the [Tidyverse](https://www.tidyverse.org/)) contains an alternative set of functions for working with strings. Many of these are similar in purpose to base R versions (although some have subtle differences). E.g. `str_length()` is the same as `nchar()`, `str_to_lower()`/`str_to_upper()` replicate `tolower()`/`toupper()`, `str_replace()` is similar to `sub()`, `str_sub()` extends `substr()`, etc. Here's a full list of these [doppelgänger stringr functions](https://stringr.tidyverse.org/articles/from-base.html).
+[stringr](https://stringr.tidyverse.org/), one of the [core Tidyverse](https://www.tidyverse.org/packages/#core-tidyverse) packages, contains an alternative set of functions for working with strings. Many of these are similar in purpose to base R versions (although some have subtle differences). E.g. `str_length()` is the same as `nchar()`, `str_to_lower()`/`str_to_upper()` replicate `tolower()`/`toupper()`, `str_replace()` is similar to `sub()`, `str_sub()` extends `substr()`, etc. Here's a full list of these [doppelgänger stringr functions](https://stringr.tidyverse.org/articles/from-base.html).
 
 However, there are a few useful stringr functions that do not have counterparts in base R (or at least whose counterparts require much more complex expressions). Here is a *small* curation of them.
 
 
 ``` r
-# you can import either all of tidyverse with library(tidyverse)
-# or just stringr by itself if that's all you need
+# since stringr is a "core" tidyverse package,
+# you can load it (+other core packages) with library(tidyverse)
+# you can also just load stringr by itself if that's all you need
 library(stringr)
 ```
 
@@ -901,6 +983,235 @@ str_pad(friends, width = 12, side = "right", pad = ".")
 
 #### Comparing strings
 
+Strings, like numbers, can also be logically compared in R using the same `==`, `!=`, `<`, `<=`, `>`, `>=` operators (also all vectorized of course). Checking equality is self-explanatory, and **inequalities evaluate by dictionary sorting order**, i.e. what order they might appear in in a dictionary, except generalized to include not just letters but also number and symbols.
+
+This snippet of code below (which you do NOT have to worry about learning right now) prints the "dictionary" sorting order for all ordinary keyboard characters typable on a standard US English keyboard layout in ascending order.
+
+
+``` r
+# print out the result
+cat(
+  # sort the characters
+  sort(
+    # flattern list output to a big vector of characters
+    unlist(
+      # split symbols into individual characters
+      strsplit(
+        # make a vector of all ordinary keyboard characters
+        c(letters,LETTERS,0:9,"`~!@#$%^&*()_+-=[]\\{}|;':\",./<>? ")
+      ,"")
+    )
+  )
+  ,sep=""
+)
+# please pardon the uneven text-wrapping of the output below:
+```
+<pre class="wrapCode">
+'- !"#$%&()*,./:;?@[\]^_`{|}~+<=>0123456789aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ
+</pre>
+
+Note the third character in the sequence is a space, which comes after single quote and hyphen, but before any other symbol, number, or letter.
+
+Characters are sorted by their order in this sequence of characters, with characters earlier in the sequence being "less than" later characters. Strings with the same first character will be sorted by the second character; if the second character is also the same, they will be sorted by the third, and so on (just like normal dictionaries)
+
+Note however that nothingness, i.e. the absence of a character (such as when a string ends), comes before any character, which makes sense because otherwise "app" would appear after "apple". Below is a series of examples demonstrating string sorting.
+
+
+``` r
+"apple" == "apple"
+```
+
+```
+## [1] TRUE
+```
+
+``` r
+# note equality also implies both >= and <=
+"apple" >= "apple"
+```
+
+```
+## [1] TRUE
+```
+
+``` r
+# remember R is case sensitive, so these are different
+"apple" != "Apple"
+```
+
+```
+## [1] TRUE
+```
+
+``` r
+# comparing apples and oranges
+"apple" == "orange"
+```
+
+```
+## [1] FALSE
+```
+
+``` r
+"apple" < "orange"
+```
+
+```
+## [1] TRUE
+```
+
+``` r
+# numbers and symbols can also dictionary-sort like letters
+# note these numeral characters have NO numeric meaning!
+"42" < "43"
+```
+
+```
+## [1] TRUE
+```
+
+``` r
+"1 pm" < "2 pm"
+```
+
+```
+## [1] TRUE
+```
+
+``` r
+"STAT240" < "STAT340"
+```
+
+```
+## [1] TRUE
+```
+
+``` r
+# however symbols come before numbers, thus
+"1,000" < "1000"
+```
+
+```
+## [1] TRUE
+```
+
+``` r
+"-3.00" < "-3.14"
+```
+
+```
+## [1] TRUE
+```
+
+``` r
+# and remember ending a string comes before any other character
+"-3" < "-3.14"
+```
+
+```
+## [1] TRUE
+```
+
+Using our newfound wisdom, we can now conclusively settle some age old debates.
+
+
+``` r
+# what is the greatest state? (head prints the first 6)
+head(sort(state.name, decreasing=TRUE))
+```
+
+```
+## [1] "Wyoming"       "Wisconsin"     "West Virginia"
+## [4] "Washington"    "Virginia"      "Vermont"
+```
+
+``` r
+# is the pen mightier than the sword?
+"pen" > "sword"
+```
+
+```
+## [1] FALSE
+```
+
+``` r
+# PC or Mac?
+"Windows" > "Mac"
+```
+
+```
+## [1] TRUE
+```
+
+``` r
+# and most importantly, did the chicken come before the egg?
+"chicken" < "egg"
+```
+
+```
+## [1] TRUE
+```
+
+
+
+
+### Coercion (converting types)
+
+Sometimes, we read data in and it may need to be converted before it's usable. E.g. let's say you read in a list of prices from some catalog and you get the following vector:
+
+
+``` r
+prices_raw = c("$1,000","$1,500","$850","$2,000")
+prices_raw
+```
+
+```
+## [1] "$1,000" "$1,500" "$850"   "$2,000"
+```
+
+Since R doesn't natively understand dollar signs or comma grouping, this will read in as a character vector. You can check the type of a vector by using the `is.numeric()`, `is.logical()`, `is.character()` functions.
+
+
+``` r
+is.character(prices_raw)
+```
+
+```
+## [1] TRUE
+```
+
+If the data has been "cleaned-up" then you can coerce (i.e. convert) the vector into other types with the corresponding `as.numeric()`, `as.logical()`, `as.character()` functions. In this case however, the data is not yet "cleaned-up" so this coercion operation will give an error.
+
+
+``` r
+as.numeric(prices_raw)
+```
+
+``` warning
+## Warning: NAs introduced by coercion
+```
+
+```
+## [1] NA NA NA NA
+```
+
+In R, it's important to remember **not to reinvent the wheel**; most actions already have an associated package/function, and it's probably better than what you can write (if you're a beginner). Here, it may be tempting to write your own parsing function by using `sub()`/`gsub()` to replace the dollar and commas then coerce, but there's a better option.
+
+[readr](https://readr.tidyverse.org/index.html) is another one of the [core Tidyverse](https://www.tidyverse.org/packages/#core-tidyverse) packages, and it's focused on
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
 
 ### Date vectors
 
@@ -910,4 +1221,4 @@ str_pad(friends, width = 12, side = "right", pad = ".")
 
  - examples from all types
 
-
+-->

@@ -293,9 +293,9 @@
 <p>Instead, <strong><em>always</em> look for a solution using vectorized operations</strong>. In R, vectorized operations are basically always <a href="https://datakuity.com/2018/01/17/for-loop-vs-vectorization-in-r/">MUCH faster than for loops</a>, due to low-level parallelization optimizations.</p>
 </div>
 </div>
-<div id="in-vector-membership" class="section level3" number="3.1.6">
+<div id="in-membership" class="section level3" number="3.1.6">
 <h3>
-<span class="header-section-number">3.1.6</span> <code>%in%</code> (Vector membership)<a class="anchor" aria-label="anchor" href="#in-vector-membership"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.1.6</span> <code>%in%</code> (Membership)<a class="anchor" aria-label="anchor" href="#in-membership"><i class="fas fa-link"></i></a>
 </h3>
 <p>One notable exception to all this is the <a href="https://rdrr.io/r/base/match.html"><code class="sourceCode r"><span class="sc">%in%</span></code></a> operator, which only “vectorizes” on the left side. For example, suppose we want to know which elements of <code>z</code> are in <code>x1</code>. Here’s how:</p>
 <div class="sourceCode" id="cb184"><pre class="downlit sourceCode r">
@@ -373,64 +373,104 @@
 <span><span class="va">letters</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span></span></code></pre></div>
 <pre><code>## Error in letters[-1:10] : only 0's may be mixed with negative subscripts</code></pre>
 </div>
-<div id="character-vectors" class="section level3" number="3.1.8">
+<div id="sortingreordering" class="section level3" number="3.1.8">
 <h3>
-<span class="header-section-number">3.1.8</span> Character vectors<a class="anchor" aria-label="anchor" href="#character-vectors"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.1.8</span> Sorting/reordering<a class="anchor" aria-label="anchor" href="#sortingreordering"><i class="fas fa-link"></i></a>
+</h3>
+<p>Sometimes, you may need to sort/reorder vectors. We already saw in the previous section you can reorder vectors by subsetting with a vector of positions. If the vector of positions exhausts the vector without repeating (i.e. returns each element of the vector exactly once), the result is a reordering of the vector.</p>
+<div class="sourceCode" id="cb208"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># defining a new data2 vector to use for examples,</span></span>
+<span><span class="co"># trust me, this will REALLY help clarify what's happening in a minute</span></span>
+<span><span class="va">data2</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op">*</span> <span class="fl">10</span></span>
+<span><span class="va">data2</span></span></code></pre></div>
+<pre><code>## [1] 30 60 60 20 40 10 50</code></pre>
+<div class="sourceCode" id="cb210"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># ok, now let's proceed with the demos, first up:</span></span>
+<span><span class="co"># manual reordering, e.g. swapping the first and last elements</span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">data2</span><span class="op">)</span></span>
+<span><span class="va">data2</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">n</span>, <span class="fl">2</span><span class="op">:</span><span class="op">(</span><span class="va">n</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
+<pre><code>## [1] 50 60 60 20 40 10 30</code></pre>
+<p>You can of course also have R sort a vector for you automatically. There are two main functions for sorting: <code><a href="https://rdrr.io/r/base/sort.html">sort()</a></code>, which does what you expect and returns a vector with the elements rearranged from lowest to highest (unless you set the argument <code>decreasing = TRUE</code> which does the opposite); and <code><a href="https://rdrr.io/r/base/order.html">order()</a></code>, which simply returns the order the elements would go in (i.e. a vector of positions where they belong) if they were to be sorted lowest to highest (again, unless you set <code>decreasing = TRUE</code>).</p>
+<div class="sourceCode" id="cb212"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># simply sort the data in ascending order</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">data2</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 10 20 30 40 50 60 60</code></pre>
+<div class="sourceCode" id="cb214"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># sort in descending order</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">data2</span>, decreasing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 60 60 50 40 30 20 10</code></pre>
+<div class="sourceCode" id="cb216"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># return the order of positions that WOULD sort it</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">data2</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 6 4 1 5 7 2 3</code></pre>
+<div class="sourceCode" id="cb218"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># passing this as a subsetting vector gives the sorted vector</span></span>
+<span><span class="va">data2</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">data2</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
+<pre><code>## [1] 10 20 30 40 50 60 60</code></pre>
+<p>A final function that is sometimes handy is the <code><a href="https://rdrr.io/r/base/rev.html">rev()</a></code> function, which exactly reverses the order.</p>
+<div class="sourceCode" id="cb220"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># reverse the vector</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span><span class="op">(</span><span class="va">data2</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 50 10 40 20 60 60 30</code></pre>
+</div>
+<div id="character-vectors" class="section level3" number="3.1.9">
+<h3>
+<span class="header-section-number">3.1.9</span> Character vectors<a class="anchor" aria-label="anchor" href="#character-vectors"><i class="fas fa-link"></i></a>
 </h3>
 <p>The <a href="https://rdrr.io/r/base/Constants.html"><code class="sourceCode r">letters</code></a> vector in the last section was one example of a <strong>character vector</strong>. You can create a character vector also with <code><a href="https://rdrr.io/r/base/c.html">c()</a></code> or <code><a href="https://rdrr.io/r/base/rep.html">rep()</a></code> which we’ve seen before. When creating characters, you can use either the single <span class="k"><code>'</code></span> or double <span class="k"><code>"</code></span> quote character, no difference.</p>
-<div class="sourceCode" id="cb208"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb222"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># creating a demo character vector, e.g. these are my friends!</span></span>
 <span><span class="va">friends</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Alice"</span>, <span class="st">"Bob"</span>, <span class="st">"Charlie"</span>, <span class="st">"Donny"</span>, <span class="st">"Emmy"</span>, <span class="st">"Francine"</span>, <span class="st">"Genevieve"</span>, <span class="st">"Heinemann"</span><span class="op">)</span></span>
 <span><span class="va">friends</span></span></code></pre></div>
 <pre><code>## [1] "Alice"     "Bob"       "Charlie"   "Donny"     "Emmy"     
 ## [6] "Francine"  "Genevieve" "Heinemann"</code></pre>
-<div class="sourceCode" id="cb210"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb224"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># you can also use rep, e.g. I can assign my friends into 2 groups</span></span>
 <span><span class="va">groups</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="va">LETTERS</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span>, time <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
 <span><span class="va">groups</span></span></code></pre></div>
 <pre><code>## [1] "A" "B" "A" "B" "A" "B" "A" "B"</code></pre>
-<div id="basic-string-functions" class="section level4" number="3.1.8.1">
+<div id="basic-string-functions" class="section level4" number="3.1.9.1">
 <h4>
-<span class="header-section-number">3.1.8.1</span> Basic string functions<a class="anchor" aria-label="anchor" href="#basic-string-functions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.1.9.1</span> Basic string functions<a class="anchor" aria-label="anchor" href="#basic-string-functions"><i class="fas fa-link"></i></a>
 </h4>
 <p>Base R has a number of common functions for working with strings: <code><a href="https://rdrr.io/r/base/nchar.html">nchar()</a></code> for getting the number of characters, <code><a href="https://rdrr.io/r/base/chartr.html">tolower()</a></code>/<code><a href="https://rdrr.io/r/base/chartr.html">toupper()</a></code> to convert case, <code><a href="https://rdrr.io/r/base/substr.html">substr()</a></code> for extracting substrings, <code><a href="https://rdrr.io/r/base/paste.html">paste()</a></code>/<code><a href="https://rdrr.io/r/base/paste.html">paste0()</a></code> to concatenate (e.g. “glue” together) strings, and <code><a href="https://rdrr.io/r/base/strrep.html">strrep()</a></code> for repeating the characters in a string.</p>
-<div class="sourceCode" id="cb212"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb226"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># get the number of characters in each name</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/nchar.html">nchar</a></span><span class="op">(</span><span class="va">friends</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 5 3 7 5 4 8 9 9</code></pre>
-<div class="sourceCode" id="cb214"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb228"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># convert names to all upper or all lower</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/chartr.html">toupper</a></span><span class="op">(</span><span class="va">friends</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "ALICE"     "BOB"       "CHARLIE"   "DONNY"     "EMMY"     
 ## [6] "FRANCINE"  "GENEVIEVE" "HEINEMANN"</code></pre>
-<div class="sourceCode" id="cb216"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb230"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/chartr.html">tolower</a></span><span class="op">(</span><span class="va">friends</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "alice"     "bob"       "charlie"   "donny"     "emmy"     
 ## [6] "francine"  "genevieve" "heinemann"</code></pre>
-<div class="sourceCode" id="cb218"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb232"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># get the first 3 characters of each name</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/substr.html">substr</a></span><span class="op">(</span><span class="va">friends</span>, <span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "Ali" "Bob" "Cha" "Don" "Emm" "Fra" "Gen" "Hei"</code></pre>
-<div class="sourceCode" id="cb220"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb234"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># get the last 3 characters of each name;</span></span>
 <span><span class="co"># remember R always includes bounds, so to get the last three,</span></span>
 <span><span class="co"># we want to get n-2,n-1,n where n is the number of characters</span></span>
 <span><span class="co"># note this is done once again with our old friend, vectorization!</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/substr.html">substr</a></span><span class="op">(</span><span class="va">friends</span>, <span class="fu"><a href="https://rdrr.io/r/base/nchar.html">nchar</a></span><span class="op">(</span><span class="va">friends</span><span class="op">)</span> <span class="op">-</span> <span class="fl">2</span>, <span class="fu"><a href="https://rdrr.io/r/base/nchar.html">nchar</a></span><span class="op">(</span><span class="va">friends</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "ice" "Bob" "lie" "nny" "mmy" "ine" "eve" "ann"</code></pre>
-<div class="sourceCode" id="cb222"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb236"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># remove the first and last characters of each name</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/substr.html">substr</a></span><span class="op">(</span><span class="va">friends</span>, <span class="fl">2</span>, <span class="fu"><a href="https://rdrr.io/r/base/nchar.html">nchar</a></span><span class="op">(</span><span class="va">friends</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "lic"     "o"       "harli"   "onn"     "mm"      "rancin" 
 ## [7] "eneviev" "eineman"</code></pre>
-<div class="sourceCode" id="cb224"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb238"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># paste can "glue" on single or (recycled) vectors of strings</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">friends</span>, <span class="st">"is my friend"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "Alice is my friend"     "Bob is my friend"      
 ## [3] "Charlie is my friend"   "Donny is my friend"    
 ## [5] "Emmy is my friend"      "Francine is my friend" 
 ## [7] "Genevieve is my friend" "Heinemann is my friend"</code></pre>
-<div class="sourceCode" id="cb226"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb240"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"My friend"</span>, <span class="va">friends</span>, <span class="st">"is in group"</span>, <span class="va">groups</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "My friend Alice is in group A"    
 ## [2] "My friend Bob is in group B"      
@@ -440,30 +480,30 @@
 ## [6] "My friend Francine is in group B" 
 ## [7] "My friend Genevieve is in group A"
 ## [8] "My friend Heinemann is in group B"</code></pre>
-<div class="sourceCode" id="cb228"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb242"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># paste0(...) is a shortcut for paste(..., sep="")</span></span>
-<span><span class="co"># sep sets the separator between each string (default: a single space " ")</span></span>
+<span><span class="co"># sep sets the separator between each string (default: a space " ")</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">friends</span>, <span class="st">"123"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "Alice123"     "Bob123"       "Charlie123"   "Donny123"    
 ## [5] "Emmy123"      "Francine123"  "Genevieve123" "Heinemann123"</code></pre>
-<div class="sourceCode" id="cb230"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb244"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">friends</span>, <span class="st">"123"</span>, sep <span class="op">=</span> <span class="st">"_"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "Alice_123"     "Bob_123"       "Charlie_123"  
 ## [4] "Donny_123"     "Emmy_123"      "Francine_123" 
 ## [7] "Genevieve_123" "Heinemann_123"</code></pre>
-<div class="sourceCode" id="cb232"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb246"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># paste also has an argument called collapse, which sets a separator,</span></span>
 <span><span class="co"># then uses that separator to collapse the vector into a single string</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">friends</span>, collapse <span class="op">=</span> <span class="st">", "</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "Alice, Bob, Charlie, Donny, Emmy, Francine, Genevieve, Heinemann"</code></pre>
-<div class="sourceCode" id="cb234"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb248"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># repeat characters in each string a set number of times</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/strrep.html">strrep</a></span><span class="op">(</span><span class="va">friends</span>, <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "AliceAliceAlice"             "BobBobBob"                  
 ## [3] "CharlieCharlieCharlie"       "DonnyDonnyDonny"            
 ## [5] "EmmyEmmyEmmy"                "FrancineFrancineFrancine"   
 ## [7] "GenevieveGenevieveGenevieve" "HeinemannHeinemannHeinemann"</code></pre>
-<div class="sourceCode" id="cb236"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb250"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># of course, this can also be vectorized!</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/strrep.html">strrep</a></span><span class="op">(</span><span class="va">friends</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "Alice"                                                                   
@@ -475,98 +515,199 @@
 ## [7] "GenevieveGenevieveGenevieveGenevieveGenevieveGenevieveGenevieve"         
 ## [8] "HeinemannHeinemannHeinemannHeinemannHeinemannHeinemannHeinemannHeinemann"</code></pre>
 </div>
-<div id="pattern-string-functions" class="section level4" number="3.1.8.2">
+<div id="pattern-string-functions" class="section level4" number="3.1.9.2">
 <h4>
-<span class="header-section-number">3.1.8.2</span> Pattern string functions<a class="anchor" aria-label="anchor" href="#pattern-string-functions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.1.9.2</span> Pattern string functions<a class="anchor" aria-label="anchor" href="#pattern-string-functions"><i class="fas fa-link"></i></a>
 </h4>
 <p>There are also functions for working with patterns. You don’t need to master these functions, but a few basic demos of them may prove helpful. Primarily, we have <code><a href="https://rdrr.io/r/base/grep.html">grep()</a></code>/<code><a href="https://rdrr.io/r/base/grep.html">grepl()</a></code> for pattern matching, and <code><a href="https://rdrr.io/r/base/grep.html">sub()</a></code>/<code><a href="https://rdrr.io/r/base/grep.html">gsub()</a></code> for pattern replacing. The prefix/suffix matching <code><a href="https://rdrr.io/r/base/startsWith.html">startsWith()</a></code>/<code><a href="https://rdrr.io/r/base/startsWith.html">endsWith()</a></code> are also occasionally useful.</p>
 <p>It should be noted the patterns below are all fairly short (mostly one single character) for simplicity of example, but patterns can be as many characters long as necessary.</p>
-<div class="sourceCode" id="cb238"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb252"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># which friends (by position) have a lowercase "e" in their name?</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="st">"e"</span>, <span class="va">friends</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 1 3 6 7 8</code></pre>
-<div class="sourceCode" id="cb240"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb254"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># alternatively, return a TRUE/FALSE vector result instead for each element</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span><span class="st">"e"</span>, <span class="va">friends</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1]  TRUE FALSE  TRUE FALSE FALSE  TRUE  TRUE  TRUE</code></pre>
-<div class="sourceCode" id="cb242"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># you can use either of these to subset the original vector to get actual names</span></span>
+<div class="sourceCode" id="cb256"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># you can use either one to subset the original vector to get actual names</span></span>
 <span><span class="va">friends</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="st">"e"</span>, <span class="va">friends</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
 <pre><code>## [1] "Alice"     "Charlie"   "Francine"  "Genevieve" "Heinemann"</code></pre>
-<div class="sourceCode" id="cb244"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb258"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># you can disable case sensitivity, which adds Emmy to the results</span></span>
 <span><span class="va">friends</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="st">"e"</span>, <span class="va">friends</span>, ignore.case <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
 <pre><code>## [1] "Alice"     "Charlie"   "Emmy"      "Francine"  "Genevieve"
 ## [6] "Heinemann"</code></pre>
-<div class="sourceCode" id="cb246"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb260"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># you can use sub() to replace patterns</span></span>
 <span><span class="co"># here we can create a set of variant spellings, changing -y to -ie</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">sub</a></span><span class="op">(</span><span class="st">"y"</span>, <span class="st">"ie"</span>, <span class="va">friends</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "Alice"     "Bob"       "Charlie"   "Donnie"    "Emmie"    
 ## [6] "Francine"  "Genevieve" "Heinemann"</code></pre>
-<div class="sourceCode" id="cb248"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb262"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># sub() can only replace once (inside each element),</span></span>
 <span><span class="co"># but gsub() can replace ALL occurrences</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">sub</a></span><span class="op">(</span><span class="st">"n"</span>, <span class="st">"m"</span>, <span class="va">friends</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "Alice"     "Bob"       "Charlie"   "Domny"     "Emmy"     
 ## [6] "Framcine"  "Gemevieve" "Heimemann"</code></pre>
-<div class="sourceCode" id="cb250"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb264"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">"n"</span>, <span class="st">"m"</span>, <span class="va">friends</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "Alice"     "Bob"       "Charlie"   "Dommy"     "Emmy"     
 ## [6] "Framcime"  "Gemevieve" "Heimemamm"</code></pre>
-<div class="sourceCode" id="cb252"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># check which string endsWith() a pattern (startsWith() does the opposite)</span></span>
+<div class="sourceCode" id="cb266"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># check if endsWith() a pattern (startsWith() does the opposite)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/startsWith.html">endsWith</a></span><span class="op">(</span><span class="va">friends</span>, <span class="st">"y"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] FALSE FALSE FALSE  TRUE  TRUE FALSE FALSE FALSE</code></pre>
 <p>Each of these functions (as well as several more listed in the <code><a href="https://rdrr.io/r/base/grep.html">grep()</a></code> help page), actually accept more complex pattern syntax for the search pattern. This advanced search pattern syntax is called “regular expressions” or “regex” for short. You can do things like match groups of characters, match repeated characters or groups, match to specific locations in words or sentences, and more.</p>
 <p>In this class we will NOT cover regular expressions to any real detail again due to limited time, but feel free to explore <a href="https://paulvanderlaken.com/wp-content/uploads/2017/08/r-regular-expression-cheetsheat.pdf">this cheat sheet</a> as well as <a href="https://paulvanderlaken.com/2017/10/03/regular-expressions-in-r-part-1-introduction-and-base-r-functions/">these</a> <a href="https://bookdown.org/rdpeng/rprogdatascience/regular-expressions.html">two</a> additional articles on the matter.</p>
 </div>
-<div id="additional-stringr-functions" class="section level4" number="3.1.8.3">
+<div id="additional-stringr-functions" class="section level4" number="3.1.9.3">
 <h4>
-<span class="header-section-number">3.1.8.3</span> Additional stringr functions<a class="anchor" aria-label="anchor" href="#additional-stringr-functions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.1.9.3</span> Additional stringr functions<a class="anchor" aria-label="anchor" href="#additional-stringr-functions"><i class="fas fa-link"></i></a>
 </h4>
-<p>The <a href="https://stringr.tidyverse.org/">stringr</a> package (which is a subset of the <a href="https://www.tidyverse.org/">Tidyverse</a>) contains an alternative set of functions for working with strings. Many of these are similar in purpose to base R versions (although some have subtle differences). E.g. <code><a href="https://stringr.tidyverse.org/reference/str_length.html">str_length()</a></code> is the same as <code><a href="https://rdrr.io/r/base/nchar.html">nchar()</a></code>, <code><a href="https://stringr.tidyverse.org/reference/case.html">str_to_lower()</a></code>/<code><a href="https://stringr.tidyverse.org/reference/case.html">str_to_upper()</a></code> replicate <code><a href="https://rdrr.io/r/base/chartr.html">tolower()</a></code>/<code><a href="https://rdrr.io/r/base/chartr.html">toupper()</a></code>, <code><a href="https://stringr.tidyverse.org/reference/str_replace.html">str_replace()</a></code> is similar to <code><a href="https://rdrr.io/r/base/grep.html">sub()</a></code>, <code><a href="https://stringr.tidyverse.org/reference/str_sub.html">str_sub()</a></code> extends <code><a href="https://rdrr.io/r/base/substr.html">substr()</a></code>, etc. Here’s a full list of these <a href="https://stringr.tidyverse.org/articles/from-base.html">doppelgänger stringr functions</a>.</p>
+<p><a href="https://stringr.tidyverse.org/">stringr</a>, one of the <a href="https://www.tidyverse.org/packages/#core-tidyverse">core Tidyverse</a> packages, contains an alternative set of functions for working with strings. Many of these are similar in purpose to base R versions (although some have subtle differences). E.g. <code><a href="https://stringr.tidyverse.org/reference/str_length.html">str_length()</a></code> is the same as <code><a href="https://rdrr.io/r/base/nchar.html">nchar()</a></code>, <code><a href="https://stringr.tidyverse.org/reference/case.html">str_to_lower()</a></code>/<code><a href="https://stringr.tidyverse.org/reference/case.html">str_to_upper()</a></code> replicate <code><a href="https://rdrr.io/r/base/chartr.html">tolower()</a></code>/<code><a href="https://rdrr.io/r/base/chartr.html">toupper()</a></code>, <code><a href="https://stringr.tidyverse.org/reference/str_replace.html">str_replace()</a></code> is similar to <code><a href="https://rdrr.io/r/base/grep.html">sub()</a></code>, <code><a href="https://stringr.tidyverse.org/reference/str_sub.html">str_sub()</a></code> extends <code><a href="https://rdrr.io/r/base/substr.html">substr()</a></code>, etc. Here’s a full list of these <a href="https://stringr.tidyverse.org/articles/from-base.html">doppelgänger stringr functions</a>.</p>
 <p>However, there are a few useful stringr functions that do not have counterparts in base R (or at least whose counterparts require much more complex expressions). Here is a <em>small</em> curation of them.</p>
-<div class="sourceCode" id="cb254"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># you can import either all of tidyverse with library(tidyverse)</span></span>
-<span><span class="co"># or just stringr by itself if that's all you need</span></span>
+<div class="sourceCode" id="cb268"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># since stringr is a "core" tidyverse package,</span></span>
+<span><span class="co"># you can load it (+other core packages) with library(tidyverse)</span></span>
+<span><span class="co"># you can also just load stringr by itself if that's all you need</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://stringr.tidyverse.org">stringr</a></span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb255"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb269"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># count how many times a pattern occurs</span></span>
 <span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_count.html">str_count</a></span><span class="op">(</span><span class="va">friends</span>, <span class="st">"e"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 1 0 1 0 0 1 4 2</code></pre>
-<div class="sourceCode" id="cb257"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb271"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># change strings to title case, i.e. first letter uppercase, all else lower</span></span>
 <span><span class="fu"><a href="https://stringr.tidyverse.org/reference/case.html">str_to_title</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/chartr.html">toupper</a></span><span class="op">(</span><span class="va">friends</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "Alice"     "Bob"       "Charlie"   "Donny"     "Emmy"     
 ## [6] "Francine"  "Genevieve" "Heinemann"</code></pre>
-<div class="sourceCode" id="cb259"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb273"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># "pad" a vector of strings to a constant length</span></span>
 <span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_pad.html">str_pad</a></span><span class="op">(</span><span class="va">friends</span>, width <span class="op">=</span> <span class="fl">12</span>, side <span class="op">=</span> <span class="st">"right"</span>, pad <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "Alice......." "Bob........." "Charlie....." "Donny......."
 ## [5] "Emmy........" "Francine...." "Genevieve..." "Heinemann..."</code></pre>
 </div>
-<div id="comparing-strings" class="section level4" number="3.1.8.4">
+<div id="comparing-strings" class="section level4" number="3.1.9.4">
 <h4>
-<span class="header-section-number">3.1.8.4</span> Comparing strings<a class="anchor" aria-label="anchor" href="#comparing-strings"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.1.9.4</span> Comparing strings<a class="anchor" aria-label="anchor" href="#comparing-strings"><i class="fas fa-link"></i></a>
 </h4>
+<p>Strings, like numbers, can also be logically compared in R using the same <code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>, <code>&gt;=</code> operators (also all vectorized of course). Checking equality is self-explanatory, and <strong>inequalities evaluate by dictionary sorting order</strong>, i.e. what order they might appear in in a dictionary, except generalized to include not just letters but also number and symbols.</p>
+<p>This snippet of code below (which you do NOT have to worry about learning right now) prints the “dictionary” sorting order for all ordinary keyboard characters typable on a standard US English keyboard layout in ascending order.</p>
+<div class="sourceCode" id="cb275"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># print out the result</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span></span>
+<span>  <span class="co"># sort the characters</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span></span>
+<span>    <span class="co"># flattern list output to a big vector of characters</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span></span>
+<span>      <span class="co"># split symbols into individual characters</span></span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/base/strsplit.html">strsplit</a></span><span class="op">(</span></span>
+<span>        <span class="co"># make a vector of all ordinary keyboard characters</span></span>
+<span>        <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">letters</span>,<span class="va">LETTERS</span>,<span class="fl">0</span><span class="op">:</span><span class="fl">9</span>,<span class="st">"`~!@#$%^&amp;*()_+-=[]\\{}|;':\",./&lt;&gt;? "</span><span class="op">)</span></span>
+<span>      ,<span class="st">""</span><span class="op">)</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span>  ,sep<span class="op">=</span><span class="st">""</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co"># please pardon the uneven text-wrapping of the output below:</span></span></code></pre></div>
+<pre class="wrapCode">
+'- !"#$%&amp;()*,./:;?@[\]^_`{|}~+&lt;=&gt;0123456789aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ
+</pre>
+<p>Note the third character in the sequence is a space, which comes after single quote and hyphen, but before any other symbol, number, or letter.</p>
+<p>Characters are sorted by their order in this sequence of characters, with characters earlier in the sequence being “less than” later characters. Strings with the same first character will be sorted by the second character; if the second character is also the same, they will be sorted by the third, and so on (just like normal dictionaries)</p>
+<p>Note however that nothingness, i.e. the absence of a character (such as when a string ends), comes before any character, which makes sense because otherwise “app” would appear after “apple”. Below is a series of examples demonstrating string sorting.</p>
+<div class="sourceCode" id="cb276"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="st">"apple"</span> <span class="op">==</span> <span class="st">"apple"</span></span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb278"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># note equality also implies both &gt;= and &lt;=</span></span>
+<span><span class="st">"apple"</span> <span class="op">&gt;=</span> <span class="st">"apple"</span></span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb280"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># remember R is case sensitive, so these are different</span></span>
+<span><span class="st">"apple"</span> <span class="op">!=</span> <span class="st">"Apple"</span></span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb282"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># comparing apples and oranges</span></span>
+<span><span class="st">"apple"</span> <span class="op">==</span> <span class="st">"orange"</span></span></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<div class="sourceCode" id="cb284"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="st">"apple"</span> <span class="op">&lt;</span> <span class="st">"orange"</span></span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb286"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># numbers and symbols can also dictionary-sort like letters</span></span>
+<span><span class="co"># note these numeral characters have NO numeric meaning!</span></span>
+<span><span class="st">"42"</span> <span class="op">&lt;</span> <span class="st">"43"</span></span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb288"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="st">"1 pm"</span> <span class="op">&lt;</span> <span class="st">"2 pm"</span></span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb290"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="st">"STAT240"</span> <span class="op">&lt;</span> <span class="st">"STAT340"</span></span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb292"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># however symbols come before numbers, thus</span></span>
+<span><span class="st">"1,000"</span> <span class="op">&lt;</span> <span class="st">"1000"</span></span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb294"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="st">"-3.00"</span> <span class="op">&lt;</span> <span class="st">"-3.14"</span></span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb296"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># and remember ending a string comes before any other character</span></span>
+<span><span class="st">"-3"</span> <span class="op">&lt;</span> <span class="st">"-3.14"</span></span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p>Using our newfound wisdom, we can now conclusively settle some age old debates.</p>
+<div class="sourceCode" id="cb298"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># what is the greatest state? (head prints the first 6)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">state.name</span>, decreasing<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] "Wyoming"       "Wisconsin"     "West Virginia"
+## [4] "Washington"    "Virginia"      "Vermont"</code></pre>
+<div class="sourceCode" id="cb300"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># is the pen mightier than the sword?</span></span>
+<span><span class="st">"pen"</span> <span class="op">&gt;</span> <span class="st">"sword"</span></span></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<div class="sourceCode" id="cb302"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># PC or Mac?</span></span>
+<span><span class="st">"Windows"</span> <span class="op">&gt;</span> <span class="st">"Mac"</span></span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb304"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># and most importantly, did the chicken come before the egg?</span></span>
+<span><span class="st">"chicken"</span> <span class="op">&lt;</span> <span class="st">"egg"</span></span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
 </div>
 </div>
-<div id="date-vectors" class="section level3" number="3.1.9">
+<div id="coercion-converting-types" class="section level3" number="3.1.10">
 <h3>
-<span class="header-section-number">3.1.9</span> Date vectors<a class="anchor" aria-label="anchor" href="#date-vectors"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.1.10</span> Coercion (converting types)<a class="anchor" aria-label="anchor" href="#coercion-converting-types"><i class="fas fa-link"></i></a>
 </h3>
-<ul>
-<li>parse, getters/setters, math, comparisons, etc.</li>
-</ul>
-</div>
-<div id="sorting-vectors" class="section level3" number="3.1.10">
-<h3>
-<span class="header-section-number">3.1.10</span> Sorting vectors<a class="anchor" aria-label="anchor" href="#sorting-vectors"><i class="fas fa-link"></i></a>
-</h3>
-<ul>
-<li>examples from all types</li>
-</ul>
+<p>Sometimes, we read data in and it may need to be converted before it’s usable. E.g. let’s say you read in a list of prices from some catalog and you get the following vector:</p>
+<div class="sourceCode" id="cb306"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">prices_raw</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"$1,000"</span>,<span class="st">"$1,500"</span>,<span class="st">"$850"</span>,<span class="st">"$2,000"</span><span class="op">)</span></span>
+<span><span class="va">prices_raw</span></span></code></pre></div>
+<pre><code>## [1] "$1,000" "$1,500" "$850"   "$2,000"</code></pre>
+<p>Since R doesn’t natively understand dollar signs or comma grouping, this will read in as a character vector. You can check the type of a vector by using the <code><a href="https://rdrr.io/r/base/numeric.html">is.numeric()</a></code>, <code><a href="https://rdrr.io/r/base/logical.html">is.logical()</a></code>, <code><a href="https://rdrr.io/r/base/character.html">is.character()</a></code> functions.</p>
+<div class="sourceCode" id="cb308"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/character.html">is.character</a></span><span class="op">(</span><span class="va">prices_raw</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p>If the data has been “cleaned-up” then you can coerce (i.e. convert) the vector into other types with the corresponding <code><a href="https://rdrr.io/r/base/numeric.html">as.numeric()</a></code>, <code><a href="https://rdrr.io/r/base/logical.html">as.logical()</a></code>, <code><a href="https://rdrr.io/r/base/character.html">as.character()</a></code> functions. In this case however, the data is not yet “cleaned-up” so this coercion operation will give an error.</p>
+<div class="sourceCode" id="cb310"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">prices_raw</span><span class="op">)</span></span></code></pre></div>
+<pre class="warning"><code>## Warning: NAs introduced by coercion</code></pre>
+<pre><code>## [1] NA NA NA NA</code></pre>
+<p>In R, it’s important to remember <strong>not to reinvent the wheel</strong>; most actions already have an associated package/function, and it’s probably better than what you can write (if you’re a beginner). Here, it may be tempting to write your own parsing function by using <code><a href="https://rdrr.io/r/base/grep.html">sub()</a></code>/<code><a href="https://rdrr.io/r/base/grep.html">gsub()</a></code> to replace the dollar and commas then coerce, but there’s a better option.</p>
+<p><a href="https://readr.tidyverse.org/index.html">readr</a> is another one of the <a href="https://www.tidyverse.org/packages/#core-tidyverse">core Tidyverse</a> packages, and it’s focused on</p>
+<!--
+
+### Date vectors
+
+ - parse, getters/setters, math, comparisons, etc.
+
+### Sorting vectors
+
+ - examples from all types
+
+-->
+
 </div>
 </div>
 </div>
@@ -611,11 +752,11 @@
 <li><a class="nav-link" href="#logical-vectors"><span class="header-section-number">3.1.3</span> Logical vectors</a></li>
 <li><a class="nav-link" href="#other-constructors"><span class="header-section-number">3.1.4</span> Other constructors</a></li>
 <li><a class="nav-link" href="#multiple-vectors-vector-recycling"><span class="header-section-number">3.1.5</span> Multiple vectors + vector recycling</a></li>
-<li><a class="nav-link" href="#in-vector-membership"><span class="header-section-number">3.1.6</span> %in% (Vector membership)</a></li>
+<li><a class="nav-link" href="#in-membership"><span class="header-section-number">3.1.6</span> %in% (Membership)</a></li>
 <li><a class="nav-link" href="#vector-subsetting"><span class="header-section-number">3.1.7</span> Vector subsetting</a></li>
-<li><a class="nav-link" href="#character-vectors"><span class="header-section-number">3.1.8</span> Character vectors</a></li>
-<li><a class="nav-link" href="#date-vectors"><span class="header-section-number">3.1.9</span> Date vectors</a></li>
-<li><a class="nav-link" href="#sorting-vectors"><span class="header-section-number">3.1.10</span> Sorting vectors</a></li>
+<li><a class="nav-link" href="#sortingreordering"><span class="header-section-number">3.1.8</span> Sorting/reordering</a></li>
+<li><a class="nav-link" href="#character-vectors"><span class="header-section-number">3.1.9</span> Character vectors</a></li>
+<li><a class="nav-link" href="#coercion-converting-types"><span class="header-section-number">3.1.10</span> Coercion (converting types)</a></li>
 </ul>
 </li>
 </ul>
@@ -635,7 +776,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, Bret Larget, Cameron Jones. It was last built on 2024-06-30.</p>
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, Bret Larget, Cameron Jones. It was last built on 2024-07-03.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
