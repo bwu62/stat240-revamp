@@ -451,6 +451,74 @@ str_pad(friends, width = 12, side = "right", pad = ".")
 
 #### Comparing strings
 
+Strings, like numbers, can also be logically compared in R using the same `==`, `!=`, `<`, `<=`, `>`, `>=` operators (also all vectorized of course). Checking equality is self-explanatory, and **inequalities evaluate by dictionary sorting order**, i.e. what order they might appear in in a dictionary, except generalized to include not just letters but also number and symbols.
+
+This snippet of code below (which you do NOT have to worry about learning right now) prints the "dictionary" sorting order for all ordinary keyboard characters typable on a standard US English keyboard layout in ascending order.
+
+```{r,eval=F}
+# print out the result
+cat(
+  # sort the characters
+  sort(
+    # flattern list output to a big vector of characters
+    unlist(
+      # split symbols into individual characters
+      strsplit(
+        # make a vector of all ordinary keyboard characters
+        c(letters,LETTERS,0:9,"`~!@#$%^&*()_+-=[]\\{}|;':\",./<>? ")
+      ,"")
+    )
+  )
+  ,sep=""
+)
+# please pardon the uneven text-wrapping of the output below:
+```
+<pre class="wrapCode">
+`r paste(sort(unlist(strsplit(c(letters,LETTERS,0:9,"\x60~!@#$%^&*()_+-=[]\\{}|;':\",./<>? "),""))),collapse="")`
+</pre>
+
+Note the third character in the sequence is a space, which comes after single quote and hyphen, but before any other symbol, number, or letter.
+
+Characters are sorted by their order in this sequence of characters, with characters earlier in the sequence being "less than" later characters. Strings with the same first character will be sorted by the second character; if the second character is also the same, they will be sorted by the third, and so on (just like normal dictionaries)
+
+Note however that nothingness, i.e. the absence of a character (such as when a string ends), comes before any character, which makes sense because otherwise "app" would appear after "apple". Below is a series of examples demonstrating string sorting.
+
+```{r}
+"apple" == "apple"
+# note equality also implies both >= and <=
+"apple" >= "apple"
+# remember R is case sensitive, so these are different
+"apple" != "Apple"
+# comparing apples and oranges
+"apple" == "orange"
+"apple" < "orange"
+# numbers and symbols can also dictionary-sort like letters
+# note these numeral characters have NO numeric meaning!
+"42" < "43"
+"1 pm" < "2 pm"
+"STAT240" < "STAT340"
+# however symbols come before numbers, thus
+"1,000" < "1000"
+"-3.00" < "-3.14"
+# and remember ending a string comes before any other character
+"-3" < "-3.14"
+```
+
+Using our newfound wisdom, we can now conclusively settle some age old debates.
+
+```{r}
+# what is the greatest state? (head prints the first 6)
+head(sort(state.name, decreasing=TRUE))
+# is the pen mightier than the sword?
+"pen" > "sword"
+# PC or Mac?
+"Windows" > "Mac"
+# and most importantly, did the chicken come before the egg?
+"chicken" < "egg"
+```
+
+
+
 
 ### Date vectors
 
