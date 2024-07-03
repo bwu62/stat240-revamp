@@ -168,6 +168,11 @@ h3{
   margin-bottom: 1rem !important;
   font-size: 1.4rem !important;
 }
+h4{
+  margin-top: 2rem !important;
+  font-size: 1.2rem !important;
+  font-style: italic;
+}
 h2+div>h3{
   margin-top: 1em !important;
 }
