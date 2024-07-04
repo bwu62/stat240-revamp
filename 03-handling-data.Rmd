@@ -545,7 +545,31 @@ In R, it's important to remember **not to reinvent the wheel**; most actions alr
 
 [readr](https://readr.tidyverse.org/index.html) is another one of the [core Tidyverse](https://www.tidyverse.org/packages/#core-tidyverse) packages. It's designed to make ingesting data as easy as possible.
 
-One set of readr functions useful here are the
+One set of readr functions useful here are the `parse_number()` and `parse_logical()` functions (converting to a string is trivial and can basically always be done using the `as.character()` function). These functions are quite smart and can ignore extra characters and just extract the relevant numerical info.
+
+```{r}
+# since readr is also a "core" tidyverse package,
+# you can use library(tidyverse) or library(readr)
+library(readr)
+```
+
+```{r}
+prices = parse_number(prices_raw)
+prices
+is.numeric(prices)
+```
+
+See the help page for `parse_number()` for more examples and usage notes.
+
+
+
+
+### Date vectors
+
+Finally, let's talk about date vectors. In R (like most other languages) dates are actually stored.
+
+
+
 
 
 
