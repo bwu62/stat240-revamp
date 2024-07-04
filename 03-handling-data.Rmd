@@ -522,14 +522,14 @@ head(sort(state.name, decreasing=TRUE))
 
 ### Coercion (converting types)
 
-Sometimes, we read data in and it may need to be converted before it's usable. E.g. let's say you read in a list of prices from some catalog and you get the following vector:
+Sometimes, we read data in and it may need to be converted before it's usable. E.g. let's say you read in a list of prices from some catalog and you get the following character vector:
 
 ```{r}
 prices_raw = c("$1,000","$1,500","$850","$2,000")
 prices_raw
 ```
 
-Since R doesn't natively understand dollar signs or comma grouping, this will read in as a character vector. You can check the type of a vector by using the `is.numeric()`, `is.logical()`, `is.character()` functions.
+Since R doesn't natively understand dollar signs or comma grouping, this must start as a character vector. You can check the type of a vector by using the `is.numeric()`, `is.logical()`, `is.character()` functions.
 
 ```{r}
 is.character(prices_raw)
