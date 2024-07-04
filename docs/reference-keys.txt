@@ -50,3 +50,4 @@ pattern-string-functions
 additional-stringr-functions
 comparing-strings
 coercion-converting-types
+date-vectors

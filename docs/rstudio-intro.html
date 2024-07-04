@@ -23,7 +23,6 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-E0YDB40HWY');
     </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
@@ -107,7 +106,7 @@
 <li>You can also easily rerun previously executed commands by either using the up <span class="k">↑</span> and down <span class="k">↓</span> arrow keys to navigate through your history, or even search your history by using <span class="k">CTRL</span>+<span class="k">R</span> or <span class="k">⌘</span>+<span class="k">R</span>.</li>
 </ul>
 </li>
-<li><p>Terminal: This tab opens a terminal in your current working directory (more on this later). By default, this is a <a href="https://gitforwindows.org/">Git Bash</a> terminal on Windows and a <a href="https://medium.com/@luzhenna/getting-started-with-zsh-on-a-macbook-bd1c98c6f383">zsh</a> terminal on Macs, but this can be easily changed in the Options menu.</p></li>
+<li><p>Terminal: This tab opens a terminal in your current working directory (more on this later). By default, this is a <a href="https://gitforwindows.org">Git Bash</a> terminal on Windows and a <a href="https://medium.com/@luzhenna/getting-started-with-zsh-on-a-macbook-bd1c98c6f383">zsh</a> terminal on Macs, but this can be easily changed in the Options menu.</p></li>
 <li><p>Background Jobs: Rstudio may sometimes run certain operations as background jobs here. Alternatively, you can also run background R scripts here if you desire.</p></li>
 </ul>
 </li>
@@ -282,7 +281,7 @@
 <h3>
 <span class="header-section-number">2.3.5</span> Assignment<a class="anchor" aria-label="anchor" href="#assignment"><i class="fas fa-link"></i></a>
 </h3>
-<p>In R, variables are typically assigned using the <code>&lt;-</code> operator, which is just a less than <code>&lt;</code> and minus <code>-</code> put together. You can also use <code>=</code> but <code>&lt;-</code> is recommended for stylistic reasons (see <a href="https://colinfay.me/r-assignment/">this blog post</a> for more details). For this class, <strong>both are acceptable</strong> but we will prefer <code>&lt;-</code> in the notes. <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;A comprehensive R style guide written by Hadley Wickham can be found here: &lt;a href="https://style.tidyverse.org/" target="_blank"&gt;https://style.tidyverse.org/&lt;/a&gt;.&lt;/p&gt;'><sup>3</sup></a></p>
+<p>In R, variables are typically assigned using the <code>&lt;-</code> operator, which is just a less than <code>&lt;</code> and minus <code>-</code> put together. You can also use <code>=</code> but <code>&lt;-</code> is recommended for stylistic reasons (see <a href="https://colinfay.me/r-assignment">this blog post</a> for more details). For this class, <strong>both are acceptable</strong> but we will prefer <code>&lt;-</code> in the notes. <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;A comprehensive R style guide written by Hadley Wickham can be found here: &lt;a href="https://style.tidyverse.org/" target="_blank"&gt;https://style.tidyverse.org/&lt;/a&gt;.&lt;/p&gt;'><sup>3</sup></a></p>
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># this is preferred</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">5</span></span>
@@ -463,8 +462,8 @@
 <h3>
 <span class="header-section-number">2.3.8</span> Packages<a class="anchor" aria-label="anchor" href="#packages"><i class="fas fa-link"></i></a>
 </h3>
-<p>Now, let’s briefly discuss packages. One of the best features of R is the ability for anyone to easily write and distribute packages on <a href="https://cran.r-project.org/">CRAN</a> (<strong>C</strong>omprehensive <strong>R</strong> <strong>A</strong>rchive <strong>N</strong>etwork). Currently, there are 21031 packages available on CRAN. There are also a further 2300 packages on the bioinformatics-specific package archive <a href="https://www.bioconductor.org/">Bioconductor</a>, as well as countless more on <a href="https://github.com/topics/r-package">GitHub</a>.</p>
-<p>In this course, we will primarily make use of the <a href="https://www.tidyverse.org/">Tidyverse</a> suite of packages, which contains several important packages for data science: <code>readr</code> for reading in data, <code>ggplot2</code> for plotting data, <code>dplyr</code> and <code>tidyr</code> for cleaning data, and <code>lubridate</code> and <code>stringr</code> for working with dates and strings. We will learn each of these as the course progresses.</p>
+<p>Now, let’s briefly discuss packages. One of the best features of R is the ability for anyone to easily write and distribute packages on <a href="https://cran.r-project.org">CRAN</a> (<strong>C</strong>omprehensive <strong>R</strong> <strong>A</strong>rchive <strong>N</strong>etwork). Currently, there are 21039 packages available on CRAN. There are also a further 2300 packages on the bioinformatics-specific package archive <a href="https://www.bioconductor.org">Bioconductor</a>, as well as countless more on <a href="https://github.com/topics/r-package">GitHub</a>.</p>
+<p>In this course, we will primarily make use of the <a href="https://www.tidyverse.org">Tidyverse</a> suite of packages, which contains several important packages for data science: <code>readr</code> for reading in data, <code>ggplot2</code> for plotting data, <code>dplyr</code> and <code>tidyr</code> for cleaning data, and <code>lubridate</code> and <code>stringr</code> for working with dates and strings. We will learn each of these as the course progresses.</p>
 <p>The most important thing you need to remember about packages is this:</p>
 <blockquote>
 <p><strong><em>install once; load daily</em></strong></p>
@@ -494,7 +493,7 @@
 <h4>
 <span class="header-section-number">2.3.8.2</span> Loading a package<a class="anchor" aria-label="anchor" href="#loading-a-package"><i class="fas fa-link"></i></a>
 </h4>
-<p>You can load a package with either <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> or <code><a href="https://rdrr.io/r/base/library.html">require()</a></code>, which are basically the same. <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;The only difference is &lt;code&gt;require()&lt;/code&gt; can be used to check if a package exists and will return &lt;code&gt;FALSE&lt;/code&gt; if it doesn’t, whereas &lt;code&gt;library()&lt;/code&gt; will just error out, see &lt;a href="https://www.geeksforgeeks.org/the-difference-between-require-and-library-in-r/" target="_blank"&gt;https://www.geeksforgeeks.org/the-difference-between-require-and-library-in-r/&lt;/a&gt; for more details.&lt;/p&gt;'><sup>5</sup></a> Some package names actually load a group of other packages, e.g. <code><a href="https://tidyverse.tidyverse.org">library(tidyverse)</a></code> will load all the <a href="https://www.tidyverse.org/packages/#core-tidyverse">“core” Tidyverse</a> packages, which include <a href="https://ggplot2.tidyverse.org/">ggplot2</a>, <a href="https://dplyr.tidyverse.org/">dplyr</a>, <a href="https://tidyr.tidyverse.org/">tidyr</a>, <a href="https://readr.tidyverse.org/">readr</a>, <a href="https://purrr.tidyverse.org/">purrr</a>, <a href="https://tibble.tidyverse.org/">tibble</a>, <a href="https://stringr.tidyverse.org/">stringr</a>, and <a href="https://forcats.tidyverse.org/">forcats</a>.</p>
+<p>You can load a package with either <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> or <code><a href="https://rdrr.io/r/base/library.html">require()</a></code>, which are basically the same. <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;The only difference is &lt;code&gt;require()&lt;/code&gt; can be used to check if a package exists and will return &lt;code&gt;FALSE&lt;/code&gt; if it doesn’t, whereas &lt;code&gt;library()&lt;/code&gt; will just error out, see &lt;a href="https://www.geeksforgeeks.org/the-difference-between-require-and-library-in-r/" target="_blank"&gt;https://www.geeksforgeeks.org/the-difference-between-require-and-library-in-r/&lt;/a&gt; for more details.&lt;/p&gt;'><sup>5</sup></a> Some package names actually load a group of other packages, e.g. <code><a href="https://tidyverse.tidyverse.org">library(tidyverse)</a></code> will load all the <a href="https://www.tidyverse.org/packages/#core-tidyverse">“core” Tidyverse</a> packages, which include <a href="https://ggplot2.tidyverse.org">ggplot2</a>, <a href="https://dplyr.tidyverse.org">dplyr</a>, <a href="https://tidyr.tidyverse.org">tidyr</a>, <a href="https://readr.tidyverse.org">readr</a>, <a href="https://purrr.tidyverse.org">purrr</a>, <a href="https://tibble.tidyverse.org">tibble</a>, <a href="https://stringr.tidyverse.org">stringr</a>, and <a href="https://forcats.tidyverse.org">forcats</a>.</p>
 <div class="sourceCode" id="cb105"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code></pre></div>
 <pre><code>## ── Attaching core tidyverse packages ───────── tidyverse 2.0.0 ──
@@ -621,7 +620,7 @@
 <h3>
 <span class="header-section-number">2.4.3</span> YAML header<a class="anchor" aria-label="anchor" href="#yaml-header"><i class="fas fa-link"></i></a>
 </h3>
-<p>Rmd files usually start with a <a href="https://yaml.org/">YAML</a> header with some important metadata about the file:</p>
+<p>Rmd files usually start with a <a href="https://yaml.org">YAML</a> header with some important metadata about the file:</p>
 <blockquote>
 <div class="sourceCode" id="cb114"><pre class="sourceCode md wrapCode"><code class="sourceCode markdown"><span id="cb114-1"><a href="rstudio-intro.html#cb114-1" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb114-2"><a href="rstudio-intro.html#cb114-2" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Demo Rmd file"</span></span>
@@ -637,7 +636,7 @@
 <h3>
 <span class="header-section-number">2.4.4</span> Markdown<a class="anchor" aria-label="anchor" href="#markdown"><i class="fas fa-link"></i></a>
 </h3>
-<p>R Markdown is based on <a href="https://markdownguide.offshoot.io/cheat-sheet/">Markdown</a> <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;Fun fact: Markdown was co-created by computer prodigy &lt;a href="https://en.wikipedia.org/wiki/Aaron_Swartz" target="_blank"&gt;Aaron Swartz&lt;/a&gt; who also famously co-created RSS and Reddit. He was an earlier pioneer of the &lt;a href="https://en.wikipedia.org/wiki/Open_access" target="_blank"&gt;Open Access&lt;/a&gt; movement and was persecuted by the government for distributing already freely-accessible journal articles. If you’re interested in learning more, I highly recommend the excellent biopic &lt;a href="https://www.imdb.com/title/tt3268458/" target="_blank"&gt;The Internet’s Own Boy: The Story of Aaron Swartz&lt;/a&gt;.&lt;/p&gt;'><sup>6</sup></a>
+<p>R Markdown is based on <a href="https://markdownguide.offshoot.io/cheat-sheet">Markdown</a> <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;Fun fact: Markdown was co-created by computer prodigy &lt;a href="https://en.wikipedia.org/wiki/Aaron_Swartz" target="_blank"&gt;Aaron Swartz&lt;/a&gt; who also famously co-created RSS and Reddit. He was an earlier pioneer of the &lt;a href="https://en.wikipedia.org/wiki/Open_access" target="_blank"&gt;Open Access&lt;/a&gt; movement and was persecuted by the government for distributing already freely-accessible journal articles. If you’re interested in learning more, I highly recommend the excellent biopic &lt;a href="https://www.imdb.com/title/tt3268458" target="_blank"&gt;The Internet’s Own Boy: The Story of Aaron Swartz&lt;/a&gt;.&lt;/p&gt;'><sup>6</sup></a>
 which is a simple syntax for “marking up” text with additional formatting. You can see mixed in with paragraphs of ordinary text, there are <code># Section</code> and <code>## Subsection</code> headings, <code>[links](url)</code> and <code>**bold text**</code>, lists and sublists, and both inline and separate “chunks” of source code.</p>
 <p>We will not expect you to learn ALL of markdown, but minimally <strong>you should learn to use section and subsection headings, links and lists, and both inline code and code chunks</strong>.</p>
 </div>
@@ -658,7 +657,7 @@ will render as: 4. Note the <code>`r</code> prefix here, which triggers evaluati
 becomes: 3.8571429, it is <strong><em>highly recommended to round the result</em></strong> off to a reasonable number of digits using either <code><a href="https://rdrr.io/r/base/Round.html">round()</a></code> or <code><a href="https://rdrr.io/r/base/Round.html">signif()</a></code>. So in this case, <code>`r round(mean(data),2)`</code>
 which becomes 3.86 is much better.</p>
 <p>It is also important to only <strong>round at the END</strong>, when you present your analysis. Do NOT round your original dataset or an intermediate value used in another computation, as this will introduce errors that can compound.</p>
-<p>Generally, I recommend rounding to either the <strong>same precision as your data, or 2-3 significant figures</strong>; we will not be too picky about the exact number of digits. See <a href="https://ecampusontario.pressbooks.pub/prehealthsciencesmath1/chapter/2-2-accuracy-precision-and-rounding-rules/">this page</a> for more discussion about precision and rounding.</p>
+<p>Generally, I recommend rounding to either the <strong>same precision as your data, or 2-3 significant figures</strong>; we will not be too picky about the exact number of digits. See <a href="https://ecampusontario.pressbooks.pub/prehealthsciencesmath1/chapter/2-2-accuracy-precision-and-rounding-rules">this page</a> for more discussion about precision and rounding.</p>
 </div>
 </div>
 <div id="code-chunks" class="section level4" number="2.4.5.2">
@@ -687,7 +686,7 @@ which becomes 3.86 is much better.</p>
 </ol>
 </li>
 <li>
-<p>This name can also optionally be followed by a comma <code>,</code> followed by additional “chunk options”, which are extra settings you can set to control the behavior of the chunk and output. There is a VERY long <a href="https://yihui.org/knitr/options/">list of available options</a>, but here is a short list of some of the MOST important:</p>
+<p>This name can also optionally be followed by a comma <code>,</code> followed by additional “chunk options”, which are extra settings you can set to control the behavior of the chunk and output. There is a VERY long <a href="https://yihui.org/knitr/options">list of available options</a>, but here is a short list of some of the MOST important:</p>
 <div id="knitr-options">
 <div class="inline-table"><table class="table table-sm">
 <colgroup>
@@ -744,7 +743,7 @@ which becomes 3.86 is much better.</p>
 <td align="center"><code>cache</code></td>
 <td align="center">TRUE, <strong>FALSE</strong>
 </td>
-<td align="left">If a chunk is time consuming, you can “cache” it. Cached chunks will not be rerun unless the code inside is modified. Note this is set FALSE by default. This option should be <strong>used with caution</strong>! Improper usage may cause code chunks to not update properly. <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;Phil Karlton, developer at Xerox and Netscape, &lt;a href="https://www.karlton.org/2017/12/naming-things-hard/"&gt;famously said&lt;/a&gt; &lt;em&gt;“There are only two hard things in Computer Science: cache invalidation and naming things.”&lt;/em&gt; For a more detailed discussion on caching in R, see &lt;a href="https://bookdown.org/yihui/rmarkdown-cookbook/cache.html" target="_blank"&gt;this intro page&lt;/a&gt; and &lt;a href="https://yihui.org/en/2018/06/cache-invalidation" target="_blank"&gt;this follow-up discussion&lt;/a&gt;.&lt;/p&gt;'><sup>7</sup></a>
+<td align="left">If a chunk is time consuming, you can “cache” it. Cached chunks will not be rerun unless the code inside is modified. Note this is set FALSE by default. This option should be <strong>used with caution</strong>! Improper usage may cause code chunks to not update properly. <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;Phil Karlton, developer at Xerox and Netscape, &lt;a href="https://www.karlton.org/2017/12/naming-things-hard"&gt;famously said&lt;/a&gt; &lt;em&gt;“There are only two hard things in Computer Science: cache invalidation and naming things.”&lt;/em&gt; For a more detailed discussion on caching in R, see &lt;a href="https://bookdown.org/yihui/rmarkdown-cookbook/cache.html" target="_blank"&gt;this intro page&lt;/a&gt; and &lt;a href="https://yihui.org/en/2018/06/cache-invalidation" target="_blank"&gt;this follow-up discussion&lt;/a&gt;.&lt;/p&gt;'><sup>7</sup></a>
 </td>
 </tr>
 </tbody>
@@ -774,9 +773,9 @@ which becomes 3.86 is much better.</p>
 <h3>
 <span class="header-section-number">2.4.6</span> Aside: <span class="math inline">\(\LaTeX\)</span><a class="anchor" aria-label="anchor" href="#aside-latex"><i class="fas fa-link"></i></a>
 </h3>
-<p>This is also outside the scope of this course, so you <strong>do NOT need to learn it</strong>, but R Markdown natively supports <span class="math inline">\(\LaTeX\)</span> code as well. It’s rendered using <a href="https://www.mathjax.org/">MathJax</a>, an open-source Javascript engine for typesetting mathematical expressions in webpages. For example, <code class="sourceCode latex"><span class="ss">$$x={-b</span><span class="sc">\pm\sqrt</span><span class="ss">{b^2-4ac} </span><span class="sc">\over</span><span class="ss"> 2a}$$</span></code> becomes:</p>
+<p>This is also outside the scope of this course, so you <strong>do NOT need to learn it</strong>, but R Markdown natively supports <span class="math inline">\(\LaTeX\)</span> code as well. It’s rendered using <a href="https://www.mathjax.org">MathJax</a>, an open-source Javascript engine for typesetting mathematical expressions in webpages. For example, <code class="sourceCode latex"><span class="ss">$$x={-b</span><span class="sc">\pm\sqrt</span><span class="ss">{b^2-4ac} </span><span class="sc">\over</span><span class="ss"> 2a}$$</span></code> becomes:</p>
 <p><span class="math display">\[x={-b\pm\sqrt{b^2-4ac} \over 2a}\]</span></p>
-<p>You will see lots of <span class="math inline">\(\LaTeX\)</span> later in the notes when we need to write math, so I just wanted to mention it here. If you wish to read more, start with Rong Zhuang’s <a href="https://jojozhuang.github.io/tutorial/mathjax-cheat-sheet-for-mathematical-notation/">MathJax cheat sheet</a> or David Richeson’s <a href="https://users.dickinson.edu/~richesod/latex/latexcheatsheet.pdf">quick guide</a> which both have lots of great beginner-friendly examples. For a slightly more complete list of symbols, Eric Torrence’s <a href="https://pages.uoregon.edu/torrence/391/labs/LaTeX-cheat-sheet.pdf">cheat sheet</a> may also be useful.</p>
+<p>You will see lots of <span class="math inline">\(\LaTeX\)</span> later in the notes when we need to write math, so I just wanted to mention it here. If you wish to read more, start with Rong Zhuang’s <a href="https://jojozhuang.github.io/tutorial/mathjax-cheat-sheet-for-mathematical-notation">MathJax cheat sheet</a> or David Richeson’s <a href="https://users.dickinson.edu/~richesod/latex/latexcheatsheet.pdf">quick guide</a> which both have lots of great beginner-friendly examples. For a slightly more complete list of symbols, Eric Torrence’s <a href="https://pages.uoregon.edu/torrence/391/labs/LaTeX-cheat-sheet.pdf">cheat sheet</a> may also be useful.</p>
 </div>
 </div>
 <div id="workflow" class="section level2" number="2.5">
@@ -971,7 +970,7 @@ head(mtcars)
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, Bret Larget, Cameron Jones. It was last built on 2024-07-03.</p>
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, Bret Larget, Cameron Jones. It was last built on 2024-07-04.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -23,7 +23,6 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-E0YDB40HWY');
     </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
@@ -167,7 +166,7 @@
 <h3>
 <span class="header-section-number">3.1.3</span> Logical vectors<a class="anchor" aria-label="anchor" href="#logical-vectors"><i class="fas fa-link"></i></a>
 </h3>
-<p>These <a href="https://osu-codeclub.github.io/posts/basics_04/">“vectorized”</a> operations also work with logical comparisons, and these produce <strong>logical vectors</strong>. For example, we can ask R which observations are even:</p>
+<p>These <a href="https://osu-codeclub.github.io/posts/basics_04">“vectorized”</a> operations also work with logical comparisons, and these produce <strong>logical vectors</strong>. For example, we can ask R which observations are even:</p>
 <div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># recall %% gives the division remainder</span></span>
 <span><span class="va">data</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html">%%</a></span> <span class="fl">2</span> <span class="op">==</span> <span class="fl">0</span></span></code></pre></div>
@@ -252,7 +251,7 @@
 <h3>
 <span class="header-section-number">3.1.5</span> Multiple vectors + vector recycling<a class="anchor" aria-label="anchor" href="#multiple-vectors-vector-recycling"><i class="fas fa-link"></i></a>
 </h3>
-<p>It may not surprise you to learn all these vectorized operations also work on multiple vectors! If the vectors aren’t the same length, <strong>the shorter vectors will be repeated</strong> until they matches the length of the longest vector. This is called <a href="https://www.geeksforgeeks.org/vector-recycling-in-r/"><strong>recycling</strong></a>. Example:</p>
+<p>It may not surprise you to learn all these vectorized operations also work on multiple vectors! If the vectors aren’t the same length, <strong>the shorter vectors will be repeated</strong> until they matches the length of the longest vector. This is called <a href="https://www.geeksforgeeks.org/vector-recycling-in-r"><strong>recycling</strong></a>. Example:</p>
 <div class="sourceCode" id="cb171"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># define some vectors for demo</span></span>
 <span><span class="co"># x1, x2 are both length 6 vectors</span></span>
@@ -290,7 +289,7 @@
 <pre><code>## [1]  TRUE  TRUE FALSE  TRUE FALSE FALSE</code></pre>
 <div class="note">
 <p>In this class, <strong>you should <em>never</em> need a for loop</strong> for any exercises (hence why it’s considered a bonus topic and not covered in the notes but instead left as optional additional reading).</p>
-<p>Instead, <strong><em>always</em> look for a solution using vectorized operations</strong>. In R, vectorized operations are basically always <a href="https://datakuity.com/2018/01/17/for-loop-vs-vectorization-in-r/">MUCH faster than for loops</a>, due to low-level parallelization optimizations.</p>
+<p>Instead, <strong><em>always</em> look for a solution using vectorized operations</strong>. In R, vectorized operations are basically always <a href="https://datakuity.com/2018/01/17/for-loop-vs-vectorization-in-r">MUCH faster than for loops</a>, due to low-level parallelization optimizations.</p>
 </div>
 </div>
 <div id="in-membership" class="section level3" number="3.1.6">
@@ -559,13 +558,13 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/startsWith.html">endsWith</a></span><span class="op">(</span><span class="va">friends</span>, <span class="st">"y"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] FALSE FALSE FALSE  TRUE  TRUE FALSE FALSE FALSE</code></pre>
 <p>Each of these functions (as well as several more listed in the <code><a href="https://rdrr.io/r/base/grep.html">grep()</a></code> help page), actually accept more complex pattern syntax for the search pattern. This advanced search pattern syntax is called “regular expressions” or “regex” for short. You can do things like match groups of characters, match repeated characters or groups, match to specific locations in words or sentences, and more.</p>
-<p>In this class we will NOT cover regular expressions to any real detail again due to limited time, but feel free to explore <a href="https://paulvanderlaken.com/wp-content/uploads/2017/08/r-regular-expression-cheetsheat.pdf">this cheat sheet</a> as well as <a href="https://paulvanderlaken.com/2017/10/03/regular-expressions-in-r-part-1-introduction-and-base-r-functions/">these</a> <a href="https://bookdown.org/rdpeng/rprogdatascience/regular-expressions.html">two</a> additional articles on the matter.</p>
+<p>In this class we will NOT cover regular expressions to any real detail again due to limited time, but feel free to explore <a href="https://paulvanderlaken.com/wp-content/uploads/2017/08/r-regular-expression-cheetsheat.pdf">this cheat sheet</a> as well as <a href="https://paulvanderlaken.com/2017/10/03/regular-expressions-in-r-part-1-introduction-and-base-r-functions">these</a> <a href="https://bookdown.org/rdpeng/rprogdatascience/regular-expressions.html">two</a> additional articles on the matter.</p>
 </div>
 <div id="additional-stringr-functions" class="section level4" number="3.1.9.3">
 <h4>
 <span class="header-section-number">3.1.9.3</span> Additional stringr functions<a class="anchor" aria-label="anchor" href="#additional-stringr-functions"><i class="fas fa-link"></i></a>
 </h4>
-<p><a href="https://stringr.tidyverse.org/">stringr</a>, one of the <a href="https://www.tidyverse.org/packages/#core-tidyverse">core Tidyverse</a> packages, contains an alternative set of functions for working with strings. Many of these are similar in purpose to base R versions (although some have subtle differences). E.g. <code><a href="https://stringr.tidyverse.org/reference/str_length.html">str_length()</a></code> is the same as <code><a href="https://rdrr.io/r/base/nchar.html">nchar()</a></code>, <code><a href="https://stringr.tidyverse.org/reference/case.html">str_to_lower()</a></code>/<code><a href="https://stringr.tidyverse.org/reference/case.html">str_to_upper()</a></code> replicate <code><a href="https://rdrr.io/r/base/chartr.html">tolower()</a></code>/<code><a href="https://rdrr.io/r/base/chartr.html">toupper()</a></code>, <code><a href="https://stringr.tidyverse.org/reference/str_replace.html">str_replace()</a></code> is similar to <code><a href="https://rdrr.io/r/base/grep.html">sub()</a></code>, <code><a href="https://stringr.tidyverse.org/reference/str_sub.html">str_sub()</a></code> extends <code><a href="https://rdrr.io/r/base/substr.html">substr()</a></code>, etc. Here’s a full list of these <a href="https://stringr.tidyverse.org/articles/from-base.html">doppelgänger stringr functions</a>.</p>
+<p><a href="https://stringr.tidyverse.org">stringr</a>, one of the <a href="https://www.tidyverse.org/packages/#core-tidyverse">core Tidyverse</a> packages, contains an alternative set of functions for working with strings. Many of these are similar in purpose to base R versions (although some have subtle differences). E.g. <code><a href="https://stringr.tidyverse.org/reference/str_length.html">str_length()</a></code> is the same as <code><a href="https://rdrr.io/r/base/nchar.html">nchar()</a></code>, <code><a href="https://stringr.tidyverse.org/reference/case.html">str_to_lower()</a></code>/<code><a href="https://stringr.tidyverse.org/reference/case.html">str_to_upper()</a></code> replicate <code><a href="https://rdrr.io/r/base/chartr.html">tolower()</a></code>/<code><a href="https://rdrr.io/r/base/chartr.html">toupper()</a></code>, <code><a href="https://stringr.tidyverse.org/reference/str_replace.html">str_replace()</a></code> is similar to <code><a href="https://rdrr.io/r/base/grep.html">sub()</a></code>, <code><a href="https://stringr.tidyverse.org/reference/str_sub.html">str_sub()</a></code> extends <code><a href="https://rdrr.io/r/base/substr.html">substr()</a></code>, etc. Here’s a full list of these <a href="https://stringr.tidyverse.org/articles/from-base.html">doppelgänger stringr functions</a>.</p>
 <p>However, there are a few useful stringr functions that do not have counterparts in base R (or at least whose counterparts require much more complex expressions). Here is a <em>small</em> curation of them.</p>
 <div class="sourceCode" id="cb268"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># since stringr is a "core" tidyverse package,</span></span>
@@ -680,12 +679,12 @@
 <h3>
 <span class="header-section-number">3.1.10</span> Coercion (converting types)<a class="anchor" aria-label="anchor" href="#coercion-converting-types"><i class="fas fa-link"></i></a>
 </h3>
-<p>Sometimes, we read data in and it may need to be converted before it’s usable. E.g. let’s say you read in a list of prices from some catalog and you get the following vector:</p>
+<p>Sometimes, we read data in and it may need to be converted before it’s usable. E.g. let’s say you read in a list of prices from some catalog and you get the following character vector:</p>
 <div class="sourceCode" id="cb306"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">prices_raw</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"$1,000"</span>,<span class="st">"$1,500"</span>,<span class="st">"$850"</span>,<span class="st">"$2,000"</span><span class="op">)</span></span>
 <span><span class="va">prices_raw</span></span></code></pre></div>
 <pre><code>## [1] "$1,000" "$1,500" "$850"   "$2,000"</code></pre>
-<p>Since R doesn’t natively understand dollar signs or comma grouping, this will read in as a character vector. You can check the type of a vector by using the <code><a href="https://rdrr.io/r/base/numeric.html">is.numeric()</a></code>, <code><a href="https://rdrr.io/r/base/logical.html">is.logical()</a></code>, <code><a href="https://rdrr.io/r/base/character.html">is.character()</a></code> functions.</p>
+<p>Since R doesn’t natively understand dollar signs or comma grouping, this must start as a character vector. You can check the type of a vector by using the <code><a href="https://rdrr.io/r/base/numeric.html">is.numeric()</a></code>, <code><a href="https://rdrr.io/r/base/logical.html">is.logical()</a></code>, <code><a href="https://rdrr.io/r/base/character.html">is.character()</a></code> functions.</p>
 <div class="sourceCode" id="cb308"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/character.html">is.character</a></span><span class="op">(</span><span class="va">prices_raw</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
@@ -696,7 +695,25 @@
 <pre><code>## [1] NA NA NA NA</code></pre>
 <p>In R, it’s important to remember <strong>not to reinvent the wheel</strong>; most actions already have an associated package/function, and it’s probably better than what you can write (if you’re a beginner). Here, it may be tempting to write your own parsing function by using <code><a href="https://rdrr.io/r/base/grep.html">sub()</a></code>/<code><a href="https://rdrr.io/r/base/grep.html">gsub()</a></code> to replace the dollar and commas then coerce, but there’s a better option.</p>
 <p><a href="https://readr.tidyverse.org/index.html">readr</a> is another one of the <a href="https://www.tidyverse.org/packages/#core-tidyverse">core Tidyverse</a> packages. It’s designed to make ingesting data as easy as possible.</p>
-<p>One set of readr functions useful here are the</p>
+<p>One set of readr functions useful here are the <code><a href="https://readr.tidyverse.org/reference/parse_number.html">parse_number()</a></code> and <code><a href="https://readr.tidyverse.org/reference/parse_atomic.html">parse_logical()</a></code> functions (converting to a string is trivial and can basically always be done using the <code><a href="https://rdrr.io/r/base/character.html">as.character()</a></code> function). These functions are quite smart and can ignore extra characters and just extract the relevant numerical info.</p>
+<div class="sourceCode" id="cb313"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># since readr is also a "core" tidyverse package,</span></span>
+<span><span class="co"># you can use library(tidyverse) or library(readr)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readr.tidyverse.org">readr</a></span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb314"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">prices</span> <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/parse_number.html">parse_number</a></span><span class="op">(</span><span class="va">prices_raw</span><span class="op">)</span></span>
+<span><span class="va">prices</span></span></code></pre></div>
+<pre><code>## [1] 1000 1500  850 2000</code></pre>
+<div class="sourceCode" id="cb316"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">is.numeric</a></span><span class="op">(</span><span class="va">prices</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p>See the help page for <code><a href="https://readr.tidyverse.org/reference/parse_number.html">parse_number()</a></code> for more examples and usage notes.</p>
+</div>
+<div id="date-vectors" class="section level3" number="3.1.11">
+<h3>
+<span class="header-section-number">3.1.11</span> Date vectors<a class="anchor" aria-label="anchor" href="#date-vectors"><i class="fas fa-link"></i></a>
+</h3>
+<p>Finally, let’s talk about date vectors. In R (like most other languages) dates are actually stored.</p>
 <!--
 
 ### Date vectors
@@ -758,6 +775,7 @@
 <li><a class="nav-link" href="#sortingreordering"><span class="header-section-number">3.1.8</span> Sorting/reordering</a></li>
 <li><a class="nav-link" href="#character-vectors"><span class="header-section-number">3.1.9</span> Character vectors</a></li>
 <li><a class="nav-link" href="#coercion-converting-types"><span class="header-section-number">3.1.10</span> Coercion (converting types)</a></li>
+<li><a class="nav-link" href="#date-vectors"><span class="header-section-number">3.1.11</span> Date vectors</a></li>
 </ul>
 </li>
 </ul>
@@ -777,7 +795,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, Bret Larget, Cameron Jones. It was last built on 2024-07-03.</p>
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, Bret Larget, Cameron Jones. It was last built on 2024-07-04.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

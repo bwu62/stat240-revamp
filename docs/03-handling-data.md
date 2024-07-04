@@ -184,7 +184,7 @@ sd(data)
 ### Logical vectors
 
 
-These ["vectorized"](https://osu-codeclub.github.io/posts/basics_04/) operations also work with logical comparisons, and these produce **logical vectors**. For example, we can ask R which observations are even:
+These ["vectorized"](https://osu-codeclub.github.io/posts/basics_04) operations also work with logical comparisons, and these produce **logical vectors**. For example, we can ask R which observations are even:
 
 
 ``` r
@@ -354,7 +354,7 @@ rep(c(1, 3, 7:9, seq(10, 12, by = 0.5)), each = 2)
 ### Multiple vectors + vector recycling
 
 
-It may not surprise you to learn all these vectorized operations also work on multiple vectors! If the vectors aren't the same length, **the shorter vectors will be repeated** until they matches the length of the longest vector. This is called [**recycling**](https://www.geeksforgeeks.org/vector-recycling-in-r/). Example:
+It may not surprise you to learn all these vectorized operations also work on multiple vectors! If the vectors aren't the same length, **the shorter vectors will be repeated** until they matches the length of the longest vector. This is called [**recycling**](https://www.geeksforgeeks.org/vector-recycling-in-r). Example:
 
 
 ``` r
@@ -428,7 +428,7 @@ x2 <= atan(z) * mean(x1)
 :::{.note}
 In this class, **you should *never* need a for loop** for any exercises (hence why it's considered a bonus topic and not covered in the notes but instead left as optional additional reading).
 
-Instead, ***always* look for a solution using vectorized operations**. In R, vectorized operations are basically always [MUCH faster than for loops](https://datakuity.com/2018/01/17/for-loop-vs-vectorization-in-r/), due to low-level parallelization optimizations.
+Instead, ***always* look for a solution using vectorized operations**. In R, vectorized operations are basically always [MUCH faster than for loops](https://datakuity.com/2018/01/17/for-loop-vs-vectorization-in-r), due to low-level parallelization optimizations.
 :::
 
 
@@ -931,13 +931,13 @@ endsWith(friends, "y")
 
 Each of these functions (as well as several more listed in the `grep()` help page), actually accept more complex pattern syntax for the search pattern. This advanced search pattern syntax is called "regular expressions" or "regex" for short. You can do things like match groups of characters, match repeated characters or groups, match to specific locations in words or sentences, and more.
 
-In this class we will NOT cover regular expressions to any real detail again due to limited time, but feel free to explore [this cheat sheet](https://paulvanderlaken.com/wp-content/uploads/2017/08/r-regular-expression-cheetsheat.pdf) as well as [these](https://paulvanderlaken.com/2017/10/03/regular-expressions-in-r-part-1-introduction-and-base-r-functions/) [two](https://bookdown.org/rdpeng/rprogdatascience/regular-expressions.html) additional articles on the matter.
+In this class we will NOT cover regular expressions to any real detail again due to limited time, but feel free to explore [this cheat sheet](https://paulvanderlaken.com/wp-content/uploads/2017/08/r-regular-expression-cheetsheat.pdf) as well as [these](https://paulvanderlaken.com/2017/10/03/regular-expressions-in-r-part-1-introduction-and-base-r-functions) [two](https://bookdown.org/rdpeng/rprogdatascience/regular-expressions.html) additional articles on the matter.
 
 
 
 #### Additional stringr functions
 
-[stringr](https://stringr.tidyverse.org/), one of the [core Tidyverse](https://www.tidyverse.org/packages/#core-tidyverse) packages, contains an alternative set of functions for working with strings. Many of these are similar in purpose to base R versions (although some have subtle differences). E.g. `str_length()` is the same as `nchar()`, `str_to_lower()`/`str_to_upper()` replicate `tolower()`/`toupper()`, `str_replace()` is similar to `sub()`, `str_sub()` extends `substr()`, etc. Here's a full list of these [doppelgänger stringr functions](https://stringr.tidyverse.org/articles/from-base.html).
+[stringr](https://stringr.tidyverse.org), one of the [core Tidyverse](https://www.tidyverse.org/packages/#core-tidyverse) packages, contains an alternative set of functions for working with strings. Many of these are similar in purpose to base R versions (although some have subtle differences). E.g. `str_length()` is the same as `nchar()`, `str_to_lower()`/`str_to_upper()` replicate `tolower()`/`toupper()`, `str_replace()` is similar to `sub()`, `str_sub()` extends `substr()`, etc. Here's a full list of these [doppelgänger stringr functions](https://stringr.tidyverse.org/articles/from-base.html).
 
 However, there are a few useful stringr functions that do not have counterparts in base R (or at least whose counterparts require much more complex expressions). Here is a *small* curation of them.
 
@@ -1157,7 +1157,7 @@ head(sort(state.name, decreasing=TRUE))
 
 ### Coercion (converting types)
 
-Sometimes, we read data in and it may need to be converted before it's usable. E.g. let's say you read in a list of prices from some catalog and you get the following vector:
+Sometimes, we read data in and it may need to be converted before it's usable. E.g. let's say you read in a list of prices from some catalog and you get the following character vector:
 
 
 ``` r
@@ -1169,7 +1169,7 @@ prices_raw
 ## [1] "$1,000" "$1,500" "$850"   "$2,000"
 ```
 
-Since R doesn't natively understand dollar signs or comma grouping, this will read in as a character vector. You can check the type of a vector by using the `is.numeric()`, `is.logical()`, `is.character()` functions.
+Since R doesn't natively understand dollar signs or comma grouping, this must start as a character vector. You can check the type of a vector by using the `is.numeric()`, `is.logical()`, `is.character()` functions.
 
 
 ``` r
@@ -1199,7 +1199,44 @@ In R, it's important to remember **not to reinvent the wheel**; most actions alr
 
 [readr](https://readr.tidyverse.org/index.html) is another one of the [core Tidyverse](https://www.tidyverse.org/packages/#core-tidyverse) packages. It's designed to make ingesting data as easy as possible.
 
-One set of readr functions useful here are the
+One set of readr functions useful here are the `parse_number()` and `parse_logical()` functions (converting to a string is trivial and can basically always be done using the `as.character()` function). These functions are quite smart and can ignore extra characters and just extract the relevant numerical info.
+
+
+``` r
+# since readr is also a "core" tidyverse package,
+# you can use library(tidyverse) or library(readr)
+library(readr)
+```
+
+
+``` r
+prices = parse_number(prices_raw)
+prices
+```
+
+```
+## [1] 1000 1500  850 2000
+```
+
+``` r
+is.numeric(prices)
+```
+
+```
+## [1] TRUE
+```
+
+See the help page for `parse_number()` for more examples and usage notes.
+
+
+
+
+### Date vectors
+
+Finally, let's talk about date vectors. In R (like most other languages) dates are actually stored.
+
+
+
 
 
 
