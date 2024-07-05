@@ -553,7 +553,6 @@ One set of readr functions useful here are the `parse_number()` and `parse_logic
 # you can use library(tidyverse) or library(readr)
 library(readr)
 ```
-
 ```{r}
 prices <- parse_number(prices_raw)
 prices
@@ -617,6 +616,7 @@ x
 R conforms to [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) standards, i.e. **dates ALWAYS show as `"YYYY-MM-DD"`** (even though they're stored numerically). This is arguably the best format for dates, because it's the unique format where [chronological order and lexicographical order are identical](https://en.wikipedia.org/wiki/ISO_8601#General_principles), which is an extremely useful property.
 
 Also note despite `date` appearing to be a character, it is NOT a character. Using `identical()` (which compares if two objects are the same) will show this to be false. Furthermore, `as.numeric()` confirms `date` converts to `r .dnum` as expected, whereas the string ``"`r date`"`` cannot be converted and returns `NA`.
+
 ```{r}
 date
 is.character(date)
@@ -626,7 +626,7 @@ cat(glue::glue("``` r
 identical(date,\"{date}\")
 ```"))
 ```
-```{r,echo=F,results='hold'}
+```{r,echo=F}
 identical(date,toString(date))
 ```
 ```{r,echo=F,results='asis'}
@@ -634,7 +634,7 @@ cat(glue::glue("``` r
 c(as.numeric(date), as.numeric(\"{date}\"))
 ```"))
 ```
-```{r,echo=F,results='hold',warning=T,class.warning="warning"}
+```{r,echo=F,warning=T,class.warning="warning"}
 c(as.numeric(date), as.numeric(toString(date)))
 ```
 
@@ -644,11 +644,65 @@ This is just to warn you that **even though they may print similarly, date objec
 
 
 
+#### Parsing dates
+
+In some cases (specifically, if dates in a dataset are already represented in standard ISO-8601 format) R will automatically parse (i.e. convert) the dates for you. In other cases, you may need to manually parse them yourself. We will continue to use lubridate, since it has the most robust and user-friendly functions for working with dates.
+
+In lubridate, the [parser functions](https://lubridate.tidyverse.org/reference/ymd.html) `mdy()`, `dmy()`, `ymd()` (as well as their rarer siblings `ydm()`, `myd()`, and `dym()`) are used to parse date data into proper date objects. The **only difference between these functions is the *order* they expect to see date components**, e.g. `mdy()` is used when the data is ordered month, day, then year (which is common in the US), and `dmy()` is used when the date data is data is ordered day, month, then year (which is generally preferred outside the US). These functions are **extremely robust and automagically recognize a wide range of formats**, and of course they're all vectorized! Here's a few examples:
+
+```{r,include=F}
+# create some date strings to demo parsing
+.mdyDemos = c(
+  format(date,"%m/%d/%y") %>% str_replace_all("(^|/)0","\\1"),
+  format(date,"%m-%d-%Y"),
+  format(date,"%m%d%y"),
+  format(date,"%b %d '%y") %>% str_replace(" 0"," "),
+  format(date,"%A, %B %d, %Y") %>% str_replace(" 0"," ") %>%
+    str_replace("( \\d+),",paste0(" ",scales::label_ordinal()(as.numeric(format(date,"%d"))),","))
+)
+```
+```{r,echo=F,results='asis'}
+cat(glue::glue("``` r
+mdy(c(
+  \"{paste(.mdyDemos,collapse='\", \"')}\"
+))
+```"))
+```
+```{r,echo=F}
+mdy(.mdyDemos)
+```
+```{r,include=F}
+# create some date strings to demo parsing
+.dmyDemos = c(
+  format(date,"%d/%m/%y") %>% str_replace_all("(^|/)0","\\1"),
+  format(date,"%d-%m-%Y"),
+  format(date,"%d%m%y"),
+  format(date,"%d %b '%y") %>% str_replace("^0",""),
+  format(date,"%A, %d of %B, %Y") %>% str_replace(", 0",", ") %>%
+    str_replace("( \\d+) of",paste0(" ",scales::label_ordinal()(as.numeric(format(date,"%d")))," of"))
+)
+```
+```{r,echo=F,results='asis'}
+cat(glue::glue("``` r
+dmy(c(
+  \"{paste(.dmyDemos,collapse='\", \"')}\"
+))
+```"))
+```
+```{r,echo=F}
+dmy(.dmyDemos)
+```
+
+As you can see, you just need to tell R which order to expect the date components and it will handle the rest! We only demonstrated the `mdy()` and `dmy()` functions here since they are by far the most common formats, but the other functions all behave the same.
+
+Also, observe that once converted, R always prints the date in ISO-8601 format as ``"`r date`"``.
 
 
 
 
+#### Aside: R's calendar
 
+A quick aside. **R has an *extremely* robust calendar**, so you don't need to worry about
 
 
 
