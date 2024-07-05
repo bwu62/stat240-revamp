@@ -1354,7 +1354,6 @@ This is just to warn you that **even though they may print similarly, date objec
 
 
 
-
 <!--
 
 ### Date vectors
