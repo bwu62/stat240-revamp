@@ -744,8 +744,8 @@
 <span><span class="va">x</span></span></code></pre></div>
 <pre><code>## [1] "2024-07-05"</code></pre>
 <div class="note">
-<p>R conforms to <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO-8601</a> standards, i.e. <strong>dates ALWAYS show as YYYY-MM-DD</strong> (even though they’re stored numerically). This is arguably the best format for dates, because it’s the unique format where <a href="https://en.wikipedia.org/wiki/ISO_8601#General_principles">chronological order and lexicographical order are identical</a>, which is an extremely useful property.</p>
-<p>Also note despite <code>"2024-07-05"</code> appearing to be a character, it is NOT a character. Using the <code><a href="https://rdrr.io/r/base/identical.html">identical()</a></code> (which compares if two objects are the same) will show this to be false. Furthermore, <code><a href="https://rdrr.io/r/base/numeric.html">as.numeric()</a></code> confirms <code>date</code> converts to 19909 as expected, whereas <code>"2024-07-05"</code> cannot be converted and returns <code>NA</code>.</p>
+<p>R conforms to <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO-8601</a> standards, i.e. <strong>dates ALWAYS show as <code>"YYYY-MM-DD"</code></strong> (even though they’re stored numerically). This is arguably the best format for dates, because it’s the unique format where <a href="https://en.wikipedia.org/wiki/ISO_8601#General_principles">chronological order and lexicographical order are identical</a>, which is an extremely useful property.</p>
+<p>Also note despite <code>date</code> appearing to be a character, it is NOT a character. Using <code><a href="https://rdrr.io/r/base/identical.html">identical()</a></code> (which compares if two objects are the same) will show this to be false. Furthermore, <code><a href="https://rdrr.io/r/base/numeric.html">as.numeric()</a></code> confirms <code>date</code> converts to 19909 as expected, whereas the string <code>"2024-07-05"</code> cannot be converted and returns <code>NA</code>.</p>
 <div class="sourceCode" id="cb329"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">date</span></span></code></pre></div>
 <pre><code>## [1] "2024-07-05"</code></pre>
@@ -759,6 +759,7 @@
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">date</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="st">"2024-07-05"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre class="warning"><code>## Warning: NAs introduced by coercion</code></pre>
 <pre><code>## [1] 19909    NA</code></pre>
+<p>This is just to warn you that <strong>even though they may print similarly, date objects and date-like strings are <em>NOT</em> the same</strong>, so to avoid errors and unexpected behavior, make sure you properly convert all date data to be true date objects.</p>
 </div>
 <!--
 
