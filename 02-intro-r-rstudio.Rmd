@@ -698,6 +698,13 @@ You will see lots of $\LaTeX$ later in the notes when we need to write math, so 
 
 
 
+### Cheat sheet
+
+If you need a good R Markdown cheat sheet, I recommend [this reference guide](https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf) published by the same developers as Rstudio. Page 1 has a Markdown syntax guide, pages 2-3 highlight some more useful chunk options, and pages 4-5 have some additional info on different output formats as well as some additional YAML header options.
+
+
+
+
 ## Workflow
 
 
