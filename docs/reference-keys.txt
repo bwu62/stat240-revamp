@@ -52,3 +52,5 @@ additional-stringr-functions
 comparing-strings
 coercion-converting-types
 date-vectors
+parsing-dates
+aside-rs-calendar

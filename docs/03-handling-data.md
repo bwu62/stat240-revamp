@@ -122,8 +122,7 @@ log(10, base = data)
 ```
 
 ```
-## [1] 2.095903 1.285097 1.285097 3.321928 1.660964      Inf
-## [7] 1.430677
+## [1] 2.095903 1.285097 1.285097 3.321928 1.660964      Inf 1.430677
 ```
 
 We can combine these with summary functions to do some neat things. For example, suppose we want to manually calculate the [standard deviation](https://www.mathsisfun.com/data/standard-deviation.html)---i.e. the average deviation from the mean---of the sample. Again, we will discuss this in more detail later in the course, but for now here is the formula:
@@ -151,8 +150,8 @@ data - mean(data)
 ```
 
 ```
-## [1] -0.8571429  2.1428571  2.1428571 -1.8571429  0.1428571
-## [6] -2.8571429  1.1428571
+## [1] -0.8571429  2.1428571  2.1428571 -1.8571429  0.1428571 -2.8571429
+## [7]  1.1428571
 ```
 
 This is then squared `( ... )^2` and again, this operates one at a time:
@@ -163,8 +162,8 @@ This is then squared `( ... )^2` and again, this operates one at a time:
 ```
 
 ```
-## [1] 0.73469388 4.59183673 4.59183673 3.44897959 0.02040816
-## [6] 8.16326531 1.30612245
+## [1] 0.73469388 4.59183673 4.59183673 3.44897959 0.02040816 8.16326531
+## [7] 1.30612245
 ```
 
 Finally, this vector is summed, scaled by 1/(n-1), and square rooted to get the standard deviation. We can check this is correct by comparing with the built-in `sd()` function.
@@ -266,8 +265,8 @@ One of the easiest, if you just need a sequence of integers, is to use the `:` o
 ```
 
 ```
-##  [1]  10   9   8   7   6   5   4   3   2   1   0  -1  -2  -3  -4
-## [16]  -5  -6  -7  -8  -9 -10
+##  [1]  10   9   8   7   6   5   4   3   2   1   0  -1  -2  -3  -4  -5
+## [17]  -6  -7  -8  -9 -10
 ```
 
 The `seq()` function does something similar, except it also has additional arguments `by` to specify the step size and `length.out` which specifies how many numbers to have in total (note: only ONE of these arguments can be set at a time).
@@ -323,8 +322,8 @@ rep(1:3, times = 3, each = 4)
 ```
 
 ```
-##  [1] 1 1 1 1 2 2 2 2 3 3 3 3 1 1 1 1 2 2 2 2 3 3 3 3 1 1 1 1 2 2
-## [31] 2 2 3 3 3 3
+##  [1] 1 1 1 1 2 2 2 2 3 3 3 3 1 1 1 1 2 2 2 2 3 3 3 3 1 1 1 1 2 2 2 2
+## [33] 3 3 3 3
 ```
 
 ``` r
@@ -344,8 +343,8 @@ rep(c(1, 3, 7:9, seq(10, 12, by = 0.5)), each = 2)
 ```
 
 ```
-##  [1]  1.0  1.0  3.0  3.0  7.0  7.0  8.0  8.0  9.0  9.0 10.0 10.0
-## [13] 10.5 10.5 11.0 11.0 11.5 11.5 12.0 12.0
+##  [1]  1.0  1.0  3.0  3.0  7.0  7.0  8.0  8.0  9.0  9.0 10.0 10.0 10.5
+## [14] 10.5 11.0 11.0 11.5 11.5 12.0 12.0
 ```
 
 
@@ -485,8 +484,8 @@ letters
 ```
 
 ```
-##  [1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o"
-## [16] "p" "q" "r" "s" "t" "u" "v" "w" "x" "y" "z"
+##  [1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p"
+## [17] "q" "r" "s" "t" "u" "v" "w" "x" "y" "z"
 ```
 
 You can extract elements form a vector with the `[]` operator, giving either a vector of numeric positions, a vector of `TRUE`/`FALSE` values, or a negative vector for exclusions (i.e. anything *except*). Examples:
@@ -547,8 +546,8 @@ letters[-1]
 ```
 
 ```
-##  [1] "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p"
-## [16] "q" "r" "s" "t" "u" "v" "w" "x" "y" "z"
+##  [1] "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q"
+## [17] "r" "s" "t" "u" "v" "w" "x" "y" "z"
 ```
 
 ``` r
@@ -557,8 +556,7 @@ letters[-1:-10]
 ```
 
 ```
-##  [1] "k" "l" "m" "n" "o" "p" "q" "r" "s" "t" "u" "v" "w" "x" "y"
-## [16] "z"
+##  [1] "k" "l" "m" "n" "o" "p" "q" "r" "s" "t" "u" "v" "w" "x" "y" "z"
 ```
 
 ``` r
@@ -567,8 +565,7 @@ letters[-(1:10)]
 ```
 
 ```
-##  [1] "k" "l" "m" "n" "o" "p" "q" "r" "s" "t" "u" "v" "w" "x" "y"
-## [16] "z"
+##  [1] "k" "l" "m" "n" "o" "p" "q" "r" "s" "t" "u" "v" "w" "x" "y" "z"
 ```
 
 ``` r
@@ -800,9 +797,8 @@ paste(friends, "123", sep = "_")
 ```
 
 ```
-## [1] "Alice_123"     "Bob_123"       "Charlie_123"  
-## [4] "Donny_123"     "Emmy_123"      "Francine_123" 
-## [7] "Genevieve_123" "Heinemann_123"
+## [1] "Alice_123"     "Bob_123"       "Charlie_123"   "Donny_123"    
+## [5] "Emmy_123"      "Francine_123"  "Genevieve_123" "Heinemann_123"
 ```
 
 ``` r
@@ -1122,8 +1118,8 @@ head(sort(state.name, decreasing = TRUE))
 ```
 
 ```
-## [1] "Wyoming"       "Wisconsin"     "West Virginia"
-## [4] "Washington"    "Virginia"      "Vermont"
+## [1] "Wyoming"       "Wisconsin"     "West Virginia" "Washington"   
+## [5] "Virginia"      "Vermont"
 ```
 
 ``` r
@@ -1208,7 +1204,6 @@ One set of readr functions useful here are the `parse_number()` and `parse_logic
 # you can use library(tidyverse) or library(readr)
 library(readr)
 ```
-
 
 ``` r
 prices <- parse_number(prices_raw)
@@ -1303,6 +1298,7 @@ R conforms to [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) standards, i.e.
 
 Also note despite `date` appearing to be a character, it is NOT a character. Using `identical()` (which compares if two objects are the same) will show this to be false. Furthermore, `as.numeric()` confirms `date` converts to 19909 as expected, whereas the string ``"2024-07-05"`` cannot be converted and returns `NA`.
 
+
 ``` r
 date
 ```
@@ -1343,11 +1339,43 @@ This is just to warn you that **even though they may print similarly, date objec
 
 
 
+#### Parsing dates
+
+In some cases (specifically, if dates in a dataset are already represented in standard ISO-8601 format) R will automatically parse (i.e. convert) the dates for you. In other cases, you may need to manually parse them yourself. We will continue to use lubridate, since it has the most robust and user-friendly functions for working with dates.
+
+In lubridate, the [parser functions](https://lubridate.tidyverse.org/reference/ymd.html) `mdy()`, `dmy()`, `ymd()` (as well as their rarer siblings `ydm()`, `myd()`, and `dym()`) are used to parse date data into proper date objects. The **only difference between these functions is the *order* they expect to see date components**, e.g. `mdy()` is used when the data is ordered month, day, then year (which is common in the US), and `dmy()` is used when the date data is data is ordered day, month, then year (which is generally preferred outside the US). These functions are **extremely robust and automagically recognize a wide range of formats**, and of course they're all vectorized! Here's a few examples:
+
+
+``` r
+mdy(c(
+  "7/5/24", "07-05-2024", "070524", "Jul 5 '24", "Friday, July 5th, 2024"
+))
+```
+
+```
+## [1] "2024-07-05" "2024-07-05" "2024-07-05" "2024-07-05" "2024-07-05"
+```
+
+``` r
+dmy(c(
+  "5/7/24", "05-07-2024", "050724", "5 Jul '24", "Friday, 5th of July, 2024"
+))
+```
+
+```
+## [1] "2024-07-05" "2024-07-05" "2024-07-05" "2024-07-05" "2024-07-05"
+```
+
+As you can see, you just need to tell R which order to expect the date components and it will handle the rest! We only demonstrated the `mdy()` and `dmy()` functions here since they are by far the most common formats, but the other functions all behave the same.
+
+Also, observe that once converted, R always prints the date in ISO-8601 format as ``"2024-07-05"``.
 
 
 
 
+#### Aside: R's calendar
 
+A quick aside. **R has an *extremely* robust calendar**, so you don't need to worry about
 
 
 
