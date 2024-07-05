@@ -119,5 +119,5 @@ page.find = function(url,pattern,md=F,n=1){
 #   }
 # }
 
-
-options(width=65)
+# set a nice width
+options(width=69)
