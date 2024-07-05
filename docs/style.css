@@ -122,6 +122,23 @@ div.sourceCode + pre{
   background-image: unset !important;
   margin-top: 0.2rem !important;
 }
+div.sourceCode + p{
+  margin-top: 1rem !important
+}
+.sourceCode + .alert{
+  margin-top: 1rem !important;
+}
+.alert code{
+  background-color: rgba(255,255,255,.6) !important;
+}
+.alert .sourceCode .sourceCode code.sourceCode{
+  background-color: unset !important;
+}
+div.sourceCode + div.sourceCode{
+  margin-top: 0.5rem !important;
+}
+
+
 pre.message,pre.warning{
   background-color: unset !important;
   background-image: unset !important;
@@ -137,25 +154,10 @@ pre.message+pre,pre.warning+pre{
   border-top: none !important;
   padding-top: 0 !important;
 }
-div.sourceCode + p{
-  margin-top: 1rem !important
-}
-.sourceCode + .alert{
-  margin-top: 1rem !important;
-}
-.alert code{
-  background-color: rgba(255,255,255,.6) !important;
-}
-.alert .sourceCode .sourceCode code.sourceCode{
-  background-color: unset !important;
-}
+
 div.alert pre{
   background-color: rgba(255,255,255,.7) !important;
 }
-div.sourceCode + div.sourceCode{
-  margin-top: 1rem !important;
-}
-
 
 /* improve heading margins for legibility */
 h2{

@@ -30,6 +30,7 @@ code
 inline-code
 code-chunks
 aside-latex
+cheat-sheet
 workflow
 working-directory
 knitting-v.-console-execution

@@ -60,7 +60,7 @@ There are LOTS of types of data that vectors can hold, from real to complex numb
  - **Numeric** vectors, which contain real numbers. Generally, R functions don't distinguish between integers and decimal numbers (also called "doubles" or "floats") so treat all numbers as decimal-valued real numbers. ^[For the CS students, R represents all numbers by default as double-precision floating-point numbers as per [IEC 60559/IEEE 754](https://en.wikipedia.org/wiki/IEEE_754){target="_blank"} specifications. There are no single precision values in R. You can force a number to be a [32-bit signed integer](https://rdrr.io/r/base/integer.html){target="_blank"} by adding an `L` to the end, e.g. `1L`, but this is extremely rare in data science and generally offers no real, tangible advantages.]
  - **Logical** vectors, which contain only `TRUE`/`FALSE` values. Usually, these arise from logical comparison operators or other functions that check if some condition is satisfied. Remember that in computations, TRUE becomes 1 and FALSE becomes 0. ^[Again, for the CS nerds, 0 in R is considered "falsy" and all other numbers are considered "truthy". E.g. try running `x & TRUE` for zero and non-zero x and observe the output.]
  - **Character** vectors, which contain characters (often also called "strings"). These are basically categorical or text data. E.g. you may have groups "A" and "B", or sex "Male" and "Female". You can even have sentences, paragraphs, or entire bodies of text in a character. We will only briefly touch on processing text data in this class. ^[CS people, looking at you again. Some languages distinguish between "character" type, which can only be just a single character; and "string" type, which are sequences of characters. In R, there is no such distinction; characters and strings are synonymous. Note this means you cannot "slice" through a string as if it's just a list of characters in R like some other languages.]
- - Lastly, we will also discuss **date** vectors, which are actually closely related to numeric vectors (more on this later). These are ubiquitous in data science and thus deserving of inclusion. ^[I don't have anything pedantic to add here, but all the other vectors got footnotes so I didn't want dates to feel left out :( ... <br/><br/> ...well ok, since you bothered to click this, I'll give you something. Dates in R, like in many other languages, are stored as [number of days after Jan 1^st^ 1970](https://rdrr.io/r/base/Dates.html){target="_blank"}, which is often ominously referred to as the "Epoch". Why 1/1/70? Because reportedly it ["*seemed to be as good as any*"](https://retrocomputing.stackexchange.com/a/25599){target="_blank"}. <br/><br/> This is why dates are basically numeric vectors with extra steps. However, like with anything, the devil's in the details, and learning to work efficiently with dates is not trivial.]
+ - Lastly, we will also discuss **date** vectors, which are actually closely related to numeric vectors (more on this later). These are ubiquitous in data science and thus deserving of inclusion. ^[I don't have anything pedantic to add here, but all the other vectors got footnotes so I didn't want dates to feel left out :( ... <br/><br/> ...well ok, since you bothered to click this, I'll give you something. We'll discuss this later too, but here's a sneak preview: dates in R, like in many other languages, are stored as [number of days after Jan 1^st^ 1970](https://rdrr.io/r/base/Dates.html){target="_blank"}, which is often ominously referred to as the "Epoch". Why 1/1/70? Because reportedly it ["*seemed to be as good as any*"](https://retrocomputing.stackexchange.com/a/25599){target="_blank"}. <br/><br/> This is why dates are basically numeric vectors with extra steps. However, like with anything, the devil's in the details, and learning to work efficiently with dates is not trivial.]
    - Note: we only cover dates themselves, not date + time values (also called datetime) since these are actually quite different data types and we only have so many lectures. ^[Similar-ish to dates, datetimes are often stored as a (possibly decimal) [number of seconds after midnight of Jan 1^st^ 1970](https://rdrr.io/r/base/DateTimeClasses.html){target="_blank"} called a POSIXct object, although R confusingly also has a whole other type of datetime object called POSIXlt where each date/time component is stored as an element of a [list](https://jennybc.github.io/purrr-tutorial/bk00_vectors-and-lists.html) (which is a whole other giant beast we don't even remotely have time to get into). See Hadley Wickham's page on [datetime](https://r4ds.hadley.nz/datetimes.html){target="_blank"} from his book "*R for Data Science*" for more info on datetime objects.]
 
 
@@ -998,11 +998,12 @@ cat(
       # split symbols into individual characters
       strsplit(
         # make a vector of all ordinary keyboard characters
-        c(letters,LETTERS,0:9,"`~!@#$%^&*()_+-=[]\\{}|;':\",./<>? ")
-      ,"")
+        c(letters, LETTERS, 0:9, "`~!@#$%^&*()_+-=[]\\{}|;':\",./<>? "),
+        ""
+      )
     )
-  )
-  ,sep=""
+  ),
+  sep = ""
 )
 # please pardon the uneven text-wrapping of the output below:
 ```
@@ -1112,12 +1113,12 @@ Note however that nothingness, i.e. the absence of a character (such as when a s
 ## [1] TRUE
 ```
 
-Using our newfound wisdom, we can now conclusively settle some age old debates.
+Using our newfound wisdom, we can now conclusively settle some age old debates!
 
 
 ``` r
 # what is the greatest state? (head prints the first 6)
-head(sort(state.name, decreasing=TRUE))
+head(sort(state.name, decreasing = TRUE))
 ```
 
 ```
@@ -1135,7 +1136,7 @@ head(sort(state.name, decreasing=TRUE))
 ```
 
 ``` r
-# PC or Mac?
+# is Windows better than Mac?
 "Windows" > "Mac"
 ```
 
@@ -1161,7 +1162,7 @@ Sometimes, we read data in and it may need to be converted before it's usable. E
 
 
 ``` r
-prices_raw = c("$1,000","$1,500","$850","$2,000")
+prices_raw <- c("$1,000", "$1,500", "$850", "$2,000")
 prices_raw
 ```
 
@@ -1210,7 +1211,7 @@ library(readr)
 
 
 ``` r
-prices = parse_number(prices_raw)
+prices <- parse_number(prices_raw)
 prices
 ```
 
@@ -1233,7 +1234,113 @@ See the help page for `parse_number()` for more examples and usage notes.
 
 ### Date vectors
 
-Finally, let's talk about date vectors. In R (like most other languages) dates are actually stored.
+Finally, let's talk about date vectors (note we are not talking about date+time values, just dates). In R, dates are actually stored as a number, representing the [number of days after January 1^st^ 1970](https://rdrr.io/r/base/Dates.html), which is used as a reference date called the [Epoch](https://en.wikipedia.org/wiki/Epoch_(computing)).
+
+Before we run some examples, we're going to load in the [lubridate](https://lubridate.tidyverse.org/) package, which is designed to make working with dates super easy and is also a part of Tidyverse. However, it's not actually a core package, which means **it MUST be loaded in separately** each time you wish to use it!
+
+
+``` r
+library(lubridate)
+```
+
+
+
+Ok, let's start the demo by creating a date object. Let's use today's date (which is Jul 5, 2024 as of [last compile](https://github.com/bwu62/stat240-revamp/commits/maste)) as an example. The `today()` function is handy here.
+
+
+``` r
+# create today as an example date object
+date <- today()
+date
+```
+
+```
+## [1] "2024-07-05"
+```
+
+We can see that even though our date object has `"Date"` class, it actually has `"double"` type, which means behind the scenes, it's secretly stored as a number. ^[The distrinction between class, type, and mode (which we haven't even mentioned and won't ever discuss) is highly technical to the mechanics of R and not worth concerning yourself over. If you're dying of curiosity, I recommend this excellent video on the matter: <https://youtu.be/RwEzWZA9uTw>{target="_blank"}.] If you `unclass()` the object, i.e. strip away the `"Date"` property, you can see it's just the number 19909 underneath, and you can check that in fact Jul 5, 2024 is indeed [19909 days after Jan 1 1970](https://www.wolframalpha.com/input?i=19909+days+after+Jan+1+1970).
+
+
+``` r
+# looks like a date
+class(date)
+```
+
+```
+## [1] "Date"
+```
+
+``` r
+is.Date(date) & !is.numeric(date)
+```
+
+```
+## [1] TRUE
+```
+
+``` r
+# but it's secretly a number underneath!
+unclass(date)
+```
+
+```
+## [1] 19909
+```
+``` r
+# we can reverse this too, start with a number,
+# then change the class to "Date", and voila!
+x <- 19909
+class(x) <- "Date"
+x
+```
+
+```
+## [1] "2024-07-05"
+```
+
+:::{.note}
+R conforms to [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) standards, i.e. **dates ALWAYS show as YYYY-MM-DD** (even though they're stored numerically). This is arguably the best format for dates, because it's the unique format where [chronological order and lexicographical order are identical](https://en.wikipedia.org/wiki/ISO_8601#General_principles), which is an extremely useful property.
+
+Also note despite ``"2024-07-05"`` appearing to be a character, it is NOT a character. Using the `identical()` (which compares if two objects are the same) will show this to be false. Furthermore, `as.numeric()` confirms `date` converts to 19909 as expected, whereas ``"2024-07-05"`` cannot be converted and returns `NA`.
+
+``` r
+date
+```
+
+```
+## [1] "2024-07-05"
+```
+
+``` r
+is.character(date)
+```
+
+```
+## [1] FALSE
+```
+``` r
+identical(date,"2024-07-05")
+```
+
+```
+## [1] FALSE
+```
+``` r
+c(as.numeric(date), as.numeric("2024-07-05"))
+```
+
+``` warning
+## Warning: NAs introduced by coercion
+```
+
+```
+## [1] 19909    NA
+```
+:::
+
+
+
+
 
 
 
