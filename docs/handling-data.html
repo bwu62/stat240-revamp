@@ -780,7 +780,21 @@
 <h4>
 <span class="header-section-number">3.1.11.2</span> Aside: R’s calendar<a class="anchor" aria-label="anchor" href="#aside-rs-calendar"><i class="fas fa-link"></i></a>
 </h4>
-<p>A quick aside. <strong>R has an <em>extremely</em> robust calendar</strong>, so you don’t need to worry about</p>
+<p>Quick aside. <strong>R has an <em>extremely</em> robust calendar</strong>, so you don’t need to worry about “babysitting” R. Notably, R knows exactly <a href="https://www.mathsisfun.com/leap-years.html">which years are leap and which aren’t</a>.</p>
+<div class="sourceCode" id="cb342"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># the most recent leap year is 2024, since it's divisible by 4</span></span>
+<span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html">mdy</a></span><span class="op">(</span><span class="st">"Feb 29, 2024"</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] "2024-02-29"</code></pre>
+<div class="sourceCode" id="cb344"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># however, years like 1900 or 2100 are not leap,</span></span>
+<span><span class="co"># since they're also divisible by 100</span></span>
+<span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html">mdy</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Feb 29, 1900"</span>, <span class="st">"Feb 29, 2100"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre class="warning"><code>## Warning: 2 failed to parse.</code></pre>
+<pre><code>## [1] NA NA</code></pre>
+<div class="sourceCode" id="cb347"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># but 2000 is also leap, since it's divisble by 400</span></span>
+<span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html">mdy</a></span><span class="op">(</span><span class="st">"Feb 29, 2000"</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] "2000-02-29"</code></pre>
 <!--
 
 ### Date vectors

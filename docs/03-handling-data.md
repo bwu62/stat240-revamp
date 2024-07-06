@@ -1375,7 +1375,45 @@ Also, observe that once converted, R always prints the date in ISO-8601 format a
 
 #### Aside: R's calendar
 
-A quick aside. **R has an *extremely* robust calendar**, so you don't need to worry about
+Quick aside. **R has an *extremely* robust calendar**, so you don't need to worry about "babysitting" R. Notably, R knows exactly [which years are leap and which aren't](https://www.mathsisfun.com/leap-years.html).
+
+
+``` r
+# the most recent leap year is 2024, since it's divisible by 4
+mdy("Feb 29, 2024")
+```
+
+```
+## [1] "2024-02-29"
+```
+
+``` r
+# however, years like 1900 or 2100 are not leap,
+# since they're also divisible by 100
+mdy(c("Feb 29, 1900", "Feb 29, 2100"))
+```
+
+``` warning
+## Warning: 2 failed to parse.
+```
+
+```
+## [1] NA NA
+```
+
+``` r
+# but 2000 is also leap, since it's divisble by 400
+mdy("Feb 29, 2000")
+```
+
+```
+## [1] "2000-02-29"
+```
+
+
+
+
+
 
 
 
