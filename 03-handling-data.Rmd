@@ -237,6 +237,12 @@ One notable exception to all this is the [`%in%`{.R}](https://rdrr.io/r/base/mat
 z %in% x1
 ```
 
+If you want to ask which elements of `z` are NOT in `x1`, you must prepend the expression with `!` to negate it:
+
+```{r}
+!z %in% x1
+```
+
 Note the difference between this and `z == x1`, which recycles `z`, *then* checks element-wise equality:
 
 ```{r}
