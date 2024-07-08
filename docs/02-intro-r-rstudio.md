@@ -73,6 +73,10 @@ Below is a brief description of the purpose of each tab. The ones we will be usi
          v.   *Value*, which gives info on what the function returns as an output
          vi.  Sometimes, other sections may appear here with more specialized info
          vii. At the end, you may also find some advanced notes, links to related functions, additional references, and example code demos.
+         
+         :::{.tip}
+         You should at least briefly **scan the help page each time you encounter a new function**. There are often several different ways to use a function depending on which/how arguments are set, and this can prevent you needing to "reinvent the wheel" by, for example trying to manually change the output format when there's already a built-in way to output to your desired format.
+         :::
      - **Viewer**: This is where a preview of your Rmd document output will appear when knitting (which we learn very soon).
        - In the top corner, there are buttons letting you clear current or all viewer items, as well a button to open the viewer in a new window in your default web browser, which can also be useful sometimes for checking your work or printing/exporting.
      - Presentation: This final tab is useful if you ever make presentations in Rstudio, e.g. using R's [Beamer](https://bookdown.org/yihui/rmarkdown/beamer-presentation.html) or [reveal.js](https://github.com/rstudio/revealjs) integrations.
@@ -724,7 +728,7 @@ all.equal(sqrt(2)^2, 2)
 ### Packages
 
 
-Now, let's briefly discuss packages. One of the best features of R is the ability for anyone to easily write and distribute packages on [CRAN](https://cran.r-project.org) (**C**omprehensive **R** **A**rchive **N**etwork). Currently, there are 21040 packages available on CRAN. There are also a further 2300 packages on the bioinformatics-specific package archive [Bioconductor](https://www.bioconductor.org), as well as countless more on [GitHub](https://github.com/topics/r-package).
+Now, let's briefly discuss packages. One of the best features of R is the ability for anyone to easily write and distribute packages on [CRAN](https://cran.r-project.org) (**C**omprehensive **R** **A**rchive **N**etwork). Currently, there are 21046 packages available on CRAN. There are also a further 2300 packages on the bioinformatics-specific package archive [Bioconductor](https://www.bioconductor.org), as well as countless more on [GitHub](https://github.com/topics/r-package).
 
 In this course, we will primarily make use of the [Tidyverse](https://www.tidyverse.org) suite of packages, which contains several important packages for data science: `readr` for reading in data, `ggplot2` for plotting data, `dplyr` and `tidyr` for cleaning data, and `lubridate` and `stringr` for working with dates and strings. We will learn each of these as the course progresses.
 
