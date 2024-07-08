@@ -585,8 +585,8 @@ library(lubridate)
 
 ```{r,include=F}
 # hidden chunk for updating date references in text
-.date = sub("  "," ",format(today(),"%b %e, %Y"))
-.dnum = format(unclass(today()),format="%d")
+.date <- sub("  ", " ", format(today(), "%b %e, %Y"))
+.dnum <- format(unclass(today()), format = "%d")
 ```
 
 Ok, let's start the demo by creating a date object. Let's use today's date (which is `r .date` as of [last compile](https://github.com/bwu62/stat240-revamp/commits/maste)) as an example. The `today()` function is handy here.
@@ -636,7 +636,7 @@ identical(date,\"{date}\")
 ```"))
 ```
 ```{r,echo=F}
-identical(date,toString(date))
+identical(date, toString(date))
 ```
 ```{r,echo=F,results='asis'}
 cat(glue::glue("``` r
@@ -661,13 +661,13 @@ In lubridate, the [parser functions](https://lubridate.tidyverse.org/reference/y
 
 ```{r,include=F}
 # create some date strings to demo parsing
-.mdyDemos = c(
-  format(date,"%m/%d/%y") %>% str_replace_all("(^|/)0","\\1"),
-  format(date,"%m-%d-%Y"),
-  format(date,"%m%d%y"),
-  format(date,"%b %d '%y") %>% str_replace(" 0"," "),
-  format(date,"%A, %B %d, %Y") %>% str_replace(" 0"," ") %>%
-    str_replace("( \\d+),",paste0(" ",scales::label_ordinal()(as.numeric(format(date,"%d"))),","))
+.mdyDemos <- c(
+  format(date, "%m/%d/%y") %>% str_replace_all("(^|/)0", "\\1"),
+  format(date, "%m-%d-%Y"),
+  format(date, "%m%d%y"),
+  format(date, "%b %d '%y") %>% str_replace(" 0", " "),
+  format(date, "%A, %B %d, %Y") %>% str_replace(" 0", " ") %>%
+    str_replace("( \\d+),", paste0(" ", scales::label_ordinal()(as.numeric(format(date, "%d"))), ","))
 )
 ```
 ```{r,echo=F,results='asis'}
@@ -682,13 +682,13 @@ mdy(.mdyDemos)
 ```
 ```{r,include=F}
 # create some date strings to demo parsing
-.dmyDemos = c(
-  format(date,"%d/%m/%y") %>% str_replace_all("(^|/)0","\\1"),
-  format(date,"%d-%m-%Y"),
-  format(date,"%d%m%y"),
-  format(date,"%d %b '%y") %>% str_replace("^0",""),
-  format(date,"%A, %d of %B, %Y") %>% str_replace(", 0",", ") %>%
-    str_replace("( \\d+) of",paste0(" ",scales::label_ordinal()(as.numeric(format(date,"%d")))," of"))
+.dmyDemos <- c(
+  format(date, "%d/%m/%y") %>% str_replace_all("(^|/)0", "\\1"),
+  format(date, "%d-%m-%Y"),
+  format(date, "%d%m%y"),
+  format(date, "%d %b '%y") %>% str_replace("^0", ""),
+  format(date, "%A, %d of %B, %Y") %>% str_replace(", 0", ", ") %>%
+    str_replace("( \\d+) of", paste0(" ", scales::label_ordinal()(as.numeric(format(date, "%d"))), " of"))
 )
 ```
 ```{r,echo=F,results='asis'}
