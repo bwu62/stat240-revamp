@@ -75,7 +75,7 @@ Below is a brief description of the purpose of each tab. The ones we will be usi
          vii. At the end, you may also find some advanced notes, links to related functions, additional references, and example code demos.
          
          :::{.tip}
-         You should at least briefly **scan the help page each time you encounter a new function**. There are often several different ways to use a function depending on which/how arguments are set, and this can prevent you needing to "reinvent the wheel" by, for example trying to manually change the output format when there's already a built-in way to output to your desired format.
+         You should at least briefly **scan the help page each time you encounter a new function**. There are often several different ways to use a function depending on which/how arguments are set, and this can prevent you needing to "reinvent the wheel" by, for example, trying to manually change the output format when there's already a built-in way to output to your desired format.
          :::
      - **Viewer**: This is where a preview of your Rmd document output will appear when knitting (which we learn very soon).
        - In the top corner, there are buttons letting you clear current or all viewer items, as well a button to open the viewer in a new window in your default web browser, which can also be useful sometimes for checking your work or printing/exporting.
