@@ -516,6 +516,9 @@ Using our newfound wisdom, we can now conclusively settle some age old debates!
 ```{r}
 # what is the greatest state? (head prints the first 6)
 head(sort(state.name, decreasing = TRUE))
+# note by definition of inequalities, we can also use min/max
+# which will find the first and last alphabetically
+c(min(state.name), max(state.name))
 # is the pen mightier than the sword?
 "pen" > "sword"
 # is Windows better than Mac?
