@@ -350,7 +350,7 @@ In general, **most R operations do NOT change the input object in place**. What 
 ```{r sort-output-not-saved}
 # original data2 vector
 data2
-#sort data2
+# sort data2
 sort(data2)
 # is it changed?
 data2
@@ -365,7 +365,7 @@ data2
 It's often considered bad practice to overwrite input like this, since it can be destructive and, if not used with caution, can more easily lead to errors down the road. **We recommend whenever possible writing the output to a new object instead**, like this:
 ```{r sort-new-save}
 # save sorted data2 to new object (encouraged syntax)
-data2_sorted = sort(data2)
+data2_sorted <- sort(data2)
 data2_sorted
 ```
 In general, R outputs are totally independent from input objects and have no impact on them ^[Put another way, R passes by value not reference, and copies are usually deep not shallow. Yes this can be very inefficient, but it's also arguably more user-friendly and intuitive to less technical users, which is by design.]. If you want an operation to be saved, **make sure to remember to assign the output to something!**
