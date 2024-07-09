@@ -965,6 +965,25 @@
 <code class="sourceCode R"><span><span class="co"># is today in dates2?</span></span>
 <span><span class="va">date</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">dates2</span></span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
+</div>
+<div id="printing-dates" class="section level4" number="3.1.11.5">
+<h4>
+<span class="header-section-number">3.1.11.5</span> Printing dates<a class="anchor" aria-label="anchor" href="#printing-dates"><i class="fas fa-link"></i></a>
+</h4>
+<p>As a final note, let’s briefly discuss printing dates. You can use <code><a href="https://rdrr.io/r/base/format.html">format()</a></code> to print dates in a pretty way. Different ways of printing each component are represented using <code>%...</code> codes. Examples:</p>
+<div class="sourceCode" id="cb411"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># print today as mm/dd/yy which is common in the US</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">date</span>, <span class="st">"%m/%d/%y"</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] "07/08/24"</code></pre>
+<div class="sourceCode" id="cb413"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># another way, slightly more written out</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">date</span>, <span class="st">"%b %d, %Y"</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] "Jul 08, 2024"</code></pre>
+<div class="sourceCode" id="cb415"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># fully written out, including weekday</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">date</span>, <span class="st">"%A, %B %e, %Y"</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] "Monday, July  8, 2024"</code></pre>
+<p>A full list of these percent codes can be found in the help page of <code><a href="https://rdrr.io/r/base/strptime.html">strptime()</a></code>, a base R function for parsing date/time objects.</p>
 <!--
 
 ### Date vectors
