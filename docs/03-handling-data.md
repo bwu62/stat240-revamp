@@ -684,7 +684,7 @@ data2
 ```
 
 ``` r
-#sort data2
+# sort data2
 sort(data2)
 ```
 
@@ -716,7 +716,7 @@ It's often considered bad practice to overwrite input like this, since it can be
 
 ``` r
 # save sorted data2 to new object (encouraged syntax)
-data2_sorted = sort(data2)
+data2_sorted <- sort(data2)
 data2_sorted
 ```
 
@@ -1424,7 +1424,7 @@ In lubridate, the [parser functions](https://lubridate.tidyverse.org/reference/y
 
 ``` r
 mdy(c(
-  "7/8/24", "07-08-2024", "070824", "Jul 8 '24", "Monday, July 8th, 2024"
+  "7/8/24 07-08-2024 070824 Jul 8 '24 Monday, July 8th, 2024 "
 ))
 ```
 
@@ -1434,7 +1434,7 @@ mdy(c(
 
 ``` r
 dmy(c(
-  "8/7/24", "08-07-2024", "080724", "8 Jul '24", "Monday, 8th of July, 2024"
+  "8/7/24 08-07-2024 080724 8 Jul '24 Monday, 8th of July, 2024 "
 ))
 ```
 
@@ -1787,6 +1787,50 @@ format(date, "%A, %B %e, %Y")
 A full list of these percent codes can be found in the help page of `strptime()`, a base R function for parsing date/time objects.
 
 
+
+
+## Data frames
+
+
+Moving on from vectors, the next most important data structure in R is the data frame. Think of a data frame as similar to a matrix, but (ideally) **each column is a vector of a single type representing a variable or attribute, and each row is an observation in your sample**.
+
+It's actually really helpful to think of a data frame as a collection of parallel vectors with the same length, each to a column with its own type. E.g. suppose you survey a sample of college students; maybe you'd have a sex column of character type, a GPA column of numeric type, a birthday column of date type, and a column for if they have declared a major with logical type.
+
+
+
+
+### Create new df
+
+
+There are 2 common ways of creating a new data frame manually: `data.frame()` from base R, or `tibble()` from the [tibble](https://tibble.tidyverse.org/) package, another of the core Tidyverse packages. They are extremely similar, but we recommend `tibble()` due to some extra features which are nice like better printing, same-line column references, and stricter subsetting rules. Example:
+
+
+``` r
+# import the tibble library
+# again, since tibble is a core tidyverse package,
+# library(tidyverse) also imports it automatically
+library(tibble)
+```
+``` r
+# manually create an example data frame
+df <- tibble(
+  name = c("Alice", "Bob", "Charlie"),
+  sex = c("F", "M", "M"),
+  birthday = mdy(c("7/8/03", "7/4/99", "10/31/06")),
+  declared_major = c(TRUE, TRUE, FALSE)
+)
+# print df
+df
+```
+
+```
+## # A tibble: 3 × 4
+##   name    sex   birthday   declared_major
+##   <chr>   <chr> <date>     <lgl>         
+## 1 Alice   F     2003-07-08 TRUE          
+## 2 Bob     M     1999-07-04 TRUE          
+## 3 Charlie M     2006-10-31 FALSE
+```
 
 
 
