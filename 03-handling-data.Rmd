@@ -770,8 +770,13 @@ mdy("Feb 29, 2024")
 # however, years like 1900 or 2100 are not leap,
 # since they're also divisible by 100
 mdy(c("Feb 29, 1900", "Feb 29, 2100"))
-# but 2000 is also leap, since it's divisble by 400
+# but 2000 is leap, since it's also divisble by 400
 mdy("Feb 29, 2000")
+# you can also use the leap_year() function instead
+# is the year that a given date is in leap?
+leap_year(date)
+# which of these given years are leap?
+leap_year(c(1900, 2000, 2024, 2100))
 ```
 
 
