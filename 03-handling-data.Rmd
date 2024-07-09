@@ -901,6 +901,51 @@ A full list of these percent codes can be found in the help page of `strptime()`
 
 
 
+## Data frames
+
+
+Moving on from vectors, the next most important data structure in R is the data frame. Think of a data frame as similar to a matrix, but (ideally) **each column is a vector of a single type representing a variable or attribute, and each row is an observation in your sample**.
+
+It's actually really helpful to think of a data frame as a collection of parallel vectors with the same length, each to a column with its own type. E.g. suppose you survey a sample of college students; maybe you'd have a sex column of character type, a GPA column of numeric type, a birthday column of date type, and a column for if they have declared a major with logical type.
+
+
+
+
+### Create new df
+
+
+There are 2 common ways of creating a new data frame manually: `data.frame()` from base R, or `tibble()` from the [tibble](https://tibble.tidyverse.org/) package, another of the core Tidyverse packages. They are extremely similar, but we recommend `tibble()` due to some extra features which are nice like better printing, same-line column references, and stricter subsetting rules. Example:
+
+```{r import-tibble}
+# import the tibble library
+# again, since tibble is a core tidyverse package,
+# library(tidyverse) also imports it automatically
+library(tibble)
+```
+```{r create-tibble1,echo=F,results='asis'}
+cat(glue::glue('``` r
+# manually create an example data frame
+df <- tibble(
+  name = c("Alice", "Bob", "Charlie"),
+  sex = c("F", "M", "M"),
+  birthday = mdy(c("{format(date-years(21),"%m/%d")%>%str_replace_all("(^|/)0","\\\\1")}/{format(date-years(21),"%y")}", "7/4/99", "10/31/06")),
+  declared_major = c(TRUE, TRUE, FALSE)
+)
+# print df
+df
+```'))
+```
+```{r create-tibble2,echo=F}
+df <- tibble(
+  name = c("Alice", "Bob", "Charlie"),
+  sex = c("F", "M", "M"),
+  birthday = c(date - years(21), mdy(c("7/4/99", "10/31/06"))),
+  declared_major = c(TRUE, TRUE, FALSE)
+)
+df
+```
+
+
 
 
 
