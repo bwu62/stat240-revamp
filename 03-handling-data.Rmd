@@ -883,6 +883,26 @@ date %in% dates2
 
 
 
+#### Printing dates
+
+As a final note, let's briefly discuss printing dates. You can use `format()` to print dates in a pretty way. Different ways of printing each component are represented using `%...` codes. Examples:
+
+```{r}
+# print today as mm/dd/yy which is common in the US
+format(date, "%m/%d/%y")
+# another way, slightly more written out
+format(date, "%b %d, %Y")
+# fully written out, including weekday
+format(date, "%A, %B %e, %Y")
+```
+
+A full list of these percent codes can be found in the help page of `strptime()`, a base R function for parsing date/time objects.
+
+
+
+
+
+
 
 
 
