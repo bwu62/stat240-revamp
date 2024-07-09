@@ -633,13 +633,13 @@ is.Date(date) & !is.numeric(date)
 unclass(date)
 ```
 ```{r date-unclass1,echo=F,results='asis'}
-cat(glue::glue("``` r
+cat(glue::glue('``` r
 # we can reverse this too, start with a number,
-# then change the class to \"Date\", and voila!
+# then change the class to "Date", and voila!
 x <- {.dnum}
-class(x) <- \"Date\"
+class(x) <- "Date"
 x
-```"))
+```'))
 ```
 ```{r date-unclass2,echo=F}
 x <- unclass(today())
@@ -657,17 +657,17 @@ date
 is.character(date)
 ```
 ```{r identical1,echo=F,results='asis'}
-cat(glue::glue("``` r
-identical(date, \"{date}\")
-```"))
+cat(glue::glue('``` r
+identical(date, "{date}")
+```'))
 ```
 ```{r identical2,echo=F}
 identical(date, toString(date))
 ```
 ```{r as.numeric1,echo=F,results='asis'}
-cat(glue::glue("``` r
-c(as.numeric(date), as.numeric(\"{date}\"))
-```"))
+cat(glue::glue('``` r
+c(as.numeric(date), as.numeric("{date}"))
+```'))
 ```
 ```{r as.numeric2,echo=F,warning=T,class.warning="warning"}
 c(as.numeric(date), as.numeric(toString(date)))
@@ -697,11 +697,11 @@ In lubridate, the [parser functions](https://lubridate.tidyverse.org/reference/y
 )
 ```
 ```{r .mdyDemos2,echo=F,results='asis'}
-cat(glue::glue("``` r
+cat(glue::glue('``` r
 mdy(c(
-  \"{paste(.mdyDemos,collapse='\", \"')}\"
+  "{paste(.mdyDemos,collapse="\", \"")}"
 ))
-```"))
+```'))
 ```
 ```{r .mdyDemos3,echo=F}
 mdy(.mdyDemos)
@@ -718,11 +718,11 @@ mdy(.mdyDemos)
 )
 ```
 ```{r .dmyDemos1,echo=F,results='asis'}
-cat(glue::glue("``` r
+cat(glue::glue('``` r
 dmy(c(
-  \"{paste(.dmyDemos,collapse='\", \"')}\"
+  "{paste(.dmyDemos,collapse="\", \"")}"
 ))
-```"))
+```'))
 ```
 ```{r .dmyDemos2,echo=F}
 dmy(.dmyDemos)
@@ -845,28 +845,28 @@ date - 1000
 date - mdy("1/1/00")
 ```
 ```{r dates-in-month1,echo=F,results='asis'}
-cat(glue::glue("``` r
+cat(glue::glue('``` r
 # make a sequence of dates from today to the end of the month
-seq(date, mdy(\"{str_replace(format(update(date,day=days_in_month(date)),'%m/%d/%y'),'^0','')}\"), by = 1)
-```"))
+seq(date, mdy("{str_replace(format(update(date,day=days_in_month(date)),"%m/%d/%y"),"^0","")}"), by = 1)
+```'))
 ```
 ```{r dates-in-month2,echo=F}
 seq(date, update(date, day = days_in_month(date)), 1)
 ```
 ```{r date-in-year1,echo=F,results='asis'}
-cat(glue::glue("``` r
+cat(glue::glue('``` r
 # make a sequence of every {as.character(wday(date,label=T,abbr=F))} from today to the end of the year
-seq(date, mdy(\"12/31/{format(date,'%y')}\"), by = 7)
-```"))
+seq(date, mdy("12/31/{format(date,"%y")}"), by = 7)
+```'))
 ```
 ```{r date-in-year2,echo=F}
 seq(date, update(date, month = 12, day = 31), 7)
 ```
 ```{r date-inequality1,echo=F,results='asis'}
-cat(glue::glue("``` r
+cat(glue::glue('``` r
 # has independence day already happened this year?
-mdy(\"7/4/{format(date,'%y')}\") <= date
-```"))
+mdy("7/4/{format(date,"%y")}") <= date
+```'))
 ```
 ```{r date-inequality2,echo=F}
 update(date, month = 7, day = 4) <= date
