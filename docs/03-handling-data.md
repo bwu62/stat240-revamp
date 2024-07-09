@@ -659,7 +659,7 @@ data2[order(data2)]
 ## [1] 10 20 30 40 50 60 60
 ```
 
-A final function that is sometimes handy is the `rev()` function, which exactly reverses the order.
+A final function that is sometimes handy is the `rev()` function, which reverses the vector.
 
 
 ``` r
@@ -671,8 +671,9 @@ rev(data2)
 ## [1] 50 10 40 20 60 60 30
 ```
 
+
 :::{.note}
-In general, **most R operations do NOT change the input object in place**. What this means is running `sort(data2)` returns a COPY of `data2` with the elements sorted; it does NOT actually change `data2`. This is true for most functions in R, with few exceptions. For example, observe:
+In general, **most R operations do NOT change the input object in place**. E.g. `sort(data2)` returns a COPY of `data2` with the elements sorted; it does NOT actually change `data2`. This is true for most functions in R, with few exceptions. For example, observe:
 
 ``` r
 # original data2 vector
@@ -723,7 +724,7 @@ data2_sorted
 ```
 ## [1] 10 20 30 40 50 60 60
 ```
-In general, R outputs are totally independent from input objects and have no impact on them ^[Put another way, R passes by value not reference, and copies are usually deep not shallow. Yes this can be very inefficient, but it's also arguably more user-friendly and intuitive to less technical users, which is by design.]. If you want an operation to be saved, **make sure to remember to assign the output to something!**
+In general, R inputs and outputs are totally independent objects with no special "connections". ^[Put another way, R passes by value not reference, and copies are usually deep not shallow. Yes this can be very inefficient, but it's also arguably more user-friendly and intuitive to less technical users, which is by design.]. If you want an operation to be saved, **make sure to remember to assign the output to something!**
 :::
 
 
@@ -736,7 +737,8 @@ The [`letters`{.R}](https://rdrr.io/r/base/Constants.html) vector in the last se
 
 ``` r
 # creating a demo character vector, e.g. these are my friends!
-friends <- c("Alice", "Bob", "Charlie", "Donny", "Emmy", "Francine", "Genevieve", "Heinemann")
+friends <- c("Alice", "Bob", "Charlie", "Donny", "Emmy", 
+             "Francine", "Genevieve", "Heinemann")
 friends
 ```
 

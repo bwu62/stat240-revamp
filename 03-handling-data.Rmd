@@ -338,15 +338,16 @@ order(data2)
 data2[order(data2)]
 ```
 
-A final function that is sometimes handy is the `rev()` function, which exactly reverses the order.
+A final function that is sometimes handy is the `rev()` function, which reverses the vector.
 
 ```{r rev}
 # reverse the vector
 rev(data2)
 ```
 
+
 :::{.note}
-In general, **most R operations do NOT change the input object in place**. What this means is running `sort(data2)` returns a COPY of `data2` with the elements sorted; it does NOT actually change `data2`. This is true for most functions in R, with few exceptions. For example, observe:
+In general, **most R operations do NOT change the input object in place**. E.g. `sort(data2)` returns a COPY of `data2` with the elements sorted; it does NOT actually change `data2`. This is true for most functions in R, with few exceptions. For example, observe:
 ```{r sort-output-not-saved}
 # original data2 vector
 data2
@@ -368,7 +369,7 @@ It's often considered bad practice to overwrite input like this, since it can be
 data2_sorted <- sort(data2)
 data2_sorted
 ```
-In general, R outputs are totally independent from input objects and have no impact on them ^[Put another way, R passes by value not reference, and copies are usually deep not shallow. Yes this can be very inefficient, but it's also arguably more user-friendly and intuitive to less technical users, which is by design.]. If you want an operation to be saved, **make sure to remember to assign the output to something!**
+In general, R inputs and outputs are totally independent objects with no special "connections". ^[Put another way, R passes by value not reference, and copies are usually deep not shallow. Yes this can be very inefficient, but it's also arguably more user-friendly and intuitive to less technical users, which is by design.]. If you want an operation to be saved, **make sure to remember to assign the output to something!**
 :::
 
 
@@ -380,7 +381,8 @@ The [`letters`{.R}](https://rdrr.io/r/base/Constants.html) vector in the last se
 
 ```{r character-vector-example}
 # creating a demo character vector, e.g. these are my friends!
-friends <- c("Alice", "Bob", "Charlie", "Donny", "Emmy", "Francine", "Genevieve", "Heinemann")
+friends <- c("Alice", "Bob", "Charlie", "Donny", "Emmy", 
+             "Francine", "Genevieve", "Heinemann")
 friends
 # you can also use rep, e.g. I can assign my friends into 2 groups
 groups <- rep(LETTERS[1:2], time = 4)
