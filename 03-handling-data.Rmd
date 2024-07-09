@@ -887,7 +887,7 @@ date %in% dates2
 
 As a final note, let's briefly discuss printing dates. You can use `format()` to print dates in a pretty way. Different ways of printing each component are represented using `%...` codes. Examples:
 
-```{r}
+```{r printing-dates}
 # print today as mm/dd/yy which is common in the US
 format(date, "%m/%d/%y")
 # another way, slightly more written out
