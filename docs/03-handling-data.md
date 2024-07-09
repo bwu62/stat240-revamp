@@ -447,6 +447,17 @@ z %in% x1
 ## [1] FALSE  TRUE
 ```
 
+If you want to ask which elements of `z` are NOT in `x1`, you must prepend the expression with `!` to negate it:
+
+
+``` r
+!z %in% x1
+```
+
+```
+## [1]  TRUE FALSE
+```
+
 Note the difference between this and `z == x1`, which recycles `z`, *then* checks element-wise equality:
 
 
@@ -659,6 +670,61 @@ rev(data2)
 ```
 ## [1] 50 10 40 20 60 60 30
 ```
+
+:::{.note}
+In general, **most R operations do NOT change the input object in place**. What this means is running `sort(data2)` returns a COPY of `data2` with the elements sorted; it does NOT actually change `data2`. This is true for most functions in R, with few exceptions. For example, observe:
+
+``` r
+# original data2 vector
+data2
+```
+
+```
+## [1] 30 60 60 20 40 10 50
+```
+
+``` r
+#sort data2
+sort(data2)
+```
+
+```
+## [1] 10 20 30 40 50 60 60
+```
+
+``` r
+# is it changed?
+data2
+```
+
+```
+## [1] 30 60 60 20 40 10 50
+```
+If you want an object to be updated in place, you should explicitly tell R to overwrite it again with the assignment `<-` operator, like this:
+
+``` r
+# overwrite data2 with the sorted copy (discouraged syntax)
+data2 <- sort(data2)
+# now it's changed
+data2
+```
+
+```
+## [1] 10 20 30 40 50 60 60
+```
+It's often considered bad practice to overwrite input like this, since it can be destructive and, if not used with caution, can more easily lead to errors down the road. **We recommend whenever possible writing the output to a new object instead**, like this:
+
+``` r
+# save sorted data2 to new object (encouraged syntax)
+data2_sorted = sort(data2)
+data2_sorted
+```
+
+```
+## [1] 10 20 30 40 50 60 60
+```
+In general, R outputs are totally independent from input objects and have no impact on them ^[Put another way, R passes by value not reference, and copies are usually deep not shallow. Yes this can be very inefficient, but it's also arguably more user-friendly and intuitive to less technical users, which is by design.]. If you want an operation to be saved, **make sure to remember to assign the output to something!**
+:::
 
 
 
@@ -1123,6 +1189,16 @@ head(sort(state.name, decreasing = TRUE))
 ```
 
 ``` r
+# note by definition of inequalities, we can also use min/max
+# which will find the first and last alphabetically
+c(min(state.name), max(state.name))
+```
+
+```
+## [1] "Alabama" "Wyoming"
+```
+
+``` r
 # is the pen mightier than the sword?
 "pen" > "sword"
 ```
@@ -1240,7 +1316,7 @@ library(lubridate)
 
 
 
-Ok, let's start the demo by creating a date object. Let's use today's date (which is Jul 5, 2024 as of [last compile](https://github.com/bwu62/stat240-revamp/commits/maste)) as an example. The `today()` function is handy here.
+Ok, let's start the demo by creating a date object. Let's use today's date (which is Jul 8, 2024 as of [last compile](https://github.com/bwu62/stat240-revamp/commits/maste)) as an example. The `today()` function is handy here.
 
 
 ``` r
@@ -1250,10 +1326,10 @@ date
 ```
 
 ```
-## [1] "2024-07-05"
+## [1] "2024-07-08"
 ```
 
-We can see that even though our date object has `"Date"` class, it actually has `"double"` type, which means behind the scenes, it's secretly stored as a number. ^[The distrinction between class, type, and mode (which we haven't even mentioned and won't ever discuss) is highly technical to the mechanics of R and not worth concerning yourself over. If you're dying of curiosity, I recommend this excellent video on the matter: <https://youtu.be/RwEzWZA9uTw>{target="_blank"}.] If you `unclass()` the object, i.e. strip away the `"Date"` property, you can see it's just the number 19909 underneath, and you can check that in fact Jul 5, 2024 is indeed [19909 days after Jan 1 1970](https://www.wolframalpha.com/input?i=19909+days+after+Jan+1+1970).
+We can see that even though our date object has `"Date"` class, it actually has `"double"` type, which means behind the scenes, it's secretly stored as a number. ^[The distrinction between class, type, and mode (which we haven't even mentioned and won't ever discuss) is highly technical to the mechanics of R and not worth concerning yourself over. If you're dying of curiosity, I recommend this excellent video on the matter: <https://youtu.be/RwEzWZA9uTw>{target="_blank"}.] If you `unclass()` the object, i.e. strip away the `"Date"` property, you can see it's just the number 19912 underneath, and you can check that in fact Jul 8, 2024 is indeed [19912 days after Jan 1 1970](https://www.wolframalpha.com/input?i=19912+days+after+Jan+1+1970).
 
 
 ``` r
@@ -1279,24 +1355,24 @@ unclass(date)
 ```
 
 ```
-## [1] 19909
+## [1] 19912
 ```
 ``` r
 # we can reverse this too, start with a number,
 # then change the class to "Date", and voila!
-x <- 19909
+x <- 19912
 class(x) <- "Date"
 x
 ```
 
 ```
-## [1] "2024-07-05"
+## [1] "2024-07-08"
 ```
 
 :::{.note}
 R conforms to [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) standards, i.e. **dates ALWAYS show as `"YYYY-MM-DD"`** (even though they're stored numerically). This is arguably the best format for dates, because it's the unique format where [chronological order and lexicographical order are identical](https://en.wikipedia.org/wiki/ISO_8601#General_principles), which is an extremely useful property.
 
-Also note despite `date` appearing to be a character, it is NOT a character. Using `identical()` (which compares if two objects are the same) will show this to be false. Furthermore, `as.numeric()` confirms `date` converts to 19909 as expected, whereas the string ``"2024-07-05"`` cannot be converted and returns `NA`.
+Also note despite `date` appearing to be a character, it is NOT a character. Using `identical()` (which compares if two objects are the same) will show this to be false. Furthermore, `as.numeric()` confirms `date` converts to 19912 as expected, whereas the string ``"2024-07-08"`` cannot be converted and returns `NA`.
 
 
 ``` r
@@ -1304,7 +1380,7 @@ date
 ```
 
 ```
-## [1] "2024-07-05"
+## [1] "2024-07-08"
 ```
 
 ``` r
@@ -1315,14 +1391,14 @@ is.character(date)
 ## [1] FALSE
 ```
 ``` r
-identical(date,"2024-07-05")
+identical(date, "2024-07-08")
 ```
 
 ```
 ## [1] FALSE
 ```
 ``` r
-c(as.numeric(date), as.numeric("2024-07-05"))
+c(as.numeric(date), as.numeric("2024-07-08"))
 ```
 
 ``` warning
@@ -1330,7 +1406,7 @@ c(as.numeric(date), as.numeric("2024-07-05"))
 ```
 
 ```
-## [1] 19909    NA
+## [1] 19912    NA
 ```
 
 This is just to warn you that **even though they may print similarly, date objects and date-like strings are *NOT* the same**, so to avoid errors and unexpected behavior, make sure you properly convert all date data to be true date objects.
@@ -1348,27 +1424,60 @@ In lubridate, the [parser functions](https://lubridate.tidyverse.org/reference/y
 
 ``` r
 mdy(c(
-  "7/5/24", "07-05-2024", "070524", "Jul 5 '24", "Friday, July 5th, 2024"
+  "7/8/24", "07-08-2024", "070824", "Jul 8 '24", "Monday, July 8th, 2024"
 ))
 ```
 
 ```
-## [1] "2024-07-05" "2024-07-05" "2024-07-05" "2024-07-05" "2024-07-05"
+## [1] "2024-07-08" "2024-07-08" "2024-07-08" "2024-07-08" "2024-07-08"
 ```
 
 ``` r
 dmy(c(
-  "5/7/24", "05-07-2024", "050724", "5 Jul '24", "Friday, 5th of July, 2024"
+  "8/7/24", "08-07-2024", "080724", "8 Jul '24", "Monday, 8th of July, 2024"
 ))
 ```
 
 ```
-## [1] "2024-07-05" "2024-07-05" "2024-07-05" "2024-07-05" "2024-07-05"
+## [1] "2024-07-08" "2024-07-08" "2024-07-08" "2024-07-08" "2024-07-08"
 ```
 
 As you can see, you just need to tell R which order to expect the date components and it will handle the rest! We only demonstrated the `mdy()` and `dmy()` functions here since they are by far the most common formats, but the other functions all behave the same.
 
-Also, observe that once converted, R always prints the date in ISO-8601 format as ``"2024-07-05"``.
+One last parser. Sometimes data gives dates as a decimal, e.g. `` 2024-07-08 `` would be `` 2024.516 `` since it's the 190th day of the year which means it's `` (190-1)/366*100%=51.6% `` of the way into the year. ^[The -1 in the numerator is due to the date being treated as 12am midnight, hence the 190th day, `` 2024-07-08 `` is just about to start, so only 190 days have passed so far.] R also has a dedicated function for this. `date_decimal()` converts the decimal to a date+time object, which we can then round to the nearest date with [`round_date(...,unit="day")`{.R}](https://lubridate.tidyverse.org/reference/round_date.html) and drop the time component with `date()` which converts date+time objects to pure date objects (again, we are not covering date+time objects due to complexity & limited time).
+
+``` r
+# generate a vector of elapsed 21st century dates
+# in decimal format for demo purposes
+# (here, runif uniformly samples 4 numbers from 2000 to 2024.516)
+dates2 <- runif(4, 2000, 2024.516)
+dates2
+```
+
+```
+## [1] 2006.509 2009.123 2014.044 2022.266
+```
+
+``` r
+# convert decimals to dates
+dates2 <- date(round_date(date_decimal(dates2), unit = "day"))
+dates2
+```
+
+```
+## [1] "2006-07-06" "2009-02-15" "2014-01-17" "2022-04-08"
+```
+
+There is also a reverse function `decimal_date()` that converts a date back into a decimal.
+
+
+``` r
+decimal_date(dates2)
+```
+
+```
+## [1] 2006.510 2009.123 2014.044 2022.266
+```
 
 
 
@@ -1402,13 +1511,244 @@ mdy(c("Feb 29, 1900", "Feb 29, 2100"))
 ```
 
 ``` r
-# but 2000 is also leap, since it's divisble by 400
+# but 2000 is leap, since it's also divisble by 400
 mdy("Feb 29, 2000")
 ```
 
 ```
 ## [1] "2000-02-29"
 ```
+
+``` r
+# you can also use the leap_year() function instead
+# is the year that a given date is in leap?
+leap_year(date)
+```
+
+```
+## [1] TRUE
+```
+
+``` r
+# which of these given years are leap?
+leap_year(c(1900, 2000, 2024, 2100))
+```
+
+```
+## [1] FALSE  TRUE  TRUE FALSE
+```
+
+
+
+
+#### Get/set components
+
+Lubridate provides many get/set functions (often called getters and setters) for getting and setting different components (i.e. properties) associated with a date. Some common ones include `year()`, `month()`, `day()`, `wday()` (for day of the week), and `quarter()`.
+
+Let's continue using the generated `dates2` object above, except I will add today `` 2024-07-08 `` into the vector as the first element.
+
+
+``` r
+# add in today, then print (to remind us what it contains)
+dates2 <- c(date, dates2)
+dates2
+```
+
+```
+## [1] "2024-07-08" "2006-07-06" "2009-02-15" "2014-01-17" "2022-04-08"
+```
+
+``` r
+# extract the year, month, day, wday, quarter
+year(dates2)
+```
+
+```
+## [1] 2024 2006 2009 2014 2022
+```
+
+``` r
+month(dates2)
+```
+
+```
+## [1] 7 7 2 1 4
+```
+
+``` r
+day(dates2)
+```
+
+```
+## [1]  8  6 15 17  8
+```
+
+``` r
+# wday starts counting from Sunday, i.e. 1=Sunday, 2=Monday, etc.
+wday(dates2)
+```
+
+```
+## [1] 2 5 1 6 6
+```
+
+``` r
+quarter(dates2)
+```
+
+```
+## [1] 3 3 1 1 2
+```
+
+Some functions (where it makes sense) like `month()` and `wday()` have additional arguments like `label` and `abbr` to control the output format when you have the option to output names instead of numbers. Again, I recommend you briefly check the help page of every new function you learn for additional options.
+
+
+``` r
+# output month as abbreviated names instead (abbr = TRUE by default)
+month(dates2, label = TRUE)
+```
+
+```
+## [1] Jul Jul Feb Jan Apr
+## 12 Levels: Jan < Feb < Mar < Apr < May < Jun < Jul < Aug < ... < Dec
+```
+
+``` r
+# output day of week as full, unabridged names
+wday(dates2, label = TRUE, abbr = FALSE)
+```
+
+```
+## [1] Monday   Thursday Sunday   Friday   Friday  
+## 7 Levels: Sunday < Monday < Tuesday < Wednesday < ... < Saturday
+```
+
+The first line in each output above is the actual output name. The list of "levels" on each second line just shows the set of all possible values that could have been outputted. This return object is actually something called an ["ordered factor"](https://r4ds.hadley.nz/factors) and is used for ordered categorical variables, but for our purposes can be treated as similar to a character/string vector. (If you want to do any string operations on the output, make sure to convert fully to character first with `as.character()`!)
+
+These getters are extremely useful for both data cleaning as well as data visualization, since it can be much more pleasant to, for example, see a monthly breakdown as Jan, Feb, ..., Dec instead of 1, 2, ..., 12.
+
+These same getters can also be used as "setters", i.e. used to set the components. For example:
+
+
+``` r
+# make a copy to use here, since this destroys the original vector
+new_dates2 <- dates2
+# change year of all dates to 2000
+year(new_dates2) <- 2000
+new_dates2
+```
+
+```
+## [1] "2000-07-08" "2000-07-06" "2000-02-15" "2000-01-17" "2000-04-08"
+```
+
+``` r
+# of course this is also vectorized!
+year(new_dates2) <- 2000:2004
+new_dates2
+```
+
+```
+## [1] "2000-07-08" "2001-07-06" "2002-02-15" "2003-01-17" "2004-04-08"
+```
+
+This works with all the getters above, feel free to experiment more with this on your own. There are also several other getter/setter functions such as `qday()` for day of the quarter, `week()` for week number, and `semester()` for 1^st^ or 2^nd^ semester of the year.
+
+
+
+
+#### Date math
+
+Since dates are represented internally as number of days since a reference point, doing math with dates turns out to be extremely easy. You can add/subtract days, make sequences, and run logical comparisons.
+
+
+``` r
+# get tomorrow by adding +1 to today
+date + 1
+```
+
+```
+## [1] "2024-07-09"
+```
+
+``` r
+# what date was 1000 days ago?
+date - 1000
+```
+
+```
+## [1] "2021-10-12"
+```
+
+``` r
+# how many days has it been since y2k?
+date - mdy("1/1/00")
+```
+
+```
+## Time difference of 8955 days
+```
+``` r
+# make a sequence of dates from today to the end of the month
+seq(date, mdy("7/31/24"), by = 1)
+```
+
+```
+##  [1] "2024-07-08" "2024-07-09" "2024-07-10" "2024-07-11" "2024-07-12"
+##  [6] "2024-07-13" "2024-07-14" "2024-07-15" "2024-07-16" "2024-07-17"
+## [11] "2024-07-18" "2024-07-19" "2024-07-20" "2024-07-21" "2024-07-22"
+## [16] "2024-07-23" "2024-07-24" "2024-07-25" "2024-07-26" "2024-07-27"
+## [21] "2024-07-28" "2024-07-29" "2024-07-30" "2024-07-31"
+```
+``` r
+# make a sequence of every Monday from today to the end of the year
+seq(date, mdy("12/31/24"), by = 7)
+```
+
+```
+##  [1] "2024-07-08" "2024-07-15" "2024-07-22" "2024-07-29" "2024-08-05"
+##  [6] "2024-08-12" "2024-08-19" "2024-08-26" "2024-09-02" "2024-09-09"
+## [11] "2024-09-16" "2024-09-23" "2024-09-30" "2024-10-07" "2024-10-14"
+## [16] "2024-10-21" "2024-10-28" "2024-11-04" "2024-11-11" "2024-11-18"
+## [21] "2024-11-25" "2024-12-02" "2024-12-09" "2024-12-16" "2024-12-23"
+## [26] "2024-12-30"
+```
+``` r
+# has independence day already happened this year?
+mdy("7/4/24") <= date
+```
+
+```
+## [1] TRUE
+```
+
+``` r
+# what is the earliest date in the dates2 vector?
+min(dates2)
+```
+
+```
+## [1] "2006-07-06"
+```
+
+``` r
+# organize dates2 in chronological order
+sort(dates2)
+```
+
+```
+## [1] "2006-07-06" "2009-02-15" "2014-01-17" "2022-04-08" "2024-07-08"
+```
+
+``` r
+# is today in dates2?
+date %in% dates2
+```
+
+```
+## [1] TRUE
+```
+
 
 
 
@@ -1424,7 +1764,7 @@ mdy("Feb 29, 2000")
 
 ### Date vectors
 
- - parse, getters/setters, math, comparisons, etc.
+ - sequence, math, comparisons, etc.
 
 ### Sorting vectors
 
