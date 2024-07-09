@@ -832,6 +832,62 @@ This works with all the getters above, feel free to experiment more with this on
 
 
 
+#### Date math
+
+Since dates are represented internally as number of days since a reference point, doing math with dates turns out to be extremely easy. You can add/subtract days, make sequences, and run logical comparisons.
+
+```{r date-math}
+# get tomorrow by adding +1 to today
+date + 1
+# what date was 1000 days ago?
+date - 1000
+# how many days has it been since y2k?
+date - mdy("1/1/00")
+```
+```{r dates-in-month1,echo=F,results='asis'}
+cat(glue::glue("``` r
+# make a sequence of dates from today to the end of the month
+seq(date, mdy(\"{str_replace(format(update(date,day=days_in_month(date)),'%m/%d/%y'),'^0','')}\"), by = 1)
+```"))
+```
+```{r dates-in-month2,echo=F}
+seq(date, update(date, day = days_in_month(date)), 1)
+```
+```{r date-in-year1,echo=F,results='asis'}
+cat(glue::glue("``` r
+# make a sequence of every {as.character(wday(date,label=T,abbr=F))} from today to the end of the year
+seq(date, mdy(\"12/31/{format(date,'%y')}\"), by = 7)
+```"))
+```
+```{r date-in-year2,echo=F}
+seq(date, update(date, month = 12, day = 31), 7)
+```
+```{r date-inequality1,echo=F,results='asis'}
+cat(glue::glue("``` r
+# has independence day already happened this year?
+mdy(\"7/4/{format(date,'%y')}\") <= date
+```"))
+```
+```{r date-inequality2,echo=F}
+update(date, month = 7, day = 4) <= date
+```
+```{r date-min-sort-in}
+# what is the earliest date in the dates2 vector?
+min(dates2)
+# organize dates2 in chronological order
+sort(dates2)
+# is today in dates2?
+date %in% dates2
+```
+
+
+
+
+
+
+
+
+
 
 
 
@@ -839,7 +895,7 @@ This works with all the getters above, feel free to experiment more with this on
 
 ### Date vectors
 
- - parse, getters/setters, math, comparisons, etc.
+ - sequence, math, comparisons, etc.
 
 ### Sorting vectors
 
