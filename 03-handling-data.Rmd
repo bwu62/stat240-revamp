@@ -730,7 +730,32 @@ dmy(.dmyDemos)
 
 As you can see, you just need to tell R which order to expect the date components and it will handle the rest! We only demonstrated the `mdy()` and `dmy()` functions here since they are by far the most common formats, but the other functions all behave the same.
 
-Also, observe that once converted, R always prints the date in ISO-8601 format as ``"`r date`"``.
+One last parser. Sometimes data gives dates as a decimal, e.g. `` `r date` `` would be `` `r round(decimal_date(date),3)` `` since it's the `r scales::label_ordinal()(yday(date))` day of the year which means it's `` `r glue::glue("({yday(date)}-1)/{365+leap_year(date)}*100%={round(decimal_date(date)%%1*100,1)}%")` `` of the way into the year. ^[The -1 in the numerator is due to the date being treated as 12am midnight, hence the `r scales::label_ordinal()(yday(date))` day, `` `r date` `` is just about to start, so only `r yday(date)` days have passed so far.] R also has a dedicated function for this. `date_decimal()` converts the decimal to a date+time object, which we can then round to the nearest date with [`round_date(...,unit="day")`{.R}](https://lubridate.tidyverse.org/reference/round_date.html) and drop the time component with `date()` which converts date+time objects to pure date objects (again, we are not covering date+time objects due to complexity & limited time).
+
+```{r date_decimal1,echo=F,results='asis'}
+cat(glue::glue("``` r
+# generate a vector of elapsed 21st century dates
+# in decimal format for demo purposes
+# (here, runif uniformly samples 4 numbers from 2000 to {round(decimal_date(date),3)})
+dates2 <- runif(4, 2000, {round(decimal_date(date),3)})
+dates2
+```"))
+```
+```{r date_decimal2,echo=F}
+dates2 <- runif(4, 2000, decimal_date(date))
+dates2
+```
+```{r date_decimal3}
+# convert decimals to dates
+dates2 <- date(round_date(date_decimal(dates2), unit = "day"))
+dates2
+```
+
+There is also a reverse function `decimal_date()` that converts a date back into a decimal.
+
+```{r decimal_date}
+decimal_date(dates2)
+```
 
 
 
