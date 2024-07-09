@@ -407,13 +407,13 @@
 <code class="sourceCode R"><span><span class="co"># passing this as a subsetting vector gives the sorted vector</span></span>
 <span><span class="va">data2</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">data2</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
 <pre><code>## [1] 10 20 30 40 50 60 60</code></pre>
-<p>A final function that is sometimes handy is the <code><a href="https://rdrr.io/r/base/rev.html">rev()</a></code> function, which exactly reverses the order.</p>
+<p>A final function that is sometimes handy is the <code><a href="https://rdrr.io/r/base/rev.html">rev()</a></code> function, which reverses the vector.</p>
 <div class="sourceCode" id="cb222"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># reverse the vector</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span><span class="op">(</span><span class="va">data2</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 50 10 40 20 60 60 30</code></pre>
 <div class="note">
-<p>In general, <strong>most R operations do NOT change the input object in place</strong>. What this means is running <code>sort(data2)</code> returns a COPY of <code>data2</code> with the elements sorted; it does NOT actually change <code>data2</code>. This is true for most functions in R, with few exceptions. For example, observe:</p>
+<p>In general, <strong>most R operations do NOT change the input object in place</strong>. E.g. <code>sort(data2)</code> returns a COPY of <code>data2</code> with the elements sorted; it does NOT actually change <code>data2</code>. This is true for most functions in R, with few exceptions. For example, observe:</p>
 <div class="sourceCode" id="cb224"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># original data2 vector</span></span>
 <span><span class="va">data2</span></span></code></pre></div>

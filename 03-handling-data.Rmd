@@ -338,15 +338,16 @@ order(data2)
 data2[order(data2)]
 ```
 
-A final function that is sometimes handy is the `rev()` function, which exactly reverses the order.
+A final function that is sometimes handy is the `rev()` function, which reverses the vector.
 
 ```{r rev}
 # reverse the vector
 rev(data2)
 ```
 
+
 :::{.note}
-In general, **most R operations do NOT change the input object in place**. What this means is running `sort(data2)` returns a COPY of `data2` with the elements sorted; it does NOT actually change `data2`. This is true for most functions in R, with few exceptions. For example, observe:
+In general, **most R operations do NOT change the input object in place**. E.g. `sort(data2)` returns a COPY of `data2` with the elements sorted; it does NOT actually change `data2`. This is true for most functions in R, with few exceptions. For example, observe:
 ```{r sort-output-not-saved}
 # original data2 vector
 data2
