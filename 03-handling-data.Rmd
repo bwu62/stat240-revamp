@@ -782,6 +782,52 @@ leap_year(c(1900, 2000, 2024, 2100))
 
 
 
+#### Get/set components
+
+Lubridate provides many get/set functions (often called getters and setters) for getting and setting different components (i.e. properties) associated with a date. Some common ones include `year()`, `month()`, `day()`, `wday()` (for day of the week), and `quarter()`.
+
+Let's continue using the generated `dates2` object above, except I will add today `` `r date` `` into the vector as the first element.
+
+```{r getters}
+# add in today, then print (to remind us what it contains)
+dates2 <- c(date, dates2)
+dates2
+# extract the year, month, day, wday, quarter
+year(dates2)
+month(dates2)
+day(dates2)
+# wday starts counting from Sunday, i.e. 1=Sunday, 2=Monday, etc.
+wday(dates2)
+quarter(dates2)
+```
+
+Some functions (where it makes sense) like `month()` and `wday()` have additional arguments like `label` and `abbr` to control the output format when you have the option to output names instead of numbers. Again, I recommend you briefly check the help page of every new function you learn for additional options.
+
+```{r getters-more}
+# output month as abbreviated names instead (abbr = TRUE by default)
+month(dates2, label = TRUE)
+# output day of week as full, unabridged names
+wday(dates2, label = TRUE, abbr = FALSE)
+```
+
+The first line in each output above is the actual output name. The list of "levels" on each second line just shows the set of all possible values that could have been outputted. This return object is actually something called an ["ordered factor"](https://r4ds.hadley.nz/factors) and is used for ordered categorical variables, but for our purposes can be treated as similar to a character/string vector. (If you want to do any string operations on the output, make sure to convert fully to character first with `as.character()`!)
+
+These getters are extremely useful for both data cleaning as well as data visualization, since it can be much more pleasant to, for example, see a monthly breakdown as Jan, Feb, ..., Dec instead of 1, 2, ..., 12.
+
+These same getters can also be used as "setters", i.e. used to set the components. For example:
+
+```{r setters}
+# make a copy to use here, since this destroys the original vector
+new_dates2 <- dates2
+# change year of all dates to 2000
+year(new_dates2) <- 2000
+new_dates2
+# of course this is also vectorized!
+year(new_dates2) <- 2000:2004
+new_dates2
+```
+
+This works with all the getters above, feel free to experiment more with this on your own. There are also several other getter/setter functions such as `qday()` for day of the quarter, `week()` for week number, and `semester()` for 1^st^ or 2^nd^ semester of the year.
 
 
 
