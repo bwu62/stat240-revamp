@@ -13,7 +13,7 @@ In this chapter we will discuss handling data in R. We will begin with a discuss
 
 First, let's discuss vectors. **Vectors are arguably the MOST fundamental data structure in R**. We briefly saw an example of vectors last chapter in section \@ref(summary-functions) on summary functions:
 
-```{r}
+```{r data-example-vector}
 # create an example dataset of a small sample of numbers
 data <- c(3, 6, 6, 2, 4, 1, 5)
 data
@@ -25,7 +25,7 @@ Last chapter, we mostly used vectors to demonstrate summary functions like `sum(
 In R, a vector can only have ONE "type" (or "class") of object at a time, e.g. a vector of ALL numbers, or a vector of ALL characters, or a vector of ALL dates, etc. Vectors of mixed-type are NOT allowed in R.
 
 Also, we have actually been working with vectors all along. That's because single values in R are in fact vectors of length 1. E.g. take any number, let's say 5; we can use `is.vector()` to show that this is in fact a vector of length 1.
-```{r}
+```{r length-1-vectors}
 x <- 5
 is.vector(x)
 length(x)
@@ -54,7 +54,7 @@ There are LOTS of types of data that vectors can hold, from real to complex numb
 
 Let's start with numeric vectors. For example, suppose we want to double, or square, or take the arc-tangent, or find the rounded base-2 logarithm of each `data` value, we can just do so directly on the vector, and it runs one value at a time:
 
-```{r}
+```{r basic-vector-math}
 data * 2
 data^2
 atan(data)
@@ -63,7 +63,7 @@ round(log2(data))
 
 Note you can also use `data` on the other side of these operators, or as the argument to certain functions:
 
-```{r}
+```{r more-vector-math}
 2^data
 # log(10) with various bases; note the Inf due to base 1
 log(10, base = data)
@@ -75,7 +75,7 @@ $$SD = \sqrt{\frac1{n-1}\sum_{i=x}^n(x_i-\bar x)^2}\qquad\text{where $\bar{x}=\f
 
 In other words, the standard deviation is the square root of 1/(n-1) times the sum of the squared differences between the sample mean and each `data` value. This is very easy to do with vector arithmetic in R:
 
-```{r}
+```{r sd-with-vector-math}
 # implementing sd() using vector arithmetic syntax
 n <- length(data)
 sqrt((1 / (n - 1)) * sum((data - mean(data))^2))
@@ -83,19 +83,19 @@ sqrt((1 / (n - 1)) * sum((data - mean(data))^2))
 
 Let's break this down. On the inside, `data - mean(data)` subtracts the mean from each data value one at a time:
 
-```{r}
+```{r sd-step1}
 data - mean(data)
 ```
 
 This is then squared `( ... )^2` and again, this operates one at a time:
 
-```{r}
+```{r sd-step2}
 (data - mean(data))^2
 ```
 
 Finally, this vector is summed, scaled by 1/(n-1), and square rooted to get the standard deviation. We can check this is correct by comparing with the built-in `sd()` function.
 
-```{r}
+```{r sd-step3}
 sd(data)
 ```
 
@@ -107,14 +107,14 @@ sd(data)
 
 These ["vectorized"](https://osu-codeclub.github.io/posts/basics_04) operations also work with logical comparisons, and these produce **logical vectors**. For example, we can ask R which observations are even:
 
-```{r}
+```{r basic-logic}
 # recall %% gives the division remainder
 data %% 2 == 0
 ```
 
 Or we can ask which of our values are within 1 standard deviation of the mean:
 
-```{r}
+```{r basic-logic-2}
 # recall & is the AND operator
 # note the inequality checks EACH value of data against the other side
 (mean(data) - sd(data) <= data) & (data <= mean(data) + sd(data))
@@ -122,7 +122,7 @@ Or we can ask which of our values are within 1 standard deviation of the mean:
 
 Remember from section \@ref(r-specials) how any **math turns `TRUE` into 1 and `FALSE` into 0**? This turns out to be extremely useful. For example, we can use `sum()` to count how many values are even:
 
-```{r}
+```{r sum-logic}
 # sum(logical vector) counts the number of TRUEs
 # here, we find 4 data values are even
 sum(data %% 2 == 0)
@@ -130,7 +130,7 @@ sum(data %% 2 == 0)
 
 Or we can ask what *proportion* of our data is within 1 standard deviation of the mean, which involves taking the sum of a logical comparison and dividing by the length, i.e. computing the mean:
 
-```{r}
+```{r mean-logic}
 # mean(logical vector) = sum(logical vector) / length(logical vector)
 # thus, it's a shortcut for calculating proportion of TRUEs
 # here, we find 57% of the data is within 1 sd of the mean
@@ -153,14 +153,14 @@ So far, we've only learned how to construct vectors by using the `c()` function,
 
 One of the easiest, if you just need a sequence of integers, is to use the `:` operator:
 
-```{r}
+```{r colon-sequences}
 1:5
 10:-10
 ```
 
 The `seq()` function does something similar, except it also has additional arguments `by` to specify the step size and `length.out` which specifies how many numbers to have in total (note: only ONE of these arguments can be set at a time).
 
-```{r}
+```{r seq}
 seq(1, 5)
 seq(0, 100, by = 10)
 seq(0, 1, length.out = 101)
@@ -168,7 +168,7 @@ seq(0, 1, length.out = 101)
 
 Vectors can also be created with the `rep()` function which lets you repeat the contents. There are two arguments: `times` which controls how many times to repeat the entire input, and `each` which controls how many times to repeat each element if the input is a vector. You can specify either or both of these arguments. Note `rep()` can be used to repeat other objects too, not just numbers.
 
-```{r}
+```{r rep}
 # repeat a single number
 rep(2, 5)
 # repeat a vector, specifying both times and each
@@ -179,7 +179,7 @@ rep(c(TRUE, FALSE), times = c(2, 4))
 
 Finally, you can mix and match all these constructors, using a combination of `c()`, `:`, `seq()`, and `rep()` to your heart's content.
 
-```{r}
+```{r rep-seq-c-together}
 rep(c(1, 3, 7:9, seq(10, 12, by = 0.5)), each = 2)
 ```
 
@@ -191,7 +191,7 @@ rep(c(1, 3, 7:9, seq(10, 12, by = 0.5)), each = 2)
 
 It may not surprise you to learn all these vectorized operations also work on multiple vectors! If the vectors aren't the same length, **the shorter vectors will be repeated** until they matches the length of the longest vector. This is called [**recycling**](https://www.geeksforgeeks.org/vector-recycling-in-r). Example:
 
-```{r, tidy=F}
+```{r define-multiple-vectors, tidy=F}
 # define some vectors for demo
 # x1, x2 are both length 6 vectors
 # y and z have lengths 3 and 2
@@ -201,7 +201,7 @@ y  <- 1:3         #  y:  1, 2, 3
 z  <- c(-1, 1)    #  z: -1, 1
 ```
 
-```{r}
+```{r multiple-vectors-recycled}
 # sum vectors one element at a time
 x1 + x2
 # take powers, again one element at a time from each vector
@@ -233,19 +233,19 @@ Instead, ***always* look for a solution using vectorized operations**. In R, vec
 
 One notable exception to all this is the [`%in%`{.R}](https://rdrr.io/r/base/match.html) operator, which only "vectorizes" on the left side. For example, suppose we want to know which elements of `z` are in `x1`. Here's how:
 
-```{r}
+```{r in-operator}
 z %in% x1
 ```
 
 If you want to ask which elements of `z` are NOT in `x1`, you must prepend the expression with `!` to negate it:
 
-```{r}
+```{r not-in-operator}
 !z %in% x1
 ```
 
 Note the difference between this and `z == x1`, which recycles `z`, *then* checks element-wise equality:
 
-```{r}
+```{r in-vs-equal}
 z == x1
 ```
 
@@ -269,13 +269,13 @@ Let's also quickly cover vector subsetting. In R, there are many ways to extract
 
 Knowing this, let's learn subsetting with some examples. A pair of useful built-in objects are the vectors [`letters`{.R}](https://rdrr.io/r/base/Constants.html) and [`LETTERS`{.R}](https://rdrr.io/r/base/Constants.html), which contain respectively the 26 lowercase and uppercase letters of the English alphabet. These letters make up a character vector (which we will discuss in detail in the next section).
 
-```{r}
+```{r letters}
 letters
 ```
 
 You can extract elements form a vector with the `[]` operator, giving either a vector of numeric positions, a vector of `TRUE`/`FALSE` values, or a negative vector for exclusions (i.e. anything *except*). Examples:
 
-```{r}
+```{r subsetting}
 # giving numeric positions of desired elements
 # remember numbers are numeric vectors of length-1
 letters[1]
@@ -297,13 +297,13 @@ letters[-1:-10]
 # of course this is equivalent to
 letters[-(1:10)]
 ```
-```{r,eval=F}
+```{r subsetting-error1,eval=F}
 # note the parentheses there, without it you get -1,0,1,...,10
 # which raises an error (what we want is -1,-2,...,-10)
 # this is because positive and negative position syntax cannot be mixed
 letters[-1:10]
 ```
-```{r,echo=F,message=T}
+```{r subsetting-error2,echo=F,message=T}
 message("Error in letters[-1:10] : only 0's may be mixed with negative subscripts")
 ```
 
@@ -314,7 +314,7 @@ message("Error in letters[-1:10] : only 0's may be mixed with negative subscript
 
 Sometimes, you may need to sort/reorder vectors. We already saw in the previous section you can reorder vectors by subsetting with a vector of positions. If the vector of positions exhausts the vector without repeating (i.e. returns each element of the vector exactly once), the result is a reordering of the vector.
 
-```{r, tidy=F}
+```{r data2-reordering, tidy=F}
 # defining a new data2 vector to use for examples,
 # trust me, this will REALLY help clarify what's happening in a minute
 data2 <- data * 10
@@ -327,7 +327,7 @@ data2[c(n, 2:(n-1), 1)]
 
 You can of course also have R sort a vector for you automatically. There are two main functions for sorting: `sort()`, which does what you expect and returns a vector with the elements rearranged from lowest to highest (unless you set the argument `decreasing = TRUE` which does the opposite); and `order()`, which simply returns the order the elements would go in (i.e. a vector of positions where they belong) if they were to be sorted lowest to highest (again, unless you set `decreasing = TRUE`).
 
-```{r}
+```{r sort-order}
 # simply sort the data in ascending order
 sort(data2)
 # sort in descending order
@@ -340,7 +340,7 @@ data2[order(data2)]
 
 A final function that is sometimes handy is the `rev()` function, which exactly reverses the order.
 
-```{r}
+```{r rev}
 # reverse the vector
 rev(data2)
 ```
@@ -352,7 +352,7 @@ rev(data2)
 
 The [`letters`{.R}](https://rdrr.io/r/base/Constants.html) vector in the last section was one example of a **character vector**. You can create a character vector also with `c()` or `rep()` which we've seen before. When creating characters, you can use either the single [`'`]{.k} or double [`"`]{.k} quote character, no difference.
 
-```{r}
+```{r character-vector-example}
 # creating a demo character vector, e.g. these are my friends!
 friends <- c("Alice", "Bob", "Charlie", "Donny", "Emmy", "Francine", "Genevieve", "Heinemann")
 friends
@@ -366,7 +366,7 @@ groups
 
 Base R has a number of common functions for working with strings: `nchar()` for getting the number of characters, `tolower()`/`toupper()` to convert case, `substr()` for extracting substrings, `paste()`/`paste0()` to concatenate (e.g. "glue" together) strings, and `strrep()` for repeating the characters in a string.
 
-```{r}
+```{r basic-string-functions}
 # get the number of characters in each name
 nchar(friends)
 # convert names to all upper or all lower
@@ -405,7 +405,7 @@ There are also functions for working with patterns. You don't need to master the
 
 It should be noted the patterns below are all fairly short (mostly one single character) for simplicity of example, but patterns can be as many characters long as necessary.
 
-```{r}
+```{r pattern-string-functions}
 # which friends (by position) have a lowercase "e" in their name?
 grep("e", friends)
 # alternatively, return a TRUE/FALSE vector result instead for each element
@@ -437,14 +437,14 @@ In this class we will NOT cover regular expressions to any real detail again due
 
 However, there are a few useful stringr functions that do not have counterparts in base R (or at least whose counterparts require much more complex expressions). Here is a *small* curation of them.
 
-```{r}
+```{r import-stringr}
 # since stringr is a "core" tidyverse package,
 # you can load it (+other core packages) with library(tidyverse)
 # you can also just load stringr by itself if that's all you need
 library(stringr)
 ```
 
-```{r}
+```{r stringr-functions}
 # count how many times a pattern occurs
 str_count(friends, "e")
 # change strings to title case, i.e. first letter uppercase, all else lower
@@ -461,7 +461,7 @@ Strings, like numbers, can also be logically compared in R using the same `==`, 
 
 This snippet of code below (which you do NOT have to worry about learning right now) prints the "dictionary" sorting order for all ordinary keyboard characters typable on a standard US English keyboard layout in ascending order.
 
-```{r,eval=F}
+```{r dictionary-order,eval=F}
 # print out the result
 cat(
   # sort the characters
@@ -490,7 +490,7 @@ Characters are sorted by their order in this sequence of characters, with charac
 
 Note however that nothingness, i.e. the absence of a character (such as when a string ends), comes before any character, which makes sense because otherwise "app" would appear after "apple". Below is a series of examples demonstrating string sorting.
 
-```{r}
+```{r string-compare-examples}
 "apple" == "apple"
 # note equality also implies both >= and <=
 "apple" >= "apple"
@@ -513,7 +513,7 @@ Note however that nothingness, i.e. the absence of a character (such as when a s
 
 Using our newfound wisdom, we can now conclusively settle some age old debates!
 
-```{r}
+```{r string-jokes}
 # what is the greatest state? (head prints the first 6)
 head(sort(state.name, decreasing = TRUE))
 # note by definition of inequalities, we can also use min/max
@@ -534,20 +534,20 @@ c(min(state.name), max(state.name))
 
 Sometimes, we read data in and it may need to be converted before it's usable. E.g. let's say you read in a list of prices from some catalog and you get the following character vector:
 
-```{r}
+```{r parsing-vector-example}
 prices_raw <- c("$1,000", "$1,500", "$850", "$2,000")
 prices_raw
 ```
 
 Since R doesn't natively understand dollar signs or comma grouping, this must start as a character vector. You can check the type of a vector by using the `is.numeric()`, `is.logical()`, `is.character()` functions.
 
-```{r}
+```{r is.character}
 is.character(prices_raw)
 ```
 
 If the data has been "cleaned-up" then you can coerce (i.e. convert) the vector into other types with the corresponding `as.numeric()`, `as.logical()`, `as.character()` functions. In this case however, the data is not yet "cleaned-up" so this coercion operation will give an error.
 
-```{r,warning=T,class.warning="warning"}
+```{r as.numeric-error,warning=T,class.warning="warning"}
 as.numeric(prices_raw)
 ```
 
@@ -557,12 +557,12 @@ In R, it's important to remember **not to reinvent the wheel**; most actions alr
 
 One set of readr functions useful here are the `parse_number()` and `parse_logical()` functions (converting to a string is trivial and can basically always be done using the `as.character()` function). These functions are quite smart and can ignore extra characters and just extract the relevant numerical info.
 
-```{r}
+```{r import readr}
 # since readr is also a "core" tidyverse package,
 # you can use library(tidyverse) or library(readr)
 library(readr)
 ```
-```{r}
+```{r readr-parse}
 prices <- parse_number(prices_raw)
 prices
 is.numeric(prices)
@@ -579,11 +579,11 @@ Finally, let's talk about date vectors (note we are not talking about date+time 
 
 Before we run some examples, we're going to load in the [lubridate](https://lubridate.tidyverse.org/) package, which is designed to make working with dates super easy and is also a part of Tidyverse. However, it's not actually a core package, which means **it MUST be loaded in separately** each time you wish to use it!
 
-```{r}
+```{r import lubridate}
 library(lubridate)
 ```
 
-```{r,include=F}
+```{r today-dynamic-definitions,include=F}
 # hidden chunk for updating date references in text
 .date <- sub("  ", " ", format(today(), "%b %e, %Y"))
 .dnum <- format(unclass(today()), format = "%d")
@@ -591,7 +591,7 @@ library(lubridate)
 
 Ok, let's start the demo by creating a date object. Let's use today's date (which is `r .date` as of [last compile](https://github.com/bwu62/stat240-revamp/commits/maste)) as an example. The `today()` function is handy here.
 
-```{r}
+```{r today}
 # create today as an example date object
 date <- today()
 date
@@ -599,14 +599,14 @@ date
 
 We can see that even though our date object has `"Date"` class, it actually has `"double"` type, which means behind the scenes, it's secretly stored as a number. ^[The distrinction between class, type, and mode (which we haven't even mentioned and won't ever discuss) is highly technical to the mechanics of R and not worth concerning yourself over. If you're dying of curiosity, I recommend this excellent video on the matter: <https://youtu.be/RwEzWZA9uTw>{target="_blank"}.] If you `unclass()` the object, i.e. strip away the `"Date"` property, you can see it's just the number `r .dnum` underneath, and you can check that in fact `r .date` is indeed [`r .dnum` days after Jan 1 1970](https://www.wolframalpha.com/input?i=`r .dnum`+days+after+Jan+1+1970).
 
-```{r}
+```{r date-class}
 # looks like a date
 class(date)
 is.Date(date) & !is.numeric(date)
 # but it's secretly a number underneath!
 unclass(date)
 ```
-```{r,echo=F,results='asis'}
+```{r date-unclass1,echo=F,results='asis'}
 cat(glue::glue("``` r
 # we can reverse this too, start with a number,
 # then change the class to \"Date\", and voila!
@@ -615,7 +615,7 @@ class(x) <- \"Date\"
 x
 ```"))
 ```
-```{r,echo=F}
+```{r date-unclass2,echo=F}
 x <- unclass(today())
 class(x) <- "Date"
 x
@@ -626,24 +626,24 @@ R conforms to [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) standards, i.e.
 
 Also note despite `date` appearing to be a character, it is NOT a character. Using `identical()` (which compares if two objects are the same) will show this to be false. Furthermore, `as.numeric()` confirms `date` converts to `r .dnum` as expected, whereas the string ``"`r date`"`` cannot be converted and returns `NA`.
 
-```{r}
+```{r date-vs-character}
 date
 is.character(date)
 ```
-```{r,echo=F,results='asis'}
+```{r identical1,echo=F,results='asis'}
 cat(glue::glue("``` r
-identical(date,\"{date}\")
+identical(date, \"{date}\")
 ```"))
 ```
-```{r,echo=F}
+```{r identical2,echo=F}
 identical(date, toString(date))
 ```
-```{r,echo=F,results='asis'}
+```{r as.numeric1,echo=F,results='asis'}
 cat(glue::glue("``` r
 c(as.numeric(date), as.numeric(\"{date}\"))
 ```"))
 ```
-```{r,echo=F,warning=T,class.warning="warning"}
+```{r as.numeric2,echo=F,warning=T,class.warning="warning"}
 c(as.numeric(date), as.numeric(toString(date)))
 ```
 
@@ -659,7 +659,7 @@ In some cases (specifically, if dates in a dataset are already represented in st
 
 In lubridate, the [parser functions](https://lubridate.tidyverse.org/reference/ymd.html) `mdy()`, `dmy()`, `ymd()` (as well as their rarer siblings `ydm()`, `myd()`, and `dym()`) are used to parse date data into proper date objects. The **only difference between these functions is the *order* they expect to see date components**, e.g. `mdy()` is used when the data is ordered month, day, then year (which is common in the US), and `dmy()` is used when the date data is data is ordered day, month, then year (which is generally preferred outside the US). These functions are **extremely robust and automagically recognize a wide range of formats**, and of course they're all vectorized! Here's a few examples:
 
-```{r,include=F}
+```{r .mdyDemos,include=F}
 # create some date strings to demo parsing
 .mdyDemos <- c(
   format(date, "%m/%d/%y") %>% str_replace_all("(^|/)0", "\\1"),
@@ -670,17 +670,17 @@ In lubridate, the [parser functions](https://lubridate.tidyverse.org/reference/y
     str_replace("( \\d+),", paste0(" ", scales::label_ordinal()(as.numeric(format(date, "%d"))), ","))
 )
 ```
-```{r,echo=F,results='asis'}
+```{r .mdyDemos2,echo=F,results='asis'}
 cat(glue::glue("``` r
 mdy(c(
   \"{paste(.mdyDemos,collapse='\", \"')}\"
 ))
 ```"))
 ```
-```{r,echo=F}
+```{r .mdyDemos3,echo=F}
 mdy(.mdyDemos)
 ```
-```{r,include=F}
+```{r .dmyDemos,include=F}
 # create some date strings to demo parsing
 .dmyDemos <- c(
   format(date, "%d/%m/%y") %>% str_replace_all("(^|/)0", "\\1"),
@@ -691,14 +691,14 @@ mdy(.mdyDemos)
     str_replace("( \\d+) of", paste0(" ", scales::label_ordinal()(as.numeric(format(date, "%d"))), " of"))
 )
 ```
-```{r,echo=F,results='asis'}
+```{r .dmyDemos1,echo=F,results='asis'}
 cat(glue::glue("``` r
 dmy(c(
   \"{paste(.dmyDemos,collapse='\", \"')}\"
 ))
 ```"))
 ```
-```{r,echo=F}
+```{r .dmyDemos2,echo=F}
 dmy(.dmyDemos)
 ```
 
@@ -713,7 +713,7 @@ Also, observe that once converted, R always prints the date in ISO-8601 format a
 
 Quick aside. **R has an *extremely* robust calendar**, so you don't need to worry about "babysitting" R. Notably, R knows exactly [which years are leap and which aren't](https://www.mathsisfun.com/leap-years.html).
 
-```{r,warning=T,class.warning="warning"}
+```{r leap-years,warning=T,class.warning="warning"}
 # the most recent leap year is 2024, since it's divisible by 4
 mdy("Feb 29, 2024")
 # however, years like 1900 or 2100 are not leap,
