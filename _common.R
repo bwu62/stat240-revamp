@@ -40,7 +40,8 @@ r.releases =
   rvest::read_html() %>% 
   rvest::html_nodes(
     xpath=
-      "//table[contains(caption,'codenames')]")%>%
+      "//table[contains(caption,'codenames')]"
+    )%>%
   {rvest::html_table(.)[[1]][1:2]} %>% 
   setNames(c("version","date")) %>% 
   head(10) %>% 
