@@ -701,7 +701,7 @@ In lubridate, the [parser functions](https://lubridate.tidyverse.org/reference/y
 ```{r .mdyDemos2,echo=F,results='asis'}
 cat(glue::glue('``` r
 mdy(c(
-  "{paste(.mdyDemos,collapse="\", \"")}"
+  "{toString(.mdyDemos)}"
 ))
 ```'))
 ```
@@ -722,7 +722,7 @@ mdy(.mdyDemos)
 ```{r .dmyDemos1,echo=F,results='asis'}
 cat(glue::glue('``` r
 dmy(c(
-  "{paste(.dmyDemos,collapse="\", \"")}"
+  "{toString(.dmyDemos)}"
 ))
 ```'))
 ```
