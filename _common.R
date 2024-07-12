@@ -120,7 +120,7 @@ page.find = function(url,pattern,md=F,n=1){
 #   }
 # }
 
-# set a nice width
-options(width=69)
+# set a better width
+options(width=80)
 
 set.seed(1)
