@@ -844,7 +844,9 @@ date + 1
 # what date was 1000 days ago?
 date - 1000
 # how many days has it been since y2k?
-date - mdy("1/1/00")
+# note that subtracting dates gives a "difftime" class object
+# you can convert this to a number using the familiar as.numeric()
+as.numeric(date - mdy("1/1/00"))
 ```
 ```{r dates-in-month1,echo=F,results='asis'}
 cat(glue::glue('``` r
