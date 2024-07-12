@@ -3,20 +3,23 @@ params:
   run: true
 ---
 
-```{r,setup}
-knitr::opts_chunk$set(eval=params$run)
-library(tidyverse)
-library(rvest)
-library(lubridate)
-```
-
-
 # (APPENDIX) Appendix {.unnumbered}
-
 
 # Datasets
 
+```{r setup,include=F}
+knitr::opts_chunk$set(eval=params$run)
+```
+
 This page contains updating/processing scripts and additional info on all datasets used for the course, as well as some brief discussions of why they were chosen. Datasets are ordered by order of appearance in the notes.
+
+```{r}
+library(tidyverse)
+library(rvest)
+library(lubridate)
+options(pillar.print_min=20)
+options(width=75)
+```
 
 
 ## Eruptions
