@@ -1,8 +1,34 @@
-# copy demo.html if inexistent or changed
-if(
-  file.exists("demo.html") && (
-    !file.exists("docs/demo.html") || 
-    file.info("demo.html")$mtime >=
-    file.info("docs/demo.html")$mtime
-  )
-) file.copy("demo.html","docs/",overwrite=T)
+# copy if inexistent or changed
+copy.file = function(file){
+  if(
+    file.exists(file) && (
+      !file.exists(paste0("docs/",file)) || 
+      file.info(file)$mtime >=
+      file.info(paste0("docs/",file))$mtime
+    )
+  ) file.copy(file,paste0("docs/",file),
+              overwrite=T)
+}
+
+# list of extra files/dirs to copy
+copy.list = c(
+  "demo.html",
+  "data/"
+)
+
+# iterate over copy list
+for(path in copy.list){
+  # check if item is file or directory
+  if(dir.exists(path)){
+    # if directory doesn't exist, create it
+    if(!dir.exists(paste0("docs/",path))){
+      dir.create(paste0("docs/",path))
+    }
+    for(file in list.files(path)){
+      copy.file(paste0(path,file))
+    }
+  } else if(file.exists(path)){
+    copy.file(path)
+  } else warning("Path wrong in copy list!")
+}
+
