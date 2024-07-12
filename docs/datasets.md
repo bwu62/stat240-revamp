@@ -1,0 +1,103 @@
+---
+params:
+  run: true
+---
+
+
+``` r
+knitr::opts_chunk$set(eval=params$run)
+library(tidyverse)
+library(rvest)
+library(lubridate)
+```
+
+
+# (APPENDIX) Appendix {.unnumbered}
+
+
+# Datasets
+
+This page contains updating/processing scripts and additional info on all datasets used for the course, as well as some brief discussions of why they were chosen. Datasets are ordered by order of appearance in the notes.
+
+
+## Eruptions
+
+For introducing reading CSVs, I wanted a dataset with all 4 data types we discussed (numeric, logical, character, and date) and was interesting enough, but without too many columns or rows, and without any problems that would add to complexity since we're just starting out. The [volcanic eruptions](https://volcano.si.edu/volcanolist_countries.cfm?country=United%20States) dataset (specifically the "Holocene Eruptions") table seemed to fit the bill nicely.
+
+
+### Load raw data
+
+
+``` r
+# load html source code
+eruptions_raw <- read_html("https://volcano.si.edu/volcanolist_countries.cfm?country=United%20States") %>% 
+  # extract table code
+  html_nodes(xpath="//table[@title='Holocene Eruptions']") %>% 
+  # convert to data frame
+  html_table(header=T,na.strings=c("Uncertain","Unknown","[Unknown]")) %>% 
+  # remove list wrapper
+  .[[1]] %>% 
+  # remove unnecessary evidence column
+  select(-Evidence) %>% 
+  # make names nice
+  set_names(c("name","start","stop","confirmed","vei"))
+```
+
+
+``` r
+eruptions <- eruptions_raw %>% 
+  mutate(
+    # convert confirmed? column to logical
+    confirmed = if_else(replace_na(confirmed,"NA")=="Confirmed",T,F),
+    # replace continuing eruptions with today's date
+    # (continuation last validated 7/11/24)
+    stop = if_else(str_detect(stop,"continu"),format(today(),"%Y %b %e"),stop,missing=stop)
+  ) %>% 
+  # extract date error to new column
+  separate(start,c("start","start_error"),"±") %>% 
+  separate(stop,c("stop","stop_error"),"±") %>% 
+  mutate(
+    # parse error time string to number of days
+    start_error = as.duration(start_error)/ddays(1),
+    stop_error = as.duration(stop_error)/ddays(1),
+    # extract start year since some earlier eruptions are missing month/day
+    start_year = str_extract(start,"(\\d{4,5})"),
+    stop_year = str_extract(stop,"(\\d{4,5})"),
+    # check if bce
+    start_bce = str_detect(start,"BCE"),
+    stop_bce = str_detect(stop,"BCE"),
+    # parse start year, adding - if bce
+    start_year = if_else(start_bce,-as.numeric(start_year),as.numeric(start_year)),
+    stop_year = if_else(stop_bce,-as.numeric(stop_year),as.numeric(stop_year)),
+    # extract start month
+    start_month = str_replace(start,".*\\d{4}\\s([:alpha:]{3}).*","\\1"),
+    stop_month = str_replace(stop,".*\\d{4}\\s([:alpha:]{3}).*","\\1"),
+    start = start %>% str_replace_all("\\[|\\]|\\(.*?\\)","") %>% str_extract("^\\s?\\d+\\s\\w+\\s\\d+") %>% ymd,
+    stop = stop %>% str_replace_all("\\[|\\]|\\(.*?\\)","") %>% str_extract("^\\s?\\d+\\s\\w+\\s\\d+") %>% ymd,
+    # if missing date but has month, use middle day +- half-month error
+    # first, compute number of days in each month
+    start_mdays = days_in_month(ymd(str_c(start_year,start_month,"1"))),
+    stop_mdays = days_in_month(ymd(str_c(stop_year,stop_month,"1"))),
+    # next, if start/stop NA but month exists, set error as half of number of days in month rounded up, then set no error (NA) as 0
+    start_error = if_else(is.na(start) & !is.na(start_month) & is.na(start_error),ceiling(start_mdays/2),start_error) %>% replace_na(0),
+    stop_error = if_else(is.na(stop) & !is.na(stop_month) & is.na(stop_error),ceiling(stop_mdays/2),stop_error) %>% replace_na(0),
+    # finally, if start/stop NA but month exists, set start/stop as middle day of month rounded down
+    start = if_else(is.na(start) & !is.na(start_month),ymd(str_c(start_year,start_month,floor(start_mdays/2))),start),
+    stop = if_else(is.na(stop) & !is.na(stop_month),ymd(str_c(stop_year,stop_month,floor(stop_mdays/2))),stop),
+    duration = (stop-start)/ddays(1)
+  ) %>% 
+  # remove intermediate rows
+  select(name,start,start_error,start_year,stop,stop_error,stop_year,duration,confirmed,vei)
+
+# get just subset for demo
+eruptions_recent <- eruptions %>% 
+  filter(start_error <= 30, start_year > 2000, confirmed) %>% 
+  select(-contains("_"))
+
+# write out to different formats for reading
+write_csv(eruptions,file="data/eruptions_recent.csv")
+```
+
+
+
+

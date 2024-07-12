@@ -58,4 +58,10 @@ getset-components
 date-math
 printing-dates
 data-frames
-create-new-df
+creating-data-frames
+importing-data-frames
+aside-file-formats-extensions
+importing-text-data-with-readr
+datasets
+eruptions
+load-raw-data

@@ -1318,7 +1318,7 @@ library(lubridate)
 
 
 
-Ok, let's start the demo by creating a date object. Let's use today's date (which is Jul 8, 2024 as of [last compile](https://github.com/bwu62/stat240-revamp/commits/maste)) as an example. The `today()` function is handy here.
+Ok, let's start the demo by creating a date object. Let's use today's date (which is Jul 12, 2024 as of [last compile](https://github.com/bwu62/stat240-revamp/commits/maste)) as an example. The `today()` function is handy here.
 
 
 ``` r
@@ -1328,10 +1328,10 @@ date
 ```
 
 ```
-## [1] "2024-07-08"
+## [1] "2024-07-12"
 ```
 
-We can see that even though our date object has `"Date"` class, it actually has `"double"` type, which means behind the scenes, it's secretly stored as a number. ^[The distrinction between class, type, and mode (which we haven't even mentioned and won't ever discuss) is highly technical to the mechanics of R and not worth concerning yourself over. If you're dying of curiosity, I recommend this excellent video on the matter: <https://youtu.be/RwEzWZA9uTw>{target="_blank"}.] If you `unclass()` the object, i.e. strip away the `"Date"` property, you can see it's just the number 19912 underneath, and you can check that in fact Jul 8, 2024 is indeed [19912 days after Jan 1 1970](https://www.wolframalpha.com/input?i=19912+days+after+Jan+1+1970).
+We can see that even though our date object has `"Date"` class, it actually has `"double"` type, which means behind the scenes, it's secretly stored as a number. ^[The distrinction between class, type, and mode (which we haven't even mentioned and won't ever discuss) is highly technical to the mechanics of R and not worth concerning yourself over. If you're dying of curiosity, I recommend this excellent video on the matter: <https://youtu.be/RwEzWZA9uTw>{target="_blank"}.] If you `unclass()` the object, i.e. strip away the `"Date"` property, you can see it's just the number 19916 underneath, and you can check that in fact Jul 12, 2024 is indeed [19916 days after Jan 1 1970](https://www.wolframalpha.com/input?i=19916+days+after+Jan+1+1970).
 
 
 ``` r
@@ -1357,24 +1357,24 @@ unclass(date)
 ```
 
 ```
-## [1] 19912
+## [1] 19916
 ```
 ``` r
 # we can reverse this too, start with a number,
 # then change the class to "Date", and voila!
-x <- 19912
+x <- 19916
 class(x) <- "Date"
 x
 ```
 
 ```
-## [1] "2024-07-08"
+## [1] "2024-07-12"
 ```
 
 :::{.note}
 R conforms to [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) standards, i.e. **dates ALWAYS show as `"YYYY-MM-DD"`** (even though they're stored numerically). This is arguably the best format for dates, because it's the unique format where [chronological order and lexicographical order are identical](https://en.wikipedia.org/wiki/ISO_8601#General_principles), which is an extremely useful property.
 
-Also note despite `date` appearing to be a character, it is NOT a character. Using `identical()` (which compares if two objects are the same) will show this to be false. Furthermore, `as.numeric()` confirms `date` converts to 19912 as expected, whereas the string ``"2024-07-08"`` cannot be converted and returns `NA`.
+Also note despite `date` appearing to be a character, it is NOT a character. Using `identical()` (which compares if two objects are the same) will show this to be false. Furthermore, `as.numeric()` confirms `date` converts to 19916 as expected, whereas the string ``"2024-07-12"`` cannot be converted and returns `NA`.
 
 
 ``` r
@@ -1382,7 +1382,7 @@ date
 ```
 
 ```
-## [1] "2024-07-08"
+## [1] "2024-07-12"
 ```
 
 ``` r
@@ -1393,14 +1393,14 @@ is.character(date)
 ## [1] FALSE
 ```
 ``` r
-identical(date, "2024-07-08")
+identical(date, "2024-07-12")
 ```
 
 ```
 ## [1] FALSE
 ```
 ``` r
-c(as.numeric(date), as.numeric("2024-07-08"))
+c(as.numeric(date), as.numeric("2024-07-12"))
 ```
 
 ``` warning
@@ -1408,7 +1408,7 @@ c(as.numeric(date), as.numeric("2024-07-08"))
 ```
 
 ```
-## [1] 19912    NA
+## [1] 19916    NA
 ```
 
 This is just to warn you that **even though they may print similarly, date objects and date-like strings are *NOT* the same**, so to avoid errors and unexpected behavior, make sure you properly convert all date data to be true date objects.
@@ -1426,38 +1426,38 @@ In lubridate, the [parser functions](https://lubridate.tidyverse.org/reference/y
 
 ``` r
 mdy(c(
-  "7/8/24 07-08-2024 070824 Jul 8 '24 Monday, July 8th, 2024 "
+  "7/12/24, 07-12-2024, 071224, Jul 12 '24, Friday, July 12th, 2024"
 ))
 ```
 
 ```
-## [1] "2024-07-08" "2024-07-08" "2024-07-08" "2024-07-08" "2024-07-08"
+## [1] "2024-07-12" "2024-07-12" "2024-07-12" "2024-07-12" "2024-07-12"
 ```
 
 ``` r
 dmy(c(
-  "8/7/24 08-07-2024 080724 8 Jul '24 Monday, 8th of July, 2024 "
+  "12/7/24, 12-07-2024, 120724, 12 Jul '24, Friday, 12th of July, 2024"
 ))
 ```
 
 ```
-## [1] "2024-07-08" "2024-07-08" "2024-07-08" "2024-07-08" "2024-07-08"
+## [1] "2024-07-12" "2024-07-12" "2024-07-12" "2024-07-12" "2024-07-12"
 ```
 
 As you can see, you just need to tell R which order to expect the date components and it will handle the rest! We only demonstrated the `mdy()` and `dmy()` functions here since they are by far the most common formats, but the other functions all behave the same.
 
-One last parser. Sometimes data gives dates as a decimal, e.g. `` 2024-07-08 `` would be `` 2024.516 `` since it's the 190th day of the year which means it's `` (190-1)/366*100%=51.6% `` of the way into the year. ^[The -1 in the numerator is due to the date being treated as 12am midnight, hence the 190th day, `` 2024-07-08 `` is just about to start, so only 190 days have passed so far.] R also has a dedicated function for this. `date_decimal()` converts the decimal to a date+time object, which we can then round to the nearest date with [`round_date(...,unit="day")`{.R}](https://lubridate.tidyverse.org/reference/round_date.html) and drop the time component with `date()` which converts date+time objects to pure date objects (again, we are not covering date+time objects due to complexity & limited time).
+One last parser. Sometimes data gives dates as a decimal, e.g. `` 2024-07-12 `` would be `` 2024.527 `` since it's the 194th day of the year which means it's `` (194-1)/366*100%=52.7% `` of the way into the year. ^[The -1 in the numerator is due to the date being treated as 12am midnight, hence the 194th day, `` 2024-07-12 `` is just about to start, so only 194 days have passed so far.] R also has a dedicated function for this. `date_decimal()` converts the decimal to a date+time object, which we can then round to the nearest date with [`round_date(...,unit="day")`{.R}](https://lubridate.tidyverse.org/reference/round_date.html) and drop the time component with `date()` which converts date+time objects to pure date objects (again, we are not covering date+time objects due to complexity & limited time).
 
 ``` r
 # generate a vector of elapsed 21st century dates
 # in decimal format for demo purposes
-# (here, runif uniformly samples 4 numbers from 2000 to 2024.516)
-dates2 <- runif(4, 2000, 2024.516)
+# (here, runif uniformly samples 4 numbers from 2000 to 2024.527)
+dates2 <- runif(4, 2000, 2024.527)
 dates2
 ```
 
 ```
-## [1] 2006.509 2009.123 2014.044 2022.266
+## [1] 2006.512 2009.127 2014.051 2022.276
 ```
 
 ``` r
@@ -1467,7 +1467,7 @@ dates2
 ```
 
 ```
-## [1] "2006-07-06" "2009-02-15" "2014-01-17" "2022-04-08"
+## [1] "2006-07-07" "2009-02-16" "2014-01-19" "2022-04-12"
 ```
 
 There is also a reverse function `decimal_date()` that converts a date back into a decimal.
@@ -1478,7 +1478,7 @@ decimal_date(dates2)
 ```
 
 ```
-## [1] 2006.510 2009.123 2014.044 2022.266
+## [1] 2006.512 2009.126 2014.049 2022.277
 ```
 
 
@@ -1547,7 +1547,7 @@ leap_year(c(1900, 2000, 2024, 2100))
 
 Lubridate provides many get/set functions (often called getters and setters) for getting and setting different components (i.e. properties) associated with a date. Some common ones include `year()`, `month()`, `day()`, `wday()` (for day of the week), and `quarter()`.
 
-Let's continue using the generated `dates2` object above, except I will add today `` 2024-07-08 `` into the vector as the first element.
+Let's continue using the generated `dates2` object above, except I will add today `` 2024-07-12 `` into the vector as the first element.
 
 
 ``` r
@@ -1557,7 +1557,7 @@ dates2
 ```
 
 ```
-## [1] "2024-07-08" "2006-07-06" "2009-02-15" "2014-01-17" "2022-04-08"
+## [1] "2024-07-12" "2006-07-07" "2009-02-16" "2014-01-19" "2022-04-12"
 ```
 
 ``` r
@@ -1582,7 +1582,7 @@ day(dates2)
 ```
 
 ```
-## [1]  8  6 15 17  8
+## [1] 12  7 16 19 12
 ```
 
 ``` r
@@ -1591,7 +1591,7 @@ wday(dates2)
 ```
 
 ```
-## [1] 2 5 1 6 6
+## [1] 6 6 2 1 3
 ```
 
 ``` r
@@ -1621,7 +1621,7 @@ wday(dates2, label = TRUE, abbr = FALSE)
 ```
 
 ```
-## [1] Monday   Thursday Sunday   Friday   Friday  
+## [1] Friday  Friday  Monday  Sunday  Tuesday
 ## 7 Levels: Sunday < Monday < Tuesday < Wednesday < ... < Saturday
 ```
 
@@ -1641,7 +1641,7 @@ new_dates2
 ```
 
 ```
-## [1] "2000-07-08" "2000-07-06" "2000-02-15" "2000-01-17" "2000-04-08"
+## [1] "2000-07-12" "2000-07-07" "2000-02-16" "2000-01-19" "2000-04-12"
 ```
 
 ``` r
@@ -1651,7 +1651,7 @@ new_dates2
 ```
 
 ```
-## [1] "2000-07-08" "2001-07-06" "2002-02-15" "2003-01-17" "2004-04-08"
+## [1] "2000-07-12" "2001-07-07" "2002-02-16" "2003-01-19" "2004-04-12"
 ```
 
 This works with all the getters above, feel free to experiment more with this on your own. There are also several other getter/setter functions such as `qday()` for day of the quarter, `week()` for week number, and `semester()` for 1^st^ or 2^nd^ semester of the year.
@@ -1670,7 +1670,7 @@ date + 1
 ```
 
 ```
-## [1] "2024-07-09"
+## [1] "2024-07-13"
 ```
 
 ``` r
@@ -1679,16 +1679,18 @@ date - 1000
 ```
 
 ```
-## [1] "2021-10-12"
+## [1] "2021-10-16"
 ```
 
 ``` r
 # how many days has it been since y2k?
-date - mdy("1/1/00")
+# note that subtracting dates gives a "difftime" class object
+# you can convert this to a number using the familiar as.numeric()
+as.numeric(date - mdy("1/1/00"))
 ```
 
 ```
-## Time difference of 8955 days
+## [1] 8959
 ```
 ``` r
 # make a sequence of dates from today to the end of the month
@@ -1696,24 +1698,22 @@ seq(date, mdy("7/31/24"), by = 1)
 ```
 
 ```
-##  [1] "2024-07-08" "2024-07-09" "2024-07-10" "2024-07-11" "2024-07-12"
-##  [6] "2024-07-13" "2024-07-14" "2024-07-15" "2024-07-16" "2024-07-17"
-## [11] "2024-07-18" "2024-07-19" "2024-07-20" "2024-07-21" "2024-07-22"
-## [16] "2024-07-23" "2024-07-24" "2024-07-25" "2024-07-26" "2024-07-27"
-## [21] "2024-07-28" "2024-07-29" "2024-07-30" "2024-07-31"
+##  [1] "2024-07-12" "2024-07-13" "2024-07-14" "2024-07-15" "2024-07-16"
+##  [6] "2024-07-17" "2024-07-18" "2024-07-19" "2024-07-20" "2024-07-21"
+## [11] "2024-07-22" "2024-07-23" "2024-07-24" "2024-07-25" "2024-07-26"
+## [16] "2024-07-27" "2024-07-28" "2024-07-29" "2024-07-30" "2024-07-31"
 ```
 ``` r
-# make a sequence of every Monday from today to the end of the year
+# make a sequence of every Friday from today to the end of the year
 seq(date, mdy("12/31/24"), by = 7)
 ```
 
 ```
-##  [1] "2024-07-08" "2024-07-15" "2024-07-22" "2024-07-29" "2024-08-05"
-##  [6] "2024-08-12" "2024-08-19" "2024-08-26" "2024-09-02" "2024-09-09"
-## [11] "2024-09-16" "2024-09-23" "2024-09-30" "2024-10-07" "2024-10-14"
-## [16] "2024-10-21" "2024-10-28" "2024-11-04" "2024-11-11" "2024-11-18"
-## [21] "2024-11-25" "2024-12-02" "2024-12-09" "2024-12-16" "2024-12-23"
-## [26] "2024-12-30"
+##  [1] "2024-07-12" "2024-07-19" "2024-07-26" "2024-08-02" "2024-08-09"
+##  [6] "2024-08-16" "2024-08-23" "2024-08-30" "2024-09-06" "2024-09-13"
+## [11] "2024-09-20" "2024-09-27" "2024-10-04" "2024-10-11" "2024-10-18"
+## [16] "2024-10-25" "2024-11-01" "2024-11-08" "2024-11-15" "2024-11-22"
+## [21] "2024-11-29" "2024-12-06" "2024-12-13" "2024-12-20" "2024-12-27"
 ```
 ``` r
 # has independence day already happened this year?
@@ -1730,7 +1730,7 @@ min(dates2)
 ```
 
 ```
-## [1] "2006-07-06"
+## [1] "2006-07-07"
 ```
 
 ``` r
@@ -1739,7 +1739,7 @@ sort(dates2)
 ```
 
 ```
-## [1] "2006-07-06" "2009-02-15" "2014-01-17" "2022-04-08" "2024-07-08"
+## [1] "2006-07-07" "2009-02-16" "2014-01-19" "2022-04-12" "2024-07-12"
 ```
 
 ``` r
@@ -1765,7 +1765,7 @@ format(date, "%m/%d/%y")
 ```
 
 ```
-## [1] "07/08/24"
+## [1] "07/12/24"
 ```
 
 ``` r
@@ -1774,7 +1774,7 @@ format(date, "%b %d, %Y")
 ```
 
 ```
-## [1] "Jul 08, 2024"
+## [1] "Jul 12, 2024"
 ```
 
 ``` r
@@ -1783,7 +1783,7 @@ format(date, "%A, %B %e, %Y")
 ```
 
 ```
-## [1] "Monday, July  8, 2024"
+## [1] "Friday, July 12, 2024"
 ```
 
 A full list of these percent codes can be found in the help page of `strptime()`, a base R function for parsing date/time objects.
@@ -1801,10 +1801,10 @@ It's actually really helpful to think of a data frame as a collection of paralle
 
 
 
-### Create new df
+### Creating data frames
 
 
-There are 2 common ways of creating a new data frame manually: `data.frame()` from base R, or `tibble()` from the [tibble](https://tibble.tidyverse.org/) package, another of the core Tidyverse packages. They are extremely similar, but we recommend `tibble()` due to some extra features which are nice like better printing, same-line column references, and stricter subsetting rules. Example:
+There are 2 common ways of creating a new data frame manually: `data.frame()` from base R, or `tibble()` from the [tibble](https://tibble.tidyverse.org/) package, another of the core Tidyverse packages. They are extremely similar, but we recommend `tibble()` due to some nice extra features such as better printing, referencing other columns during creation, and stricter subsetting rules. Example:
 
 
 ``` r
@@ -1818,7 +1818,8 @@ library(tibble)
 df <- tibble(
   name = c("Alice", "Bob", "Charlie"),
   sex = c("F", "M", "M"),
-  birthday = mdy(c("7/8/03", "7/4/99", "10/31/06")),
+  birthday = mdy(c("7/12/03", "7/4/99", "10/31/06")),
+  age = floor(as.numeric(today() - birthday)/365.24),
   declared_major = c(TRUE, TRUE, FALSE)
 )
 # print df
@@ -1826,12 +1827,98 @@ df
 ```
 
 ```
-## # A tibble: 3 × 4
-##   name    sex   birthday   declared_major
-##   <chr>   <chr> <date>     <lgl>         
-## 1 Alice   F     2003-07-08 TRUE          
-## 2 Bob     M     1999-07-04 TRUE          
-## 3 Charlie M     2006-10-31 FALSE
+## # A tibble: 3 × 6
+##   name    sex   birthday     age declared_major school    
+##   <chr>   <chr> <date>     <dbl> <lgl>          <chr>     
+## 1 Alice   F     2003-07-12    21 TRUE           UW-Madison
+## 2 Bob     M     1999-07-04    25 TRUE           UW-Madison
+## 3 Charlie M     2006-10-31    17 FALSE          UW-Madison
+```
+
+Note the following:
+
+ - The syntax inside `tibble()` is always `column_name = vector_of_data, next_column_name = next_vector_of_data, ...` where each vector must be the same length.
+ - The vectors do not have to be pre-created; you canc reate them as you go along.
+ - You can reference another column immediately after creating it inside the function, e.g. `birthday` was created, and then immediately used on the next line to help create `age` (by the way `age` here is approximately computed as number of days since birth divided by 365.24, the approximate number of days in a year, then rounded down following convention).
+ - Data frames can, and almost always do contain many columns each with a different type. However, as usual a single column---which is still a vector!---can only contain a SINGLE type of data inside it, e.g. you cannot have a column with both numbers and characters simultaneously.
+ - Printing the df by either just writing it on a new line, or with the `print()` function (same thing) will show not only the first few rows, but also other info like
+   - column (and row) names,
+   - number of rows and columns (displayed as rows x cols),
+   - and the type of each column (dbl, chr, lgl, date, or others beyond our scope)
+ - You can create a column of constants by recycling a single value
+   - Note: by design, `tibble()` will ONLY recycle length-1 vectors. This is to help avoid errors and improve syntax legibility.
+
+
+
+
+### Importing data frames
+
+Of course, in practice you don't usually create data frames manually like this, but rather import them from data files. As always, there are base R ways for doing this, but we will continue to recommend Tidyverse syntax due to its better features and design.
+
+There are a million different data formats, but we will only cover 3 main formats that are most commonly encountered in data science: CSV, or comma separated value files; TSV/TXT tables, which are either tab or space separated; and XLS(X), which are Excel (or similar spreadsheet software) data files. Notably, we do not cover databases (like SQL or its derivatives) or non-rectangular data formats (like JSON or XML) again due to limitations of time/space.
+
+
+
+
+#### Aside: file formats & extensions
+
+First, a small aside. File formats (or types) and file extensions are commonly conflated, but the distinction is important.
+
+ - File **format** refers to the internal structure of the contents. Common formats include simple text (which can be encoded using a variety of [different encodings](https://dsc.gmu.edu/tutorials-data/tutorial-character-encoding/) with ASCII and Unicode UTF-8 being the most common), other more complex documents like PDFs or DOCs, images and videos, compressed archives, binary executables, or other specialized (often proprietary) formats.
+ - In contrast, file **extensions** are just characters added to the end of the name of a file for our convenience and to hint to computers (and users) what you might expect to find inside the contents of the file. It has no bearing on the actual file format contained inside.
+
+Many extensions may in fact be the same file format, e.g. .Rmd, .html, .csv, .txt, and many more are all examples of extensions that are actually just simple text files (under some encoding), which is why they can all be opened with any text editor. Similarly some formats can be stored with a variety of different extensions, e.g. MPEG-4 is a versatile multimedia "container" format and may be stored not only as .mp4 but also .m4a, .m4b, .m4p, .m4r, or .m4v depending on context.
+
+Again, the extension only exists to "hint" at the contents of a file. You can store a text file with a .mp4 extension if you want. Your computer will then suggest you open it with a video player which will fail, but you can force it to open in a text editor and it will work just fine. Remember **file names and file contents are totally separate things** and need not have any bearing on each other.
+
+Some important takeaways from all this:
+
+ - Some data "formats" (like CSV, TSV, JSON, or XML) are really just simple text files just like .txt files. In this class, when we say "CSV" we generally refer to the specific way the text is formatted (i.e. values separated by commas) inside the file, not just the extension.
+ - Some data formats (like XLS(X) or databases) are not simple text files but specialized formats, and often need more specialized treatment.
+ - Just changing the extension of a file does NOT change the contents. E.g. changing a .csv extension to .zip does NOT create a valid zip file, no more than painting stripes on a horse turns it into a zebra.
+
+:::{.note}
+Today, many systems by default hide file extensions, e.g. a file that's actually named `data.csv` may appear to the user as just named `data`. This can cause problems, because if a user isn't aware of this and tries to rename the file to `data.csv` it may actually become `data.csv.csv`. This is a common cause of knit-fail that we see.
+
+We **highly recommended you force your device to always show extensions** which can help avoid these problems. Instructions [for Windows](https://www.howtogeek.com/205086/beginner-how-to-make-windows-show-file-extensions/) and [for Macs](https://support.apple.com/guide/mac-help/show-or-hide-filename-extensions-on-mac-mchlp2304/mac).
+:::
+
+
+
+
+#### Importing text data with readr
+
+For text data, we once again turn to [readr](https://readr.tidyverse.org/) which has a suite of functions for importing them, of which we will only focus on a few:
+
+ - `read_csv()` is used to read in CSV files where columns of data are separated by commas,
+ - `read_tsv()` and `read_table()` are used to read in files where columns of data are separated by tabs or by whitespace (which can include varying numbers of tabs, spaces, and some other special space-like characters),
+ - `read_delim()` is the general form of these `read_...` functions and can be used to read in files with any other type of separator.
+
+
+
+
+``` r
+eruptions_recent = read_csv("data/eruptions_recent.csv")
+eruptions_recent
+```
+
+```
+## # A tibble: 1,278 × 10
+##    name       start      start_error start_year stop       stop_error
+##    <chr>      <date>           <dbl>      <dbl> <date>          <dbl>
+##  1 Kilauea    2024-06-03           0       2024 2024-06-03          0
+##  2 Atka Volc… 2024-03-27           0       2024 2024-03-27          0
+##  3 Ahyi       2024-01-01           0       2024 2024-03-27          0
+##  4 Kanaga     2023-12-18           0       2023 2023-12-18          0
+##  5 Ruby       2023-09-14           0       2023 2023-09-15          0
+##  6 Shishaldin 2023-07-11           1       2023 2023-11-03          0
+##  7 Mauna Loa  2022-11-27           0       2022 2022-12-10          0
+##  8 Ahyi       2022-11-18           1       2022 2023-06-11          0
+##  9 Kilauea    2021-09-29           0       2021 2023-09-16          0
+## 10 Pavlof     2021-08-05           0       2021 2022-12-07          0
+## # ℹ 1,268 more rows
+## # ℹ 4 more variables: stop_year <dbl>, duration <dbl>,
+## #   confirmed <lgl>, vei <dbl>
 ```
 
 
