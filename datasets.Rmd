@@ -94,6 +94,9 @@ eruptions_recent <- eruptions %>%
   filter(start_error <= 30, start_year > 2000, confirmed) %>% 
   select(-contains("_"))
 
+# print
+eruptions_recent
+
 # write out to different formats for reading
 write_csv(eruptions,file="data/eruptions_recent.csv")
 ```
