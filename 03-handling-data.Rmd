@@ -915,10 +915,10 @@ It's actually really helpful to think of a data frame as a collection of paralle
 
 
 
-### Create new df
+### Creating data frames
 
 
-There are 2 common ways of creating a new data frame manually: `data.frame()` from base R, or `tibble()` from the [tibble](https://tibble.tidyverse.org/) package, another of the core Tidyverse packages. They are extremely similar, but we recommend `tibble()` due to some extra features which are nice like better printing, same-line column references, and stricter subsetting rules. Example:
+There are 2 common ways of creating a new data frame manually: `data.frame()` from base R, or `tibble()` from the [tibble](https://tibble.tidyverse.org/) package, another of the core Tidyverse packages. They are extremely similar, but we recommend `tibble()` due to some nice extra features such as better printing, referencing other columns during creation, and stricter subsetting rules. Example:
 
 ```{r import-tibble}
 # import the tibble library
@@ -933,6 +933,7 @@ df <- tibble(
   name = c("Alice", "Bob", "Charlie"),
   sex = c("F", "M", "M"),
   birthday = mdy(c("{format(date-years(21),"%m/%d")%>%str_replace_all("(^|/)0","\\\\1")}/{format(date-years(21),"%y")}", "7/4/99", "10/31/06")),
+  age = floor(as.numeric(today() - birthday)/365.24),
   declared_major = c(TRUE, TRUE, FALSE)
 )
 # print df
@@ -944,7 +945,9 @@ df <- tibble(
   name = c("Alice", "Bob", "Charlie"),
   sex = c("F", "M", "M"),
   birthday = c(date - years(21), mdy(c("7/4/99", "10/31/06"))),
-  declared_major = c(TRUE, TRUE, FALSE)
+  age = floor(as.numeric(today() - birthday)/365.24),
+  declared_major = c(TRUE, TRUE, FALSE),
+  school = "UW-Madison"
 )
 df
 ```
