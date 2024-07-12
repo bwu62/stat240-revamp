@@ -3,21 +3,22 @@ params:
   run: true
 ---
 
-
-``` r
-knitr::opts_chunk$set(eval=params$run)
-library(tidyverse)
-library(rvest)
-library(lubridate)
-```
-
-
 # (APPENDIX) Appendix {.unnumbered}
-
 
 # Datasets
 
+
+
 This page contains updating/processing scripts and additional info on all datasets used for the course, as well as some brief discussions of why they were chosen. Datasets are ordered by order of appearance in the notes.
+
+
+``` r
+library(tidyverse)
+library(rvest)
+library(lubridate)
+options(pillar.print_min=20)
+options(width=75)
+```
 
 
 ## Eruptions
@@ -94,6 +95,38 @@ eruptions_recent <- eruptions %>%
   filter(start_error <= 30, start_year > 2000, confirmed) %>% 
   select(-contains("_"))
 
+# print
+eruptions_recent
+```
+
+```
+## # A tibble: 71 × 6
+##    name                  start      stop       duration confirmed   vei
+##    <chr>                 <date>     <date>        <dbl> <lgl>     <int>
+##  1 Kilauea               2024-06-03 2024-06-03        0 TRUE         NA
+##  2 Atka Volcanic Complex 2024-03-27 2024-03-27        0 TRUE         NA
+##  3 Ahyi                  2024-01-01 2024-03-27       86 TRUE         NA
+##  4 Kanaga                2023-12-18 2023-12-18        0 TRUE          1
+##  5 Ruby                  2023-09-14 2023-09-15        1 TRUE          1
+##  6 Shishaldin            2023-07-11 2023-11-03      115 TRUE          3
+##  7 Mauna Loa             2022-11-27 2022-12-10       13 TRUE          0
+##  8 Ahyi                  2022-11-18 2023-06-11      205 TRUE          1
+##  9 Kilauea               2021-09-29 2023-09-16      717 TRUE          0
+## 10 Pavlof                2021-08-05 2022-12-07      489 TRUE          2
+## 11 Pagan                 2021-07-29 2021-09-06       39 TRUE          2
+## 12 Great Sitkin          2021-05-25 2024-07-12     1144 TRUE          2
+## 13 Veniaminof            2021-02-28 2021-04-05       36 TRUE          1
+## 14 Semisopochnoi         2021-02-02 2023-05-05      822 TRUE          2
+## 15 Kilauea               2020-12-20 2021-05-23      154 TRUE          0
+## 16 Cleveland             2020-06-01 2020-06-01        0 TRUE          3
+## 17 Semisopochnoi         2019-12-07 2020-06-19      195 TRUE          1
+## 18 Shishaldin            2019-07-23 2020-05-04      286 TRUE          3
+## 19 Semisopochnoi         2019-07-16 2019-08-24       39 TRUE          1
+## 20 Great Sitkin          2019-06-01 2019-06-07        6 TRUE          1
+## # ℹ 51 more rows
+```
+
+``` r
 # write out to different formats for reading
 write_csv(eruptions,file="data/eruptions_recent.csv")
 ```

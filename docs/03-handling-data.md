@@ -93,8 +93,7 @@ atan(data)
 ```
 
 ```
-## [1] 1.2490458 1.4056476 1.4056476 1.1071487 1.3258177 0.7853982
-## [7] 1.3734008
+## [1] 1.2490458 1.4056476 1.4056476 1.1071487 1.3258177 0.7853982 1.3734008
 ```
 
 ``` r
@@ -150,8 +149,7 @@ data - mean(data)
 ```
 
 ```
-## [1] -0.8571429  2.1428571  2.1428571 -1.8571429  0.1428571 -2.8571429
-## [7]  1.1428571
+## [1] -0.8571429  2.1428571  2.1428571 -1.8571429  0.1428571 -2.8571429  1.1428571
 ```
 
 This is then squared `( ... )^2` and again, this operates one at a time:
@@ -162,8 +160,7 @@ This is then squared `( ... )^2` and again, this operates one at a time:
 ```
 
 ```
-## [1] 0.73469388 4.59183673 4.59183673 3.44897959 0.02040816 8.16326531
-## [7] 1.30612245
+## [1] 0.73469388 4.59183673 4.59183673 3.44897959 0.02040816 8.16326531 1.30612245
 ```
 
 Finally, this vector is summed, scaled by 1/(n-1), and square rooted to get the standard deviation. We can check this is correct by comparing with the built-in `sd()` function.
@@ -265,8 +262,8 @@ One of the easiest, if you just need a sequence of integers, is to use the `:` o
 ```
 
 ```
-##  [1]  10   9   8   7   6   5   4   3   2   1   0  -1  -2  -3  -4  -5
-## [17]  -6  -7  -8  -9 -10
+##  [1]  10   9   8   7   6   5   4   3   2   1   0  -1  -2  -3  -4  -5  -6  -7  -8
+## [20]  -9 -10
 ```
 
 The `seq()` function does something similar, except it also has additional arguments `by` to specify the step size and `length.out` which specifies how many numbers to have in total (note: only ONE of these arguments can be set at a time).
@@ -293,15 +290,13 @@ seq(0, 1, length.out = 101)
 ```
 
 ```
-##   [1] 0.00 0.01 0.02 0.03 0.04 0.05 0.06 0.07 0.08 0.09 0.10 0.11
-##  [13] 0.12 0.13 0.14 0.15 0.16 0.17 0.18 0.19 0.20 0.21 0.22 0.23
-##  [25] 0.24 0.25 0.26 0.27 0.28 0.29 0.30 0.31 0.32 0.33 0.34 0.35
-##  [37] 0.36 0.37 0.38 0.39 0.40 0.41 0.42 0.43 0.44 0.45 0.46 0.47
-##  [49] 0.48 0.49 0.50 0.51 0.52 0.53 0.54 0.55 0.56 0.57 0.58 0.59
-##  [61] 0.60 0.61 0.62 0.63 0.64 0.65 0.66 0.67 0.68 0.69 0.70 0.71
-##  [73] 0.72 0.73 0.74 0.75 0.76 0.77 0.78 0.79 0.80 0.81 0.82 0.83
-##  [85] 0.84 0.85 0.86 0.87 0.88 0.89 0.90 0.91 0.92 0.93 0.94 0.95
-##  [97] 0.96 0.97 0.98 0.99 1.00
+##   [1] 0.00 0.01 0.02 0.03 0.04 0.05 0.06 0.07 0.08 0.09 0.10 0.11 0.12 0.13 0.14
+##  [16] 0.15 0.16 0.17 0.18 0.19 0.20 0.21 0.22 0.23 0.24 0.25 0.26 0.27 0.28 0.29
+##  [31] 0.30 0.31 0.32 0.33 0.34 0.35 0.36 0.37 0.38 0.39 0.40 0.41 0.42 0.43 0.44
+##  [46] 0.45 0.46 0.47 0.48 0.49 0.50 0.51 0.52 0.53 0.54 0.55 0.56 0.57 0.58 0.59
+##  [61] 0.60 0.61 0.62 0.63 0.64 0.65 0.66 0.67 0.68 0.69 0.70 0.71 0.72 0.73 0.74
+##  [76] 0.75 0.76 0.77 0.78 0.79 0.80 0.81 0.82 0.83 0.84 0.85 0.86 0.87 0.88 0.89
+##  [91] 0.90 0.91 0.92 0.93 0.94 0.95 0.96 0.97 0.98 0.99 1.00
 ```
 
 Vectors can also be created with the `rep()` function which lets you repeat the contents. There are two arguments: `times` which controls how many times to repeat the entire input, and `each` which controls how many times to repeat each element if the input is a vector. You can specify either or both of these arguments. Note `rep()` can be used to repeat other objects too, not just numbers.
@@ -322,8 +317,7 @@ rep(1:3, times = 3, each = 4)
 ```
 
 ```
-##  [1] 1 1 1 1 2 2 2 2 3 3 3 3 1 1 1 1 2 2 2 2 3 3 3 3 1 1 1 1 2 2 2 2
-## [33] 3 3 3 3
+##  [1] 1 1 1 1 2 2 2 2 3 3 3 3 1 1 1 1 2 2 2 2 3 3 3 3 1 1 1 1 2 2 2 2 3 3 3 3
 ```
 
 ``` r
@@ -343,8 +337,8 @@ rep(c(1, 3, 7:9, seq(10, 12, by = 0.5)), each = 2)
 ```
 
 ```
-##  [1]  1.0  1.0  3.0  3.0  7.0  7.0  8.0  8.0  9.0  9.0 10.0 10.0 10.5
-## [14] 10.5 11.0 11.0 11.5 11.5 12.0 12.0
+##  [1]  1.0  1.0  3.0  3.0  7.0  7.0  8.0  8.0  9.0  9.0 10.0 10.0 10.5 10.5 11.0
+## [16] 11.0 11.5 11.5 12.0 12.0
 ```
 
 
@@ -495,8 +489,8 @@ letters
 ```
 
 ```
-##  [1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p"
-## [17] "q" "r" "s" "t" "u" "v" "w" "x" "y" "z"
+##  [1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s"
+## [20] "t" "u" "v" "w" "x" "y" "z"
 ```
 
 You can extract elements form a vector with the `[]` operator, giving either a vector of numeric positions, a vector of `TRUE`/`FALSE` values, or a negative vector for exclusions (i.e. anything *except*). Examples:
@@ -557,8 +551,8 @@ letters[-1]
 ```
 
 ```
-##  [1] "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q"
-## [17] "r" "s" "t" "u" "v" "w" "x" "y" "z"
+##  [1] "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s" "t"
+## [20] "u" "v" "w" "x" "y" "z"
 ```
 
 ``` r
@@ -743,8 +737,8 @@ friends
 ```
 
 ```
-## [1] "Alice"     "Bob"       "Charlie"   "Donny"     "Emmy"     
-## [6] "Francine"  "Genevieve" "Heinemann"
+## [1] "Alice"     "Bob"       "Charlie"   "Donny"     "Emmy"      "Francine" 
+## [7] "Genevieve" "Heinemann"
 ```
 
 ``` r
@@ -778,8 +772,8 @@ toupper(friends)
 ```
 
 ```
-## [1] "ALICE"     "BOB"       "CHARLIE"   "DONNY"     "EMMY"     
-## [6] "FRANCINE"  "GENEVIEVE" "HEINEMANN"
+## [1] "ALICE"     "BOB"       "CHARLIE"   "DONNY"     "EMMY"      "FRANCINE" 
+## [7] "GENEVIEVE" "HEINEMANN"
 ```
 
 ``` r
@@ -787,8 +781,8 @@ tolower(friends)
 ```
 
 ```
-## [1] "alice"     "bob"       "charlie"   "donny"     "emmy"     
-## [6] "francine"  "genevieve" "heinemann"
+## [1] "alice"     "bob"       "charlie"   "donny"     "emmy"      "francine" 
+## [7] "genevieve" "heinemann"
 ```
 
 ``` r
@@ -818,8 +812,8 @@ substr(friends, 2, nchar(friends) - 1)
 ```
 
 ```
-## [1] "lic"     "o"       "harli"   "onn"     "mm"      "rancin" 
-## [7] "eneviev" "eineman"
+## [1] "lic"     "o"       "harli"   "onn"     "mm"      "rancin"  "eneviev"
+## [8] "eineman"
 ```
 
 ``` r
@@ -828,9 +822,8 @@ paste(friends, "is my friend")
 ```
 
 ```
-## [1] "Alice is my friend"     "Bob is my friend"      
-## [3] "Charlie is my friend"   "Donny is my friend"    
-## [5] "Emmy is my friend"      "Francine is my friend" 
+## [1] "Alice is my friend"     "Bob is my friend"       "Charlie is my friend"  
+## [4] "Donny is my friend"     "Emmy is my friend"      "Francine is my friend" 
 ## [7] "Genevieve is my friend" "Heinemann is my friend"
 ```
 
@@ -839,14 +832,10 @@ paste("My friend", friends, "is in group", groups)
 ```
 
 ```
-## [1] "My friend Alice is in group A"    
-## [2] "My friend Bob is in group B"      
-## [3] "My friend Charlie is in group A"  
-## [4] "My friend Donny is in group B"    
-## [5] "My friend Emmy is in group A"     
-## [6] "My friend Francine is in group B" 
-## [7] "My friend Genevieve is in group A"
-## [8] "My friend Heinemann is in group B"
+## [1] "My friend Alice is in group A"     "My friend Bob is in group B"      
+## [3] "My friend Charlie is in group A"   "My friend Donny is in group B"    
+## [5] "My friend Emmy is in group A"      "My friend Francine is in group B" 
+## [7] "My friend Genevieve is in group A" "My friend Heinemann is in group B"
 ```
 
 ``` r
@@ -856,8 +845,8 @@ paste0(friends, "123")
 ```
 
 ```
-## [1] "Alice123"     "Bob123"       "Charlie123"   "Donny123"    
-## [5] "Emmy123"      "Francine123"  "Genevieve123" "Heinemann123"
+## [1] "Alice123"     "Bob123"       "Charlie123"   "Donny123"     "Emmy123"     
+## [6] "Francine123"  "Genevieve123" "Heinemann123"
 ```
 
 ``` r
@@ -949,8 +938,7 @@ friends[grep("e", friends, ignore.case = TRUE)]
 ```
 
 ```
-## [1] "Alice"     "Charlie"   "Emmy"      "Francine"  "Genevieve"
-## [6] "Heinemann"
+## [1] "Alice"     "Charlie"   "Emmy"      "Francine"  "Genevieve" "Heinemann"
 ```
 
 ``` r
@@ -960,8 +948,8 @@ sub("y", "ie", friends)
 ```
 
 ```
-## [1] "Alice"     "Bob"       "Charlie"   "Donnie"    "Emmie"    
-## [6] "Francine"  "Genevieve" "Heinemann"
+## [1] "Alice"     "Bob"       "Charlie"   "Donnie"    "Emmie"     "Francine" 
+## [7] "Genevieve" "Heinemann"
 ```
 
 ``` r
@@ -971,8 +959,8 @@ sub("n", "m", friends)
 ```
 
 ```
-## [1] "Alice"     "Bob"       "Charlie"   "Domny"     "Emmy"     
-## [6] "Framcine"  "Gemevieve" "Heimemann"
+## [1] "Alice"     "Bob"       "Charlie"   "Domny"     "Emmy"      "Framcine" 
+## [7] "Gemevieve" "Heimemann"
 ```
 
 ``` r
@@ -980,8 +968,8 @@ gsub("n", "m", friends)
 ```
 
 ```
-## [1] "Alice"     "Bob"       "Charlie"   "Dommy"     "Emmy"     
-## [6] "Framcime"  "Gemevieve" "Heimemamm"
+## [1] "Alice"     "Bob"       "Charlie"   "Dommy"     "Emmy"      "Framcime" 
+## [7] "Gemevieve" "Heimemamm"
 ```
 
 ``` r
@@ -1029,8 +1017,8 @@ str_to_title(toupper(friends))
 ```
 
 ```
-## [1] "Alice"     "Bob"       "Charlie"   "Donny"     "Emmy"     
-## [6] "Francine"  "Genevieve" "Heinemann"
+## [1] "Alice"     "Bob"       "Charlie"   "Donny"     "Emmy"      "Francine" 
+## [7] "Genevieve" "Heinemann"
 ```
 
 ``` r
@@ -1039,8 +1027,8 @@ str_pad(friends, width = 12, side = "right", pad = ".")
 ```
 
 ```
-## [1] "Alice......." "Bob........." "Charlie....." "Donny......."
-## [5] "Emmy........" "Francine...." "Genevieve..." "Heinemann..."
+## [1] "Alice......." "Bob........." "Charlie....." "Donny......." "Emmy........"
+## [6] "Francine...." "Genevieve..." "Heinemann..."
 ```
 
 
@@ -1612,7 +1600,7 @@ month(dates2, label = TRUE)
 
 ```
 ## [1] Jul Jul Feb Jan Apr
-## 12 Levels: Jan < Feb < Mar < Apr < May < Jun < Jul < Aug < ... < Dec
+## 12 Levels: Jan < Feb < Mar < Apr < May < Jun < Jul < Aug < Sep < ... < Dec
 ```
 
 ``` r
@@ -1622,7 +1610,7 @@ wday(dates2, label = TRUE, abbr = FALSE)
 
 ```
 ## [1] Friday  Friday  Monday  Sunday  Tuesday
-## 7 Levels: Sunday < Monday < Tuesday < Wednesday < ... < Saturday
+## 7 Levels: Sunday < Monday < Tuesday < Wednesday < Thursday < ... < Saturday
 ```
 
 The first line in each output above is the actual output name. The list of "levels" on each second line just shows the set of all possible values that could have been outputted. This return object is actually something called an ["ordered factor"](https://r4ds.hadley.nz/factors) and is used for ordered categorical variables, but for our purposes can be treated as similar to a character/string vector. (If you want to do any string operations on the output, make sure to convert fully to character first with `as.character()`!)
@@ -1904,23 +1892,32 @@ eruptions_recent
 
 ```
 ## # A tibble: 1,278 × 10
-##    name       start      start_error start_year stop       stop_error
-##    <chr>      <date>           <dbl>      <dbl> <date>          <dbl>
-##  1 Kilauea    2024-06-03           0       2024 2024-06-03          0
-##  2 Atka Volc… 2024-03-27           0       2024 2024-03-27          0
-##  3 Ahyi       2024-01-01           0       2024 2024-03-27          0
-##  4 Kanaga     2023-12-18           0       2023 2023-12-18          0
-##  5 Ruby       2023-09-14           0       2023 2023-09-15          0
-##  6 Shishaldin 2023-07-11           1       2023 2023-11-03          0
-##  7 Mauna Loa  2022-11-27           0       2022 2022-12-10          0
-##  8 Ahyi       2022-11-18           1       2022 2023-06-11          0
-##  9 Kilauea    2021-09-29           0       2021 2023-09-16          0
-## 10 Pavlof     2021-08-05           0       2021 2022-12-07          0
+##    name        start      start_error start_year stop       stop_error stop_year
+##    <chr>       <date>           <dbl>      <dbl> <date>          <dbl>     <dbl>
+##  1 Kilauea     2024-06-03           0       2024 2024-06-03          0      2024
+##  2 Atka Volca… 2024-03-27           0       2024 2024-03-27          0      2024
+##  3 Ahyi        2024-01-01           0       2024 2024-03-27          0      2024
+##  4 Kanaga      2023-12-18           0       2023 2023-12-18          0      2023
+##  5 Ruby        2023-09-14           0       2023 2023-09-15          0      2023
+##  6 Shishaldin  2023-07-11           1       2023 2023-11-03          0      2023
+##  7 Mauna Loa   2022-11-27           0       2022 2022-12-10          0      2022
+##  8 Ahyi        2022-11-18           1       2022 2023-06-11          0      2023
+##  9 Kilauea     2021-09-29           0       2021 2023-09-16          0      2023
+## 10 Pavlof      2021-08-05           0       2021 2022-12-07          0      2022
 ## # ℹ 1,268 more rows
-## # ℹ 4 more variables: stop_year <dbl>, duration <dbl>,
-## #   confirmed <lgl>, vei <dbl>
+## # ℹ 3 more variables: duration <dbl>, confirmed <lgl>, vei <dbl>
 ```
 
+
+``` r
+rep(1,100)
+```
+
+```
+##   [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+##  [38] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+##  [75] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+```
 
 
 

@@ -44,6 +44,7 @@ stuff to add:
 - after paring down samples, ask Derek & Cameron to help with grading evaluation for calibrating papers
 - pare down more, use focused sample to calibrate TAs/instructors if needed?
 - glossary?
+- DT datatable fancy printouts?
 
 
 other notes to self:

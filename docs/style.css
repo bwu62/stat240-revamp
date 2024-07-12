@@ -89,7 +89,7 @@ main ul ul{
 /* increase body width */
 @media (min-width: 1200px) {
     .container-fluid main {
-        max-width: 50rem;
+        max-width: 55rem;
     }
 }
 
