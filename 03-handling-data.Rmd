@@ -927,7 +927,7 @@ There are 2 common ways of creating a new data frame manually: `data.frame()` fr
 ```{r import-tibble}
 # import the tibble library
 # again, since tibble is a core tidyverse package,
-# library(tidyverse) also imports it automatically
+# library(tidyverse) also imports it
 library(tibble)
 ```
 ```{r create-tibble1,echo=F,results='asis'}
