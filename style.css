@@ -154,6 +154,12 @@ pre.message+pre,pre.warning+pre{
   border-top: none !important;
   padding-top: 0 !important;
 }
+pre.message:has(+div.sourceCode),pre.warning:has(+div.sourceCode){
+  border-bottom: 1px solid #eee !important;
+}
+pre.message+div.sourceCode,pre.warning+div.sourceCode{
+  margin-top: 1rem !important;
+}
 
 div.alert pre{
   background-color: rgba(255,255,255,.7) !important;
