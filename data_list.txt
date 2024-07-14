@@ -1,0 +1,5 @@
+data/eruptions_recent.csv
+data/eruptions_recent.delim
+data/eruptions_recent.tsv
+data/eruptions_recent.xlsx
+data/eruptions_recent2.csv
