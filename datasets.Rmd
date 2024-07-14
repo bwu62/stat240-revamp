@@ -62,17 +62,17 @@ eruptions_raw <- read_html("https://volcano.si.edu/volcanolist_countries.cfm?cou
   # remove unnecessary evidence column
   select(-Evidence) %>% 
   # make names nice
-  set_names(c("name","start","stop","confirmed","vei"))
+  set_names(c("volcano","start","stop","confirmed","vei"))
 ```
 
 ```{r}
 eruptions <- eruptions_raw %>% 
   mutate(
-    name = str_replace(name,"°","°"),
+    volcano = str_replace(volcano,"°","°"),
     # convert confirmed? column to logical
     confirmed = if_else(replace_na(confirmed,"NA")=="Confirmed",T,F),
     # replace continuing eruptions with today's date
-    # (continuation last validated 7/11/24)
+    # (continuation last validated 7/14/24)
     stop = if_else(str_detect(stop,"continu"),format(today(),"%Y %b %e"),stop,missing=stop)
   ) %>% 
   # extract date error to new column
@@ -109,7 +109,7 @@ eruptions <- eruptions_raw %>%
     duration = (stop-start)/ddays(1)
   ) %>% 
   # remove intermediate rows
-  select(name,start,start_error,start_year,stop,stop_error,stop_year,duration,confirmed,vei)
+  select(volcano,start,start_error,start_year,stop,stop_error,stop_year,duration,confirmed,vei)
 
 # get just subset for demo
 eruptions_recent <- eruptions %>% 
