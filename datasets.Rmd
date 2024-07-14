@@ -8,15 +8,19 @@ params:
 # Datasets
 
 ```{r setup,include=F}
-knitr::opts_chunk$set(eval=params$run)
+knitr::opts_chunk$set(eval=params$run,cache=T,autodep=T)
 ```
 
 This page contains updating/processing scripts and additional info on all datasets used for the course, as well as some brief discussions of why they were chosen. Datasets are ordered by order of appearance in the notes.
+
+Also, since this is mostly for me to keep track of datasets and processing scripts, it's not as meticulously formatted like the rest of the notes, e.g. lines of code are not kept to ~80 characters, and comments may be brief, again they're for me not you. I may also use more advanced syntax or additional packages. Read at your own discretion.
+
 
 ```{r}
 library(tidyverse)
 library(rvest)
 library(lubridate)
+library(xlsx)
 options(pillar.print_min=20)
 options(width=75)
 ```
@@ -29,7 +33,7 @@ For introducing reading CSVs, I wanted a dataset with all 4 data types we discus
 
 ### Load raw data
 
-```{r, cache=T}
+```{r}
 # load html source code
 eruptions_raw <- read_html("https://volcano.si.edu/volcanolist_countries.cfm?country=United%20States") %>% 
   # extract table code
@@ -94,13 +98,18 @@ eruptions_recent <- eruptions %>%
   filter(start_error <= 30, start_year > 2000, confirmed) %>% 
   select(-contains("_"))
 
-# print
 eruptions_recent
-
-# write out to different formats for reading
-write_csv(eruptions,file="data/eruptions_recent.csv")
 ```
 
+```{r}
+# write out to different formats for reading
+write_csv(eruptions_recent,file="data/eruptions_recent.csv")
+write_csv2(eruptions_recent,file="data/eruptions_recent2.csv")
+write_tsv(eruptions_recent,file="data/eruptions_recent.tsv")
+eruptions_recent %>% as.data.frame %>% print(print.gap=2,width=1000,row.names=F) %>% capture.output(file="data/eruptions_recent.txt")
+write_delim(eruptions_recent,file="data/eruptions_recent.delim",delim="|",na="")
+eruptions_recent %>% as.data.frame %>% write.xlsx(file="data/eruptions_recent.xlsx",row.names=F,showNA=F)
+```
 
 
 
