@@ -326,7 +326,7 @@ n <- length(data2)
 data2[c(n, 2:(n-1), 1)]
 ```
 
-You can of course also have R sort a vector for you automatically. There are two main functions for sorting: `sort()`, which does what you expect and returns a vector with the elements rearranged from lowest to highest (unless you set the argument `decreasing = TRUE` which does the opposite); and `order()`, which simply returns the order the elements would go in (i.e. a vector of positions where they belong) if they were to be sorted lowest to highest (again, unless you set `decreasing = TRUE`).
+You can of course also have R sort a vector for you. There are two main functions for sorting: `sort()`, which does what you expect and returns a vector with the elements rearranged from lowest to highest (unless you set the argument `decreasing = TRUE` which does the opposite); and `order()`, which simply returns the order the elements would go in (i.e. a vector of positions where they belong) if they were to be sorted lowest to highest (again, unless you set `decreasing = TRUE`).
 
 ```{r sort-order}
 # simply sort the data in ascending order
@@ -693,7 +693,7 @@ This is just to warn you that **even though they may print similarly, date objec
 
 #### Parsing dates
 
-In some cases (specifically, if dates in a dataset are already represented in standard ISO-8601 format) R will automatically parse (i.e. convert) the dates for you. In other cases, you may need to manually parse them yourself. We will continue to use lubridate, since it has the most robust and user-friendly functions for working with dates.
+In some cases (specifically, if dates in a dataset are already represented in standard ISO-8601 format) R will automagically parse (i.e. convert) the dates for you. In other cases, you may need to manually parse them yourself. We will continue to use lubridate, since it has the most robust and user-friendly functions for working with dates.
 
 In lubridate, the [parser functions](https://lubridate.tidyverse.org/reference/ymd.html) `mdy()`, `dmy()`, `ymd()` (as well as their rarer siblings `ydm()`, `myd()`, and `dym()`) are used to parse date data into proper date objects. The **only difference between these functions is the *order* they expect to see date components**, e.g. `mdy()` is used when the data is ordered month, day, then year (which is common in the US), and `dmy()` is used when the date data is data is ordered day, month, then year (which is generally preferred outside the US). These functions are **extremely robust and automagically recognize a wide range of formats**, and of course they're all vectorized! Here's a few examples:
 
