@@ -4,4 +4,5 @@
 .Ruserdata
 _bookdown_files
 ./*_files
+./*_cache
 *.rds
