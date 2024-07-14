@@ -1041,14 +1041,14 @@ To demonstrate the basic functionality of these different functions, I've prepar
 
 
 
+
+
 <!--
 
-### Date vectors
+data frame topics
 
- - sequence, math, comparisons, etc.
-
-### Sorting vectors
-
- - examples from all types
+ - dimensions
+ - subsetting
+ - missing
 
 -->
