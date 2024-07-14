@@ -4,17 +4,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>404 page! | STAT 240 Revamp</title>
+<title>(Part*) Handling Data | STAT 240 Revamp</title>
 <meta name="author" content="Bi Cheng Wu, Bret Larget, Cameron Jones">
-<meta name="description" content='This is not the page you’re looking for.   $(function(){   $(".note").addClass("alert alert-warning");  });  $(function(){   $(".tip").addClass("alert alert-success");  });'>
+<meta name="description" content='$(function(){   $(".note").addClass("alert alert-warning");  });  $(function(){   $(".tip").addClass("alert alert-success");  });'>
 <meta name="generator" content="bookdown 0.39.1 with bs4_book()">
-<meta property="og:title" content="404 page! | STAT 240 Revamp">
+<meta property="og:title" content="(Part*) Handling Data | STAT 240 Revamp">
 <meta property="og:type" content="book">
-<meta property="og:url" content="https://bwu62.github.io/stat240-revamp/404.html">
-<meta property="og:description" content='This is not the page you’re looking for.   $(function(){   $(".note").addClass("alert alert-warning");  });  $(function(){   $(".tip").addClass("alert alert-success");  });'>
+<meta property="og:url" content="https://bwu62.github.io/stat240-revamp/part-handling-data.html">
+<meta property="og:description" content='$(function(){   $(".note").addClass("alert alert-warning");  });  $(function(){   $(".tip").addClass("alert alert-success");  });'>
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="404 page! | STAT 240 Revamp">
-<meta name="twitter:description" content='This is not the page you’re looking for.   $(function(){   $(".note").addClass("alert alert-warning");  });  $(function(){   $(".tip").addClass("alert alert-success");  });'>
+<meta name="twitter:title" content="(Part*) Handling Data | STAT 240 Revamp">
+<meta name="twitter:description" content='$(function(){   $(".note").addClass("alert alert-warning");  });  $(function(){   $(".tip").addClass("alert alert-success");  });'>
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Roboto_Mono-0.4.9/font.css" rel="stylesheet">
@@ -53,8 +53,8 @@
 <li><a class="" href="index.html">Welcome</a></li>
 <li><a class="" href="setup.html"><span class="header-section-number">1</span> Setup</a></li>
 <li><a class="" href="rstudio-intro.html"><span class="header-section-number">2</span> Intro to R/Rstudio</a></li>
-<li><a class="" href="data-vectors.html"><span class="header-section-number">3</span> Data Vectors</a></li>
-<li><a class="" href="data-frames.html"><span class="header-section-number">4</span> Data Frames</a></li>
+<li><a class="active" href="part-handling-data.html">(Part*) Handling Data</a></li>
+<li><a class="" href="vectors.html"><span class="header-section-number">3</span> Vectors</a></li>
 <li class="book-part">Appendix</li>
 <li><a class="" href="datasets.html"><span class="header-section-number">A</span> Datasets</a></li>
 </ul>
@@ -64,10 +64,9 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="page" class="section level1">
-<h1>404 page!<a class="anchor" aria-label="anchor" href="#page"><i class="fas fa-link"></i></a>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="part-handling-data" class="section level1 unnumbered">
+<h1>(Part*) Handling Data<a class="anchor" aria-label="anchor" href="#part-handling-data"><i class="fas fa-link"></i></a>
 </h1>
-<p>This is not the page you’re looking for.</p>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@xiee/utils/js/external-link.min.js" defer></script><script>
   $(function(){
@@ -77,10 +76,20 @@
     $(".tip").addClass("alert alert-success");
   });
 </script><div class="chapter-nav">
-<div class="empty"></div>
-<div class="empty"></div>
+<div class="prev"><a href="rstudio-intro.html"><span class="header-section-number">2</span> Intro to R/Rstudio</a></div>
+<div class="next"><a href="vectors.html"><span class="header-section-number">3</span> Vectors</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    </div>
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#part-handling-data">(Part*) Handling Data</a></li></ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/bwu62/stat240-revamp/blob/master/03-handling-data.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/bwu62/stat240-revamp/edit/master/03-handling-data.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
 
 </div>
 </div> <!-- .container -->

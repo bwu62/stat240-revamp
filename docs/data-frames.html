@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 4 Data Frames | STAT 240 Revamp</title>
+<meta name="author" content="Bi Cheng Wu, Bret Larget, Cameron Jones">
+<meta name="description" content="Moving on from vectors, the next most important data structure in R is the data frame. Think of a data frame as similar to a matrix, but (ideally) each column is a vector of a single type...">
+<meta name="generator" content="bookdown 0.39.1 with bs4_book()">
+<meta property="og:title" content="Chapter 4 Data Frames | STAT 240 Revamp">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://bwu62.github.io/stat240-revamp/data-frames.html">
+<meta property="og:description" content="Moving on from vectors, the next most important data structure in R is the data frame. Think of a data frame as similar to a matrix, but (ideally) each column is a vector of a single type...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 4 Data Frames | STAT 240 Revamp">
+<meta name="twitter:description" content="Moving on from vectors, the next most important data structure in R is the data frame. Think of a data frame as similar to a matrix, but (ideally) each column is a vector of a single type...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Roboto_Mono-0.4.9/font.css" rel="stylesheet">
+<script src="libs/bs3compat-0.7.0.9000/transition.js"></script><script src="libs/bs3compat-0.7.0.9000/tabs.js"></script><script src="libs/bs3compat-0.7.0.9000/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-E0YDB40HWY"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-E0YDB40HWY');
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">STAT 240 Revamp</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Welcome</a></li>
+<li><a class="" href="setup.html"><span class="header-section-number">1</span> Setup</a></li>
+<li><a class="" href="rstudio-intro.html"><span class="header-section-number">2</span> Intro to R/Rstudio</a></li>
+<li><a class="" href="data-vectors.html"><span class="header-section-number">3</span> Data Vectors</a></li>
+<li><a class="active" href="data-frames.html"><span class="header-section-number">4</span> Data Frames</a></li>
+<li class="book-part">Appendix</li>
+<li><a class="" href="datasets.html"><span class="header-section-number">A</span> Datasets</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/bwu62/stat240-revamp">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="data-frames" class="section level1" number="4">
+<h1>
+<span class="header-section-number">4</span> Data Frames<a class="anchor" aria-label="anchor" href="#data-frames"><i class="fas fa-link"></i></a>
+</h1>
+<p>Moving on from vectors, the next most important data structure in R is the data frame. Think of a data frame as similar to a matrix, but (ideally) <strong>each column is a vector of a single type representing a variable or attribute, and each row is an observation in your sample</strong>.</p>
+<p>It’s actually really helpful to think of a data frame as a collection of parallel vectors with the same length, each to a column with its own type. E.g. suppose you survey a sample of college students; maybe you’d have a sex column of character type, a GPA column of numeric type, a birthday column of date type, and a column for if they have declared a major with logical type.</p>
+<div id="creating-data-frames" class="section level2" number="4.1">
+<h2>
+<span class="header-section-number">4.1</span> Creating data frames<a class="anchor" aria-label="anchor" href="#creating-data-frames"><i class="fas fa-link"></i></a>
+</h2>
+<p>There are 2 common ways of creating a new data frame manually: <code><a href="https://rdrr.io/r/base/data.frame.html">data.frame()</a></code> from base R, or <code><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble()</a></code> from the <a href="https://tibble.tidyverse.org/">tibble</a> package, another of the core Tidyverse packages. They are extremely similar, but we recommend <code><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble()</a></code> due to some nice extra features such as better printing, referencing other columns during creation, and stricter subsetting rules. Example:</p>
+<div class="sourceCode" id="cb417"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># import the tibble and lubridate libraries</span></span>
+<span><span class="co"># again, tibble is core tidyverse, so library(tidyverse) will also work</span></span>
+<span><span class="co"># but lubridate is not core so needs to be imported manually</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/">tibble</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://lubridate.tidyverse.org">lubridate</a></span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb418"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># manually create an example data frame</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
+<span>  name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Alice"</span>, <span class="st">"Bob"</span>, <span class="st">"Charlie"</span><span class="op">)</span>,</span>
+<span>  sex <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"F"</span>, <span class="st">"M"</span>, <span class="st">"M"</span><span class="op">)</span>,</span>
+<span>  birthday <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html">mdy</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"7/14/03"</span>, <span class="st">"7/4/99"</span>, <span class="st">"10/31/06"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">floor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/now.html">today</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">birthday</span><span class="op">)</span><span class="op">/</span><span class="fl">365.24</span><span class="op">)</span>,</span>
+<span>  declared_major <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co"># print df</span></span>
+<span><span class="va">df</span></span></code></pre></div>
+<pre><code>## # A tibble: 3 × 6
+##   name    sex   birthday     age declared_major school    
+##   &lt;chr&gt;   &lt;chr&gt; &lt;date&gt;     &lt;dbl&gt; &lt;lgl&gt;          &lt;chr&gt;     
+## 1 Alice   F     2003-07-14    21 TRUE           UW-Madison
+## 2 Bob     M     1999-07-04    25 TRUE           UW-Madison
+## 3 Charlie M     2006-10-31    17 FALSE          UW-Madison</code></pre>
+<p>Note the following:</p>
+<ul>
+<li>The syntax inside <code><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble()</a></code> is always <code>column_name = vector_of_data, next_column_name = next_vector_of_data, ...</code> where each vector must be the same length.</li>
+<li>The vectors do not have to be pre-created; you canc reate them as you go along.</li>
+<li>You can reference another column immediately after creating it inside the function, e.g. <code>birthday</code> was created, and then immediately used on the next line to help create <code>age</code> (by the way <code>age</code> here is approximately computed as number of days since birth divided by 365.24, the approximate number of days in a year, then rounded down following convention).</li>
+<li>Data frames can, and almost always do contain many columns each with a different type. However, as usual a single column—which is still a vector!—can only contain a SINGLE type of data inside it, e.g. you cannot have a column with both numbers and characters simultaneously.</li>
+<li>Printing the df by either just writing it on a new line, or with the <code><a href="https://rdrr.io/r/base/print.html">print()</a></code> function (same thing) will show not only the first few rows, but also other info like
+<ul>
+<li>column (and row) names,</li>
+<li>number of rows and columns (displayed as rows x cols),</li>
+<li>and the type of each column (dbl, chr, lgl, date, or others beyond our scope)</li>
+</ul>
+</li>
+<li>You can create a column of constants by recycling a single value
+<ul>
+<li>Note: by design, <code><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble()</a></code> will ONLY recycle length-1 vectors. This is to help avoid errors and improve syntax legibility.</li>
+</ul>
+</li>
+</ul>
+</div>
+<div id="importing-data-frames" class="section level2" number="4.2">
+<h2>
+<span class="header-section-number">4.2</span> Importing data frames<a class="anchor" aria-label="anchor" href="#importing-data-frames"><i class="fas fa-link"></i></a>
+</h2>
+<p>Of course, in practice you don’t usually create data frames manually like this, but rather import them from data files. As always, there are base R ways for doing this, but we will continue to recommend Tidyverse syntax due to its better features and design.</p>
+<p>There are a million different data formats, but we will only cover 3 main formats that are most commonly encountered in data science: CSV, or comma separated value files; TSV/TXT tables, which are either tab or space separated; and XLS(X), which are Excel (or similar spreadsheet software) data files. Notably, we do not cover databases (like SQL or its derivatives) or non-rectangular data formats (like JSON or XML) again due to limitations of time/space.</p>
+<div id="aside-file-formats-extensions" class="section level3" number="4.2.1">
+<h3>
+<span class="header-section-number">4.2.1</span> Aside: file formats &amp; extensions<a class="anchor" aria-label="anchor" href="#aside-file-formats-extensions"><i class="fas fa-link"></i></a>
+</h3>
+<p>First, a small aside. File formats (or types) and file extensions are commonly conflated, but the distinction is important.</p>
+<ul>
+<li>File <strong>format</strong> refers to the internal structure of the contents. Common formats include simple text (which can be encoded using a variety of <a href="https://dsc.gmu.edu/tutorials-data/tutorial-character-encoding/">different encodings</a> with ASCII and Unicode UTF-8 being the most common), other more complex documents like PDFs or DOCs, images and videos, compressed archives, binary executables, or other specialized (often proprietary) formats.</li>
+<li>In contrast, file <strong>extensions</strong> are just characters added to the end of the name of a file for our convenience and to hint to computers (and users) what you might expect to find inside the contents of the file. It has no bearing on the actual file format contained inside.</li>
+</ul>
+<p>Many extensions may in fact be the same file format, e.g. .Rmd, .html, .csv, .txt, and many more are all examples of extensions that are actually just simple text files (under some encoding), which is why they can all be opened with any text editor. Conversely, some formats can be stored with a variety of different extensions, e.g. MPEG-4 is a versatile multimedia “container” format and may be stored not only as .mp4 but also .m4a, .m4b, .m4p, .m4r, or .m4v depending on context.</p>
+<p>Again, the extension only exists to “hint” at the contents of a file. You can store a text file with a .mp4 extension if you want. Your computer will then suggest you open it with a video player which will fail, but you can force it to open in a text editor and it will work just fine. Remember <strong>file names and file contents are totally separate things</strong> and need not have any bearing on each other.</p>
+<p>Some important takeaways from all this:</p>
+<ul>
+<li>Some data “formats” (like CSV, TSV, JSON, or XML) are really just simple text files (similar to the .txt files often created by text editor programs). In this class, when we say “CSV” we generally refer to the specific way the text is formatted (i.e. values separated by commas) inside the file, not just the extension.</li>
+<li>Some data formats (like XLS(X) or databases) are not simple text files but specialized formats, and often need different treatment.</li>
+<li>Just changing the extension of a file does NOT change the contents. E.g. changing a .csv extension to .zip does NOT create a valid zip file, no more than painting stripes on a horse turns it into a zebra.</li>
+</ul>
+<div class="note">
+<p>Today, many systems by default hide file extensions, e.g. a file that’s actually named <code>data.csv</code> may appear to the user as just named <code>data</code>. This can cause problems, because if a user isn’t aware of this and tries to rename the file to <code>data.csv</code> it may actually become <code>data.csv.csv</code>. This is a common cause of knit-fail that we see.</p>
+<p>We <strong>highly recommended you force your device to always show extensions</strong> which can help avoid these problems. Instructions <a href="https://www.howtogeek.com/205086/beginner-how-to-make-windows-show-file-extensions/">for Windows</a> and <a href="https://support.apple.com/guide/mac-help/show-or-hide-filename-extensions-on-mac-mchlp2304/mac">for Macs</a>.</p>
+</div>
+</div>
+<div id="importing-functions" class="section level3" number="4.2.2">
+<h3>
+<span class="header-section-number">4.2.2</span> Importing functions<a class="anchor" aria-label="anchor" href="#importing-functions"><i class="fas fa-link"></i></a>
+</h3>
+<p>For text-format data files, we once again turn to <a href="https://readr.tidyverse.org/">readr</a> which has a suite of functions for importing them, of which we will only focus on a few:</p>
+<ul>
+<li>
+<code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a></code> is used to read in CSV files where columns of data are separated by commas,</li>
+<li>
+<code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_tsv()</a></code> is used to read in files where columns of data are separated by tabs,</li>
+<li>
+<code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_delim()</a></code> is the general form of these <code>read_...</code> functions and can be used to read in files with any other type of separator.</li>
+</ul>
+<p>One additional non-text format will be covered in this course: XLS(X) spreadsheet data, commonly generated by Excel or similar spreadsheet software. For these, we have a different function from Tidyverse’s non-core <a href="https://readxl.tidyverse.org">readxl</a> package:</p>
+<ul>
+<li>
+<a href="https://rdrr.io/cran/readxl/man/read_excel.html"><code class="sourceCode r"><span class="fu">read_excel</span>()</code></a> can be used to read in both XLS and XLSX spreadsheet data</li>
+</ul>
+<div class="note">
+<p>Note the underscores in the function names. E.g. <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a></code> which is from readr is NOT the same as <code><a href="https://rdrr.io/r/utils/read.table.html">read.csv()</a></code> which is a base R function. They are similar, but readr’s <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a></code> has some minor improvements in speed and consistency so is recommended by this class.</p>
+<p>Also note that if you do not have readr (or tidyverse) loaded, attempting to <span class="k">TAB</span> autocomplete the <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a></code> function will instead give you <code><a href="https://rdrr.io/r/utils/read.table.html">read.csv()</a></code> so again, remember to set your working directory and load necessary libraries whenever (re)opening Rstudio before starting/resuming your work.</p>
+</div>
+</div>
+<div id="eruptions-example" class="section level3" number="4.2.3">
+<h3>
+<span class="header-section-number">4.2.3</span> Eruptions example<a class="anchor" aria-label="anchor" href="#eruptions-example"><i class="fas fa-link"></i></a>
+</h3>
+<p>To demonstrate the basic functionality of these different functions, I’ve prepared and exported a dataset on 21<sup>st</sup> century volcanic eruptions in the United States from the <a href="https://volcano.si.edu/volcanolist_countries.cfm?country=United%20States">Smithsonian</a> to all the formats listed above so we can practice reading them in from any initial format:</p>
+<ul>
+<li><a href="data/eruptions_recent.csv"><code>eruptions_recent.csv</code></a></li>
+<li><a href="data/eruptions_recent.tsv"><code>eruptions_recent.tsv</code></a></li>
+<li><a href="data/eruptions_recent.delim"><code>eruptions_recent.delim</code></a></li>
+<li><a href="data/eruptions_recent.xlsx"><code>eruptions_recent.xlsx</code></a></li>
+</ul>
+<p>For example, here’s the first 6 lines of the <a href="data/eruptions_recent.csv"><code>eruptions_recent.csv</code></a> CSV file (for each eruption, we have the volcano name, start and stop dates, duration in days, if its certainty is confirmed, and the VEI or volcano explosivity index).</p>
+<pre class="csv"><code>volcano,start,stop,duration,confirmed,vei
+Kilauea,2024-06-03,2024-06-03,0,TRUE,NA
+Atka Volcanic Complex,2024-03-27,2024-03-27,0,TRUE,NA
+Ahyi,2024-01-01,2024-03-27,86,TRUE,NA
+Kanaga,2023-12-18,2023-12-18,0,TRUE,1
+Ruby,2023-09-14,2023-09-15,1,TRUE,1</code></pre>
+<p>If you have a link to a dataset, you can directly pass it into <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a></code> and it will automagically download the file to your system’s temp folder and read it in. Make sure to save it into a data frame with a sensible name. It’s also usually a good idea to print out the first few lines to check the result and see if everything worked without error.</p>
+<div class="sourceCode" id="cb421"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># import readr</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readr.tidyverse.org">readr</a></span><span class="op">)</span></span>
+<span><span class="co"># read in CSV file from link</span></span>
+<span><span class="va">eruptions_recent</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span></span>
+<span>  <span class="st">"https://bwu62.github.io/stat240-revamp/data/eruptions_recent.csv"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<pre class="message"><code>## Rows: 71 Columns: 6
+## ── Column specification ───────────────────────────────────────────────────
+## Delimiter: ","
+## chr  (1): volcano
+## dbl  (2): duration, vei
+## lgl  (1): confirmed
+## date (2): start, stop
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<div class="sourceCode" id="cb423"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># print result to check</span></span>
+<span><span class="va">eruptions_recent</span></span></code></pre></div>
+<pre><code>## # A tibble: 71 × 6
+##    volcano               start      stop       duration confirmed   vei
+##    &lt;chr&gt;                 &lt;date&gt;     &lt;date&gt;        &lt;dbl&gt; &lt;lgl&gt;     &lt;dbl&gt;
+##  1 Kilauea               2024-06-03 2024-06-03        0 TRUE         NA
+##  2 Atka Volcanic Complex 2024-03-27 2024-03-27        0 TRUE         NA
+##  3 Ahyi                  2024-01-01 2024-03-27       86 TRUE         NA
+##  4 Kanaga                2023-12-18 2023-12-18        0 TRUE          1
+##  5 Ruby                  2023-09-14 2023-09-15        1 TRUE          1
+##  6 Shishaldin            2023-07-11 2023-11-03      115 TRUE          3
+##  7 Mauna Loa             2022-11-27 2022-12-10       13 TRUE          0
+##  8 Ahyi                  2022-11-18 2023-06-11      205 TRUE          1
+##  9 Kilauea               2021-09-29 2023-09-16      717 TRUE          0
+## 10 Pavlof                2021-08-05 2022-12-07      489 TRUE          2
+## # ℹ 61 more rows</code></pre>
+<p>Several things to note here:</p>
+<ul>
+<li>Some diagnostic messages will be printed while reading, as well as any warnings/errors if it encounters anything unsual (no errors/warnings are observed here).</li>
+<li>While reading in, R will try to intelligently guess the data types of each column if they’re in a standard format. You can see here that since all columns in the CSV were already very neat and written in a standard format (e.g. dates in YYYY-MM-DD, numbers and logicals written in common syntax, missing values written as NA), everything automagically converted: <code>name</code> is left as a character, <code>start</code> and <code>stop</code> parsed to dates, <code>duration</code> and <code>vei</code> parsed to numeric, and <code>confirmed</code> became logical.
+<ul>
+<li>If columns are not written in a standard format, this may not work as well (if at all) and you may need to do more data cleaning yourself, which we will touch on later.</li>
+</ul>
+</li>
+<li>You can run just the data frame name again to print the first few rows. This is equivalent to running <code>print(eruptions_recent)</code>.
+<ul>
+<li>Printing is often a useful way to double check for errors.</li>
+</ul>
+</li>
+<li>If you look in your <a href="https://i.imgur.com/Xo5HE2U.png">Environment tab</a> now, you should see the loaded data frame.
+<ul>
+<li>Here, you can click on the arrow to see a list of all columns, as well as their names, types, and the first few values.</li>
+<li>You can also click here on the object name itself here to open a new tab with a full spreadsheet-like view of the entire data frame, where you can inspect the data frame, and even search for values and sort by columns (note: sorting here is just for preview and does not affect the underlying object).</li>
+</ul>
+</li>
+</ul>
+<!--
+
+data frame topics
+
+ - dimensions
+ - subsetting
+ - missing
+
+-->
+</div>
+</div>
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/@xiee/utils/js/external-link.min.js" defer></script><script>
+  $(function(){
+    $(".note").addClass("alert alert-warning");
+  });
+  $(function(){
+    $(".tip").addClass("alert alert-success");
+  });
+</script><div class="chapter-nav">
+<div class="prev"><a href="data-vectors.html"><span class="header-section-number">3</span> Data Vectors</a></div>
+<div class="next"><a href="datasets.html"><span class="header-section-number">A</span> Datasets</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#data-frames"><span class="header-section-number">4</span> Data Frames</a></li>
+<li><a class="nav-link" href="#creating-data-frames"><span class="header-section-number">4.1</span> Creating data frames</a></li>
+<li>
+<a class="nav-link" href="#importing-data-frames"><span class="header-section-number">4.2</span> Importing data frames</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#aside-file-formats-extensions"><span class="header-section-number">4.2.1</span> Aside: file formats &amp; extensions</a></li>
+<li><a class="nav-link" href="#importing-functions"><span class="header-section-number">4.2.2</span> Importing functions</a></li>
+<li><a class="nav-link" href="#eruptions-example"><span class="header-section-number">4.2.3</span> Eruptions example</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/bwu62/stat240-revamp/blob/master/04-data-frames.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/bwu62/stat240-revamp/edit/master/04-data-frames.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, Bret Larget, Cameron Jones. It was last built on 2024-07-14.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

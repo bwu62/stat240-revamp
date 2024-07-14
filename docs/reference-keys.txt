@@ -35,8 +35,7 @@ workflow
 working-directory
 knitting-v.-console-execution
 tips
-handling-data
-vectors
+data-vectors
 types-of-vectors
 numeric-vectors
 logical-vectors
