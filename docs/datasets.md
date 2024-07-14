@@ -25,13 +25,22 @@ if(!dir.exists("data/")) dir.create("data/")
 
 ## List of datasets
 
-Here's a convenient list of all dataset files generated. Note that some files may automatically open a download prompt while others may not. To force download, right click on a file link and choose "Save link as". Alternatively, you can also 
+Here's a convenient list of all dataset files generated. Note that some files may automatically open a download prompt while others may not. To force download, right click on a file link and choose "Save link as".
 
  - [`eruptions_recent.csv`](data/eruptions_recent.csv)
  - [`eruptions_recent.delim`](data/eruptions_recent.delim)
  - [`eruptions_recent.tsv`](data/eruptions_recent.tsv)
  - [`eruptions_recent.xlsx`](data/eruptions_recent.xlsx)
  - [`eruptions_recent2.csv`](data/eruptions_recent2.csv)
+
+Alternatively, you can also run the following line, which will **download ALL files above to your current working directory**. It's recommended to first set your working directory to an appropriate place before running this, e.g. to the `data/` directory in your `STAT240/` course folder.
+
+
+``` r
+lapply(readLines("https://bwu62.github.io/stat240-revamp/data_list.txt"),
+       \(.)download.file(.,basename(.)))
+```
+
 
 
 ## Eruptions
