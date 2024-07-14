@@ -122,7 +122,6 @@ eruptions_recent
 ```{r}
 # write out to different formats for reading
 write_csv(eruptions_recent,file="data/eruptions_recent.csv")
-write_csv2(eruptions_recent,file="data/eruptions_recent2.csv")
 write_tsv(eruptions_recent,file="data/eruptions_recent.tsv")
 write_delim(eruptions_recent,file="data/eruptions_recent.delim",delim="|",na="")
 eruptions_recent %>% as.data.frame %>% write.xlsx(file="data/eruptions_recent.xlsx",row.names=F,showNA=F)
