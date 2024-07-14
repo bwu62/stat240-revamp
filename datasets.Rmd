@@ -1,14 +1,12 @@
----
-params:
-  run: true
----
+
 
 # (APPENDIX) Appendix {.unnumbered}
 
 # Datasets
 
 ```{r setup,include=F}
-knitr::opts_chunk$set(eval=params$run,cache=T,autodep=T)
+run_and_cache = T
+knitr::opts_chunk$set(eval=run_and_cache,cache=run_and_cache)
 ```
 
 This page contains updating/processing scripts and additional info on all datasets used for the course, as well as some brief discussions of why they were chosen. Datasets are ordered by order of appearance in the notes.
@@ -23,7 +21,19 @@ library(lubridate)
 library(xlsx)
 options(pillar.print_min=20)
 options(width=75)
+if(!dir.exists("data/")) dir.create("data/")
 ```
+
+
+## List of datasets
+
+Here's a convenient list of all dataset files generated.
+
+```{r,echo=F,results='asis'}
+files = stringr::str_subset(list.files('data'),"index\\.html",negate=T)
+stringr::str_glue(" - [`{files}`](data/{files})")
+```
+
 
 
 ## Eruptions
@@ -51,6 +61,7 @@ eruptions_raw <- read_html("https://volcano.si.edu/volcanolist_countries.cfm?cou
 ```{r}
 eruptions <- eruptions_raw %>% 
   mutate(
+    name = str_replace(name,"°","°"),
     # convert confirmed? column to logical
     confirmed = if_else(replace_na(confirmed,"NA")=="Confirmed",T,F),
     # replace continuing eruptions with today's date
@@ -106,10 +117,18 @@ eruptions_recent
 write_csv(eruptions_recent,file="data/eruptions_recent.csv")
 write_csv2(eruptions_recent,file="data/eruptions_recent2.csv")
 write_tsv(eruptions_recent,file="data/eruptions_recent.tsv")
-eruptions_recent %>% as.data.frame %>% print(print.gap=2,width=1000,row.names=F,right=F) %>% capture.output(file="data/eruptions_recent.txt")
 write_delim(eruptions_recent,file="data/eruptions_recent.delim",delim="|",na="")
 eruptions_recent %>% as.data.frame %>% write.xlsx(file="data/eruptions_recent.xlsx",row.names=F,showNA=F)
+
+# originally line below was b/c I wanted to prep example for read_table but turns out
+# its behavior changed recentlyish https://www.tidyverse.org/blog/2021/07/readr-2-0-0/
+# it no longer works well here, and read.table needs to be used instead
+# (alternatively read_fwf from readr also works but that seems beyond scope)
+# but I don't want to confuse students by introducing a mix of readr + base R
+# so quitting this example, need to reevaluate in the future importance
+# of reading whitespace aligned table formats
+
+# eruptions_recent %>% as.data.frame %>% print(print.gap=2,width=1000,row.names=F,right=F) %>% capture.output() %>% 
+#   str_replace("<NA>","NA  ") %>% str_replace("^ *",'"') %>% str_replace("( {2,})",'"\\1') %>% str_replace('"name"',"name  ") %>% write_lines(file="data/eruptions_recent.txt")
 ```
-
-
 
