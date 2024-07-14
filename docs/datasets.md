@@ -125,7 +125,7 @@ eruptions_recent
 write_csv(eruptions_recent,file="data/eruptions_recent.csv")
 write_csv2(eruptions_recent,file="data/eruptions_recent2.csv")
 write_tsv(eruptions_recent,file="data/eruptions_recent.tsv")
-eruptions_recent %>% as.data.frame %>% print(print.gap=2,width=1000,row.names=F) %>% capture.output(file="data/eruptions_recent.txt")
+eruptions_recent %>% as.data.frame %>% print(print.gap=2,width=1000,row.names=F,right=F) %>% capture.output(file="data/eruptions_recent.txt")
 write_delim(eruptions_recent,file="data/eruptions_recent.delim",delim="|",na="")
 eruptions_recent %>% as.data.frame %>% write.xlsx(file="data/eruptions_recent.xlsx",row.names=F,showNA=F)
 ```

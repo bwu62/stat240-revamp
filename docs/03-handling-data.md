@@ -589,6 +589,7 @@ letters[-1:10]
 
 ### Sorting/reordering
 
+
 Sometimes, you may need to sort/reorder vectors. We already saw in the previous section you can reorder vectors by subsetting with a vector of positions. If the vector of positions exhausts the vector without repeating (i.e. returns each element of the vector exactly once), the result is a reordering of the vector.
 
 
@@ -726,6 +727,7 @@ In general, R inputs and outputs are totally independent objects with no special
 
 ### Character vectors
 
+
 The [`letters`{.R}](https://rdrr.io/r/base/Constants.html) vector in the last section was one example of a **character vector**. You can create a character vector also with `c()` or `rep()` which we've seen before. When creating characters, you can use either the single [`'`]{.k} or double [`"`]{.k} quote character, no difference.
 
 
@@ -752,7 +754,10 @@ groups
 ```
 
 
+
+
 #### Basic string functions
+
 
 Base R has a number of common functions for working with strings: `nchar()` for getting the number of characters, `tolower()`/`toupper()` to convert case, `substr()` for extracting substrings, `paste()`/`paste0()` to concatenate (e.g. "glue" together) strings, and `strrep()` for repeating the characters in a string.
 
@@ -898,7 +903,9 @@ strrep(friends, 1:8)
 
 
 
+
 #### Pattern string functions
+
 
 There are also functions for working with patterns. You don't need to master these functions, but a few basic demos of them may prove helpful. Primarily, we have `grep()`/`grepl()` for pattern matching, and `sub()`/`gsub()` for pattern replacing. The prefix/suffix matching `startsWith()`/`endsWith()` are also occasionally useful.
 
@@ -987,7 +994,9 @@ In this class we will NOT cover regular expressions to any real detail again due
 
 
 
+
 #### Additional stringr functions
+
 
 [stringr](https://stringr.tidyverse.org), one of the [core Tidyverse](https://www.tidyverse.org/packages/#core-tidyverse) packages, contains an alternative set of functions for working with strings. Many of these are similar in purpose to base R versions (although some have subtle differences). E.g. `str_length()` is the same as `nchar()`, `str_to_lower()`/`str_to_upper()` replicate `tolower()`/`toupper()`, `str_replace()` is similar to `sub()`, `str_sub()` extends `substr()`, etc. Here's a full list of these [doppelgänger stringr functions](https://stringr.tidyverse.org/articles/from-base.html).
 
@@ -1033,7 +1042,9 @@ str_pad(friends, width = 12, side = "right", pad = ".")
 
 
 
+
 #### Comparing strings
+
 
 Strings, like numbers, can also be logically compared in R using the same `==`, `!=`, `<`, `<=`, `>`, `>=` operators (also all vectorized of course). Checking equality is self-explanatory, and **inequalities evaluate by dictionary sorting order**, i.e. what order they might appear in in a dictionary, except generalized to include not just letters but also number and symbols.
 
@@ -1220,6 +1231,7 @@ c(min(state.name), max(state.name))
 
 ### Coercion (converting types)
 
+
 Sometimes, we read data in and it may need to be converted before it's usable. E.g. let's say you read in a list of prices from some catalog and you get the following character vector:
 
 
@@ -1294,6 +1306,7 @@ See the help page for `parse_number()` for more examples and usage notes.
 
 
 ### Date vectors
+
 
 Finally, let's talk about date vectors (note we are not talking about date+time values, just dates). In R, dates are actually stored as a number, representing the [number of days after January 1^st^ 1970](https://rdrr.io/r/base/Dates.html), which is used as a reference date called the [Epoch](https://en.wikipedia.org/wiki/Epoch_(computing)).
 
@@ -1407,6 +1420,7 @@ This is just to warn you that **even though they may print similarly, date objec
 
 #### Parsing dates
 
+
 In some cases (specifically, if dates in a dataset are already represented in standard ISO-8601 format) R will automatically parse (i.e. convert) the dates for you. In other cases, you may need to manually parse them yourself. We will continue to use lubridate, since it has the most robust and user-friendly functions for working with dates.
 
 In lubridate, the [parser functions](https://lubridate.tidyverse.org/reference/ymd.html) `mdy()`, `dmy()`, `ymd()` (as well as their rarer siblings `ydm()`, `myd()`, and `dym()`) are used to parse date data into proper date objects. The **only difference between these functions is the *order* they expect to see date components**, e.g. `mdy()` is used when the data is ordered month, day, then year (which is common in the US), and `dmy()` is used when the date data is data is ordered day, month, then year (which is generally preferred outside the US). These functions are **extremely robust and automagically recognize a wide range of formats**, and of course they're all vectorized! Here's a few examples:
@@ -1474,6 +1488,7 @@ decimal_date(dates2)
 
 #### Aside: R's calendar
 
+
 Quick aside. **R has an *extremely* robust calendar**, so you don't need to worry about "babysitting" R. Notably, R knows exactly [which years are leap and which aren't](https://www.mathsisfun.com/leap-years.html).
 
 
@@ -1532,6 +1547,7 @@ leap_year(c(1900, 2000, 2024, 2100))
 
 
 #### Get/set components
+
 
 Lubridate provides many get/set functions (often called getters and setters) for getting and setting different components (i.e. properties) associated with a date. Some common ones include `year()`, `month()`, `day()`, `wday()` (for day of the week), and `quarter()`.
 
@@ -1649,6 +1665,7 @@ This works with all the getters above, feel free to experiment more with this on
 
 #### Date math
 
+
 Since dates are represented internally as number of days since a reference point, doing math with dates turns out to be extremely easy. You can add/subtract days, make sequences, and run logical comparisons.
 
 
@@ -1743,6 +1760,7 @@ date %in% dates2
 
 
 #### Printing dates
+
 
 As a final note, let's briefly discuss printing dates. You can use `format()` to print dates in a pretty way. Different ways of printing each component are represented using `%...` codes. Examples:
 
@@ -1841,6 +1859,7 @@ Note the following:
 
 ### Importing data frames
 
+
 Of course, in practice you don't usually create data frames manually like this, but rather import them from data files. As always, there are base R ways for doing this, but we will continue to recommend Tidyverse syntax due to its better features and design.
 
 There are a million different data formats, but we will only cover 3 main formats that are most commonly encountered in data science: CSV, or comma separated value files; TSV/TXT tables, which are either tab or space separated; and XLS(X), which are Excel (or similar spreadsheet software) data files. Notably, we do not cover databases (like SQL or its derivatives) or non-rectangular data formats (like JSON or XML) again due to limitations of time/space.
@@ -1849,6 +1868,7 @@ There are a million different data formats, but we will only cover 3 main format
 
 
 #### Aside: file formats & extensions
+
 
 First, a small aside. File formats (or types) and file extensions are commonly conflated, but the distinction is important.
 
@@ -1876,13 +1896,18 @@ We **highly recommended you force your device to always show extensions** which 
 
 #### Importing data
 
-For text data, we once again turn to [readr](https://readr.tidyverse.org/) which has a suite of functions for importing them, of which we will only focus on a few:
+
+For text-format data files, we once again turn to [readr](https://readr.tidyverse.org/) which has a suite of functions for importing them, of which we will only focus on a few:
 
  - `read_csv()` is used to read in CSV files where columns of data are separated by commas,
  - `read_tsv()` and `read_table()` are used to read in files where columns of data are separated by tabs or by whitespace (which can include varying numbers of tabs, spaces, and some other special space-like characters),
  - `read_delim()` is the general form of these `read_...` functions and can be used to read in files with any other type of separator.
 
-One additional
+One additional non-text format will be covered in this course: XLS(X) spreadsheet data, commonly generated by Excel or similar spreadsheet software. These are encoded differently and cannot be opened by simple text editors, but can be easily read in using the `read_excel()` function from the [readxl](https://readxl.tidyverse.org) package, which is installed with Tidyverse but is NOT a core package, i.e. it must always be loaded explicitly.
+
+To demonstrate the basic functionality of all these functions, I've prepared a dataset
+
+
 
 
 
