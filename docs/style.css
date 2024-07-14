@@ -44,6 +44,14 @@ pre code {
 /* underline links... */
 main p a, main li a, div.popover a{
   text-decoration: underline;
+  text-decoration-thickness: from-font;
+}
+p code.sourceCode span,li code.sourceCode span{
+  color: #212529 !important;
+}
+p a:has(>code.sourceCode),li a:has(>code.sourceCode){
+  color: #212529 !important;
+  text-decoration-color: #ccc;
 }
 
 /* ...except in footnotes */

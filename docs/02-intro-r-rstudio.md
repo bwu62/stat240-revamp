@@ -319,7 +319,7 @@ log(0)
 ## [1] -Inf
 ```
 
-Additionally, [`NA`{.R}](https://rdrr.io/r/base/NA.html) is used to represent missing values, i.e. when data is not available. **Note [`NA`{.R}](https://rdrr.io/r/base/NA.html) and [`NaN`{.R}](https://rdrr.io/r/base/is.finite.html) are NOT the same**. We will learn later about how to handle [`NA`{.R}](https://rdrr.io/r/base/NA.html) missing values.
+Additionally, [`NA`{.R}](https://rdrr.io/r/base/NA.html) is used to represent missing values, i.e. when data is not available. **Note `NA` and `NaN` are NOT the same**. We will learn later about how to handle [`NA`{.R}](https://rdrr.io/r/base/NA.html) missing values.
 
 
 
