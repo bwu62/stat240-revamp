@@ -1,6 +1,6 @@
 
 
-# Data frames
+# Data Frames
 
 Moving on from vectors, the next most important data structure in R is the data frame. Think of a data frame as similar to a matrix, but (ideally) **each column is a vector of a single type representing a variable or attribute, and each row is an observation in your sample**.
 
@@ -14,10 +14,11 @@ It's actually really helpful to think of a data frame as a collection of paralle
 There are 2 common ways of creating a new data frame manually: `data.frame()` from base R, or `tibble()` from the [tibble](https://tibble.tidyverse.org/) package, another of the core Tidyverse packages. They are extremely similar, but we recommend `tibble()` due to some nice extra features such as better printing, referencing other columns during creation, and stricter subsetting rules. Example:
 
 ```{r import-tibble}
-# import the tibble library
-# again, since tibble is a core tidyverse package,
-# library(tidyverse) also imports it
+# import the tibble and lubridate libraries
+# again, tibble is core tidyverse, so library(tidyverse) will also work
+# but lubridate is not core so needs to be imported manually
 library(tibble)
+library(lubridate)
 ```
 ```{r create-tibble1,echo=F,results='asis'}
 cat(glue::glue('``` r
@@ -25,7 +26,7 @@ cat(glue::glue('``` r
 df <- tibble(
   name = c("Alice", "Bob", "Charlie"),
   sex = c("F", "M", "M"),
-  birthday = mdy(c("{format(date-years(21),"%m/%d")%>%str_replace_all("(^|/)0","\\\\1")}/{format(date-years(21),"%y")}", "7/4/99", "10/31/06")),
+  birthday = mdy(c("{format(today()-years(21),"%m/%d")%>%stringr::str_replace_all("(^|/)0","\\\\1")}/{format(today()-years(21),"%y")}", "7/4/99", "10/31/06")),
   age = floor(as.numeric(today() - birthday)/365.24),
   declared_major = c(TRUE, TRUE, FALSE)
 )
@@ -37,7 +38,7 @@ df
 df <- tibble(
   name = c("Alice", "Bob", "Charlie"),
   sex = c("F", "M", "M"),
-  birthday = c(date - years(21), mdy(c("7/4/99", "10/31/06"))),
+  birthday = c(today() - years(21), mdy(c("7/4/99", "10/31/06"))),
   age = floor(as.numeric(today() - birthday) / 365.24),
   declared_major = c(TRUE, TRUE, FALSE),
   school = "UW-Madison"
@@ -132,6 +133,8 @@ For example, here's the first 6 lines of the [`eruptions_recent.csv`](data/erupt
 If you have a link to a dataset, you can directly pass it into `read_csv()` and it will automagically download the file to your system's temp folder and read it in. Make sure to save it into a data frame with a sensible name. It's also usually a good idea to print out the first few lines to check the result and see if everything worked without error.
 
 ```{r,message=T,class.message="message"}
+# import readr
+library(readr)
 # read in CSV file from link
 eruptions_recent <- read_csv(
   "https://bwu62.github.io/stat240-revamp/data/eruptions_recent.csv"
