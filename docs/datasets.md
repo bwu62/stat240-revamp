@@ -11,11 +11,15 @@ params:
 
 This page contains updating/processing scripts and additional info on all datasets used for the course, as well as some brief discussions of why they were chosen. Datasets are ordered by order of appearance in the notes.
 
+Also, since this is mostly for me to keep track of datasets and processing scripts, it's not as meticulously formatted like the rest of the notes, e.g. lines of code are not kept to ~80 characters, and comments may be brief, again they're for me not you. I may also use more advanced syntax or additional packages. Read at your own discretion.
+
+
 
 ``` r
 library(tidyverse)
 library(rvest)
 library(lubridate)
+library(xlsx)
 options(pillar.print_min=20)
 options(width=75)
 ```
@@ -95,7 +99,6 @@ eruptions_recent <- eruptions %>%
   filter(start_error <= 30, start_year > 2000, confirmed) %>% 
   select(-contains("_"))
 
-# print
 eruptions_recent
 ```
 
@@ -113,24 +116,19 @@ eruptions_recent
 ##  8 Ahyi                  2022-11-18 2023-06-11      205 TRUE          1
 ##  9 Kilauea               2021-09-29 2023-09-16      717 TRUE          0
 ## 10 Pavlof                2021-08-05 2022-12-07      489 TRUE          2
-## 11 Pagan                 2021-07-29 2021-09-06       39 TRUE          2
-## 12 Great Sitkin          2021-05-25 2024-07-12     1144 TRUE          2
-## 13 Veniaminof            2021-02-28 2021-04-05       36 TRUE          1
-## 14 Semisopochnoi         2021-02-02 2023-05-05      822 TRUE          2
-## 15 Kilauea               2020-12-20 2021-05-23      154 TRUE          0
-## 16 Cleveland             2020-06-01 2020-06-01        0 TRUE          3
-## 17 Semisopochnoi         2019-12-07 2020-06-19      195 TRUE          1
-## 18 Shishaldin            2019-07-23 2020-05-04      286 TRUE          3
-## 19 Semisopochnoi         2019-07-16 2019-08-24       39 TRUE          1
-## 20 Great Sitkin          2019-06-01 2019-06-07        6 TRUE          1
-## # ℹ 51 more rows
+## # ℹ 61 more rows
 ```
+
 
 ``` r
 # write out to different formats for reading
-write_csv(eruptions,file="data/eruptions_recent.csv")
+write_csv(eruptions_recent,file="data/eruptions_recent.csv")
+write_csv2(eruptions_recent,file="data/eruptions_recent2.csv")
+write_tsv(eruptions_recent,file="data/eruptions_recent.tsv")
+eruptions_recent %>% as.data.frame %>% print(print.gap=2,width=1000,row.names=F) %>% capture.output(file="data/eruptions_recent.txt")
+write_delim(eruptions_recent,file="data/eruptions_recent.delim",delim="|",na="")
+eruptions_recent %>% as.data.frame %>% write.xlsx(file="data/eruptions_recent.xlsx",row.names=F,showNA=F)
 ```
-
 
 
 

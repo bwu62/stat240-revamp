@@ -61,7 +61,7 @@ data-frames
 creating-data-frames
 importing-data-frames
 aside-file-formats-extensions
-importing-text-data-with-readr
+importing-data
 datasets
 eruptions
 load-raw-data
