@@ -612,9 +612,7 @@ See the help page for `parse_number()` for more examples and usage notes.
 
 
 
-
 ### Date vectors
-
 
 Finally, let's talk about date vectors (note we are not talking about date+time values, just dates). In R, dates are actually stored as a number, representing the [number of days after January 1^st^ 1970](https://rdrr.io/r/base/Dates.html), which is used as a reference date called the [Epoch](https://en.wikipedia.org/wiki/Epoch_(computing)).
 
@@ -693,9 +691,7 @@ This is just to warn you that **even though they may print similarly, date objec
 
 
 
-
 #### Parsing dates
-
 
 In some cases (specifically, if dates in a dataset are already represented in standard ISO-8601 format) R will automatically parse (i.e. convert) the dates for you. In other cases, you may need to manually parse them yourself. We will continue to use lubridate, since it has the most robust and user-friendly functions for working with dates.
 
@@ -775,9 +771,7 @@ decimal_date(dates2)
 
 
 
-
 #### Aside: R's calendar
-
 
 Quick aside. **R has an *extremely* robust calendar**, so you don't need to worry about "babysitting" R. Notably, R knows exactly [which years are leap and which aren't](https://www.mathsisfun.com/leap-years.html).
 
@@ -798,9 +792,7 @@ leap_year(c(1900, 2000, 2024, 2100))
 
 
 
-
 #### Get/set components
-
 
 Lubridate provides many get/set functions (often called getters and setters) for getting and setting different components (i.e. properties) associated with a date. Some common ones include `year()`, `month()`, `day()`, `wday()` (for day of the week), and `quarter()`.
 
@@ -849,9 +841,7 @@ This works with all the getters above, feel free to experiment more with this on
 
 
 
-
 #### Date math
-
 
 Since dates are represented internally as number of days since a reference point, doing math with dates turns out to be extremely easy. You can add/subtract days, make sequences, and run logical comparisons.
 
@@ -903,9 +893,7 @@ date %in% dates2
 
 
 
-
 #### Printing dates
-
 
 As a final note, let's briefly discuss printing dates. You can use `format()` to print dates in a pretty way. Different ways of printing each component are represented using `%...` codes. Examples:
 
@@ -925,7 +913,6 @@ A full list of these percent codes can be found in the help page of `strptime()`
 
 ## Data frames
 
-
 Moving on from vectors, the next most important data structure in R is the data frame. Think of a data frame as similar to a matrix, but (ideally) **each column is a vector of a single type representing a variable or attribute, and each row is an observation in your sample**.
 
 It's actually really helpful to think of a data frame as a collection of parallel vectors with the same length, each to a column with its own type. E.g. suppose you survey a sample of college students; maybe you'd have a sex column of character type, a GPA column of numeric type, a birthday column of date type, and a column for if they have declared a major with logical type.
@@ -934,7 +921,6 @@ It's actually really helpful to think of a data frame as a collection of paralle
 
 
 ### Creating data frames
-
 
 There are 2 common ways of creating a new data frame manually: `data.frame()` from base R, or `tibble()` from the [tibble](https://tibble.tidyverse.org/) package, another of the core Tidyverse packages. They are extremely similar, but we recommend `tibble()` due to some nice extra features such as better printing, referencing other columns during creation, and stricter subsetting rules. Example:
 
@@ -988,16 +974,13 @@ Note the following:
 
 ### Importing data frames
 
-
 Of course, in practice you don't usually create data frames manually like this, but rather import them from data files. As always, there are base R ways for doing this, but we will continue to recommend Tidyverse syntax due to its better features and design.
 
 There are a million different data formats, but we will only cover 3 main formats that are most commonly encountered in data science: CSV, or comma separated value files; TSV/TXT tables, which are either tab or space separated; and XLS(X), which are Excel (or similar spreadsheet software) data files. Notably, we do not cover databases (like SQL or its derivatives) or non-rectangular data formats (like JSON or XML) again due to limitations of time/space.
 
 
 
-
 #### Aside: file formats & extensions
-
 
 First, a small aside. File formats (or types) and file extensions are commonly conflated, but the distinction is important.
 
@@ -1022,9 +1005,7 @@ We **highly recommended you force your device to always show extensions** which 
 
 
 
-
-#### Importing data
-
+#### Importing functions
 
 For text-format data files, we once again turn to [readr](https://readr.tidyverse.org/) which has a suite of functions for importing them, of which we will only focus on a few:
 
