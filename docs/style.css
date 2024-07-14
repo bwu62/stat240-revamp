@@ -154,6 +154,12 @@ pre.message+pre,pre.warning+pre{
   border-top: none !important;
   padding-top: 0 !important;
 }
+pre.message:has(+div.sourceCode),pre.warning:has(+div.sourceCode){
+  border-bottom: 1px solid #eee !important;
+}
+pre.message+div.sourceCode,pre.warning+div.sourceCode{
+  margin-top: 1rem !important;
+}
 
 div.alert pre{
   background-color: rgba(255,255,255,.7) !important;
@@ -218,11 +224,15 @@ tr.header th[align="center"]{
 
 
 /* tighten datasets list */
-div#datasets li{
-  margin:0 !important;
+div#datasets li,div#eruptions-example ul:nth-of-type(1) li{
+  margin: 0 !important;
 }
-div#datasets li code{
-  background-color:unset !important;
+div#datasets li code,div#eruptions-example ul:nth-of-type(1) li code{
+  background-color: unset !important;
+}
+
+div#datasets li:nth-last-of-type(1),div#eruptions-example ul:nth-of-type(1) li:nth-last-of-type(1){
+  margin-bottom: 0.5rem !important;
 }
 
 /* REMEMBER TO REMOVE LATER!! */

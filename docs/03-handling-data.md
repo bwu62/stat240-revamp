@@ -149,7 +149,8 @@ data - mean(data)
 ```
 
 ```
-## [1] -0.8571429  2.1428571  2.1428571 -1.8571429  0.1428571 -2.8571429  1.1428571
+## [1] -0.8571429  2.1428571  2.1428571 -1.8571429  0.1428571 -2.8571429
+## [7]  1.1428571
 ```
 
 This is then squared `( ... )^2` and again, this operates one at a time:
@@ -160,7 +161,8 @@ This is then squared `( ... )^2` and again, this operates one at a time:
 ```
 
 ```
-## [1] 0.73469388 4.59183673 4.59183673 3.44897959 0.02040816 8.16326531 1.30612245
+## [1] 0.73469388 4.59183673 4.59183673 3.44897959 0.02040816 8.16326531
+## [7] 1.30612245
 ```
 
 Finally, this vector is summed, scaled by 1/(n-1), and square rooted to get the standard deviation. We can check this is correct by comparing with the built-in `sd()` function.
@@ -262,8 +264,8 @@ One of the easiest, if you just need a sequence of integers, is to use the `:` o
 ```
 
 ```
-##  [1]  10   9   8   7   6   5   4   3   2   1   0  -1  -2  -3  -4  -5  -6  -7  -8
-## [20]  -9 -10
+##  [1]  10   9   8   7   6   5   4   3   2   1   0  -1  -2  -3  -4  -5  -6
+## [18]  -7  -8  -9 -10
 ```
 
 The `seq()` function does something similar, except it also has additional arguments `by` to specify the step size and `length.out` which specifies how many numbers to have in total (note: only ONE of these arguments can be set at a time).
@@ -290,13 +292,14 @@ seq(0, 1, length.out = 101)
 ```
 
 ```
-##   [1] 0.00 0.01 0.02 0.03 0.04 0.05 0.06 0.07 0.08 0.09 0.10 0.11 0.12 0.13 0.14
-##  [16] 0.15 0.16 0.17 0.18 0.19 0.20 0.21 0.22 0.23 0.24 0.25 0.26 0.27 0.28 0.29
-##  [31] 0.30 0.31 0.32 0.33 0.34 0.35 0.36 0.37 0.38 0.39 0.40 0.41 0.42 0.43 0.44
-##  [46] 0.45 0.46 0.47 0.48 0.49 0.50 0.51 0.52 0.53 0.54 0.55 0.56 0.57 0.58 0.59
-##  [61] 0.60 0.61 0.62 0.63 0.64 0.65 0.66 0.67 0.68 0.69 0.70 0.71 0.72 0.73 0.74
-##  [76] 0.75 0.76 0.77 0.78 0.79 0.80 0.81 0.82 0.83 0.84 0.85 0.86 0.87 0.88 0.89
-##  [91] 0.90 0.91 0.92 0.93 0.94 0.95 0.96 0.97 0.98 0.99 1.00
+##   [1] 0.00 0.01 0.02 0.03 0.04 0.05 0.06 0.07 0.08 0.09 0.10 0.11 0.12 0.13
+##  [15] 0.14 0.15 0.16 0.17 0.18 0.19 0.20 0.21 0.22 0.23 0.24 0.25 0.26 0.27
+##  [29] 0.28 0.29 0.30 0.31 0.32 0.33 0.34 0.35 0.36 0.37 0.38 0.39 0.40 0.41
+##  [43] 0.42 0.43 0.44 0.45 0.46 0.47 0.48 0.49 0.50 0.51 0.52 0.53 0.54 0.55
+##  [57] 0.56 0.57 0.58 0.59 0.60 0.61 0.62 0.63 0.64 0.65 0.66 0.67 0.68 0.69
+##  [71] 0.70 0.71 0.72 0.73 0.74 0.75 0.76 0.77 0.78 0.79 0.80 0.81 0.82 0.83
+##  [85] 0.84 0.85 0.86 0.87 0.88 0.89 0.90 0.91 0.92 0.93 0.94 0.95 0.96 0.97
+##  [99] 0.98 0.99 1.00
 ```
 
 Vectors can also be created with the `rep()` function which lets you repeat the contents. There are two arguments: `times` which controls how many times to repeat the entire input, and `each` which controls how many times to repeat each element if the input is a vector. You can specify either or both of these arguments. Note `rep()` can be used to repeat other objects too, not just numbers.
@@ -317,7 +320,8 @@ rep(1:3, times = 3, each = 4)
 ```
 
 ```
-##  [1] 1 1 1 1 2 2 2 2 3 3 3 3 1 1 1 1 2 2 2 2 3 3 3 3 1 1 1 1 2 2 2 2 3 3 3 3
+##  [1] 1 1 1 1 2 2 2 2 3 3 3 3 1 1 1 1 2 2 2 2 3 3 3 3 1 1 1 1 2 2 2 2 3 3 3
+## [36] 3
 ```
 
 ``` r
@@ -337,8 +341,8 @@ rep(c(1, 3, 7:9, seq(10, 12, by = 0.5)), each = 2)
 ```
 
 ```
-##  [1]  1.0  1.0  3.0  3.0  7.0  7.0  8.0  8.0  9.0  9.0 10.0 10.0 10.5 10.5 11.0
-## [16] 11.0 11.5 11.5 12.0 12.0
+##  [1]  1.0  1.0  3.0  3.0  7.0  7.0  8.0  8.0  9.0  9.0 10.0 10.0 10.5 10.5
+## [15] 11.0 11.0 11.5 11.5 12.0 12.0
 ```
 
 
@@ -489,8 +493,8 @@ letters
 ```
 
 ```
-##  [1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s"
-## [20] "t" "u" "v" "w" "x" "y" "z"
+##  [1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q"
+## [18] "r" "s" "t" "u" "v" "w" "x" "y" "z"
 ```
 
 You can extract elements form a vector with the `[]` operator, giving either a vector of numeric positions, a vector of `TRUE`/`FALSE` values, or a negative vector for exclusions (i.e. anything *except*). Examples:
@@ -551,8 +555,8 @@ letters[-1]
 ```
 
 ```
-##  [1] "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s" "t"
-## [20] "u" "v" "w" "x" "y" "z"
+##  [1] "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r"
+## [18] "s" "t" "u" "v" "w" "x" "y" "z"
 ```
 
 ``` r
@@ -615,7 +619,7 @@ data2[c(n, 2:(n-1), 1)]
 ## [1] 50 60 60 20 40 10 30
 ```
 
-You can of course also have R sort a vector for you automatically. There are two main functions for sorting: `sort()`, which does what you expect and returns a vector with the elements rearranged from lowest to highest (unless you set the argument `decreasing = TRUE` which does the opposite); and `order()`, which simply returns the order the elements would go in (i.e. a vector of positions where they belong) if they were to be sorted lowest to highest (again, unless you set `decreasing = TRUE`).
+You can of course also have R sort a vector for you. There are two main functions for sorting: `sort()`, which does what you expect and returns a vector with the elements rearranged from lowest to highest (unless you set the argument `decreasing = TRUE` which does the opposite); and `order()`, which simply returns the order the elements would go in (i.e. a vector of positions where they belong) if they were to be sorted lowest to highest (again, unless you set `decreasing = TRUE`).
 
 
 ``` r
@@ -827,8 +831,9 @@ paste(friends, "is my friend")
 ```
 
 ```
-## [1] "Alice is my friend"     "Bob is my friend"       "Charlie is my friend"  
-## [4] "Donny is my friend"     "Emmy is my friend"      "Francine is my friend" 
+## [1] "Alice is my friend"     "Bob is my friend"      
+## [3] "Charlie is my friend"   "Donny is my friend"    
+## [5] "Emmy is my friend"      "Francine is my friend" 
 ## [7] "Genevieve is my friend" "Heinemann is my friend"
 ```
 
@@ -850,8 +855,8 @@ paste0(friends, "123")
 ```
 
 ```
-## [1] "Alice123"     "Bob123"       "Charlie123"   "Donny123"     "Emmy123"     
-## [6] "Francine123"  "Genevieve123" "Heinemann123"
+## [1] "Alice123"     "Bob123"       "Charlie123"   "Donny123"    
+## [5] "Emmy123"      "Francine123"  "Genevieve123" "Heinemann123"
 ```
 
 ``` r
@@ -1036,8 +1041,8 @@ str_pad(friends, width = 12, side = "right", pad = ".")
 ```
 
 ```
-## [1] "Alice......." "Bob........." "Charlie....." "Donny......." "Emmy........"
-## [6] "Francine...." "Genevieve..." "Heinemann..."
+## [1] "Alice......." "Bob........." "Charlie....." "Donny......."
+## [5] "Emmy........" "Francine...." "Genevieve..." "Heinemann..."
 ```
 
 
@@ -1304,9 +1309,7 @@ See the help page for `parse_number()` for more examples and usage notes.
 
 
 
-
 ### Date vectors
-
 
 Finally, let's talk about date vectors (note we are not talking about date+time values, just dates). In R, dates are actually stored as a number, representing the [number of days after January 1^st^ 1970](https://rdrr.io/r/base/Dates.html), which is used as a reference date called the [Epoch](https://en.wikipedia.org/wiki/Epoch_(computing)).
 
@@ -1417,11 +1420,9 @@ This is just to warn you that **even though they may print similarly, date objec
 
 
 
-
 #### Parsing dates
 
-
-In some cases (specifically, if dates in a dataset are already represented in standard ISO-8601 format) R will automatically parse (i.e. convert) the dates for you. In other cases, you may need to manually parse them yourself. We will continue to use lubridate, since it has the most robust and user-friendly functions for working with dates.
+In some cases (specifically, if dates in a dataset are already represented in standard ISO-8601 format) R will automagically parse (i.e. convert) the dates for you. In other cases, you may need to manually parse them yourself. We will continue to use lubridate, since it has the most robust and user-friendly functions for working with dates.
 
 In lubridate, the [parser functions](https://lubridate.tidyverse.org/reference/ymd.html) `mdy()`, `dmy()`, `ymd()` (as well as their rarer siblings `ydm()`, `myd()`, and `dym()`) are used to parse date data into proper date objects. The **only difference between these functions is the *order* they expect to see date components**, e.g. `mdy()` is used when the data is ordered month, day, then year (which is common in the US), and `dmy()` is used when the date data is data is ordered day, month, then year (which is generally preferred outside the US). These functions are **extremely robust and automagically recognize a wide range of formats**, and of course they're all vectorized! Here's a few examples:
 
@@ -1485,9 +1486,7 @@ decimal_date(dates2)
 
 
 
-
 #### Aside: R's calendar
-
 
 Quick aside. **R has an *extremely* robust calendar**, so you don't need to worry about "babysitting" R. Notably, R knows exactly [which years are leap and which aren't](https://www.mathsisfun.com/leap-years.html).
 
@@ -1545,9 +1544,7 @@ leap_year(c(1900, 2000, 2024, 2100))
 
 
 
-
 #### Get/set components
-
 
 Lubridate provides many get/set functions (often called getters and setters) for getting and setting different components (i.e. properties) associated with a date. Some common ones include `year()`, `month()`, `day()`, `wday()` (for day of the week), and `quarter()`.
 
@@ -1662,9 +1659,7 @@ This works with all the getters above, feel free to experiment more with this on
 
 
 
-
 #### Date math
-
 
 Since dates are represented internally as number of days since a reference point, doing math with dates turns out to be extremely easy. You can add/subtract days, make sequences, and run logical comparisons.
 
@@ -1758,9 +1753,7 @@ date %in% dates2
 
 
 
-
 #### Printing dates
-
 
 As a final note, let's briefly discuss printing dates. You can use `format()` to print dates in a pretty way. Different ways of printing each component are represented using `%...` codes. Examples:
 
@@ -1799,7 +1792,6 @@ A full list of these percent codes can be found in the help page of `strptime()`
 
 ## Data frames
 
-
 Moving on from vectors, the next most important data structure in R is the data frame. Think of a data frame as similar to a matrix, but (ideally) **each column is a vector of a single type representing a variable or attribute, and each row is an observation in your sample**.
 
 It's actually really helpful to think of a data frame as a collection of parallel vectors with the same length, each to a column with its own type. E.g. suppose you survey a sample of college students; maybe you'd have a sex column of character type, a GPA column of numeric type, a birthday column of date type, and a column for if they have declared a major with logical type.
@@ -1809,14 +1801,13 @@ It's actually really helpful to think of a data frame as a collection of paralle
 
 ### Creating data frames
 
-
 There are 2 common ways of creating a new data frame manually: `data.frame()` from base R, or `tibble()` from the [tibble](https://tibble.tidyverse.org/) package, another of the core Tidyverse packages. They are extremely similar, but we recommend `tibble()` due to some nice extra features such as better printing, referencing other columns during creation, and stricter subsetting rules. Example:
 
 
 ``` r
 # import the tibble library
 # again, since tibble is a core tidyverse package,
-# library(tidyverse) also imports it automatically
+# library(tidyverse) also imports it
 library(tibble)
 ```
 ``` r
@@ -1859,16 +1850,13 @@ Note the following:
 
 ### Importing data frames
 
-
 Of course, in practice you don't usually create data frames manually like this, but rather import them from data files. As always, there are base R ways for doing this, but we will continue to recommend Tidyverse syntax due to its better features and design.
 
 There are a million different data formats, but we will only cover 3 main formats that are most commonly encountered in data science: CSV, or comma separated value files; TSV/TXT tables, which are either tab or space separated; and XLS(X), which are Excel (or similar spreadsheet software) data files. Notably, we do not cover databases (like SQL or its derivatives) or non-rectangular data formats (like JSON or XML) again due to limitations of time/space.
 
 
 
-
 #### Aside: file formats & extensions
-
 
 First, a small aside. File formats (or types) and file extensions are commonly conflated, but the distinction is important.
 
@@ -1893,9 +1881,7 @@ We **highly recommended you force your device to always show extensions** which 
 
 
 
-
-#### Importing data
-
+#### Importing functions
 
 For text-format data files, we once again turn to [readr](https://readr.tidyverse.org/) which has a suite of functions for importing them, of which we will only focus on a few:
 
@@ -1903,22 +1889,94 @@ For text-format data files, we once again turn to [readr](https://readr.tidyvers
  - `read_tsv()` is used to read in files where columns of data are separated by tabs,
  - `read_delim()` is the general form of these `read_...` functions and can be used to read in files with any other type of separator.
 
+One additional non-text format will be covered in this course: XLS(X) spreadsheet data, commonly generated by Excel or similar spreadsheet software. For these, we have a different function from Tidyverse's non-core [readxl](https://readxl.tidyverse.org) package:
+
+ - `read_excel()` can be used to read in both XLS and XLSX spreadsheet data
+
 :::{.note}
-Note the underscore in the function names. `read_csv()` which is from readr is NOT the same as `read.csv()` which is a base R function. They are similar, but readr's `read_csv()` has some minor improvements in speed and consistency so is recommended by this class.
+Note the underscores in the function names. E.g. `read_csv()` which is from readr is NOT the same as `read.csv()` which is a base R function. They are similar, but readr's `read_csv()` has some minor improvements in speed and consistency so is recommended by this class.
 
 Also note that if you do not have readr (or tidyverse) loaded, attempting to [TAB]{.k} autocomplete the `read_csv()` function will instead give you `read.csv()` so again, remember to set your working directory and load necessary libraries whenever (re)opening Rstudio before starting/resuming your work.
 :::
 
-One additional non-text format will be covered in this course: XLS(X) spreadsheet data, commonly generated by Excel or similar spreadsheet software. These are encoded differently and cannot be opened by simple text editors, but can be easily read in using the `read_excel()` function from the [readxl](https://readxl.tidyverse.org) package, which is installed with Tidyverse but is NOT a core package, i.e. it must always be loaded explicitly.
-
-To demonstrate the basic functionality of these different functions, I've prepared and exported a dataset on 21^st^ century volcanic eruptions to all the formats listed above so we can practice reading them in. 
 
 
+#### Eruptions example
+
+To demonstrate the basic functionality of these different functions, I've prepared and exported a dataset on 21^st^ century volcanic eruptions in the United States from the [Smithsonian](https://volcano.si.edu/volcanolist_countries.cfm?country=United%20States) to all the formats listed above so we can practice reading them in from any initial format:
+
+ - [`eruptions_recent.csv`](data/eruptions_recent.csv)
+ - [`eruptions_recent.tsv`](data/eruptions_recent.tsv)
+ - [`eruptions_recent.delim`](data/eruptions_recent.delim)
+ - [`eruptions_recent.xlsx`](data/eruptions_recent.xlsx)
+
+For example, here's the first 6 lines of the [`eruptions_recent.csv`](data/eruptions_recent.csv) CSV file (for each eruption, we have the volcano name, start and stop dates, duration in days, if its certainty is confirmed, and the VEI or volcano explosivity index).
 
 
+``` csv
+volcano,start,stop,duration,confirmed,vei
+Kilauea,2024-06-03,2024-06-03,0,TRUE,NA
+Atka Volcanic Complex,2024-03-27,2024-03-27,0,TRUE,NA
+Ahyi,2024-01-01,2024-03-27,86,TRUE,NA
+Kanaga,2023-12-18,2023-12-18,0,TRUE,1
+Ruby,2023-09-14,2023-09-15,1,TRUE,1
+```
+
+If you have a link to a dataset, you can directly pass it into `read_csv()` and it will automagically download the file to your system's temp folder and read it in. Make sure to save it into a data frame with a sensible name. It's also usually a good idea to print out the first few lines to check the result and see if everything worked without error.
 
 
+``` r
+# read in CSV file from link
+eruptions_recent <- read_csv(
+  "https://bwu62.github.io/stat240-revamp/data/eruptions_recent.csv"
+)
+```
 
+``` message
+## Rows: 71 Columns: 6
+## ── Column specification ───────────────────────────────────────────────────
+## Delimiter: ","
+## chr  (1): name
+## dbl  (2): duration, vei
+## lgl  (1): confirmed
+## date (2): start, stop
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+```
+
+``` r
+# print result to check
+eruptions_recent
+```
+
+```
+## # A tibble: 71 × 6
+##    name                  start      stop       duration confirmed   vei
+##    <chr>                 <date>     <date>        <dbl> <lgl>     <dbl>
+##  1 Kilauea               2024-06-03 2024-06-03        0 TRUE         NA
+##  2 Atka Volcanic Complex 2024-03-27 2024-03-27        0 TRUE         NA
+##  3 Ahyi                  2024-01-01 2024-03-27       86 TRUE         NA
+##  4 Kanaga                2023-12-18 2023-12-18        0 TRUE          1
+##  5 Ruby                  2023-09-14 2023-09-15        1 TRUE          1
+##  6 Shishaldin            2023-07-11 2023-11-03      115 TRUE          3
+##  7 Mauna Loa             2022-11-27 2022-12-10       13 TRUE          0
+##  8 Ahyi                  2022-11-18 2023-06-11      205 TRUE          1
+##  9 Kilauea               2021-09-29 2023-09-16      717 TRUE          0
+## 10 Pavlof                2021-08-05 2022-12-07      489 TRUE          2
+## # ℹ 61 more rows
+```
+
+Several things to note here:
+
+ - Some diagnostic messages will be printed while reading, as well as any warnings/errors if it encounters anything unsual (no errors/warnings are observed here).
+ - While reading in, R will try to intelligently guess the data types of each column if they're in a standard format. You can see here that since all columns in the CSV were already very neat and written in a standard format (e.g. dates in YYYY-MM-DD, numbers and logicals written in common syntax, missing values written as NA), everything automagically converted: `name` is left as a character, `start` and `stop` parsed to dates, `duration` and `vei` parsed to numeric, and `confirmed` became logical.
+   - If columns are not written in a standard format, this may not work as well (if at all) and you may need to do more data cleaning yourself, which we will touch on later.
+ - You can run just the data frame name again to print the first few rows. This is equivalent to running `print(eruptions_recent)`.
+   - Printing is often a useful way to double check for errors.
+ - If you look in your [Environment tab](https://i.imgur.com/Xo5HE2U.png) now, you should see the loaded data frame.
+   - Here, you can click on the arrow to see a list of all columns, as well as their names, types, and the first few values.
+   - You can also click here on the object name itself here to open a new tab with a full spreadsheet-like view of the entire data frame, where you can inspect the data frame, and even search for values and sort by columns (note: sorting here is just for preview and does not affect the underlying object).
 
 
 
@@ -1933,12 +1991,10 @@ To demonstrate the basic functionality of these different functions, I've prepar
 
 <!--
 
-### Date vectors
+data frame topics
 
- - sequence, math, comparisons, etc.
-
-### Sorting vectors
-
- - examples from all types
+ - dimensions
+ - subsetting
+ - missing
 
 -->

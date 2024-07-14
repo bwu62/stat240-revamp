@@ -133,7 +133,7 @@ barplot(c(1, 3, 2))
 
 
 :::{.tip}
-All functions in these notes should automatically link to their online help pages (these are the same help pages inside Rstudio that we saw in the previous section). Try clicking on the `barplot()` function here or in the previous code block to see its help page.
+All functions in these notes should automagically link to their online help pages (these are the same help pages inside Rstudio that we saw in the previous section). Try clicking on the `barplot()` function here or in the previous code block to see its help page.
 :::
 
 
@@ -773,13 +773,13 @@ library(tidyverse)
 ```
 
 ```
-## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+## ── Attaching core tidyverse packages ─────────────────── tidyverse 2.0.0 ──
 ## ✔ dplyr     1.1.4     ✔ readr     2.1.5
 ## ✔ forcats   1.0.0     ✔ stringr   1.5.1
 ## ✔ ggplot2   3.5.1     ✔ tibble    3.2.1
 ## ✔ lubridate 1.9.3     ✔ tidyr     1.3.1
 ## ✔ purrr     1.0.2     
-## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+## ── Conflicts ───────────────────────────────────── tidyverse_conflicts() ──
 ## ✖ tidyr::extract()   masks magrittr::extract()
 ## ✖ dplyr::filter()    masks stats::filter()
 ## ✖ dplyr::lag()       masks stats::lag()
@@ -912,7 +912,7 @@ Here's a second section.
 ### Source window
 
 
-Download the [`demo.Rmd`](demo.Rmd) example file and open it; it should automatically open in Rstudio in a new panel in the top left called the source window, which is actually just a basic text editor like Notepad or TextEdit, but with some additional R-aware features (more on this later).
+Download the [`demo.Rmd`](demo.Rmd) example file and open it; it should automagically open in Rstudio in a new panel in the top left called the source window, which is actually just a basic text editor like Notepad or TextEdit, but with some additional R-aware features (more on this later).
 
 ![](https://i.imgur.com/qFJ3MrS.png)
 
@@ -1119,7 +1119,7 @@ You can do this by either of these methods:
  - Recommended: Using the top menu bar, go to "Session" > "Set Working Directory" > "To Source File Location". This sets the working directory to where the location of the current file being edited.
    - For Windows users, the shortcut for this is [ALT]{.k}+[S]{.k}, then release both keys and type [W]{.k} and [S]{.k} one at a time.
    - For both Windows and Mac, you can also setup a custom shortcut for this action. From the top menu bar, go to "Tools" > "Modify Keyboard Shortcuts...", find "Set Working Directory to Current Document's Directory" and set your preferred shortcut. Mine is set to [CTRL]{.k}+[SHIFT]{.k}+[D]{.k} but feel free to choose your own.
- - You can also set it automatically to your current Rmd file location with  `try(setwd(dirname(rstudioapi::getSourceEditorContext()$path)),silent=T)` which can be run either in the console, or copied into any Rmd file (e.g. in the setup chunk) and run whenever you open the file.
+ - You can also set it automagically to your current Rmd file location with  `try(setwd(dirname(rstudioapi::getSourceEditorContext()$path)),silent=T)` which can be run either in the console, or copied into any Rmd file (e.g. in the setup chunk) and run whenever you open the file.
  - You can also set it manually by running `setwd()` in the console if you prefer.
 
 :::{.note}

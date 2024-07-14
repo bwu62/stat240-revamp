@@ -63,18 +63,18 @@ eruptions_raw <- read_html("https://volcano.si.edu/volcanolist_countries.cfm?cou
   # remove unnecessary evidence column
   select(-Evidence) %>% 
   # make names nice
-  set_names(c("name","start","stop","confirmed","vei"))
+  set_names(c("volcano","start","stop","confirmed","vei"))
 ```
 
 
 ``` r
 eruptions <- eruptions_raw %>% 
   mutate(
-    name = str_replace(name,"°","°"),
+    volcano = str_replace(volcano,"°","°"),
     # convert confirmed? column to logical
     confirmed = if_else(replace_na(confirmed,"NA")=="Confirmed",T,F),
     # replace continuing eruptions with today's date
-    # (continuation last validated 7/11/24)
+    # (continuation last validated 7/14/24)
     stop = if_else(str_detect(stop,"continu"),format(today(),"%Y %b %e"),stop,missing=stop)
   ) %>% 
   # extract date error to new column
@@ -111,7 +111,7 @@ eruptions <- eruptions_raw %>%
     duration = (stop-start)/ddays(1)
   ) %>% 
   # remove intermediate rows
-  select(name,start,start_error,start_year,stop,stop_error,stop_year,duration,confirmed,vei)
+  select(volcano,start,start_error,start_year,stop,stop_error,stop_year,duration,confirmed,vei)
 
 # get just subset for demo
 eruptions_recent <- eruptions %>% 
@@ -123,7 +123,7 @@ eruptions_recent
 
 ```
 ## # A tibble: 71 × 6
-##    name                  start      stop       duration confirmed   vei
+##    volcano               start      stop       duration confirmed   vei
 ##    <chr>                 <date>     <date>        <dbl> <lgl>     <int>
 ##  1 Kilauea               2024-06-03 2024-06-03        0 TRUE         NA
 ##  2 Atka Volcanic Complex 2024-03-27 2024-03-27        0 TRUE         NA
@@ -135,24 +135,13 @@ eruptions_recent
 ##  8 Ahyi                  2022-11-18 2023-06-11      205 TRUE          1
 ##  9 Kilauea               2021-09-29 2023-09-16      717 TRUE          0
 ## 10 Pavlof                2021-08-05 2022-12-07      489 TRUE          2
-## 11 Pagan                 2021-07-29 2021-09-06       39 TRUE          2
-## 12 Great Sitkin          2021-05-25 2024-07-14     1146 TRUE          2
-## 13 Veniaminof            2021-02-28 2021-04-05       36 TRUE          1
-## 14 Semisopochnoi         2021-02-02 2023-05-05      822 TRUE          2
-## 15 Kilauea               2020-12-20 2021-05-23      154 TRUE          0
-## 16 Cleveland             2020-06-01 2020-06-01        0 TRUE          3
-## 17 Semisopochnoi         2019-12-07 2020-06-19      195 TRUE          1
-## 18 Shishaldin            2019-07-23 2020-05-04      286 TRUE          3
-## 19 Semisopochnoi         2019-07-16 2019-08-24       39 TRUE          1
-## 20 Great Sitkin          2019-06-01 2019-06-07        6 TRUE          1
-## # ℹ 51 more rows
+## # ℹ 61 more rows
 ```
 
 
 ``` r
 # write out to different formats for reading
 write_csv(eruptions_recent,file="data/eruptions_recent.csv")
-write_csv2(eruptions_recent,file="data/eruptions_recent2.csv")
 write_tsv(eruptions_recent,file="data/eruptions_recent.tsv")
 write_delim(eruptions_recent,file="data/eruptions_recent.delim",delim="|",na="")
 eruptions_recent %>% as.data.frame %>% write.xlsx(file="data/eruptions_recent.xlsx",row.names=F,showNA=F)

@@ -61,7 +61,8 @@ data-frames
 creating-data-frames
 importing-data-frames
 aside-file-formats-extensions
-importing-data
+importing-functions
+eruptions-example
 datasets
 list-of-datasets
 eruptions
