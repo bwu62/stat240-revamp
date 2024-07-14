@@ -217,8 +217,13 @@ tr.header th[align="center"]{
 }
 
 
-
-
+/* tighten datasets list */
+div#datasets li{
+  margin:0 !important;
+}
+div#datasets li code{
+  background-color:unset !important;
+}
 
 /* REMEMBER TO REMOVE LATER!! */
 main > div[class*="section level1"] {
