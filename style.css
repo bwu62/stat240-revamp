@@ -224,11 +224,15 @@ tr.header th[align="center"]{
 
 
 /* tighten datasets list */
-div#datasets li{
-  margin:0 !important;
+div#datasets li,div#eruptions-example ul:nth-of-type(1) li{
+  margin: 0 !important;
 }
-div#datasets li code{
-  background-color:unset !important;
+div#datasets li code,div#eruptions-example ul:nth-of-type(1) li code{
+  background-color: unset !important;
+}
+
+div#datasets li:nth-last-of-type(1),div#eruptions-example ul:nth-of-type(1) li:nth-last-of-type(1){
+  margin-bottom: 0.5rem !important;
 }
 
 /* REMEMBER TO REMOVE LATER!! */
