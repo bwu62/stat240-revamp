@@ -1,0 +1,11 @@
+
+
+# Data index {.unlisted .unnumbered}
+
+Below are links to all available datasets in this directory.
+
+```{r,echo=F,results='asis'}
+files = stringr::str_subset(list.files('data'),"index\\.html",negate=T)
+stringr::str_glue(" - [{files}]({files})")
+```
+
