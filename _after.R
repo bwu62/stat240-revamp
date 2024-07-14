@@ -33,21 +33,3 @@ for(path in copy.list){
     copy.file(path)
   } else warning("Path wrong in copy list!")
 }
-
-# move data index around
-copy.file("docs/data-index.html",
-          "docs/data/index.html")
-copy.file("docs/data/index.html",
-          "data/index.html")
-
-# fix links in data index
-if(file.exists("docs/data/index.html")){
-  xfun::gsub_file("docs/data/index.html",
-                  '="libs',
-                  '="../libs')
-}
-if(file.exists("data/index.html")){
-  xfun::gsub_file("data/index.html",
-                  '="libs',
-                  '="../libs')
-}
