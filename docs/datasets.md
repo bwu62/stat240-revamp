@@ -126,7 +126,17 @@ eruptions_recent
 ##  8 Ahyi                  2022-11-18 2023-06-11      205 TRUE          1
 ##  9 Kilauea               2021-09-29 2023-09-16      717 TRUE          0
 ## 10 Pavlof                2021-08-05 2022-12-07      489 TRUE          2
-## # ℹ 61 more rows
+## 11 Pagan                 2021-07-29 2021-09-06       39 TRUE          2
+## 12 Great Sitkin          2021-05-25 2024-07-14     1146 TRUE          2
+## 13 Veniaminof            2021-02-28 2021-04-05       36 TRUE          1
+## 14 Semisopochnoi         2021-02-02 2023-05-05      822 TRUE          2
+## 15 Kilauea               2020-12-20 2021-05-23      154 TRUE          0
+## 16 Cleveland             2020-06-01 2020-06-01        0 TRUE          3
+## 17 Semisopochnoi         2019-12-07 2020-06-19      195 TRUE          1
+## 18 Shishaldin            2019-07-23 2020-05-04      286 TRUE          3
+## 19 Semisopochnoi         2019-07-16 2019-08-24       39 TRUE          1
+## 20 Great Sitkin          2019-06-01 2019-06-07        6 TRUE          1
+## # ℹ 51 more rows
 ```
 
 
