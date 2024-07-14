@@ -69,23 +69,37 @@
 </h1>
 <p>This page contains updating/processing scripts and additional info on all datasets used for the course, as well as some brief discussions of why they were chosen. Datasets are ordered by order of appearance in the notes.</p>
 <p>Also, since this is mostly for me to keep track of datasets and processing scripts, it’s not as meticulously formatted like the rest of the notes, e.g. lines of code are not kept to ~80 characters, and comments may be brief, again they’re for me not you. I may also use more advanced syntax or additional packages. Read at your own discretion.</p>
-<div class="sourceCode" id="cb422"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb420"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rvest.tidyverse.org/">rvest</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://lubridate.tidyverse.org">lubridate</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/colearendt/xlsx">xlsx</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>pillar.print_min<span class="op">=</span><span class="fl">20</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>width<span class="op">=</span><span class="fl">75</span><span class="op">)</span></span></code></pre></div>
-<div id="eruptions" class="section level2" number="4.1">
+<span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>width<span class="op">=</span><span class="fl">75</span><span class="op">)</span></span>
+<span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.exists</a></span><span class="op">(</span><span class="st">"data/"</span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span><span class="op">(</span><span class="st">"data/"</span><span class="op">)</span></span></code></pre></div>
+<div id="list-of-datasets" class="section level2" number="4.1">
 <h2>
-<span class="header-section-number">A.1</span> Eruptions<a class="anchor" aria-label="anchor" href="#eruptions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">A.1</span> List of datasets<a class="anchor" aria-label="anchor" href="#list-of-datasets"><i class="fas fa-link"></i></a>
+</h2>
+<p>Here’s a convenient list of all dataset files generated.</p>
+<ul>
+<li><a href="data/eruptions_recent.csv"><code>eruptions_recent.csv</code></a></li>
+<li><a href="data/eruptions_recent.delim"><code>eruptions_recent.delim</code></a></li>
+<li><a href="data/eruptions_recent.tsv"><code>eruptions_recent.tsv</code></a></li>
+<li><a href="data/eruptions_recent.xlsx"><code>eruptions_recent.xlsx</code></a></li>
+<li><a href="data/eruptions_recent2.csv"><code>eruptions_recent2.csv</code></a></li>
+</ul>
+</div>
+<div id="eruptions" class="section level2" number="4.2">
+<h2>
+<span class="header-section-number">A.2</span> Eruptions<a class="anchor" aria-label="anchor" href="#eruptions"><i class="fas fa-link"></i></a>
 </h2>
 <p>For introducing reading CSVs, I wanted a dataset with all 4 data types we discussed (numeric, logical, character, and date) and was interesting enough, but without too many columns or rows, and without any problems that would add to complexity since we’re just starting out. The <a href="https://volcano.si.edu/volcanolist_countries.cfm?country=United%20States">volcanic eruptions</a> dataset (specifically the “Holocene Eruptions”) table seemed to fit the bill nicely.</p>
-<div id="load-raw-data" class="section level3" number="4.1.1">
+<div id="load-raw-data" class="section level3" number="4.2.1">
 <h3>
-<span class="header-section-number">A.1.1</span> Load raw data<a class="anchor" aria-label="anchor" href="#load-raw-data"><i class="fas fa-link"></i></a>
+<span class="header-section-number">A.2.1</span> Load raw data<a class="anchor" aria-label="anchor" href="#load-raw-data"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb423"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb421"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># load html source code</span></span>
 <span><span class="va">eruptions_raw</span> <span class="op">&lt;-</span> <span class="fu"><a href="http://xml2.r-lib.org/reference/read_xml.html">read_html</a></span><span class="op">(</span><span class="st">"https://volcano.si.edu/volcanolist_countries.cfm?country=United%20States"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="co"># extract table code</span></span>
@@ -98,9 +112,10 @@
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">Evidence</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="co"># make names nice</span></span>
 <span>  <span class="fu"><a href="https://rlang.r-lib.org/reference/set_names.html">set_names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"name"</span>,<span class="st">"start"</span>,<span class="st">"stop"</span>,<span class="st">"confirmed"</span>,<span class="st">"vei"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb424"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb422"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">eruptions</span> <span class="op">&lt;-</span> <span class="va">eruptions_raw</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    name <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_replace.html">str_replace</a></span><span class="op">(</span><span class="va">name</span>,<span class="st">"°"</span>,<span class="st">"°"</span><span class="op">)</span>,</span>
 <span>    <span class="co"># convert confirmed? column to logical</span></span>
 <span>    confirmed <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/replace_na.html">replace_na</a></span><span class="op">(</span><span class="va">confirmed</span>,<span class="st">"NA"</span><span class="op">)</span><span class="op">==</span><span class="st">"Confirmed"</span>,<span class="cn">T</span>,<span class="cn">F</span><span class="op">)</span>,</span>
 <span>    <span class="co"># replace continuing eruptions with today's date</span></span>
@@ -163,14 +178,24 @@
 ##  9 Kilauea               2021-09-29 2023-09-16      717 TRUE          0
 ## 10 Pavlof                2021-08-05 2022-12-07      489 TRUE          2
 ## # ℹ 61 more rows</code></pre>
-<div class="sourceCode" id="cb426"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb424"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># write out to different formats for reading</span></span>
 <span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html">write_csv</a></span><span class="op">(</span><span class="va">eruptions_recent</span>,file<span class="op">=</span><span class="st">"data/eruptions_recent.csv"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html">write_csv2</a></span><span class="op">(</span><span class="va">eruptions_recent</span>,file<span class="op">=</span><span class="st">"data/eruptions_recent2.csv"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html">write_tsv</a></span><span class="op">(</span><span class="va">eruptions_recent</span>,file<span class="op">=</span><span class="st">"data/eruptions_recent.tsv"</span><span class="op">)</span></span>
-<span><span class="va">eruptions_recent</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">as.data.frame</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span>print.gap<span class="op">=</span><span class="fl">2</span>,width<span class="op">=</span><span class="fl">1000</span>,row.names<span class="op">=</span><span class="cn">F</span>,right<span class="op">=</span><span class="cn">F</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/capture.output.html">capture.output</a></span><span class="op">(</span>file<span class="op">=</span><span class="st">"data/eruptions_recent.txt"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html">write_delim</a></span><span class="op">(</span><span class="va">eruptions_recent</span>,file<span class="op">=</span><span class="st">"data/eruptions_recent.delim"</span>,delim<span class="op">=</span><span class="st">"|"</span>,na<span class="op">=</span><span class="st">""</span><span class="op">)</span></span>
-<span><span class="va">eruptions_recent</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">as.data.frame</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/xlsx/man/write.xlsx.html">write.xlsx</a></span><span class="op">(</span>file<span class="op">=</span><span class="st">"data/eruptions_recent.xlsx"</span>,row.names<span class="op">=</span><span class="cn">F</span>,showNA<span class="op">=</span><span class="cn">F</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">eruptions_recent</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">as.data.frame</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/xlsx/man/write.xlsx.html">write.xlsx</a></span><span class="op">(</span>file<span class="op">=</span><span class="st">"data/eruptions_recent.xlsx"</span>,row.names<span class="op">=</span><span class="cn">F</span>,showNA<span class="op">=</span><span class="cn">F</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># originally line below was b/c I wanted to prep example for read_table but turns out</span></span>
+<span><span class="co"># its behavior changed recentlyish https://www.tidyverse.org/blog/2021/07/readr-2-0-0/</span></span>
+<span><span class="co"># it no longer works well here, and read.table needs to be used instead</span></span>
+<span><span class="co"># (alternatively read_fwf from readr also works but that seems beyond scope)</span></span>
+<span><span class="co"># but I don't want to confuse students by introducing a mix of readr + base R</span></span>
+<span><span class="co"># so quitting this example, need to reevaluate in the future importance</span></span>
+<span><span class="co"># of reading whitespace aligned table formats</span></span>
+<span></span>
+<span><span class="co"># eruptions_recent %&gt;% as.data.frame %&gt;% print(print.gap=2,width=1000,row.names=F,right=F) %&gt;% capture.output() %&gt;% </span></span>
+<span><span class="co">#   str_replace("&lt;NA&gt;","NA  ") %&gt;% str_replace("^ *",'"') %&gt;% str_replace("( {2,})",'"\\1') %&gt;% str_replace('"name"',"name  ") %&gt;% write_lines(file="data/eruptions_recent.txt")</span></span></code></pre></div>
 
 </div>
 </div>
@@ -211,8 +236,9 @@
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#datasets"><span class="header-section-number">A</span> Datasets</a></li>
+<li><a class="nav-link" href="#list-of-datasets"><span class="header-section-number">A.1</span> List of datasets</a></li>
 <li>
-<a class="nav-link" href="#eruptions"><span class="header-section-number">A.1</span> Eruptions</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#load-raw-data"><span class="header-section-number">A.1.1</span> Load raw data</a></li></ul>
+<a class="nav-link" href="#eruptions"><span class="header-section-number">A.2</span> Eruptions</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#load-raw-data"><span class="header-section-number">A.2.1</span> Load raw data</a></li></ul>
 </li>
 </ul>
 
@@ -231,7 +257,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, Bret Larget, Cameron Jones. It was last built on 2024-07-13.</p>
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, Bret Larget, Cameron Jones. It was last built on 2024-07-14.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

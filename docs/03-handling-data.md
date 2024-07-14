@@ -733,7 +733,7 @@ The [`letters`{.R}](https://rdrr.io/r/base/Constants.html) vector in the last se
 
 ``` r
 # creating a demo character vector, e.g. these are my friends!
-friends <- c("Alice", "Bob", "Charlie", "Donny", "Emmy", 
+friends <- c("Alice", "Bob", "Charlie", "Donny", "Emmy",
              "Francine", "Genevieve", "Heinemann")
 friends
 ```
@@ -1319,7 +1319,7 @@ library(lubridate)
 
 
 
-Ok, let's start the demo by creating a date object. Let's use today's date (which is Jul 13, 2024 as of [last compile](https://github.com/bwu62/stat240-revamp/commits/maste)) as an example. The `today()` function is handy here.
+Ok, let's start the demo by creating a date object. Let's use today's date (which is Jul 14, 2024 as of [last compile](https://github.com/bwu62/stat240-revamp/commits/maste)) as an example. The `today()` function is handy here.
 
 
 ``` r
@@ -1329,10 +1329,10 @@ date
 ```
 
 ```
-## [1] "2024-07-13"
+## [1] "2024-07-14"
 ```
 
-We can see that even though our date object has `"Date"` class, it actually has `"double"` type, which means behind the scenes, it's secretly stored as a number. ^[The distrinction between class, type, and mode (which we haven't even mentioned and won't ever discuss) is highly technical to the mechanics of R and not worth concerning yourself over. If you're dying of curiosity, I recommend this excellent video on the matter: <https://youtu.be/RwEzWZA9uTw>{target="_blank"}.] If you `unclass()` the object, i.e. strip away the `"Date"` property, you can see it's just the number 19917 underneath, and you can check that in fact Jul 13, 2024 is indeed [19917 days after Jan 1 1970](https://www.wolframalpha.com/input?i=19917+days+after+Jan+1+1970).
+We can see that even though our date object has `"Date"` class, it actually has `"double"` type, which means behind the scenes, it's secretly stored as a number. ^[The distrinction between class, type, and mode (which we haven't even mentioned and won't ever discuss) is highly technical to the mechanics of R and not worth concerning yourself over. If you're dying of curiosity, I recommend this excellent video on the matter: <https://youtu.be/RwEzWZA9uTw>{target="_blank"}.] If you `unclass()` the object, i.e. strip away the `"Date"` property, you can see it's just the number 19918 underneath, and you can check that in fact Jul 14, 2024 is indeed [19918 days after Jan 1 1970](https://www.wolframalpha.com/input?i=19918+days+after+Jan+1+1970).
 
 
 ``` r
@@ -1358,24 +1358,24 @@ unclass(date)
 ```
 
 ```
-## [1] 19917
+## [1] 19918
 ```
 ``` r
 # we can reverse this too, start with a number,
 # then change the class to "Date", and voila!
-x <- 19917
+x <- 19918
 class(x) <- "Date"
 x
 ```
 
 ```
-## [1] "2024-07-13"
+## [1] "2024-07-14"
 ```
 
 :::{.note}
 R conforms to [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) standards, i.e. **dates ALWAYS show as `"YYYY-MM-DD"`** (even though they're stored numerically). This is arguably the best format for dates, because it's the unique format where [chronological order and lexicographical order are identical](https://en.wikipedia.org/wiki/ISO_8601#General_principles), which is an extremely useful property.
 
-Also note despite `date` appearing to be a character, it is NOT a character. Using `identical()` (which compares if two objects are the same) will show this to be false. Furthermore, `as.numeric()` confirms `date` converts to 19917 as expected, whereas the string ``"2024-07-13"`` cannot be converted and returns `NA`.
+Also note despite `date` appearing to be a character, it is NOT a character. Using `identical()` (which compares if two objects are the same) will show this to be false. Furthermore, `as.numeric()` confirms `date` converts to 19918 as expected, whereas the string ``"2024-07-14"`` cannot be converted and returns `NA`.
 
 
 ``` r
@@ -1383,7 +1383,7 @@ date
 ```
 
 ```
-## [1] "2024-07-13"
+## [1] "2024-07-14"
 ```
 
 ``` r
@@ -1394,14 +1394,14 @@ is.character(date)
 ## [1] FALSE
 ```
 ``` r
-identical(date, "2024-07-13")
+identical(date, "2024-07-14")
 ```
 
 ```
 ## [1] FALSE
 ```
 ``` r
-c(as.numeric(date), as.numeric("2024-07-13"))
+c(as.numeric(date), as.numeric("2024-07-14"))
 ```
 
 ``` warning
@@ -1409,7 +1409,7 @@ c(as.numeric(date), as.numeric("2024-07-13"))
 ```
 
 ```
-## [1] 19917    NA
+## [1] 19918    NA
 ```
 
 This is just to warn you that **even though they may print similarly, date objects and date-like strings are *NOT* the same**, so to avoid errors and unexpected behavior, make sure you properly convert all date data to be true date objects.
@@ -1428,38 +1428,38 @@ In lubridate, the [parser functions](https://lubridate.tidyverse.org/reference/y
 
 ``` r
 mdy(c(
-  "7/13/24, 07-13-2024, 071324, Jul 13 '24, Saturday, July 13th, 2024"
+  "7/14/24, 07-14-2024, 071424, Jul 14 '24, Sunday, July 14th, 2024"
 ))
 ```
 
 ```
-## [1] "2024-07-13" "2024-07-13" "2024-07-13" "2024-07-13" "2024-07-13"
+## [1] "2024-07-14" "2024-07-14" "2024-07-14" "2024-07-14" "2024-07-14"
 ```
 
 ``` r
 dmy(c(
-  "13/7/24, 13-07-2024, 130724, 13 Jul '24, Saturday, 13th of July, 2024"
+  "14/7/24, 14-07-2024, 140724, 14 Jul '24, Sunday, 14th of July, 2024"
 ))
 ```
 
 ```
-## [1] "2024-07-13" "2024-07-13" "2024-07-13" "2024-07-13" "2024-07-13"
+## [1] "2024-07-14" "2024-07-14" "2024-07-14" "2024-07-14" "2024-07-14"
 ```
 
 As you can see, you just need to tell R which order to expect the date components and it will handle the rest! We only demonstrated the `mdy()` and `dmy()` functions here since they are by far the most common formats, but the other functions all behave the same.
 
-One last parser. Sometimes data gives dates as a decimal, e.g. `` 2024-07-13 `` would be `` 2024.53 `` since it's the 195th day of the year which means it's `` (195-1)/366*100%=53% `` of the way into the year. ^[The -1 in the numerator is due to the date being treated as 12am midnight, hence the 195th day, `` 2024-07-13 `` is just about to start, so only 195 days have passed so far.] R also has a dedicated function for this. `date_decimal()` converts the decimal to a date+time object, which we can then round to the nearest date with [`round_date(...,unit="day")`{.R}](https://lubridate.tidyverse.org/reference/round_date.html) and drop the time component with `date()` which converts date+time objects to pure date objects (again, we are not covering date+time objects due to complexity & limited time).
+One last parser. Sometimes data gives dates as a decimal, e.g. `` 2024-07-14 `` would be `` 2024.533 `` since it's the 196th day of the year which means it's `` (196-1)/366*100%=53.3% `` of the way into the year. ^[The -1 in the numerator is due to the date being treated as 12am midnight, hence the 196th day, `` 2024-07-14 `` is just about to start, so only 196 days have passed so far.] R also has a dedicated function for this. `date_decimal()` converts the decimal to a date+time object, which we can then round to the nearest date with [`round_date(...,unit="day")`{.R}](https://lubridate.tidyverse.org/reference/round_date.html) and drop the time component with `date()` which converts date+time objects to pure date objects (again, we are not covering date+time objects due to complexity & limited time).
 
 ``` r
 # generate a vector of elapsed 21st century dates
 # in decimal format for demo purposes
-# (here, runif uniformly samples 4 numbers from 2000 to 2024.53)
-dates2 <- runif(4, 2000, 2024.53)
+# (here, runif uniformly samples 4 numbers from 2000 to 2024.533)
+dates2 <- runif(4, 2000, 2024.533)
 dates2
 ```
 
 ```
-## [1] 2006.513 2009.128 2014.052 2022.278
+## [1] 2006.514 2009.129 2014.054 2022.281
 ```
 
 ``` r
@@ -1469,7 +1469,7 @@ dates2
 ```
 
 ```
-## [1] "2006-07-07" "2009-02-17" "2014-01-20" "2022-04-13"
+## [1] "2006-07-07" "2009-02-17" "2014-01-21" "2022-04-14"
 ```
 
 There is also a reverse function `decimal_date()` that converts a date back into a decimal.
@@ -1480,7 +1480,7 @@ decimal_date(dates2)
 ```
 
 ```
-## [1] 2006.512 2009.129 2014.052 2022.279
+## [1] 2006.512 2009.129 2014.055 2022.282
 ```
 
 
@@ -1551,7 +1551,7 @@ leap_year(c(1900, 2000, 2024, 2100))
 
 Lubridate provides many get/set functions (often called getters and setters) for getting and setting different components (i.e. properties) associated with a date. Some common ones include `year()`, `month()`, `day()`, `wday()` (for day of the week), and `quarter()`.
 
-Let's continue using the generated `dates2` object above, except I will add today `` 2024-07-13 `` into the vector as the first element.
+Let's continue using the generated `dates2` object above, except I will add today `` 2024-07-14 `` into the vector as the first element.
 
 
 ``` r
@@ -1561,7 +1561,7 @@ dates2
 ```
 
 ```
-## [1] "2024-07-13" "2006-07-07" "2009-02-17" "2014-01-20" "2022-04-13"
+## [1] "2024-07-14" "2006-07-07" "2009-02-17" "2014-01-21" "2022-04-14"
 ```
 
 ``` r
@@ -1586,7 +1586,7 @@ day(dates2)
 ```
 
 ```
-## [1] 13  7 17 20 13
+## [1] 14  7 17 21 14
 ```
 
 ``` r
@@ -1595,7 +1595,7 @@ wday(dates2)
 ```
 
 ```
-## [1] 7 6 3 2 4
+## [1] 1 6 3 3 5
 ```
 
 ``` r
@@ -1625,7 +1625,7 @@ wday(dates2, label = TRUE, abbr = FALSE)
 ```
 
 ```
-## [1] Saturday  Friday    Tuesday   Monday    Wednesday
+## [1] Sunday   Friday   Tuesday  Tuesday  Thursday
 ## 7 Levels: Sunday < Monday < Tuesday < Wednesday < Thursday < ... < Saturday
 ```
 
@@ -1645,7 +1645,7 @@ new_dates2
 ```
 
 ```
-## [1] "2000-07-13" "2000-07-07" "2000-02-17" "2000-01-20" "2000-04-13"
+## [1] "2000-07-14" "2000-07-07" "2000-02-17" "2000-01-21" "2000-04-14"
 ```
 
 ``` r
@@ -1655,7 +1655,7 @@ new_dates2
 ```
 
 ```
-## [1] "2000-07-13" "2001-07-07" "2002-02-17" "2003-01-20" "2004-04-13"
+## [1] "2000-07-14" "2001-07-07" "2002-02-17" "2003-01-21" "2004-04-14"
 ```
 
 This works with all the getters above, feel free to experiment more with this on your own. There are also several other getter/setter functions such as `qday()` for day of the quarter, `week()` for week number, and `semester()` for 1^st^ or 2^nd^ semester of the year.
@@ -1675,7 +1675,7 @@ date + 1
 ```
 
 ```
-## [1] "2024-07-14"
+## [1] "2024-07-15"
 ```
 
 ``` r
@@ -1684,7 +1684,7 @@ date - 1000
 ```
 
 ```
-## [1] "2021-10-17"
+## [1] "2021-10-18"
 ```
 
 ``` r
@@ -1695,7 +1695,7 @@ as.numeric(date - mdy("1/1/00"))
 ```
 
 ```
-## [1] 8960
+## [1] 8961
 ```
 ``` r
 # make a sequence of dates from today to the end of the month
@@ -1703,22 +1703,22 @@ seq(date, mdy("7/31/24"), by = 1)
 ```
 
 ```
-##  [1] "2024-07-13" "2024-07-14" "2024-07-15" "2024-07-16" "2024-07-17"
-##  [6] "2024-07-18" "2024-07-19" "2024-07-20" "2024-07-21" "2024-07-22"
-## [11] "2024-07-23" "2024-07-24" "2024-07-25" "2024-07-26" "2024-07-27"
-## [16] "2024-07-28" "2024-07-29" "2024-07-30" "2024-07-31"
+##  [1] "2024-07-14" "2024-07-15" "2024-07-16" "2024-07-17" "2024-07-18"
+##  [6] "2024-07-19" "2024-07-20" "2024-07-21" "2024-07-22" "2024-07-23"
+## [11] "2024-07-24" "2024-07-25" "2024-07-26" "2024-07-27" "2024-07-28"
+## [16] "2024-07-29" "2024-07-30" "2024-07-31"
 ```
 ``` r
-# make a sequence of every Saturday from today to the end of the year
+# make a sequence of every Sunday from today to the end of the year
 seq(date, mdy("12/31/24"), by = 7)
 ```
 
 ```
-##  [1] "2024-07-13" "2024-07-20" "2024-07-27" "2024-08-03" "2024-08-10"
-##  [6] "2024-08-17" "2024-08-24" "2024-08-31" "2024-09-07" "2024-09-14"
-## [11] "2024-09-21" "2024-09-28" "2024-10-05" "2024-10-12" "2024-10-19"
-## [16] "2024-10-26" "2024-11-02" "2024-11-09" "2024-11-16" "2024-11-23"
-## [21] "2024-11-30" "2024-12-07" "2024-12-14" "2024-12-21" "2024-12-28"
+##  [1] "2024-07-14" "2024-07-21" "2024-07-28" "2024-08-04" "2024-08-11"
+##  [6] "2024-08-18" "2024-08-25" "2024-09-01" "2024-09-08" "2024-09-15"
+## [11] "2024-09-22" "2024-09-29" "2024-10-06" "2024-10-13" "2024-10-20"
+## [16] "2024-10-27" "2024-11-03" "2024-11-10" "2024-11-17" "2024-11-24"
+## [21] "2024-12-01" "2024-12-08" "2024-12-15" "2024-12-22" "2024-12-29"
 ```
 ``` r
 # has independence day already happened this year?
@@ -1744,7 +1744,7 @@ sort(dates2)
 ```
 
 ```
-## [1] "2006-07-07" "2009-02-17" "2014-01-20" "2022-04-13" "2024-07-13"
+## [1] "2006-07-07" "2009-02-17" "2014-01-21" "2022-04-14" "2024-07-14"
 ```
 
 ``` r
@@ -1771,7 +1771,7 @@ format(date, "%m/%d/%y")
 ```
 
 ```
-## [1] "07/13/24"
+## [1] "07/14/24"
 ```
 
 ``` r
@@ -1780,7 +1780,7 @@ format(date, "%b %d, %Y")
 ```
 
 ```
-## [1] "Jul 13, 2024"
+## [1] "Jul 14, 2024"
 ```
 
 ``` r
@@ -1789,7 +1789,7 @@ format(date, "%A, %B %e, %Y")
 ```
 
 ```
-## [1] "Saturday, July 13, 2024"
+## [1] "Sunday, July 14, 2024"
 ```
 
 A full list of these percent codes can be found in the help page of `strptime()`, a base R function for parsing date/time objects.
@@ -1824,7 +1824,7 @@ library(tibble)
 df <- tibble(
   name = c("Alice", "Bob", "Charlie"),
   sex = c("F", "M", "M"),
-  birthday = mdy(c("7/13/03", "7/4/99", "10/31/06")),
+  birthday = mdy(c("7/14/03", "7/4/99", "10/31/06")),
   age = floor(as.numeric(today() - birthday)/365.24),
   declared_major = c(TRUE, TRUE, FALSE)
 )
@@ -1836,7 +1836,7 @@ df
 ## # A tibble: 3 × 6
 ##   name    sex   birthday     age declared_major school    
 ##   <chr>   <chr> <date>     <dbl> <lgl>          <chr>     
-## 1 Alice   F     2003-07-13    21 TRUE           UW-Madison
+## 1 Alice   F     2003-07-14    21 TRUE           UW-Madison
 ## 2 Bob     M     1999-07-04    25 TRUE           UW-Madison
 ## 3 Charlie M     2006-10-31    17 FALSE          UW-Madison
 ```
@@ -1881,7 +1881,7 @@ Again, the extension only exists to "hint" at the contents of a file. You can st
 
 Some important takeaways from all this:
 
- - Some data "formats" (like CSV, TSV, JSON, or XML) are really just simple text files just like .txt files. In this class, when we say "CSV" we generally refer to the specific way the text is formatted (i.e. values separated by commas) inside the file, not just the extension.
+ - Some data "formats" (like CSV, TSV, JSON, or XML) are really just simple text files (similar to the .txt files often created by text editor programs). In this class, when we say "CSV" we generally refer to the specific way the text is formatted (i.e. values separated by commas) inside the file, not just the extension.
  - Some data formats (like XLS(X) or databases) are not simple text files but specialized formats, and often need different treatment.
  - Just changing the extension of a file does NOT change the contents. E.g. changing a .csv extension to .zip does NOT create a valid zip file, no more than painting stripes on a horse turns it into a zebra.
 
@@ -1900,38 +1900,26 @@ We **highly recommended you force your device to always show extensions** which 
 For text-format data files, we once again turn to [readr](https://readr.tidyverse.org/) which has a suite of functions for importing them, of which we will only focus on a few:
 
  - `read_csv()` is used to read in CSV files where columns of data are separated by commas,
- - `read_tsv()` and `read_table()` are used to read in files where columns of data are separated by tabs or by whitespace (which can include varying numbers of tabs, spaces, and some other special space-like characters),
+ - `read_tsv()` is used to read in files where columns of data are separated by tabs,
  - `read_delim()` is the general form of these `read_...` functions and can be used to read in files with any other type of separator.
+
+:::{.note}
+Note the underscore in the function names. `read_csv()` which is from readr is NOT the same as `read.csv()` which is a base R function. They are similar, but readr's `read_csv()` has some minor improvements in speed and consistency so is recommended by this class.
+
+Also note that if you do not have readr (or tidyverse) loaded, attempting to [TAB]{.k} autocomplete the `read_csv()` function will instead give you `read.csv()` so again, remember to set your working directory and load necessary libraries whenever (re)opening Rstudio before starting/resuming your work.
+:::
 
 One additional non-text format will be covered in this course: XLS(X) spreadsheet data, commonly generated by Excel or similar spreadsheet software. These are encoded differently and cannot be opened by simple text editors, but can be easily read in using the `read_excel()` function from the [readxl](https://readxl.tidyverse.org) package, which is installed with Tidyverse but is NOT a core package, i.e. it must always be loaded explicitly.
 
-To demonstrate the basic functionality of all these functions, I've prepared a dataset
+To demonstrate the basic functionality of these different functions, I've prepared and exported a dataset on 21^st^ century volcanic eruptions to all the formats listed above so we can practice reading them in. 
 
 
 
 
 
-``` r
-eruptions_recent = read_csv("data/eruptions_recent.csv")
-eruptions_recent
-```
 
-```
-## # A tibble: 71 × 6
-##    name                  start      stop       duration confirmed   vei
-##    <chr>                 <date>     <date>        <dbl> <lgl>     <dbl>
-##  1 Kilauea               2024-06-03 2024-06-03        0 TRUE         NA
-##  2 Atka Volcanic Complex 2024-03-27 2024-03-27        0 TRUE         NA
-##  3 Ahyi                  2024-01-01 2024-03-27       86 TRUE         NA
-##  4 Kanaga                2023-12-18 2023-12-18        0 TRUE          1
-##  5 Ruby                  2023-09-14 2023-09-15        1 TRUE          1
-##  6 Shishaldin            2023-07-11 2023-11-03      115 TRUE          3
-##  7 Mauna Loa             2022-11-27 2022-12-10       13 TRUE          0
-##  8 Ahyi                  2022-11-18 2023-06-11      205 TRUE          1
-##  9 Kilauea               2021-09-29 2023-09-16      717 TRUE          0
-## 10 Pavlof                2021-08-05 2022-12-07      489 TRUE          2
-## # ℹ 61 more rows
-```
+
+
 
 
 
