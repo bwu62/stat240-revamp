@@ -383,8 +383,10 @@ The [`letters`{.R}](https://rdrr.io/r/base/Constants.html) vector in the last se
 
 ```{r character-vector-example}
 # creating a demo character vector, e.g. these are my friends!
-friends <- c("Alice", "Bob", "Charlie", "Donny", "Emmy", 
-             "Francine", "Genevieve", "Heinemann")
+friends <- c(
+  "Alice", "Bob", "Charlie", "Donny", "Emmy",
+  "Francine", "Genevieve", "Heinemann"
+)
 friends
 # you can also use rep, e.g. I can assign my friends into 2 groups
 groups <- rep(LETTERS[1:2], time = 4)
