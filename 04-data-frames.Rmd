@@ -133,6 +133,9 @@ To demonstrate the basic functionality of these different functions, I've prepar
  - [`eruptions_recent.delim`](data/eruptions_recent.delim)
  - [`eruptions_recent.xlsx`](data/eruptions_recent.xlsx)
 
+
+#### CSV file
+
 For example, here's the first 6 lines of the [`eruptions_recent.csv`](data/eruptions_recent.csv) CSV file (for each eruption, we have the volcano name, start and stop dates, duration in days, if its certainty is confirmed, and the VEI or volcano explosivity index).
 
 ```{embed,echo=1:6,file="data/eruptions_recent.csv"}
@@ -172,6 +175,8 @@ Several things to note here:
    - Here, you can click on the arrow to see a list of all columns, as well as their names, types, and the first few values.
    - You can also click here on the object name itself here to open a new tab with a full spreadsheet-like view of the entire data frame, where you can inspect the data frame, and even search for values and sort by columns (note: sorting here is just for preview and does not affect the underlying object).
 
+
+#### TSV file
 
 
 
