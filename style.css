@@ -45,6 +45,10 @@ body{
   line-height:1.5;
 }
 
+main li{
+  margin-bottom: 0.3rem;
+}
+
 /* underline links... */
 main p a, main li a, div.popover a{
   text-decoration: underline;
