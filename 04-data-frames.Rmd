@@ -178,6 +178,40 @@ Several things to note here:
 
 #### TSV file
 
+The other functions are all similar. Here's the first 6 lines of the TSV-version of the same dataset, [`eruptions_recent.tsv`](data/eruptions_recent.tsv) (the way these notes are built doesn't diaplay tabs properly, but if you view the TSV file directly, you can see them).
+
+```{embed,echo=1:6,file="data/eruptions_recent.tsv"}
+```
+
+Here it is read in with the `read_tsv()` function. This time, to save space, I've disabled the diagnostic messages by setting `show_col_types = FALSE` and reduced the final print checking to 6 lines. Otherwise, you can see we have the exact same result.
+
+```{r}
+# read in TSV file from link
+eruptions_recent <- read_tsv(
+  "https://bwu62.github.io/stat240-revamp/data/eruptions_recent.tsv",
+  show_col_types = FALSE
+)
+# print first 6 lines instead of 10 to still check, but save space
+print(eruptions_recent, n = 6)
+```
+
+
+#### Arbitrary delimited file
+
+If your data file has columns delimited (i.e. separated) by other characters, you can use the `read_delim()` function, which is a generalization of the previous two to read it in. Just set the `delim` argument to whatever the delimiter is, and you're good to go. Here's the first 6 lines of [`eruptions_recent.delim`](data/eruptions_recent.delim) where the columns are separated by vertical bar `|` characters, followed by the line of code to import it and check the result.
+
+```{embed,echo=1:6,file="data/eruptions_recent.delim"}
+```
+```{r}
+# read in | delimited file from link
+eruptions_recent <- read_delim(
+  "https://bwu62.github.io/stat240-revamp/data/eruptions_recent.delim",
+  delim = "|",
+  show_col_types = FALSE
+)
+# print first 6 lines instead of 10 to still check, but save space
+print(eruptions_recent, n = 6)
+```
 
 
 
