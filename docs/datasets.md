@@ -31,7 +31,6 @@ Here's a convenient list of all dataset files generated. Note that some files ma
  - [`eruptions_recent.delim`](data/eruptions_recent.delim)
  - [`eruptions_recent.tsv`](data/eruptions_recent.tsv)
  - [`eruptions_recent.xlsx`](data/eruptions_recent.xlsx)
- - [`eruptions_recent2.csv`](data/eruptions_recent2.csv)
 
 Alternatively, you can also run the following line, which will **download ALL files above to your current working directory**. It's recommended to first set your working directory to an appropriate place before running this, e.g. to the `data/` directory in your `STAT240/` course folder.
 

@@ -1056,7 +1056,8 @@ cat(
         ""
       )
     )
-  ), sep = ""
+  ),
+  sep = ""
 )
 # please pardon the uneven text-wrapping of the output below:
 ```
@@ -1332,7 +1333,7 @@ date
 ## [1] "2024-07-15"
 ```
 
-We can see that even though our date object has `"Date"` class, it actually has `"double"` type, which means behind the scenes, it's secretly stored as a number. ^[The distrinction between class, type, and mode (which we haven't even mentioned and won't ever discuss) is highly technical to the mechanics of R and not worth concerning yourself over. If you're dying of curiosity, I recommend this excellent video on the matter: <https://youtu.be/RwEzWZA9uTw>{target="_blank"}.] If you `unclass()` the object, i.e. strip away the `"Date"` property, you can see it's just the number 19919 underneath, and you can check that in fact Jul 15, 2024 is indeed [19919 days after Jan 1 1970](https://www.wolframalpha.com/input?i=19919+days+after+Jan+1+1970).
+We can see that even though our date object has `"Date"` class, it actually has `"double"` type, which means behind the scenes, it's secretly stored as a number. ^[The distinction between class, type, and mode (which we haven't even mentioned and won't ever discuss) is highly technical to the mechanics of R and not worth concerning yourself over. If you're dying of curiosity, I recommend this excellent video on the matter: <https://youtu.be/RwEzWZA9uTw>{target="_blank"}.] If you `unclass()` the object, i.e. strip away the `"Date"` property, you can see it's just the number 19919 underneath, and you can check that in fact Jul 15, 2024 is indeed [19919 days after Jan 1 1970](https://www.wolframalpha.com/input?i=19919+days+after+Jan+1+1970).
 
 
 ``` r
@@ -1783,4 +1784,3 @@ format(date, "%A, %B %e, %Y")
 ```
 
 A full list of these percent codes can be found in the help page of `strptime()`, a base R function for parsing date/time objects.
-

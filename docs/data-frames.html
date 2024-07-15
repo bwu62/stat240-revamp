@@ -357,7 +357,7 @@ Ruby|2023-09-14|2023-09-15|1|TRUE|1</code></pre>
 <li>
 <code>col_names</code>: controls handling of column names:
 <ul>
-<li>If set to <code>TRUE</code>, first row of file will be used as column names,</li>
+<li>Under the default value <code>TRUE</code>, first row of file will be used as column names,</li>
 <li>If set to <code>FALSE</code>, placeholder column names will be used, and first row of file will be treated as data,</li>
 <li>If set to a character vector, that vector will be used as the column names, and again first row of file will be treated as data.</li>
 </ul>
@@ -382,11 +382,15 @@ For example, suppose a data frame had a numeric column, a date column, a charact
 </ul>
 </li>
 <li>
-<code>na</code>:</li>
-<li><code>comment</code></li>
-<li><code>skip</code></li>
-<li><code>n_max</code></li>
-<li><code>id</code></li>
+<code>na</code>: sets a vector of values to be treated as missing; defaults to <code>c("", "NA")</code>, i.e. empty strings and <code>"NA"</code> will be treated as missing</li>
+<li>
+<code>comment</code>: some data files have comment lines, usually (but not always) beginning with a hashtag <code>#</code> character; these can be ignored by setting <code>comment = "#"</code>
+</li>
+<li>
+<code>skip</code>, <code>n_max</code>: these control how many lines are skipped and how many lines maximum are read in the file</li>
+<li>
+<code>id</code>: if the filename contains important information, setting <code>id = TRUE</code>
+</li>
 <li><code>show_col_types</code></li>
 </ul>
 </li>

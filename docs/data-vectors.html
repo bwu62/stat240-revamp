@@ -622,7 +622,8 @@
 <span>        <span class="st">""</span></span>
 <span>      <span class="op">)</span></span>
 <span>    <span class="op">)</span></span>
-<span>  <span class="op">)</span>, sep <span class="op">=</span> <span class="st">""</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  sep <span class="op">=</span> <span class="st">""</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co"># please pardon the uneven text-wrapping of the output below:</span></span></code></pre></div>
 <pre class="wrapCode">
@@ -749,7 +750,7 @@
 <span><span class="va">date</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/now.html">today</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">date</span></span></code></pre></div>
 <pre><code>## [1] "2024-07-15"</code></pre>
-<p>We can see that even though our date object has <code>"Date"</code> class, it actually has <code>"double"</code> type, which means behind the scenes, it’s secretly stored as a number. <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;The distrinction between class, type, and mode (which we haven’t even mentioned and won’t ever discuss) is highly technical to the mechanics of R and not worth concerning yourself over. If you’re dying of curiosity, I recommend this excellent video on the matter: &lt;a href="https://youtu.be/RwEzWZA9uTw" target="_blank"&gt;https://youtu.be/RwEzWZA9uTw&lt;/a&gt;.&lt;/p&gt;'><sup>16</sup></a> If you <code><a href="https://rdrr.io/r/base/class.html">unclass()</a></code> the object, i.e. strip away the <code>"Date"</code> property, you can see it’s just the number 19919 underneath, and you can check that in fact Jul 15, 2024 is indeed <a href="https://www.wolframalpha.com/input?i=19919+days+after+Jan+1+1970">19919 days after Jan 1 1970</a>.</p>
+<p>We can see that even though our date object has <code>"Date"</code> class, it actually has <code>"double"</code> type, which means behind the scenes, it’s secretly stored as a number. <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;The distinction between class, type, and mode (which we haven’t even mentioned and won’t ever discuss) is highly technical to the mechanics of R and not worth concerning yourself over. If you’re dying of curiosity, I recommend this excellent video on the matter: &lt;a href="https://youtu.be/RwEzWZA9uTw" target="_blank"&gt;https://youtu.be/RwEzWZA9uTw&lt;/a&gt;.&lt;/p&gt;'><sup>16</sup></a> If you <code><a href="https://rdrr.io/r/base/class.html">unclass()</a></code> the object, i.e. strip away the <code>"Date"</code> property, you can see it’s just the number 19919 underneath, and you can check that in fact Jul 15, 2024 is indeed <a href="https://www.wolframalpha.com/input?i=19919+days+after+Jan+1+1970">19919 days after Jan 1 1970</a>.</p>
 <div class="sourceCode" id="cb337"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># looks like a date</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">date</span><span class="op">)</span></span></code></pre></div>

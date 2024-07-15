@@ -350,7 +350,7 @@ Some arguments below can be used in several ways, e.g. they may accept either a 
 
  - The `read_csv()`, `read_tsv()`, and `read_delim()` functions from readr share a single help page, and have many arguments in common (but not all, again see help page for more). Some useful additional arguments include:
    - `col_names`: controls handling of column names:
-     - If set to `TRUE`, first row of file will be used as column names,
+     - Under the default value `TRUE`, first row of file will be used as column names,
      - If set to `FALSE`, placeholder column names will be used, and first row of file will be treated as data,
      - If set to a character vector, that vector will be used as the column names, and again first row of file will be treated as data.
    - `col_types`: controls handling of column types:
@@ -362,11 +362,10 @@ Some arguments below can be used in several ways, e.g. they may accept either a 
        - `c` = character, for both text/categorical data as well as data in a non-standard format, to be parsed/coerced later
        
        For example, suppose a data frame had a numeric column, a date column, a character column, and a non-standard column that needs to be parsed later; you would set `col_types = "dDcc"` to specify this.
-   - `na`: 
-   - `comment`
-   - `skip`
-   - `n_max`
-   - `id`
+   - `na`: sets a vector of values to be treated as missing; defaults to `c("", "NA")`, i.e. empty strings and `"NA"` will be treated as missing
+   - `comment`: some data files have comment lines, usually (but not always) beginning with a hashtag `#` character; these can be ignored by setting `comment = "#"`
+   - `skip`, `n_max`: these control how many lines are skipped and how many lines maximum are read in the file
+   - `id`: if the filename contains important information, setting `id = TRUE`
    - `show_col_types`
 
 
