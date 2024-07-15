@@ -505,7 +505,8 @@ cat(
         ""
       )
     )
-  ), sep = ""
+  ),
+  sep = ""
 )
 # please pardon the uneven text-wrapping of the output below:
 ```
@@ -904,4 +905,3 @@ format(date, "%A, %B %e, %Y")
 ```
 
 A full list of these percent codes can be found in the help page of `strptime()`, a base R function for parsing date/time objects.
-
