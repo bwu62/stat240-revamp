@@ -45,6 +45,14 @@ stuff to add:
 - pare down more, use focused sample to calibrate TAs/instructors if needed?
 - glossary?
 - DT datatable fancy printouts?
+- basic data literacy concepts?
+  - percent of, percent change, X change
+  - percent vs points (and point difference)
+  - bad plots
+  - biases
+    - esp. survivorship, selection (e.g. sampling, berkson), generalization (e.g. WEIRD)
+  - fallacies
+    - prosecutor, gambler, correlation, dredging, regression to mean
 
 
 other notes to self:
