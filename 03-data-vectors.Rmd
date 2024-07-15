@@ -598,6 +598,13 @@ prices
 is.numeric(prices)
 ```
 
+This will also work with things like percent symbols, but note it simply ignores the symbol instead of treating it as dividing by 100.
+
+```{r }
+# demonstrate parsing percentages
+parse_number(c("30%", "100%", "1,500%"))
+```
+
 See the help page for `parse_number()` for more examples and usage notes.
 
 
