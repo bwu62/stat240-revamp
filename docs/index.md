@@ -1,7 +1,7 @@
 --- 
 title: "STAT 240 Revamp"
 author: "Bi Cheng Wu, Bret Larget, Cameron Jones"
-date: "2024-07-14"
+date: "2024-07-15"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -45,6 +45,14 @@ stuff to add:
 - pare down more, use focused sample to calibrate TAs/instructors if needed?
 - glossary?
 - DT datatable fancy printouts?
+- basic data literacy concepts?
+  - percent of, percent change, X change
+  - percent vs points (and point difference)
+  - bad plots
+  - biases
+    - esp. survivorship, selection (e.g. sampling, berkson), generalization (e.g. WEIRD)
+  - fallacies
+    - prosecutor, gambler, correlation, dredging, regression to mean
 
 
 other notes to self:

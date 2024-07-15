@@ -148,7 +148,7 @@ If you have a link to a dataset, you can directly pass it into `read_csv()` and 
 library(readr)
 ```
 ```{r,include=F}
-options(width=70)
+options(width = 70)
 ```
 ```{r,message=T,class.message="message"}
 # read in CSV file from link
@@ -157,7 +157,7 @@ eruptions_recent <- read_csv(
 )
 ```
 ```{r,include=F}
-options(width=80)
+options(width = 80)
 ```
 ```{r,message=T,class.message="message"}
 # print first few lines of result to check

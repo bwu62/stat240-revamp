@@ -27,7 +27,7 @@ library(lubridate)
 df <- tibble(
   name = c("Alice", "Bob", "Charlie"),
   sex = c("F", "M", "M"),
-  date_of_birth = mdy(c("7/14/03", "7/4/99", "10/31/06")),
+  date_of_birth = mdy(c("7/15/03", "7/4/99", "10/31/06")),
   age = floor(as.numeric(today() - birthday)/365.24),
   declared_major = c(TRUE, TRUE, FALSE),
   school = "UW-Madison"
@@ -40,7 +40,7 @@ df
 ## # A tibble: 3 × 6
 ##   name    sex   date_of_birth   age declared_major school    
 ##   <chr>   <chr> <date>        <dbl> <lgl>          <chr>     
-## 1 Alice   F     2003-07-14       21 TRUE           UW-Madison
+## 1 Alice   F     2003-07-15       21 TRUE           UW-Madison
 ## 2 Bob     M     1999-07-04       25 TRUE           UW-Madison
 ## 3 Charlie M     2006-10-31       17 FALSE          UW-Madison
 ```
@@ -200,7 +200,7 @@ eruptions_recent
 Several things to note here:
 
  - Some diagnostic messages will be printed while reading, as well as any warnings/errors if it encounters anything unsual (no errors/warnings are observed here).
- - While reading in, R will try to intelligently guess the data types of each column if they're in a standard format. You can see here that since all columns in the CSV were already very neat and written in a standard format (e.g. dates in YYYY-MM-DD, numbers and logicals written in common syntax, missing values written as NA), everything automagically converted: `name` is left as a character, `start` and `stop` parsed to dates, `duration` and `vei` parsed to numeric, and `confirmed` became logical.
+ - While reading in, R will try to intelligently guess the data types of each column if they're in a standard format. You can see here that since all columns in the CSV were already very neat and written in a standard format (e.g. dates in `YYYY-MM-DD`, numbers and logicals written in common syntax, missing values written as NA), everything automagically converted: `name` is left as a character, `start` and `stop` parsed to dates, `duration` and `vei` parsed to numeric, and `confirmed` became logical.
    - If columns are not written in a standard format, this may not work as well (if at all) and you may need to do more data cleaning yourself, which we will touch on later.
  - You can run just the data frame name again to print the first few rows. This is equivalent to running `print(eruptions_recent)`.
    - Printing is often a useful way to double check for errors. By default, only the first 10 lines are printed to save space.
@@ -289,9 +289,92 @@ print(eruptions_recent, n = 5)
 
 #### XLS(X) file
 
-Data is also commonly encountered as an XLS/XLSX spreadsheet file, which can be read by [`read_excel()`{.R}](https://rdrr.io/cran/readxl/man/read_excel.html), which remember is from [readxl](https://readxl.tidyverse.org) not [readr](https://readr.tidyverse.org). The [`eruptions_recent.xlsx`](data/eruptions_recent.xlsx) file again has the same dataset but exported to a XLSX. Since XLSX is not a text format, it can't be embedded here, but here's what the first few rows look like when opened in Excel:
+Data is also commonly encountered as an XLS/XLSX spreadsheet file, which can be read with readxl's [`read_excel()`{.R}](https://rdrr.io/cran/readxl/man/read_excel.html) function. The [`eruptions_recent.xlsx`](data/eruptions_recent.xlsx) file again has the same dataset but exported to XLSX. Since XLSX is not a text format, it can't be embedded here, but here's what the first few rows look like when opened in Excel:
 
-![](https://i.imgur.com/lZbyh6Y.png)
+![](https://i.imgur.com/lZbyh6Y.png){}
+
+Unfortunately, readxl does not yet support [reading from links](https://github.com/tidyverse/readxl/issues/278) so the data file must be downloaded before loading.
+
+
+``` r
+# load readxl, which is NOT core tidyverse, so must be imported explicitly
+library(readxl)
+```
+
+``` r
+# I already have the file downloaded to data/
+# inside my current working directory
+dir.exists("data/")
+```
+
+```
+## [1] TRUE
+```
+
+``` r
+file.exists("data/eruptions_recent.xlsx")
+```
+
+```
+## [1] TRUE
+```
+
+``` r
+eruptions_recent <- read_xlsx("data/eruptions_recent.xlsx")
+# print first 5 lines
+print(eruptions_recent, n = 5)
+```
+
+```
+## # A tibble: 71 × 6
+##   volcano       start               stop                duration confirmed   vei
+##   <chr>         <dttm>              <dttm>                 <dbl> <chr>     <dbl>
+## 1 Kilauea       2024-06-03 00:00:00 2024-06-03 00:00:00        0 TRUE         NA
+## 2 Atka Volcani… 2024-03-27 00:00:00 2024-03-27 00:00:00        0 TRUE         NA
+## 3 Ahyi          2024-01-01 00:00:00 2024-03-27 00:00:00       86 TRUE         NA
+## 4 Kanaga        2023-12-18 00:00:00 2023-12-18 00:00:00        0 TRUE          1
+## 5 Ruby          2023-09-14 00:00:00 2023-09-15 00:00:00        1 TRUE          1
+## # ℹ 66 more rows
+```
+
+Oops, looks like start/stop was read as a datetime instead of a date. We'll learn later how to fix this, but for now we're moving on.
+
+
+### Aside: extra arguments
+
+The files above have been prepared to be easily imported without needing additional arguments, but in general it's common to need to set other arguments in the functions to ge them to import properly. Below is a BRIEF selection of some of the most useful arguments available, loosely ordered by order of importance.
+
+:::{.note}
+Some arguments below can be used in several ways, e.g. they may accept either a TRUE/FALSE or a vector of numbers or strings, etc. and may have different behavior depending on the input. We will highlight the most common usages here, see help page for more details.
+:::
+
+ - The `read_csv()`, `read_tsv()`, and `read_delim()` functions from readr share a single help page, and have many arguments in common (but not all, again see help page for more). Some useful additional arguments include:
+   - `col_names`: controls handling of column names:
+     - If set to `TRUE`, first row of file will be used as column names,
+     - If set to `FALSE`, placeholder column names will be used, and first row of file will be treated as data,
+     - If set to a character vector, that vector will be used as the column names, and again first row of file will be treated as data.
+   - `col_types`: controls handling of column types:
+     - The best way to set this is with a single word string where each letter represents in order from left to right the column type to use:
+       - `d` = double (i.e. a "normal" numeric value)
+       - `n` = number, which is a special readr format that parses "human readable" non-standard numbers such as "$1,000" or "150%" (closely related to the `parse_number()` function from section \@ref(coercion))
+       - `l` = logical, i.e. TRUE/FALSE
+       - `D` = date, but this only works if dates are in a standard format like `"YYYY-MM-DD"`; it will NOT parse non-standard formats
+       - `c` = character, for both text/categorical data as well as data in a non-standard format, to be parsed/coerced later
+       
+       For example, suppose a data frame had a numeric column, a date column, a character column, and a non-standard column that needs to be parsed later; you would set `col_types = "dDcc"` to specify this.
+   - `na`: 
+   - `comment`
+   - `skip`
+   - `n_max`
+   - `id`
+   - `show_col_types`
+
+
+
+
+
+
+
 
 
 
