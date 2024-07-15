@@ -26,9 +26,10 @@ cat(glue::glue('``` r
 df <- tibble(
   name = c("Alice", "Bob", "Charlie"),
   sex = c("F", "M", "M"),
-  birthday = mdy(c("{format(today()-years(21),"%m/%d")%>%stringr::str_replace_all("(^|/)0","\\\\1")}/{format(today()-years(21),"%y")}", "7/4/99", "10/31/06")),
+  date_of_birth = mdy(c("{format(today()-years(21),"%m/%d")%>%stringr::str_replace_all("(^|/)0","\\\\1")}/{format(today()-years(21),"%y")}", "7/4/99", "10/31/06")),
   age = floor(as.numeric(today() - birthday)/365.24),
-  declared_major = c(TRUE, TRUE, FALSE)
+  declared_major = c(TRUE, TRUE, FALSE),
+  school = "UW-Madison"
 )
 # print df
 df
@@ -38,8 +39,8 @@ df
 df <- tibble(
   name = c("Alice", "Bob", "Charlie"),
   sex = c("F", "M", "M"),
-  birthday = c(today() - years(21), mdy(c("7/4/99", "10/31/06"))),
-  age = floor(as.numeric(today() - birthday) / 365.24),
+  date_of_birth = c(today() - years(21), mdy(c("7/4/99", "10/31/06"))),
+  age = floor(as.numeric(today() - date_of_birth) / 365.24),
   declared_major = c(TRUE, TRUE, FALSE),
   school = "UW-Madison"
 )
@@ -50,7 +51,7 @@ Note the following:
 
  - The syntax inside `tibble()` is always `column_name = vector_of_data, next_column_name = next_vector_of_data, ...` where each vector must be the same length.
  - The vectors do not have to be pre-created; you canc reate them as you go along.
- - You can reference another column immediately after creating it inside the function, e.g. `birthday` was created, and then immediately used on the next line to help create `age` (by the way `age` here is approximately computed as number of days since birth divided by 365.24, the approximate number of days in a year, then rounded down following convention).
+ - You can reference another column immediately after creating it inside the function, e.g. `date_of_birth` was created, and then immediately used on the next line to help create `age` (by the way `age` here is approximately computed as number of days since birth divided by 365.24, the approximate number of days in a year, then rounded down following convention).
  - Data frames can, and almost always do contain many columns each with a different type. However, as usual a single column---which is still a vector!---can only contain a SINGLE type of data inside it, e.g. you cannot have a column with both numbers and characters simultaneously.
  - Printing the df by either just writing it on a new line, or with the `print()` function (same thing) will show not only the first few rows, but also other info like
    - column (and row) names,
