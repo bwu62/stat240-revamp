@@ -559,7 +559,7 @@ c(min(state.name), max(state.name))
 
 
 
-## Coercion (converting types)
+## Coercion (converting types) {#coercion}
 
 
 Sometimes, we read data in and it may need to be converted before it's usable. E.g. let's say you read in a list of prices from some catalog and you get the following character vector:
