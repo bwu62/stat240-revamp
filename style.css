@@ -53,6 +53,9 @@ p a:has(>code.sourceCode),li a:has(>code.sourceCode){
   color: #212529 !important;
   text-decoration-color: #ccc;
 }
+a{
+  text-underline-offset:12%;
+}
 
 /* ...except in footnotes */
 a.footnote-ref{
