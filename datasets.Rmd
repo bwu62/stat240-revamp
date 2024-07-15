@@ -29,7 +29,7 @@ if(!dir.exists("data/")) dir.create("data/")
 Here's a convenient list of all dataset files generated. Note that some files may automatically open a download prompt while others may not. To force download, right click on a file link and choose "Save link as".
 
 ```{r,echo=F,results='asis'}
-files = list.files('data')
+files <- list.files('data')
 write_lines(paste0("https://bwu62.github.io/stat240-revamp/data/",files),file="data_list.txt")
 stringr::str_glue(" - [`{files}`](data/{files})")
 ```
