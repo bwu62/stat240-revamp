@@ -105,6 +105,10 @@ main ul ul{
   list-style-type: circle !important;
 }
 
+ul+p,ol+p{
+  margin-top:1.2rem;
+}
+
 /* increase body width */
 @media (min-width: 1200px) {
     .container-fluid main {
