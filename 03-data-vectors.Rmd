@@ -505,8 +505,7 @@ cat(
         ""
       )
     )
-  ),
-  sep = ""
+  ), sep = ""
 )
 # please pardon the uneven text-wrapping of the output below:
 ```
@@ -588,7 +587,7 @@ In R, it's important to remember **not to reinvent the wheel**; most actions alr
 
 One set of readr functions useful here are the `parse_number()` and `parse_logical()` functions (converting to a string is trivial and can basically always be done using the `as.character()` function). These functions are quite smart and can ignore extra characters and just extract the relevant numerical info.
 
-```{r import readr}
+```{r import-readr}
 # since readr is also a "core" tidyverse package,
 # you can use library(tidyverse) or library(readr)
 library(readr)
