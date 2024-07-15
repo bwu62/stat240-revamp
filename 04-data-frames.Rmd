@@ -123,7 +123,7 @@ Also note that if you do not have readr (or tidyverse) loaded, attempting to [TA
 
 
 
-### Eruptions example
+### Example: US Eruptions
 
 
 To demonstrate the basic functionality of these different functions, I've prepared and exported a dataset on 21^st^ century volcanic eruptions in the United States from the [Smithsonian](https://volcano.si.edu/volcanolist_countries.cfm?country=United%20States) to all the formats listed above so we can practice reading them in from any initial format:
@@ -134,7 +134,8 @@ To demonstrate the basic functionality of these different functions, I've prepar
  - [`eruptions_recent.xlsx`](data/eruptions_recent.xlsx)
 
 
-#### CSV file
+
+### CSV file
 
 For example, here's the first few lines of the [`eruptions_recent.csv`](data/eruptions_recent.csv) CSV file (for each eruption, we have the volcano name, start and stop dates, duration in days, if its certainty is confirmed, and the VEI or volcano explosivity index).
 
@@ -176,7 +177,8 @@ Several things to note here:
    - You can also click here on the object name itself here to open a new tab with a full spreadsheet-like view of the entire data frame, where you can inspect the data frame, and even search for values and sort by columns (note: sorting here is just for preview and does not affect the underlying object).
 
 
-#### TSV file
+
+### TSV file
 
 The other functions are all similar. Here's the first few lines of the TSV-version of the same dataset, [`eruptions_recent.tsv`](data/eruptions_recent.tsv) (the way these notes are built doesn't diaplay tabs properly, but if you view the TSV file directly, you can see them).
 
@@ -196,7 +198,8 @@ print(eruptions_recent, n = 5)
 ```
 
 
-#### Arbitrary delimited file
+
+### Arbitrary delimited file
 
 If your data file has columns delimited (i.e. separated) by other characters, you can use the `read_delim()` function, which is a generalization of the previous two to read it in. Just set the `delim` argument to whatever the delimiter is, and you're good to go. Here's the first few lines of [`eruptions_recent.delim`](data/eruptions_recent.delim) where the columns are separated by vertical bar `|` characters, followed by the line of code to import it and check the result.
 
@@ -214,7 +217,8 @@ print(eruptions_recent, n = 5)
 ```
 
 
-#### XLS(X) file
+
+### XLS(X) file
 
 Data is also commonly encountered as an XLS/XLSX spreadsheet file, which can be read with readxl's [`read_excel()`{.R}](https://rdrr.io/cran/readxl/man/read_excel.html) function. The [`eruptions_recent.xlsx`](data/eruptions_recent.xlsx) file again has the same dataset but exported to XLSX. Since XLSX is not a text format, it can't be embedded here, but here's what the first few rows look like when opened in Excel:
 
@@ -239,7 +243,8 @@ print(eruptions_recent, n = 5)
 Oops, looks like start/stop was read as a datetime instead of a date. We'll learn later how to fix this, but for now we're moving on.
 
 
-### Aside: extra arguments
+
+### Extra arguments
 
 The files above have been prepared to be easily imported without needing additional arguments, but in general it's common to need to set other arguments in the functions to ge them to import properly. Below is a BRIEF selection of some of the most useful arguments available, loosely ordered by order of importance.
 
