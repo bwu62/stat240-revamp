@@ -12,7 +12,7 @@ It's actually really helpful to think of a data frame as a collection of paralle
 ## Creating data frames
 
 
-There are 2 common ways of creating a new data frame manually: `data.frame()` from base R, or `tibble()` from the [tibble](https://tibble.tidyverse.org/) package, another of the core Tidyverse packages. They are extremely similar, but we recommend `tibble()` due to some nice extra features such as better printing, referencing other columns during creation, and stricter subsetting rules. Example:
+There are 2 common ways of creating a new data frame manually: `data.frame()` from base R, or `tibble()` from the [tibble](https://tibble.tidyverse.org) package, another of the core Tidyverse packages. They are extremely similar, but we recommend `tibble()` due to some nice extra features such as better printing, referencing other columns during creation, and stricter subsetting rules. Example:
 
 
 ``` r
@@ -76,7 +76,7 @@ There are a million different data formats, but we will only cover 3 of the most
 
 First, a small aside. File formats (or types) and file extensions are commonly conflated, but the distinction is important.
 
- - File **format** refers to the internal structure of the contents. Common formats include simple text (which can be encoded using a variety of [different encodings](https://dsc.gmu.edu/tutorials-data/tutorial-character-encoding/) with ASCII and Unicode UTF-8 being the most common), other more complex documents like PDFs or DOCs, images and videos, compressed archives, binary executables, or other specialized (often proprietary) formats.
+ - File **format** refers to the internal structure of the contents. Common formats include simple text (which can be encoded using a variety of [different encodings](https://dsc.gmu.edu/tutorials-data/tutorial-character-encoding) with ASCII and Unicode UTF-8 being the most common), other more complex documents like PDFs or DOCs, images and videos, compressed archives, binary executables, or other specialized (often proprietary) formats.
  - File **extensions**, in contrast are just characters added to the end of the name of a file for our convenience and to hint to computers (and users) what you might expect to find inside the contents of the file. It has no bearing on the actual file format contained inside.
 
 Many extensions may in fact be the same file format, e.g. .Rmd, .html, .csv, .txt, and many more are all examples of extensions that are actually just simple text files (under some encoding), which is why they can all be opened with any text editor. Conversely, some formats can be stored with a variety of different extensions, e.g. MPEG-4 is a versatile multimedia "container" format and may be stored not only as .mp4 but also .m4a, .m4b, .m4p, .m4r, or .m4v depending on context.
@@ -92,7 +92,7 @@ Some important takeaways from all this:
 :::{.note}
 Today, many systems by default hide file extensions, e.g. a file that's actually named `data.csv` may appear to the user as just named `data`. This can cause problems, because if a user isn't aware of this and tries to rename the file to `data.csv` it may actually become `data.csv.csv`. This is a common cause of knit-fail that we see.
 
-We **highly recommended you force your device to always show extensions** which can help avoid these problems. Instructions [for Windows](https://www.howtogeek.com/205086/beginner-how-to-make-windows-show-file-extensions/) and [for Macs](https://support.apple.com/guide/mac-help/show-or-hide-filename-extensions-on-mac-mchlp2304/mac).
+We **highly recommended you force your device to always show extensions** which can help avoid these problems. Instructions [for Windows](https://www.howtogeek.com/205086/beginner-how-to-make-windows-show-file-extensions) and [for Macs](https://support.apple.com/guide/mac-help/show-or-hide-filename-extensions-on-mac-mchlp2304/mac).
 :::
 
 
@@ -101,7 +101,7 @@ We **highly recommended you force your device to always show extensions** which 
 ### Importing functions
 
 
-For text-format data files, we once again turn to [readr](https://readr.tidyverse.org/) which has a suite of functions for importing them, of which we will only focus on a few:
+For text-format data files, we once again turn to [readr](https://readr.tidyverse.org) which has a suite of functions for importing them, of which we will only focus on a few:
 
  - `read_csv()` is used to read in CSV files where columns of data are separated by commas,
  - `read_tsv()` is used to read in files where columns of data are separated by tabs,
@@ -133,7 +133,7 @@ To demonstrate the basic functionality of these different functions, I've prepar
 
 #### CSV file
 
-For example, here's the first 6 lines of the [`eruptions_recent.csv`](data/eruptions_recent.csv) CSV file (for each eruption, we have the volcano name, start and stop dates, duration in days, if its certainty is confirmed, and the VEI or volcano explosivity index).
+For example, here's the first few lines of the [`eruptions_recent.csv`](data/eruptions_recent.csv) CSV file (for each eruption, we have the volcano name, start and stop dates, duration in days, if its certainty is confirmed, and the VEI or volcano explosivity index).
 
 
 ``` csv
@@ -176,7 +176,7 @@ eruptions_recent <- read_csv(
 
 
 ``` r
-# print first 10 lines of result to check
+# print first few lines of result to check
 eruptions_recent
 ```
 
@@ -211,7 +211,7 @@ Several things to note here:
 
 #### TSV file
 
-The other functions are all similar. Here's the first 6 lines of the TSV-version of the same dataset, [`eruptions_recent.tsv`](data/eruptions_recent.tsv) (the way these notes are built doesn't diaplay tabs properly, but if you view the TSV file directly, you can see them).
+The other functions are all similar. Here's the first few lines of the TSV-version of the same dataset, [`eruptions_recent.tsv`](data/eruptions_recent.tsv) (the way these notes are built doesn't diaplay tabs properly, but if you view the TSV file directly, you can see them).
 
 
 ``` tsv
@@ -223,7 +223,7 @@ Kanaga	2023-12-18	2023-12-18	0	TRUE	1
 Ruby	2023-09-14	2023-09-15	1	TRUE	1
 ```
 
-Here it is read in with the `read_tsv()` function. This time, to save space, I've disabled the diagnostic messages by setting `show_col_types = FALSE` and reduced the final print checking to 6 lines. Otherwise, you can see we have the exact same result.
+Here it is read in with the `read_tsv()` function. This time, to save space, I've disabled the diagnostic messages by setting `show_col_types = FALSE` and reduced the final print checking to 5 lines. Otherwise, you can see we have the exact same result.
 
 
 ``` r
@@ -232,8 +232,8 @@ eruptions_recent <- read_tsv(
   "https://bwu62.github.io/stat240-revamp/data/eruptions_recent.tsv",
   show_col_types = FALSE
 )
-# print first 6 lines instead of 10 to still check, but save space
-print(eruptions_recent, n = 6)
+# print first 5 lines instead of 10 to still check, but save space
+print(eruptions_recent, n = 5)
 ```
 
 ```
@@ -245,14 +245,13 @@ print(eruptions_recent, n = 6)
 ## 3 Ahyi                  2024-01-01 2024-03-27       86 TRUE         NA
 ## 4 Kanaga                2023-12-18 2023-12-18        0 TRUE          1
 ## 5 Ruby                  2023-09-14 2023-09-15        1 TRUE          1
-## 6 Shishaldin            2023-07-11 2023-11-03      115 TRUE          3
-## # ℹ 65 more rows
+## # ℹ 66 more rows
 ```
 
 
 #### Arbitrary delimited file
 
-If your data file has columns delimited (i.e. separated) by other characters, you can use the `read_delim()` function, which is a generalization of the previous two to read it in. Just set the `delim` argument to whatever the delimiter is, and you're good to go. Here's the first 6 lines of [`eruptions_recent.delim`](data/eruptions_recent.delim) where the columns are separated by vertical bar `|` characters, followed by the line of code to import it and check the result.
+If your data file has columns delimited (i.e. separated) by other characters, you can use the `read_delim()` function, which is a generalization of the previous two to read it in. Just set the `delim` argument to whatever the delimiter is, and you're good to go. Here's the first few lines of [`eruptions_recent.delim`](data/eruptions_recent.delim) where the columns are separated by vertical bar `|` characters, followed by the line of code to import it and check the result.
 
 
 ``` delim
@@ -271,8 +270,8 @@ eruptions_recent <- read_delim(
   delim = "|",
   show_col_types = FALSE
 )
-# print first 6 lines instead of 10 to still check, but save space
-print(eruptions_recent, n = 6)
+# print first 5 lines
+print(eruptions_recent, n = 5)
 ```
 
 ```
@@ -284,10 +283,15 @@ print(eruptions_recent, n = 6)
 ## 3 Ahyi                  2024-01-01 2024-03-27       86 TRUE         NA
 ## 4 Kanaga                2023-12-18 2023-12-18        0 TRUE          1
 ## 5 Ruby                  2023-09-14 2023-09-15        1 TRUE          1
-## 6 Shishaldin            2023-07-11 2023-11-03      115 TRUE          3
-## # ℹ 65 more rows
+## # ℹ 66 more rows
 ```
 
+
+#### XLS(X) file
+
+Data is also commonly encountered as an XLS/XLSX spreadsheet file, which can be read by [`read_excel()`{.R}](https://rdrr.io/cran/readxl/man/read_excel.html), which remember is from [readxl](https://readxl.tidyverse.org) not [readr](https://readr.tidyverse.org). The [`eruptions_recent.xlsx`](data/eruptions_recent.xlsx) file again has the same dataset but exported to a XLSX. Since XLSX is not a text format, it can't be embedded here, but here's what the first few rows look like when opened in Excel:
+
+![](https://i.imgur.com/lZbyh6Y.png)
 
 
 

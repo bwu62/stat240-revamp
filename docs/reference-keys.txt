@@ -65,6 +65,7 @@ eruptions-example
 csv-file
 tsv-file
 arbitrary-delimited-file
+xlsx-file
 datasets
 list-of-datasets
 eruptions

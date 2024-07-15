@@ -74,7 +74,7 @@
 <h2>
 <span class="header-section-number">4.1</span> Creating data frames<a class="anchor" aria-label="anchor" href="#creating-data-frames"><i class="fas fa-link"></i></a>
 </h2>
-<p>There are 2 common ways of creating a new data frame manually: <code><a href="https://rdrr.io/r/base/data.frame.html">data.frame()</a></code> from base R, or <code><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble()</a></code> from the <a href="https://tibble.tidyverse.org/">tibble</a> package, another of the core Tidyverse packages. They are extremely similar, but we recommend <code><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble()</a></code> due to some nice extra features such as better printing, referencing other columns during creation, and stricter subsetting rules. Example:</p>
+<p>There are 2 common ways of creating a new data frame manually: <code><a href="https://rdrr.io/r/base/data.frame.html">data.frame()</a></code> from base R, or <code><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble()</a></code> from the <a href="https://tibble.tidyverse.org">tibble</a> package, another of the core Tidyverse packages. They are extremely similar, but we recommend <code><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble()</a></code> due to some nice extra features such as better printing, referencing other columns during creation, and stricter subsetting rules. Example:</p>
 <div class="sourceCode" id="cb417"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># import the tibble and lubridate libraries</span></span>
 <span><span class="co"># again, tibble is core tidyverse, so library(tidyverse) will also work</span></span>
@@ -131,7 +131,7 @@
 </h3>
 <p>First, a small aside. File formats (or types) and file extensions are commonly conflated, but the distinction is important.</p>
 <ul>
-<li>File <strong>format</strong> refers to the internal structure of the contents. Common formats include simple text (which can be encoded using a variety of <a href="https://dsc.gmu.edu/tutorials-data/tutorial-character-encoding/">different encodings</a> with ASCII and Unicode UTF-8 being the most common), other more complex documents like PDFs or DOCs, images and videos, compressed archives, binary executables, or other specialized (often proprietary) formats.</li>
+<li>File <strong>format</strong> refers to the internal structure of the contents. Common formats include simple text (which can be encoded using a variety of <a href="https://dsc.gmu.edu/tutorials-data/tutorial-character-encoding">different encodings</a> with ASCII and Unicode UTF-8 being the most common), other more complex documents like PDFs or DOCs, images and videos, compressed archives, binary executables, or other specialized (often proprietary) formats.</li>
 <li>File <strong>extensions</strong>, in contrast are just characters added to the end of the name of a file for our convenience and to hint to computers (and users) what you might expect to find inside the contents of the file. It has no bearing on the actual file format contained inside.</li>
 </ul>
 <p>Many extensions may in fact be the same file format, e.g. .Rmd, .html, .csv, .txt, and many more are all examples of extensions that are actually just simple text files (under some encoding), which is why they can all be opened with any text editor. Conversely, some formats can be stored with a variety of different extensions, e.g. MPEG-4 is a versatile multimedia “container” format and may be stored not only as .mp4 but also .m4a, .m4b, .m4p, .m4r, or .m4v depending on context.</p>
@@ -144,14 +144,14 @@
 </ul>
 <div class="note">
 <p>Today, many systems by default hide file extensions, e.g. a file that’s actually named <code>data.csv</code> may appear to the user as just named <code>data</code>. This can cause problems, because if a user isn’t aware of this and tries to rename the file to <code>data.csv</code> it may actually become <code>data.csv.csv</code>. This is a common cause of knit-fail that we see.</p>
-<p>We <strong>highly recommended you force your device to always show extensions</strong> which can help avoid these problems. Instructions <a href="https://www.howtogeek.com/205086/beginner-how-to-make-windows-show-file-extensions/">for Windows</a> and <a href="https://support.apple.com/guide/mac-help/show-or-hide-filename-extensions-on-mac-mchlp2304/mac">for Macs</a>.</p>
+<p>We <strong>highly recommended you force your device to always show extensions</strong> which can help avoid these problems. Instructions <a href="https://www.howtogeek.com/205086/beginner-how-to-make-windows-show-file-extensions">for Windows</a> and <a href="https://support.apple.com/guide/mac-help/show-or-hide-filename-extensions-on-mac-mchlp2304/mac">for Macs</a>.</p>
 </div>
 </div>
 <div id="importing-functions" class="section level3" number="4.2.2">
 <h3>
 <span class="header-section-number">4.2.2</span> Importing functions<a class="anchor" aria-label="anchor" href="#importing-functions"><i class="fas fa-link"></i></a>
 </h3>
-<p>For text-format data files, we once again turn to <a href="https://readr.tidyverse.org/">readr</a> which has a suite of functions for importing them, of which we will only focus on a few:</p>
+<p>For text-format data files, we once again turn to <a href="https://readr.tidyverse.org">readr</a> which has a suite of functions for importing them, of which we will only focus on a few:</p>
 <ul>
 <li>
 <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a></code> is used to read in CSV files where columns of data are separated by commas,</li>
@@ -185,7 +185,7 @@
 <h4>
 <span class="header-section-number">4.2.3.1</span> CSV file<a class="anchor" aria-label="anchor" href="#csv-file"><i class="fas fa-link"></i></a>
 </h4>
-<p>For example, here’s the first 6 lines of the <a href="data/eruptions_recent.csv"><code>eruptions_recent.csv</code></a> CSV file (for each eruption, we have the volcano name, start and stop dates, duration in days, if its certainty is confirmed, and the VEI or volcano explosivity index).</p>
+<p>For example, here’s the first few lines of the <a href="data/eruptions_recent.csv"><code>eruptions_recent.csv</code></a> CSV file (for each eruption, we have the volcano name, start and stop dates, duration in days, if its certainty is confirmed, and the VEI or volcano explosivity index).</p>
 <pre class="csv"><code>volcano,start,stop,duration,confirmed,vei
 Kilauea,2024-06-03,2024-06-03,0,TRUE,NA
 Atka Volcanic Complex,2024-03-27,2024-03-27,0,TRUE,NA
@@ -212,7 +212,7 @@ Ruby,2023-09-14,2023-09-15,1,TRUE,1</code></pre>
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 <div class="sourceCode" id="cb424"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># print first 10 lines of result to check</span></span>
+<code class="sourceCode R"><span><span class="co"># print first few lines of result to check</span></span>
 <span><span class="va">eruptions_recent</span></span></code></pre></div>
 <pre><code>## # A tibble: 71 × 6
 ##    volcano               start      stop       duration confirmed   vei
@@ -253,22 +253,22 @@ Ruby,2023-09-14,2023-09-15,1,TRUE,1</code></pre>
 <h4>
 <span class="header-section-number">4.2.3.2</span> TSV file<a class="anchor" aria-label="anchor" href="#tsv-file"><i class="fas fa-link"></i></a>
 </h4>
-<p>The other functions are all similar. Here’s the first 6 lines of the TSV-version of the same dataset, <a href="data/eruptions_recent.tsv"><code>eruptions_recent.tsv</code></a> (the way these notes are built doesn’t diaplay tabs properly, but if you view the TSV file directly, you can see them).</p>
+<p>The other functions are all similar. Here’s the first few lines of the TSV-version of the same dataset, <a href="data/eruptions_recent.tsv"><code>eruptions_recent.tsv</code></a> (the way these notes are built doesn’t diaplay tabs properly, but if you view the TSV file directly, you can see them).</p>
 <pre class="tsv"><code>volcano start   stop    duration    confirmed   vei
 Kilauea 2024-06-03  2024-06-03  0   TRUE    NA
 Atka Volcanic Complex   2024-03-27  2024-03-27  0   TRUE    NA
 Ahyi    2024-01-01  2024-03-27  86  TRUE    NA
 Kanaga  2023-12-18  2023-12-18  0   TRUE    1
 Ruby    2023-09-14  2023-09-15  1   TRUE    1</code></pre>
-<p>Here it is read in with the <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_tsv()</a></code> function. This time, to save space, I’ve disabled the diagnostic messages by setting <code>show_col_types = FALSE</code> and reduced the final print checking to 6 lines. Otherwise, you can see we have the exact same result.</p>
+<p>Here it is read in with the <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_tsv()</a></code> function. This time, to save space, I’ve disabled the diagnostic messages by setting <code>show_col_types = FALSE</code> and reduced the final print checking to 5 lines. Otherwise, you can see we have the exact same result.</p>
 <div class="sourceCode" id="cb427"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># read in TSV file from link</span></span>
 <span><span class="va">eruptions_recent</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_tsv</a></span><span class="op">(</span></span>
 <span>  <span class="st">"https://bwu62.github.io/stat240-revamp/data/eruptions_recent.tsv"</span>,</span>
 <span>  show_col_types <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co"># print first 6 lines instead of 10 to still check, but save space</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">eruptions_recent</span>, n <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span></code></pre></div>
+<span><span class="co"># print first 5 lines instead of 10 to still check, but save space</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">eruptions_recent</span>, n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 71 × 6
 ##   volcano               start      stop       duration confirmed   vei
 ##   &lt;chr&gt;                 &lt;date&gt;     &lt;date&gt;        &lt;dbl&gt; &lt;lgl&gt;     &lt;dbl&gt;
@@ -277,14 +277,13 @@ Ruby    2023-09-14  2023-09-15  1   TRUE    1</code></pre>
 ## 3 Ahyi                  2024-01-01 2024-03-27       86 TRUE         NA
 ## 4 Kanaga                2023-12-18 2023-12-18        0 TRUE          1
 ## 5 Ruby                  2023-09-14 2023-09-15        1 TRUE          1
-## 6 Shishaldin            2023-07-11 2023-11-03      115 TRUE          3
-## # ℹ 65 more rows</code></pre>
+## # ℹ 66 more rows</code></pre>
 </div>
 <div id="arbitrary-delimited-file" class="section level4" number="4.2.3.3">
 <h4>
 <span class="header-section-number">4.2.3.3</span> Arbitrary delimited file<a class="anchor" aria-label="anchor" href="#arbitrary-delimited-file"><i class="fas fa-link"></i></a>
 </h4>
-<p>If your data file has columns delimited (i.e. separated) by other characters, you can use the <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_delim()</a></code> function, which is a generalization of the previous two to read it in. Just set the <code>delim</code> argument to whatever the delimiter is, and you’re good to go. Here’s the first 6 lines of <a href="data/eruptions_recent.delim"><code>eruptions_recent.delim</code></a> where the columns are separated by vertical bar <code>|</code> characters, followed by the line of code to import it and check the result.</p>
+<p>If your data file has columns delimited (i.e. separated) by other characters, you can use the <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_delim()</a></code> function, which is a generalization of the previous two to read it in. Just set the <code>delim</code> argument to whatever the delimiter is, and you’re good to go. Here’s the first few lines of <a href="data/eruptions_recent.delim"><code>eruptions_recent.delim</code></a> where the columns are separated by vertical bar <code>|</code> characters, followed by the line of code to import it and check the result.</p>
 <pre class="delim"><code>volcano|start|stop|duration|confirmed|vei
 Kilauea|2024-06-03|2024-06-03|0|TRUE|
 Atka Volcanic Complex|2024-03-27|2024-03-27|0|TRUE|
@@ -298,8 +297,8 @@ Ruby|2023-09-14|2023-09-15|1|TRUE|1</code></pre>
 <span>  delim <span class="op">=</span> <span class="st">"|"</span>,</span>
 <span>  show_col_types <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co"># print first 6 lines instead of 10 to still check, but save space</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">eruptions_recent</span>, n <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span></code></pre></div>
+<span><span class="co"># print first 5 lines</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">eruptions_recent</span>, n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 71 × 6
 ##   volcano               start      stop       duration confirmed   vei
 ##   &lt;chr&gt;                 &lt;date&gt;     &lt;date&gt;        &lt;dbl&gt; &lt;lgl&gt;     &lt;dbl&gt;
@@ -308,8 +307,14 @@ Ruby|2023-09-14|2023-09-15|1|TRUE|1</code></pre>
 ## 3 Ahyi                  2024-01-01 2024-03-27       86 TRUE         NA
 ## 4 Kanaga                2023-12-18 2023-12-18        0 TRUE          1
 ## 5 Ruby                  2023-09-14 2023-09-15        1 TRUE          1
-## 6 Shishaldin            2023-07-11 2023-11-03      115 TRUE          3
-## # ℹ 65 more rows</code></pre>
+## # ℹ 66 more rows</code></pre>
+</div>
+<div id="xlsx-file" class="section level4" number="4.2.3.4">
+<h4>
+<span class="header-section-number">4.2.3.4</span> XLS(X) file<a class="anchor" aria-label="anchor" href="#xlsx-file"><i class="fas fa-link"></i></a>
+</h4>
+<p>Data is also commonly encountered as an XLS/XLSX spreadsheet file, which can be read by <a href="https://rdrr.io/cran/readxl/man/read_excel.html"><code class="sourceCode r"><span class="fu">read_excel</span>()</code></a>, which remember is from <a href="https://readxl.tidyverse.org">readxl</a> not <a href="https://readr.tidyverse.org">readr</a>. The <a href="data/eruptions_recent.xlsx"><code>eruptions_recent.xlsx</code></a> file again has the same dataset but exported to a XLSX. Since XLSX is not a text format, it can’t be embedded here, but here’s what the first few rows look like when opened in Excel:</p>
+<div class="inline-figure"><img src="https://i.imgur.com/lZbyh6Y.png"></div>
 <!--
 
 data frame topics
