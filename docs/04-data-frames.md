@@ -120,7 +120,7 @@ Also note that if you do not have readr (or tidyverse) loaded, attempting to [TA
 
 
 
-### Eruptions example
+### Example: US Eruptions
 
 
 To demonstrate the basic functionality of these different functions, I've prepared and exported a dataset on 21^st^ century volcanic eruptions in the United States from the [Smithsonian](https://volcano.si.edu/volcanolist_countries.cfm?country=United%20States) to all the formats listed above so we can practice reading them in from any initial format:
@@ -131,7 +131,8 @@ To demonstrate the basic functionality of these different functions, I've prepar
  - [`eruptions_recent.xlsx`](data/eruptions_recent.xlsx)
 
 
-#### CSV file
+
+### CSV file
 
 For example, here's the first few lines of the [`eruptions_recent.csv`](data/eruptions_recent.csv) CSV file (for each eruption, we have the volcano name, start and stop dates, duration in days, if its certainty is confirmed, and the VEI or volcano explosivity index).
 
@@ -209,7 +210,8 @@ Several things to note here:
    - You can also click here on the object name itself here to open a new tab with a full spreadsheet-like view of the entire data frame, where you can inspect the data frame, and even search for values and sort by columns (note: sorting here is just for preview and does not affect the underlying object).
 
 
-#### TSV file
+
+### TSV file
 
 The other functions are all similar. Here's the first few lines of the TSV-version of the same dataset, [`eruptions_recent.tsv`](data/eruptions_recent.tsv) (the way these notes are built doesn't diaplay tabs properly, but if you view the TSV file directly, you can see them).
 
@@ -249,7 +251,8 @@ print(eruptions_recent, n = 5)
 ```
 
 
-#### Arbitrary delimited file
+
+### Arbitrary delimited file
 
 If your data file has columns delimited (i.e. separated) by other characters, you can use the `read_delim()` function, which is a generalization of the previous two to read it in. Just set the `delim` argument to whatever the delimiter is, and you're good to go. Here's the first few lines of [`eruptions_recent.delim`](data/eruptions_recent.delim) where the columns are separated by vertical bar `|` characters, followed by the line of code to import it and check the result.
 
@@ -287,13 +290,14 @@ print(eruptions_recent, n = 5)
 ```
 
 
-#### XLS(X) file
+
+### XLS(X) file
 
 Data is also commonly encountered as an XLS/XLSX spreadsheet file, which can be read with readxl's [`read_excel()`{.R}](https://rdrr.io/cran/readxl/man/read_excel.html) function. The [`eruptions_recent.xlsx`](data/eruptions_recent.xlsx) file again has the same dataset but exported to XLSX. Since XLSX is not a text format, it can't be embedded here, but here's what the first few rows look like when opened in Excel:
 
 ![](https://i.imgur.com/lZbyh6Y.png){}
 
-Unfortunately, readxl does not yet support [reading from links](https://github.com/tidyverse/readxl/issues/278) so the data file must be downloaded before loading.
+Unfortunately, [readxl does not support URLs](https://github.com/tidyverse/readxl/issues/278) so the data must be downloaded before loading.
 
 
 ``` r
@@ -340,39 +344,55 @@ print(eruptions_recent, n = 5)
 Oops, looks like start/stop was read as a datetime instead of a date. We'll learn later how to fix this, but for now we're moving on.
 
 
-### Aside: extra arguments
+
+### Extra arguments
 
 The files above have been prepared to be easily imported without needing additional arguments, but in general it's common to need to set other arguments in the functions to ge them to import properly. Below is a BRIEF selection of some of the most useful arguments available, loosely ordered by order of importance.
 
 :::{.note}
-Some arguments below can be used in several ways, e.g. they may accept either a TRUE/FALSE or a vector of numbers or strings, etc. and may have different behavior depending on the input. We will highlight the most common usages here, see help page for more details.
+Some arguments below can be used in several ways, e.g. they may accept either a TRUE/FALSE or a vector of numbers or strings, etc. and may have different behavior depending on the input. We will highlight the most common usages here, but as always see help page for more details!
 :::
 
- - The `read_csv()`, `read_tsv()`, and `read_delim()` functions from readr share a single help page, and have many arguments in common (but not all, again see help page for more). Some useful additional arguments include:
-   - `col_names`: controls handling of column names:
-     - Under the default value `TRUE`, first row of file will be used as column names,
-     - If set to `FALSE`, placeholder column names will be used, and first row of file will be treated as data,
-     - If set to a character vector, that vector will be used as the column names, and again first row of file will be treated as data.
-   - `col_types`: controls handling of column types:
-     - The best way to set this is with a single word string where each letter represents in order from left to right the column type to use:
-       - `d` = double (i.e. a "normal" numeric value)
-       - `n` = number, which is a special readr format that parses "human readable" non-standard numbers such as "$1,000" or "150%" (closely related to the `parse_number()` function from section \@ref(coercion))
-       - `l` = logical, i.e. TRUE/FALSE
-       - `D` = date, but this only works if dates are in a standard format like `"YYYY-MM-DD"`; it will NOT parse non-standard formats
-       - `c` = character, for both text/categorical data as well as data in a non-standard format, to be parsed/coerced later
+The `read_csv()`, `read_tsv()`, and `read_delim()` functions from readr share a single help page, and have many arguments in common (but not all, again see help page). Some useful additional arguments include:
+
+ - `col_names` controls handling of column names.
+   - Under the default value `TRUE`, first row of file will be used as column names,
+   - If set to `FALSE`, placeholder names will be used, and the first line of the file will be treated as data,
+   - If set to a character vector, that vector will be used as the column names, and again first row of file will be treated as data.
+ - `col_types` controls handling of column types.
+   - The best way to set this is with a compact, single-word string where each letter represents in order from left to right the column type to use:
+     - `d` = double (i.e. a "normal" numeric value)
+     - `n` = number, which is a special readr format that parses "human readable" non-standard numbers such as "$1,000" or "150%" (closely related to the `parse_number()` function from section \@ref(coercion))
+     - `l` = logical, i.e. TRUE/FALSE
+     - `D` = date, but this only works if dates are in a standard format like `"YYYY-MM-DD"`; it will NOT parse non-standard formats
+     - `c` = character, for both text data as well as data in a non-standard format, to be parsed later
+     - `_` or `-` will skip a column
        
-       For example, suppose a data frame had a numeric column, a date column, a character column, and a non-standard column that needs to be parsed later; you would set `col_types = "dDcc"` to specify this.
-   - `na`: sets a vector of values to be treated as missing; defaults to `c("", "NA")`, i.e. empty strings and `"NA"` will be treated as missing
-   - `comment`: some data files have comment lines, usually (but not always) beginning with a hashtag `#` character; these can be ignored by setting `comment = "#"`
-   - `skip`, `n_max`: these control how many lines are skipped and how many lines maximum are read in the file
-   - `id`: if the filename contains important information, setting `id = TRUE`
-   - `show_col_types`
+   For example, suppose a data frame had in order from left to right a numeric column, a date column, a character column, a column you want to skip, and a non-standard column that needs to be parsed later; you would set `col_types = "dDc_c"` to specify this.
+ - `na` sets a vector of values to be treated as missing, which by default is `c("", "NA")`, i.e. empty strings and `"NA"` will be treated as missing.
+ - `comment` is for some data files that have comment lines, usually (but not always) beginning with a hashtag `#` character. These lines can be ignored by setting `comment = "#"` for example.
+ - `skip` let's you skip a set number of lines at the beginning of the file.
+ - `n_max` allows setting the maximum number of lines read in the file.
+ - `id` is useful when the filename contains important information (common when importing data split into many files). Setting `id = TRUE` saves the name in an `id` column.
+ - `show_col_types` can be set to `FALSE` to silence diagnostic messages shown after importing.
+
+
+The `read_excel()` function from readxl also has some useful extra arguments. Some of are the same as above, some are similar but slightly different, and some are unique to it (again, see help page). Brief selection of the most important arguments:
+
+ - `sheet` and `range` are unique to `read_excel()` and you control which sheet (i.e. the tabs at the bottom) and what range (i.e. rectangular region of the spreadsheet) to read the data from.
+    - `sheet` (defaults to the first sheet) can be either a name, a number indicating the position, or even included in the `range` specification.
+    - `range` (defauls to the entire range) can be specified a variety of different ways, but most commonly might be something like `"A2:D6"` which includes the cells between columns A-D and rows 2-6. See [this page](https://readxl.tidyverse.org/reference/cell-specification.html) for examples of other syntax.
+ - `col_names` behaves exactly the same as above: the default `TRUE` uses first row as names, `FALSE` uses generic placeholder names, but you can also directly set the names with a character vector
+ - `col_types` is similar, but instead of a compact string notation, you must use a character vector to specify each column type, with "numeric", "logical", "date", "text", or "skip" as the possible values
+ - `na`: also behaves the same above and accepts a vector of values that represent missing data; the only difference is it defaults to `""`
+ - `skip` behaves the same as above, and let's you skip lines at the beginning.
+ - `n_max` also behaves the same and sets the maximum number of lines read.
 
 
 
+### Paths & file management
 
-
-
+Let's also briefly discuss paths and revisit file management. 
 
 
 

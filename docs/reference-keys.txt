@@ -61,12 +61,13 @@ creating-data-frames
 importing-data-frames
 aside-file-formats-extensions
 importing-functions
-eruptions-example
+example-us-eruptions
 csv-file
 tsv-file
 arbitrary-delimited-file
 xlsx-file
-aside-extra-arguments
+extra-arguments
+paths-file-management
 datasets
 list-of-datasets
 eruptions
