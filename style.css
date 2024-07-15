@@ -41,6 +41,10 @@ pre code {
 }
 */
 
+body{
+  line-height:1.5;
+}
+
 /* underline links... */
 main p a, main li a, div.popover a{
   text-decoration: underline;
