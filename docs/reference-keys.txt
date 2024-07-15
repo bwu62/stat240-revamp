@@ -62,6 +62,9 @@ importing-data-frames
 aside-file-formats-extensions
 importing-functions
 eruptions-example
+csv-file
+tsv-file
+arbitrary-delimited-file
 datasets
 list-of-datasets
 eruptions

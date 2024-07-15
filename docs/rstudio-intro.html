@@ -502,13 +502,13 @@
 <p>You can load a package with either <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> or <code><a href="https://rdrr.io/r/base/library.html">require()</a></code>, which are basically the same. <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;The only difference is &lt;code&gt;require()&lt;/code&gt; can be used to check if a package exists and will return &lt;code&gt;FALSE&lt;/code&gt; if it doesn’t, whereas &lt;code&gt;library()&lt;/code&gt; will just error out, see &lt;a href="https://www.geeksforgeeks.org/the-difference-between-require-and-library-in-r/" target="_blank"&gt;https://www.geeksforgeeks.org/the-difference-between-require-and-library-in-r/&lt;/a&gt; for more details.&lt;/p&gt;'><sup>5</sup></a> Some package names actually load a group of other packages, e.g. <code><a href="https://tidyverse.tidyverse.org">library(tidyverse)</a></code> will load all the <a href="https://www.tidyverse.org/packages/#core-tidyverse">“core” Tidyverse</a> packages, which include <a href="https://ggplot2.tidyverse.org">ggplot2</a>, <a href="https://dplyr.tidyverse.org">dplyr</a>, <a href="https://tidyr.tidyverse.org">tidyr</a>, <a href="https://readr.tidyverse.org">readr</a>, <a href="https://purrr.tidyverse.org">purrr</a>, <a href="https://tibble.tidyverse.org">tibble</a>, <a href="https://stringr.tidyverse.org">stringr</a>, and <a href="https://forcats.tidyverse.org">forcats</a>.</p>
 <div class="sourceCode" id="cb105"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code></pre></div>
-<pre><code>## ── Attaching core tidyverse packages ─────────────────── tidyverse 2.0.0 ──
+<pre><code>## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
 ## ✔ dplyr     1.1.4     ✔ readr     2.1.5
 ## ✔ forcats   1.0.0     ✔ stringr   1.5.1
 ## ✔ ggplot2   3.5.1     ✔ tibble    3.2.1
 ## ✔ lubridate 1.9.3     ✔ tidyr     1.3.1
 ## ✔ purrr     1.0.2     
-## ── Conflicts ───────────────────────────────────── tidyverse_conflicts() ──
+## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ## ✖ tidyr::extract()   masks magrittr::extract()
 ## ✖ dplyr::filter()    masks stats::filter()
 ## ✖ dplyr::lag()       masks stats::lag()

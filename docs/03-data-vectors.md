@@ -51,7 +51,7 @@ There are LOTS of types of data that vectors can hold, from real to complex numb
  - **Numeric** vectors, which contain real numbers. Generally, R functions don't distinguish between integers and decimal numbers (also called "doubles" or "floats") so treat all numbers as decimal-valued real numbers. ^[For the CS students, R represents all numbers by default as double-precision floating-point numbers as per [IEC 60559/IEEE 754](https://en.wikipedia.org/wiki/IEEE_754){target="_blank"} specifications. There are no single precision values in R. You can force a number to be a [32-bit signed integer](https://rdrr.io/r/base/integer.html){target="_blank"} by adding an `L` to the end, e.g. `1L`, but this is extremely rare in data science and generally offers no real, tangible advantages.]
  - **Logical** vectors, which contain only `TRUE`/`FALSE` values. Usually, these arise from logical comparison operators or other functions that check if some condition is satisfied. Remember that in computations, TRUE becomes 1 and FALSE becomes 0. ^[Again, for the CS nerds, 0 in R is considered "falsy" and all other numbers are considered "truthy". E.g. try running `x & TRUE` for zero and non-zero x and observe the output.]
  - **Character** vectors, which contain characters (often also called "strings"). These are basically categorical or text data. E.g. you may have groups "A" and "B", or sex "Male" and "Female". You can even have sentences, paragraphs, or entire bodies of text in a character. We will only briefly touch on processing text data in this class. ^[CS people, looking at you again. Some languages distinguish between "character" type, which can only be just a single character; and "string" type, which are sequences of characters. In R, there is no such distinction; characters and strings are synonymous. Note this means you cannot "slice" through a string as if it's just a list of characters in R like some other languages.]
- - Lastly, we will also discuss **date** vectors, which are actually closely related to numeric vectors (more on this later). These are ubiquitous in data science and thus deserving of inclusion. ^[I don't have anything pedantic to add here, but all the other vectors got footnotes so I didn't want dates to feel left out :( ... <br/><br/> ...well ok, since you bothered to click this, I'll give you something. We'll discuss this later too, but here's a sneak preview: dates in R, like in many other languages, are stored as [number of days after Jan 1^st^ 1970](https://rdrr.io/r/base/Dates.html){target="_blank"}, which is often ominously referred to as the "Epoch". Why 1/1/70? Because reportedly it ["*seemed to be as good as any*"](https://retrocomputing.stackexchange.com/a/25599){target="_blank"}. <br/><br/> This is why dates are basically numeric vectors with extra steps. However, like with anything, the devil's in the details, and learning to work efficiently with dates is not trivial.]
+ - Lastly, **date** vectors will also be covered. These are actually closely related to numeric vectors (more on this later). These are ubiquitous in data science and thus deserving of inclusion. ^[I don't have anything pedantic to add here, but all the other vectors got footnotes so I didn't want dates to feel left out :( ... <br/><br/> ...well ok, since you bothered to click this, I'll give you something. We'll discuss this later too, but here's a sneak preview: dates in R, like in many other languages, are stored as [number of days after Jan 1^st^ 1970](https://rdrr.io/r/base/Dates.html){target="_blank"}, which is often ominously referred to as the "Epoch". Why 1/1/70? Because reportedly it ["*seemed to be as good as any*"](https://retrocomputing.stackexchange.com/a/25599){target="_blank"}. <br/><br/> This is why dates are basically numeric vectors with extra steps. However, like with anything, the devil's in the details, and learning to work efficiently with dates is not trivial.]
    - Note: we only cover dates themselves, not date + time values (also called datetime) since these are actually quite different data types and we only have so many lectures. ^[Similar-ish to dates, datetimes are often stored as a (possibly decimal) [number of seconds after midnight of Jan 1^st^ 1970](https://rdrr.io/r/base/DateTimeClasses.html){target="_blank"} called a POSIXct object, although R confusingly also has a whole other type of datetime object called POSIXlt where each date/time component is stored as an element of a [list](https://jennybc.github.io/purrr-tutorial/bk00_vectors-and-lists.html) (which is a whole other giant beast we don't even remotely have time to get into). See Hadley Wickham's page on [datetime](https://r4ds.hadley.nz/datetimes.html){target="_blank"} from his book "*R for Data Science*" for more info on datetime objects.]
 
 
@@ -140,8 +140,7 @@ data - mean(data)
 ```
 
 ```
-## [1] -0.8571429  2.1428571  2.1428571 -1.8571429  0.1428571 -2.8571429
-## [7]  1.1428571
+## [1] -0.8571429  2.1428571  2.1428571 -1.8571429  0.1428571 -2.8571429  1.1428571
 ```
 
 This is then squared `( ... )^2` and again, this operates one at a time:
@@ -152,8 +151,7 @@ This is then squared `( ... )^2` and again, this operates one at a time:
 ```
 
 ```
-## [1] 0.73469388 4.59183673 4.59183673 3.44897959 0.02040816 8.16326531
-## [7] 1.30612245
+## [1] 0.73469388 4.59183673 4.59183673 3.44897959 0.02040816 8.16326531 1.30612245
 ```
 
 Finally, this vector is summed, scaled by 1/(n-1), and square rooted to get the standard deviation. We can check this is correct by comparing with the built-in `sd()` function.
@@ -255,8 +253,8 @@ One of the easiest, if you just need a sequence of integers, is to use the `:` o
 ```
 
 ```
-##  [1]  10   9   8   7   6   5   4   3   2   1   0  -1  -2  -3  -4  -5  -6
-## [18]  -7  -8  -9 -10
+##  [1]  10   9   8   7   6   5   4   3   2   1   0  -1  -2  -3  -4  -5  -6  -7  -8
+## [20]  -9 -10
 ```
 
 The `seq()` function does something similar, except it also has additional arguments `by` to specify the step size and `length.out` which specifies how many numbers to have in total (note: only ONE of these arguments can be set at a time).
@@ -283,14 +281,13 @@ seq(0, 1, length.out = 101)
 ```
 
 ```
-##   [1] 0.00 0.01 0.02 0.03 0.04 0.05 0.06 0.07 0.08 0.09 0.10 0.11 0.12 0.13
-##  [15] 0.14 0.15 0.16 0.17 0.18 0.19 0.20 0.21 0.22 0.23 0.24 0.25 0.26 0.27
-##  [29] 0.28 0.29 0.30 0.31 0.32 0.33 0.34 0.35 0.36 0.37 0.38 0.39 0.40 0.41
-##  [43] 0.42 0.43 0.44 0.45 0.46 0.47 0.48 0.49 0.50 0.51 0.52 0.53 0.54 0.55
-##  [57] 0.56 0.57 0.58 0.59 0.60 0.61 0.62 0.63 0.64 0.65 0.66 0.67 0.68 0.69
-##  [71] 0.70 0.71 0.72 0.73 0.74 0.75 0.76 0.77 0.78 0.79 0.80 0.81 0.82 0.83
-##  [85] 0.84 0.85 0.86 0.87 0.88 0.89 0.90 0.91 0.92 0.93 0.94 0.95 0.96 0.97
-##  [99] 0.98 0.99 1.00
+##   [1] 0.00 0.01 0.02 0.03 0.04 0.05 0.06 0.07 0.08 0.09 0.10 0.11 0.12 0.13 0.14
+##  [16] 0.15 0.16 0.17 0.18 0.19 0.20 0.21 0.22 0.23 0.24 0.25 0.26 0.27 0.28 0.29
+##  [31] 0.30 0.31 0.32 0.33 0.34 0.35 0.36 0.37 0.38 0.39 0.40 0.41 0.42 0.43 0.44
+##  [46] 0.45 0.46 0.47 0.48 0.49 0.50 0.51 0.52 0.53 0.54 0.55 0.56 0.57 0.58 0.59
+##  [61] 0.60 0.61 0.62 0.63 0.64 0.65 0.66 0.67 0.68 0.69 0.70 0.71 0.72 0.73 0.74
+##  [76] 0.75 0.76 0.77 0.78 0.79 0.80 0.81 0.82 0.83 0.84 0.85 0.86 0.87 0.88 0.89
+##  [91] 0.90 0.91 0.92 0.93 0.94 0.95 0.96 0.97 0.98 0.99 1.00
 ```
 
 Vectors can also be created with the `rep()` function which lets you repeat the contents. There are two arguments: `times` which controls how many times to repeat the entire input, and `each` which controls how many times to repeat each element if the input is a vector. You can specify either or both of these arguments. Note `rep()` can be used to repeat other objects too, not just numbers.
@@ -311,8 +308,7 @@ rep(1:3, times = 3, each = 4)
 ```
 
 ```
-##  [1] 1 1 1 1 2 2 2 2 3 3 3 3 1 1 1 1 2 2 2 2 3 3 3 3 1 1 1 1 2 2 2 2 3 3 3
-## [36] 3
+##  [1] 1 1 1 1 2 2 2 2 3 3 3 3 1 1 1 1 2 2 2 2 3 3 3 3 1 1 1 1 2 2 2 2 3 3 3 3
 ```
 
 ``` r
@@ -332,8 +328,8 @@ rep(c(1, 3, 7:9, seq(10, 12, by = 0.5)), each = 2)
 ```
 
 ```
-##  [1]  1.0  1.0  3.0  3.0  7.0  7.0  8.0  8.0  9.0  9.0 10.0 10.0 10.5 10.5
-## [15] 11.0 11.0 11.5 11.5 12.0 12.0
+##  [1]  1.0  1.0  3.0  3.0  7.0  7.0  8.0  8.0  9.0  9.0 10.0 10.0 10.5 10.5 11.0
+## [16] 11.0 11.5 11.5 12.0 12.0
 ```
 
 
@@ -484,8 +480,8 @@ letters
 ```
 
 ```
-##  [1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q"
-## [18] "r" "s" "t" "u" "v" "w" "x" "y" "z"
+##  [1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s"
+## [20] "t" "u" "v" "w" "x" "y" "z"
 ```
 
 You can extract elements form a vector with the `[]` operator, giving either a vector of numeric positions, a vector of `TRUE`/`FALSE` values, or a negative vector for exclusions (i.e. anything *except*). Examples:
@@ -546,8 +542,8 @@ letters[-1]
 ```
 
 ```
-##  [1] "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r"
-## [18] "s" "t" "u" "v" "w" "x" "y" "z"
+##  [1] "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s" "t"
+## [20] "u" "v" "w" "x" "y" "z"
 ```
 
 ``` r
@@ -822,9 +818,8 @@ paste(friends, "is my friend")
 ```
 
 ```
-## [1] "Alice is my friend"     "Bob is my friend"      
-## [3] "Charlie is my friend"   "Donny is my friend"    
-## [5] "Emmy is my friend"      "Francine is my friend" 
+## [1] "Alice is my friend"     "Bob is my friend"       "Charlie is my friend"  
+## [4] "Donny is my friend"     "Emmy is my friend"      "Francine is my friend" 
 ## [7] "Genevieve is my friend" "Heinemann is my friend"
 ```
 
@@ -846,8 +841,8 @@ paste0(friends, "123")
 ```
 
 ```
-## [1] "Alice123"     "Bob123"       "Charlie123"   "Donny123"    
-## [5] "Emmy123"      "Francine123"  "Genevieve123" "Heinemann123"
+## [1] "Alice123"     "Bob123"       "Charlie123"   "Donny123"     "Emmy123"     
+## [6] "Francine123"  "Genevieve123" "Heinemann123"
 ```
 
 ``` r
@@ -1032,8 +1027,8 @@ str_pad(friends, width = 12, side = "right", pad = ".")
 ```
 
 ```
-## [1] "Alice......." "Bob........." "Charlie....." "Donny......."
-## [5] "Emmy........" "Francine...." "Genevieve..." "Heinemann..."
+## [1] "Alice......." "Bob........." "Charlie....." "Donny......." "Emmy........"
+## [6] "Francine...." "Genevieve..." "Heinemann..."
 ```
 
 
