@@ -11,6 +11,7 @@ It's actually really helpful to think of a data frame as a collection of paralle
 
 ## Creating data frames
 
+
 There are 2 common ways of creating a new data frame manually: `data.frame()` from base R, or `tibble()` from the [tibble](https://tibble.tidyverse.org/) package, another of the core Tidyverse packages. They are extremely similar, but we recommend `tibble()` due to some nice extra features such as better printing, referencing other columns during creation, and stricter subsetting rules. Example:
 
 ```{r import-tibble}
@@ -65,18 +66,21 @@ Note the following:
 
 ## Importing data frames
 
+
 Of course, in practice you don't usually create data frames manually like this, but rather import them from data files. As always, there are base R ways for doing this, but we will continue to recommend Tidyverse syntax due to its better features and design.
 
-There are a million different data formats, but we will only cover 3 main formats that are most commonly encountered in data science: CSV, or comma separated value files; TSV/TXT tables, which are either tab or space separated; and XLS(X), which are Excel (or similar spreadsheet software) data files. Notably, we do not cover databases (like SQL or its derivatives) or non-rectangular data formats (like JSON or XML) again due to limitations of time/space.
+There are a million different data formats, but we will only cover 3 of the most common basic ones: CSV, or comma separated value files; TSV, or tab separated files; and XLS(X), which are Excel (or similar spreadsheet software) data files. Notably, we do not cover databases (like SQL or its derivatives) or non-rectangular data formats (like JSON or XML), again due to limitations of time/space.
+
 
 
 
 ### Aside: file formats & extensions
 
+
 First, a small aside. File formats (or types) and file extensions are commonly conflated, but the distinction is important.
 
  - File **format** refers to the internal structure of the contents. Common formats include simple text (which can be encoded using a variety of [different encodings](https://dsc.gmu.edu/tutorials-data/tutorial-character-encoding/) with ASCII and Unicode UTF-8 being the most common), other more complex documents like PDFs or DOCs, images and videos, compressed archives, binary executables, or other specialized (often proprietary) formats.
- - In contrast, file **extensions** are just characters added to the end of the name of a file for our convenience and to hint to computers (and users) what you might expect to find inside the contents of the file. It has no bearing on the actual file format contained inside.
+ - File **extensions**, in contrast are just characters added to the end of the name of a file for our convenience and to hint to computers (and users) what you might expect to find inside the contents of the file. It has no bearing on the actual file format contained inside.
 
 Many extensions may in fact be the same file format, e.g. .Rmd, .html, .csv, .txt, and many more are all examples of extensions that are actually just simple text files (under some encoding), which is why they can all be opened with any text editor. Conversely, some formats can be stored with a variety of different extensions, e.g. MPEG-4 is a versatile multimedia "container" format and may be stored not only as .mp4 but also .m4a, .m4b, .m4p, .m4r, or .m4v depending on context.
 
@@ -96,7 +100,9 @@ We **highly recommended you force your device to always show extensions** which 
 
 
 
+
 ### Importing functions
+
 
 For text-format data files, we once again turn to [readr](https://readr.tidyverse.org/) which has a suite of functions for importing them, of which we will only focus on a few:
 
@@ -116,7 +122,9 @@ Also note that if you do not have readr (or tidyverse) loaded, attempting to [TA
 
 
 
+
 ### Eruptions example
+
 
 To demonstrate the basic functionality of these different functions, I've prepared and exported a dataset on 21^st^ century volcanic eruptions in the United States from the [Smithsonian](https://volcano.si.edu/volcanolist_countries.cfm?country=United%20States) to all the formats listed above so we can practice reading them in from any initial format:
 
@@ -129,7 +137,6 @@ For example, here's the first 6 lines of the [`eruptions_recent.csv`](data/erupt
 
 ```{embed,echo=1:6,file="data/eruptions_recent.csv"}
 ```
-
 
 If you have a link to a dataset, you can directly pass it into `read_csv()` and it will automagically download the file to your system's temp folder and read it in. Make sure to save it into a data frame with a sensible name. It's also usually a good idea to print out the first few lines to check the result and see if everything worked without error.
 
@@ -150,7 +157,7 @@ eruptions_recent <- read_csv(
 options(width=80)
 ```
 ```{r,message=T,class.message="message"}
-# print result to check
+# print first 10 lines of result to check
 eruptions_recent
 ```
 
@@ -160,7 +167,7 @@ Several things to note here:
  - While reading in, R will try to intelligently guess the data types of each column if they're in a standard format. You can see here that since all columns in the CSV were already very neat and written in a standard format (e.g. dates in YYYY-MM-DD, numbers and logicals written in common syntax, missing values written as NA), everything automagically converted: `name` is left as a character, `start` and `stop` parsed to dates, `duration` and `vei` parsed to numeric, and `confirmed` became logical.
    - If columns are not written in a standard format, this may not work as well (if at all) and you may need to do more data cleaning yourself, which we will touch on later.
  - You can run just the data frame name again to print the first few rows. This is equivalent to running `print(eruptions_recent)`.
-   - Printing is often a useful way to double check for errors.
+   - Printing is often a useful way to double check for errors. By default, only the first 10 lines are printed to save space.
  - If you look in your [Environment tab](https://i.imgur.com/Xo5HE2U.png) now, you should see the loaded data frame.
    - Here, you can click on the arrow to see a list of all columns, as well as their names, types, and the first few values.
    - You can also click here on the object name itself here to open a new tab with a full spreadsheet-like view of the entire data frame, where you can inspect the data frame, and even search for values and sort by columns (note: sorting here is just for preview and does not affect the underlying object).
