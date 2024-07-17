@@ -27,7 +27,7 @@ library(lubridate)
 df <- tibble(
   name = c("Alice", "Bob", "Charlie"),
   sex = c("F", "M", "M"),
-  date_of_birth = mdy(c("7/15/03", "7/4/99", "10/31/06")),
+  date_of_birth = mdy(c("7/17/03", "7/4/99", "10/31/06")),
   age = floor(as.numeric(today() - birthday)/365.24),
   declared_major = c(TRUE, TRUE, FALSE),
   school = "UW-Madison"
@@ -40,7 +40,7 @@ df
 ## # A tibble: 3 × 6
 ##   name    sex   date_of_birth   age declared_major school    
 ##   <chr>   <chr> <date>        <dbl> <lgl>          <chr>     
-## 1 Alice   F     2003-07-15       21 TRUE           UW-Madison
+## 1 Alice   F     2003-07-17       21 TRUE           UW-Madison
 ## 2 Bob     M     1999-07-04       25 TRUE           UW-Madison
 ## 3 Charlie M     2006-10-31       17 FALSE          UW-Madison
 ```
@@ -146,7 +146,7 @@ Kanaga,2023-12-18,2023-12-18,0,TRUE,1
 Ruby,2023-09-14,2023-09-15,1,TRUE,1
 ```
 
-If you have a link to a dataset, you can directly pass it into `read_csv()` and it will automagically download the file to your system's temp folder and read it in. Make sure to save it into a data frame with a sensible name. It's also usually a good idea to print out the first few lines to check the result and see if everything worked without error.
+If you have a link to a dataset, you can directly pass it into `read_csv()` and it will automagically download the file to your system's temp directory and read it in. Make sure to save it into a data frame with a sensible name. It's also usually a good idea to print out the first few lines to check the result and see if everything worked without error.
 
 
 ``` r
@@ -392,7 +392,97 @@ The `read_excel()` function from readxl also has some useful extra arguments. So
 
 ### Paths & file management
 
-Let's also briefly discuss paths and revisit file management. 
+We also need to briefly discuss paths and revisit file management. Previously, we had to download a data file and import it from our local storage. For many first time R users, this is a nontrivial task.
+
+In R, to import a downloaded file, you must provide a valid **file path, which is just a reference to a file's location** on your system. **Paths are always relative to the current working directory**. If you remembered to set your working directory correctly, so that your Rstudio session runs from the same place as your current Rmd file (which is where it knits from), and your path is also correct, then everything should work all the time, no errors.
+
+If your data file is in the same directory as your Rmd file, you can reference it by just using the name. For example, suppose you're working on `hw01.Rmd` and your directories look like this:
+
+:::{.paths}
+    ..
+    └── STAT240/
+        └── homework/
+            └── hw01/
+                ├── hw01.Rmd
+                └── hw01_data.csv
+:::
+
+Since `hw01_data.csv` is in the same directory as `hw01.Rmd`, you can import it by simply doing `read_csv("hw01_data.csv")`, again assuming you have your working directory set correctly. However, if your data file is in a subdirectory called `data/`, i.e. like this:
+
+:::{.paths}
+    ..
+    └── STAT240/
+        └── homework/
+            └── hw01/
+                ├── hw01.Rmd
+                └── data/
+                     └── hw01_data.csv
+:::
+
+Then, to import it you would need to write `read_csv("data/hw01_data.csv")` so that R will know first to go into the `data/` directory before searching for `hw01_data.csv` to load. If instead, you had your data file one level up, like this:
+
+:::{.paths}
+    └── STAT240/
+        └── homework/
+            ├── hw01_data.csv
+            └── hw01/
+                └── hw01.Rmd
+:::
+
+Then, to import it you would need to write `read_csv("../hw01_data.csv")` where the `../` means to go up a directory level (i.e. exit out of the current folder) before searching for `hw01_data.csv` to load.
+
+It's important to note here **there is no single correct way to manage your files**, as long as they are organized and you can easily find what you need. However, if you have no strong preference, we recommend you follow our file organization structure introduced in section \@ref(setup-files), i.e. setup your directories like this:
+
+:::{.paths}
+    ..
+    └── STAT240/
+        │
+        ├── data/
+        │   ├── data_A.csv
+        │   ├── data_B.tsv
+        │   ├── data_C.xlsx
+        │   :    :
+        │
+        ├── discussion/
+        │   │
+        │   ├── ds01/
+        │   │   └── ds01.Rmd
+        │   │
+        │   ├── ds02/
+        │   :   └── ds02.Rmd
+        │
+        ├── homework/
+        │   │
+        │   ├── hw01/
+        │   │   └── hw01.Rmd
+        │   │
+        │   ├── hw02/
+        │   :   └── hw02.Rmd
+        │
+        ├── notes/
+        ├── project/
+        ├── other/
+        :
+:::
+
+Then, as long as you always do the following, things should always just work:
+
+ 1. Always put your homework/discussion Rmd files in `homework/hw##/` or `discussion/ds##/` where `##` is the assignment number.
+ 2. Always put ALL data in the `data/` directory, which is exactly 2 levels up from all `hw##` and `ds##` directories.
+ 3. Always reference your data files like `"../../data/data_file.csv"` which will tell R to go up 2 levels from the current directory, which will take you to the main `STAT240/` directory, then descend into `data/` to search for `data_file.csv`.
+
+:::{.tip}
+If you're having trouble finding and importing your file, these additional tips may help:
+
+ - In R, **you can also [TAB]{.k} automcomplete paths**. Make sure your working directory is set, then start a path with `""`, place your cursor between the quotes, and hit [TAB]{.k}. You will see a popup menu showing files in your current directory. From here, either select a subdirectory to [TAB]{.k} into again, or type [.]{.k}[.]{.k}[/]{.k} to go up a directory level, repeat these steps as necessary until you find your file, then hit [ENTER]{.k} to confirm the selection.
+ - If you're desperate, you can also use the graphical [readr import tool](https://i.imgur.com/EBpswIS.png) found in the Environment tab, which opens a [dialog box](https://i.imgur.com/2fc4kQa.png) where you can browse to a file, set arguments with convenient dropdown menus, see a preview of what the data would look like with those settings, and best of all: in the corner you can see **what code is generated that can do all this** which you can copy into your Rmd file. As always, make sure your working directory is set beforehand!
+:::
+
+:::{.note}
+Paths in R **always use forward [/]{.k} slashes**, NEVER back [\\]{.k} slashes, even though back slashes are used by Windows file systems. This is just R's syntax.
+:::
+
+
 
 
 

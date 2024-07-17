@@ -45,8 +45,16 @@ body{
   line-height:1.5;
 }
 
+div.paths pre{
+  line-height:1.2;
+}
+
 main li{
   margin-bottom: 0.3rem;
+}
+
+ol+div.alert,ul+div.alert,p+div.alert{
+  margin-top:1rem;
 }
 
 /* underline links... */
@@ -159,6 +167,10 @@ div.sourceCode + p{
 }
 div.sourceCode + div.sourceCode{
   margin-top: 0.5rem !important;
+}
+
+p:has(+ul),p:has(+ol){
+  margin-bottom:.5rem;
 }
 
 

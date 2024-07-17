@@ -130,22 +130,23 @@ Now your R/Rstudio should be properly setup.
 
 There will be a lot of files to keep track of in this course, so it is highly recommended you create a neat directory structure on your computer to help organize your files. We recommend a directory structure similar to this:
 
+:::{.paths}
     ..
-    └── STAT240
-        ├── data
-        ├── discussion
-        │   ├── ds01
-        │   ├── ds02
-        │   └── ds03
-        |         ⋮
-        ├── homework
-        │   ├── hw01
-        │   ├── hw02
-        │   └── hw03
-        |         ⋮
-        ├── notes
-        └── project
-
+    └── STAT240/
+        ├── data/
+        ├── discussion/
+        │   ├── ds01/
+        │   ├── ds02/
+        │   ├── ds03/
+        │   :    :
+        ├── homework/
+        │   ├── hw01/
+        │   ├── hw02/
+        │   ├── hw03/
+        │   :    :
+        ├── notes/
+        └── project/
+:::
 
 :::{.note}
 "Directory" is synonymous with "folder". In technical spaces, "directory" is often the preferred term.

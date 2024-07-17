@@ -86,7 +86,7 @@
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
 <span>  name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Alice"</span>, <span class="st">"Bob"</span>, <span class="st">"Charlie"</span><span class="op">)</span>,</span>
 <span>  sex <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"F"</span>, <span class="st">"M"</span>, <span class="st">"M"</span><span class="op">)</span>,</span>
-<span>  date_of_birth <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html">mdy</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"7/15/03"</span>, <span class="st">"7/4/99"</span>, <span class="st">"10/31/06"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  date_of_birth <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html">mdy</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"7/17/03"</span>, <span class="st">"7/4/99"</span>, <span class="st">"10/31/06"</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">floor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/now.html">today</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">birthday</span><span class="op">)</span><span class="op">/</span><span class="fl">365.24</span><span class="op">)</span>,</span>
 <span>  declared_major <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>,</span>
 <span>  school <span class="op">=</span> <span class="st">"UW-Madison"</span></span>
@@ -96,7 +96,7 @@
 <pre><code>## # A tibble: 3 × 6
 ##   name    sex   date_of_birth   age declared_major school    
 ##   &lt;chr&gt;   &lt;chr&gt; &lt;date&gt;        &lt;dbl&gt; &lt;lgl&gt;          &lt;chr&gt;     
-## 1 Alice   F     2003-07-15       21 TRUE           UW-Madison
+## 1 Alice   F     2003-07-17       21 TRUE           UW-Madison
 ## 2 Bob     M     1999-07-04       25 TRUE           UW-Madison
 ## 3 Charlie M     2006-10-31       17 FALSE          UW-Madison</code></pre>
 <p>Note the following:</p>
@@ -193,7 +193,7 @@ Atka Volcanic Complex,2024-03-27,2024-03-27,0,TRUE,NA
 Ahyi,2024-01-01,2024-03-27,86,TRUE,NA
 Kanaga,2023-12-18,2023-12-18,0,TRUE,1
 Ruby,2023-09-14,2023-09-15,1,TRUE,1</code></pre>
-<p>If you have a link to a dataset, you can directly pass it into <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a></code> and it will automagically download the file to your system’s temp folder and read it in. Make sure to save it into a data frame with a sensible name. It’s also usually a good idea to print out the first few lines to check the result and see if everything worked without error.</p>
+<p>If you have a link to a dataset, you can directly pass it into <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a></code> and it will automagically download the file to your system’s temp directory and read it in. Make sure to save it into a data frame with a sensible name. It’s also usually a good idea to print out the first few lines to check the result and see if everything worked without error.</p>
 <div class="sourceCode" id="cb423"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># import readr</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readr.tidyverse.org">readr</a></span><span class="op">)</span></span></code></pre></div>
@@ -423,7 +423,84 @@ For example, suppose a data frame had in order from left to right a numeric colu
 <h3>
 <span class="header-section-number">4.2.9</span> Paths &amp; file management<a class="anchor" aria-label="anchor" href="#paths-file-management"><i class="fas fa-link"></i></a>
 </h3>
-<p>Let’s also briefly discuss paths and revisit file management.</p>
+<p>We also need to briefly discuss paths and revisit file management. Previously, we had to download a data file and import it from our local storage. For many first time R users, this is a nontrivial task.</p>
+<p>In R, to import a downloaded file, you must provide a valid <strong>file path, which is just a reference to a file’s location</strong> on your system. <strong>Paths are always relative to the current working directory</strong>. If you remembered to set your working directory correctly, so that your Rstudio session runs from the same place as your current Rmd file (which is where it knits from), and your path is also correct, then everything should work all the time, no errors.</p>
+<p>If your data file is in the same directory as your Rmd file, you can reference it by just using the name. For example, suppose you’re working on <code>hw01.Rmd</code> and your directories look like this:</p>
+<div class="paths">
+<pre><code>..
+└── STAT240/
+    └── homework/
+        └── hw01/
+            ├── hw01.Rmd
+            └── hw01_data.csv</code></pre>
+</div>
+<p>Since <code>hw01_data.csv</code> is in the same directory as <code>hw01.Rmd</code>, you can import it by simply doing <code>read_csv("hw01_data.csv")</code>, again assuming you have your working directory set correctly. However, if your data file is in a subdirectory called <code>data/</code>, i.e. like this:</p>
+<div class="paths">
+<pre><code>..
+└── STAT240/
+    └── homework/
+        └── hw01/
+            ├── hw01.Rmd
+            └── data/
+                 └── hw01_data.csv</code></pre>
+</div>
+<p>Then, to import it you would need to write <code>read_csv("data/hw01_data.csv")</code> so that R will know first to go into the <code>data/</code> directory before searching for <code>hw01_data.csv</code> to load. If instead, you had your data file one level up, like this:</p>
+<div class="paths">
+<pre><code>└── STAT240/
+    └── homework/
+        ├── hw01_data.csv
+        └── hw01/
+            └── hw01.Rmd</code></pre>
+</div>
+<p>Then, to import it you would need to write <code>read_csv("../hw01_data.csv")</code> where the <code>../</code> means to go up a directory level (i.e. exit out of the current folder) before searching for <code>hw01_data.csv</code> to load.</p>
+<p>It’s important to note here <strong>there is no single correct way to manage your files</strong>, as long as they are organized and you can easily find what you need. However, if you have no strong preference, we recommend you follow our file organization structure introduced in section <a href="setup.html#setup-files">1.3</a>, i.e. setup your directories like this:</p>
+<div class="paths">
+<pre><code>..
+└── STAT240/
+    │
+    ├── data/
+    │   ├── data_A.csv
+    │   ├── data_B.tsv
+    │   ├── data_C.xlsx
+    │   :    :
+    │
+    ├── discussion/
+    │   │
+    │   ├── ds01/
+    │   │   └── ds01.Rmd
+    │   │
+    │   ├── ds02/
+    │   :   └── ds02.Rmd
+    │
+    ├── homework/
+    │   │
+    │   ├── hw01/
+    │   │   └── hw01.Rmd
+    │   │
+    │   ├── hw02/
+    │   :   └── hw02.Rmd
+    │
+    ├── notes/
+    ├── project/
+    ├── other/
+    :</code></pre>
+</div>
+<p>Then, as long as you always do the following, things should always just work:</p>
+<ol style="list-style-type: decimal">
+<li>Always put your homework/discussion Rmd files in <code>homework/hw##/</code> or <code>discussion/ds##/</code> where <code>##</code> is the assignment number.</li>
+<li>Always put ALL data in the <code>data/</code> directory, which is exactly 2 levels up from all <code>hw##</code> and <code>ds##</code> directories.</li>
+<li>Always reference your data files like <code>"../../data/data_file.csv"</code> which will tell R to go up 2 levels from the current directory, which will take you to the main <code>STAT240/</code> directory, then descend into <code>data/</code> to search for <code>data_file.csv</code>.</li>
+</ol>
+<div class="tip">
+<p>If you’re having trouble finding and importing your file, these additional tips may help:</p>
+<ul>
+<li>In R, <strong>you can also <span class="k">TAB</span> automcomplete paths</strong>. Make sure your working directory is set, then start a path with <code>""</code>, place your cursor between the quotes, and hit <span class="k">TAB</span>. You will see a popup menu showing files in your current directory. From here, either select a subdirectory to <span class="k">TAB</span> into again, or type <span class="k">.</span><span class="k">.</span><span class="k">/</span> to go up a directory level, repeat these steps as necessary until you find your file, then hit <span class="k">ENTER</span> to confirm the selection.</li>
+<li>If you’re desperate, you can also use the graphical <a href="https://i.imgur.com/EBpswIS.png">readr import tool</a> found in the Environment tab, which opens a <a href="https://i.imgur.com/2fc4kQa.png">dialog box</a> where you can browse to a file, set arguments with convenient dropdown menus, see a preview of what the data would look like with those settings, and best of all: in the corner you can see <strong>what code is generated that can do all this</strong> which you can copy into your Rmd file. As always, make sure your working directory is set beforehand!</li>
+</ul>
+</div>
+<div class="note">
+<p>Paths in R <strong>always use forward <span class="k">/</span> slashes</strong>, NEVER back <span class="k">\</span> slashes, even though back slashes are used by Windows file systems. This is just R’s syntax.</p>
+</div>
 <!--
 
 data frame topics
@@ -485,7 +562,7 @@ data frame topics
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, Bret Larget, Cameron Jones. It was last built on 2024-07-15.</p>
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, Bret Larget, Cameron Jones. It was last built on 2024-07-17.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
