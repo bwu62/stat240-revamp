@@ -72,7 +72,7 @@ eruptions <- eruptions_raw %>%
     # convert confirmed? column to logical
     confirmed = if_else(replace_na(confirmed,"NA")=="Confirmed",T,F),
     # replace continuing eruptions with today's date
-    # (continuation last validated 7/14/24)
+    # (continuation last validated 7/17/24)
     stop = if_else(str_detect(stop,"continu"),format(today(),"%Y %b %e"),stop,missing=stop)
   ) %>% 
   # extract date error to new column
