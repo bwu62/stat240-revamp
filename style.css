@@ -169,6 +169,10 @@ div.sourceCode + div.sourceCode{
   margin-top: 0.5rem !important;
 }
 
+p:has(+ul),p:has(+ol){
+  margin-bottom:.5rem;
+}
+
 
 pre.message,pre.warning{
   background-color: unset !important;
