@@ -53,6 +53,10 @@ main li{
   margin-bottom: 0.3rem;
 }
 
+ol+div.alert,ul+div.alert,p+div.alert{
+  margin-top:1rem;
+}
+
 /* underline links... */
 main p a, main li a, div.popover a{
   text-decoration: underline;
