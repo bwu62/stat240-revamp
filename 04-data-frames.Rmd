@@ -335,22 +335,36 @@ It's important to note here **there is no single correct way to manage your file
 :::{.paths}
     ..
     └── STAT240/
+        │
         ├── data/
+        │   ├── data_A.csv
+        │   ├── data_B.tsv
+        │   ├── data_C.xlsx
+        │   :    :
+        │
         ├── discussion/
+        │   │
         │   ├── ds01/
+        │   │   └── ds01.Rmd
+        │   │
         │   ├── ds02/
-        │   └── ds03/
-        |         ⋮
+        │   :   └── ds02.Rmd
+        │
         ├── homework/
+        │   │
         │   ├── hw01/
+        │   │   └── hw01.Rmd
+        │   │
         │   ├── hw02/
-        │   └── hw03/
-        |         ⋮
+        │   :   └── hw02.Rmd
+        │
         ├── notes/
-        └── project/
+        ├── project/
+        ├── other/
+        :
 :::
 
-Then, things should automagically work if you always remember to do the following:
+Then, as long as you always do the following, things should always just work:
 
  1. Always put your homework/discussion Rmd files in `homework/hw##/` or `discussion/ds##/` where `##` is the assignment number.
  2. Always put ALL data in the `data/` directory, which is exactly 2 levels up from all `hw##` and `ds##` directories.

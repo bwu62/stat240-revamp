@@ -137,16 +137,15 @@ There will be a lot of files to keep track of in this course, so it is highly re
         ├── discussion/
         │   ├── ds01/
         │   ├── ds02/
-        │   └── ds03/
-        |         ⋮
+        │   ├── ds03/
+        │   :    :
         ├── homework/
         │   ├── hw01/
         │   ├── hw02/
-        │   └── hw03/
-        |         ⋮
+        │   ├── hw03/
+        │   :    :
         ├── notes/
         └── project/
-
 :::
 
 :::{.note}
