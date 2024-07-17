@@ -142,7 +142,7 @@ For example, here's the first few lines of the [`eruptions_recent.csv`](data/eru
 ```{embed,echo=1:6,file="data/eruptions_recent.csv"}
 ```
 
-If you have a link to a dataset, you can directly pass it into `read_csv()` and it will automagically download the file to your system's temp folder and read it in. Make sure to save it into a data frame with a sensible name. It's also usually a good idea to print out the first few lines to check the result and see if everything worked without error.
+If you have a link to a dataset, you can directly pass it into `read_csv()` and it will automagically download the file to your system's temp directory and read it in. Make sure to save it into a data frame with a sensible name. It's also usually a good idea to print out the first few lines to check the result and see if everything worked without error.
 
 ```{r}
 # import readr
