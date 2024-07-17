@@ -297,15 +297,18 @@ In R, to import a downloaded file, you must provide a valid **file path, which i
 
 If your data file is in the same directory as your Rmd file, you can reference it by just using the name. For example, suppose you're working on `hw01.Rmd` and your directories look like this:
 
+:::{.paths}
     ..
     └── STAT240/
         └── homework/
             └── hw01/
                 ├── hw01.Rmd
                 └── hw01_data.csv
+:::
 
 Since `hw01_data.csv` is in the same directory as `hw01.Rmd`, you can import it by simply doing `read_csv("hw01_data.csv")`, again assuming you have your working directory set correctly. However, if your data file is in a subdirectory called `data/`, i.e. like this:
 
+:::{.paths}
     ..
     └── STAT240/
         └── homework/
@@ -313,19 +316,23 @@ Since `hw01_data.csv` is in the same directory as `hw01.Rmd`, you can import it 
                 ├── hw01.Rmd
                 └── data/
                      └── hw01_data.csv
+:::
 
 Then, to import it you would need to write `read_csv("data/hw01_data.csv")` so that R will know first to go into the `data/` directory before searching for `hw01_data.csv` to load. If instead, you had your data file one level up, like this:
 
+:::{.paths}
     └── STAT240/
         └── homework/
             ├── hw01_data.csv
             └── hw01/
                 └── hw01.Rmd
+:::
 
 Then, to import it you would need to write `read_csv("../hw01_data.csv")` where the `../` means to go up a directory level (i.e. exit out of the current folder) before searching for `hw01_data.csv` to load.
 
 It's important to note here **there is no single correct way to manage your files**, as long as they are organized and you can easily find what you need. However, if you have no strong preference, we recommend you follow our file organization structure introduced in section \@ref(setup-files), i.e. setup your directories like this:
 
+:::{.paths}
     ..
     └── STAT240/
         ├── data/
@@ -341,6 +348,7 @@ It's important to note here **there is no single correct way to manage your file
         |         ⋮
         ├── notes/
         └── project/
+:::
 
 Then, things should automagically work if you always remember to do the following:
 

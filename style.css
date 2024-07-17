@@ -45,6 +45,10 @@ body{
   line-height:1.5;
 }
 
+div.paths pre{
+  line-height:1.2;
+}
+
 main li{
   margin-bottom: 0.3rem;
 }
