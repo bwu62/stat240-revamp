@@ -1630,7 +1630,7 @@ If your system is in a different language, you may see the code above output non
 
 
 ``` r
-write('invisible(Sys.setlocale("LC_TIME","C"))\n',"~/.Rprofile",1,T)
+write('\ninvisible(Sys.setlocale("LC_TIME","C"))\n',"~/.Rprofile",1,T)
 ```
 
 How does this work? It adds the line `invisible(Sys.setlocale("LC_TIME","C"))` to your `"~/.Rprofile"` file, which is run every time R starts up. The added line invisibly sets the `"LC_TIME"` locale variable to `"C"`, which tells lubridate to use English for all outputs.
