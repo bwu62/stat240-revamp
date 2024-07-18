@@ -521,7 +521,7 @@ eruptions_recent
 
 ### Basic operations
 
-Here are a few basic operations for working with data frames. `nrow()`, `ncol()`, and `dim()` can show the number of rows and/or columns, `summary()` can show a quick summary of each column, `names()`/`colnames()` can both get and set column names, `rownames()` can both get and set row names
+Here are a few basic operations for working with data frames. `nrow()`, `ncol()`, and `dim()` can show the number of rows and/or columns, `summary()` can show a quick summary of each column, `names()`/`colnames()` can both get and set column names, `rownames()` can both get and set row names. Column names can also be set using the `
 
 
 
