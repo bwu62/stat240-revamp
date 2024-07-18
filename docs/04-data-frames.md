@@ -491,6 +491,9 @@ We will be using data frames extensively throughout this class. Let's start by l
 
 
 ``` r
+# set R to print fewer rows by default, to save space in demos below
+options(pillar.print_min = 5)
+
 # reload dataset
 eruptions_recent <- read_csv(
   "https://bwu62.github.io/stat240-revamp/data/eruptions_recent.csv",
@@ -502,19 +505,14 @@ eruptions_recent
 
 ```
 ## # A tibble: 77 × 6
-##    volcano               start      stop       duration confirmed   vei
-##    <chr>                 <date>     <date>        <dbl> <lgl>     <dbl>
-##  1 Kilauea               2024-06-03 2024-06-03        0 TRUE         NA
-##  2 Atka Volcanic Complex 2024-03-27 2024-03-27        0 TRUE         NA
-##  3 Ahyi                  2024-01-01 2024-03-27       86 TRUE         NA
-##  4 Kanaga                2023-12-18 2023-12-18        0 TRUE          1
-##  5 Ruby                  2023-09-14 2023-09-15        1 TRUE          1
-##  6 Shishaldin            2023-07-11 2023-11-03      115 TRUE          3
-##  7 Mauna Loa             2022-11-27 2022-12-10       13 TRUE          0
-##  8 Ahyi                  2022-11-18 2023-06-11      205 TRUE          1
-##  9 Kilauea               2021-09-29 2023-09-16      717 TRUE          0
-## 10 Pavlof                2021-08-05 2022-12-07      489 TRUE          2
-## # ℹ 67 more rows
+##   volcano               start      stop       duration confirmed   vei
+##   <chr>                 <date>     <date>        <dbl> <lgl>     <dbl>
+## 1 Kilauea               2024-06-03 2024-06-03        0 TRUE         NA
+## 2 Atka Volcanic Complex 2024-03-27 2024-03-27        0 TRUE         NA
+## 3 Ahyi                  2024-01-01 2024-03-27       86 TRUE         NA
+## 4 Kanaga                2023-12-18 2023-12-18        0 TRUE          1
+## 5 Ruby                  2023-09-14 2023-09-15        1 TRUE          1
+## # ℹ 72 more rows
 ```
 
 
@@ -617,19 +615,143 @@ rownames(eruptions_recent)
 
 
 
+### Subsetting data frames
+
+You can extract and manipulate subsets of a data frame along either dimension. Most commonly, you may want to use `$` to either pull out a single column as a vector, modify an existing column in-place, or even create a new column.
+
+
+``` r
+# extract the vei column
+eruptions_recent$duration
+```
+
+```
+##  [1]    0    0   86    0    1  115   13  205  717  489   39 1150   36  822  154
+## [16]    0  195   30  286   39    6   53  110   62  253 1005  125    3    6   23
+## [31]  519  121   44 1021    0    0 1491  131    1    3    2  100   71    0   NA
+## [46]  108   19    2   38    8    0  256   29  422    4   98    0   98  188  264
+## [61]  139   58  259   71   41 1213   NA  509  150  202   63  180    1   NA   NA
+## [76]    1   72
+```
+
+``` r
+# change the confirmed column to 1s and 0s in-place
+eruptions_recent$confirmed <- as.numeric(eruptions_recent$confirmed)
+eruptions_recent
+```
+
+```
+## # A tibble: 77 × 6
+##   volcano               start      stop       duration confirmed   vei
+##   <chr>                 <date>     <date>        <dbl>     <dbl> <dbl>
+## 1 Kilauea               2024-06-03 2024-06-03        0         1    NA
+## 2 Atka Volcanic Complex 2024-03-27 2024-03-27        0         1    NA
+## 3 Ahyi                  2024-01-01 2024-03-27       86         1    NA
+## 4 Kanaga                2023-12-18 2023-12-18        0         1     1
+## 5 Ruby                  2023-09-14 2023-09-15        1         1     1
+## # ℹ 72 more rows
+```
+
+``` r
+# add a new column giving just the year the eruption started in
+eruptions_recent$start_year <- year(eruptions_recent$start)
+eruptions_recent
+```
+
+```
+## # A tibble: 77 × 7
+##   volcano              start      stop       duration confirmed   vei start_year
+##   <chr>                <date>     <date>        <dbl>     <dbl> <dbl>      <dbl>
+## 1 Kilauea              2024-06-03 2024-06-03        0         1    NA       2024
+## 2 Atka Volcanic Compl… 2024-03-27 2024-03-27        0         1    NA       2024
+## 3 Ahyi                 2024-01-01 2024-03-27       86         1    NA       2024
+## 4 Kanaga               2023-12-18 2023-12-18        0         1     1       2023
+## 5 Ruby                 2023-09-14 2023-09-15        1         1     1       2023
+## # ℹ 72 more rows
+```
+
+You can also use `[]` and `[[]]` to subset columns by name or position, the difference being `[]` returns a data frame and `[[]]` returns the vector directly.
+
+
+``` r
+# extract the vei column, keeping the result as a data frame
+eruptions_recent["vei"]
+```
+
+```
+## # A tibble: 77 × 1
+##     vei
+##   <dbl>
+## 1    NA
+## 2    NA
+## 3    NA
+## 4     1
+## 5     1
+## # ℹ 72 more rows
+```
+
+``` r
+# extract the same column but by position and directly as a vector
+eruptions_recent[[6]]
+```
+
+```
+##  [1] NA NA NA  1  1  3  0  1  0  2  2  2  1  2  0  3  1 NA  3  1  1  1  1  1  3
+## [26]  2  3  3  3  2  1  3  3  0  2  2  2  2 NA  2  3  1  2  2 NA  3  2  4  4  1
+## [51] NA  2  2  2  1  1  2  2  1  3  3  1  2  1  2  2  1  3  2  2  3  1 NA  1 NA
+## [76]  0  3
+```
+
+The `[]` operator has an additional usage of `[rows,cols]` where `rows`, `cols` can both be vectors specifying subsets by name or by position. Leaving one of them empty means return all of them.
+
+
+``` r
+# extract just the first 5 start/stop times
+eruptions_recent[1:5, c("start", "stop")]
+```
+
+```
+## # A tibble: 5 × 2
+##   start      stop      
+##   <date>     <date>    
+## 1 2024-06-03 2024-06-03
+## 2 2024-03-27 2024-03-27
+## 3 2024-01-01 2024-03-27
+## 4 2023-12-18 2023-12-18
+## 5 2023-09-14 2023-09-15
+```
+
+``` r
+# extract the entire 10th row
+eruptions_recent[10, ]
+```
+
+```
+## # A tibble: 1 × 7
+##   volcano start      stop       duration confirmed   vei start_year
+##   <chr>   <date>     <date>        <dbl>     <dbl> <dbl>      <dbl>
+## 1 Pavlof  2021-08-05 2022-12-07      489         1     2       2021
+```
+
+``` r
+# you can also use negative indices to remove specific items
+# e.g. this removes rows 1-10 and also removes the 7th column (start_year)
+eruptions_recent[-(1:10), -7]
+```
+
+```
+## # A tibble: 67 × 6
+##   volcano       start      stop       duration confirmed   vei
+##   <chr>         <date>     <date>        <dbl>     <dbl> <dbl>
+## 1 Pagan         2021-07-29 2021-09-06       39         1     2
+## 2 Great Sitkin  2021-05-25 2024-07-18     1150         1     2
+## 3 Veniaminof    2021-02-28 2021-04-05       36         1     1
+## 4 Semisopochnoi 2021-02-02 2023-05-05      822         1     2
+## 5 Kilauea       2020-12-20 2021-05-23      154         1     0
+## # ℹ 62 more rows
+```
+
+You can also expand data frames by binding additional rows and columns with `rbind()`, `cbind()`. This is slightly outside our scope for now, see [this page](https://www.programiz.com/r/dataframe) for more details if you wish.
 
 
 
-
-
-
-
-<!--
-
-data frame topics
-
- - dimensions
- - subsetting
- - missing
-
--->

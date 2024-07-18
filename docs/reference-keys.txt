@@ -70,6 +70,7 @@ extra-arguments
 paths-file-management
 working-with-data-frames
 basic-operations
+subsetting-data-frames
 datasets
 list-of-datasets
 eruptions
