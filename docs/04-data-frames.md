@@ -751,7 +751,85 @@ eruptions_recent[-(1:10), -7]
 ## # ℹ 62 more rows
 ```
 
-You can also expand data frames by binding additional rows and columns with `rbind()`, `cbind()`. This is slightly outside our scope for now, see [this page](https://www.programiz.com/r/dataframe) for more details if you wish.
+This is commonly used in data science to split up a dataset. For example, suppose you wanted to randomly partition your data into an 80% training and 20% testing set. You can first use [`sample(n,x)`{.R}](https://rdrr.io/r/base/sample.html) to randomly select `x` rows out of `n`, then use both positive and negative row subsetting syntax to get both partitions:
 
 
+``` r
+# define total number of rows and 20% for testing data
+n <- nrow(eruptions_recent)
+x <- round(n * 0.2)
+# randomly draw 20% of the row numbers
+test_rows <- sample(n, x)
+test_rows
+```
+
+```
+##  [1] 68 39  1 34 43 14 59 51 21 54  7 37 66 74 42
+```
+
+``` r
+# split dataset using the subsetting syntax we just learned
+eruptions_recent_test  <- eruptions_recent[ test_rows, ]
+eruptions_recent_train <- eruptions_recent[-test_rows, ]
+eruptions_recent_test
+```
+
+```
+## # A tibble: 15 × 7
+##    volcano             start      stop       duration confirmed   vei start_year
+##    <chr>               <date>     <date>        <dbl>     <dbl> <dbl>      <dbl>
+##  1 Anatahan            2004-04-12 2005-09-03      509         1     3       2004
+##  2 Cleveland           2010-09-11 2010-09-12        1         0    NA       2010
+##  3 Kilauea             2024-06-03 2024-06-03        0         1    NA       2024
+##  4 Mariana Back-Arc S… 2013-02-13 2015-12-01     1021         1     0       2013
+##  5 Cleveland           2009-10-02 2009-12-12       71         1     2       2009
+##  6 Semisopochnoi       2021-02-02 2023-05-05      822         1     2       2021
+##  7 Veniaminof          2006-03-03 2006-09-07      188         1     1       2006
+##  8 Shishaldin          2008-02-12 2008-02-12        0         0    NA       2008
+##  9 Great Sitkin        2019-06-01 2019-06-07        6         1     1       2019
+## 10 Cleveland           2007-06-17 2008-08-12      422         1     2       2007
+## 11 Mauna Loa           2022-11-27 2022-12-10       13         1     0       2022
+## 12 Cleveland           2011-07-19 2015-08-18     1491         1     2       2011
+## 13 St. Helens          2004-10-01 2008-01-27     1213         1     2       2004
+## 14 Atka Volcanic Comp… 2002-07-16 NA               NA         1     1       2002
+## 15 Pagan               2010-05-03 2010-08-11      100         1     1       2010
+```
+
+``` r
+eruptions_recent_train
+```
+
+```
+## # A tibble: 62 × 7
+##   volcano              start      stop       duration confirmed   vei start_year
+##   <chr>                <date>     <date>        <dbl>     <dbl> <dbl>      <dbl>
+## 1 Atka Volcanic Compl… 2024-03-27 2024-03-27        0         1    NA       2024
+## 2 Ahyi                 2024-01-01 2024-03-27       86         1    NA       2024
+## 3 Kanaga               2023-12-18 2023-12-18        0         1     1       2023
+## 4 Ruby                 2023-09-14 2023-09-15        1         1     1       2023
+## 5 Shishaldin           2023-07-11 2023-11-03      115         1     3       2023
+## # ℹ 57 more rows
+```
+
+If you ever need to recombine them, just use `rbind()` which will bind rows together from multiple data frames, as long as they have the exact same columns (both name and type).
+
+
+``` r
+# note the resulting rows will be in a different order,
+# but it's the same data frame we started out with
+eruptions_recent_recombined = rbind(eruptions_recent_test,eruptions_recent_train)
+eruptions_recent_recombined
+```
+
+```
+## # A tibble: 77 × 7
+##   volcano              start      stop       duration confirmed   vei start_year
+##   <chr>                <date>     <date>        <dbl>     <dbl> <dbl>      <dbl>
+## 1 Anatahan             2004-04-12 2005-09-03      509         1     3       2004
+## 2 Cleveland            2010-09-11 2010-09-12        1         0    NA       2010
+## 3 Kilauea              2024-06-03 2024-06-03        0         1    NA       2024
+## 4 Mariana Back-Arc Se… 2013-02-13 2015-12-01     1021         1     0       2013
+## 5 Cleveland            2009-10-02 2009-12-12       71         1     2       2009
+## # ℹ 72 more rows
+```
 
