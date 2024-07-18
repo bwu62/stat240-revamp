@@ -818,6 +818,14 @@ month(dates2, label = TRUE)
 wday(dates2, label = TRUE, abbr = FALSE)
 ```
 
+
+:::{.note}
+```
+write('\nSys.setlocale("LC_TIME","C")\n',file="~/.Rprofile",append = TRUE)
+```
+:::
+
+
 The first line in each output above is the actual output name. The list of "levels" on each second line just shows the set of all possible values that could have been outputted. This return object is actually something called an ["ordered factor"](https://r4ds.hadley.nz/factors) and is used for ordered categorical variables, but for our purposes can be treated as similar to a character/string vector. (If you want to do any string operations on the output, make sure to convert fully to character first with `as.character()`!)
 
 These getters are extremely useful for both data cleaning as well as data visualization, since it can be much more pleasant to, for example, see a monthly breakdown as Jan, Feb, ..., Dec instead of 1, 2, ..., 12.
