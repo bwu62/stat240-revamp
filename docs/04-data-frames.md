@@ -27,7 +27,7 @@ library(lubridate)
 df <- tibble(
   name = c("Alice", "Bob", "Charlie"),
   sex = c("F", "M", "M"),
-  date_of_birth = mdy(c("7/17/03", "7/4/99", "10/31/06")),
+  date_of_birth = mdy(c("7/18/03", "7/4/99", "10/31/06")),
   age = floor(as.numeric(today() - birthday)/365.24),
   declared_major = c(TRUE, TRUE, FALSE),
   school = "UW-Madison"
@@ -40,7 +40,7 @@ df
 ## # A tibble: 3 × 6
 ##   name    sex   date_of_birth   age declared_major school    
 ##   <chr>   <chr> <date>        <dbl> <lgl>          <chr>     
-## 1 Alice   F     2003-07-17       21 TRUE           UW-Madison
+## 1 Alice   F     2003-07-18       21 TRUE           UW-Madison
 ## 2 Bob     M     1999-07-04       25 TRUE           UW-Madison
 ## 3 Charlie M     2006-10-31       17 FALSE          UW-Madison
 ```
@@ -483,6 +483,45 @@ Paths in R **always use forward [/]{.k} slashes**, NEVER back [\\]{.k} slashes, 
 :::
 
 
+
+
+## Working with data frames
+
+We will be using data frames extensively throughout this class. Let's start by learning some basic manipulations with them. First, I'm going to reload the `eruptions_recent` dataset using the CSV file, so that we have the correct `start`/`stop` columns.
+
+
+``` r
+# reload dataset
+eruptions_recent <- read_csv(
+  "https://bwu62.github.io/stat240-revamp/data/eruptions_recent.csv",
+  show_col_types = FALSE
+)
+# print first few rows
+eruptions_recent
+```
+
+```
+## # A tibble: 71 × 6
+##    volcano               start      stop       duration confirmed   vei
+##    <chr>                 <date>     <date>        <dbl> <lgl>     <dbl>
+##  1 Kilauea               2024-06-03 2024-06-03        0 TRUE         NA
+##  2 Atka Volcanic Complex 2024-03-27 2024-03-27        0 TRUE         NA
+##  3 Ahyi                  2024-01-01 2024-03-27       86 TRUE         NA
+##  4 Kanaga                2023-12-18 2023-12-18        0 TRUE          1
+##  5 Ruby                  2023-09-14 2023-09-15        1 TRUE          1
+##  6 Shishaldin            2023-07-11 2023-11-03      115 TRUE          3
+##  7 Mauna Loa             2022-11-27 2022-12-10       13 TRUE          0
+##  8 Ahyi                  2022-11-18 2023-06-11      205 TRUE          1
+##  9 Kilauea               2021-09-29 2023-09-16      717 TRUE          0
+## 10 Pavlof                2021-08-05 2022-12-07      489 TRUE          2
+## # ℹ 61 more rows
+```
+
+
+
+### Basic operations
+
+Here are a few basic operations for working with data frames. `nrow()`, `ncol()`, and `dim()` can show the number of rows and/or columns, `summary()` can show a quick summary of each column, `names()`/`colnames()` can both get and set column names, `rownames()` can both get and set row names
 
 
 

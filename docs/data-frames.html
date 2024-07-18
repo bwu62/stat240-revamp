@@ -75,18 +75,18 @@
 <span class="header-section-number">4.1</span> Creating data frames<a class="anchor" aria-label="anchor" href="#creating-data-frames"><i class="fas fa-link"></i></a>
 </h2>
 <p>There are 2 common ways of creating a new data frame manually: <code><a href="https://rdrr.io/r/base/data.frame.html">data.frame()</a></code> from base R, or <code><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble()</a></code> from the <a href="https://tibble.tidyverse.org">tibble</a> package, another of the core Tidyverse packages. They are extremely similar, but we recommend <code><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble()</a></code> due to some nice extra features such as better printing, referencing other columns during creation, and stricter subsetting rules. Example:</p>
-<div class="sourceCode" id="cb419"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb420"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># import the tibble and lubridate libraries</span></span>
 <span><span class="co"># again, tibble is core tidyverse, so library(tidyverse) will also work</span></span>
 <span><span class="co"># but lubridate is not core so needs to be imported manually</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/">tibble</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://lubridate.tidyverse.org">lubridate</a></span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb420"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb421"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># manually create an example data frame</span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
 <span>  name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Alice"</span>, <span class="st">"Bob"</span>, <span class="st">"Charlie"</span><span class="op">)</span>,</span>
 <span>  sex <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"F"</span>, <span class="st">"M"</span>, <span class="st">"M"</span><span class="op">)</span>,</span>
-<span>  date_of_birth <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html">mdy</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"7/17/03"</span>, <span class="st">"7/4/99"</span>, <span class="st">"10/31/06"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  date_of_birth <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html">mdy</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"7/18/03"</span>, <span class="st">"7/4/99"</span>, <span class="st">"10/31/06"</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">floor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/now.html">today</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">birthday</span><span class="op">)</span><span class="op">/</span><span class="fl">365.24</span><span class="op">)</span>,</span>
 <span>  declared_major <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>,</span>
 <span>  school <span class="op">=</span> <span class="st">"UW-Madison"</span></span>
@@ -96,7 +96,7 @@
 <pre><code>## # A tibble: 3 × 6
 ##   name    sex   date_of_birth   age declared_major school    
 ##   &lt;chr&gt;   &lt;chr&gt; &lt;date&gt;        &lt;dbl&gt; &lt;lgl&gt;          &lt;chr&gt;     
-## 1 Alice   F     2003-07-17       21 TRUE           UW-Madison
+## 1 Alice   F     2003-07-18       21 TRUE           UW-Madison
 ## 2 Bob     M     1999-07-04       25 TRUE           UW-Madison
 ## 3 Charlie M     2006-10-31       17 FALSE          UW-Madison</code></pre>
 <p>Note the following:</p>
@@ -194,10 +194,10 @@ Ahyi,2024-01-01,2024-03-27,86,TRUE,NA
 Kanaga,2023-12-18,2023-12-18,0,TRUE,1
 Ruby,2023-09-14,2023-09-15,1,TRUE,1</code></pre>
 <p>If you have a link to a dataset, you can directly pass it into <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a></code> and it will automagically download the file to your system’s temp directory and read it in. Make sure to save it into a data frame with a sensible name. It’s also usually a good idea to print out the first few lines to check the result and see if everything worked without error.</p>
-<div class="sourceCode" id="cb423"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb424"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># import readr</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readr.tidyverse.org">readr</a></span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb424"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb425"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># read in CSV file from link</span></span>
 <span><span class="va">eruptions_recent</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span></span>
 <span>  <span class="st">"https://bwu62.github.io/stat240-revamp/data/eruptions_recent.csv"</span></span>
@@ -212,7 +212,7 @@ Ruby,2023-09-14,2023-09-15,1,TRUE,1</code></pre>
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<div class="sourceCode" id="cb426"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb427"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># print first few lines of result to check</span></span>
 <span><span class="va">eruptions_recent</span></span></code></pre></div>
 <pre><code>## # A tibble: 71 × 6
@@ -262,7 +262,7 @@ Ahyi    2024-01-01  2024-03-27  86  TRUE    NA
 Kanaga  2023-12-18  2023-12-18  0   TRUE    1
 Ruby    2023-09-14  2023-09-15  1   TRUE    1</code></pre>
 <p>Here it is read in with the <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_tsv()</a></code> function. This time, to save space, I’ve disabled the diagnostic messages by setting <code>show_col_types = FALSE</code> and reduced the final print checking to 5 lines. Otherwise, you can see we have the exact same result.</p>
-<div class="sourceCode" id="cb429"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb430"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># read in TSV file from link</span></span>
 <span><span class="va">eruptions_recent</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_tsv</a></span><span class="op">(</span></span>
 <span>  <span class="st">"https://bwu62.github.io/stat240-revamp/data/eruptions_recent.tsv"</span>,</span>
@@ -291,7 +291,7 @@ Atka Volcanic Complex|2024-03-27|2024-03-27|0|TRUE|
 Ahyi|2024-01-01|2024-03-27|86|TRUE|
 Kanaga|2023-12-18|2023-12-18|0|TRUE|1
 Ruby|2023-09-14|2023-09-15|1|TRUE|1</code></pre>
-<div class="sourceCode" id="cb432"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb433"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># read in | delimited file from link</span></span>
 <span><span class="va">eruptions_recent</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_delim</a></span><span class="op">(</span></span>
 <span>  <span class="st">"https://bwu62.github.io/stat240-revamp/data/eruptions_recent.delim"</span>,</span>
@@ -317,18 +317,18 @@ Ruby|2023-09-14|2023-09-15|1|TRUE|1</code></pre>
 <p>Data is also commonly encountered as an XLS/XLSX spreadsheet file, which can be read with readxl’s <a href="https://rdrr.io/cran/readxl/man/read_excel.html"><code class="sourceCode r"><span class="fu">read_excel</span>()</code></a> function. The <a href="data/eruptions_recent.xlsx"><code>eruptions_recent.xlsx</code></a> file again has the same dataset but exported to XLSX. Since XLSX is not a text format, it can’t be embedded here, but here’s what the first few rows look like when opened in Excel:</p>
 <div class="inline-figure"><img src="https://i.imgur.com/lZbyh6Y.png"></div>
 <p>Unfortunately, <a href="https://github.com/tidyverse/readxl/issues/278">readxl does not support URLs</a> so the data must be downloaded before loading.</p>
-<div class="sourceCode" id="cb434"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb435"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># load readxl, which is NOT core tidyverse, so must be imported explicitly</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readxl.tidyverse.org">readxl</a></span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb435"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb436"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># I already have the file downloaded to data/</span></span>
 <span><span class="co"># inside my current working directory</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.exists</a></span><span class="op">(</span><span class="st">"data/"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb437"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb438"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/files.html">file.exists</a></span><span class="op">(</span><span class="st">"data/eruptions_recent.xlsx"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb439"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb440"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">eruptions_recent</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_xlsx</a></span><span class="op">(</span><span class="st">"data/eruptions_recent.xlsx"</span><span class="op">)</span></span>
 <span><span class="co"># print first 5 lines</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">eruptions_recent</span>, n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
@@ -501,6 +501,40 @@ For example, suppose a data frame had in order from left to right a numeric colu
 <div class="note">
 <p>Paths in R <strong>always use forward <span class="k">/</span> slashes</strong>, NEVER back <span class="k">\</span> slashes, even though back slashes are used by Windows file systems. This is just R’s syntax.</p>
 </div>
+</div>
+</div>
+<div id="working-with-data-frames" class="section level2" number="4.3">
+<h2>
+<span class="header-section-number">4.3</span> Working with data frames<a class="anchor" aria-label="anchor" href="#working-with-data-frames"><i class="fas fa-link"></i></a>
+</h2>
+<p>We will be using data frames extensively throughout this class. Let’s start by learning some basic manipulations with them. First, I’m going to reload the <code>eruptions_recent</code> dataset using the CSV file, so that we have the correct <code>start</code>/<code>stop</code> columns.</p>
+<div class="sourceCode" id="cb446"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># reload dataset</span></span>
+<span><span class="va">eruptions_recent</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span></span>
+<span>  <span class="st">"https://bwu62.github.io/stat240-revamp/data/eruptions_recent.csv"</span>,</span>
+<span>  show_col_types <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co"># print first few rows</span></span>
+<span><span class="va">eruptions_recent</span></span></code></pre></div>
+<pre><code>## # A tibble: 71 × 6
+##    volcano               start      stop       duration confirmed   vei
+##    &lt;chr&gt;                 &lt;date&gt;     &lt;date&gt;        &lt;dbl&gt; &lt;lgl&gt;     &lt;dbl&gt;
+##  1 Kilauea               2024-06-03 2024-06-03        0 TRUE         NA
+##  2 Atka Volcanic Complex 2024-03-27 2024-03-27        0 TRUE         NA
+##  3 Ahyi                  2024-01-01 2024-03-27       86 TRUE         NA
+##  4 Kanaga                2023-12-18 2023-12-18        0 TRUE          1
+##  5 Ruby                  2023-09-14 2023-09-15        1 TRUE          1
+##  6 Shishaldin            2023-07-11 2023-11-03      115 TRUE          3
+##  7 Mauna Loa             2022-11-27 2022-12-10       13 TRUE          0
+##  8 Ahyi                  2022-11-18 2023-06-11      205 TRUE          1
+##  9 Kilauea               2021-09-29 2023-09-16      717 TRUE          0
+## 10 Pavlof                2021-08-05 2022-12-07      489 TRUE          2
+## # ℹ 61 more rows</code></pre>
+<div id="basic-operations" class="section level3" number="4.3.1">
+<h3>
+<span class="header-section-number">4.3.1</span> Basic operations<a class="anchor" aria-label="anchor" href="#basic-operations"><i class="fas fa-link"></i></a>
+</h3>
+<p>Here are a few basic operations for working with data frames. <code><a href="https://rdrr.io/r/base/nrow.html">nrow()</a></code>, <code><a href="https://rdrr.io/r/base/nrow.html">ncol()</a></code>, and <code><a href="https://rdrr.io/r/base/dim.html">dim()</a></code> can show the number of rows and/or columns, <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> can show a quick summary of each column, <code><a href="https://rdrr.io/r/base/names.html">names()</a></code>/<code><a href="https://rdrr.io/r/base/colnames.html">colnames()</a></code> can both get and set column names, <code><a href="https://rdrr.io/r/base/colnames.html">rownames()</a></code> can both get and set row names</p>
 <!--
 
 data frame topics
@@ -545,6 +579,9 @@ data frame topics
 <li><a class="nav-link" href="#paths-file-management"><span class="header-section-number">4.2.9</span> Paths &amp; file management</a></li>
 </ul>
 </li>
+<li>
+<a class="nav-link" href="#working-with-data-frames"><span class="header-section-number">4.3</span> Working with data frames</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#basic-operations"><span class="header-section-number">4.3.1</span> Basic operations</a></li></ul>
+</li>
 </ul>
 
       <div class="book-extra">
@@ -562,7 +599,7 @@ data frame topics
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, Bret Larget, Cameron Jones. It was last built on 2024-07-17.</p>
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, Bret Larget, Cameron Jones. It was last built on 2024-07-18.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

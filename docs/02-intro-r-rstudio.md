@@ -768,24 +768,26 @@ It's important to check the output messages to see if the install was successful
 You can load a package with either `library()` or `require()`, which are basically the same. ^[The only difference is `require()` can be used to check if a package exists and will return `FALSE` if it doesn't, whereas `library()` will just error out, see <https://www.geeksforgeeks.org/the-difference-between-require-and-library-in-r/>{target="_blank"} for more details.] Some package names actually load a group of other packages, e.g. `library(tidyverse)` will load all the ["core" Tidyverse](https://www.tidyverse.org/packages/#core-tidyverse) packages, which include [ggplot2](https://ggplot2.tidyverse.org), [dplyr](https://dplyr.tidyverse.org), [tidyr](https://tidyr.tidyverse.org), [readr](https://readr.tidyverse.org), [purrr](https://purrr.tidyverse.org), [tibble](https://tibble.tidyverse.org), [stringr](https://stringr.tidyverse.org), and [forcats](https://forcats.tidyverse.org).
 
 
+
 ``` r
 library(tidyverse)
 ```
 
-```
-## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+``` wrapcode
+## ── Attaching core tidyverse packages ────────────── tidyverse 2.0.0 ──
 ## ✔ dplyr     1.1.4     ✔ readr     2.1.5
 ## ✔ forcats   1.0.0     ✔ stringr   1.5.1
 ## ✔ ggplot2   3.5.1     ✔ tibble    3.2.1
 ## ✔ lubridate 1.9.3     ✔ tidyr     1.3.1
 ## ✔ purrr     1.0.2     
-## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+## ── Conflicts ──────────────────────────────── tidyverse_conflicts() ──
 ## ✖ tidyr::extract()   masks magrittr::extract()
 ## ✖ dplyr::filter()    masks stats::filter()
 ## ✖ dplyr::lag()       masks stats::lag()
 ## ✖ purrr::set_names() masks magrittr::set_names()
 ## ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
 ```
+
 
 Upon loading, many packages will print various diagnostic messages to the console. These are generally completely ignorable. Sometimes these will warn about "Conflicts", this is standard and just means it has overridden other default functions. E.g. You can see above the `filter()` function from the package `dplyr` has overwritten the pre-loaded [`filter()`{.R}](https://rdrr.io/r/stats/filter.html) function from the `stats` package.
 

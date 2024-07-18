@@ -220,7 +220,7 @@ h2+div>h3{
   margin-top: 1em !important;
 }
 
-.wrapCode{
+.wrapCode,pre.wrapcode code{
   text-wrap: wrap;
 }
 

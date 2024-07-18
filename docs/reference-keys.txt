@@ -68,6 +68,8 @@ arbitrary-delimited-file
 xlsx-file
 extra-arguments
 paths-file-management
+working-with-data-frames
+basic-operations
 datasets
 list-of-datasets
 eruptions
