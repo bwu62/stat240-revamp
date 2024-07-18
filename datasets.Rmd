@@ -113,7 +113,7 @@ eruptions <- eruptions_raw %>%
 
 # get just subset for demo
 eruptions_recent <- eruptions %>% 
-  filter(start_error <= 30, start_year > 2000, confirmed) %>% 
+  filter(start_error <= 30, start_year > 2000) %>% 
   select(-contains("_"))
 
 eruptions_recent
