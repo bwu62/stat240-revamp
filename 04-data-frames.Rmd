@@ -402,7 +402,34 @@ eruptions_recent
 
 ### Basic operations
 
-Here are a few basic operations for working with data frames. `nrow()`, `ncol()`, and `dim()` can show the number of rows and/or columns, `summary()` can show a quick summary of each column, `names()`/`colnames()` can both get and set column names, `rownames()` can both get and set row names. Column names can also be set using the `
+Here are a few basic operations for working with data frames: `nrow()`, `ncol()`, and `dim()` can show the number of rows and/or columns; `summary()` can show a quick summary of each column; `names()`/`colnames()` can both get and set column names; `rownames()` can both get and set row names.
+
+```{r}
+# get number of rows and columns
+nrow(eruptions_recent)
+ncol(eruptions_recent)
+# get both together using dim()
+dim(eruptions_recent)
+# show different summary of each column, depending on the column type
+summary(eruptions_recent)
+# show names of the variable columns
+# note names() and colnames() are completely identical for data frames
+names(eruptions_recent)
+# you can also set individual, specific, or even all names
+names(eruptions_recent)[2] <- "START"
+names(eruptions_recent)[c(1,4:6)] <- c("VOLCANO","DURATION", "CONFIRMED", "VEI")
+names(eruptions_recent)
+# let's reset the names back to their original values
+names(eruptions_recent) <- c(
+  "volcano", "start", "stop", "duration", "confirmed", "vei"
+)
+# data frames may also have row names, though most don't
+# if there are no row names, they just show as numbers
+# (this is not generally a commonly used feature)
+rownames(eruptions_recent)
+```
+
+
 
 
 
