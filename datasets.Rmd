@@ -85,10 +85,10 @@ eruptions <- eruptions_raw %>%
     # extract start year since some earlier eruptions are missing month/day
     start_year = str_extract(start,"(\\d{4,5})"),
     stop_year = str_extract(stop,"(\\d{4,5})"),
-    # check if bce
+    # check if BCE
     start_bce = str_detect(start,"BCE"),
     stop_bce = str_detect(stop,"BCE"),
-    # parse start year, adding - if bce
+    # parse start year, adding - if BCE
     start_year = if_else(start_bce,-as.numeric(start_year),as.numeric(start_year)),
     stop_year = if_else(stop_bce,-as.numeric(stop_year),as.numeric(stop_year)),
     # extract start month
