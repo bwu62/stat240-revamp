@@ -470,7 +470,28 @@ eruptions_recent[10, ]
 eruptions_recent[-(1:10), -7]
 ```
 
-You can also expand data frames by binding additional rows and columns with `rbind()`, `cbind()`. This is slightly outside our scope for now, see [this page](https://www.programiz.com/r/dataframe) for more details if you wish.
+This is commonly used in data science to split up a dataset. For example, suppose you wanted to randomly partition your data into an 80% training and 20% testing set. You can first use [`sample(n,x)`{.R}](https://rdrr.io/r/base/sample.html) to randomly select `x` rows out of `n`, then use both positive and negative row subsetting syntax to get both partitions:
 
+```{r,tidy=F}
+# define total number of rows and 20% for testing data
+n <- nrow(eruptions_recent)
+x <- round(n * 0.2)
+# randomly draw 20% of the row numbers
+test_rows <- sample(n, x)
+test_rows
+# split dataset using the subsetting syntax we just learned
+eruptions_recent_test  <- eruptions_recent[ test_rows, ]
+eruptions_recent_train <- eruptions_recent[-test_rows, ]
+eruptions_recent_test
+eruptions_recent_train
+```
 
+If you ever need to recombine them, just use `rbind()` which will bind rows together from multiple data frames, as long as they have the exact same columns (both name and type).
+
+```{r}
+# note the resulting rows will be in a different order,
+# but it's the same data frame we started out with
+eruptions_recent_recombined = rbind(eruptions_recent_test,eruptions_recent_train)
+eruptions_recent_recombined
+```
 
