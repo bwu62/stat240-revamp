@@ -384,6 +384,27 @@ Paths in R **always use forward [/]{.k} slashes**, NEVER back [\\]{.k} slashes, 
 
 
 
+## Working with data frames
+
+We will be using data frames extensively throughout this class. Let's start by learning some basic manipulations with them. First, I'm going to reload the `eruptions_recent` dataset using the CSV file, so that we have the correct `start`/`stop` columns.
+
+```{r}
+# reload dataset
+eruptions_recent <- read_csv(
+  "https://bwu62.github.io/stat240-revamp/data/eruptions_recent.csv",
+  show_col_types = FALSE
+)
+# print first few rows
+eruptions_recent
+```
+
+
+
+### Basic operations
+
+Here are a few basic operations for working with data frames. `nrow()`, `ncol()`, and `dim()` can show the number of rows and/or columns, `summary()` can show a quick summary of each column, `names()`/`colnames()` can both get and set column names, `rownames()` can both get and set row names. Column names can also be set using the `
+
+
 
 
 
