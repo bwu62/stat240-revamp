@@ -123,7 +123,7 @@
 <span>    <span class="co"># convert confirmed? column to logical</span></span>
 <span>    confirmed <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/replace_na.html">replace_na</a></span><span class="op">(</span><span class="va">confirmed</span>,<span class="st">"NA"</span><span class="op">)</span><span class="op">==</span><span class="st">"Confirmed"</span>,<span class="cn">T</span>,<span class="cn">F</span><span class="op">)</span>,</span>
 <span>    <span class="co"># replace continuing eruptions with today's date</span></span>
-<span>    <span class="co"># (continuation last validated 7/14/24)</span></span>
+<span>    <span class="co"># (continuation last validated 7/17/24)</span></span>
 <span>    stop <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html">str_detect</a></span><span class="op">(</span><span class="va">stop</span>,<span class="st">"continu"</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/now.html">today</a></span><span class="op">(</span><span class="op">)</span>,<span class="st">"%Y %b %e"</span><span class="op">)</span>,<span class="va">stop</span>,missing<span class="op">=</span><span class="va">stop</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="co"># extract date error to new column</span></span>
@@ -136,10 +136,10 @@
 <span>    <span class="co"># extract start year since some earlier eruptions are missing month/day</span></span>
 <span>    start_year <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_extract.html">str_extract</a></span><span class="op">(</span><span class="va">start</span>,<span class="st">"(\\d{4,5})"</span><span class="op">)</span>,</span>
 <span>    stop_year <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_extract.html">str_extract</a></span><span class="op">(</span><span class="va">stop</span>,<span class="st">"(\\d{4,5})"</span><span class="op">)</span>,</span>
-<span>    <span class="co"># check if bce</span></span>
+<span>    <span class="co"># check if BCE</span></span>
 <span>    start_bce <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html">str_detect</a></span><span class="op">(</span><span class="va">start</span>,<span class="st">"BCE"</span><span class="op">)</span>,</span>
 <span>    stop_bce <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html">str_detect</a></span><span class="op">(</span><span class="va">stop</span>,<span class="st">"BCE"</span><span class="op">)</span>,</span>
-<span>    <span class="co"># parse start year, adding - if bce</span></span>
+<span>    <span class="co"># parse start year, adding - if BCE</span></span>
 <span>    start_year <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">start_bce</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">start_year</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">start_year</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>    stop_year <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">stop_bce</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">stop_year</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">stop_year</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>    <span class="co"># extract start month</span></span>
@@ -181,17 +181,7 @@
 ##  8 Ahyi                  2022-11-18 2023-06-11      205 TRUE          1
 ##  9 Kilauea               2021-09-29 2023-09-16      717 TRUE          0
 ## 10 Pavlof                2021-08-05 2022-12-07      489 TRUE          2
-## 11 Pagan                 2021-07-29 2021-09-06       39 TRUE          2
-## 12 Great Sitkin          2021-05-25 2024-07-17     1149 TRUE          2
-## 13 Veniaminof            2021-02-28 2021-04-05       36 TRUE          1
-## 14 Semisopochnoi         2021-02-02 2023-05-05      822 TRUE          2
-## 15 Kilauea               2020-12-20 2021-05-23      154 TRUE          0
-## 16 Cleveland             2020-06-01 2020-06-01        0 TRUE          3
-## 17 Semisopochnoi         2019-12-07 2020-06-19      195 TRUE          1
-## 18 Shishaldin            2019-07-23 2020-05-04      286 TRUE          3
-## 19 Semisopochnoi         2019-07-16 2019-08-24       39 TRUE          1
-## 20 Great Sitkin          2019-06-01 2019-06-07        6 TRUE          1
-## # ℹ 51 more rows</code></pre>
+## # ℹ 61 more rows</code></pre>
 <div class="sourceCode" id="cb450"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># write out to different formats for reading</span></span>
 <span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html">write_csv</a></span><span class="op">(</span><span class="va">eruptions_recent</span>,file<span class="op">=</span><span class="st">"data/eruptions_recent.csv"</span><span class="op">)</span></span>

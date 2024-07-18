@@ -48,7 +48,7 @@ df
 Note the following:
 
  - The syntax inside `tibble()` is always `column_name = vector_of_data, next_column_name = next_vector_of_data, ...` where each vector must be the same length.
- - The vectors do not have to be pre-created; you canc reate them as you go along.
+ - The vectors do not have to be pre-created; you can create them as you go along.
  - You can reference another column immediately after creating it inside the function, e.g. `date_of_birth` was created, and then immediately used on the next line to help create `age` (by the way `age` here is approximately computed as number of days since birth divided by 365.24, the approximate number of days in a year, then rounded down following convention).
  - Data frames can, and almost always do contain many columns each with a different type. However, as usual a single column---which is still a vector!---can only contain a SINGLE type of data inside it, e.g. you cannot have a column with both numbers and characters simultaneously.
  - Printing the df by either just writing it on a new line, or with the `print()` function (same thing) will show not only the first few rows, but also other info like
@@ -200,7 +200,7 @@ eruptions_recent
 
 Several things to note here:
 
- - Some diagnostic messages will be printed while reading, as well as any warnings/errors if it encounters anything unsual (no errors/warnings are observed here).
+ - Some diagnostic messages will be printed while reading, as well as any warnings/errors if it encounters anything unusual (no errors/warnings are observed here).
  - While reading in, R will try to intelligently guess the data types of each column if they're in a standard format. You can see here that since all columns in the CSV were already very neat and written in a standard format (e.g. dates in `YYYY-MM-DD`, numbers and logicals written in common syntax, missing values written as NA), everything automagically converted: `name` is left as a character, `start` and `stop` parsed to dates, `duration` and `vei` parsed to numeric, and `confirmed` became logical.
    - If columns are not written in a standard format, this may not work as well (if at all) and you may need to do more data cleaning yourself, which we will touch on later.
  - You can run just the data frame name again to print the first few rows. This is equivalent to running `print(eruptions_recent)`.
@@ -213,7 +213,7 @@ Several things to note here:
 
 ### TSV file
 
-The other functions are all similar. Here's the first few lines of the TSV-version of the same dataset, [`eruptions_recent.tsv`](data/eruptions_recent.tsv) (the way these notes are built doesn't diaplay tabs properly, but if you view the TSV file directly, you can see them).
+The other functions are all similar. Here's the first few lines of the TSV-version of the same dataset, [`eruptions_recent.tsv`](data/eruptions_recent.tsv) (the way these notes are built doesn't display tabs properly, but if you view the TSV file directly, you can see them).
 
 
 ``` tsv
@@ -347,7 +347,7 @@ Oops, looks like start/stop was read as a datetime instead of a date. We'll lear
 
 ### Extra arguments
 
-The files above have been prepared to be easily imported without needing additional arguments, but in general it's common to need to set other arguments in the functions to ge them to import properly. Below is a BRIEF selection of some of the most useful arguments available, loosely ordered by order of importance.
+The files above have been prepared to be easily imported without needing additional arguments, but in general it's common to need to set other arguments in the functions to get them to import properly. Below is a BRIEF selection of some of the most useful arguments available, loosely ordered by order of importance.
 
 :::{.note}
 Some arguments below can be used in several ways, e.g. they may accept either a TRUE/FALSE or a vector of numbers or strings, etc. and may have different behavior depending on the input. We will highlight the most common usages here, but as always see help page for more details!
@@ -381,7 +381,7 @@ The `read_excel()` function from readxl also has some useful extra arguments. So
 
  - `sheet` and `range` are unique to `read_excel()` and you control which sheet (i.e. the tabs at the bottom) and what range (i.e. rectangular region of the spreadsheet) to read the data from.
     - `sheet` (defaults to the first sheet) can be either a name, a number indicating the position, or even included in the `range` specification.
-    - `range` (defauls to the entire range) can be specified a variety of different ways, but most commonly might be something like `"A2:D6"` which includes the cells between columns A-D and rows 2-6. See [this page](https://readxl.tidyverse.org/reference/cell-specification.html) for examples of other syntax.
+    - `range` (defaults to the entire range) can be specified a variety of different ways, but most commonly might be something like `"A2:D6"` which includes the cells between columns A-D and rows 2-6. See [this page](https://readxl.tidyverse.org/reference/cell-specification.html) for examples of other syntax.
  - `col_names` behaves exactly the same as above: the default `TRUE` uses first row as names, `FALSE` uses generic placeholder names, but you can also directly set the names with a character vector
  - `col_types` is similar, but instead of a compact string notation, you must use a character vector to specify each column type, with "numeric", "logical", "date", "text", or "skip" as the possible values
  - `na`: also behaves the same above and accepts a vector of values that represent missing data; the only difference is it defaults to `""`
@@ -474,7 +474,7 @@ Then, as long as you always do the following, things should always just work:
 :::{.tip}
 If you're having trouble finding and importing your file, these additional tips may help:
 
- - In R, **you can also [TAB]{.k} automcomplete paths**. Make sure your working directory is set, then start a path with `""`, place your cursor between the quotes, and hit [TAB]{.k}. You will see a popup menu showing files in your current directory. From here, either select a subdirectory to [TAB]{.k} into again, or type [.]{.k}[.]{.k}[/]{.k} to go up a directory level, repeat these steps as necessary until you find your file, then hit [ENTER]{.k} to confirm the selection.
+ - In R, **you can also [TAB]{.k} autocomplete paths**. Make sure your working directory is set, then start a path with `""`, place your cursor between the quotes, and hit [TAB]{.k}. You will see a popup menu showing files in your current directory. From here, either select a subdirectory to [TAB]{.k} into again, or type [.]{.k}[.]{.k}[/]{.k} to go up a directory level, repeat these steps as necessary until you find your file, then hit [ENTER]{.k} to confirm the selection.
  - If you're desperate, you can also use the graphical [readr import tool](https://i.imgur.com/EBpswIS.png) found in the Environment tab, which opens a [dialog box](https://i.imgur.com/2fc4kQa.png) where you can browse to a file, set arguments with convenient dropdown menus, see a preview of what the data would look like with those settings, and best of all: in the corner you can see **what code is generated that can do all this** which you can copy into your Rmd file. As always, make sure your working directory is set beforehand!
 :::
 

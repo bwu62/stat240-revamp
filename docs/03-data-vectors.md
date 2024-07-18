@@ -1047,7 +1047,7 @@ This snippet of code below (which you do NOT have to worry about learning right 
 cat(
   # sort the characters
   sort(
-    # flattern list output to a big vector of characters
+    # flatten list output to a big vector of characters
     unlist(
       # split symbols into individual characters
       strsplit(
@@ -1513,7 +1513,7 @@ mdy(c("Feb 29, 1900", "Feb 29, 2100"))
 ```
 
 ``` r
-# but 2000 is leap, since it's also divisble by 400
+# but 2000 is leap, since it's also divisible by 400
 mdy("Feb 29, 2000")
 ```
 
