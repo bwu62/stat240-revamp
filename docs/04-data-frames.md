@@ -163,7 +163,7 @@ eruptions_recent <- read_csv(
 ```
 
 ``` message
-## Rows: 71 Columns: 6
+## Rows: 77 Columns: 6
 ## ── Column specification ──────────────────────────────────────────────
 ## Delimiter: ","
 ## chr  (1): volcano
@@ -182,7 +182,7 @@ eruptions_recent
 ```
 
 ```
-## # A tibble: 71 × 6
+## # A tibble: 77 × 6
 ##    volcano               start      stop       duration confirmed   vei
 ##    <chr>                 <date>     <date>        <dbl> <lgl>     <dbl>
 ##  1 Kilauea               2024-06-03 2024-06-03        0 TRUE         NA
@@ -195,7 +195,7 @@ eruptions_recent
 ##  8 Ahyi                  2022-11-18 2023-06-11      205 TRUE          1
 ##  9 Kilauea               2021-09-29 2023-09-16      717 TRUE          0
 ## 10 Pavlof                2021-08-05 2022-12-07      489 TRUE          2
-## # ℹ 61 more rows
+## # ℹ 67 more rows
 ```
 
 Several things to note here:
@@ -239,7 +239,7 @@ print(eruptions_recent, n = 5)
 ```
 
 ```
-## # A tibble: 71 × 6
+## # A tibble: 77 × 6
 ##   volcano               start      stop       duration confirmed   vei
 ##   <chr>                 <date>     <date>        <dbl> <lgl>     <dbl>
 ## 1 Kilauea               2024-06-03 2024-06-03        0 TRUE         NA
@@ -247,7 +247,7 @@ print(eruptions_recent, n = 5)
 ## 3 Ahyi                  2024-01-01 2024-03-27       86 TRUE         NA
 ## 4 Kanaga                2023-12-18 2023-12-18        0 TRUE          1
 ## 5 Ruby                  2023-09-14 2023-09-15        1 TRUE          1
-## # ℹ 66 more rows
+## # ℹ 72 more rows
 ```
 
 
@@ -278,7 +278,7 @@ print(eruptions_recent, n = 5)
 ```
 
 ```
-## # A tibble: 71 × 6
+## # A tibble: 77 × 6
 ##   volcano               start      stop       duration confirmed   vei
 ##   <chr>                 <date>     <date>        <dbl> <lgl>     <dbl>
 ## 1 Kilauea               2024-06-03 2024-06-03        0 TRUE         NA
@@ -286,7 +286,7 @@ print(eruptions_recent, n = 5)
 ## 3 Ahyi                  2024-01-01 2024-03-27       86 TRUE         NA
 ## 4 Kanaga                2023-12-18 2023-12-18        0 TRUE          1
 ## 5 Ruby                  2023-09-14 2023-09-15        1 TRUE          1
-## # ℹ 66 more rows
+## # ℹ 72 more rows
 ```
 
 
@@ -330,7 +330,7 @@ print(eruptions_recent, n = 5)
 ```
 
 ```
-## # A tibble: 71 × 6
+## # A tibble: 77 × 6
 ##   volcano       start               stop                duration confirmed   vei
 ##   <chr>         <dttm>              <dttm>                 <dbl> <chr>     <dbl>
 ## 1 Kilauea       2024-06-03 00:00:00 2024-06-03 00:00:00        0 TRUE         NA
@@ -338,7 +338,7 @@ print(eruptions_recent, n = 5)
 ## 3 Ahyi          2024-01-01 00:00:00 2024-03-27 00:00:00       86 TRUE         NA
 ## 4 Kanaga        2023-12-18 00:00:00 2023-12-18 00:00:00        0 TRUE          1
 ## 5 Ruby          2023-09-14 00:00:00 2023-09-15 00:00:00        1 TRUE          1
-## # ℹ 66 more rows
+## # ℹ 72 more rows
 ```
 
 Oops, looks like start/stop was read as a datetime instead of a date. We'll learn later how to fix this, but for now we're moving on.
@@ -501,7 +501,7 @@ eruptions_recent
 ```
 
 ```
-## # A tibble: 71 × 6
+## # A tibble: 77 × 6
 ##    volcano               start      stop       duration confirmed   vei
 ##    <chr>                 <date>     <date>        <dbl> <lgl>     <dbl>
 ##  1 Kilauea               2024-06-03 2024-06-03        0 TRUE         NA
@@ -514,14 +514,108 @@ eruptions_recent
 ##  8 Ahyi                  2022-11-18 2023-06-11      205 TRUE          1
 ##  9 Kilauea               2021-09-29 2023-09-16      717 TRUE          0
 ## 10 Pavlof                2021-08-05 2022-12-07      489 TRUE          2
-## # ℹ 61 more rows
+## # ℹ 67 more rows
 ```
 
 
 
 ### Basic operations
 
-Here are a few basic operations for working with data frames. `nrow()`, `ncol()`, and `dim()` can show the number of rows and/or columns, `summary()` can show a quick summary of each column, `names()`/`colnames()` can both get and set column names, `rownames()` can both get and set row names. Column names can also be set using the `
+Here are a few basic operations for working with data frames: `nrow()`, `ncol()`, and `dim()` can show the number of rows and/or columns; `summary()` can show a quick summary of each column; `names()`/`colnames()` can both get and set column names; `rownames()` can both get and set row names.
+
+
+``` r
+# get number of rows and columns
+nrow(eruptions_recent)
+```
+
+```
+## [1] 77
+```
+
+``` r
+ncol(eruptions_recent)
+```
+
+```
+## [1] 6
+```
+
+``` r
+# get both together using dim()
+dim(eruptions_recent)
+```
+
+```
+## [1] 77  6
+```
+
+``` r
+# show different summary of each column, depending on the column type
+summary(eruptions_recent)
+```
+
+```
+##    volcano              start                 stop               duration     
+##  Length:77          Min.   :2001-02-02   Min.   :2001-04-15   Min.   :   0.0  
+##  Class :character   1st Qu.:2006-03-20   1st Qu.:2007-03-03   1st Qu.:   6.0  
+##  Mode  :character   Median :2010-09-11   Median :2012-02-18   Median :  71.0  
+##                     Mean   :2012-05-31   Mean   :2013-05-18   Mean   : 192.1  
+##                     3rd Qu.:2019-07-16   3rd Qu.:2019-12-07   3rd Qu.: 195.0  
+##                     Max.   :2024-06-03   Max.   :2024-07-18   Max.   :1491.0  
+##                                          NA's   :4            NA's   :4       
+##  confirmed            vei       
+##  Mode :logical   Min.   :0.000  
+##  FALSE:6         1st Qu.:1.000  
+##  TRUE :71        Median :2.000  
+##                  Mean   :1.838  
+##                  3rd Qu.:3.000  
+##                  Max.   :4.000  
+##                  NA's   :9
+```
+
+``` r
+# show names of the variable columns
+# note names() and colnames() are completely identical for data frames
+names(eruptions_recent)
+```
+
+```
+## [1] "volcano"   "start"     "stop"      "duration"  "confirmed" "vei"
+```
+
+``` r
+# you can also set individual, specific, or even all names
+names(eruptions_recent)[2] <- "START"
+names(eruptions_recent)[c(1,4:6)] <- c("VOLCANO","DURATION", "CONFIRMED", "VEI")
+names(eruptions_recent)
+```
+
+```
+## [1] "VOLCANO"   "START"     "stop"      "DURATION"  "CONFIRMED" "VEI"
+```
+
+``` r
+# let's reset the names back to their original values
+names(eruptions_recent) <- c(
+  "volcano", "start", "stop", "duration", "confirmed", "vei"
+)
+# data frames may also have row names, though most don't
+# if there are no row names, they just show as numbers
+# (this is not generally a commonly used feature)
+rownames(eruptions_recent)
+```
+
+```
+##  [1] "1"  "2"  "3"  "4"  "5"  "6"  "7"  "8"  "9"  "10" "11" "12" "13" "14" "15"
+## [16] "16" "17" "18" "19" "20" "21" "22" "23" "24" "25" "26" "27" "28" "29" "30"
+## [31] "31" "32" "33" "34" "35" "36" "37" "38" "39" "40" "41" "42" "43" "44" "45"
+## [46] "46" "47" "48" "49" "50" "51" "52" "53" "54" "55" "56" "57" "58" "59" "60"
+## [61] "61" "62" "63" "64" "65" "66" "67" "68" "69" "70" "71" "72" "73" "74" "75"
+## [76] "76" "77"
+```
+
+
 
 
 
