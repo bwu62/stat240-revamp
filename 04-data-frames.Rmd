@@ -389,6 +389,9 @@ Paths in R **always use forward [/]{.k} slashes**, NEVER back [\\]{.k} slashes, 
 We will be using data frames extensively throughout this class. Let's start by learning some basic manipulations with them. First, I'm going to reload the `eruptions_recent` dataset using the CSV file, so that we have the correct `start`/`stop` columns.
 
 ```{r}
+# set R to print fewer rows by default, to save space in demos below
+options(pillar.print_min = 5)
+
 # reload dataset
 eruptions_recent <- read_csv(
   "https://bwu62.github.io/stat240-revamp/data/eruptions_recent.csv",
@@ -431,19 +434,43 @@ rownames(eruptions_recent)
 
 
 
+### Subsetting data frames
+
+You can extract and manipulate subsets of a data frame along either dimension. Most commonly, you may want to use `$` to either pull out a single column as a vector, modify an existing column in-place, or even create a new column.
+
+```{r}
+# extract the vei column
+eruptions_recent$duration
+# change the confirmed column to 1s and 0s in-place
+eruptions_recent$confirmed <- as.numeric(eruptions_recent$confirmed)
+eruptions_recent
+# add a new column giving just the year the eruption started in
+eruptions_recent$start_year <- year(eruptions_recent$start)
+eruptions_recent
+```
+
+You can also use `[]` and `[[]]` to subset columns by name or position, the difference being `[]` returns a data frame and `[[]]` returns the vector directly.
+
+```{r}
+# extract the vei column, keeping the result as a data frame
+eruptions_recent["vei"]
+# extract the same column but by position and directly as a vector
+eruptions_recent[[6]]
+```
+
+The `[]` operator has an additional usage of `[rows,cols]` where `rows`, `cols` can both be vectors specifying subsets by name or by position. Leaving one of them empty means return all of them.
+
+```{r}
+# extract just the first 5 start/stop times
+eruptions_recent[1:5, c("start", "stop")]
+# extract the entire 10th row
+eruptions_recent[10, ]
+# you can also use negative indices to remove specific items
+# e.g. this removes rows 1-10 and also removes the 7th column (start_year)
+eruptions_recent[-(1:10), -7]
+```
+
+You can also expand data frames by binding additional rows and columns with `rbind()`, `cbind()`. This is slightly outside our scope for now, see [this page](https://www.programiz.com/r/dataframe) for more details if you wish.
 
 
 
-
-
-
-
-<!--
-
-data frame topics
-
- - dimensions
- - subsetting
- - missing
-
--->
