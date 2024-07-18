@@ -157,7 +157,7 @@ seq(0, 100, by = 10)
 seq(0, 1, length.out = 101)
 ```
 
-Vectors can also be created with the `rep()` function which lets you repeat the contents. There are two arguments: `times` which controls how many times to repeat the entire input, and `each` which controls how many times to repeat each element if the input is a vector. You can specify either or both of these arguments. Note `rep()` can be used to repeat other objects too, not just numbers.
+Vectors can also be created with the `rep()` function which lets you repeat the contents. There are two arguments: `times` which controls how many times to repeat the entire input, and `each` which controls how many times to repeat each element if the input is a vector. You can specify either or both of these arguments.^[`rep()` is actually simultaneously an extremely useful and also extremely infuriating function, due to the bafflingly nonintuitive design of its arguments. See Hadley Wickham's [thoughtful diatribe](https://design.tidyverse.org/cs-rep.html){target="_blank"} on the matter for more.] Note `rep()` can be used to repeat other objects too, not just numbers.
 
 ```{r rep}
 # repeat a single number
