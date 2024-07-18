@@ -417,7 +417,7 @@ summary(eruptions_recent)
 names(eruptions_recent)
 # you can also set individual, specific, or even all names
 names(eruptions_recent)[2] <- "START"
-names(eruptions_recent)[c(1,4:6)] <- c("VOLCANO","DURATION", "CONFIRMED", "VEI")
+names(eruptions_recent)[c(1, 4:6)] <- c("VOLCANO", "DURATION", "CONFIRMED", "VEI")
 names(eruptions_recent)
 # let's reset the names back to their original values
 names(eruptions_recent) <- c(
