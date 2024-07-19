@@ -1672,7 +1672,7 @@ This works with all the getters above, feel free to experiment more with this on
 
 ### Date math
 
-Since dates are represented internally as number of days since a reference point, doing math with dates turns out to be extremely easy. You can add/subtract days, make sequences, and run logical comparisons.
+Since dates are represented internally as number of days since a reference point, doing math with dates turns out to be extremely easy. You can add/subtract days, make sequences, run logical comparisons, and even use some statistical summary functions.
 
 
 ``` r
@@ -1759,6 +1759,34 @@ date %in% dates2
 
 ```
 ## [1] TRUE
+```
+
+``` r
+# some statistical functions can also be run on dates
+# e.g. we can find the mean and median date of dates2
+mean(dates2)
+```
+
+```
+## [1] "2015-04-24"
+```
+
+``` r
+median(dates2)
+```
+
+```
+## [1] "2014-01-23"
+```
+
+``` r
+# we can even find the standard deviation of dates,
+# though this does NOT return a date itself but rather a number of days
+sd(dates2)
+```
+
+```
+## [1] 2893.741
 ```
 
 

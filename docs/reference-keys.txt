@@ -74,7 +74,7 @@ subsetting-data-frames
 data-exploration
 descriptive-statistics
 measures-of-central-tendency
-data-visualization
+mean
 datasets
 list-of-datasets
 eruptions

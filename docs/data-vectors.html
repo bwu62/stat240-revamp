@@ -918,7 +918,7 @@
 <h3>
 <span class="header-section-number">3.11.4</span> Date math<a class="anchor" aria-label="anchor" href="#date-math"><i class="fas fa-link"></i></a>
 </h3>
-<p>Since dates are represented internally as number of days since a reference point, doing math with dates turns out to be extremely easy. You can add/subtract days, make sequences, and run logical comparisons.</p>
+<p>Since dates are represented internally as number of days since a reference point, doing math with dates turns out to be extremely easy. You can add/subtract days, make sequences, run logical comparisons, and even use some statistical summary functions.</p>
 <div class="sourceCode" id="cb396"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># get tomorrow by adding +1 to today</span></span>
 <span><span class="va">date</span> <span class="op">+</span> <span class="fl">1</span></span></code></pre></div>
@@ -963,21 +963,34 @@
 <code class="sourceCode R"><span><span class="co"># is today in dates2?</span></span>
 <span><span class="va">date</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">dates2</span></span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb414"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># some statistical functions can also be run on dates</span></span>
+<span><span class="co"># e.g. we can find the mean and median date of dates2</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">dates2</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] "2015-04-24"</code></pre>
+<div class="sourceCode" id="cb416"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">dates2</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] "2014-01-23"</code></pre>
+<div class="sourceCode" id="cb418"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># we can even find the standard deviation of dates,</span></span>
+<span><span class="co"># though this does NOT return a date itself but rather a number of days</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">dates2</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 2893.741</code></pre>
 </div>
 <div id="printing-dates" class="section level3" number="3.11.5">
 <h3>
 <span class="header-section-number">3.11.5</span> Printing dates<a class="anchor" aria-label="anchor" href="#printing-dates"><i class="fas fa-link"></i></a>
 </h3>
 <p>As a final note, let’s briefly discuss printing dates. You can use <code><a href="https://rdrr.io/r/base/format.html">format()</a></code> to print dates in a pretty way. Different ways of printing each component are represented using <code>%...</code> codes. Examples:</p>
-<div class="sourceCode" id="cb414"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb420"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># print today as mm/dd/yy which is common in the US</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">date</span>, <span class="st">"%m/%d/%y"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "07/19/24"</code></pre>
-<div class="sourceCode" id="cb416"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb422"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># another way, slightly more written out</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">date</span>, <span class="st">"%b %d, %Y"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "Jul 19, 2024"</code></pre>
-<div class="sourceCode" id="cb418"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb424"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># fully written out, including weekday</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">date</span>, <span class="st">"%A, %B %e, %Y"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "Friday, July 19, 2024"</code></pre>

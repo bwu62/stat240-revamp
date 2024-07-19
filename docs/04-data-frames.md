@@ -330,7 +330,7 @@ print(eruptions_recent, n = 5)
 ```
 
 ```
-## # A tibble: 77 × 6
+## # A tibble: 73 × 6
 ##   volcano       start               stop                duration confirmed   vei
 ##   <chr>         <dttm>              <dttm>                 <dbl> <chr>     <dbl>
 ## 1 Kilauea       2024-06-03 00:00:00 2024-06-03 00:00:00        0 TRUE         NA
@@ -338,7 +338,7 @@ print(eruptions_recent, n = 5)
 ## 3 Ahyi          2024-01-01 00:00:00 2024-03-27 00:00:00       86 TRUE         NA
 ## 4 Kanaga        2023-12-18 00:00:00 2023-12-18 00:00:00        0 TRUE          1
 ## 5 Ruby          2023-09-14 00:00:00 2023-09-15 00:00:00        1 TRUE          1
-## # ℹ 72 more rows
+## # ℹ 68 more rows
 ```
 
 Oops, looks like start/stop was read as a datetime instead of a date. We'll learn later how to fix this, but for now we're moving on.
