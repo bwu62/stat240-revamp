@@ -163,7 +163,7 @@ eruptions_recent <- read_csv(
 ```
 
 ``` message
-## Rows: 77 Columns: 6
+## Rows: 73 Columns: 6
 ## ── Column specification ──────────────────────────────────────────────
 ## Delimiter: ","
 ## chr  (1): volcano
@@ -182,7 +182,7 @@ eruptions_recent
 ```
 
 ```
-## # A tibble: 77 × 6
+## # A tibble: 73 × 6
 ##    volcano               start      stop       duration confirmed   vei
 ##    <chr>                 <date>     <date>        <dbl> <lgl>     <dbl>
 ##  1 Kilauea               2024-06-03 2024-06-03        0 TRUE         NA
@@ -195,7 +195,7 @@ eruptions_recent
 ##  8 Ahyi                  2022-11-18 2023-06-11      205 TRUE          1
 ##  9 Kilauea               2021-09-29 2023-09-16      717 TRUE          0
 ## 10 Pavlof                2021-08-05 2022-12-07      489 TRUE          2
-## # ℹ 67 more rows
+## # ℹ 63 more rows
 ```
 
 Several things to note here:
@@ -239,7 +239,7 @@ print(eruptions_recent, n = 5)
 ```
 
 ```
-## # A tibble: 77 × 6
+## # A tibble: 73 × 6
 ##   volcano               start      stop       duration confirmed   vei
 ##   <chr>                 <date>     <date>        <dbl> <lgl>     <dbl>
 ## 1 Kilauea               2024-06-03 2024-06-03        0 TRUE         NA
@@ -247,7 +247,7 @@ print(eruptions_recent, n = 5)
 ## 3 Ahyi                  2024-01-01 2024-03-27       86 TRUE         NA
 ## 4 Kanaga                2023-12-18 2023-12-18        0 TRUE          1
 ## 5 Ruby                  2023-09-14 2023-09-15        1 TRUE          1
-## # ℹ 72 more rows
+## # ℹ 68 more rows
 ```
 
 
@@ -278,7 +278,7 @@ print(eruptions_recent, n = 5)
 ```
 
 ```
-## # A tibble: 77 × 6
+## # A tibble: 73 × 6
 ##   volcano               start      stop       duration confirmed   vei
 ##   <chr>                 <date>     <date>        <dbl> <lgl>     <dbl>
 ## 1 Kilauea               2024-06-03 2024-06-03        0 TRUE         NA
@@ -286,7 +286,7 @@ print(eruptions_recent, n = 5)
 ## 3 Ahyi                  2024-01-01 2024-03-27       86 TRUE         NA
 ## 4 Kanaga                2023-12-18 2023-12-18        0 TRUE          1
 ## 5 Ruby                  2023-09-14 2023-09-15        1 TRUE          1
-## # ℹ 72 more rows
+## # ℹ 68 more rows
 ```
 
 
@@ -504,7 +504,7 @@ eruptions_recent
 ```
 
 ```
-## # A tibble: 77 × 6
+## # A tibble: 73 × 6
 ##   volcano               start      stop       duration confirmed   vei
 ##   <chr>                 <date>     <date>        <dbl> <lgl>     <dbl>
 ## 1 Kilauea               2024-06-03 2024-06-03        0 TRUE         NA
@@ -512,7 +512,7 @@ eruptions_recent
 ## 3 Ahyi                  2024-01-01 2024-03-27       86 TRUE         NA
 ## 4 Kanaga                2023-12-18 2023-12-18        0 TRUE          1
 ## 5 Ruby                  2023-09-14 2023-09-15        1 TRUE          1
-## # ℹ 72 more rows
+## # ℹ 68 more rows
 ```
 
 
@@ -528,7 +528,7 @@ nrow(eruptions_recent)
 ```
 
 ```
-## [1] 77
+## [1] 73
 ```
 
 ``` r
@@ -545,7 +545,7 @@ dim(eruptions_recent)
 ```
 
 ```
-## [1] 77  6
+## [1] 73  6
 ```
 
 ``` r
@@ -555,21 +555,21 @@ summary(eruptions_recent)
 
 ```
 ##    volcano              start                 stop               duration     
-##  Length:77          Min.   :2001-02-02   Min.   :2001-04-15   Min.   :   0.0  
-##  Class :character   1st Qu.:2006-03-20   1st Qu.:2007-03-03   1st Qu.:   6.0  
-##  Mode  :character   Median :2010-09-11   Median :2012-02-18   Median :  71.0  
-##                     Mean   :2012-05-31   Mean   :2013-05-18   Mean   : 192.1  
-##                     3rd Qu.:2019-07-16   3rd Qu.:2019-12-07   3rd Qu.: 195.0  
-##                     Max.   :2024-06-03   Max.   :2024-07-18   Max.   :1491.0  
-##                                          NA's   :4            NA's   :4       
+##  Length:73          Min.   :2001-02-02   Min.   :2001-04-15   Min.   :   0.0  
+##  Class :character   1st Qu.:2006-11-25   1st Qu.:2007-03-03   1st Qu.:   6.0  
+##  Mode  :character   Median :2011-07-19   Median :2012-02-18   Median :  71.0  
+##                     Mean   :2012-11-07   Mean   :2013-05-18   Mean   : 192.1  
+##                     3rd Qu.:2019-07-23   3rd Qu.:2019-12-07   3rd Qu.: 195.0  
+##                     Max.   :2024-06-03   Max.   :2024-07-19   Max.   :1491.0  
+##                                                                               
 ##  confirmed            vei       
 ##  Mode :logical   Min.   :0.000  
-##  FALSE:6         1st Qu.:1.000  
-##  TRUE :71        Median :2.000  
-##                  Mean   :1.838  
+##  FALSE:4         1st Qu.:1.000  
+##  TRUE :69        Median :2.000  
+##                  Mean   :1.864  
 ##                  3rd Qu.:3.000  
 ##                  Max.   :4.000  
-##                  NA's   :9
+##                  NA's   :7
 ```
 
 ``` r
@@ -609,8 +609,7 @@ rownames(eruptions_recent)
 ## [16] "16" "17" "18" "19" "20" "21" "22" "23" "24" "25" "26" "27" "28" "29" "30"
 ## [31] "31" "32" "33" "34" "35" "36" "37" "38" "39" "40" "41" "42" "43" "44" "45"
 ## [46] "46" "47" "48" "49" "50" "51" "52" "53" "54" "55" "56" "57" "58" "59" "60"
-## [61] "61" "62" "63" "64" "65" "66" "67" "68" "69" "70" "71" "72" "73" "74" "75"
-## [76] "76" "77"
+## [61] "61" "62" "63" "64" "65" "66" "67" "68" "69" "70" "71" "72" "73"
 ```
 
 
@@ -626,12 +625,11 @@ eruptions_recent$duration
 ```
 
 ```
-##  [1]    0    0   86    0    1  115   13  205  717  489   39 1150   36  822  154
+##  [1]    0    0   86    0    1  115   13  205  717  489   39 1151   36  822  154
 ## [16]    0  195   30  286   39    6   53  110   62  253 1005  125    3    6   23
-## [31]  519  121   44 1021    0    0 1491  131    1    3    2  100   71    0   NA
-## [46]  108   19    2   38    8    0  256   29  422    4   98    0   98  188  264
-## [61]  139   58  259   71   41 1213   NA  509  150  202   63  180    1   NA   NA
-## [76]    1   72
+## [31]  519  121   44 1021    0    0 1491  131    1    3    2  100   71    0  108
+## [46]   19    2   38    8    0  256   29  422    4   98    0   98  188  264  139
+## [61]   58  259   71   41 1213  509  150  202   63  180    1    1   72
 ```
 
 ``` r
@@ -641,7 +639,7 @@ eruptions_recent
 ```
 
 ```
-## # A tibble: 77 × 6
+## # A tibble: 73 × 6
 ##   volcano               start      stop       duration confirmed   vei
 ##   <chr>                 <date>     <date>        <dbl>     <dbl> <dbl>
 ## 1 Kilauea               2024-06-03 2024-06-03        0         1    NA
@@ -649,7 +647,7 @@ eruptions_recent
 ## 3 Ahyi                  2024-01-01 2024-03-27       86         1    NA
 ## 4 Kanaga                2023-12-18 2023-12-18        0         1     1
 ## 5 Ruby                  2023-09-14 2023-09-15        1         1     1
-## # ℹ 72 more rows
+## # ℹ 68 more rows
 ```
 
 ``` r
@@ -659,7 +657,7 @@ eruptions_recent
 ```
 
 ```
-## # A tibble: 77 × 7
+## # A tibble: 73 × 7
 ##   volcano              start      stop       duration confirmed   vei start_year
 ##   <chr>                <date>     <date>        <dbl>     <dbl> <dbl>      <dbl>
 ## 1 Kilauea              2024-06-03 2024-06-03        0         1    NA       2024
@@ -667,7 +665,7 @@ eruptions_recent
 ## 3 Ahyi                 2024-01-01 2024-03-27       86         1    NA       2024
 ## 4 Kanaga               2023-12-18 2023-12-18        0         1     1       2023
 ## 5 Ruby                 2023-09-14 2023-09-15        1         1     1       2023
-## # ℹ 72 more rows
+## # ℹ 68 more rows
 ```
 
 You can also use `[]` and `[[]]` to subset columns by name or position, the difference being `[]` returns a data frame and `[[]]` returns the vector directly.
@@ -679,7 +677,7 @@ eruptions_recent["vei"]
 ```
 
 ```
-## # A tibble: 77 × 1
+## # A tibble: 73 × 1
 ##     vei
 ##   <dbl>
 ## 1    NA
@@ -687,7 +685,7 @@ eruptions_recent["vei"]
 ## 3    NA
 ## 4     1
 ## 5     1
-## # ℹ 72 more rows
+## # ℹ 68 more rows
 ```
 
 ``` r
@@ -697,9 +695,8 @@ eruptions_recent[[6]]
 
 ```
 ##  [1] NA NA NA  1  1  3  0  1  0  2  2  2  1  2  0  3  1 NA  3  1  1  1  1  1  3
-## [26]  2  3  3  3  2  1  3  3  0  2  2  2  2 NA  2  3  1  2  2 NA  3  2  4  4  1
-## [51] NA  2  2  2  1  1  2  2  1  3  3  1  2  1  2  2  1  3  2  2  3  1 NA  1 NA
-## [76]  0  3
+## [26]  2  3  3  3  2  1  3  3  0  2  2  2  2 NA  2  3  1  2  2  3  2  4  4  1 NA
+## [51]  2  2  2  1  1  2  2  1  3  3  1  2  1  2  2  3  2  2  3  1 NA  0  3
 ```
 
 The `[]` operator has an additional usage of `[rows,cols]` where `rows`, `cols` can both be vectors specifying subsets by name or by position. Leaving one of them empty means return all of them.
@@ -740,15 +737,15 @@ eruptions_recent[-(1:10), -7]
 ```
 
 ```
-## # A tibble: 67 × 6
+## # A tibble: 63 × 6
 ##   volcano       start      stop       duration confirmed   vei
 ##   <chr>         <date>     <date>        <dbl>     <dbl> <dbl>
 ## 1 Pagan         2021-07-29 2021-09-06       39         1     2
-## 2 Great Sitkin  2021-05-25 2024-07-18     1150         1     2
+## 2 Great Sitkin  2021-05-25 2024-07-19     1151         1     2
 ## 3 Veniaminof    2021-02-28 2021-04-05       36         1     1
 ## 4 Semisopochnoi 2021-02-02 2023-05-05      822         1     2
 ## 5 Kilauea       2020-12-20 2021-05-23      154         1     0
-## # ℹ 62 more rows
+## # ℹ 58 more rows
 ```
 
 This is commonly used in data science to split up a dataset. For example, suppose you wanted to randomly partition your data into an 80% training and 20% testing set. You can first use [`sample(n,x)`{.R}](https://rdrr.io/r/base/sample.html) to randomly select `x` rows out of `n`, then use both positive and negative row subsetting syntax to get both partitions:
@@ -764,7 +761,7 @@ test_rows
 ```
 
 ```
-##  [1] 68 39  1 34 43 14 59 51 21 54  7 37 66 74 42
+##  [1] 68 39  1 34 43 14 59 51 21 42 54 46 10  7  9
 ```
 
 ``` r
@@ -778,21 +775,21 @@ eruptions_recent_test
 ## # A tibble: 15 × 7
 ##    volcano             start      stop       duration confirmed   vei start_year
 ##    <chr>               <date>     <date>        <dbl>     <dbl> <dbl>      <dbl>
-##  1 Anatahan            2004-04-12 2005-09-03      509         1     3       2004
+##  1 Veniaminof          2004-02-16 2004-09-05      202         1     2       2004
 ##  2 Cleveland           2010-09-11 2010-09-12        1         0    NA       2010
 ##  3 Kilauea             2024-06-03 2024-06-03        0         1    NA       2024
 ##  4 Mariana Back-Arc S… 2013-02-13 2015-12-01     1021         1     0       2013
 ##  5 Cleveland           2009-10-02 2009-12-12       71         1     2       2009
 ##  6 Semisopochnoi       2021-02-02 2023-05-05      822         1     2       2021
-##  7 Veniaminof          2006-03-03 2006-09-07      188         1     1       2006
-##  8 Shishaldin          2008-02-12 2008-02-12        0         0    NA       2008
+##  7 Cleveland           2006-02-06 2006-10-28      264         1     3       2006
+##  8 Anatahan            2007-11-27 2008-08-09      256         1     2       2007
 ##  9 Great Sitkin        2019-06-01 2019-06-07        6         1     1       2019
-## 10 Cleveland           2007-06-17 2008-08-12      422         1     2       2007
-## 11 Mauna Loa           2022-11-27 2022-12-10       13         1     0       2022
-## 12 Cleveland           2011-07-19 2015-08-18     1491         1     2       2011
-## 13 St. Helens          2004-10-01 2008-01-27     1213         1     2       2004
-## 14 Atka Volcanic Comp… 2002-07-16 NA               NA         1     1       2002
-## 15 Pagan               2010-05-03 2010-08-11      100         1     1       2010
+## 10 Pagan               2010-05-03 2010-08-11      100         1     1       2010
+## 11 Pagan               2006-12-04 2006-12-08        4         1     1       2006
+## 12 Cleveland           2009-01-02 2009-01-21       19         1     2       2009
+## 13 Pavlof              2021-08-05 2022-12-07      489         1     2       2021
+## 14 Mauna Loa           2022-11-27 2022-12-10       13         1     0       2022
+## 15 Kilauea             2021-09-29 2023-09-16      717         1     0       2021
 ```
 
 ``` r
@@ -800,7 +797,7 @@ eruptions_recent_train
 ```
 
 ```
-## # A tibble: 62 × 7
+## # A tibble: 58 × 7
 ##   volcano              start      stop       duration confirmed   vei start_year
 ##   <chr>                <date>     <date>        <dbl>     <dbl> <dbl>      <dbl>
 ## 1 Atka Volcanic Compl… 2024-03-27 2024-03-27        0         1    NA       2024
@@ -808,7 +805,7 @@ eruptions_recent_train
 ## 3 Kanaga               2023-12-18 2023-12-18        0         1     1       2023
 ## 4 Ruby                 2023-09-14 2023-09-15        1         1     1       2023
 ## 5 Shishaldin           2023-07-11 2023-11-03      115         1     3       2023
-## # ℹ 57 more rows
+## # ℹ 53 more rows
 ```
 
 If you ever need to recombine them, just use `rbind()` which will bind rows together from multiple data frames, as long as they have the exact same columns (both name and type).
@@ -822,14 +819,14 @@ eruptions_recent_recombined
 ```
 
 ```
-## # A tibble: 77 × 7
+## # A tibble: 73 × 7
 ##   volcano              start      stop       duration confirmed   vei start_year
 ##   <chr>                <date>     <date>        <dbl>     <dbl> <dbl>      <dbl>
-## 1 Anatahan             2004-04-12 2005-09-03      509         1     3       2004
+## 1 Veniaminof           2004-02-16 2004-09-05      202         1     2       2004
 ## 2 Cleveland            2010-09-11 2010-09-12        1         0    NA       2010
 ## 3 Kilauea              2024-06-03 2024-06-03        0         1    NA       2024
 ## 4 Mariana Back-Arc Se… 2013-02-13 2015-12-01     1021         1     0       2013
 ## 5 Cleveland            2009-10-02 2009-12-12       71         1     2       2009
-## # ℹ 72 more rows
+## # ℹ 68 more rows
 ```
 
