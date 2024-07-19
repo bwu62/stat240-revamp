@@ -71,6 +71,9 @@ paths-file-management
 working-with-data-frames
 basic-operations
 subsetting-data-frames
+data-exploration
+summary-statistics
+data-visualization
 datasets
 list-of-datasets
 eruptions
