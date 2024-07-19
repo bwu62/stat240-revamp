@@ -2,7 +2,14 @@ book_filename: "stat240-revamp"
 new_session: true
 before_chapter_script: _common.R
 after_chapter_script: _after.R
-rmd_files: ["index.Rmd", "01-setup.Rmd", "02-intro-r-rstudio.Rmd", "03-data-vectors.Rmd", "04-data-frames.Rmd", "datasets.Rmd"]
+rmd_files: 
+  - "index.Rmd"
+  - "01-setup.Rmd"
+  - "02-intro-r-rstudio.Rmd"
+  - "03-data-vectors.Rmd"
+  - "04-data-frames.Rmd"
+  - "05-data-exploration.Rmd"
+  - "datasets.Rmd"
 delete_merged_file: true
 language:
   ui:
