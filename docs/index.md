@@ -55,6 +55,16 @@ stuff to add:
     - prosecutor, gambler, correlation, dredging, regression to mean
 
 
+dataset ideas (note: should prioritize datasets most students would find interesting)
+
+ - olympics
+ - politics
+ - crime
+ - causes of death
+ - climate
+ - something economic
+
+
 other notes to self:
 
 - use [params](https://bookdown.org/yihui/rmarkdown/params-declare.html) to control:

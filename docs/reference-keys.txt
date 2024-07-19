@@ -72,7 +72,8 @@ working-with-data-frames
 basic-operations
 subsetting-data-frames
 data-exploration
-summary-statistics
+descriptive-statistics
+measures-of-central-tendency
 data-visualization
 datasets
 list-of-datasets
