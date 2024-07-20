@@ -28,7 +28,7 @@ A **statistic** is just some number computed from a sample of data, often intend
 
 ### Measures of central tendency
 
-There are MANY statistics that quantify the "center" of some sample. These are all collectively referred to as **measures of central tendency**, also often called **averages** for short. The 3 most common averages are the **mean**, **median**, and **mode**.
+There are MANY statistics that aim to quantify the "center" of a sample. These are all collectively referred to as **measures of central tendency**, also often called **averages** for short. The 3 most common averages are the **mean**, **median**, and **mode**.
 
 :::{.note}
 **"Average" can refer to ANY measure of central tendency**, i.e. average can refer to either mean, median, or mode (or any of these [other measures](https://en.wikipedia.org/wiki/Central_tendency#Measures)). Thus, it's generally recommended to specify which measure you're referring to and avoid using the word "average" (unless you're being strategically ambiguous).
