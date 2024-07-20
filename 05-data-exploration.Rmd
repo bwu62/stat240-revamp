@@ -219,13 +219,28 @@ quantile(eruptions_recent$duration, probs = c(0, 0.25, 0.5, 0.75, 1))
 
 These 5 numbers correspond to the **min**, **1^st^ quartile ($Q_1$)**, **median**, **3^rd^ quartile ($Q_3$)**, and max respectively, which are often collectively known as the [five-number summary](https://en.wikipedia.org/wiki/Five-number_summary).
 
-The **difference $Q_3-Q_1$ is called the interquartile range**, and is often used instead of the variance/standard deviation when outliers/skewness is a significant concern in a dataset (similar to how, in similar circumstances, the median is often preferred to the mean).
+The **difference $Q_3-Q_1$ is called the interquartile range**, and is often used instead of the variance/standard deviation when outliers/skewness is a significant concern in a dataset due to its increased robustness. The IQR can be computed with the `IQR()` function:
+
+```{r}
+# compute the interquartile range of eruption durations
+IQR(eruptions_recent$duration)
+```
 
 
 
 #### Range
 
 The range is the crudest of the measures of spread, defined as the **difference between the minimum and maximum** of a sample. It is even more sensitive to outliers than the variance/standard deviation, and thus less commonly used in formal statistical settings. It is sometimes the only practical measures for extremely small datasets.
+
+In R, the `range()` function gives the minimum and maximum in a vector; to get the actual range, you can use `diff()` to take the difference of the two:
+
+```{r}
+# range() gives the min/max vector
+range(eruptions_recent$duration)
+# diff() of range() gives the true statistical range
+diff(range(eruptions_recent$duration))
+```
+
 
 
 #### Other measures
