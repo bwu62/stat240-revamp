@@ -199,7 +199,6 @@ Since the standard deviation is defined as the square root of the variance (and 
 The variance and standard deviation are the most common measures of spread, but like the arithmetic mean, they are also sensitive to outliers and may not be suitable with highly skewed data.
 
 
-
 #### Interquartile range
 
 The interquartile range, also called the IQR, is the **distance between the 1^st^ and 3^rd^ quartile**. To understand this, let's first briefly review percentiles.
