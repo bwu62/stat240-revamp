@@ -1,5 +1,21 @@
-# example R options set globally
-options(width = 60)
+# https://stackoverflow.com/a/4090208/25278020
+# ensure necessary packages are installed
+list.of.packages = c(
+  "devtools", "rmarkdown", "tidyverse",
+  "downlit", "bookdown", "DescTools"
+)
+new.packages <- list.of.packages[!(
+  list.of.packages %in% 
+    installed.packages()[,"Package"]
+)]
+if(length(new.packages)) install.packages(new.packages)
+
+tryCatch({
+  invisible(grkmisc::pretty_num)
+}, error = function(e) {
+  devtools::install_github("gadenbuie/grkmisc")
+})
+
 
 # example chunk options set globally
 knitr::opts_chunk$set(
@@ -7,6 +23,7 @@ knitr::opts_chunk$set(
   warning=F, message=F, 
   fig.dim=c(6,4), dev="svg"
 )
+
 
 # library(tidyverse)
 # library(lubridate)
