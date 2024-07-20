@@ -148,6 +148,11 @@ Note the median length of eruptions, 71, is significantly smaller than the mean,
 It's worth mentioning here the word "outliers" isn't well defined formally and is actually a surprisingly tricky subject in statistics. Here, an "outlier" just loosely refers to observations that differ dramatically compared to the rest of your data. It's important to remember that **not all "outliers" are errors**; some may in fact point to new information you're not aware of.
 :::
 
+:::{.def}
+Statistics that are **less sensitive to "outliers" are called *robust***. E.g. the median is more robust than the mean.
+:::
+
+
 
 #### Mode
 
@@ -271,7 +276,6 @@ Since the standard deviation is defined as the square root of the variance (and 
 :::
 
 The variance and standard deviation are the most common measures of spread, but like the arithmetic mean, they are also sensitive to outliers and may not be suitable with highly skewed data.
-
 
 
 #### Interquartile range
