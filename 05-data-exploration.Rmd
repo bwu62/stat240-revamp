@@ -158,6 +158,12 @@ This is just a short list; there are a host of [other means](https://en.wikipedi
 
 
 
+### Measures of spread
+
+Arguably the next most important category of summary statistics after measures of central tendency are **measures of spread**, which aim to quantify how "spread out" a dataset is. Variance and standard deviation are by far the most common measures
+
+
+
 
 
 <!--
