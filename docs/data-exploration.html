@@ -273,13 +273,26 @@
 <pre><code>##   0%  25%  50%  75% 100% 
 ##    0    6   71  195 1491</code></pre>
 <p>These 5 numbers correspond to the <strong>min</strong>, <strong>1<sup>st</sup> quartile (<span class="math inline">\(Q_1\)</span>)</strong>, <strong>median</strong>, <strong>3<sup>rd</sup> quartile (<span class="math inline">\(Q_3\)</span>)</strong>, and max respectively, which are often collectively known as the <a href="https://en.wikipedia.org/wiki/Five-number_summary">five-number summary</a>.</p>
-<p>The <strong>difference <span class="math inline">\(Q_3-Q_1\)</span> is called the interquartile range</strong>, and is often used instead of the variance/standard deviation when outliers/skewness is a significant concern in a dataset (similar to how, in similar circumstances, the median is often preferred to the mean).</p>
+<p>The <strong>difference <span class="math inline">\(Q_3-Q_1\)</span> is called the interquartile range</strong>, and is often used instead of the variance/standard deviation when outliers/skewness is a significant concern in a dataset due to its increased robustness. The IQR can be computed with the <code><a href="https://rdrr.io/r/stats/IQR.html">IQR()</a></code> function:</p>
+<div class="sourceCode" id="cb520"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># compute the interquartile range of eruption durations</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/IQR.html">IQR</a></span><span class="op">(</span><span class="va">eruptions_recent</span><span class="op">$</span><span class="va">duration</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 189</code></pre>
 </div>
 <div id="range" class="section level4" number="5.1.2.4">
 <h4>
 <span class="header-section-number">5.1.2.4</span> Range<a class="anchor" aria-label="anchor" href="#range"><i class="fas fa-link"></i></a>
 </h4>
 <p>The range is the crudest of the measures of spread, defined as the <strong>difference between the minimum and maximum</strong> of a sample. It is even more sensitive to outliers than the variance/standard deviation, and thus less commonly used in formal statistical settings. It is sometimes the only practical measures for extremely small datasets.</p>
+<p>In R, the <code><a href="https://rdrr.io/r/base/range.html">range()</a></code> function gives the minimum and maximum in a vector; to get the actual range, you can use <code><a href="https://rdrr.io/r/base/diff.html">diff()</a></code> to take the difference of the two:</p>
+<div class="sourceCode" id="cb522"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># range() gives the min/max vector</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">eruptions_recent</span><span class="op">$</span><span class="va">duration</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1]    0 1491</code></pre>
+<div class="sourceCode" id="cb524"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># diff() of range() gives the true statistical range</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">eruptions_recent</span><span class="op">$</span><span class="va">duration</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 1491</code></pre>
 </div>
 <div id="other-measures-1" class="section level4" number="5.1.2.5">
 <h4>
