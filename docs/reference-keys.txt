@@ -77,6 +77,8 @@ measures-of-central-tendency
 mean
 median
 mode
+other-measures
+measures-of-spread
 datasets
 list-of-datasets
 eruptions

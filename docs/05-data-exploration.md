@@ -25,9 +25,10 @@ A **statistic** is just some number computed from a sample of data, often intend
 :::
 
 
+
 ### Measures of central tendency
 
-There are MANY statistics that quantify the "center" of some sample. These are all collectively referred to as **measures of central tendency**, also often called **averages** for short. The 3 most common averages are the **mean**, **median**, and **mode**.
+There are MANY statistics that aim to quantify the "center" of a sample. These are all collectively referred to as **measures of central tendency**, also often called **averages** for short. The 3 most common averages are the **mean**, **median**, and **mode**.
 
 :::{.note}
 **"Average" can refer to ANY measure of central tendency**, i.e. average can refer to either mean, median, or mode (or any of these [other measures](https://en.wikipedia.org/wiki/Central_tendency#Measures)). Thus, it's generally recommended to specify which measure you're referring to and avoid using the word "average" (unless you're being strategically ambiguous).
@@ -200,6 +201,23 @@ DescTools::Mode(eruptions_recent$volcano)
 ```
 
 
+#### Other measures
+
+The mean, median, and mode are by far the most common measures of central tendency, and they are the only ones you need to know for this course. However, I thought it might be worth briefly mentioning a few other averages with interesting applications just for fun:
+
+ - The [quadratic mean](https://en.wikipedia.org/wiki/Root_mean_square), also known as the root mean square, is defined for a sample $x_1,\dots,x_n$ as $\sqrt{\frac1n(x_1^2+\cdots+x_n^2)}$. This shows up in some statistical contexts, e.g. the standard deviation is almost a quadratic mean of the difference of each observation from the arithmetic mean, except dividing by $n-1$ instead of $n$, which is called [Bessel's correction](https://en.wikipedia.org/wiki/Bessel%27s_correction) and is necessary to correct a small bias. It also has applications in statistical model evaluation, statistical physics, electronics engineering, signal analysis, and more.
+ - The [geometric mean](https://en.wikipedia.org/wiki/Geometric_mean) is defined as $\sqrt[n]{x_1x_2\cdotsx_n}$ and is only valid for positive-valued data. This is useful when data is multiplicate rather than additive in nature, e.g. growth rates, interes rates, comparisons of relative performance on benchmarks, etc. It has many applications in finance and economics, some areas of optical engineering, and even cinematography.
+   - Note the logarithm of the geometric mean of a sample is equal to the arithmetic mean of the logarithm of the same sample. In other words, a geometric mean viewed on a log scale "looks like" an arithmetic mean on a linear scale. Log transforms are an important tool for certain contexts, see [this page](https://people.duke.edu/~rnau/411log.htm) for a brief overview.
+ - The [harmonic mean](https://en.wikipedia.org/wiki/Harmonic_mean) is defined as $\left(\frac{x_1^{-1}+\cdots+x_n^{-1}}{n}\right)^{-1}$, i.e. the reciprocal of the arithmetic mean of the reciprocals of the data, and is also typically only used for positive-valued data. It turns out to be the correct mean to use in certain applications involving rate, ratio, or time values. It also has applications in machine learning, physics, finance, and even [baseball](https://en.wikipedia.org/wiki/Power%E2%80%93speed_number).
+ - Collectively, the arithmetic, geometric, and harmonic means are also known as the [Pythagorean means](https://en.wikipedia.org/wiki/Pythagorean_means).\
+
+This is just a short list; there are a host of [other means](https://en.wikipedia.org/wiki/Central_tendency#Measures) that exist. Once again, **you do NOT need to know these advanced means**; you are only expected to learn the arithmetic mean, median, and mode.
+
+
+
+### Measures of spread
+
+Arguably the next most important category of summary statistics after measures of central tendency are **measures of spread**, which aim to quantify how "spread out" a dataset is. Variance and standard deviation are by far the most common measures
 
 
 

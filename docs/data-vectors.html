@@ -851,6 +851,7 @@
 <code class="sourceCode R"><span><span class="co"># which of these given years are leap?</span></span>
 <span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/leap_year.html">leap_year</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1900</span>, <span class="fl">2000</span>, <span class="fl">2024</span>, <span class="fl">2100</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] FALSE  TRUE  TRUE FALSE</code></pre>
+<p>Fun fact: R’s calendar is more rigorous than Excel’s calendar, since it correctly treats 1900 as non-leap, <a href="https://learn.microsoft.com/en-us/office/troubleshoot/excel/wrongly-assumes-1900-is-leap-year">unlike Excel</a>. This is of course probably immaterial in the 21<sup>st</sup> century, I just think it’s an amusing bit of trivia.</p>
 </div>
 <div id="getset-components" class="section level3" number="3.11.3">
 <h3>

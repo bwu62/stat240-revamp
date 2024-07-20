@@ -1540,6 +1540,9 @@ leap_year(c(1900, 2000, 2024, 2100))
 ## [1] FALSE  TRUE  TRUE FALSE
 ```
 
+Fun fact: R's calendar is more rigorous than Excel's calendar, since it correctly treats 1900 as non-leap, [unlike Excel](https://learn.microsoft.com/en-us/office/troubleshoot/excel/wrongly-assumes-1900-is-leap-year). This is of course probably immaterial in the 21^st^ century, I just think it's an amusing bit of trivia.
+
+
 
 
 ### Get/set components
