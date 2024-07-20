@@ -79,6 +79,12 @@ median
 mode
 other-measures
 measures-of-spread
+variance-and-standard-deviation
+interquartile-range
+percentiles
+range
+other-measures-1
+skew
 datasets
 list-of-datasets
 eruptions

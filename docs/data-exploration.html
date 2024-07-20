@@ -98,7 +98,7 @@
 <h4>
 <span class="header-section-number">5.1.1.1</span> Mean<a class="anchor" aria-label="anchor" href="#mean"><i class="fas fa-link"></i></a>
 </h4>
-<p>The arithmetic mean, commonly referred to as just “mean”, is what most people think of when they hear “average”. It is the <strong>sum of a sample divided by the sample size</strong>. Formally, given a sample <span class="math inline">\(x_1,x_2,\dots,x_n\)</span> the mean <span class="math inline">\(\bar{x}\)</span> is defined as:</p>
+<p>The arithmetic mean of a sample, commonly referred to as just “mean”, is what most people think of when they hear “average”. It is the <strong>sum of a sample divided by the sample size</strong>. Formally, given a sample <span class="math inline">\(x_1,x_2,\dots,x_n\)</span> the mean <span class="math inline">\(\bar{x}\)</span> is defined as:</p>
 <p><span class="math display">\[\bar{x}=\frac1n\sum_{i=1}^nx_i=\frac{x_1+x_2+\cdots+x_n}n\]</span></p>
 <p>The mean may seem the most natural and intuitive central tendency measure, but it has a number of drawbacks:</p>
 <ol style="list-style-type: decimal">
@@ -209,33 +209,94 @@
 </h4>
 <p>The mean, median, and mode are by far the most common measures of central tendency, and they are the only ones you need to know for this course. However, I thought it might be worth briefly mentioning a few other averages with interesting applications just for fun:</p>
 <ul>
-<li>The <a href="https://en.wikipedia.org/wiki/Root_mean_square">quadratic mean</a>, also known as the root mean square, is defined for a sample <span class="math inline">\(x_1,\dots,x_n\)</span> as <span class="math inline">\(\sqrt{\frac1n(x_1^2+\cdots+x_n^2)}\)</span>. This shows up in some statistical contexts, e.g. the standard deviation is almost a quadratic mean of the difference of each observation from the arithmetic mean, except dividing by <span class="math inline">\(n-1\)</span> instead of <span class="math inline">\(n\)</span>, which is called <a href="https://en.wikipedia.org/wiki/Bessel%27s_correction">Bessel’s correction</a> and is necessary to correct a small bias. It also has applications in statistical model evaluation, statistical physics, electronics engineering, signal analysis, and more.</li>
-<li>The <a href="https://en.wikipedia.org/wiki/Geometric_mean">geometric mean</a> is defined as <span class="math inline">\(\sqrt[n]{x_1x_2\cdotsx_n}\)</span> and is only valid for positive-valued data. This is useful when data is multiplicate rather than additive in nature, e.g. growth rates, interes rates, comparisons of relative performance on benchmarks, etc. It has many applications in finance and economics, some areas of optical engineering, and even cinematography.
+<li>The <a href="https://en.wikipedia.org/wiki/Root_mean_square">quadratic mean</a>, also known as the root mean square, is defined for a sample <span class="math inline">\(x_1,\dots,x_n\)</span> as <span class="math inline">\(\sqrt{\frac1n(x_1^2+\cdots+x_n^2)}\)</span>. This shows up in some statistical contexts, e.g. the standard deviation is almost a quadratic mean of the difference of each observation from the arithmetic mean, except dividing by <span class="math inline">\(n-1\)</span> instead of <span class="math inline">\(n\)</span> (which corrects a small bias and is called <a href="https://en.wikipedia.org/wiki/Bessel%27s_correction">Bessel’s correction</a>). It also has applications in model evaluation, statistical physics, electronics engineering, signal analysis, and more.</li>
+<li>The <a href="https://en.wikipedia.org/wiki/Geometric_mean">geometric mean</a> is defined as <span class="math inline">\(\sqrt[n]{x_1x_2\cdots x_n}\)</span> and is only valid for positive-valued data. This is useful when data is multiplicative rather than additive in nature, e.g. growth rates, interest rates, comparisons of relative performance on benchmarks, etc. It has many applications in finance and economics, some areas of optical engineering, and even cinematography.
 <ul>
 <li>Note the logarithm of the geometric mean of a sample is equal to the arithmetic mean of the logarithm of the same sample. In other words, a geometric mean viewed on a log scale “looks like” an arithmetic mean on a linear scale. Log transforms are an important tool for certain contexts, see <a href="https://people.duke.edu/~rnau/411log.htm">this page</a> for a brief overview.</li>
 </ul>
 </li>
 <li>The <a href="https://en.wikipedia.org/wiki/Harmonic_mean">harmonic mean</a> is defined as <span class="math inline">\(\left(\frac{x_1^{-1}+\cdots+x_n^{-1}}{n}\right)^{-1}\)</span>, i.e. the reciprocal of the arithmetic mean of the reciprocals of the data, and is also typically only used for positive-valued data. It turns out to be the correct mean to use in certain applications involving rate, ratio, or time values. It also has applications in machine learning, physics, finance, and even <a href="https://en.wikipedia.org/wiki/Power%E2%80%93speed_number">baseball</a>.</li>
-<li>Collectively, the arithmetic, geometric, and harmonic means are also known as the <a href="https://en.wikipedia.org/wiki/Pythagorean_means">Pythagorean means</a>.<br>
-</li>
+<li>Collectively, the arithmetic, geometric, and harmonic means are also known as the <a href="https://en.wikipedia.org/wiki/Pythagorean_means">Pythagorean means</a>.</li>
 </ul>
-<p>This is just a short list; there are a host of <a href="https://en.wikipedia.org/wiki/Central_tendency#Measures">other means</a> that exist. Once again, <strong>you do NOT need to know these advanced means</strong>; you are only expected to learn the arithmetic mean, median, and mode.</p>
+<p>This is just a short list; there are a host of <a href="https://en.wikipedia.org/wiki/Central_tendency#Measures">other means</a> that exist. Once again, <strong>you do NOT need to know any of these advanced means</strong>; you are only expected to know the arithmetic mean, median, and mode.</p>
 </div>
 </div>
 <div id="measures-of-spread" class="section level3" number="5.1.2">
 <h3>
 <span class="header-section-number">5.1.2</span> Measures of spread<a class="anchor" aria-label="anchor" href="#measures-of-spread"><i class="fas fa-link"></i></a>
 </h3>
-<p>Arguably the next most important category of summary statistics after measures of central tendency are <strong>measures of spread</strong>, which aim to quantify how “spread out” a dataset is. Variance and standard deviation are by far the most common measures</p>
+<p>Arguably the next most important set of summary statistics after measures of central tendency are <strong>measures of spread</strong>, which aim to quantify how “spread out” a dataset is. <strong>Variance</strong> and <strong>standard deviation</strong> are by far the most common measures, but the <strong>IQR</strong> and <strong>range</strong> are also sometimes useful.</p>
+<p>Unlike measures of central tendency, measures of spread are typically location-agnostic, i.e. they don’t change if the entire dataset is shifted up or down by a constant. Formally, a sample <span class="math inline">\(x_1,\dots,x_n\)</span> and a sample <span class="math inline">\(x_1+c,\,\dots,\,x_n+c\)</span> have the same spread for all <span class="math inline">\(c\)</span>.</p>
+<div id="variance-and-standard-deviation" class="section level4" number="5.1.2.1">
+<h4>
+<span class="header-section-number">5.1.2.1</span> Variance (and standard deviation)<a class="anchor" aria-label="anchor" href="#variance-and-standard-deviation"><i class="fas fa-link"></i></a>
+</h4>
+<p>Let’s get the easy one out of the way first. <strong>Standard deviation is always defined as the (positive) square root of variance</strong>. So what’s the variance then? The <strong>variance of a sample is defined as</strong>:</p>
+<p><span class="math display">\[s^2=\frac1{n-1}\sum_{i=1}^n(x_i-\bar{x})^2\]</span></p>
+<p>Basically, it’s the <strong>mean squared-distance from the mean</strong>, <span class="math inline">\(\bar{x}\)</span>, except we use <span class="math inline">\(n-1\)</span> instead of <span class="math inline">\(n\)</span> to correct for a <a href="%5BBessel's%20correction%5D(https://en.wikipedia.org/wiki/Bessel%27s_correction)">small bias</a>. For example, we can compute the variance of the duration of eruptions, in <strong>days squared</strong>:</p>
+<div class="sourceCode" id="cb512"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># compute variance of duration</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="va">eruptions_recent</span><span class="op">$</span><span class="va">duration</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 101097.9</code></pre>
+<p>In other words, the “average” squared difference of an eruption’s duration and the mean duration is about 101.1k days<sup>2</sup>.</p>
+<p>Note the units of the variance are squared of the data units. This makes it inconvenient to work with, since it means it cannot be directly compared with the data. This is why instead we often work with <strong>its square root, i.e. the standard deviation</strong>, which can be thought of as the <strong>“average” distance from the mean</strong> for a given observation. This can be computed using <code><a href="https://rdrr.io/r/stats/sd.html">sd()</a></code>:</p>
+<div class="sourceCode" id="cb514"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># compute the standard deviation of duration</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">eruptions_recent</span><span class="op">$</span><span class="va">duration</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 317.959</code></pre>
+<div class="sourceCode" id="cb516"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># you can check this is equal to sqrt(var(...))</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="va">eruptions_recent</span><span class="op">$</span><span class="va">duration</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 317.959</code></pre>
+<p>In other words, the “average” distance in days between the duration of eruptions and the mean is about 318 days.</p>
+<div class="note">
+<p>Since the standard deviation is defined as the square root of the variance (and thus the variance is always the square of the standard deviation), knowing one of these quantities enables you to also easily compute the other.</p>
+</div>
+<p>The variance and standard deviation are the most common measures of spread, but like the arithmetic mean, they are also sensitive to outliers and may not be suitable with highly skewed data.</p>
+</div>
+<div id="interquartile-range" class="section level4" number="5.1.2.2">
+<h4>
+<span class="header-section-number">5.1.2.2</span> Interquartile range<a class="anchor" aria-label="anchor" href="#interquartile-range"><i class="fas fa-link"></i></a>
+</h4>
+<p>The interquartile range, also called the IQR, is the <strong>distance between the 1<sup>st</sup> and 3<sup>rd</sup> quartile</strong>. To understand this, let’s first briefly review percentiles.</p>
+</div>
+<div id="percentiles" class="section level4" number="5.1.2.3">
+<h4>
+<span class="header-section-number">5.1.2.3</span> Percentiles<a class="anchor" aria-label="anchor" href="#percentiles"><i class="fas fa-link"></i></a>
+</h4>
+<p>Percentiles are a generalization of the median. Recall the median is the data point that is just barely greater than or equal to 50% of the data. Similarly, a <strong><span class="math inline">\(p\)</span><sup>th</sup> percentile is the data point just barely greater than or equal to <span class="math inline">\(p\)</span>% of the data</strong>. Percentiles are computed using the <a href="https://rdrr.io/r/stats/quantile.html"><code class="sourceCode r"><span class="fu">quantile</span>(x, <span class="at">probs =</span> p)</code></a> function, where <code>x</code> is the data vector, and <code>p</code> is a desired percentile (or vector thereof). For example, we can compute the 0<sup>th</sup>, 25<sup>th</sup>, 50<sup>th</sup>, 75<sup>th</sup>, and 100<sup>th</sup> percentiles of eruption duration with:</p>
+<div class="sourceCode" id="cb518"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">eruptions_recent</span><span class="op">$</span><span class="va">duration</span>, probs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##   0%  25%  50%  75% 100% 
+##    0    6   71  195 1491</code></pre>
+<p>These 5 numbers correspond to the <strong>min</strong>, <strong>1<sup>st</sup> quartile (<span class="math inline">\(Q_1\)</span>)</strong>, <strong>median</strong>, <strong>3<sup>rd</sup> quartile (<span class="math inline">\(Q_3\)</span>)</strong>, and max respectively, which are often collectively known as the <a href="https://en.wikipedia.org/wiki/Five-number_summary">five-number summary</a>.</p>
+<p>The <strong>difference <span class="math inline">\(Q_3-Q_1\)</span> is called the interquartile range</strong>, and is often used instead of the variance/standard deviation when outliers/skewness is a significant concern in a dataset (similar to how, in similar circumstances, the median is often preferred to the mean).</p>
+</div>
+<div id="range" class="section level4" number="5.1.2.4">
+<h4>
+<span class="header-section-number">5.1.2.4</span> Range<a class="anchor" aria-label="anchor" href="#range"><i class="fas fa-link"></i></a>
+</h4>
+<p>The range is the crudest of the measures of spread, defined as the <strong>difference between the minimum and maximum</strong> of a sample. It is even more sensitive to outliers than the variance/standard deviation, and thus less commonly used in formal statistical settings. It is sometimes the only practical measures for extremely small datasets.</p>
+</div>
+<div id="other-measures-1" class="section level4" number="5.1.2.5">
+<h4>
+<span class="header-section-number">5.1.2.5</span> Other measures<a class="anchor" aria-label="anchor" href="#other-measures-1"><i class="fas fa-link"></i></a>
+</h4>
+<p>The variance, standard deviation, IQR, and range are the only measures of spread you need to know for this course, but here are a few other measures just for fun:</p>
+<ul>
+<li>The <a href="https://en.wikipedia.org/wiki/Median_absolute_deviation">median absolute deviation</a> or MAD is exactly what it sounds like, the median of the absolute value deviation from the median. It’s a more robust (i.e. outlier-resistant) version of the standard deviation.</li>
+<li>The <a href="https://en.wikipedia.org/wiki/Gini_coefficient">Gini coefficient</a> is another interesting measure of spread (one of my favorites). It’s the only one on this list that is dimensionless (i.e. always a “pure” number with no units) and always between 0 and 1 for non-negative data. It’s defined as half the <a href="https://en.wikipedia.org/wiki/Mean_absolute_difference#Relative_mean_absolute_difference">relative mean absolute difference</a>, which is itself defined as the average absolute difference <span class="math inline">\(|x_i-x_j|\)</span> between all pairs of observations divided by the arithmetic mean. It’s commonly used in economics to characterize inequality, with 0 being total equality (e.g. everyone has exactly the same amount of wealth) and 1 being total inequality (e.g. one person having all the wealth and everyone else having none).</li>
+</ul>
+<p>Once again, this is just a subset of the possible <a href="https://en.wikipedia.org/wiki/Statistical_dispersion">measures of spread</a>, and <strong>you do NOT need to know these other measures</strong>; you are only expected to know the variance, standard deviation, IQR, and range.</p>
+</div>
+</div>
+<div id="skew" class="section level3" number="5.1.3">
+<h3>
+<span class="header-section-number">5.1.3</span> Skew<a class="anchor" aria-label="anchor" href="#skew"><i class="fas fa-link"></i></a>
+</h3>
+<p>Another important summary statistic is the skew of a dataset. Skew has a precise mathematical definition that is beyond the scope of this course. All you need to know is the <strong>difference between a positive (i.e. right) skew and a negative (i.e. left) skew</strong> in a dataset.</p>
 <!--
 
- - central tendency
-   - mean, median, mode
- - min, max
- - quantiles
-   - quartiles
- - spread
-   - var, sd, range, IQR
  - skew
  - correlation?
 
@@ -273,6 +334,7 @@
 <a class="nav-link" href="#descriptive-statistics"><span class="header-section-number">5.1</span> Descriptive statistics</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#measures-of-central-tendency"><span class="header-section-number">5.1.1</span> Measures of central tendency</a></li>
 <li><a class="nav-link" href="#measures-of-spread"><span class="header-section-number">5.1.2</span> Measures of spread</a></li>
+<li><a class="nav-link" href="#skew"><span class="header-section-number">5.1.3</span> Skew</a></li>
 </ul>
 </li>
 </ul>
@@ -292,7 +354,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, Bret Larget, Cameron Jones. It was last built on 2024-07-19.</p>
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, Bret Larget, Cameron Jones. It was last built on 2024-07-20.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
