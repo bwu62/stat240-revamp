@@ -235,6 +235,11 @@ Once again, this is just a subset of the possible [measures of spread](https://e
 
 
 
+### Skew
+
+Another important summary statistic is the skew of a dataset. Skew has a precise mathematical definition that is beyond the scope of this course. All you need to know is the **difference between a positive (i.e. right) skew and a negative (i.e. left) skew** in a dataset.
+
+
 
 
 
@@ -242,13 +247,6 @@ Once again, this is just a subset of the possible [measures of spread](https://e
 
 <!--
 
- - central tendency
-   - mean, median, mode
- - min, max
- - quantiles
-   - quartiles
- - spread
-   - var, sd, range, IQR
  - skew
  - correlation?
 
