@@ -75,6 +75,8 @@ data-exploration
 descriptive-statistics
 measures-of-central-tendency
 mean
+median
+mode
 datasets
 list-of-datasets
 eruptions
