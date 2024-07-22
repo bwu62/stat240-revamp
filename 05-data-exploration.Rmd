@@ -297,10 +297,24 @@ par(mar=c(0,0,0,0))
 L = 4
 wd1 = 1.5
 wd2 = 2.2
+R = rgb(1,0,0,.9)
+B = rgb(0,0,1,.8)
+G = rgb(0,.6,0,1)
 
 f = sn::dsn
+r = .5
+x0 = f(0)*.005
+h = f(0)*.99/(6+5*r)
+g = r*h
 curve(f(x),-L,L,n=1001,axes=F,xlab="",ylab="",asp=4,lwd=wd1)
-lines(c(0,0),c(f(0)*.005,f(0)*.995),col="black",lwd=wd2)
+#lines(c(0,0),c(f(0)*.005,f(0)*.995),col="black",lwd=wd2)
+lines(c(0,0),c(x0,x0+h),col=G,lwd=2)
+lines(c(0,0),c(x0+3*(g+h),x0+3*(g+h)+h),col=G,lwd=2)
+lines(c(0,0),c(x0+g+h,x0+g+2*h),col=B,lwd=2)
+lines(c(0,0),c(x0+4*(g+h),x0+4*(g+h)+h),col=B,lwd=2)
+lines(c(0,0),c(x0+2*(g+h),x0+2*(g+h)+h),col=R,lwd=2)
+lines(c(0,0),c(x0+5*(g+h),x0+5*(g+h)+h),col=R,lwd=2)
+lines(c(-L,L),c(0,0),col="gray50",lwd=wd1)
 lines(c(-L,L),c(0,0),col="gray50",lwd=wd1)
 curve(f(x),-L,L,n=1001,asp=4,add=T,lwd=wd1)
 text(-L*.98,f(0)*.9,"Unskewed (symmetric)",adj=c(0,1))
@@ -309,11 +323,11 @@ a = 4
 f = \(x) sn::dsn(x,xi=-w(a)*m(a),omega=w(a),alpha=a)
 curve(f(x),-L,L,n=1001,axes=F,xlab="",ylab="",asp=4,lwd=wd1)
 lines(c(-L,L),c(0,0),col="gray50",lwd=wd1)
-lines(c(0,0),c(f(0)*.005,f(0)*.995),col=rgb(1,0,0,.9),lwd=wd2)
+lines(c(0,0),c(f(0)*.005,f(0)*.995),col=R,lwd=wd2)
 md = sn::qsn(.5,xi=-w(a)*m(a),omega=w(a),alpha=a)
-lines(rep(md,2),c(f(0)*.005,f(md)*.995),col=rgb(0,0,1,.8),lwd=wd2)
+lines(rep(md,2),c(f(0)*.005,f(md)*.995),col=B,lwd=wd2)
 mn = w(a)*(spd(a)-m(a))
-lines(rep(mn,2),c(f(0)*.005,f(mn)*.995),col=rgb(0,.6,0,1),lwd=wd2)
+lines(rep(mn,2),c(f(0)*.005,f(mn)*.995),col=G,lwd=wd2)
 lines(c(-L,L),c(0,0),col="gray50",lwd=wd1)
 curve(f(x),-L,L,n=1001,asp=4,add=T,lwd=wd1)
 text(-L*.98,f(0)*.9,"Positive (right) skew",adj=c(0,1))
@@ -322,21 +336,15 @@ a = -4
 f = \(x) sn::dsn(x,xi=-w(a)*m(a),omega=w(a),alpha=a)
 curve(f(x),-L,L,n=1001,axes=F,xlab="",ylab="",asp=4,lwd=wd1)
 lines(c(-L,L),c(0,0),col="gray50",lwd=wd1)
-lines(c(0,0),c(f(0)*.005,f(0)*.995),col=rgb(1,0,0,.9),lwd=wd2)
+lines(c(0,0),c(f(0)*.005,f(0)*.995),col=R,lwd=wd2)
 md = sn::qsn(.5,xi=-w(a)*m(a),omega=w(a),alpha=a)
-lines(rep(md,2),c(f(0)*.005,f(md)*.995),col=rgb(0,0,1,.8),lwd=wd2)
+lines(rep(md,2),c(f(0)*.005,f(md)*.995),col=B,lwd=wd2)
 mn = w(a)*(spd(a)-m(a))
-lines(rep(mn,2),c(f(0)*.005,f(mn)*.995),col=rgb(0,.6,0,1),lwd=wd2)
+lines(rep(mn,2),c(f(0)*.005,f(mn)*.995),col=G,lwd=wd2)
 lines(c(-L,L),c(0,0),col="gray50",lwd=wd1)
 curve(f(x),-L,L,n=1001,asp=4,add=T,lwd=wd1)
 text(-L*.98,f(0)*.9,"Negative (left) skew",adj=c(0,1))
 ```
-
-
-
-
-
-
 
 
 
