@@ -2,7 +2,8 @@
 # ensure necessary packages are installed
 list.of.packages = c(
   "devtools", "rmarkdown", "tidyverse",
-  "downlit", "bookdown", "DescTools"
+  "downlit", "bookdown", "DescTools",
+  "sn"
 )
 new.packages <- list.of.packages[!(
   list.of.packages %in% 
