@@ -35,7 +35,7 @@ There are MANY statistics that aim to quantify the "center" of a sample. These a
 :::
 
 
-#### Mean
+### Mean
 
 The arithmetic mean of a sample, commonly referred to as just "mean", is what most people think of when they hear "average". It is the **sum of a sample divided by the sample size**. Formally, given a sample $x_1,x_2,\dots,x_n$ the mean $\bar{x}$ is defined as:
 
@@ -78,7 +78,8 @@ mean(c(1,6,NA,2), na.rm = TRUE)
 :::
 
 
-#### Median
+
+### Median
 
 The median, a common alternative to the mean, is defined as the **"middle" number in a sorted sample**. Formally, it's the value that is both greater than or equal to half the sample, and also less than or equal to half the sample. If there are an even number of observations, the median isn't uniquely defined but is commonly taken as the mean of the middle two numbers.
 
@@ -117,7 +118,7 @@ Statistics that are **less sensitive to "outliers" are called *robust***. E.g. t
 
 
 
-#### Mode
+### Mode
 
 The mode is the oft-maligned black sheep of the central tendency family. It is defined as **the most common observation**, i.e. the observation that occurs the most number of times in a sample. It's primarily intended for categorical data (e.g. male vs female) though it also has some relevance to distributions (more on this much later).
 
@@ -149,7 +150,6 @@ DescTools::Mode(eruptions_recent$volcano)
 ```
 
 
-#### Other measures
 #### Aside: Modality
 
 Most common distributions have only 1 mode, i.e. they are unimodal, but some distributions may have 2 or more modes, in which case they're called bimodal (for 2 modes) or multimodal (for ≥2 modes). Here's an example of a bimodal distribution:
@@ -165,6 +165,7 @@ curve(f(x),-L,L,asp=8,lwd=1.5,add=T)
 
 
 
+### Other measures
 
 The mean, median, and mode are by far the most common measures of central tendency, and they are the only ones you need to know for this course. However, I thought it might be worth briefly mentioning a few other averages with interesting applications just for fun:
 
@@ -186,7 +187,7 @@ Unlike measures of central tendency, measures of spread are typically location-a
 
 
 
-#### Variance (and standard deviation)
+### Variance (and standard deviation)
 
 Let's get the easy one out of the way first. **Standard deviation is always defined as the (positive) square root of variance**. So what's the variance then? The **variance of a sample is defined as**:
 
@@ -219,12 +220,12 @@ Since the standard deviation is defined as the square root of the variance (and 
 The variance and standard deviation are the most common measures of spread, but like the arithmetic mean, they are also sensitive to outliers and may not be suitable with highly skewed data.
 
 
-#### Interquartile range
+### Interquartile range
 
 The interquartile range, also called the IQR, is the **distance between the 1^st^ and 3^rd^ quartile**. To understand this, let's first briefly review percentiles.
 
 
-#### Percentiles
+### Percentiles
 
 Percentiles are a generalization of the median. Recall the median is the data point that is just barely greater than or equal to 50% of the data. Similarly, a **$p$^th^ percentile is the data point just barely greater than or equal to $p$% of the data**. Percentiles are computed using the [`quantile(x, probs = p)`{.R}](https://rdrr.io/r/stats/quantile.html) function, where `x` is the data vector, and `p` is a desired percentile (or vector thereof). For example, we can compute the 0^th^, 25^th^, 50^th^, 75^th^, and 100^th^ percentiles of eruption duration with:
 
@@ -243,7 +244,7 @@ IQR(eruptions_recent$duration)
 
 
 
-#### Range
+### Range
 
 The range is the crudest of the measures of spread, defined as the **difference between the minimum and maximum** of a sample. It is even more sensitive to outliers than the variance/standard deviation, and thus less commonly used in formal statistical settings. It is sometimes the only practical measures for extremely small datasets.
 
@@ -258,7 +259,7 @@ diff(range(eruptions_recent$duration))
 
 
 
-#### Other measures
+### Other measures
 
 The variance, standard deviation, IQR, and range are the only measures of spread you need to know for this course, but here are a few other measures just for fun:
 
