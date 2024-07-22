@@ -368,7 +368,7 @@ The side of the skewness is always the **side with the longer tail**. If the lon
 
 Below, we have 3 example (unimodal) distributions showing the kinds of skewness, with the [**modes**]{style="color:#ff1919"} of each aligned.
 
- 1. An unskewed, or symmetric distribution. The mean, median, and mode all coincide in the middle (shown by the multicolored line.
+ 1. An unskewed, or symmetric distribution. The mean, median, and mode all coincide in the middle (shown by the multicolored line).
  2. A positive, or right skewed distribution. Starting from the peak and **moving right**, we have in the following order the [**mode**]{style="color:#ff1919"}, [**median**]{style="color:#3333ff"}, and [**mean**]{style="color:#009900"}.
  3. A negative, or left skewed distribution. Starting from the peak and **moving left**, we have again in the same order the [**mode**]{style="color:#ff1919"}, [**median**]{style="color:#3333ff"}, and [**mean**]{style="color:#009900"}.
 
