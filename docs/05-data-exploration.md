@@ -68,7 +68,7 @@ mean(eruptions_recent$duration)
 ```
 
 ```
-## [1] 192.0685
+## [1] 192.1096
 ```
 
 ``` r
@@ -77,7 +77,7 @@ sum(eruptions_recent$duration) / length(eruptions_recent$duration)
 ```
 
 ```
-## [1] 192.0685
+## [1] 192.1096
 ```
 
 :::{.note}
@@ -143,7 +143,7 @@ c(
 ## [1] 0.5068493 0.5205479
 ```
 
-Note the median length of eruptions, 71, is significantly smaller than the mean, 192.0684932, because the data is extremely skewed, i.e. there are a few extremely long eruptions, which pull the mean up to be much higher (since it's more sensitive to extreme values).
+Note the median length of eruptions, 71, is significantly smaller than the mean, 192.109589, because the data is extremely skewed, i.e. there are a few extremely long eruptions, which pull the mean up to be much higher (since it's more sensitive to extreme values).
 
 :::{.note}
 It's worth mentioning here the word "outliers" isn't well defined formally and is actually a surprisingly tricky subject in statistics. Here, an "outlier" just loosely refers to observations that differ dramatically compared to the rest of your data. It's important to remember that **not all "outliers" are errors**; some may in fact point to new information you're not aware of.
@@ -252,10 +252,10 @@ var(eruptions_recent$duration)
 ```
 
 ```
-## [1] 101097.9
+## [1] 101178
 ```
 
-In other words, the "average" squared difference of an eruption's duration and the mean duration is about 101.1k days^2^.
+In other words, the "average" squared difference of an eruption's duration and the mean duration is about 101.2k days^2^.
 
 Note the units of the variance are squared of the data units. This makes it inconvenient to work with, since it means it cannot be directly compared with the data. This is why instead we often work with **its square root, i.e. the standard deviation**, which can be thought of as the **"average" distance from the mean** for a given observation. This can be computed using `sd()`:
 
@@ -266,7 +266,7 @@ sd(eruptions_recent$duration)
 ```
 
 ```
-## [1] 317.959
+## [1] 318.0848
 ```
 
 ``` r
@@ -275,10 +275,10 @@ sqrt(var(eruptions_recent$duration))
 ```
 
 ```
-## [1] 317.959
+## [1] 318.0848
 ```
 
-In other words, the "average" distance in days between the duration of eruptions and the mean is about 318 days.
+In other words, the "average" distance in days between the duration of eruptions and the mean is about 318.1 days.
 
 :::{.note}
 Since the standard deviation is defined as the square root of the variance (and thus the variance is always the square of the standard deviation), knowing one of these quantities enables you to also easily compute the other.
@@ -375,6 +375,11 @@ Below, we have 3 example (unimodal) distributions showing the kinds of skewness,
 This shows again, as we already learned, that the median is more robust vs the mean to "outliers"/skew, or in other words, the mean is more affected by "outliers"/skew and gets "dragged away" further by the skewness.
 
 <img src="05-data-exploration_files/figure-html/unnamed-chunk-14-1.svg" width="672" /><img src="05-data-exploration_files/figure-html/unnamed-chunk-14-2.svg" width="672" /><img src="05-data-exploration_files/figure-html/unnamed-chunk-14-3.svg" width="672" />
+
+
+
+
+
 
 
 

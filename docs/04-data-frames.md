@@ -560,7 +560,7 @@ summary(eruptions_recent)
 ##  Mode  :character   Median :2011-07-19   Median :2012-02-18   Median :  71.0  
 ##                     Mean   :2012-11-07   Mean   :2013-05-18   Mean   : 192.1  
 ##                     3rd Qu.:2019-07-23   3rd Qu.:2019-12-07   3rd Qu.: 195.0  
-##                     Max.   :2024-06-03   Max.   :2024-07-19   Max.   :1491.0  
+##                     Max.   :2024-06-03   Max.   :2024-07-22   Max.   :1491.0  
 ##                                                                               
 ##  confirmed            vei       
 ##  Mode :logical   Min.   :0.000  
@@ -625,7 +625,7 @@ eruptions_recent$duration
 ```
 
 ```
-##  [1]    0    0   86    0    1  115   13  205  717  489   39 1151   36  822  154
+##  [1]    0    0   86    0    1  115   13  205  717  489   39 1154   36  822  154
 ## [16]    0  195   30  286   39    6   53  110   62  253 1005  125    3    6   23
 ## [31]  519  121   44 1021    0    0 1491  131    1    3    2  100   71    0  108
 ## [46]   19    2   38    8    0  256   29  422    4   98    0   98  188  264  139
@@ -741,7 +741,7 @@ eruptions_recent[-(1:10), -7]
 ##   volcano       start      stop       duration confirmed   vei
 ##   <chr>         <date>     <date>        <dbl>     <dbl> <dbl>
 ## 1 Pagan         2021-07-29 2021-09-06       39         1     2
-## 2 Great Sitkin  2021-05-25 2024-07-19     1151         1     2
+## 2 Great Sitkin  2021-05-25 2024-07-22     1154         1     2
 ## 3 Veniaminof    2021-02-28 2021-04-05       36         1     1
 ## 4 Semisopochnoi 2021-02-02 2023-05-05      822         1     2
 ## 5 Kilauea       2020-12-20 2021-05-23      154         1     0
