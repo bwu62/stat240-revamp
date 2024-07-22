@@ -21,8 +21,9 @@ tryCatch({
 # example chunk options set globally
 knitr::opts_chunk$set(
   eval=T, echo=T, comment="##", 
-  warning=F, message=F, 
-  fig.dim=c(6,4), dev="svg"
+  warning=F, message=F,
+  dev="svg", fig.width=6,
+  fig.height=4
 )
 
 
