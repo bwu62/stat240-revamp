@@ -180,7 +180,7 @@ rep(c(1, 3, 7:9, seq(10, 12, by = 0.5)), each = 2)
 ## Multiple vectors + vector recycling
 
 
-It may not surprise you to learn all these vectorized operations also work on multiple vectors! If the vectors aren't the same length, **the shorter vectors will be repeated** until they matches the length of the longest vector. This is called [**recycling**](https://www.geeksforgeeks.org/vector-recycling-in-r). Example:
+It may not surprise you to learn all these vectorized operations also work on multiple vectors! If the vectors aren't the same length, **the shorter vectors will be repeated** until they match the length of the longest vector. This is called [**recycling**](https://www.geeksforgeeks.org/vector-recycling-in-r). Example:
 
 ```{r define-multiple-vectors, tidy=F}
 # define some vectors for demo
