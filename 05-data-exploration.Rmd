@@ -150,6 +150,21 @@ DescTools::Mode(eruptions_recent$volcano)
 
 
 #### Other measures
+#### Aside: Modality
+
+Most common distributions have only 1 mode, i.e. they are unimodal, but some distributions may have 2 or more modes, in which case they're called bimodal (for 2 modes) or multimodal (for ≥2 modes). Here's an example of a bimodal distribution:
+
+```{r,echo=F,fig.height=2}
+par(mar=c(0,0,0,0))
+L=6
+f = \(x) dnorm(x,-2.5)+dnorm(x,2,1.4)
+curve(f(x),-L,L,axes=F,xlab="",ylab="",asp=8,lwd=1.5)
+lines(c(-L,L),c(0,0),col="gray50",lwd=1.5)
+curve(f(x),-L,L,asp=8,lwd=1.5,add=T)
+```
+
+
+
 
 The mean, median, and mode are by far the most common measures of central tendency, and they are the only ones you need to know for this course. However, I thought it might be worth briefly mentioning a few other averages with interesting applications just for fun:
 
