@@ -94,10 +94,11 @@
 <div class="note">
 <p><strong>“Average” can refer to ANY measure of central tendency</strong>, i.e. average can refer to either mean, median, or mode (or any of these <a href="https://en.wikipedia.org/wiki/Central_tendency#Measures">other measures</a>). Thus, it’s generally recommended to specify which measure you’re referring to and avoid using the word “average” (unless you’re being strategically ambiguous).</p>
 </div>
-<div id="mean" class="section level4" number="5.1.1.1">
-<h4>
-<span class="header-section-number">5.1.1.1</span> Mean<a class="anchor" aria-label="anchor" href="#mean"><i class="fas fa-link"></i></a>
-</h4>
+</div>
+<div id="mean" class="section level3" number="5.1.2">
+<h3>
+<span class="header-section-number">5.1.2</span> Mean<a class="anchor" aria-label="anchor" href="#mean"><i class="fas fa-link"></i></a>
+</h3>
 <p>The arithmetic mean of a sample, commonly referred to as just “mean”, is what most people think of when they hear “average”. It is the <strong>sum of a sample divided by the sample size</strong>. Formally, given a sample <span class="math inline">\(x_1,x_2,\dots,x_n\)</span> the mean <span class="math inline">\(\bar{x}\)</span> is defined as:</p>
 <p><span class="math display">\[\bar{x}=\frac1n\sum_{i=1}^nx_i=\frac{x_1+x_2+\cdots+x_n}n\]</span></p>
 <p>The mean may seem the most natural and intuitive central tendency measure, but it has a number of drawbacks:</p>
@@ -139,10 +140,10 @@
 <pre><code>## [1] 3</code></pre>
 </div>
 </div>
-<div id="median" class="section level4" number="5.1.1.2">
-<h4>
-<span class="header-section-number">5.1.1.2</span> Median<a class="anchor" aria-label="anchor" href="#median"><i class="fas fa-link"></i></a>
-</h4>
+<div id="median" class="section level3" number="5.1.3">
+<h3>
+<span class="header-section-number">5.1.3</span> Median<a class="anchor" aria-label="anchor" href="#median"><i class="fas fa-link"></i></a>
+</h3>
 <p>The median, a common alternative to the mean, is defined as the <strong>“middle” number in a sorted sample</strong>. Formally, it’s the value that is both greater than or equal to half the sample, and also less than or equal to half the sample. If there are an even number of observations, the median isn’t uniquely defined but is commonly taken as the mean of the middle two numbers.</p>
 <p>The median is generally recommended over the mean in the following situations:</p>
 <ol style="list-style-type: decimal">
@@ -175,10 +176,10 @@
 <p>Statistics that are <strong>less sensitive to “outliers” are called <em>robust</em></strong>. E.g. the median is more robust than the mean.</p>
 </div>
 </div>
-<div id="mode" class="section level4" number="5.1.1.3">
-<h4>
-<span class="header-section-number">5.1.1.3</span> Mode<a class="anchor" aria-label="anchor" href="#mode"><i class="fas fa-link"></i></a>
-</h4>
+<div id="mode" class="section level3" number="5.1.4">
+<h3>
+<span class="header-section-number">5.1.4</span> Mode<a class="anchor" aria-label="anchor" href="#mode"><i class="fas fa-link"></i></a>
+</h3>
 <p>The mode is the oft-maligned black sheep of the central tendency family. It is defined as <strong>the most common observation</strong>, i.e. the observation that occurs the most number of times in a sample. It’s primarily intended for categorical data (e.g. male vs female) though it also has some relevance to distributions (more on this much later).</p>
 <p>The mode is of course also a form of “average”. For example, statistics show roughly <a href="https://www.zippia.com/lumberjack-jobs/demographics">95% of lumberjacks in the US are male</a>. It would therefore be accurate to say “the average American lumberjack is male”. In fact, for categorical data—which is ubiquitous—this is the only possible measure of central tendency.</p>
 <p>Unfortunately, base R does not have a convenient function for computing the mode (the function <code><a href="https://rdrr.io/r/base/mode.html">mode()</a></code> is <a href="https://ds-pl-r-book.netlify.app/modes-types-classes-of-objects.html">completely unrelated</a>), but you can easily either define it yourself or import <code>Mode()</code> from the <code>DescTools</code> package</p>
@@ -205,11 +206,18 @@
 <pre><code>## [1] "Cleveland"
 ## attr(,"freq")
 ## [1] 13</code></pre>
-</div>
-<div id="other-measures" class="section level4" number="5.1.1.4">
+<div id="aside-modality" class="section level4" number="5.1.4.1">
 <h4>
-<span class="header-section-number">5.1.1.4</span> Other measures<a class="anchor" aria-label="anchor" href="#other-measures"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.1.4.1</span> Aside: Modality<a class="anchor" aria-label="anchor" href="#aside-modality"><i class="fas fa-link"></i></a>
 </h4>
+<p>Most common distributions have only 1 mode, i.e. they are unimodal, but some distributions may have 2 or more modes, in which case they’re called bimodal (for 2 modes) or multimodal (for ≥2 modes). Here’s an example of a bimodal distribution:</p>
+<div class="inline-figure"><img src="05-data-exploration_files/figure-html/unnamed-chunk-8-1.svg" width="672"></div>
+</div>
+</div>
+<div id="other-measures" class="section level3" number="5.1.5">
+<h3>
+<span class="header-section-number">5.1.5</span> Other measures<a class="anchor" aria-label="anchor" href="#other-measures"><i class="fas fa-link"></i></a>
+</h3>
 <p>The mean, median, and mode are by far the most common measures of central tendency, and they are the only ones you need to know for this course. However, I thought it might be worth briefly mentioning a few other averages with interesting applications just for fun:</p>
 <ul>
 <li>The <a href="https://en.wikipedia.org/wiki/Root_mean_square">quadratic mean</a>, also known as the root mean square, is defined for a sample <span class="math inline">\(x_1,\dots,x_n\)</span> as <span class="math inline">\(\sqrt{\frac1n(x_1^2+\cdots+x_n^2)}\)</span>. This shows up in some statistical contexts, e.g. the standard deviation is almost a quadratic mean of the difference of each observation from the arithmetic mean, except dividing by <span class="math inline">\(n-1\)</span> instead of <span class="math inline">\(n\)</span> (which corrects a small bias and is called <a href="https://en.wikipedia.org/wiki/Bessel%27s_correction">Bessel’s correction</a>). It also has applications in model evaluation, statistical physics, electronics engineering, signal analysis, and more.</li>
@@ -218,22 +226,22 @@
 <li>Note the logarithm of the geometric mean of a sample is equal to the arithmetic mean of the logarithm of the same sample. In other words, a geometric mean viewed on a log scale “looks like” an arithmetic mean on a linear scale. Log transforms are an important tool for certain contexts, see <a href="https://people.duke.edu/~rnau/411log.htm">this page</a> for a brief overview.</li>
 </ul>
 </li>
-<li>The <a href="https://en.wikipedia.org/wiki/Harmonic_mean">harmonic mean</a> is defined as <span class="math inline">\(\left(\frac{x_1^{-1}+\cdots+x_n^{-1}}{n}\right)^{-1}\)</span>, i.e. the reciprocal of the arithmetic mean of the reciprocals of the data, and is also typically only used for positive-valued data. It turns out to be the correct mean to use in certain applications involving rate, ratio, or time values. It also has applications in machine learning, physics, finance, and even <a href="https://en.wikipedia.org/wiki/Power%E2%80%93speed_number">baseball</a>.</li>
+<li>The <a href="https://en.wikipedia.org/wiki/Harmonic_mean">harmonic mean</a> is defined as <span class="math inline">\(\left(\frac{x_1^{-1}+\,\cdots\,+x_n^{-1}}{n}\right)^{\!-1}\)</span>, i.e. the reciprocal of the arithmetic mean of the reciprocals of the data, and is also typically only used for positive-valued data. It turns out to be the correct mean to use in certain applications involving rate, ratio, or time values. It also has applications in machine learning, physics, finance, and even <a href="https://en.wikipedia.org/wiki/Power%E2%80%93speed_number">baseball</a>.</li>
 <li>Collectively, the arithmetic, geometric, and harmonic means are also known as the <a href="https://en.wikipedia.org/wiki/Pythagorean_means">Pythagorean means</a>.</li>
 </ul>
 <p>This is just a short list; there are a host of <a href="https://en.wikipedia.org/wiki/Central_tendency#Measures">other means</a> that exist. Once again, <strong>you do NOT need to know any of these advanced means</strong>; you are only expected to know the arithmetic mean, median, and mode.</p>
 </div>
-</div>
-<div id="measures-of-spread" class="section level3" number="5.1.2">
+<div id="measures-of-spread" class="section level3" number="5.1.6">
 <h3>
-<span class="header-section-number">5.1.2</span> Measures of spread<a class="anchor" aria-label="anchor" href="#measures-of-spread"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.1.6</span> Measures of spread<a class="anchor" aria-label="anchor" href="#measures-of-spread"><i class="fas fa-link"></i></a>
 </h3>
 <p>Arguably the next most important set of summary statistics after measures of central tendency are <strong>measures of spread</strong>, which aim to quantify how “spread out” a dataset is. <strong>Variance</strong> and <strong>standard deviation</strong> are by far the most common measures, but the <strong>IQR</strong> and <strong>range</strong> are also sometimes useful.</p>
 <p>Unlike measures of central tendency, measures of spread are typically location-agnostic, i.e. they don’t change if the entire dataset is shifted up or down by a constant. Formally, a sample <span class="math inline">\(x_1,\dots,x_n\)</span> and a sample <span class="math inline">\(x_1+c,\,\dots,\,x_n+c\)</span> have the same spread for all <span class="math inline">\(c\)</span>.</p>
-<div id="variance-and-standard-deviation" class="section level4" number="5.1.2.1">
-<h4>
-<span class="header-section-number">5.1.2.1</span> Variance (and standard deviation)<a class="anchor" aria-label="anchor" href="#variance-and-standard-deviation"><i class="fas fa-link"></i></a>
-</h4>
+</div>
+<div id="variance-and-standard-deviation" class="section level3" number="5.1.7">
+<h3>
+<span class="header-section-number">5.1.7</span> Variance (and standard deviation)<a class="anchor" aria-label="anchor" href="#variance-and-standard-deviation"><i class="fas fa-link"></i></a>
+</h3>
 <p>Let’s get the easy one out of the way first. <strong>Standard deviation is always defined as the (positive) square root of variance</strong>. So what’s the variance then? The <strong>variance of a sample is defined as</strong>:</p>
 <p><span class="math display">\[s^2=\frac1{n-1}\sum_{i=1}^n(x_i-\bar{x})^2\]</span></p>
 <p>Basically, it’s the <strong>mean squared-distance from the mean</strong>, <span class="math inline">\(\bar{x}\)</span>, except we use <span class="math inline">\(n-1\)</span> instead of <span class="math inline">\(n\)</span> to correct for a <a href="%5BBessel's%20correction%5D(https://en.wikipedia.org/wiki/Bessel%27s_correction)">small bias</a>. For example, we can compute the variance of the duration of eruptions, in <strong>days squared</strong>:</p>
@@ -257,16 +265,16 @@
 </div>
 <p>The variance and standard deviation are the most common measures of spread, but like the arithmetic mean, they are also sensitive to outliers and may not be suitable with highly skewed data.</p>
 </div>
-<div id="interquartile-range" class="section level4" number="5.1.2.2">
-<h4>
-<span class="header-section-number">5.1.2.2</span> Interquartile range<a class="anchor" aria-label="anchor" href="#interquartile-range"><i class="fas fa-link"></i></a>
-</h4>
+<div id="interquartile-range" class="section level3" number="5.1.8">
+<h3>
+<span class="header-section-number">5.1.8</span> Interquartile range<a class="anchor" aria-label="anchor" href="#interquartile-range"><i class="fas fa-link"></i></a>
+</h3>
 <p>The interquartile range, also called the IQR, is the <strong>distance between the 1<sup>st</sup> and 3<sup>rd</sup> quartile</strong>. To understand this, let’s first briefly review percentiles.</p>
 </div>
-<div id="percentiles" class="section level4" number="5.1.2.3">
-<h4>
-<span class="header-section-number">5.1.2.3</span> Percentiles<a class="anchor" aria-label="anchor" href="#percentiles"><i class="fas fa-link"></i></a>
-</h4>
+<div id="percentiles" class="section level3" number="5.1.9">
+<h3>
+<span class="header-section-number">5.1.9</span> Percentiles<a class="anchor" aria-label="anchor" href="#percentiles"><i class="fas fa-link"></i></a>
+</h3>
 <p>Percentiles are a generalization of the median. Recall the median is the data point that is just barely greater than or equal to 50% of the data. Similarly, a <strong><span class="math inline">\(p\)</span><sup>th</sup> percentile is the data point just barely greater than or equal to <span class="math inline">\(p\)</span>% of the data</strong>. Percentiles are computed using the <a href="https://rdrr.io/r/stats/quantile.html"><code class="sourceCode r"><span class="fu">quantile</span>(x, <span class="at">probs =</span> p)</code></a> function, where <code>x</code> is the data vector, and <code>p</code> is a desired percentile (or vector thereof). For example, we can compute the 0<sup>th</sup>, 25<sup>th</sup>, 50<sup>th</sup>, 75<sup>th</sup>, and 100<sup>th</sup> percentiles of eruption duration with:</p>
 <div class="sourceCode" id="cb518"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">eruptions_recent</span><span class="op">$</span><span class="va">duration</span>, probs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -279,10 +287,10 @@
 <span><span class="fu"><a href="https://rdrr.io/r/stats/IQR.html">IQR</a></span><span class="op">(</span><span class="va">eruptions_recent</span><span class="op">$</span><span class="va">duration</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 189</code></pre>
 </div>
-<div id="range" class="section level4" number="5.1.2.4">
-<h4>
-<span class="header-section-number">5.1.2.4</span> Range<a class="anchor" aria-label="anchor" href="#range"><i class="fas fa-link"></i></a>
-</h4>
+<div id="range" class="section level3" number="5.1.10">
+<h3>
+<span class="header-section-number">5.1.10</span> Range<a class="anchor" aria-label="anchor" href="#range"><i class="fas fa-link"></i></a>
+</h3>
 <p>The range is the crudest of the measures of spread, defined as the <strong>difference between the minimum and maximum</strong> of a sample. It is even more sensitive to outliers than the variance/standard deviation, and thus less commonly used in formal statistical settings. It is sometimes the only practical measures for extremely small datasets.</p>
 <p>In R, the <code><a href="https://rdrr.io/r/base/range.html">range()</a></code> function gives the minimum and maximum in a vector; to get the actual range, you can use <code><a href="https://rdrr.io/r/base/diff.html">diff()</a></code> to take the difference of the two:</p>
 <div class="sourceCode" id="cb522"><pre class="downlit sourceCode r">
@@ -294,10 +302,10 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">eruptions_recent</span><span class="op">$</span><span class="va">duration</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 1491</code></pre>
 </div>
-<div id="other-measures-1" class="section level4" number="5.1.2.5">
-<h4>
-<span class="header-section-number">5.1.2.5</span> Other measures<a class="anchor" aria-label="anchor" href="#other-measures-1"><i class="fas fa-link"></i></a>
-</h4>
+<div id="other-measures-1" class="section level3" number="5.1.11">
+<h3>
+<span class="header-section-number">5.1.11</span> Other measures<a class="anchor" aria-label="anchor" href="#other-measures-1"><i class="fas fa-link"></i></a>
+</h3>
 <p>The variance, standard deviation, IQR, and range are the only measures of spread you need to know for this course, but here are a few other measures just for fun:</p>
 <ul>
 <li>The <a href="https://en.wikipedia.org/wiki/Median_absolute_deviation">median absolute deviation</a> or MAD is exactly what it sounds like, the median of the absolute value deviation from the median. It’s a more robust (i.e. outlier-resistant) version of the standard deviation.</li>
@@ -305,12 +313,20 @@
 </ul>
 <p>Once again, this is just a subset of the possible <a href="https://en.wikipedia.org/wiki/Statistical_dispersion">measures of spread</a>, and <strong>you do NOT need to know these other measures</strong>; you are only expected to know the variance, standard deviation, IQR, and range.</p>
 </div>
-</div>
-<div id="skew" class="section level3" number="5.1.3">
+<div id="skew" class="section level3" number="5.1.12">
 <h3>
-<span class="header-section-number">5.1.3</span> Skew<a class="anchor" aria-label="anchor" href="#skew"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.1.12</span> Skew<a class="anchor" aria-label="anchor" href="#skew"><i class="fas fa-link"></i></a>
 </h3>
-<p>Another important summary statistic is the skew of a dataset. Skew has a precise mathematical definition that is beyond the scope of this course. All you need to know is the <strong>difference between a positive (i.e. right) skew and a negative (i.e. left) skew</strong> in a dataset.</p>
+<p>Another important summary statistic is the skew of a dataset. Skew has a precise mathematical definition that is beyond the scope of this course. All you need to know is the <strong>difference between a positive (also called right) skew and a negative (also called left) skew</strong> in a dataset.</p>
+<p>The side of the skewness is always the <strong>side with the longer tail</strong>. If the longer tail is on the positive (or right) side, it’s called positive (or right) skew. If the longer tail is on the negative (or left) side, it’s called negative (or left) skew.</p>
+<p>Below, we have 3 example (unimodal) distributions showing the kinds of skewness, with the <span style="color:#ff1919"><strong>modes</strong></span> of each aligned.</p>
+<ol style="list-style-type: decimal">
+<li>An unskewed, or symmetric distribution. The mean, median, and mode all coincide in the middle (shown by the black line).</li>
+<li>A positive, or right skewed distribution. Starting from the peak and <strong>moving right</strong>, we have in the following order the <span style="color:#ff1919"><strong>mode</strong></span>, <span style="color:#3333ff"><strong>median</strong></span>, and <span style="color:#009900"><strong>mean</strong></span>.</li>
+<li>A negative, or left skewed distribution. Starting from the peak and <strong>moving left</strong>, we have again in the same order the <span style="color:#ff1919"><strong>mode</strong></span>, <span style="color:#3333ff"><strong>median</strong></span>, and <span style="color:#009900"><strong>mean</strong></span>.</li>
+</ol>
+<p>This shows again, as we already learned, that the median is more robust vs the mean to “outliers”/skew, or in other words, the mean is more affected by “outliers”/skew and gets “dragged away” further by the skewness.</p>
+<p><img src="05-data-exploration_files/figure-html/unnamed-chunk-14-1.svg" width="672"><img src="05-data-exploration_files/figure-html/unnamed-chunk-14-2.svg" width="672"><img src="05-data-exploration_files/figure-html/unnamed-chunk-14-3.svg" width="672"></p>
 <!--
 
  - skew
@@ -349,8 +365,17 @@
 <li>
 <a class="nav-link" href="#descriptive-statistics"><span class="header-section-number">5.1</span> Descriptive statistics</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#measures-of-central-tendency"><span class="header-section-number">5.1.1</span> Measures of central tendency</a></li>
-<li><a class="nav-link" href="#measures-of-spread"><span class="header-section-number">5.1.2</span> Measures of spread</a></li>
-<li><a class="nav-link" href="#skew"><span class="header-section-number">5.1.3</span> Skew</a></li>
+<li><a class="nav-link" href="#mean"><span class="header-section-number">5.1.2</span> Mean</a></li>
+<li><a class="nav-link" href="#median"><span class="header-section-number">5.1.3</span> Median</a></li>
+<li><a class="nav-link" href="#mode"><span class="header-section-number">5.1.4</span> Mode</a></li>
+<li><a class="nav-link" href="#other-measures"><span class="header-section-number">5.1.5</span> Other measures</a></li>
+<li><a class="nav-link" href="#measures-of-spread"><span class="header-section-number">5.1.6</span> Measures of spread</a></li>
+<li><a class="nav-link" href="#variance-and-standard-deviation"><span class="header-section-number">5.1.7</span> Variance (and standard deviation)</a></li>
+<li><a class="nav-link" href="#interquartile-range"><span class="header-section-number">5.1.8</span> Interquartile range</a></li>
+<li><a class="nav-link" href="#percentiles"><span class="header-section-number">5.1.9</span> Percentiles</a></li>
+<li><a class="nav-link" href="#range"><span class="header-section-number">5.1.10</span> Range</a></li>
+<li><a class="nav-link" href="#other-measures-1"><span class="header-section-number">5.1.11</span> Other measures</a></li>
+<li><a class="nav-link" href="#skew"><span class="header-section-number">5.1.12</span> Skew</a></li>
 </ul>
 </li>
 </ul>
@@ -370,7 +395,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, Bret Larget, Cameron Jones. It was last built on 2024-07-20.</p>
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, Bret Larget, Cameron Jones. It was last built on 2024-07-22.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

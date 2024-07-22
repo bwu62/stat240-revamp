@@ -35,7 +35,7 @@ There are MANY statistics that aim to quantify the "center" of a sample. These a
 :::
 
 
-#### Mean
+### Mean
 
 The arithmetic mean of a sample, commonly referred to as just "mean", is what most people think of when they hear "average". It is the **sum of a sample divided by the sample size**. Formally, given a sample $x_1,x_2,\dots,x_n$ the mean $\bar{x}$ is defined as:
 
@@ -103,7 +103,8 @@ mean(c(1,6,NA,2), na.rm = TRUE)
 :::
 
 
-#### Median
+
+### Median
 
 The median, a common alternative to the mean, is defined as the **"middle" number in a sorted sample**. Formally, it's the value that is both greater than or equal to half the sample, and also less than or equal to half the sample. If there are an even number of observations, the median isn't uniquely defined but is commonly taken as the mean of the middle two numbers.
 
@@ -154,7 +155,7 @@ Statistics that are **less sensitive to "outliers" are called *robust***. E.g. t
 
 
 
-#### Mode
+### Mode
 
 The mode is the oft-maligned black sheep of the central tendency family. It is defined as **the most common observation**, i.e. the observation that occurs the most number of times in a sample. It's primarily intended for categorical data (e.g. male vs female) though it also has some relevance to distributions (more on this much later).
 
@@ -206,14 +207,22 @@ DescTools::Mode(eruptions_recent$volcano)
 ```
 
 
-#### Other measures
+#### Aside: Modality
+
+Most common distributions have only 1 mode, i.e. they are unimodal, but some distributions may have 2 or more modes, in which case they're called bimodal (for 2 modes) or multimodal (for ≥2 modes). Here's an example of a bimodal distribution:
+
+<img src="05-data-exploration_files/figure-html/unnamed-chunk-8-1.svg" width="672" />
+
+
+
+### Other measures
 
 The mean, median, and mode are by far the most common measures of central tendency, and they are the only ones you need to know for this course. However, I thought it might be worth briefly mentioning a few other averages with interesting applications just for fun:
 
  - The [quadratic mean](https://en.wikipedia.org/wiki/Root_mean_square), also known as the root mean square, is defined for a sample $x_1,\dots,x_n$ as $\sqrt{\frac1n(x_1^2+\cdots+x_n^2)}$. This shows up in some statistical contexts, e.g. the standard deviation is almost a quadratic mean of the difference of each observation from the arithmetic mean, except dividing by $n-1$ instead of $n$ (which corrects a small bias and is called [Bessel's correction](https://en.wikipedia.org/wiki/Bessel%27s_correction)). It also has applications in model evaluation, statistical physics, electronics engineering, signal analysis, and more.
  - The [geometric mean](https://en.wikipedia.org/wiki/Geometric_mean) is defined as $\sqrt[n]{x_1x_2\cdots x_n}$ and is only valid for positive-valued data. This is useful when data is multiplicative rather than additive in nature, e.g. growth rates, interest rates, comparisons of relative performance on benchmarks, etc. It has many applications in finance and economics, some areas of optical engineering, and even cinematography.
    - Note the logarithm of the geometric mean of a sample is equal to the arithmetic mean of the logarithm of the same sample. In other words, a geometric mean viewed on a log scale "looks like" an arithmetic mean on a linear scale. Log transforms are an important tool for certain contexts, see [this page](https://people.duke.edu/~rnau/411log.htm) for a brief overview.
- - The [harmonic mean](https://en.wikipedia.org/wiki/Harmonic_mean) is defined as $\left(\frac{x_1^{-1}+\cdots+x_n^{-1}}{n}\right)^{-1}$, i.e. the reciprocal of the arithmetic mean of the reciprocals of the data, and is also typically only used for positive-valued data. It turns out to be the correct mean to use in certain applications involving rate, ratio, or time values. It also has applications in machine learning, physics, finance, and even [baseball](https://en.wikipedia.org/wiki/Power%E2%80%93speed_number).
+ - The [harmonic mean](https://en.wikipedia.org/wiki/Harmonic_mean) is defined as $\left(\frac{x_1^{-1}+\,\cdots\,+x_n^{-1}}{n}\right)^{\!-1}$, i.e. the reciprocal of the arithmetic mean of the reciprocals of the data, and is also typically only used for positive-valued data. It turns out to be the correct mean to use in certain applications involving rate, ratio, or time values. It also has applications in machine learning, physics, finance, and even [baseball](https://en.wikipedia.org/wiki/Power%E2%80%93speed_number).
  - Collectively, the arithmetic, geometric, and harmonic means are also known as the [Pythagorean means](https://en.wikipedia.org/wiki/Pythagorean_means).
 
 This is just a short list; there are a host of [other means](https://en.wikipedia.org/wiki/Central_tendency#Measures) that exist. Once again, **you do NOT need to know any of these advanced means**; you are only expected to know the arithmetic mean, median, and mode.
@@ -228,7 +237,7 @@ Unlike measures of central tendency, measures of spread are typically location-a
 
 
 
-#### Variance (and standard deviation)
+### Variance (and standard deviation)
 
 Let's get the easy one out of the way first. **Standard deviation is always defined as the (positive) square root of variance**. So what's the variance then? The **variance of a sample is defined as**:
 
@@ -278,12 +287,12 @@ Since the standard deviation is defined as the square root of the variance (and 
 The variance and standard deviation are the most common measures of spread, but like the arithmetic mean, they are also sensitive to outliers and may not be suitable with highly skewed data.
 
 
-#### Interquartile range
+### Interquartile range
 
 The interquartile range, also called the IQR, is the **distance between the 1^st^ and 3^rd^ quartile**. To understand this, let's first briefly review percentiles.
 
 
-#### Percentiles
+### Percentiles
 
 Percentiles are a generalization of the median. Recall the median is the data point that is just barely greater than or equal to 50% of the data. Similarly, a **$p$^th^ percentile is the data point just barely greater than or equal to $p$% of the data**. Percentiles are computed using the [`quantile(x, probs = p)`{.R}](https://rdrr.io/r/stats/quantile.html) function, where `x` is the data vector, and `p` is a desired percentile (or vector thereof). For example, we can compute the 0^th^, 25^th^, 50^th^, 75^th^, and 100^th^ percentiles of eruption duration with:
 
@@ -313,7 +322,7 @@ IQR(eruptions_recent$duration)
 
 
 
-#### Range
+### Range
 
 The range is the crudest of the measures of spread, defined as the **difference between the minimum and maximum** of a sample. It is even more sensitive to outliers than the variance/standard deviation, and thus less commonly used in formal statistical settings. It is sometimes the only practical measures for extremely small datasets.
 
@@ -340,7 +349,7 @@ diff(range(eruptions_recent$duration))
 
 
 
-#### Other measures
+### Other measures
 
 The variance, standard deviation, IQR, and range are the only measures of spread you need to know for this course, but here are a few other measures just for fun:
 
@@ -353,7 +362,19 @@ Once again, this is just a subset of the possible [measures of spread](https://e
 
 ### Skew
 
-Another important summary statistic is the skew of a dataset. Skew has a precise mathematical definition that is beyond the scope of this course. All you need to know is the **difference between a positive (i.e. right) skew and a negative (i.e. left) skew** in a dataset.
+Another important summary statistic is the skew of a dataset. Skew has a precise mathematical definition that is beyond the scope of this course. All you need to know is the **difference between a positive (also called right) skew and a negative (also called left) skew** in a dataset.
+
+The side of the skewness is always the **side with the longer tail**. If the longer tail is on the positive (or right) side, it's called positive (or right) skew. If the longer tail is on the negative (or left) side, it's called negative (or left) skew.
+
+Below, we have 3 example (unimodal) distributions showing the kinds of skewness, with the [**modes**]{style="color:#ff1919"} of each aligned.
+
+ 1. An unskewed, or symmetric distribution. The mean, median, and mode all coincide in the middle (shown by the black line).
+ 2. A positive, or right skewed distribution. Starting from the peak and **moving right**, we have in the following order the [**mode**]{style="color:#ff1919"}, [**median**]{style="color:#3333ff"}, and [**mean**]{style="color:#009900"}.
+ 3. A negative, or left skewed distribution. Starting from the peak and **moving left**, we have again in the same order the [**mode**]{style="color:#ff1919"}, [**median**]{style="color:#3333ff"}, and [**mean**]{style="color:#009900"}.
+
+This shows again, as we already learned, that the median is more robust vs the mean to "outliers"/skew, or in other words, the mean is more affected by "outliers"/skew and gets "dragged away" further by the skewness.
+
+<img src="05-data-exploration_files/figure-html/unnamed-chunk-14-1.svg" width="672" /><img src="05-data-exploration_files/figure-html/unnamed-chunk-14-2.svg" width="672" /><img src="05-data-exploration_files/figure-html/unnamed-chunk-14-3.svg" width="672" />
 
 
 
