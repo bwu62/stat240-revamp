@@ -241,7 +241,7 @@ Unlike measures of central tendency, measures of spread are typically location-a
 
 Let's get the easy one out of the way first. **Standard deviation is always defined as the (positive) square root of variance**. So what's the variance then? The **variance of a sample is defined as**:
 
-$$s^2=\frac1{n-1}\sum_{i=1}^n(x_i-\bar{x})^2$$
+$$s^2=\frac1{n-1}\sum_{i=1}^n(x_i-\bar{x})^2=\frac{(x_1-\bar{x})^2+\cdots+(x_n-\bar{x})^2}n$$
 
 Basically, it's the **mean squared-distance from the mean**, $\bar{x}$, except we use $n-1$ instead of $n$ to correct for a [small bias]([Bessel's correction](https://en.wikipedia.org/wiki/Bessel%27s_correction)). For example, we can compute the variance of the duration of eruptions, in **days squared**:
 
@@ -257,7 +257,11 @@ var(eruptions_recent$duration)
 
 In other words, the "average" squared difference of an eruption's duration and the mean duration is about 101.2k days^2^.
 
-Note the units of the variance are squared of the data units. This makes it inconvenient to work with, since it means it cannot be directly compared with the data. This is why instead we often work with **its square root, i.e. the standard deviation**, which can be thought of as the **"average" distance from the mean** for a given observation. This can be computed using `sd()`:
+Note the units of the variance are squared of the data units. This makes it inconvenient to work with, since it means it cannot be directly compared with the data. This is why instead we often work with **its square root, i.e. the standard deviation**:
+
+$$s=\sqrt{\frac1{n-1}\sum_{i=1}^n(x_i-\bar{x})^2}$$
+
+which can be thought of as the **"average" distance from the mean** for a given observation. This can be computed using `sd()`:
 
 
 ``` r
@@ -368,13 +372,39 @@ The side of the skewness is always the **side with the longer tail**. If the lon
 
 Below, we have 3 example (unimodal) distributions showing the kinds of skewness, with the [**modes**]{style="color:#ff1919"} of each aligned.
 
- 1. An unskewed, or symmetric distribution. The mean, median, and mode all coincide in the middle (shown by the multicolored line).
- 2. A positive, or right skewed distribution. Starting from the peak and **moving right**, we have in the following order the [**mode**]{style="color:#ff1919"}, [**median**]{style="color:#3333ff"}, and [**mean**]{style="color:#009900"}.
- 3. A negative, or left skewed distribution. Starting from the peak and **moving left**, we have again in the same order the [**mode**]{style="color:#ff1919"}, [**median**]{style="color:#3333ff"}, and [**mean**]{style="color:#009900"}.
+ 1. An unskewed, or symmetric distribution, where [**mode**]{style="color:#ff1919"} $=$ [**median**]{style="color:#3333ff"} $=$ [**mean**]{style="color:#009900"}.
+ 2. A positive, or right skewed distribution, where [**mode**]{style="color:#ff1919"} $<$ [**median**]{style="color:#3333ff"} $<$ [**mean**]{style="color:#009900"}.
+ 3. A negative, or left skewed distribution, where [**mean**]{style="color:#009900"} $<$ [**median**]{style="color:#3333ff"} $<$ [**mode**]{style="color:#ff1919"}.
 
-This shows again, as we already learned, that the median is more robust vs the mean to "outliers"/skew, or in other words, the mean is more affected by "outliers"/skew and gets "dragged away" further by the skewness.
+<img src="05-data-exploration_files/figure-html/unnamed-chunk-14-1.svg" width="672" />
 
-<img src="05-data-exploration_files/figure-html/unnamed-chunk-14-1.svg" width="672" /><img src="05-data-exploration_files/figure-html/unnamed-chunk-14-2.svg" width="672" /><img src="05-data-exploration_files/figure-html/unnamed-chunk-14-3.svg" width="672" />
+This shows again, as we already learned, that the median is more robust vs the mean to "outliers"/skew, or in other words, the mean is more affected by "outliers"/skew and gets "dragged away" further by the skewness. 
+
+:::{.note}
+Visually, the mode is always the "peak", the median splits the distribution into 2 equal areas, and the mean is the center of mass of the shape along the horizontal axis (i.e. its "balancing point").
+:::
+
+
+
+
+## Data visualization
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

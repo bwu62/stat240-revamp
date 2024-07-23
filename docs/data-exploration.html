@@ -243,14 +243,16 @@
 <span class="header-section-number">5.1.7</span> Variance (and standard deviation)<a class="anchor" aria-label="anchor" href="#variance-and-standard-deviation"><i class="fas fa-link"></i></a>
 </h3>
 <p>Let’s get the easy one out of the way first. <strong>Standard deviation is always defined as the (positive) square root of variance</strong>. So what’s the variance then? The <strong>variance of a sample is defined as</strong>:</p>
-<p><span class="math display">\[s^2=\frac1{n-1}\sum_{i=1}^n(x_i-\bar{x})^2\]</span></p>
+<p><span class="math display">\[s^2=\frac1{n-1}\sum_{i=1}^n(x_i-\bar{x})^2=\frac{(x_1-\bar{x})^2+\cdots+(x_n-\bar{x})^2}n\]</span></p>
 <p>Basically, it’s the <strong>mean squared-distance from the mean</strong>, <span class="math inline">\(\bar{x}\)</span>, except we use <span class="math inline">\(n-1\)</span> instead of <span class="math inline">\(n\)</span> to correct for a <a href="%5BBessel's%20correction%5D(https://en.wikipedia.org/wiki/Bessel%27s_correction)">small bias</a>. For example, we can compute the variance of the duration of eruptions, in <strong>days squared</strong>:</p>
 <div class="sourceCode" id="cb512"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># compute variance of duration</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="va">eruptions_recent</span><span class="op">$</span><span class="va">duration</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 101178</code></pre>
 <p>In other words, the “average” squared difference of an eruption’s duration and the mean duration is about 101.2k days<sup>2</sup>.</p>
-<p>Note the units of the variance are squared of the data units. This makes it inconvenient to work with, since it means it cannot be directly compared with the data. This is why instead we often work with <strong>its square root, i.e. the standard deviation</strong>, which can be thought of as the <strong>“average” distance from the mean</strong> for a given observation. This can be computed using <code><a href="https://rdrr.io/r/stats/sd.html">sd()</a></code>:</p>
+<p>Note the units of the variance are squared of the data units. This makes it inconvenient to work with, since it means it cannot be directly compared with the data. This is why instead we often work with <strong>its square root, i.e. the standard deviation</strong>:</p>
+<p><span class="math display">\[s=\sqrt{\frac1{n-1}\sum_{i=1}^n(x_i-\bar{x})^2}\]</span></p>
+<p>which can be thought of as the <strong>“average” distance from the mean</strong> for a given observation. This can be computed using <code><a href="https://rdrr.io/r/stats/sd.html">sd()</a></code>:</p>
 <div class="sourceCode" id="cb514"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># compute the standard deviation of duration</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">eruptions_recent</span><span class="op">$</span><span class="va">duration</span><span class="op">)</span></span></code></pre></div>
@@ -321,12 +323,21 @@
 <p>The side of the skewness is always the <strong>side with the longer tail</strong>. If the longer tail is on the positive (or right) side, it’s called positive (or right) skew. If the longer tail is on the negative (or left) side, it’s called negative (or left) skew.</p>
 <p>Below, we have 3 example (unimodal) distributions showing the kinds of skewness, with the <span style="color:#ff1919"><strong>modes</strong></span> of each aligned.</p>
 <ol style="list-style-type: decimal">
-<li>An unskewed, or symmetric distribution. The mean, median, and mode all coincide in the middle (shown by the multicolored line).</li>
-<li>A positive, or right skewed distribution. Starting from the peak and <strong>moving right</strong>, we have in the following order the <span style="color:#ff1919"><strong>mode</strong></span>, <span style="color:#3333ff"><strong>median</strong></span>, and <span style="color:#009900"><strong>mean</strong></span>.</li>
-<li>A negative, or left skewed distribution. Starting from the peak and <strong>moving left</strong>, we have again in the same order the <span style="color:#ff1919"><strong>mode</strong></span>, <span style="color:#3333ff"><strong>median</strong></span>, and <span style="color:#009900"><strong>mean</strong></span>.</li>
+<li>An unskewed, or symmetric distribution, where <span style="color:#ff1919"><strong>mode</strong></span> <span class="math inline">\(=\)</span> <span style="color:#3333ff"><strong>median</strong></span> <span class="math inline">\(=\)</span> <span style="color:#009900"><strong>mean</strong></span>.</li>
+<li>A positive, or right skewed distribution, where <span style="color:#ff1919"><strong>mode</strong></span> <span class="math inline">\(&lt;\)</span> <span style="color:#3333ff"><strong>median</strong></span> <span class="math inline">\(&lt;\)</span> <span style="color:#009900"><strong>mean</strong></span>.</li>
+<li>A negative, or left skewed distribution, where <span style="color:#009900"><strong>mean</strong></span> <span class="math inline">\(&lt;\)</span> <span style="color:#3333ff"><strong>median</strong></span> <span class="math inline">\(&lt;\)</span> <span style="color:#ff1919"><strong>mode</strong></span>.</li>
 </ol>
+<div class="inline-figure"><img src="05-data-exploration_files/figure-html/unnamed-chunk-14-1.svg" width="672"></div>
 <p>This shows again, as we already learned, that the median is more robust vs the mean to “outliers”/skew, or in other words, the mean is more affected by “outliers”/skew and gets “dragged away” further by the skewness.</p>
-<p><img src="05-data-exploration_files/figure-html/unnamed-chunk-14-1.svg" width="672"><img src="05-data-exploration_files/figure-html/unnamed-chunk-14-2.svg" width="672"><img src="05-data-exploration_files/figure-html/unnamed-chunk-14-3.svg" width="672"></p>
+<div class="note">
+<p>Visually, the mode is always the “peak”, the median splits the distribution into 2 equal areas, and the mean is the center of mass of the shape along the horizontal axis (i.e. its “balancing point”).</p>
+</div>
+</div>
+</div>
+<div id="data-visualization" class="section level2" number="5.2">
+<h2>
+<span class="header-section-number">5.2</span> Data visualization<a class="anchor" aria-label="anchor" href="#data-visualization"><i class="fas fa-link"></i></a>
+</h2>
 <!--
 
  - skew
@@ -339,7 +350,6 @@
 
 -->
 
-</div>
 </div>
 </div>
 
@@ -378,6 +388,7 @@
 <li><a class="nav-link" href="#skew"><span class="header-section-number">5.1.12</span> Skew</a></li>
 </ul>
 </li>
+<li><a class="nav-link" href="#data-visualization"><span class="header-section-number">5.2</span> Data visualization</a></li>
 </ul>
 
       <div class="book-extra">
@@ -408,7 +419,7 @@
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-AMS-MML_HTMLorMML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

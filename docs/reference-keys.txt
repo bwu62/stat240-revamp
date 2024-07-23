@@ -86,6 +86,7 @@ percentiles
 range
 other-measures-1
 skew
+data-visualization
 datasets
 list-of-datasets
 eruptions
