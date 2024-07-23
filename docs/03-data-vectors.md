@@ -484,7 +484,7 @@ letters
 ## [20] "t" "u" "v" "w" "x" "y" "z"
 ```
 
-You can extract elements form a vector with the `[]` operator, giving either a vector of numeric positions, a vector of `TRUE`/`FALSE` values, or a negative vector for exclusions (i.e. anything *except*). Examples:
+You can extract elements from a vector with the `[]` operator, giving either a vector of numeric positions, a vector of `TRUE`/`FALSE` values, or a negative vector for exclusions (i.e. anything *except*). Examples:
 
 
 ``` r
