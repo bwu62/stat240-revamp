@@ -5,7 +5,7 @@
 # Datasets
 
 ```{r setup,include=F}
-knitr::opts_chunk$set(eval=T,cache=T,tidy=F)
+knitr::opts_chunk$set(tidy=F,eval=F)
 ```
 
 This page contains updating/processing scripts and additional info on all datasets used for the course, as well as some brief discussions of why they were chosen. Datasets are ordered by order of appearance in the notes.
@@ -28,7 +28,7 @@ if(!dir.exists("data/")) dir.create("data/")
 
 Here's a convenient list of all dataset files generated. Note that some files may automatically open a download prompt while others may not. To force download, right click on a file link and choose "Save link as".
 
-```{r,echo=F,results='asis'}
+```{r,eval=T,results='asis'}
 files <- list.files('data')
 write_lines(paste0("https://bwu62.github.io/stat240-revamp/data/",files),file="data_list.txt")
 stringr::str_glue(" - [`{files}`](data/{files})")
@@ -138,3 +138,4 @@ eruptions_recent %>% as.data.frame %>% write.xlsx(file="data/eruptions_recent.xl
 #   str_replace("<NA>","NA  ") %>% str_replace("^ *",'"') %>% str_replace("( {2,})",'"\\1') %>% str_replace('"name"',"name  ") %>% write_lines(file="data/eruptions_recent.txt")
 ```
 
+```{r,eval=T,echo=F}
