@@ -814,7 +814,7 @@ If you ever need to recombine them, just use `rbind()` which will bind rows toge
 ``` r
 # note the resulting rows will be in a different order,
 # but it's the same data frame we started out with
-eruptions_recent_recombined = rbind(eruptions_recent_test,eruptions_recent_train)
+eruptions_recent_recombined <- rbind(eruptions_recent_test, eruptions_recent_train)
 eruptions_recent_recombined
 ```
 
@@ -829,4 +829,3 @@ eruptions_recent_recombined
 ## 5 Cleveland            2009-10-02 2009-12-12       71         1     2       2009
 ## # ℹ 68 more rows
 ```
-

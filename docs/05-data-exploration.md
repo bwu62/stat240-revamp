@@ -85,7 +85,7 @@ If a vector has missing values, i.e. `NA`, `mean()` and most other statistical f
 
 ``` r
 # example of NAs causing mean to fail
-mean(c(1,6,NA,2))
+mean(c(1, 6, NA, 2))
 ```
 
 ```
@@ -94,7 +94,7 @@ mean(c(1,6,NA,2))
 
 ``` r
 # setting na.rm = TRUE tells R to safely ignore NAs
-mean(c(1,6,NA,2), na.rm = TRUE)
+mean(c(1, 6, NA, 2), na.rm = TRUE)
 ```
 
 ```
@@ -135,7 +135,7 @@ c(
   ),
   mean(
     eruptions_recent$duration <= median(eruptions_recent$duration)
-  ) 
+  )
 )
 ```
 

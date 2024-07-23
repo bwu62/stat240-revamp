@@ -727,7 +727,7 @@ For example, suppose a data frame had in order from left to right a numeric colu
 <div class="sourceCode" id="cb490"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># note the resulting rows will be in a different order,</span></span>
 <span><span class="co"># but it's the same data frame we started out with</span></span>
-<span><span class="va">eruptions_recent_recombined</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">eruptions_recent_test</span>,<span class="va">eruptions_recent_train</span><span class="op">)</span></span>
+<span><span class="va">eruptions_recent_recombined</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">eruptions_recent_test</span>, <span class="va">eruptions_recent_train</span><span class="op">)</span></span>
 <span><span class="va">eruptions_recent_recombined</span></span></code></pre></div>
 <pre><code>## # A tibble: 73 × 7
 ##   volcano              start      stop       duration confirmed   vei start_year
