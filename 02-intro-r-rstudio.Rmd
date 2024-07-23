@@ -115,7 +115,7 @@ The ` [1] ` that appears at the start of the output line just means this is the 
 
 ```{r set-par,include=F}
 knitr::opts_knit$set(global.par = T)
-par(mar = c(1.5, 2, 1.5, 1))
+par(mar = c(0, 0, 0, 0))
 ```
 
 ```{r visual-output}
