@@ -359,6 +359,29 @@ Visually, the mode is always the "peak", the median splits the distribution into
 
 
 
+## Data visualization
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <!--
 
