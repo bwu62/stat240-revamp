@@ -71,9 +71,9 @@ sum(eruptions_recent$duration) / length(eruptions_recent$duration)
 If a vector has missing values, i.e. `NA`, `mean()` and most other statistical functions will return `NA`. This is a safety measure, to help remind you to handle missing values appropriately before attempting further analysis. You can tell R to ignore `NA`s and proceed by setting `na.rm = TRUE` in the function.
 ```{r}
 # example of NAs causing mean to fail
-mean(c(1,6,NA,2))
+mean(c(1, 6, NA, 2))
 # setting na.rm = TRUE tells R to safely ignore NAs
-mean(c(1,6,NA,2), na.rm = TRUE)
+mean(c(1, 6, NA, 2), na.rm = TRUE)
 ```
 :::
 
@@ -102,7 +102,7 @@ c(
   ),
   mean(
     eruptions_recent$duration <= median(eruptions_recent$duration)
-  ) 
+  )
 )
 ```
 
