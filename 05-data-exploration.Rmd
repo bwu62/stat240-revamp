@@ -154,7 +154,7 @@ DescTools::Mode(eruptions_recent$volcano)
 
 Most common distributions have only 1 mode, i.e. they are unimodal, but some distributions may have 2 or more modes, in which case they're called bimodal (for 2 modes) or multimodal (for ≥2 modes). Here's an example of a bimodal distribution:
 
-```{r,echo=F,fig.height=2}
+```{r,echo=F,fig.height=2,tidy=F}
 par(mar=c(0,0,0,0))
 L=6
 f = \(x) dnorm(x,-2.5)+dnorm(x,2,1.4)
@@ -286,7 +286,7 @@ Below, we have 3 example (unimodal) distributions showing the kinds of skewness,
  2. A positive, or right skewed distribution, where [**mode**]{style="color:#ff1919"} $<$ [**median**]{style="color:#3333ff"} $<$ [**mean**]{style="color:#009900"}.
  3. A negative, or left skewed distribution, where [**mean**]{style="color:#009900"} $<$ [**median**]{style="color:#3333ff"} $<$ [**mode**]{style="color:#ff1919"}.
 
-```{r,echo=F,fig.height=5.2}
+```{r,echo=F,fig.height=5.2,tidy=F}
 d = \(a) a/sqrt(1+a^2)
 spd = \(a) sqrt(2/pi)*d(a)
 m = function(a){
