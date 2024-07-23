@@ -79,6 +79,8 @@ eruptions <- eruptions_raw %>%
   separate(start,c("start","start_error"),"±") %>% 
   separate(stop,c("stop","stop_error"),"±") %>% 
   mutate(
+    # fix a few names
+    volcano = volcano %>% str_replace("Asuncion","Asunción") %>% str_replace("Pajaros","Pájaros") %>% str_replace("Kilauea","Kīlauea"),
     # parse error time string to number of days
     start_error = as.duration(start_error)/ddays(1),
     stop_error = as.duration(stop_error)/ddays(1),
