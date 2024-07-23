@@ -202,10 +202,10 @@ x1 - y
 # log y with x1+2 as base, again recycling y
 log(y, base = x1 + 2)
 # more complex operation that recycles multiple vectors,
-# as well as some numbers (which are just length-1 vectors)
+# as well as some numbers (which are just length 1 vectors)
 2^abs(x1 * z) - x2^y - median(data)
 # these also work with other numeric/logical functions we've seen so far
-# here, left side is a length-6 vector, right side is a length-2 vector,
+# here, left side is a length 6 vector, right side is a length 2 vector,
 # so right side is recycled three times then compared with left
 x2 <= atan(z) * mean(x1)
 ```
@@ -268,7 +268,7 @@ You can extract elements from a vector with the `[]` operator, giving either a v
 
 ```{r subsetting}
 # giving numeric positions of desired elements
-# remember numbers are numeric vectors of length-1
+# remember numbers are numeric vectors of length 1
 letters[1]
 # of course this also works with longer vectors
 letters[5:10]
