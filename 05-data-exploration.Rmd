@@ -202,7 +202,11 @@ var(eruptions_recent$duration)
 
 In other words, the "average" squared difference of an eruption's duration and the mean duration is about `r grkmisc::pretty_num(var(eruptions_recent$duration))` days^2^.
 
-Note the units of the variance are squared of the data units. This makes it inconvenient to work with, since it means it cannot be directly compared with the data. This is why instead we often work with **its square root, i.e. the standard deviation**, which can be thought of as the **"average" distance from the mean** for a given observation. This can be computed using `sd()`:
+Note the units of the variance are squared of the data units. This makes it inconvenient to work with, since it means it cannot be directly compared with the data. This is why instead we often work with **its square root, i.e. the standard deviation**:
+
+$$s=\sqrt{\frac1{n-1}\sum_{i=1}^n(x_i-\bar{x})^2}$$
+
+which can be thought of as the **"average" distance from the mean** for a given observation. This can be computed using `sd()`:
 
 ```{r}
 # compute the standard deviation of duration
