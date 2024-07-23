@@ -20,7 +20,6 @@ library(lubridate)
 library(xlsx)
 options(pillar.print_min=20)
 options(width=75)
-if(!dir.exists("data/")) dir.create("data/")
 ```
 
 
@@ -31,7 +30,7 @@ Here's a convenient list of all dataset files generated. Note that some files ma
 ```{r,eval=T,results='asis'}
 files <- list.files('data')
 write_lines(paste0("https://bwu62.github.io/stat240-revamp/data/",files),file="data_list.txt")
-stringr::str_glue(" - [`{files}`](data/{files})")
+str_glue(" - [`{files}`](data/{files})")
 ```
 
 Alternatively, you can also run the following line, which will **download ALL files above to your current working directory**. It's recommended to first set your working directory to an appropriate place before running this, e.g. to the `data/` directory in your `STAT240/` course folder.
@@ -87,12 +86,9 @@ eruptions <- eruptions_raw %>%
     # extract start year since some earlier eruptions are missing month/day
     start_year = str_extract(start,"(\\d{4,5})"),
     stop_year = str_extract(stop,"(\\d{4,5})"),
-    # check if BCE
-    start_bce = str_detect(start,"BCE"),
-    stop_bce = str_detect(stop,"BCE"),
     # parse start year, adding - if BCE
-    start_year = if_else(start_bce,-as.numeric(start_year),as.numeric(start_year)),
-    stop_year = if_else(stop_bce,-as.numeric(stop_year),as.numeric(stop_year)),
+    start_year = as.numeric(start_year) * if_else(str_detect(start,"BCE"),-1,1),
+    stop_year = as.numeric(stop_year) * if_else(str_detect(stop,"BCE"),-1,1),
     # extract start month
     start_month = str_replace(start,".*\\d{4}\\s([:alpha:]{3}).*","\\1"),
     stop_month = str_replace(stop,".*\\d{4}\\s([:alpha:]{3}).*","\\1"),
@@ -117,8 +113,6 @@ eruptions <- eruptions_raw %>%
 eruptions_recent <- eruptions %>% 
   filter(start_error <= 30, start_year > 2000, !is.na(stop)) %>% 
   select(-contains("_"))
-
-eruptions_recent
 ```
 
 ```{r}
