@@ -350,6 +350,11 @@ curve(f(x),-L,L,n=1001,asp=4,add=T,lwd=wd1)
 text(-L*.98,f(0)*.9,"Negative (left) skew",adj=c(0,1),cex=1.3)
 ```
 
+This shows again, as we already learned, that the median is more robust vs the mean to "outliers"/skew, or in other words, the mean is more affected by "outliers"/skew and gets "dragged away" further by the skewness. 
+
+:::{.note}
+Visually, the mode is always the "peak", the median splits the distribution into 2 equal areas, and the mean is the center of mass of the shape along the horizontal axis (i.e. its "balancing point").
+:::
 
 
 
