@@ -204,7 +204,7 @@ write_csv(volcanoes_raw,"data/volcanoes_raw.csv")
 ### Process volcano info
 
 ```{r}
-volcanoes = volcanoes_raw %>% 
+volcanoes <- volcanoes_raw %>% 
   # these are already only US volcanoes, and Summit is just Elevation in meters
   select(-Country,-Summit) %>% 
   set_names(c("volcano","region","landform_type","last_known_eruption","latitude","longitude","summit_ft")) %>% 
