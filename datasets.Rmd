@@ -18,8 +18,6 @@ library(tidyverse)
 library(rvest)
 library(lubridate)
 library(xlsx)
-options(pillar.print_min=20)
-options(width=75)
 ```
 
 
