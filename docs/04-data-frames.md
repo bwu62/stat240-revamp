@@ -185,7 +185,7 @@ eruptions_recent
 ## # A tibble: 73 × 6
 ##    volcano               start      stop       duration confirmed   vei
 ##    <chr>                 <date>     <date>        <dbl> <lgl>     <dbl>
-##  1 Kilauea               2024-06-03 2024-06-03        0 TRUE         NA
+##  1 Kīlauea               2024-06-03 2024-06-03        0 TRUE         NA
 ##  2 Atka Volcanic Complex 2024-03-27 2024-03-27        0 TRUE         NA
 ##  3 Ahyi                  2024-01-01 2024-03-27       86 TRUE         NA
 ##  4 Kanaga                2023-12-18 2023-12-18        0 TRUE          1
@@ -193,7 +193,7 @@ eruptions_recent
 ##  6 Shishaldin            2023-07-11 2023-11-03      115 TRUE          3
 ##  7 Mauna Loa             2022-11-27 2022-12-10       13 TRUE          0
 ##  8 Ahyi                  2022-11-18 2023-06-11      205 TRUE          1
-##  9 Kilauea               2021-09-29 2023-09-16      717 TRUE          0
+##  9 Kīlauea               2021-09-29 2023-09-16      717 TRUE          0
 ## 10 Pavlof                2021-08-05 2022-12-07      489 TRUE          2
 ## # ℹ 63 more rows
 ```
@@ -242,7 +242,7 @@ print(eruptions_recent, n = 5)
 ## # A tibble: 73 × 6
 ##   volcano               start      stop       duration confirmed   vei
 ##   <chr>                 <date>     <date>        <dbl> <lgl>     <dbl>
-## 1 Kilauea               2024-06-03 2024-06-03        0 TRUE         NA
+## 1 Kīlauea               2024-06-03 2024-06-03        0 TRUE         NA
 ## 2 Atka Volcanic Complex 2024-03-27 2024-03-27        0 TRUE         NA
 ## 3 Ahyi                  2024-01-01 2024-03-27       86 TRUE         NA
 ## 4 Kanaga                2023-12-18 2023-12-18        0 TRUE          1
@@ -281,7 +281,7 @@ print(eruptions_recent, n = 5)
 ## # A tibble: 73 × 6
 ##   volcano               start      stop       duration confirmed   vei
 ##   <chr>                 <date>     <date>        <dbl> <lgl>     <dbl>
-## 1 Kilauea               2024-06-03 2024-06-03        0 TRUE         NA
+## 1 Kīlauea               2024-06-03 2024-06-03        0 TRUE         NA
 ## 2 Atka Volcanic Complex 2024-03-27 2024-03-27        0 TRUE         NA
 ## 3 Ahyi                  2024-01-01 2024-03-27       86 TRUE         NA
 ## 4 Kanaga                2023-12-18 2023-12-18        0 TRUE          1
@@ -507,7 +507,7 @@ eruptions_recent
 ## # A tibble: 73 × 6
 ##   volcano               start      stop       duration confirmed   vei
 ##   <chr>                 <date>     <date>        <dbl> <lgl>     <dbl>
-## 1 Kilauea               2024-06-03 2024-06-03        0 TRUE         NA
+## 1 Kīlauea               2024-06-03 2024-06-03        0 TRUE         NA
 ## 2 Atka Volcanic Complex 2024-03-27 2024-03-27        0 TRUE         NA
 ## 3 Ahyi                  2024-01-01 2024-03-27       86 TRUE         NA
 ## 4 Kanaga                2023-12-18 2023-12-18        0 TRUE          1
@@ -560,7 +560,7 @@ summary(eruptions_recent)
 ##  Mode  :character   Median :2011-07-19   Median :2012-02-18   Median :  71.0  
 ##                     Mean   :2012-11-07   Mean   :2013-05-18   Mean   : 192.1  
 ##                     3rd Qu.:2019-07-23   3rd Qu.:2019-12-07   3rd Qu.: 195.0  
-##                     Max.   :2024-06-03   Max.   :2024-07-22   Max.   :1491.0  
+##                     Max.   :2024-06-03   Max.   :2024-07-23   Max.   :1491.0  
 ##                                                                               
 ##  confirmed            vei       
 ##  Mode :logical   Min.   :0.000  
@@ -625,7 +625,7 @@ eruptions_recent$duration
 ```
 
 ```
-##  [1]    0    0   86    0    1  115   13  205  717  489   39 1154   36  822  154
+##  [1]    0    0   86    0    1  115   13  205  717  489   39 1155   36  822  154
 ## [16]    0  195   30  286   39    6   53  110   62  253 1005  125    3    6   23
 ## [31]  519  121   44 1021    0    0 1491  131    1    3    2  100   71    0  108
 ## [46]   19    2   38    8    0  256   29  422    4   98    0   98  188  264  139
@@ -642,7 +642,7 @@ eruptions_recent
 ## # A tibble: 73 × 6
 ##   volcano               start      stop       duration confirmed   vei
 ##   <chr>                 <date>     <date>        <dbl>     <dbl> <dbl>
-## 1 Kilauea               2024-06-03 2024-06-03        0         1    NA
+## 1 Kīlauea               2024-06-03 2024-06-03        0         1    NA
 ## 2 Atka Volcanic Complex 2024-03-27 2024-03-27        0         1    NA
 ## 3 Ahyi                  2024-01-01 2024-03-27       86         1    NA
 ## 4 Kanaga                2023-12-18 2023-12-18        0         1     1
@@ -660,7 +660,7 @@ eruptions_recent
 ## # A tibble: 73 × 7
 ##   volcano              start      stop       duration confirmed   vei start_year
 ##   <chr>                <date>     <date>        <dbl>     <dbl> <dbl>      <dbl>
-## 1 Kilauea              2024-06-03 2024-06-03        0         1    NA       2024
+## 1 Kīlauea              2024-06-03 2024-06-03        0         1    NA       2024
 ## 2 Atka Volcanic Compl… 2024-03-27 2024-03-27        0         1    NA       2024
 ## 3 Ahyi                 2024-01-01 2024-03-27       86         1    NA       2024
 ## 4 Kanaga               2023-12-18 2023-12-18        0         1     1       2023
@@ -741,10 +741,10 @@ eruptions_recent[-(1:10), -7]
 ##   volcano       start      stop       duration confirmed   vei
 ##   <chr>         <date>     <date>        <dbl>     <dbl> <dbl>
 ## 1 Pagan         2021-07-29 2021-09-06       39         1     2
-## 2 Great Sitkin  2021-05-25 2024-07-22     1154         1     2
+## 2 Great Sitkin  2021-05-25 2024-07-23     1155         1     2
 ## 3 Veniaminof    2021-02-28 2021-04-05       36         1     1
 ## 4 Semisopochnoi 2021-02-02 2023-05-05      822         1     2
-## 5 Kilauea       2020-12-20 2021-05-23      154         1     0
+## 5 Kīlauea       2020-12-20 2021-05-23      154         1     0
 ## # ℹ 58 more rows
 ```
 
@@ -777,7 +777,7 @@ eruptions_recent_test
 ##    <chr>               <date>     <date>        <dbl>     <dbl> <dbl>      <dbl>
 ##  1 Veniaminof          2004-02-16 2004-09-05      202         1     2       2004
 ##  2 Cleveland           2010-09-11 2010-09-12        1         0    NA       2010
-##  3 Kilauea             2024-06-03 2024-06-03        0         1    NA       2024
+##  3 Kīlauea             2024-06-03 2024-06-03        0         1    NA       2024
 ##  4 Mariana Back-Arc S… 2013-02-13 2015-12-01     1021         1     0       2013
 ##  5 Cleveland           2009-10-02 2009-12-12       71         1     2       2009
 ##  6 Semisopochnoi       2021-02-02 2023-05-05      822         1     2       2021
@@ -789,7 +789,7 @@ eruptions_recent_test
 ## 12 Cleveland           2009-01-02 2009-01-21       19         1     2       2009
 ## 13 Pavlof              2021-08-05 2022-12-07      489         1     2       2021
 ## 14 Mauna Loa           2022-11-27 2022-12-10       13         1     0       2022
-## 15 Kilauea             2021-09-29 2023-09-16      717         1     0       2021
+## 15 Kīlauea             2021-09-29 2023-09-16      717         1     0       2021
 ```
 
 ``` r
@@ -824,7 +824,7 @@ eruptions_recent_recombined
 ##   <chr>                <date>     <date>        <dbl>     <dbl> <dbl>      <dbl>
 ## 1 Veniaminof           2004-02-16 2004-09-05      202         1     2       2004
 ## 2 Cleveland            2010-09-11 2010-09-12        1         0    NA       2010
-## 3 Kilauea              2024-06-03 2024-06-03        0         1    NA       2024
+## 3 Kīlauea              2024-06-03 2024-06-03        0         1    NA       2024
 ## 4 Mariana Back-Arc Se… 2013-02-13 2015-12-01     1021         1     0       2013
 ## 5 Cleveland            2009-10-02 2009-12-12       71         1     2       2009
 ## # ℹ 68 more rows

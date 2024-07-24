@@ -68,7 +68,7 @@ mean(eruptions_recent$duration)
 ```
 
 ```
-## [1] 192.1096
+## [1] 192.1233
 ```
 
 ``` r
@@ -77,7 +77,7 @@ sum(eruptions_recent$duration) / length(eruptions_recent$duration)
 ```
 
 ```
-## [1] 192.1096
+## [1] 192.1233
 ```
 
 :::{.note}
@@ -143,7 +143,7 @@ c(
 ## [1] 0.5068493 0.5205479
 ```
 
-Note the median length of eruptions, 71, is significantly smaller than the mean, 192.109589, because the data is extremely skewed, i.e. there are a few extremely long eruptions, which pull the mean up to be much higher (since it's more sensitive to extreme values).
+Note the median length of eruptions, 71, is significantly smaller than the mean, 192.1232877, because the data is extremely skewed, i.e. there are a few extremely long eruptions, which pull the mean up to be much higher (since it's more sensitive to extreme values).
 
 :::{.note}
 It's worth mentioning here the word "outliers" isn't well defined formally and is actually a surprisingly tricky subject in statistics. Here, an "outlier" just loosely refers to observations that differ dramatically compared to the rest of your data. It's important to remember that **not all "outliers" are errors**; some may in fact point to new information you're not aware of.
@@ -252,7 +252,7 @@ var(eruptions_recent$duration)
 ```
 
 ```
-## [1] 101178
+## [1] 101204.7
 ```
 
 In other words, the "average" squared difference of an eruption's duration and the mean duration is about 101.2k days^2^.
@@ -270,7 +270,7 @@ sd(eruptions_recent$duration)
 ```
 
 ```
-## [1] 318.0848
+## [1] 318.1269
 ```
 
 ``` r
@@ -279,7 +279,7 @@ sqrt(var(eruptions_recent$duration))
 ```
 
 ```
-## [1] 318.0848
+## [1] 318.1269
 ```
 
 In other words, the "average" distance in days between the duration of eruptions and the mean is about 318.1 days.
