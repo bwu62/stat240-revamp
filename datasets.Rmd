@@ -120,6 +120,9 @@ eruptions_recent <- eruptions %>%
 ### Write out data
 
 ```{r}
+# save complete file too
+write_csv(eruptions,file="data/eruptions.csv")
+
 # write out to different formats for reading
 write_csv(eruptions_recent,file="data/eruptions_recent.csv")
 write_tsv(eruptions_recent,file="data/eruptions_recent.tsv")
