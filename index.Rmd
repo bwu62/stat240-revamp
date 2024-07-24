@@ -63,6 +63,8 @@ dataset ideas (note: should prioritize datasets most students would find interes
  - causes of death
  - climate
  - something economic
+ - SSA names
+ - birth rate
 
 
 other notes to self:
