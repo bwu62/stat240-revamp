@@ -64,6 +64,8 @@ eruptions_raw <- read_html("https://volcano.si.edu/volcanolist_countries.cfm?cou
   set_names(c("volcano","start","stop","confirmed","vei"))
 ```
 
+### Process data
+
 ```{r}
 eruptions <- eruptions_raw %>% 
   mutate(
@@ -114,6 +116,8 @@ eruptions_recent <- eruptions %>%
   filter(start_error <= 30, start_year > 2000, !is.na(stop)) %>% 
   select(-contains("_"))
 ```
+
+### Write out data
 
 ```{r}
 # write out to different formats for reading
