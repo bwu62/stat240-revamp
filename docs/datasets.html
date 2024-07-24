@@ -75,9 +75,7 @@
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rvest.tidyverse.org/">rvest</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://lubridate.tidyverse.org">lubridate</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/colearendt/xlsx">xlsx</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>pillar.print_min<span class="op">=</span><span class="fl">20</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>width<span class="op">=</span><span class="fl">75</span><span class="op">)</span></span></code></pre></div>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/colearendt/xlsx">xlsx</a></span><span class="op">)</span></span></code></pre></div>
 <div id="list-of-datasets" class="section level2" number="6.1">
 <h2>
 <span class="header-section-number">A.1</span> List of datasets<a class="anchor" aria-label="anchor" href="#list-of-datasets"><i class="fas fa-link"></i></a>
@@ -94,6 +92,7 @@
 <li><a href="data/eruptions_recent.delim"><code>eruptions_recent.delim</code></a></li>
 <li><a href="data/eruptions_recent.tsv"><code>eruptions_recent.tsv</code></a></li>
 <li><a href="data/eruptions_recent.xlsx"><code>eruptions_recent.xlsx</code></a></li>
+<li><a href="data/eruptions_recent2.csv"><code>eruptions_recent2.csv</code></a></li>
 <li><a href="data/volcanoes.csv"><code>volcanoes.csv</code></a></li>
 <li><a href="data/volcanoes_raw.csv"><code>volcanoes_raw.csv</code></a></li>
 </ul>
@@ -297,7 +296,7 @@
 <span class="header-section-number">A.2.6</span> Process volcano info<a class="anchor" aria-label="anchor" href="#process-volcano-info"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb537"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">volcanoes</span> <span class="op">=</span> <span class="va">volcanoes_raw</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<code class="sourceCode R"><span><span class="va">volcanoes</span> <span class="op">&lt;-</span> <span class="va">volcanoes_raw</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="co"># these are already only US volcanoes, and Summit is just Elevation in meters</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">Country</span>,<span class="op">-</span><span class="va">Summit</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rlang.r-lib.org/reference/set_names.html">set_names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"volcano"</span>,<span class="st">"region"</span>,<span class="st">"landform_type"</span>,<span class="st">"last_known_eruption"</span>,<span class="st">"latitude"</span>,<span class="st">"longitude"</span>,<span class="st">"summit_ft"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -361,9 +360,13 @@
 <span class="header-section-number">A.2.9</span> Augment eruptions<a class="anchor" aria-label="anchor" href="#augment-eruptions"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb543"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">volcanoes</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<code class="sourceCode R"><span><span class="va">eruptions_recent2</span> <span class="op">&lt;-</span> <span class="va">volcanoes</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">volcano</span>, <span class="va">landform</span>, <span class="va">type</span>, <span class="va">summit_ft</span>, <span class="va">underwater</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu">stringdist_right_join</span><span class="op">(</span><span class="va">eruptions_recent</span>,by<span class="op">=</span><span class="st">"volcano"</span>,max_dist<span class="op">=</span><span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">View</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">right_join</a></span><span class="op">(</span><span class="va">eruptions_recent</span>,<span class="va">.</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html">write_csv</a></span><span class="op">(</span><span class="va">eruptions_recent2</span>, file<span class="op">=</span><span class="st">"data/eruptions_recent2.csv"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb544"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">eruptions_recent2</span>,width<span class="op">=</span><span class="fl">93</span><span class="op">)</span></span></code></pre></div>
 
 </div>
 </div>

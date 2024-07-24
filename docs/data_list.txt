@@ -3,5 +3,6 @@ https://bwu62.github.io/stat240-revamp/data/eruptions_recent.csv
 https://bwu62.github.io/stat240-revamp/data/eruptions_recent.delim
 https://bwu62.github.io/stat240-revamp/data/eruptions_recent.tsv
 https://bwu62.github.io/stat240-revamp/data/eruptions_recent.xlsx
+https://bwu62.github.io/stat240-revamp/data/eruptions_recent2.csv
 https://bwu62.github.io/stat240-revamp/data/volcanoes.csv
 https://bwu62.github.io/stat240-revamp/data/volcanoes_raw.csv

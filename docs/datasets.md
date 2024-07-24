@@ -17,8 +17,6 @@ library(tidyverse)
 library(rvest)
 library(lubridate)
 library(xlsx)
-options(pillar.print_min=20)
-options(width=75)
 ```
 
 
@@ -39,6 +37,7 @@ stringr::str_glue(" - [`{files}`](data/{files})")
  - [`eruptions_recent.delim`](data/eruptions_recent.delim)
  - [`eruptions_recent.tsv`](data/eruptions_recent.tsv)
  - [`eruptions_recent.xlsx`](data/eruptions_recent.xlsx)
+ - [`eruptions_recent2.csv`](data/eruptions_recent2.csv)
  - [`volcanoes.csv`](data/volcanoes.csv)
  - [`volcanoes_raw.csv`](data/volcanoes_raw.csv)
 
@@ -256,7 +255,7 @@ write_csv(volcanoes_raw,"data/volcanoes_raw.csv")
 
 
 ``` r
-volcanoes = volcanoes_raw %>% 
+volcanoes <- volcanoes_raw %>% 
   # these are already only US volcanoes, and Summit is just Elevation in meters
   select(-Country,-Summit) %>% 
   set_names(c("volcano","region","landform_type","last_known_eruption","latitude","longitude","summit_ft")) %>% 
@@ -330,8 +329,17 @@ volcanoes_raw
 
 
 ``` r
-volcanoes %>% 
+eruptions_recent2 <- volcanoes %>% 
   select(volcano, landform, type, summit_ft, underwater) %>% 
-  stringdist_right_join(eruptions_recent,by="volcano",max_dist=1) %>% View
+  right_join(eruptions_recent,.)
+
+write_csv(eruptions_recent2, file="data/eruptions_recent2.csv")
+```
+
+
+
+
+``` r
+print(eruptions_recent2,width=93)
 ```
 
