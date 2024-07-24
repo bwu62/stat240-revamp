@@ -447,7 +447,7 @@ sub("y", "ie", friends)
 # but gsub() can replace ALL occurrences
 sub("n", "m", friends)
 gsub("n", "m", friends)
-# which friends have a name that endsWith() "y?" 
+# which friends have a name that endsWith() "y"?
 # (startsWith() does the opposite)
 endsWith(friends, "y")
 ```
