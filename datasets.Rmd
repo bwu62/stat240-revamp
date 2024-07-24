@@ -238,8 +238,18 @@ volcanoes_raw
 ### Augment eruptions
 
 ```{r}
-volcanoes %>% 
+eruptions_recent2 <- volcanoes %>% 
   select(volcano, landform, type, summit_ft, underwater) %>% 
-  stringdist_right_join(eruptions_recent,by="volcano",max_dist=1) %>% View
+  right_join(eruptions_recent,.)
+
+write_csv(eruptions_recent2, file="data/eruptions_recent2.csv")
+```
+
+```{r,eval=T,echo=F}
+eruptions_recent2 <- read_csv("data/eruptions_recent2.csv")
+```
+
+```{r}
+print(eruptions_recent2,width=93)
 ```
 
