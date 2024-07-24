@@ -23,7 +23,7 @@ library(xlsx)
 
 ## List of datasets
 
-Here's a convenient list of all dataset files generated. Note that some files may automatically open a download prompt while others may not. To force download, right click on a file link and choose "Save link as".
+Here's a convenient list of all dataset files generated. Note that **not ALL files are used in the notes!**. These are primarily for my own record keeping purposes. Also note that some files may automatically open a download prompt while others may not. To force download, right click on a file link and choose "Save link as".
 
 ```{r,eval=T,results='asis'}
 library(readr)
@@ -249,7 +249,8 @@ write_csv(eruptions_recent2, file="data/eruptions_recent2.csv")
 eruptions_recent2 <- read_csv("data/eruptions_recent2.csv")
 ```
 
-```{r}
+```{r,eval=T}
+# print all columns
 print(eruptions_recent2,width=93)
 ```
 

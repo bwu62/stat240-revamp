@@ -22,7 +22,7 @@ library(xlsx)
 
 ## List of datasets
 
-Here's a convenient list of all dataset files generated. Note that some files may automatically open a download prompt while others may not. To force download, right click on a file link and choose "Save link as".
+Here's a convenient list of all dataset files generated. Note that **not ALL files are used in the notes!**. These are primarily for my own record keeping purposes. Also note that some files may automatically open a download prompt while others may not. To force download, right click on a file link and choose "Save link as".
 
 
 ``` r
@@ -340,6 +340,36 @@ write_csv(eruptions_recent2, file="data/eruptions_recent2.csv")
 
 
 ``` r
+# print all columns
 print(eruptions_recent2,width=93)
+```
+
+```
+## # A tibble: 174 × 10
+##    volcano               start      stop       duration confirmed   vei
+##    <chr>                 <date>     <date>        <dbl> <lgl>     <dbl>
+##  1 Kīlauea               2024-06-03 2024-06-03        0 TRUE         NA
+##  2 Atka Volcanic Complex 2024-03-27 2024-03-27        0 TRUE         NA
+##  3 Ahyi                  2024-01-01 2024-03-27       86 TRUE         NA
+##  4 Kanaga                2023-12-18 2023-12-18        0 TRUE          1
+##  5 Ruby                  2023-09-14 2023-09-15        1 TRUE          1
+##  6 Shishaldin            2023-07-11 2023-11-03      115 TRUE          3
+##  7 Mauna Loa             2022-11-27 2022-12-10       13 TRUE          0
+##  8 Ahyi                  2022-11-18 2023-06-11      205 TRUE          1
+##  9 Kīlauea               2021-09-29 2023-09-16      717 TRUE          0
+## 10 Pavlof                2021-08-05 2022-12-07      489 TRUE          2
+##    landform  type          summit_ft underwater
+##    <chr>     <chr>             <dbl> <lgl>     
+##  1 Shield    Shield             4009 FALSE     
+##  2 Composite Stratovolcano      4980 FALSE     
+##  3 Composite Stratovolcano      -246 TRUE      
+##  4 Composite Stratovolcano      4288 FALSE     
+##  5 Composite Stratovolcano      -571 TRUE      
+##  6 Composite Stratovolcano      9373 FALSE     
+##  7 Shield    Shield            13681 FALSE     
+##  8 Composite Stratovolcano      -246 TRUE      
+##  9 Shield    Shield             4009 FALSE     
+## 10 Composite Stratovolcano      8179 FALSE     
+## # ℹ 164 more rows
 ```
 
