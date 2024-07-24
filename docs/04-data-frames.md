@@ -27,7 +27,7 @@ library(lubridate)
 df <- tibble(
   name = c("Alice", "Bob", "Charlie"),
   sex = c("F", "M", "M"),
-  date_of_birth = mdy(c("7/22/03", "7/4/99", "10/31/06")),
+  date_of_birth = mdy(c("7/23/03", "7/4/99", "10/31/06")),
   age = floor(as.numeric(today() - birthday)/365.24),
   declared_major = c(TRUE, TRUE, FALSE),
   school = "UW-Madison"
@@ -40,7 +40,7 @@ df
 ## # A tibble: 3 × 6
 ##   name    sex   date_of_birth   age declared_major school    
 ##   <chr>   <chr> <date>        <dbl> <lgl>          <chr>     
-## 1 Alice   F     2003-07-22       21 TRUE           UW-Madison
+## 1 Alice   F     2003-07-23       21 TRUE           UW-Madison
 ## 2 Bob     M     1999-07-04       25 TRUE           UW-Madison
 ## 3 Charlie M     2006-10-31       17 FALSE          UW-Madison
 ```
@@ -139,7 +139,7 @@ For example, here's the first few lines of the [`eruptions_recent.csv`](data/eru
 
 ``` csv
 volcano,start,stop,duration,confirmed,vei
-Kilauea,2024-06-03,2024-06-03,0,TRUE,NA
+Kīlauea,2024-06-03,2024-06-03,0,TRUE,NA
 Atka Volcanic Complex,2024-03-27,2024-03-27,0,TRUE,NA
 Ahyi,2024-01-01,2024-03-27,86,TRUE,NA
 Kanaga,2023-12-18,2023-12-18,0,TRUE,1
@@ -218,7 +218,7 @@ The other functions are all similar. Here's the first few lines of the TSV-versi
 
 ``` tsv
 volcano	start	stop	duration	confirmed	vei
-Kilauea	2024-06-03	2024-06-03	0	TRUE	NA
+Kīlauea	2024-06-03	2024-06-03	0	TRUE	NA
 Atka Volcanic Complex	2024-03-27	2024-03-27	0	TRUE	NA
 Ahyi	2024-01-01	2024-03-27	86	TRUE	NA
 Kanaga	2023-12-18	2023-12-18	0	TRUE	1
@@ -259,7 +259,7 @@ If your data file has columns delimited (i.e. separated) by other characters, yo
 
 ``` delim
 volcano|start|stop|duration|confirmed|vei
-Kilauea|2024-06-03|2024-06-03|0|TRUE|
+Kīlauea|2024-06-03|2024-06-03|0|TRUE|
 Atka Volcanic Complex|2024-03-27|2024-03-27|0|TRUE|
 Ahyi|2024-01-01|2024-03-27|86|TRUE|
 Kanaga|2023-12-18|2023-12-18|0|TRUE|1
@@ -333,7 +333,7 @@ print(eruptions_recent, n = 5)
 ## # A tibble: 73 × 6
 ##   volcano       start               stop                duration confirmed   vei
 ##   <chr>         <dttm>              <dttm>                 <dbl> <chr>     <dbl>
-## 1 Kilauea       2024-06-03 00:00:00 2024-06-03 00:00:00        0 TRUE         NA
+## 1 Kīlauea       2024-06-03 00:00:00 2024-06-03 00:00:00        0 TRUE         NA
 ## 2 Atka Volcani… 2024-03-27 00:00:00 2024-03-27 00:00:00        0 TRUE         NA
 ## 3 Ahyi          2024-01-01 00:00:00 2024-03-27 00:00:00       86 TRUE         NA
 ## 4 Kanaga        2023-12-18 00:00:00 2023-12-18 00:00:00        0 TRUE          1

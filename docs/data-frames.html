@@ -7,7 +7,7 @@
 <title>Chapter 4 Data Frames | STAT 240 Revamp</title>
 <meta name="author" content="Bi Cheng Wu, Bret Larget, Cameron Jones">
 <meta name="description" content="Moving on from vectors, the next most important data structure in R is the data frame. Think of a data frame as similar to a matrix, but (ideally) each column is a vector of a single type...">
-<meta name="generator" content="bookdown 0.40 with bs4_book()">
+<meta name="generator" content="bookdown 0.40.1 with bs4_book()">
 <meta property="og:title" content="Chapter 4 Data Frames | STAT 240 Revamp">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://bwu62.github.io/stat240-revamp/data-frames.html">
@@ -87,7 +87,7 @@
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
 <span>  name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Alice"</span>, <span class="st">"Bob"</span>, <span class="st">"Charlie"</span><span class="op">)</span>,</span>
 <span>  sex <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"F"</span>, <span class="st">"M"</span>, <span class="st">"M"</span><span class="op">)</span>,</span>
-<span>  date_of_birth <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html">mdy</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"7/22/03"</span>, <span class="st">"7/4/99"</span>, <span class="st">"10/31/06"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  date_of_birth <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html">mdy</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"7/23/03"</span>, <span class="st">"7/4/99"</span>, <span class="st">"10/31/06"</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">floor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/now.html">today</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">birthday</span><span class="op">)</span><span class="op">/</span><span class="fl">365.24</span><span class="op">)</span>,</span>
 <span>  declared_major <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>,</span>
 <span>  school <span class="op">=</span> <span class="st">"UW-Madison"</span></span>
@@ -97,7 +97,7 @@
 <pre><code>## # A tibble: 3 × 6
 ##   name    sex   date_of_birth   age declared_major school    
 ##   &lt;chr&gt;   &lt;chr&gt; &lt;date&gt;        &lt;dbl&gt; &lt;lgl&gt;          &lt;chr&gt;     
-## 1 Alice   F     2003-07-22       21 TRUE           UW-Madison
+## 1 Alice   F     2003-07-23       21 TRUE           UW-Madison
 ## 2 Bob     M     1999-07-04       25 TRUE           UW-Madison
 ## 3 Charlie M     2006-10-31       17 FALSE          UW-Madison</code></pre>
 <p>Note the following:</p>
@@ -189,7 +189,7 @@
 </h3>
 <p>For example, here’s the first few lines of the <a href="data/eruptions_recent.csv"><code>eruptions_recent.csv</code></a> CSV file (for each eruption, we have the volcano name, start and stop dates, duration in days, if its certainty is confirmed, and the VEI or volcano explosivity index).</p>
 <pre class="csv"><code>volcano,start,stop,duration,confirmed,vei
-Kilauea,2024-06-03,2024-06-03,0,TRUE,NA
+Kīlauea,2024-06-03,2024-06-03,0,TRUE,NA
 Atka Volcanic Complex,2024-03-27,2024-03-27,0,TRUE,NA
 Ahyi,2024-01-01,2024-03-27,86,TRUE,NA
 Kanaga,2023-12-18,2023-12-18,0,TRUE,1
@@ -257,7 +257,7 @@ Ruby,2023-09-14,2023-09-15,1,TRUE,1</code></pre>
 </h3>
 <p>The other functions are all similar. Here’s the first few lines of the TSV-version of the same dataset, <a href="data/eruptions_recent.tsv"><code>eruptions_recent.tsv</code></a> (the way these notes are built doesn’t display tabs properly, but if you view the TSV file directly, you can see them).</p>
 <pre class="tsv"><code>volcano start   stop    duration    confirmed   vei
-Kilauea 2024-06-03  2024-06-03  0   TRUE    NA
+Kīlauea 2024-06-03  2024-06-03  0   TRUE    NA
 Atka Volcanic Complex   2024-03-27  2024-03-27  0   TRUE    NA
 Ahyi    2024-01-01  2024-03-27  86  TRUE    NA
 Kanaga  2023-12-18  2023-12-18  0   TRUE    1
@@ -287,7 +287,7 @@ Ruby    2023-09-14  2023-09-15  1   TRUE    1</code></pre>
 </h3>
 <p>If your data file has columns delimited (i.e. separated) by other characters, you can use the <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_delim()</a></code> function, which is a generalization of the previous two to read it in. Just set the <code>delim</code> argument to whatever the delimiter is, and you’re good to go. Here’s the first few lines of <a href="data/eruptions_recent.delim"><code>eruptions_recent.delim</code></a> where the columns are separated by vertical bar <code>|</code> characters, followed by the line of code to import it and check the result.</p>
 <pre class="delim"><code>volcano|start|stop|duration|confirmed|vei
-Kilauea|2024-06-03|2024-06-03|0|TRUE|
+Kīlauea|2024-06-03|2024-06-03|0|TRUE|
 Atka Volcanic Complex|2024-03-27|2024-03-27|0|TRUE|
 Ahyi|2024-01-01|2024-03-27|86|TRUE|
 Kanaga|2023-12-18|2023-12-18|0|TRUE|1
@@ -336,7 +336,7 @@ Ruby|2023-09-14|2023-09-15|1|TRUE|1</code></pre>
 <pre><code>## # A tibble: 73 × 6
 ##   volcano       start               stop                duration confirmed   vei
 ##   &lt;chr&gt;         &lt;dttm&gt;              &lt;dttm&gt;                 &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;
-## 1 Kilauea       2024-06-03 00:00:00 2024-06-03 00:00:00        0 TRUE         NA
+## 1 Kīlauea       2024-06-03 00:00:00 2024-06-03 00:00:00        0 TRUE         NA
 ## 2 Atka Volcani… 2024-03-27 00:00:00 2024-03-27 00:00:00        0 TRUE         NA
 ## 3 Ahyi          2024-01-01 00:00:00 2024-03-27 00:00:00       86 TRUE         NA
 ## 4 Kanaga        2023-12-18 00:00:00 2023-12-18 00:00:00        0 TRUE          1
@@ -796,7 +796,7 @@ For example, suppose a data frame had in order from left to right a numeric colu
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, Bret Larget, Cameron Jones. It was last built on 2024-07-22.</p>
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, Bret Larget, Cameron Jones. It was last built on 2024-07-23.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
@@ -809,7 +809,7 @@ For example, suppose a data frame had in order from left to right a numeric colu
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-AMS-MML_HTMLorMML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

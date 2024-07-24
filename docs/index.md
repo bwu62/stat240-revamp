@@ -1,7 +1,7 @@
 --- 
 title: "STAT 240 Revamp"
 author: "Bi Cheng Wu, Bret Larget, Cameron Jones"
-date: "2024-07-22"
+date: "2024-07-23"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -10,6 +10,7 @@ url: https://bwu62.github.io/stat240-revamp
 description: Revamped STAT240 notes
 biblio-style: apalike
 csl: chicago-fullnote-bibliography.csl
+mathjax-config: TeX-AMS-MML_HTMLorMML
 ---
 
 
@@ -63,6 +64,8 @@ dataset ideas (note: should prioritize datasets most students would find interes
  - causes of death
  - climate
  - something economic
+ - SSA names
+ - birth rate
 
 
 other notes to self:

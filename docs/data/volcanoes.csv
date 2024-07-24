@@ -1,0 +1,126 @@
+volcano,region,landform,type,last_known_eruption,latitude,longitude,summit_ft,underwater
+Kīlauea,Hawaiian-Emperor Hotspot Volcano Group,Shield,Shield,2024,19.421,-155.287,4009,FALSE
+Atka Volcanic Complex,Aleutian Ridge Volcanic Arc,Composite,Stratovolcano,2024,52.330999999999996,-174.13899999999998,4980,FALSE
+Ahyi,Mariana Volcanic Arc,Composite,Stratovolcano,2024,20.419999999999998,145.03,-246,TRUE
+Kanaga,Aleutian Ridge Volcanic Arc,Composite,Stratovolcano,2023,51.923,-177.168,4288,FALSE
+Ruby,Mariana Volcanic Arc,Composite,Stratovolcano,2023,15.605,145.572,-571,TRUE
+Shishaldin,Aleutian Ridge Volcanic Arc,Composite,Stratovolcano,2023,54.756,-163.97,9373,FALSE
+Mauna Loa,Hawaiian-Emperor Hotspot Volcano Group,Shield,Shield,2022,19.474999999999998,-155.608,13681,FALSE
+Pavlof,Aleutian Ridge Volcanic Arc,Composite,Stratovolcano,2022,55.416999999999994,-161.894,8179,FALSE
+Pagan,Mariana Volcanic Arc,Composite,Stratovolcano,2021,18.130000000000003,145.8,1870,FALSE
+Great Sitkin,Aleutian Ridge Volcanic Arc,Composite,Stratovolcano,2024,52.076,-176.13,5709,FALSE
+Veniaminof,Aleutian Ridge Volcanic Arc,Composite,Stratovolcano,2021,56.17,-159.38000000000002,8225,FALSE
+Semisopochnoi,Aleutian Ridge Volcanic Arc,Composite,Stratovolcano,2023,51.93,179.58,4006,FALSE
+Cleveland,Aleutian Ridge Volcanic Arc,Composite,Stratovolcano,2020,52.825,-169.944,5676,FALSE
+Bogoslof,Aleutian Ridge Volcanic Arc,Composite,Stratovolcano,2017,53.93,-168.03,492,FALSE
+Mariana Back-Arc Segment at 15.5°N,Mariana Volcanic Arc,Cluster,Fissure vent,2015,15.406,144.506,-13451,TRUE
+South Sarigan Seamount,Mariana Volcanic Arc,Composite,Stratovolcano,2010,16.58,145.78,-604,TRUE
+Redoubt,Alaska Peninsula Volcanic Arc,Composite,Stratovolcano,2009,60.485,-152.742,10197,FALSE
+Kasatochi,Aleutian Ridge Volcanic Arc,Composite,Stratovolcano,2008,52.177,-175.508,1030,FALSE
+Okmok,Aleutian Ridge Volcanic Arc,Shield,Shield,2008,53.43,-168.13,3520,FALSE
+Anatahan,Mariana Volcanic Arc,Composite,Stratovolcano,2008,16.35,145.67,2592,FALSE
+Fourpeaked,Alaska Peninsula Volcanic Arc,Composite,Stratovolcano,2006,58.77,-153.672,6906,FALSE
+Augustine,Alaska Peninsula Volcanic Arc,Composite,Lava dome,2006,59.3626,-153.435,3996,FALSE
+St. Helens,High Cascades Volcanic Arc,Composite,Stratovolcano,2008,46.2,-122.17999999999999,8363,FALSE
+NW Rota-1,Mariana Volcanic Arc,Composite,Stratovolcano,2010,14.600999999999999,144.77499999999998,-1696,TRUE
+Vailulu'u,Samoan Hotspot Volcano Group,Shield,Shield,2003,-14.215,-169.05800000000002,-1942,TRUE
+Wrangell,Wrangell Volcanic Arc,Shield,Shield,1912,62.006,-144.017,14035,FALSE
+Chiginagak,Alaska Peninsula Volcanic Arc,Composite,Stratovolcano,1998,57.135000000000005,-156.99,7287,FALSE
+Amukta,Aleutian Ridge Volcanic Arc,Composite,Stratovolcano,1997,52.5,-171.252,3497,FALSE
+Gareloi,Aleutian Ridge Volcanic Arc,Composite,Stratovolcano,1989,51.790000000000006,-178.79399999999998,5161,FALSE
+North Gorda Ridge Segment,Northeast Pacific Rift Zones,Cluster,Fissure vent,1996,42.67,-126.78,-9843,TRUE
+Kama'ehuakanaloa,Hawaiian-Emperor Hotspot Volcano Group,Shield,Shield,1996,18.919999999999998,-155.26999999999998,-3199,TRUE
+Makushin,Aleutian Ridge Volcanic Arc,Composite,Stratovolcano,1995,53.891,-166.923,5906,FALSE
+Seguam,Aleutian Ridge Volcanic Arc,Composite,Stratovolcano,1993,52.315,-172.51,3458,FALSE
+Akutan,Aleutian Ridge Volcanic Arc,Composite,Stratovolcano,1992,54.134,-165.98600000000002,4275,FALSE
+Spurr,Alaska Peninsula Volcanic Arc,Composite,Stratovolcano,1992,61.29900000000001,-152.251,11070,FALSE
+Westdahl,Aleutian Ridge Volcanic Arc,Composite,Stratovolcano,1992,54.516,-164.65,5128,FALSE
+Kiska,Aleutian Ridge Volcanic Arc,Composite,Stratovolcano,1990,52.103,177.602,4003,FALSE
+Carlisle,Aleutian Ridge Volcanic Arc,Composite,Stratovolcano,1828,52.894,-170.054,5315,FALSE
+Esmeralda Bank,Mariana Volcanic Arc,Composite,Stratovolcano,NA,14.958,145.24899999999997,-243,TRUE
+Kupreanof,Aleutian Ridge Volcanic Arc,Composite,Stratovolcano,NA,56.010999999999996,-159.797,6217,FALSE
+Fukujin,Mariana Volcanic Arc,Composite,Stratovolcano,1974,21.93,143.47,-712,TRUE
+Ukinrek Maars,Alaska Peninsula Volcanic Arc,Minor ,Maar,1977,57.834399999999995,-156.52030000000002,299,FALSE
+Kasuga 1,Mariana Volcanic Arc,Composite,Stratovolcano,1959,21.764999999999997,143.70999999999998,-1962,TRUE
+Trident,Alaska Peninsula Volcanic Arc,Composite,Stratovolcano,1974,58.236000000000004,-155.1,6115,FALSE
+Vsevidof,Aleutian Ridge Volcanic Arc,Composite,Stratovolcano,1878,53.13,-168.69299999999998,7051,FALSE
+Kaena,Hawaiian-Emperor Hotspot Volcano Group,Shield,Shield,NA,21.822,-158.772,-3937,TRUE
+Iliamna,Alaska Peninsula Volcanic Arc,Composite,Stratovolcano,1876,60.032000000000004,-153.09,10016,FALSE
+Martin,Alaska Peninsula Volcanic Arc,Composite,Stratovolcano,1953,58.172000000000004,-155.36100000000002,6112,FALSE
+Farallon de Pájaros,Mariana Volcanic Arc,Composite,Stratovolcano,1953,20.546,144.893,1106,FALSE
+Mageik,Alaska Peninsula Volcanic Arc,Composite,Stratovolcano,-500,58.19500000000001,-155.253,7103,FALSE
+St. Paul Island,Northern Alaska-Bering Sea Volcanic Province,Shield,Shield,-1280,57.167,-170.21299999999997,666,FALSE
+Aniakchak,Alaska Peninsula Volcanic Arc,Caldera,Caldera,1931,56.879999999999995,-158.17,4400,FALSE
+Yunaska,Aleutian Ridge Volcanic Arc,Shield,Shield,1937,52.6394,-170.6317,1804,FALSE
+Kagamil,Aleutian Ridge Volcanic Arc,Composite,Stratovolcano,1929,52.974,-169.72,2930,FALSE
+Asunción,Mariana Volcanic Arc,Composite,Stratovolcano,1906,19.671000000000003,145.406,2812,FALSE
+Agrigan,Mariana Volcanic Arc,Composite,Stratovolcano,1917,18.77,145.67,3166,FALSE
+Lassen Volcanic Center,High Cascades Volcanic Arc,Composite,Stratovolcano,1917,40.492000000000004,-121.508,10456,FALSE
+Tanaga,Aleutian Ridge Volcanic Arc,Composite,Stratovolcano,1914,51.885,-178.146,5925,FALSE
+Katmai,Alaska Peninsula Volcanic Arc,Composite,Stratovolcano,1912,58.279,-154.9533,6716,FALSE
+Novarupta,Alaska Peninsula Volcanic Arc,Caldera,Caldera,1912,58.26550000000001,-155.1588,2759,FALSE
+Medicine Lake,High Cascades Volcanic Arc,Shield,Shield,1060,41.611,-121.554,7913,FALSE
+Rainier,High Cascades Volcanic Arc,Composite,Stratovolcano,1450,46.852999999999994,-121.76,14409,FALSE
+Mono Lake Volcanic Field,Basin and Range Volcanic Province,Cluster,Volcanic field,1790,38,-119.03,6959,FALSE
+Alamagan,Mariana Volcanic Arc,Composite,Stratovolcano,870,17.6,145.83,2441,FALSE
+Baker,Garibaldi Volcanic Arc,Composite,Stratovolcano,1880,48.777,-121.813,10778,FALSE
+Guguan,Mariana Volcanic Arc,Composite,Stratovolcano,1883,17.307000000000002,145.845,942,FALSE
+Hood,High Cascades Volcanic Arc,Composite,Stratovolcano,1866,45.373999999999995,-121.695,11240,FALSE
+Ofu-Olosega,Samoan Hotspot Volcano Group,Shield,Shield,1866,-14.175,-169.618,2096,FALSE
+Ugashik-Peulik,Alaska Peninsula Volcanic Arc,Composite,Stratovolcano,1814,57.751,-156.36800000000002,4836,FALSE
+Fisher,Aleutian Ridge Volcanic Arc,Composite,Stratovolcano,1830,54.65,-164.43,3648,FALSE
+Little Sitkin,Aleutian Ridge Volcanic Arc,Composite,Stratovolcano,1830,51.949999999999996,178.54299999999998,3852,FALSE
+Hualalai,Hawaiian-Emperor Hotspot Volcano Group,Shield,Shield,1801,19.692,-155.87,8278,FALSE
+Amak,Aleutian Ridge Volcanic Arc,Composite,Stratovolcano,1796,55.4184,-163.1472,1795,FALSE
+Haleakala,Hawaiian-Emperor Hotspot Volcano Group,Shield,Shield,1750,20.708,-156.25,10023,FALSE
+Snowy Mountain,Alaska Peninsula Volcanic Arc,Composite,Stratovolcano,1710,58.336,-154.68200000000002,7093,FALSE
+Glacier Peak,Garibaldi Volcanic Arc,Composite,Stratovolcano,1700,48.112,-121.113,10541,FALSE
+Takawangha,Aleutian Ridge Volcanic Arc,Composite,Stratovolcano,1550,51.873,-178.006,4754,FALSE
+Mono-Inyo Craters,Basin and Range Volcanic Province,Cluster,Lava dome,1380,37.803999999999995,-119.029,9173,FALSE
+Black Rock Desert,Basin and Range Volcanic Province,Cluster,Volcanic field,1290,38.97,-112.5,5906,FALSE
+Mammoth Mountain,Basin and Range Volcanic Province,Minor,Lava dome,1260,37.631,-119.032,11053,FALSE
+Shasta,High Cascades Volcanic Arc,Composite,Stratovolcano,1250,41.409,-122.193,14163,FALSE
+Hayes,Alaska Peninsula Volcanic Arc,Composite,Stratovolcano,1200,61.64,-152.411,9954,FALSE
+Uinkaret Field,Basin and Range Volcanic Province,Cluster,Volcanic field,1100,36.379999999999995,-113.13,5102,FALSE
+San Francisco Volcanic Field,Basin and Range Volcanic Province,Cluster,Volcanic field,1075,35.346999999999994,-111.67799999999998,12631,FALSE
+Markagunt Plateau,Basin and Range Volcanic Province,Cluster,Volcanic field,1050,37.58,-112.66999999999999,9318,FALSE
+Adams,High Cascades Volcanic Arc,Composite,Stratovolcano,950,46.206,-121.49000000000001,12277,FALSE
+Jefferson,High Cascades Volcanic Arc,Composite,Stratovolcano,950,44.674,-121.8,10495,FALSE
+Churchill,Wrangell Volcanic Arc,Composite,Stratovolcano,847,61.379999999999995,-141.75,16421,FALSE
+Newberry,High Cascades Volcanic Arc,Shield,Shield,690,43.72200000000001,-121.229,7986,FALSE
+Blue Lake Crater,High Cascades Volcanic Arc,Minor ,Maar,680,44.4125,-121.7686,3727,FALSE
+Belknap,High Cascades Volcanic Arc,Shield,Shield,480,44.285000000000004,-121.84100000000001,6873,FALSE
+Tutuila,Samoan Hotspot Volcano Group,Cluster,Tuff cone,440,-14.290299999999998,-170.7019,2142,FALSE
+Three Sisters,High Cascades Volcanic Arc,Composite,Complex,439,44.133,-121.76700000000001,10364,FALSE
+Imuruk Lake,Northern Alaska-Bering Sea Volcanic Province,Cluster,Volcanic field,300,65.51700000000001,-163.45000000000002,2001,FALSE
+Salton Buttes,Gulf of California Rift Province,Minor ,Lava dome,210,33.197,-115.616,-131,FALSE
+Craters of the Moon,Yellowstone-Snake River Hotspot Volcano Group,Cluster,Volcanic field,-130,43.370999999999995,-113.49300000000001,6578,FALSE
+Ubehebe Craters,Basin and Range Volcanic Province,Minor,Maar,-150,37.02,-117.45,2467,FALSE
+Wapi Lava Field,Yellowstone-Snake River Hotspot Volcano Group,Shield,Shield,-300,42.885999999999996,-113.21600000000001,5240,FALSE
+Yantarni,Alaska Peninsula Volcanic Arc,Composite,Stratovolcano,-800,57.019,-157.185,4413,FALSE
+Sand Mountain Field,High Cascades Volcanic Arc,Cluster,Volcanic field,-950,44.379999999999995,-121.93,5459,FALSE
+Buzzard Creek,Alaska Peninsula Volcanic Arc,Minor ,Tuff ring,-1050,64.06160000000001,-148.4327,2723,FALSE
+Koniuji,Aleutian Ridge Volcanic Arc,Composite,Stratovolcano,-1150,52.220000000000006,-175.13,896,FALSE
+Zuni-Bandera,Basin and Range Volcanic Province,Cluster,Volcanic field,-1170,34.8,-108,8366,FALSE
+Jordan Craters,High Lava Plains Volcanic Province,Cluster,Volcanic field,-1250,43.147,-117.46000000000001,4833,FALSE
+Moffett,Aleutian Ridge Volcanic Arc,Composite,Stratovolcano,-1600,51.943999999999996,-176.74699999999999,3924,FALSE
+Griggs,Alaska Peninsula Volcanic Arc,Composite,Stratovolcano,-1790,58.35399999999999,-155.092,7602,FALSE
+Dana,Aleutian Ridge Volcanic Arc,Composite,Stratovolcano,-1890,55.641,-161.21399999999997,4442,FALSE
+Black Peak,Alaska Peninsula Volcanic Arc,Composite,Stratovolcano,-1900,56.552,-158.785,3386,FALSE
+Dotsero,Basin and Range Volcanic Province,Minor ,Maar,-2200,39.661300000000004,-107.0355,7316,FALSE
+Escanaba Segment,Northeast Pacific Rift Zones,Cluster,Fissure vent,-2260,40.98,-127.5,-5577,TRUE
+Edgecumbe,Queen Charlotte Volcanic Province,Cluster,Volcanic field,-2080,57.05,-135.75,3182,FALSE
+Mauna Kea,Hawaiian-Emperor Hotspot Volcano Group,Shield,Shield,-2460,19.82,-155.47,13796,FALSE
+Davis Lake,High Cascades Volcanic Arc,Cluster,Volcanic field,-2790,43.57,-121.82,7096,FALSE
+Crater Lake,High Cascades Volcanic Arc,Caldera,Caldera,-2850,42.942,-122.107,8159,FALSE
+Hell's Half Acre,Yellowstone-Snake River Hotspot Volcano Group,Shield,Shield,-3250,43.5,-112.45,5351,FALSE
+Carrizozo,Basin and Range Volcanic Province,Minor,Pyroclastic cone,-3250,33.78,-105.93,5679,FALSE
+Kaguyak,Alaska Peninsula Volcanic Arc,Caldera,Lava dome,-3850,58.6113,-154.0245,2956,FALSE
+Diamond Craters,High Lava Plains Volcanic Province,Cluster,Volcanic field,-5610,43.1,-118.75,4708,FALSE
+West Crater,High Cascades Volcanic Arc,Cluster,Volcanic field,-5750,45.879999999999995,-122.08,4360,FALSE
+Bachelor,High Cascades Volcanic Arc,Composite,Stratovolcano,-5800,43.979,-121.68799999999999,9065,FALSE
+Indian Heaven,High Cascades Volcanic Arc,Cluster,Volcanic field,-6250,45.93,-121.82,5925,FALSE
+Roundtop,Aleutian Ridge Volcanic Arc,Composite,Stratovolcano,-7600,54.8,-163.589,6138,FALSE
+Black Butte Crater Lava Field,Yellowstone-Snake River Hotspot Volcano Group,Shield,Shield,-8400,43.183,-114.35199999999999,4849,FALSE
+Red Hill,Basin and Range Volcanic Province,Cluster,Volcanic field,-9450,34.25,-108.83,7546,FALSE
+Golden Trout Creek,Basin and Range Volcanic Province,Cluster,Volcanic field,NA,36.358,-118.32,9469,FALSE

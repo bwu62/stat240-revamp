@@ -19,7 +19,6 @@ library(lubridate)
 library(xlsx)
 options(pillar.print_min=20)
 options(width=75)
-if(!dir.exists("data/")) dir.create("data/")
 ```
 
 
@@ -27,10 +26,21 @@ if(!dir.exists("data/")) dir.create("data/")
 
 Here's a convenient list of all dataset files generated. Note that some files may automatically open a download prompt while others may not. To force download, right click on a file link and choose "Save link as".
 
+
+``` r
+library(readr)
+files <- list.files('data')
+write_lines(paste0("https://bwu62.github.io/stat240-revamp/data/",files),file="data_list.txt")
+stringr::str_glue(" - [`{files}`](data/{files})")
+```
+
+ - [`eruptions.csv`](data/eruptions.csv)
  - [`eruptions_recent.csv`](data/eruptions_recent.csv)
  - [`eruptions_recent.delim`](data/eruptions_recent.delim)
  - [`eruptions_recent.tsv`](data/eruptions_recent.tsv)
  - [`eruptions_recent.xlsx`](data/eruptions_recent.xlsx)
+ - [`volcanoes.csv`](data/volcanoes.csv)
+ - [`volcanoes_raw.csv`](data/volcanoes_raw.csv)
 
 Alternatively, you can also run the following line, which will **download ALL files above to your current working directory**. It's recommended to first set your working directory to an appropriate place before running this, e.g. to the `data/` directory in your `STAT240/` course folder.
 
@@ -65,6 +75,8 @@ eruptions_raw <- read_html("https://volcano.si.edu/volcanolist_countries.cfm?cou
   set_names(c("volcano","start","stop","confirmed","vei"))
 ```
 
+### Process data
+
 
 ``` r
 eruptions <- eruptions_raw %>% 
@@ -73,25 +85,24 @@ eruptions <- eruptions_raw %>%
     # convert confirmed? column to logical
     confirmed = if_else(replace_na(confirmed,"NA")=="Confirmed",T,F),
     # replace continuing eruptions with today's date
-    # (continuation last validated 7/19/24)
+    # (continuation last validated 7/23/24)
     stop = if_else(str_detect(stop,"continu"),format(today(),"%Y %b %e"),stop,missing=stop)
   ) %>% 
   # extract date error to new column
   separate(start,c("start","start_error"),"±") %>% 
   separate(stop,c("stop","stop_error"),"±") %>% 
   mutate(
+    # fix a few names
+    volcano = volcano %>% str_replace("Asuncion","Asunción") %>% str_replace("Pajaros","Pájaros") %>% str_replace("Kilauea","Kīlauea"),
     # parse error time string to number of days
     start_error = as.duration(start_error)/ddays(1),
     stop_error = as.duration(stop_error)/ddays(1),
     # extract start year since some earlier eruptions are missing month/day
     start_year = str_extract(start,"(\\d{4,5})"),
     stop_year = str_extract(stop,"(\\d{4,5})"),
-    # check if BCE
-    start_bce = str_detect(start,"BCE"),
-    stop_bce = str_detect(stop,"BCE"),
     # parse start year, adding - if BCE
-    start_year = if_else(start_bce,-as.numeric(start_year),as.numeric(start_year)),
-    stop_year = if_else(stop_bce,-as.numeric(stop_year),as.numeric(stop_year)),
+    start_year = as.numeric(start_year) * if_else(str_detect(start,"BCE"),-1,1),
+    stop_year = as.numeric(stop_year) * if_else(str_detect(stop,"BCE"),-1,1),
     # extract start month
     start_month = str_replace(start,".*\\d{4}\\s([:alpha:]{3}).*","\\1"),
     stop_month = str_replace(stop,".*\\d{4}\\s([:alpha:]{3}).*","\\1"),
@@ -116,39 +127,15 @@ eruptions <- eruptions_raw %>%
 eruptions_recent <- eruptions %>% 
   filter(start_error <= 30, start_year > 2000, !is.na(stop)) %>% 
   select(-contains("_"))
-
-eruptions_recent
 ```
 
-```
-## # A tibble: 73 × 6
-##    volcano               start      stop       duration confirmed   vei
-##    <chr>                 <date>     <date>        <dbl> <lgl>     <int>
-##  1 Kilauea               2024-06-03 2024-06-03        0 TRUE         NA
-##  2 Atka Volcanic Complex 2024-03-27 2024-03-27        0 TRUE         NA
-##  3 Ahyi                  2024-01-01 2024-03-27       86 TRUE         NA
-##  4 Kanaga                2023-12-18 2023-12-18        0 TRUE          1
-##  5 Ruby                  2023-09-14 2023-09-15        1 TRUE          1
-##  6 Shishaldin            2023-07-11 2023-11-03      115 TRUE          3
-##  7 Mauna Loa             2022-11-27 2022-12-10       13 TRUE          0
-##  8 Ahyi                  2022-11-18 2023-06-11      205 TRUE          1
-##  9 Kilauea               2021-09-29 2023-09-16      717 TRUE          0
-## 10 Pavlof                2021-08-05 2022-12-07      489 TRUE          2
-## 11 Pagan                 2021-07-29 2021-09-06       39 TRUE          2
-## 12 Great Sitkin          2021-05-25 2024-07-22     1154 TRUE          2
-## 13 Veniaminof            2021-02-28 2021-04-05       36 TRUE          1
-## 14 Semisopochnoi         2021-02-02 2023-05-05      822 TRUE          2
-## 15 Kilauea               2020-12-20 2021-05-23      154 TRUE          0
-## 16 Cleveland             2020-06-01 2020-06-01        0 TRUE          3
-## 17 Semisopochnoi         2019-12-07 2020-06-19      195 TRUE          1
-## 18 Cleveland             2019-11-07 2019-12-07       30 FALSE        NA
-## 19 Shishaldin            2019-07-23 2020-05-04      286 TRUE          3
-## 20 Semisopochnoi         2019-07-16 2019-08-24       39 TRUE          1
-## # ℹ 53 more rows
-```
+### Write out data
 
 
 ``` r
+# save complete file too
+write_csv(eruptions,file="data/eruptions.csv")
+
 # write out to different formats for reading
 write_csv(eruptions_recent,file="data/eruptions_recent.csv")
 write_tsv(eruptions_recent,file="data/eruptions_recent.tsv")
@@ -165,5 +152,186 @@ eruptions_recent %>% as.data.frame %>% write.xlsx(file="data/eruptions_recent.xl
 
 # eruptions_recent %>% as.data.frame %>% print(print.gap=2,width=1000,row.names=F,right=F) %>% capture.output() %>% 
 #   str_replace("<NA>","NA  ") %>% str_replace("^ *",'"') %>% str_replace("( {2,})",'"\\1') %>% str_replace('"name"',"name  ") %>% write_lines(file="data/eruptions_recent.txt")
+```
+
+
+
+### Inspect data
+
+
+``` r
+eruptions
+```
+
+```
+## # A tibble: 1,278 × 10
+##    volcano     start      start_error start_year stop       stop_error stop_year
+##    <chr>       <date>           <dbl>      <dbl> <date>          <dbl>     <dbl>
+##  1 Kīlauea     2024-06-03           0       2024 2024-06-03          0      2024
+##  2 Atka Volca… 2024-03-27           0       2024 2024-03-27          0      2024
+##  3 Ahyi        2024-01-01           0       2024 2024-03-27          0      2024
+##  4 Kanaga      2023-12-18           0       2023 2023-12-18          0      2023
+##  5 Ruby        2023-09-14           0       2023 2023-09-15          0      2023
+##  6 Shishaldin  2023-07-11           1       2023 2023-11-03          0      2023
+##  7 Mauna Loa   2022-11-27           0       2022 2022-12-10          0      2022
+##  8 Ahyi        2022-11-18           1       2022 2023-06-11          0      2023
+##  9 Kīlauea     2021-09-29           0       2021 2023-09-16          0      2023
+## 10 Pavlof      2021-08-05           0       2021 2022-12-07          0      2022
+## # ℹ 1,268 more rows
+## # ℹ 3 more variables: duration <dbl>, confirmed <lgl>, vei <dbl>
+```
+
+``` r
+eruptions_recent
+```
+
+```
+## # A tibble: 73 × 6
+##    volcano               start      stop       duration confirmed   vei
+##    <chr>                 <date>     <date>        <dbl> <lgl>     <dbl>
+##  1 Kīlauea               2024-06-03 2024-06-03        0 TRUE         NA
+##  2 Atka Volcanic Complex 2024-03-27 2024-03-27        0 TRUE         NA
+##  3 Ahyi                  2024-01-01 2024-03-27       86 TRUE         NA
+##  4 Kanaga                2023-12-18 2023-12-18        0 TRUE          1
+##  5 Ruby                  2023-09-14 2023-09-15        1 TRUE          1
+##  6 Shishaldin            2023-07-11 2023-11-03      115 TRUE          3
+##  7 Mauna Loa             2022-11-27 2022-12-10       13 TRUE          0
+##  8 Ahyi                  2022-11-18 2023-06-11      205 TRUE          1
+##  9 Kīlauea               2021-09-29 2023-09-16      717 TRUE          0
+## 10 Pavlof                2021-08-05 2022-12-07      489 TRUE          2
+## # ℹ 63 more rows
+```
+
+### Scrape volcanoes info
+
+
+``` r
+nums <- c(332010, 311160, 284141, 311110, 284202, 311360, 332020, 312030, 284170,
+         311120, 312070, 311060, 311240, 311300, 284305, 284193, 313030, 311130,
+         311290, 284200, 312260, 313010, 321050, 284211, 244000, 315020, 312110,
+         311190, 311070, 331031, 332000, 311310, 311180, 311320, 313040, 311340,
+         311020, 311230, 284210, 312060, 284133, 312131, 284134, 312160, 311270,
+         332080, 313020, 312140, 284140, 312150, 314010, 312090, 311210, 311260,
+         284150, 284160, 323080, 311080, 312170, 312180, 323020, 321030, 323110,
+         284180, 321010, 284190, 322010, 244010, 312130, 311350, 311050, 332040,
+         311390, 332060, 312200, 321020, 311090, 323120, 327050, 323150, 323010,
+         313050, 329010, 329020, 327040, 321040, 322020, 315030, 322110, 322030,
+         322060, 244020, 322070, 314060, 323200, 324020, 323160, 324030, 312100,
+         322040, 315001, 311140, 327120, 322190, 311111, 312190, 312050, 312080,
+         328010, 331040, 315040, 332030, 322100, 322160, 324040, 327110, 312250,
+         322170, 321060, 322090, 321070, 311380, 324010, 327812, 323170)
+
+get_volc_info <- function(num){
+
+  source <- "https://volcano.si.edu/volcano.cfm?vn={num}&vtab=Eruptions" %>%
+    str_glue() %>%
+    read_html()
+
+  name <- source %>%
+    html_nodes(xpath="//div[@class='volcano-title-container']/h3/text()") %>%
+    HTMLdecode()
+
+  info <- source %>%
+    html_nodes(xpath="//div[@class='volcano-info-table']//li//text()") %>%
+    as.character() %>%
+    {setNames(.[1:4],.[5:8])}
+
+  subinfo <- source %>%
+    html_nodes(xpath="//div[@class='volcano-subinfo-table']//li[position()<5]//text()") %>%
+    as.character() %>%
+    {setNames(.[1:4],.[5:8])}
+
+  c(name=name,info,subinfo)
+}
+
+library(parallel)
+cl <- makeCluster(detectCores()-1)
+clusterExport(cl,c("nums","get_volc_info"))
+volcanoes_raw <- mclapply(nums,get_volc_info) %>% as.data.frame %>% unname %>% t %>% as.data.frame
+stopCluster(cl)
+write_csv(volcanoes_raw,"data/volcanoes_raw.csv")
+```
+
+### Process volcano info
+
+
+``` r
+volcanoes = volcanoes_raw %>% 
+  # these are already only US volcanoes, and Summit is just Elevation in meters
+  select(-Country,-Summit) %>% 
+  set_names(c("volcano","region","landform_type","last_known_eruption","latitude","longitude","summit_ft")) %>% 
+  mutate(landform_type = str_replace_all(landform_type,"\\(\\w+\\)|\\?",""),
+         last_known_eruption = parse_number(last_known_eruption) * if_else(str_detect(last_known_eruption,"BCE"),-1,1),
+         latitude = parse_number(latitude) * if_else(str_detect(latitude,"S"),-1,1),
+         longitude = parse_number(longitude) * if_else(str_detect(longitude,"W"),-1,1),
+         summit_ft = parse_number(summit_ft) * if_else(volcano=="Ruby",-1,1)) %>% 
+  separate(landform_type,into=c("landform","type"),sep=" \\| ") %>% 
+  mutate(underwater = summit_ft < -131)
+```
+
+### Write out volcanoes info
+
+
+``` r
+write_csv(volcanoes,"data/volcanoes.csv")
+```
+
+
+
+### Inspect volcanoes info
+
+
+``` r
+volcanoes
+```
+
+```
+## # A tibble: 125 × 9
+##    volcano          region landform type  last_known_eruption latitude longitude
+##    <chr>            <chr>  <chr>    <chr>               <dbl>    <dbl>     <dbl>
+##  1 Kīlauea          Hawai… Shield   Shie…                2024     19.4     -155.
+##  2 Atka Volcanic C… Aleut… Composi… Stra…                2024     52.3     -174.
+##  3 Ahyi             Maria… Composi… Stra…                2024     20.4      145.
+##  4 Kanaga           Aleut… Composi… Stra…                2023     51.9     -177.
+##  5 Ruby             Maria… Composi… Stra…                2023     15.6      146.
+##  6 Shishaldin       Aleut… Composi… Stra…                2023     54.8     -164.
+##  7 Mauna Loa        Hawai… Shield   Shie…                2022     19.5     -156.
+##  8 Pavlof           Aleut… Composi… Stra…                2022     55.4     -162.
+##  9 Pagan            Maria… Composi… Stra…                2021     18.1      146.
+## 10 Great Sitkin     Aleut… Composi… Stra…                2024     52.1     -176.
+## # ℹ 115 more rows
+## # ℹ 2 more variables: summit_ft <dbl>, underwater <lgl>
+```
+
+``` r
+volcanoes_raw
+```
+
+```
+## # A tibble: 125 × 9
+##    name                  Country      `Volcanic Province` `Landform | Volc Type`
+##    <chr>                 <chr>        <chr>               <chr>                 
+##  1 Kīlauea               United Stat… Hawaiian-Emperor H… Shield | Shield       
+##  2 Atka Volcanic Complex United Stat… Aleutian Ridge Vol… Composite | Stratovol…
+##  3 Ahyi                  United Stat… Mariana Volcanic A… Composite | Stratovol…
+##  4 Kanaga                United Stat… Aleutian Ridge Vol… Composite | Stratovol…
+##  5 Ruby                  United Stat… Mariana Volcanic A… Composite | Stratovol…
+##  6 Shishaldin            United Stat… Aleutian Ridge Vol… Composite | Stratovol…
+##  7 Mauna Loa             United Stat… Hawaiian-Emperor H… Shield | Shield       
+##  8 Pavlof                United Stat… Aleutian Ridge Vol… Composite | Stratovol…
+##  9 Pagan                 United Stat… Mariana Volcanic A… Composite | Stratovol…
+## 10 Great Sitkin          United Stat… Aleutian Ridge Vol… Composite | Stratovol…
+## # ℹ 115 more rows
+## # ℹ 5 more variables: `Last Known Eruption` <chr>, Latitude <chr>,
+## #   Longitude <chr>, Summit <chr>, Elevation <chr>
+```
+
+### Augment eruptions
+
+
+``` r
+volcanoes %>% 
+  select(volcano, landform, type, summit_ft, underwater) %>% 
+  stringdist_right_join(eruptions_recent,by="volcano",max_dist=1) %>% View
 ```
 

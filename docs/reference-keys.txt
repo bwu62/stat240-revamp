@@ -87,7 +87,16 @@ range
 other-measures-1
 skew
 data-visualization
+section
 datasets
 list-of-datasets
 eruptions
 load-raw-data
+process-data
+write-out-data
+inspect-data
+scrape-volcanoes-info
+process-volcano-info
+write-out-volcanoes-info
+inspect-volcanoes-info
+augment-eruptions

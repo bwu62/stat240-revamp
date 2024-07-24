@@ -7,7 +7,7 @@
 <title>A Datasets | STAT 240 Revamp</title>
 <meta name="author" content="Bi Cheng Wu, Bret Larget, Cameron Jones">
 <meta name="description" content="This page contains updating/processing scripts and additional info on all datasets used for the course, as well as some brief discussions of why they were chosen. Datasets are ordered by order of...">
-<meta name="generator" content="bookdown 0.40 with bs4_book()">
+<meta name="generator" content="bookdown 0.40.1 with bs4_book()">
 <meta property="og:title" content="A Datasets | STAT 240 Revamp">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://bwu62.github.io/stat240-revamp/datasets.html">
@@ -77,21 +77,28 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://lubridate.tidyverse.org">lubridate</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/colearendt/xlsx">xlsx</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>pillar.print_min<span class="op">=</span><span class="fl">20</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>width<span class="op">=</span><span class="fl">75</span><span class="op">)</span></span>
-<span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.exists</a></span><span class="op">(</span><span class="st">"data/"</span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span><span class="op">(</span><span class="st">"data/"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>width<span class="op">=</span><span class="fl">75</span><span class="op">)</span></span></code></pre></div>
 <div id="list-of-datasets" class="section level2" number="6.1">
 <h2>
 <span class="header-section-number">A.1</span> List of datasets<a class="anchor" aria-label="anchor" href="#list-of-datasets"><i class="fas fa-link"></i></a>
 </h2>
 <p>Here’s a convenient list of all dataset files generated. Note that some files may automatically open a download prompt while others may not. To force download, right click on a file link and choose “Save link as”.</p>
+<div class="sourceCode" id="cb527"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readr.tidyverse.org">readr</a></span><span class="op">)</span></span>
+<span><span class="va">files</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="st">'data'</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_lines.html">write_lines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"https://bwu62.github.io/stat240-revamp/data/"</span>,<span class="va">files</span><span class="op">)</span>,file<span class="op">=</span><span class="st">"data_list.txt"</span><span class="op">)</span></span>
+<span><span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_glue.html">str_glue</a></span><span class="op">(</span><span class="st">" - [`{files}`](data/{files})"</span><span class="op">)</span></span></code></pre></div>
 <ul>
+<li><a href="data/eruptions.csv"><code>eruptions.csv</code></a></li>
 <li><a href="data/eruptions_recent.csv"><code>eruptions_recent.csv</code></a></li>
 <li><a href="data/eruptions_recent.delim"><code>eruptions_recent.delim</code></a></li>
 <li><a href="data/eruptions_recent.tsv"><code>eruptions_recent.tsv</code></a></li>
 <li><a href="data/eruptions_recent.xlsx"><code>eruptions_recent.xlsx</code></a></li>
+<li><a href="data/volcanoes.csv"><code>volcanoes.csv</code></a></li>
+<li><a href="data/volcanoes_raw.csv"><code>volcanoes_raw.csv</code></a></li>
 </ul>
 <p>Alternatively, you can also run the following line, which will <strong>download ALL files above to your current working directory</strong>. It’s recommended to first set your working directory to an appropriate place before running this, e.g. to the <code>data/</code> directory in your <code>STAT240/</code> course folder.</p>
-<div class="sourceCode" id="cb527"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb528"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span><span class="op">(</span><span class="st">"https://bwu62.github.io/stat240-revamp/data_list.txt"</span><span class="op">)</span>,</span>
 <span>       \<span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span><span class="op">(</span><span class="va">.</span>,<span class="fu"><a href="https://rdrr.io/r/base/basename.html">basename</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -104,7 +111,7 @@
 <h3>
 <span class="header-section-number">A.2.1</span> Load raw data<a class="anchor" aria-label="anchor" href="#load-raw-data"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb528"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb529"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># load html source code</span></span>
 <span><span class="va">eruptions_raw</span> <span class="op">&lt;-</span> <span class="fu"><a href="http://xml2.r-lib.org/reference/read_xml.html">read_html</a></span><span class="op">(</span><span class="st">"https://volcano.si.edu/volcanolist_countries.cfm?country=United%20States"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="co"># extract table code</span></span>
@@ -117,32 +124,36 @@
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">Evidence</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="co"># make names nice</span></span>
 <span>  <span class="fu"><a href="https://rlang.r-lib.org/reference/set_names.html">set_names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"volcano"</span>,<span class="st">"start"</span>,<span class="st">"stop"</span>,<span class="st">"confirmed"</span>,<span class="st">"vei"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb529"><pre class="downlit sourceCode r">
+</div>
+<div id="process-data" class="section level3" number="6.2.2">
+<h3>
+<span class="header-section-number">A.2.2</span> Process data<a class="anchor" aria-label="anchor" href="#process-data"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb530"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">eruptions</span> <span class="op">&lt;-</span> <span class="va">eruptions_raw</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
 <span>    volcano <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_replace.html">str_replace</a></span><span class="op">(</span><span class="va">volcano</span>,<span class="st">"°"</span>,<span class="st">"°"</span><span class="op">)</span>,</span>
 <span>    <span class="co"># convert confirmed? column to logical</span></span>
 <span>    confirmed <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/replace_na.html">replace_na</a></span><span class="op">(</span><span class="va">confirmed</span>,<span class="st">"NA"</span><span class="op">)</span><span class="op">==</span><span class="st">"Confirmed"</span>,<span class="cn">T</span>,<span class="cn">F</span><span class="op">)</span>,</span>
 <span>    <span class="co"># replace continuing eruptions with today's date</span></span>
-<span>    <span class="co"># (continuation last validated 7/19/24)</span></span>
+<span>    <span class="co"># (continuation last validated 7/23/24)</span></span>
 <span>    stop <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html">str_detect</a></span><span class="op">(</span><span class="va">stop</span>,<span class="st">"continu"</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/now.html">today</a></span><span class="op">(</span><span class="op">)</span>,<span class="st">"%Y %b %e"</span><span class="op">)</span>,<span class="va">stop</span>,missing<span class="op">=</span><span class="va">stop</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="co"># extract date error to new column</span></span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/separate.html">separate</a></span><span class="op">(</span><span class="va">start</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"start"</span>,<span class="st">"start_error"</span><span class="op">)</span>,<span class="st">"±"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/separate.html">separate</a></span><span class="op">(</span><span class="va">stop</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"stop"</span>,<span class="st">"stop_error"</span><span class="op">)</span>,<span class="st">"±"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    <span class="co"># fix a few names</span></span>
+<span>    volcano <span class="op">=</span> <span class="va">volcano</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_replace.html">str_replace</a></span><span class="op">(</span><span class="st">"Asuncion"</span>,<span class="st">"Asunción"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_replace.html">str_replace</a></span><span class="op">(</span><span class="st">"Pajaros"</span>,<span class="st">"Pájaros"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_replace.html">str_replace</a></span><span class="op">(</span><span class="st">"Kilauea"</span>,<span class="st">"Kīlauea"</span><span class="op">)</span>,</span>
 <span>    <span class="co"># parse error time string to number of days</span></span>
 <span>    start_error <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/as.duration.html">as.duration</a></span><span class="op">(</span><span class="va">start_error</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/duration.html">ddays</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>,</span>
 <span>    stop_error <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/as.duration.html">as.duration</a></span><span class="op">(</span><span class="va">stop_error</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/duration.html">ddays</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>,</span>
 <span>    <span class="co"># extract start year since some earlier eruptions are missing month/day</span></span>
 <span>    start_year <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_extract.html">str_extract</a></span><span class="op">(</span><span class="va">start</span>,<span class="st">"(\\d{4,5})"</span><span class="op">)</span>,</span>
 <span>    stop_year <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_extract.html">str_extract</a></span><span class="op">(</span><span class="va">stop</span>,<span class="st">"(\\d{4,5})"</span><span class="op">)</span>,</span>
-<span>    <span class="co"># check if BCE</span></span>
-<span>    start_bce <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html">str_detect</a></span><span class="op">(</span><span class="va">start</span>,<span class="st">"BCE"</span><span class="op">)</span>,</span>
-<span>    stop_bce <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html">str_detect</a></span><span class="op">(</span><span class="va">stop</span>,<span class="st">"BCE"</span><span class="op">)</span>,</span>
 <span>    <span class="co"># parse start year, adding - if BCE</span></span>
-<span>    start_year <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">start_bce</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">start_year</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">start_year</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>    stop_year <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">stop_bce</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">stop_year</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">stop_year</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    start_year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">start_year</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html">str_detect</a></span><span class="op">(</span><span class="va">start</span>,<span class="st">"BCE"</span><span class="op">)</span>,<span class="op">-</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span>,</span>
+<span>    stop_year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">stop_year</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html">str_detect</a></span><span class="op">(</span><span class="va">stop</span>,<span class="st">"BCE"</span><span class="op">)</span>,<span class="op">-</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span>,</span>
 <span>    <span class="co"># extract start month</span></span>
 <span>    start_month <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_replace.html">str_replace</a></span><span class="op">(</span><span class="va">start</span>,<span class="st">".*\\d{4}\\s([:alpha:]{3}).*"</span>,<span class="st">"\\1"</span><span class="op">)</span>,</span>
 <span>    stop_month <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_replace.html">str_replace</a></span><span class="op">(</span><span class="va">stop</span>,<span class="st">".*\\d{4}\\s([:alpha:]{3}).*"</span>,<span class="st">"\\1"</span><span class="op">)</span>,</span>
@@ -166,35 +177,17 @@
 <span><span class="co"># get just subset for demo</span></span>
 <span><span class="va">eruptions_recent</span> <span class="op">&lt;-</span> <span class="va">eruptions</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">start_error</span> <span class="op">&lt;=</span> <span class="fl">30</span>, <span class="va">start_year</span> <span class="op">&gt;</span> <span class="fl">2000</span>, <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">stop</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">contains</a></span><span class="op">(</span><span class="st">"_"</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">eruptions_recent</span></span></code></pre></div>
-<pre><code>## # A tibble: 73 × 6
-##    volcano               start      stop       duration confirmed   vei
-##    &lt;chr&gt;                 &lt;date&gt;     &lt;date&gt;        &lt;dbl&gt; &lt;lgl&gt;     &lt;int&gt;
-##  1 Kilauea               2024-06-03 2024-06-03        0 TRUE         NA
-##  2 Atka Volcanic Complex 2024-03-27 2024-03-27        0 TRUE         NA
-##  3 Ahyi                  2024-01-01 2024-03-27       86 TRUE         NA
-##  4 Kanaga                2023-12-18 2023-12-18        0 TRUE          1
-##  5 Ruby                  2023-09-14 2023-09-15        1 TRUE          1
-##  6 Shishaldin            2023-07-11 2023-11-03      115 TRUE          3
-##  7 Mauna Loa             2022-11-27 2022-12-10       13 TRUE          0
-##  8 Ahyi                  2022-11-18 2023-06-11      205 TRUE          1
-##  9 Kilauea               2021-09-29 2023-09-16      717 TRUE          0
-## 10 Pavlof                2021-08-05 2022-12-07      489 TRUE          2
-## 11 Pagan                 2021-07-29 2021-09-06       39 TRUE          2
-## 12 Great Sitkin          2021-05-25 2024-07-22     1154 TRUE          2
-## 13 Veniaminof            2021-02-28 2021-04-05       36 TRUE          1
-## 14 Semisopochnoi         2021-02-02 2023-05-05      822 TRUE          2
-## 15 Kilauea               2020-12-20 2021-05-23      154 TRUE          0
-## 16 Cleveland             2020-06-01 2020-06-01        0 TRUE          3
-## 17 Semisopochnoi         2019-12-07 2020-06-19      195 TRUE          1
-## 18 Cleveland             2019-11-07 2019-12-07       30 FALSE        NA
-## 19 Shishaldin            2019-07-23 2020-05-04      286 TRUE          3
-## 20 Semisopochnoi         2019-07-16 2019-08-24       39 TRUE          1
-## # ℹ 53 more rows</code></pre>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">contains</a></span><span class="op">(</span><span class="st">"_"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="write-out-data" class="section level3" number="6.2.3">
+<h3>
+<span class="header-section-number">A.2.3</span> Write out data<a class="anchor" aria-label="anchor" href="#write-out-data"><i class="fas fa-link"></i></a>
+</h3>
 <div class="sourceCode" id="cb531"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># write out to different formats for reading</span></span>
+<code class="sourceCode R"><span><span class="co"># save complete file too</span></span>
+<span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html">write_csv</a></span><span class="op">(</span><span class="va">eruptions</span>,file<span class="op">=</span><span class="st">"data/eruptions.csv"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># write out to different formats for reading</span></span>
 <span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html">write_csv</a></span><span class="op">(</span><span class="va">eruptions_recent</span>,file<span class="op">=</span><span class="st">"data/eruptions_recent.csv"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html">write_tsv</a></span><span class="op">(</span><span class="va">eruptions_recent</span>,file<span class="op">=</span><span class="st">"data/eruptions_recent.tsv"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html">write_delim</a></span><span class="op">(</span><span class="va">eruptions_recent</span>,file<span class="op">=</span><span class="st">"data/eruptions_recent.delim"</span>,delim<span class="op">=</span><span class="st">"|"</span>,na<span class="op">=</span><span class="st">""</span><span class="op">)</span></span>
@@ -210,10 +203,172 @@
 <span></span>
 <span><span class="co"># eruptions_recent %&gt;% as.data.frame %&gt;% print(print.gap=2,width=1000,row.names=F,right=F) %&gt;% capture.output() %&gt;% </span></span>
 <span><span class="co">#   str_replace("&lt;NA&gt;","NA  ") %&gt;% str_replace("^ *",'"') %&gt;% str_replace("( {2,})",'"\\1') %&gt;% str_replace('"name"',"name  ") %&gt;% write_lines(file="data/eruptions_recent.txt")</span></span></code></pre></div>
+</div>
+<div id="inspect-data" class="section level3" number="6.2.4">
+<h3>
+<span class="header-section-number">A.2.4</span> Inspect data<a class="anchor" aria-label="anchor" href="#inspect-data"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb532"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">eruptions</span></span></code></pre></div>
+<pre><code>## # A tibble: 1,278 × 10
+##    volcano     start      start_error start_year stop       stop_error stop_year
+##    &lt;chr&gt;       &lt;date&gt;           &lt;dbl&gt;      &lt;dbl&gt; &lt;date&gt;          &lt;dbl&gt;     &lt;dbl&gt;
+##  1 Kīlauea     2024-06-03           0       2024 2024-06-03          0      2024
+##  2 Atka Volca… 2024-03-27           0       2024 2024-03-27          0      2024
+##  3 Ahyi        2024-01-01           0       2024 2024-03-27          0      2024
+##  4 Kanaga      2023-12-18           0       2023 2023-12-18          0      2023
+##  5 Ruby        2023-09-14           0       2023 2023-09-15          0      2023
+##  6 Shishaldin  2023-07-11           1       2023 2023-11-03          0      2023
+##  7 Mauna Loa   2022-11-27           0       2022 2022-12-10          0      2022
+##  8 Ahyi        2022-11-18           1       2022 2023-06-11          0      2023
+##  9 Kīlauea     2021-09-29           0       2021 2023-09-16          0      2023
+## 10 Pavlof      2021-08-05           0       2021 2022-12-07          0      2022
+## # ℹ 1,268 more rows
+## # ℹ 3 more variables: duration &lt;dbl&gt;, confirmed &lt;lgl&gt;, vei &lt;dbl&gt;</code></pre>
+<div class="sourceCode" id="cb534"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">eruptions_recent</span></span></code></pre></div>
+<pre><code>## # A tibble: 73 × 6
+##    volcano               start      stop       duration confirmed   vei
+##    &lt;chr&gt;                 &lt;date&gt;     &lt;date&gt;        &lt;dbl&gt; &lt;lgl&gt;     &lt;dbl&gt;
+##  1 Kīlauea               2024-06-03 2024-06-03        0 TRUE         NA
+##  2 Atka Volcanic Complex 2024-03-27 2024-03-27        0 TRUE         NA
+##  3 Ahyi                  2024-01-01 2024-03-27       86 TRUE         NA
+##  4 Kanaga                2023-12-18 2023-12-18        0 TRUE          1
+##  5 Ruby                  2023-09-14 2023-09-15        1 TRUE          1
+##  6 Shishaldin            2023-07-11 2023-11-03      115 TRUE          3
+##  7 Mauna Loa             2022-11-27 2022-12-10       13 TRUE          0
+##  8 Ahyi                  2022-11-18 2023-06-11      205 TRUE          1
+##  9 Kīlauea               2021-09-29 2023-09-16      717 TRUE          0
+## 10 Pavlof                2021-08-05 2022-12-07      489 TRUE          2
+## # ℹ 63 more rows</code></pre>
+</div>
+<div id="scrape-volcanoes-info" class="section level3" number="6.2.5">
+<h3>
+<span class="header-section-number">A.2.5</span> Scrape volcanoes info<a class="anchor" aria-label="anchor" href="#scrape-volcanoes-info"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb536"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">nums</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">332010</span>, <span class="fl">311160</span>, <span class="fl">284141</span>, <span class="fl">311110</span>, <span class="fl">284202</span>, <span class="fl">311360</span>, <span class="fl">332020</span>, <span class="fl">312030</span>, <span class="fl">284170</span>,</span>
+<span>         <span class="fl">311120</span>, <span class="fl">312070</span>, <span class="fl">311060</span>, <span class="fl">311240</span>, <span class="fl">311300</span>, <span class="fl">284305</span>, <span class="fl">284193</span>, <span class="fl">313030</span>, <span class="fl">311130</span>,</span>
+<span>         <span class="fl">311290</span>, <span class="fl">284200</span>, <span class="fl">312260</span>, <span class="fl">313010</span>, <span class="fl">321050</span>, <span class="fl">284211</span>, <span class="fl">244000</span>, <span class="fl">315020</span>, <span class="fl">312110</span>,</span>
+<span>         <span class="fl">311190</span>, <span class="fl">311070</span>, <span class="fl">331031</span>, <span class="fl">332000</span>, <span class="fl">311310</span>, <span class="fl">311180</span>, <span class="fl">311320</span>, <span class="fl">313040</span>, <span class="fl">311340</span>,</span>
+<span>         <span class="fl">311020</span>, <span class="fl">311230</span>, <span class="fl">284210</span>, <span class="fl">312060</span>, <span class="fl">284133</span>, <span class="fl">312131</span>, <span class="fl">284134</span>, <span class="fl">312160</span>, <span class="fl">311270</span>,</span>
+<span>         <span class="fl">332080</span>, <span class="fl">313020</span>, <span class="fl">312140</span>, <span class="fl">284140</span>, <span class="fl">312150</span>, <span class="fl">314010</span>, <span class="fl">312090</span>, <span class="fl">311210</span>, <span class="fl">311260</span>,</span>
+<span>         <span class="fl">284150</span>, <span class="fl">284160</span>, <span class="fl">323080</span>, <span class="fl">311080</span>, <span class="fl">312170</span>, <span class="fl">312180</span>, <span class="fl">323020</span>, <span class="fl">321030</span>, <span class="fl">323110</span>,</span>
+<span>         <span class="fl">284180</span>, <span class="fl">321010</span>, <span class="fl">284190</span>, <span class="fl">322010</span>, <span class="fl">244010</span>, <span class="fl">312130</span>, <span class="fl">311350</span>, <span class="fl">311050</span>, <span class="fl">332040</span>,</span>
+<span>         <span class="fl">311390</span>, <span class="fl">332060</span>, <span class="fl">312200</span>, <span class="fl">321020</span>, <span class="fl">311090</span>, <span class="fl">323120</span>, <span class="fl">327050</span>, <span class="fl">323150</span>, <span class="fl">323010</span>,</span>
+<span>         <span class="fl">313050</span>, <span class="fl">329010</span>, <span class="fl">329020</span>, <span class="fl">327040</span>, <span class="fl">321040</span>, <span class="fl">322020</span>, <span class="fl">315030</span>, <span class="fl">322110</span>, <span class="fl">322030</span>,</span>
+<span>         <span class="fl">322060</span>, <span class="fl">244020</span>, <span class="fl">322070</span>, <span class="fl">314060</span>, <span class="fl">323200</span>, <span class="fl">324020</span>, <span class="fl">323160</span>, <span class="fl">324030</span>, <span class="fl">312100</span>,</span>
+<span>         <span class="fl">322040</span>, <span class="fl">315001</span>, <span class="fl">311140</span>, <span class="fl">327120</span>, <span class="fl">322190</span>, <span class="fl">311111</span>, <span class="fl">312190</span>, <span class="fl">312050</span>, <span class="fl">312080</span>,</span>
+<span>         <span class="fl">328010</span>, <span class="fl">331040</span>, <span class="fl">315040</span>, <span class="fl">332030</span>, <span class="fl">322100</span>, <span class="fl">322160</span>, <span class="fl">324040</span>, <span class="fl">327110</span>, <span class="fl">312250</span>,</span>
+<span>         <span class="fl">322170</span>, <span class="fl">321060</span>, <span class="fl">322090</span>, <span class="fl">321070</span>, <span class="fl">311380</span>, <span class="fl">324010</span>, <span class="fl">327812</span>, <span class="fl">323170</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">get_volc_info</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">num</span><span class="op">)</span><span class="op">{</span></span>
+<span></span>
+<span>  <span class="va">source</span> <span class="op">&lt;-</span> <span class="st">"https://volcano.si.edu/volcano.cfm?vn={num}&amp;vtab=Eruptions"</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_glue.html">str_glue</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="http://xml2.r-lib.org/reference/read_xml.html">read_html</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="va">name</span> <span class="op">&lt;-</span> <span class="va">source</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://rvest.tidyverse.org/reference/rename.html">html_nodes</a></span><span class="op">(</span>xpath<span class="op">=</span><span class="st">"//div[@class='volcano-title-container']/h3/text()"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu">HTMLdecode</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="va">info</span> <span class="op">&lt;-</span> <span class="va">source</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://rvest.tidyverse.org/reference/rename.html">html_nodes</a></span><span class="op">(</span>xpath<span class="op">=</span><span class="st">"//div[@class='volcano-info-table']//li//text()"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/stats/setNames.html">setNames</a></span><span class="op">(</span><span class="va">.</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>,<span class="va">.</span><span class="op">[</span><span class="fl">5</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span><span class="op">)</span><span class="op">}</span></span>
+<span></span>
+<span>  <span class="va">subinfo</span> <span class="op">&lt;-</span> <span class="va">source</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://rvest.tidyverse.org/reference/rename.html">html_nodes</a></span><span class="op">(</span>xpath<span class="op">=</span><span class="st">"//div[@class='volcano-subinfo-table']//li[position()&lt;5]//text()"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/stats/setNames.html">setNames</a></span><span class="op">(</span><span class="va">.</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>,<span class="va">.</span><span class="op">[</span><span class="fl">5</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span><span class="op">)</span><span class="op">}</span></span>
+<span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>name<span class="op">=</span><span class="va">name</span>,<span class="va">info</span>,<span class="va">subinfo</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">parallel</span><span class="op">)</span></span>
+<span><span class="va">cl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/parallel/makeCluster.html">makeCluster</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/parallel/detectCores.html">detectCores</a></span><span class="op">(</span><span class="op">)</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/parallel/clusterApply.html">clusterExport</a></span><span class="op">(</span><span class="va">cl</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"nums"</span>,<span class="st">"get_volc_info"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">volcanoes_raw</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/parallel/mcdummies.html">mclapply</a></span><span class="op">(</span><span class="va">nums</span>,<span class="va">get_volc_info</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">as.data.frame</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">unname</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">t</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">as.data.frame</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/parallel/makeCluster.html">stopCluster</a></span><span class="op">(</span><span class="va">cl</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html">write_csv</a></span><span class="op">(</span><span class="va">volcanoes_raw</span>,<span class="st">"data/volcanoes_raw.csv"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="process-volcano-info" class="section level3" number="6.2.6">
+<h3>
+<span class="header-section-number">A.2.6</span> Process volcano info<a class="anchor" aria-label="anchor" href="#process-volcano-info"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb537"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">volcanoes</span> <span class="op">=</span> <span class="va">volcanoes_raw</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="co"># these are already only US volcanoes, and Summit is just Elevation in meters</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">Country</span>,<span class="op">-</span><span class="va">Summit</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rlang.r-lib.org/reference/set_names.html">set_names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"volcano"</span>,<span class="st">"region"</span>,<span class="st">"landform_type"</span>,<span class="st">"last_known_eruption"</span>,<span class="st">"latitude"</span>,<span class="st">"longitude"</span>,<span class="st">"summit_ft"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>landform_type <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_replace.html">str_replace_all</a></span><span class="op">(</span><span class="va">landform_type</span>,<span class="st">"\\(\\w+\\)|\\?"</span>,<span class="st">""</span><span class="op">)</span>,</span>
+<span>         last_known_eruption <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/parse_number.html">parse_number</a></span><span class="op">(</span><span class="va">last_known_eruption</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html">str_detect</a></span><span class="op">(</span><span class="va">last_known_eruption</span>,<span class="st">"BCE"</span><span class="op">)</span>,<span class="op">-</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span>,</span>
+<span>         latitude <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/parse_number.html">parse_number</a></span><span class="op">(</span><span class="va">latitude</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html">str_detect</a></span><span class="op">(</span><span class="va">latitude</span>,<span class="st">"S"</span><span class="op">)</span>,<span class="op">-</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span>,</span>
+<span>         longitude <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/parse_number.html">parse_number</a></span><span class="op">(</span><span class="va">longitude</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html">str_detect</a></span><span class="op">(</span><span class="va">longitude</span>,<span class="st">"W"</span><span class="op">)</span>,<span class="op">-</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span>,</span>
+<span>         summit_ft <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/parse_number.html">parse_number</a></span><span class="op">(</span><span class="va">summit_ft</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">volcano</span><span class="op">==</span><span class="st">"Ruby"</span>,<span class="op">-</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/separate.html">separate</a></span><span class="op">(</span><span class="va">landform_type</span>,into<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"landform"</span>,<span class="st">"type"</span><span class="op">)</span>,sep<span class="op">=</span><span class="st">" \\| "</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>underwater <span class="op">=</span> <span class="va">summit_ft</span> <span class="op">&lt;</span> <span class="op">-</span><span class="fl">131</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="write-out-volcanoes-info" class="section level3" number="6.2.7">
+<h3>
+<span class="header-section-number">A.2.7</span> Write out volcanoes info<a class="anchor" aria-label="anchor" href="#write-out-volcanoes-info"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb538"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html">write_csv</a></span><span class="op">(</span><span class="va">volcanoes</span>,<span class="st">"data/volcanoes.csv"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="inspect-volcanoes-info" class="section level3" number="6.2.8">
+<h3>
+<span class="header-section-number">A.2.8</span> Inspect volcanoes info<a class="anchor" aria-label="anchor" href="#inspect-volcanoes-info"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb539"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">volcanoes</span></span></code></pre></div>
+<pre><code>## # A tibble: 125 × 9
+##    volcano          region landform type  last_known_eruption latitude longitude
+##    &lt;chr&gt;            &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;               &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+##  1 Kīlauea          Hawai… Shield   Shie…                2024     19.4     -155.
+##  2 Atka Volcanic C… Aleut… Composi… Stra…                2024     52.3     -174.
+##  3 Ahyi             Maria… Composi… Stra…                2024     20.4      145.
+##  4 Kanaga           Aleut… Composi… Stra…                2023     51.9     -177.
+##  5 Ruby             Maria… Composi… Stra…                2023     15.6      146.
+##  6 Shishaldin       Aleut… Composi… Stra…                2023     54.8     -164.
+##  7 Mauna Loa        Hawai… Shield   Shie…                2022     19.5     -156.
+##  8 Pavlof           Aleut… Composi… Stra…                2022     55.4     -162.
+##  9 Pagan            Maria… Composi… Stra…                2021     18.1      146.
+## 10 Great Sitkin     Aleut… Composi… Stra…                2024     52.1     -176.
+## # ℹ 115 more rows
+## # ℹ 2 more variables: summit_ft &lt;dbl&gt;, underwater &lt;lgl&gt;</code></pre>
+<div class="sourceCode" id="cb541"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">volcanoes_raw</span></span></code></pre></div>
+<pre><code>## # A tibble: 125 × 9
+##    name                  Country      `Volcanic Province` `Landform | Volc Type`
+##    &lt;chr&gt;                 &lt;chr&gt;        &lt;chr&gt;               &lt;chr&gt;                 
+##  1 Kīlauea               United Stat… Hawaiian-Emperor H… Shield | Shield       
+##  2 Atka Volcanic Complex United Stat… Aleutian Ridge Vol… Composite | Stratovol…
+##  3 Ahyi                  United Stat… Mariana Volcanic A… Composite | Stratovol…
+##  4 Kanaga                United Stat… Aleutian Ridge Vol… Composite | Stratovol…
+##  5 Ruby                  United Stat… Mariana Volcanic A… Composite | Stratovol…
+##  6 Shishaldin            United Stat… Aleutian Ridge Vol… Composite | Stratovol…
+##  7 Mauna Loa             United Stat… Hawaiian-Emperor H… Shield | Shield       
+##  8 Pavlof                United Stat… Aleutian Ridge Vol… Composite | Stratovol…
+##  9 Pagan                 United Stat… Mariana Volcanic A… Composite | Stratovol…
+## 10 Great Sitkin          United Stat… Aleutian Ridge Vol… Composite | Stratovol…
+## # ℹ 115 more rows
+## # ℹ 5 more variables: `Last Known Eruption` &lt;chr&gt;, Latitude &lt;chr&gt;,
+## #   Longitude &lt;chr&gt;, Summit &lt;chr&gt;, Elevation &lt;chr&gt;</code></pre>
+</div>
+<div id="augment-eruptions" class="section level3" number="6.2.9">
+<h3>
+<span class="header-section-number">A.2.9</span> Augment eruptions<a class="anchor" aria-label="anchor" href="#augment-eruptions"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb543"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">volcanoes</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">volcano</span>, <span class="va">landform</span>, <span class="va">type</span>, <span class="va">summit_ft</span>, <span class="va">underwater</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">stringdist_right_join</span><span class="op">(</span><span class="va">eruptions_recent</span>,by<span class="op">=</span><span class="st">"volcano"</span>,max_dist<span class="op">=</span><span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">View</span></span></code></pre></div>
 
 </div>
 </div>
 </div>
+
 
 
 
@@ -256,7 +411,17 @@
 <li><a class="nav-link" href="#datasets"><span class="header-section-number">A</span> Datasets</a></li>
 <li><a class="nav-link" href="#list-of-datasets"><span class="header-section-number">A.1</span> List of datasets</a></li>
 <li>
-<a class="nav-link" href="#eruptions"><span class="header-section-number">A.2</span> Eruptions</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#load-raw-data"><span class="header-section-number">A.2.1</span> Load raw data</a></li></ul>
+<a class="nav-link" href="#eruptions"><span class="header-section-number">A.2</span> Eruptions</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#load-raw-data"><span class="header-section-number">A.2.1</span> Load raw data</a></li>
+<li><a class="nav-link" href="#process-data"><span class="header-section-number">A.2.2</span> Process data</a></li>
+<li><a class="nav-link" href="#write-out-data"><span class="header-section-number">A.2.3</span> Write out data</a></li>
+<li><a class="nav-link" href="#inspect-data"><span class="header-section-number">A.2.4</span> Inspect data</a></li>
+<li><a class="nav-link" href="#scrape-volcanoes-info"><span class="header-section-number">A.2.5</span> Scrape volcanoes info</a></li>
+<li><a class="nav-link" href="#process-volcano-info"><span class="header-section-number">A.2.6</span> Process volcano info</a></li>
+<li><a class="nav-link" href="#write-out-volcanoes-info"><span class="header-section-number">A.2.7</span> Write out volcanoes info</a></li>
+<li><a class="nav-link" href="#inspect-volcanoes-info"><span class="header-section-number">A.2.8</span> Inspect volcanoes info</a></li>
+<li><a class="nav-link" href="#augment-eruptions"><span class="header-section-number">A.2.9</span> Augment eruptions</a></li>
+</ul>
 </li>
 </ul>
 
@@ -275,7 +440,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, Bret Larget, Cameron Jones. It was last built on 2024-07-22.</p>
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, Bret Larget, Cameron Jones. It was last built on 2024-07-23.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
@@ -288,7 +453,7 @@
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-AMS-MML_HTMLorMML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');
