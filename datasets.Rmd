@@ -142,3 +142,13 @@ eruptions_recent %>% as.data.frame %>% write.xlsx(file="data/eruptions_recent.xl
 ```
 
 ```{r,eval=T,echo=F}
+eruptions <- read_csv("data/eruptions.csv")
+eruptions_recent <- read_csv("data/eruptions_recent.csv")
+```
+
+### Inspect data
+
+```{r,eval=T}
+eruptions
+eruptions_recent
+```
