@@ -1,0 +1,43 @@
+---
+title: "Demo Rmd file"
+author: "Jane Doe"
+date: "2024-06-20"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+# this is a standard "setup" chunk usually found at the top of Rmd files,
+# often used for setting options, loading files, and importing libraries
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+# Section 1
+
+## Subsection A
+
+Here's some ordinary text. You can use Markdown syntax to add more features, e.g. here's a [link](https://markdownguide.org/cheat-sheet), here's some **bold text**, and here's some `inline code`. You can also add images, footnotes, blockquotes, and more. See linked cheat sheet above for more.
+
+ 1. Lists are also east to add!
+ 2. Here's a second item.
+ 3. You can even add sublists:
+    - Here's a sublist with bullets.
+    - Another bullet?
+
+## Subsection B
+
+You can easily incorporate R code into an Rmd file, with outputs and plots that auto-update. Here's an example code chunk named "chunk1".
+
+```{r example-chunk, fig.height=5, fig.align="center"}
+data <- c(3, 6, 6, 2, 4, 1, 5)
+mean(data)
+hist(data)
+```
+
+You can even refer to R objects inside text, e.g. the sample mean and standard deviation are `r mean(data)` and `r sd(data)`.
+
+# Section 2
+
+Here's a second section.
+
+<!-- comments in an Rmd file must use HTML-style syntax -->

@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 5 Data Exploration | STAT 240 Revamp</title>
+<meta name="author" content="Bi Cheng Wu, Bret Larget, Cameron Jones">
+<meta name="description" content="One of the first and most important things you should do after obtaining a dataset is to explore the data thoroughly using a combination of summary statistics and visualizations. Careful data...">
+<meta name="generator" content="bookdown 0.40.1 with bs4_book()">
+<meta property="og:title" content="Chapter 5 Data Exploration | STAT 240 Revamp">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://bwu62.github.io/stat240-revamp/data-exploration.html">
+<meta property="og:description" content="One of the first and most important things you should do after obtaining a dataset is to explore the data thoroughly using a combination of summary statistics and visualizations. Careful data...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 5 Data Exploration | STAT 240 Revamp">
+<meta name="twitter:description" content="One of the first and most important things you should do after obtaining a dataset is to explore the data thoroughly using a combination of summary statistics and visualizations. Careful data...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Roboto_Mono-0.4.9/font.css" rel="stylesheet">
+<script src="libs/bs3compat-0.7.0.9000/transition.js"></script><script src="libs/bs3compat-0.7.0.9000/tabs.js"></script><script src="libs/bs3compat-0.7.0.9000/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-E0YDB40HWY"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-E0YDB40HWY');
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">STAT 240 Revamp</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Welcome</a></li>
+<li><a class="" href="setup.html"><span class="header-section-number">1</span> Setup</a></li>
+<li><a class="" href="rstudio-intro.html"><span class="header-section-number">2</span> Intro to R/Rstudio</a></li>
+<li><a class="" href="data-vectors.html"><span class="header-section-number">3</span> Data Vectors</a></li>
+<li><a class="" href="data-frames.html"><span class="header-section-number">4</span> Data Frames</a></li>
+<li><a class="active" href="data-exploration.html"><span class="header-section-number">5</span> Data Exploration</a></li>
+<li class="book-part">Appendix</li>
+<li><a class="" href="datasets.html"><span class="header-section-number">A</span> Datasets</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/bwu62/stat240-revamp">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="data-exploration" class="section level1" number="5">
+<h1>
+<span class="header-section-number">5</span> Data Exploration<a class="anchor" aria-label="anchor" href="#data-exploration"><i class="fas fa-link"></i></a>
+</h1>
+<p>One of the first and most important things you should do after obtaining a dataset is to <strong>explore the data thoroughly</strong> using a combination of summary statistics and visualizations. Careful data exploration will help you do the following:</p>
+<ol style="list-style-type: decimal">
+<li>Understand the dataset,</li>
+<li>Discover interesting, sometimes unexpected patterns and trends,</li>
+<li>Identify potential sources of problems (e.g. errors, biases, other obstacles to later analysis),</li>
+<li>Formulate meaningful questions to ask using the data, and</li>
+<li>Choose the most appropriate path of analysis.</li>
+</ol>
+<p>In this chapter, we will cover a variety of data exploration techniques, starting with descriptive (i.e. summary) statistics, then move on to data visualization (i.e. graphing/plotting).</p>
+<div id="descriptive-statistics" class="section level2" number="5.1">
+<h2>
+<span class="header-section-number">5.1</span> Descriptive statistics<a class="anchor" aria-label="anchor" href="#descriptive-statistics"><i class="fas fa-link"></i></a>
+</h2>
+<p>Descriptive statistics is what most people think of when they hear the word “statistics”, i.e. a collection of numbers that summarize some data. This is often a good starting point for exploring a newly encountered dataset.</p>
+<div class="def">
+<p>A <strong>statistic</strong> is just some number computed from a sample of data, often intended to summarize the data in a specific way. Virtually any function that ingests a sample and outputs a number can be referred to as a statistic.</p>
+</div>
+<div id="measures-of-central-tendency" class="section level3" number="5.1.1">
+<h3>
+<span class="header-section-number">5.1.1</span> Measures of central tendency<a class="anchor" aria-label="anchor" href="#measures-of-central-tendency"><i class="fas fa-link"></i></a>
+</h3>
+<p>There are MANY statistics that aim to quantify the “center” of a sample. These are all collectively referred to as <strong>measures of central tendency</strong>, also often called <strong>averages</strong> for short. The 3 most common averages are the <strong>mean</strong>, <strong>median</strong>, and <strong>mode</strong>.</p>
+<div class="note">
+<p><strong>“Average” can refer to ANY measure of central tendency</strong>, i.e. average can refer to either mean, median, or mode (or any of these <a href="https://en.wikipedia.org/wiki/Central_tendency#Measures">other measures</a>). Thus, it’s generally recommended to specify which measure you’re referring to and avoid using the word “average” (unless you’re being strategically ambiguous).</p>
+</div>
+</div>
+<div id="mean" class="section level3" number="5.1.2">
+<h3>
+<span class="header-section-number">5.1.2</span> Mean<a class="anchor" aria-label="anchor" href="#mean"><i class="fas fa-link"></i></a>
+</h3>
+<p>The arithmetic mean of a sample, commonly referred to as just “mean”, is what most people think of when they hear “average”. It is the <strong>sum of a sample divided by the sample size</strong>. Formally, given a sample <span class="math inline">\(x_1,x_2,\dots,x_n\)</span> the mean <span class="math inline">\(\bar{x}\)</span> is defined as:</p>
+<p><span class="math display">\[\bar{x}=\frac1n\sum_{i=1}^nx_i=\frac{x_1+x_2+\cdots+x_n}n\]</span></p>
+<p>The mean may seem the most natural and intuitive central tendency measure, but it has a number of drawbacks:</p>
+<ol style="list-style-type: decimal">
+<li>The mean is sensitive to “outliers” and is not recommended with heavily skewed data.</li>
+<li>The mean should generally only be used with truly numeric data, i.e. data where values are intrinsically tied to some quantitative observable.
+<ul>
+<li>A common example of data that is not “truly” numeric is ordinal data, which is commonly generated by <a href="https://en.wikipedia.org/wiki/Likert_scale">Likert scales</a> (e.g. strongly disagree, disagree, neutral, agree, strongly agree), or star-based review systems (e.g. ★★★★☆).<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;In practice, this kind of ordinal data is often treated as numeric anyway, implicitly assuming a constant interval between each step, and for most purposes this is probably fine.&lt;/p&gt;"><sup>19</sup></a>
+</li>
+</ul>
+</li>
+</ol>
+<p>Continuing with our previous 21<sup>st</sup> century US volcanic eruptions dataset, you can use <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code> to, for example, find the mean length of eruptions in days:</p>
+<div class="sourceCode" id="cb492"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># import all core tidyverse packages, since we will need several</span></span>
+<span><span class="co"># (again, this imports readr, tibble, and stringr, as well as several others)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="co"># reload dataset</span></span>
+<span><span class="va">eruptions_recent</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span></span>
+<span>  <span class="st">"https://bwu62.github.io/stat240-revamp/data/eruptions_recent.csv"</span>,</span>
+<span>  show_col_types <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb493"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># compute mean duration of eruptions</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">eruptions_recent</span><span class="op">$</span><span class="va">duration</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 192.1233</code></pre>
+<div class="sourceCode" id="cb495"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># we can check this agrees with our mathematical definition</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">eruptions_recent</span><span class="op">$</span><span class="va">duration</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">eruptions_recent</span><span class="op">$</span><span class="va">duration</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 192.1233</code></pre>
+<div class="note">
+<p>If a vector has missing values, i.e. <code>NA</code>, <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code> and most other statistical functions will return <code>NA</code>. This is a safety measure, to help remind you to handle missing values appropriately before attempting further analysis. You can tell R to ignore <code>NA</code>s and proceed by setting <code>na.rm = TRUE</code> in the function.</p>
+<div class="sourceCode" id="cb497"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># example of NAs causing mean to fail</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">6</span>, <span class="cn">NA</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] NA</code></pre>
+<div class="sourceCode" id="cb499"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># setting na.rm = TRUE tells R to safely ignore NAs</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">6</span>, <span class="cn">NA</span>, <span class="fl">2</span><span class="op">)</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 3</code></pre>
+</div>
+</div>
+<div id="median" class="section level3" number="5.1.3">
+<h3>
+<span class="header-section-number">5.1.3</span> Median<a class="anchor" aria-label="anchor" href="#median"><i class="fas fa-link"></i></a>
+</h3>
+<p>The median, a common alternative to the mean, is defined as the <strong>“middle” number in a sorted sample</strong>. Formally, it’s the value that is both greater than or equal to half the sample, and also less than or equal to half the sample. If there are an even number of observations, the median isn’t uniquely defined but is commonly taken as the mean of the middle two numbers.</p>
+<p>The median is generally recommended over the mean in the following situations:</p>
+<ol style="list-style-type: decimal">
+<li>There are “outliers”, or the data is significantly skewed.</li>
+<li>The data is not truly numeric, e.g. if you have ordinal data.</li>
+</ol>
+<p>We can use <code><a href="https://rdrr.io/r/stats/median.html">median()</a></code> to find the median length of eruptions in days:</p>
+<div class="sourceCode" id="cb501"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># compute median duration of eruptions</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">eruptions_recent</span><span class="op">$</span><span class="va">duration</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 71</code></pre>
+<div class="sourceCode" id="cb503"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># check to see if it satisfies the formal definition</span></span>
+<span><span class="co"># recall from the logical vectors section from Chapter 3 that</span></span>
+<span><span class="co"># mean() of a logical vector gives the proportion of TRUEs</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span></span>
+<span>    <span class="va">eruptions_recent</span><span class="op">$</span><span class="va">duration</span> <span class="op">&gt;=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">eruptions_recent</span><span class="op">$</span><span class="va">duration</span><span class="op">)</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span></span>
+<span>    <span class="va">eruptions_recent</span><span class="op">$</span><span class="va">duration</span> <span class="op">&lt;=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">eruptions_recent</span><span class="op">$</span><span class="va">duration</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 0.5068493 0.5205479</code></pre>
+<p>Note the median length of eruptions, 71, is significantly smaller than the mean, 192.1232877, because the data is extremely skewed, i.e. there are a few extremely long eruptions, which pull the mean up to be much higher (since it’s more sensitive to extreme values).</p>
+<div class="note">
+<p>It’s worth mentioning here the word “outliers” isn’t well defined formally and is actually a surprisingly tricky subject in statistics. Here, an “outlier” just loosely refers to observations that differ dramatically compared to the rest of your data. It’s important to remember that <strong>not all “outliers” are errors</strong>; some may in fact point to new information you’re not aware of.</p>
+</div>
+<div class="def">
+<p>Statistics that are <strong>less sensitive to “outliers” are called <em>robust</em></strong>. E.g. the median is more robust than the mean.</p>
+</div>
+</div>
+<div id="mode" class="section level3" number="5.1.4">
+<h3>
+<span class="header-section-number">5.1.4</span> Mode<a class="anchor" aria-label="anchor" href="#mode"><i class="fas fa-link"></i></a>
+</h3>
+<p>The mode is the oft-maligned black sheep of the central tendency family. It is defined as <strong>the most common observation</strong>, i.e. the observation that occurs the most number of times in a sample. It’s primarily intended for categorical data (e.g. male vs female) though it also has some relevance to distributions (more on this much later).</p>
+<p>The mode is of course also a form of “average”. For example, statistics show roughly <a href="https://www.zippia.com/lumberjack-jobs/demographics">95% of lumberjacks in the US are male</a>. It would therefore be accurate to say “the average American lumberjack is male”. In fact, for categorical data—which is ubiquitous—this is the only possible measure of central tendency.</p>
+<p>Unfortunately, base R does not have a convenient function for computing the mode (the function <code><a href="https://rdrr.io/r/base/mode.html">mode()</a></code> is <a href="https://ds-pl-r-book.netlify.app/modes-types-classes-of-objects.html">completely unrelated</a>), but you can easily either define it yourself or import <code>Mode()</code> from the <code>DescTools</code> package</p>
+<div class="sourceCode" id="cb505"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># this defines a simple Mode function using mostly commands we already know</span></span>
+<span><span class="co"># explanation: table tabulates observations, then</span></span>
+<span><span class="co">#              sort(- ...) sorts by descending order, then</span></span>
+<span><span class="co">#              names(...)[1] extracts the name of the first item</span></span>
+<span><span class="co"># note this function doesn't return multiple modes if there are more than 1</span></span>
+<span><span class="va">Mode</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span></code></pre></div>
+<div class="sourceCode" id="cb506"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># find the volcano with the most number of eruptions</span></span>
+<span><span class="fu">Mode</span><span class="op">(</span><span class="va">eruptions_recent</span><span class="op">$</span><span class="va">volcano</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] "Cleveland"</code></pre>
+<div class="sourceCode" id="cb508"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># how many eruptions has Cleveland had since 2001?</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">eruptions_recent</span><span class="op">$</span><span class="va">volcano</span> <span class="op">==</span> <span class="st">"Cleveland"</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 13</code></pre>
+<div class="sourceCode" id="cb510"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># the DescTools package also has a Mode function,</span></span>
+<span><span class="co"># which correctly handles ties and also gives the frequency</span></span>
+<span><span class="co"># make sure to install it before using: install.packages("DescTools")</span></span>
+<span><span class="fu">DescTools</span><span class="fu">::</span><span class="fu"><a href="https://andrisignorell.github.io/DescTools/reference/Mode.html">Mode</a></span><span class="op">(</span><span class="va">eruptions_recent</span><span class="op">$</span><span class="va">volcano</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] "Cleveland"
+## attr(,"freq")
+## [1] 13</code></pre>
+<div id="aside-modality" class="section level4" number="5.1.4.1">
+<h4>
+<span class="header-section-number">5.1.4.1</span> Aside: Modality<a class="anchor" aria-label="anchor" href="#aside-modality"><i class="fas fa-link"></i></a>
+</h4>
+<p>Most common distributions have only 1 mode, i.e. they are unimodal, but some distributions may have 2 or more modes, in which case they’re called bimodal (for 2 modes) or multimodal (for ≥2 modes). Here’s an example of a bimodal distribution:</p>
+<div class="inline-figure"><img src="05-data-exploration_files/figure-html/unnamed-chunk-8-1.svg" width="672"></div>
+</div>
+</div>
+<div id="other-measures" class="section level3" number="5.1.5">
+<h3>
+<span class="header-section-number">5.1.5</span> Other measures<a class="anchor" aria-label="anchor" href="#other-measures"><i class="fas fa-link"></i></a>
+</h3>
+<p>The mean, median, and mode are by far the most common measures of central tendency, and they are the only ones you need to know for this course. However, I thought it might be worth briefly mentioning a few other averages with interesting applications just for fun:</p>
+<ul>
+<li>The <a href="https://en.wikipedia.org/wiki/Root_mean_square">quadratic mean</a>, also known as the root mean square, is defined for a sample <span class="math inline">\(x_1,\dots,x_n\)</span> as <span class="math inline">\(\sqrt{\frac1n(x_1^2+\cdots+x_n^2)}\)</span>. This shows up in some statistical contexts, e.g. the standard deviation is almost a quadratic mean of the difference of each observation from the arithmetic mean, except dividing by <span class="math inline">\(n-1\)</span> instead of <span class="math inline">\(n\)</span> (which corrects a small bias and is called <a href="https://en.wikipedia.org/wiki/Bessel%27s_correction">Bessel’s correction</a>). It also has applications in model evaluation, statistical physics, electronics engineering, signal analysis, and more.</li>
+<li>The <a href="https://en.wikipedia.org/wiki/Geometric_mean">geometric mean</a> is defined as <span class="math inline">\(\sqrt[n]{x_1x_2\cdots x_n}\)</span> and is only valid for positive-valued data. This is useful when data is multiplicative rather than additive in nature, e.g. growth rates, interest rates, comparisons of relative performance on benchmarks, etc. It has many applications in finance and economics, some areas of optical engineering, and even cinematography.
+<ul>
+<li>Note the logarithm of the geometric mean of a sample is equal to the arithmetic mean of the logarithm of the same sample. In other words, a geometric mean viewed on a log scale “looks like” an arithmetic mean on a linear scale. Log transforms are an important tool for certain contexts, see <a href="https://people.duke.edu/~rnau/411log.htm">this page</a> for a brief overview.</li>
+</ul>
+</li>
+<li>The <a href="https://en.wikipedia.org/wiki/Harmonic_mean">harmonic mean</a> is defined as <span class="math inline">\(\left(\frac{x_1^{-1}+\,\cdots\,+x_n^{-1}}{n}\right)^{\!-1}\)</span>, i.e. the reciprocal of the arithmetic mean of the reciprocals of the data, and is also typically only used for positive-valued data. It turns out to be the correct mean to use in certain applications involving rate, ratio, or time values. It also has applications in machine learning, physics, finance, and even <a href="https://en.wikipedia.org/wiki/Power%E2%80%93speed_number">baseball</a>.</li>
+<li>Collectively, the arithmetic, geometric, and harmonic means are also known as the <a href="https://en.wikipedia.org/wiki/Pythagorean_means">Pythagorean means</a>.</li>
+</ul>
+<p>This is just a short list; there are a host of <a href="https://en.wikipedia.org/wiki/Central_tendency#Measures">other means</a> that exist. Once again, <strong>you do NOT need to know any of these advanced means</strong>; you are only expected to know the arithmetic mean, median, and mode.</p>
+</div>
+<div id="measures-of-spread" class="section level3" number="5.1.6">
+<h3>
+<span class="header-section-number">5.1.6</span> Measures of spread<a class="anchor" aria-label="anchor" href="#measures-of-spread"><i class="fas fa-link"></i></a>
+</h3>
+<p>Arguably the next most important set of summary statistics after measures of central tendency are <strong>measures of spread</strong>, which aim to quantify how “spread out” a dataset is. <strong>Variance</strong> and <strong>standard deviation</strong> are by far the most common measures, but the <strong>IQR</strong> and <strong>range</strong> are also sometimes useful.</p>
+<p>Unlike measures of central tendency, measures of spread are typically location-agnostic, i.e. they don’t change if the entire dataset is shifted up or down by a constant. Formally, a sample <span class="math inline">\(x_1,\dots,x_n\)</span> and a sample <span class="math inline">\(x_1+c,\,\dots,\,x_n+c\)</span> have the same spread for all <span class="math inline">\(c\)</span>.</p>
+</div>
+<div id="variance-and-standard-deviation" class="section level3" number="5.1.7">
+<h3>
+<span class="header-section-number">5.1.7</span> Variance (and standard deviation)<a class="anchor" aria-label="anchor" href="#variance-and-standard-deviation"><i class="fas fa-link"></i></a>
+</h3>
+<p>Let’s get the easy one out of the way first. <strong>Standard deviation is always defined as the (positive) square root of variance</strong>. So what’s the variance then? The <strong>variance of a sample is defined as</strong>:</p>
+<p><span class="math display">\[s^2=\frac1{n-1}\sum_{i=1}^n(x_i-\bar{x})^2=\frac{(x_1-\bar{x})^2+\cdots+(x_n-\bar{x})^2}n\]</span></p>
+<p>Basically, it’s the <strong>mean squared-distance from the mean</strong>, <span class="math inline">\(\bar{x}\)</span>, except we use <span class="math inline">\(n-1\)</span> instead of <span class="math inline">\(n\)</span> to correct for a <a href="%5BBessel's%20correction%5D(https://en.wikipedia.org/wiki/Bessel%27s_correction)">small bias</a>. For example, we can compute the variance of the duration of eruptions, in <strong>days squared</strong>:</p>
+<div class="sourceCode" id="cb512"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># compute variance of duration</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="va">eruptions_recent</span><span class="op">$</span><span class="va">duration</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 101204.7</code></pre>
+<p>In other words, the “average” squared difference of an eruption’s duration and the mean duration is about 101.2k days<sup>2</sup>.</p>
+<p>Note the units of the variance are squared of the data units. This makes it inconvenient to work with, since it means it cannot be directly compared with the data. This is why instead we often work with <strong>its square root, i.e. the standard deviation</strong>:</p>
+<p><span class="math display">\[s=\sqrt{\frac1{n-1}\sum_{i=1}^n(x_i-\bar{x})^2}\]</span></p>
+<p>which can be thought of as the <strong>“average” distance from the mean</strong> for a given observation. This can be computed using <code><a href="https://rdrr.io/r/stats/sd.html">sd()</a></code>:</p>
+<div class="sourceCode" id="cb514"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># compute the standard deviation of duration</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">eruptions_recent</span><span class="op">$</span><span class="va">duration</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 318.1269</code></pre>
+<div class="sourceCode" id="cb516"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># you can check this is equal to sqrt(var(...))</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="va">eruptions_recent</span><span class="op">$</span><span class="va">duration</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 318.1269</code></pre>
+<p>In other words, the “average” distance in days between the duration of eruptions and the mean is about 318.1 days.</p>
+<div class="note">
+<p>Since the standard deviation is defined as the square root of the variance (and thus the variance is always the square of the standard deviation), knowing one of these quantities enables you to also easily compute the other.</p>
+</div>
+<p>The variance and standard deviation are the most common measures of spread, but like the arithmetic mean, they are also sensitive to outliers and may not be suitable with highly skewed data.</p>
+</div>
+<div id="interquartile-range" class="section level3" number="5.1.8">
+<h3>
+<span class="header-section-number">5.1.8</span> Interquartile range<a class="anchor" aria-label="anchor" href="#interquartile-range"><i class="fas fa-link"></i></a>
+</h3>
+<p>The interquartile range, also called the IQR, is the <strong>distance between the 1<sup>st</sup> and 3<sup>rd</sup> quartile</strong>. To understand this, let’s first briefly review percentiles.</p>
+</div>
+<div id="percentiles" class="section level3" number="5.1.9">
+<h3>
+<span class="header-section-number">5.1.9</span> Percentiles<a class="anchor" aria-label="anchor" href="#percentiles"><i class="fas fa-link"></i></a>
+</h3>
+<p>Percentiles are a generalization of the median. Recall the median is the data point that is just barely greater than or equal to 50% of the data. Similarly, a <strong><span class="math inline">\(p\)</span><sup>th</sup> percentile is the data point just barely greater than or equal to <span class="math inline">\(p\)</span>% of the data</strong>. Percentiles are computed using the <a href="https://rdrr.io/r/stats/quantile.html"><code class="sourceCode r"><span class="fu">quantile</span>(x, <span class="at">probs =</span> p)</code></a> function, where <code>x</code> is the data vector, and <code>p</code> is a desired percentile (or vector thereof). For example, we can compute the 0<sup>th</sup>, 25<sup>th</sup>, 50<sup>th</sup>, 75<sup>th</sup>, and 100<sup>th</sup> percentiles of eruption duration with:</p>
+<div class="sourceCode" id="cb518"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">eruptions_recent</span><span class="op">$</span><span class="va">duration</span>, probs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##   0%  25%  50%  75% 100% 
+##    0    6   71  195 1491</code></pre>
+<p>These 5 numbers correspond to the <strong>min</strong>, <strong>1<sup>st</sup> quartile (<span class="math inline">\(Q_1\)</span>)</strong>, <strong>median</strong>, <strong>3<sup>rd</sup> quartile (<span class="math inline">\(Q_3\)</span>)</strong>, and max respectively, which are often collectively known as the <a href="https://en.wikipedia.org/wiki/Five-number_summary">five-number summary</a>.</p>
+<p>The <strong>difference <span class="math inline">\(Q_3-Q_1\)</span> is called the interquartile range</strong>, and is often used instead of the variance/standard deviation when outliers/skewness is a significant concern in a dataset due to its increased robustness. The IQR can be computed with the <code><a href="https://rdrr.io/r/stats/IQR.html">IQR()</a></code> function:</p>
+<div class="sourceCode" id="cb520"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># compute the interquartile range of eruption durations</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/IQR.html">IQR</a></span><span class="op">(</span><span class="va">eruptions_recent</span><span class="op">$</span><span class="va">duration</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 189</code></pre>
+</div>
+<div id="range" class="section level3" number="5.1.10">
+<h3>
+<span class="header-section-number">5.1.10</span> Range<a class="anchor" aria-label="anchor" href="#range"><i class="fas fa-link"></i></a>
+</h3>
+<p>The range is the crudest of the measures of spread, defined as the <strong>difference between the minimum and maximum</strong> of a sample. It is even more sensitive to outliers than the variance/standard deviation, and thus less commonly used in formal statistical settings. It is sometimes the only practical measures for extremely small datasets.</p>
+<p>In R, the <code><a href="https://rdrr.io/r/base/range.html">range()</a></code> function gives the minimum and maximum in a vector; to get the actual range, you can use <code><a href="https://rdrr.io/r/base/diff.html">diff()</a></code> to take the difference of the two:</p>
+<div class="sourceCode" id="cb522"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># range() gives the min/max vector</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">eruptions_recent</span><span class="op">$</span><span class="va">duration</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1]    0 1491</code></pre>
+<div class="sourceCode" id="cb524"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># diff() of range() gives the true statistical range</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">eruptions_recent</span><span class="op">$</span><span class="va">duration</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 1491</code></pre>
+</div>
+<div id="other-measures-1" class="section level3" number="5.1.11">
+<h3>
+<span class="header-section-number">5.1.11</span> Other measures<a class="anchor" aria-label="anchor" href="#other-measures-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>The variance, standard deviation, IQR, and range are the only measures of spread you need to know for this course, but here are a few other measures just for fun:</p>
+<ul>
+<li>The <a href="https://en.wikipedia.org/wiki/Median_absolute_deviation">median absolute deviation</a> or MAD is exactly what it sounds like, the median of the absolute value deviation from the median. It’s a more robust (i.e. outlier-resistant) version of the standard deviation.</li>
+<li>The <a href="https://en.wikipedia.org/wiki/Gini_coefficient">Gini coefficient</a> is another interesting measure of spread (one of my favorites). It’s the only one on this list that is dimensionless (i.e. always a “pure” number with no units) and always between 0 and 1 for non-negative data. It’s defined as half the <a href="https://en.wikipedia.org/wiki/Mean_absolute_difference#Relative_mean_absolute_difference">relative mean absolute difference</a>, which is itself defined as the average absolute difference <span class="math inline">\(|x_i-x_j|\)</span> between all pairs of observations divided by the arithmetic mean. It’s commonly used in economics to characterize inequality, with 0 being total equality (e.g. everyone has exactly the same amount of wealth) and 1 being total inequality (e.g. one person having all the wealth and everyone else having none).</li>
+</ul>
+<p>Once again, this is just a subset of the possible <a href="https://en.wikipedia.org/wiki/Statistical_dispersion">measures of spread</a>, and <strong>you do NOT need to know these other measures</strong>; you are only expected to know the variance, standard deviation, IQR, and range.</p>
+</div>
+<div id="skew" class="section level3" number="5.1.12">
+<h3>
+<span class="header-section-number">5.1.12</span> Skew<a class="anchor" aria-label="anchor" href="#skew"><i class="fas fa-link"></i></a>
+</h3>
+<p>Another important summary statistic is the skew of a dataset. Skew has a precise mathematical definition that is beyond the scope of this course. All you need to know is the <strong>difference between a positive (also called right) skew and a negative (also called left) skew</strong> in a dataset.</p>
+<p>The side of the skewness is always the <strong>side with the longer tail</strong>. If the longer tail is on the positive (or right) side, it’s called positive (or right) skew. If the longer tail is on the negative (or left) side, it’s called negative (or left) skew.</p>
+<p>Below, we have 3 example (unimodal) distributions showing the kinds of skewness, with the <span style="color:#ff1919"><strong>modes</strong></span> of each aligned.</p>
+<ol style="list-style-type: decimal">
+<li>An unskewed, or symmetric distribution, where <span style="color:#ff1919"><strong>mode</strong></span> <span class="math inline">\(=\)</span> <span style="color:#3333ff"><strong>median</strong></span> <span class="math inline">\(=\)</span> <span style="color:#009900"><strong>mean</strong></span>.</li>
+<li>A positive, or right skewed distribution, where <span style="color:#ff1919"><strong>mode</strong></span> <span class="math inline">\(&lt;\)</span> <span style="color:#3333ff"><strong>median</strong></span> <span class="math inline">\(&lt;\)</span> <span style="color:#009900"><strong>mean</strong></span>.</li>
+<li>A negative, or left skewed distribution, where <span style="color:#009900"><strong>mean</strong></span> <span class="math inline">\(&lt;\)</span> <span style="color:#3333ff"><strong>median</strong></span> <span class="math inline">\(&lt;\)</span> <span style="color:#ff1919"><strong>mode</strong></span>.</li>
+</ol>
+<div class="inline-figure"><img src="05-data-exploration_files/figure-html/unnamed-chunk-14-1.svg" width="672"></div>
+<p>This shows again, as we already learned, that the median is more robust vs the mean to “outliers”/skew, or in other words, the mean is more affected by “outliers”/skew and gets “dragged away” further by the skewness.</p>
+<div class="note">
+<p>Visually, the mode is always the “peak”, the median splits the distribution into 2 equal areas, and the mean is the center of mass of the shape along the horizontal axis (i.e. its “balancing point”).</p>
+</div>
+</div>
+</div>
+<div id="data-visualization" class="section level2" number="5.2">
+<h2>
+<span class="header-section-number">5.2</span> Data visualization<a class="anchor" aria-label="anchor" href="#data-visualization"><i class="fas fa-link"></i></a>
+</h2>
+<p>Descriptive statistics are a good place to start, but usually plotting your data visually is the best way to fully understand your dataset down to its core. In this next chapter, we will cover a variety of common plot types that are most useful for exploratory analysis.</p>
+<p>When studying each plot type, it’s important to keep the following questions in mind:</p>
+<ol style="list-style-type: decimal">
+<li>What kind of data is appropriate for this plot?</li>
+<li>How to create this plot?</li>
+<li>How to interpret this plot?</li>
+</ol>
+<div id="ggplot2" class="section level3" number="5.2.1">
+<h3>
+<span class="header-section-number">5.2.1</span> ggplot2<a class="anchor" aria-label="anchor" href="#ggplot2"><i class="fas fa-link"></i></a>
+</h3>
+<p>We will be making all plots using the <a href="https://ggplot2.tidyverse.org/">ggplot2</a> package which is also a core Tidyverse package. It offers a robust syntax for easily creating and modifying plots. When making a ggplot2 plot, it’s important to remember <strong>everything is a layer</strong> that you <strong>add onto the base object using <code>+</code></strong> just like adding numbers. Whether you’re adding a plot, a faceting structure, changing the axes, adding annotations (e.g. title/labels), etc. they’re all layers that are added. This may seem strange at first, but you’ll quickly grasp it in the examples that follow.</p>
+<p>I already have core Tidyverse packages loaded from section <a href="data-exploration.html#mean">5.1.2</a> above, but if you need to load it again make sure to run the following:</p>
+<div class="sourceCode" id="cb526"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># if you need to, reimport all core tidyverse packages</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="palmer" class="section level3" number="5.2.2">
+<h3>
+<span class="header-section-number">5.2.2</span> Palmer<a class="anchor" aria-label="anchor" href="#palmer"><i class="fas fa-link"></i></a>
+</h3>
+<p>To properly demonstrate some of these data visualization techniques, we need a slightly more feature-rich dataset.</p>
+<div class="sourceCode" id="cb527"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># load in the augmented US eruptions dataset</span></span>
+<span><span class="va">eruptions_recent2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span></span>
+<span>  <span class="st">"https://bwu62.github.io/stat240-revamp/data/eruptions_recent2.csv"</span>,</span>
+<span>  show_col_types <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co"># print the first 5 rows of the data frame to check;</span></span>
+<span><span class="co"># this data frame is now too wide for our screen,</span></span>
+<span><span class="co"># you can see some columns are cut off</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">eruptions_recent2</span>, n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
+<span><span class="co"># let's temporarily increase the width and reprint,</span></span>
+<span><span class="co"># so you can see the entire data frame</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">118</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">eruptions_recent2</span>, n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
+<span><span class="co"># reset width to its original value</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">80</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="one-variable-plots" class="section level3" number="5.2.3">
+<h3>
+<span class="header-section-number">5.2.3</span> One-variable plots<a class="anchor" aria-label="anchor" href="#one-variable-plots"><i class="fas fa-link"></i></a>
+</h3>
+<p>Ok, now we’re ready to explore some plots. We will start with some simple one-variable plots, i.e. plots that aim to visualize just a single column in a data frame. Depending on the type of that</p>
+
+</div>
+</div>
+</div>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/@xiee/utils/js/external-link.min.js" defer></script><script>
+  $(function(){
+    $(".note").addClass("alert alert-warning");
+  });
+  $(function(){
+    $(".tip").addClass("alert alert-success");
+  });
+  $(function(){
+    $(".def").addClass("alert alert-info");
+  });
+</script><div class="chapter-nav">
+<div class="prev"><a href="data-frames.html"><span class="header-section-number">4</span> Data Frames</a></div>
+<div class="next"><a href="datasets.html"><span class="header-section-number">A</span> Datasets</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#data-exploration"><span class="header-section-number">5</span> Data Exploration</a></li>
+<li>
+<a class="nav-link" href="#descriptive-statistics"><span class="header-section-number">5.1</span> Descriptive statistics</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#measures-of-central-tendency"><span class="header-section-number">5.1.1</span> Measures of central tendency</a></li>
+<li><a class="nav-link" href="#mean"><span class="header-section-number">5.1.2</span> Mean</a></li>
+<li><a class="nav-link" href="#median"><span class="header-section-number">5.1.3</span> Median</a></li>
+<li><a class="nav-link" href="#mode"><span class="header-section-number">5.1.4</span> Mode</a></li>
+<li><a class="nav-link" href="#other-measures"><span class="header-section-number">5.1.5</span> Other measures</a></li>
+<li><a class="nav-link" href="#measures-of-spread"><span class="header-section-number">5.1.6</span> Measures of spread</a></li>
+<li><a class="nav-link" href="#variance-and-standard-deviation"><span class="header-section-number">5.1.7</span> Variance (and standard deviation)</a></li>
+<li><a class="nav-link" href="#interquartile-range"><span class="header-section-number">5.1.8</span> Interquartile range</a></li>
+<li><a class="nav-link" href="#percentiles"><span class="header-section-number">5.1.9</span> Percentiles</a></li>
+<li><a class="nav-link" href="#range"><span class="header-section-number">5.1.10</span> Range</a></li>
+<li><a class="nav-link" href="#other-measures-1"><span class="header-section-number">5.1.11</span> Other measures</a></li>
+<li><a class="nav-link" href="#skew"><span class="header-section-number">5.1.12</span> Skew</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#data-visualization"><span class="header-section-number">5.2</span> Data visualization</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#ggplot2"><span class="header-section-number">5.2.1</span> ggplot2</a></li>
+<li><a class="nav-link" href="#palmer"><span class="header-section-number">5.2.2</span> Palmer</a></li>
+<li><a class="nav-link" href="#one-variable-plots"><span class="header-section-number">5.2.3</span> One-variable plots</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/bwu62/stat240-revamp/blob/master/05-data-exploration.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/bwu62/stat240-revamp/edit/master/05-data-exploration.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, Bret Larget, Cameron Jones. It was last built on 2024-07-24.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-AMS-MML_HTMLorMML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
