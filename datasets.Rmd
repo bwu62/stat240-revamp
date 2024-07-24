@@ -223,14 +223,14 @@ volcanoes <- volcanoes_raw %>%
 write_csv(volcanoes,"data/volcanoes.csv")
 ```
 
-```{r,eval=T,echo=F}
+```{r,echo=F}
 volcanoes <- read_csv("data/volcanoes.csv")
 volcanoes_raw <- read_csv("data/volcanoes_raw.csv")
 ```
 
 ### Inspect volcanoes info
 
-```{r,eval=T}
+```{r}
 volcanoes
 volcanoes_raw
 ```
@@ -245,11 +245,11 @@ eruptions_recent2 <- volcanoes %>%
 write_csv(eruptions_recent2, file="data/eruptions_recent2.csv")
 ```
 
-```{r,eval=T,echo=F}
+```{r,echo=F}
 eruptions_recent2 <- read_csv("data/eruptions_recent2.csv")
 ```
 
-```{r,eval=T}
+```{r}
 # print all columns
 options(width=93)
 eruptions_recent2
