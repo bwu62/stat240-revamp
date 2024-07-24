@@ -10,6 +10,7 @@ url: https://bwu62.github.io/stat240-revamp
 description: Revamped STAT240 notes
 biblio-style: apalike
 csl: chicago-fullnote-bibliography.csl
+mathjax-config: TeX-AMS-MML_HTMLorMML
 ---
 
 
