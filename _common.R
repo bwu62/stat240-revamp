@@ -3,7 +3,7 @@
 list.of.packages = c(
   "devtools", "rmarkdown", "tidyverse",
   "downlit", "bookdown", "DescTools",
-  "sn"
+  "sn", "palmerpenguins"
 )
 
 # make sure to use the github dev

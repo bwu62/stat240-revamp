@@ -150,6 +150,8 @@ eruptions_recent <- read_csv("data/eruptions_recent.csv")
 eruptions_recent
 ```
 
+<!--
+
 ### Scrape volcanoes info
 
 ```{r}
@@ -249,6 +251,33 @@ eruptions_recent2 <- read_csv("data/eruptions_recent2.csv")
 
 ```{r,eval=T}
 # print all columns
-print(eruptions_recent2,width=93)
+options(width=93)
+eruptions_recent2
+options(width=80)
+```
+
+-->
+
+## Palmer Penguins
+
+For the data visualization, I wanted a more feature rich dataset with a healthy combination of numerics and characters that is ready to go, easy to use, fun & interesting, and would make good looking plots for the demos. I spent too long brainstorming ideas, including scraping additional info on the volcanoes, but wasn't happy with the result. Then, while looking for inspiration, I found through Hadley Wickham's excellent [R4DS book](https://r4ds.hadley.nz/data-visualize) the [Palmer penguins](https://allisonhorst.github.io/palmerpenguins/) dataset, which is absolutely perfect.
+
+Now, I want students to continue practicing reading datasets, so the following code simple extracts the dataset therein and rewrites it out.
+
+### Write out data
+
+```{r}
+library(palmerpenguins)
+write_csv(penguins,"data/penguins.csv")
+```
+
+```{r,eval=T,echo=F}
+penguins <- read_csv("data/penguins.csv")
+```
+
+### Inspect data
+
+```{r}
+penguins
 ```
 
