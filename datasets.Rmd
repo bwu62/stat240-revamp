@@ -21,7 +21,7 @@ library(xlsx)
 ```
 
 
-## List of datasets
+## List of datasets {#datasets-list}
 
 Here's a convenient list of all dataset files generated. Note that **not ALL files are used in the notes!**. These are primarily for my own record keeping purposes. Also note that some files may automatically open a download prompt while others may not. To force download, right click on a file link and choose "Save link as".
 

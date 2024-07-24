@@ -264,10 +264,10 @@ tr.header th[align="center"]{
 
 
 /* tighten datasets list */
-div#datasets li,div#eruptions-example > ul:first-of-type li{
+div#datasets-list li,div#eruptions-example > ul:first-of-type li{
   margin: 0 !important;
 }
-div#datasets li code,div#eruptions-example > ul:first-of-type li code{
+div#datasets-list li code,div#eruptions-example > ul:first-of-type li code{
   background-color: unset !important;
 }
 
