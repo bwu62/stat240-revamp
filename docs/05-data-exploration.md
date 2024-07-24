@@ -393,11 +393,14 @@ Visually, the mode is always the "peak", the median splits the distribution into
 
 Descriptive statistics are a good place to start, but usually plotting your data visually is the best way to fully understand your dataset down to its core. In this next chapter, we will cover a variety of common plot types that are most useful for exploratory analysis.
 
-When studying each plot type, it's 
+When studying each plot type, it's important to keep the following questions in mind:
+
+ 1. What kind of data is appropriate for this plot?
+ 2. How to create this plot?
+ 3. How to interpret this plot?
 
 
-
-
+### 
 
 
 

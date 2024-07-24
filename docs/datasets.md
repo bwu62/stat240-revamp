@@ -167,3 +167,9 @@ eruptions_recent %>% as.data.frame %>% write.xlsx(file="data/eruptions_recent.xl
 #   str_replace("<NA>","NA  ") %>% str_replace("^ *",'"') %>% str_replace("( {2,})",'"\\1') %>% str_replace('"name"',"name  ") %>% write_lines(file="data/eruptions_recent.txt")
 ```
 
+
+
+
+
+
+
