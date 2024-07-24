@@ -152,3 +152,95 @@ eruptions_recent <- read_csv("data/eruptions_recent.csv")
 eruptions
 eruptions_recent
 ```
+
+### Scrape volcanoes info
+
+```{r}
+nums <- c(332010, 311160, 284141, 311110, 284202, 311360, 332020, 312030, 284170,
+         311120, 312070, 311060, 311240, 311300, 284305, 284193, 313030, 311130,
+         311290, 284200, 312260, 313010, 321050, 284211, 244000, 315020, 312110,
+         311190, 311070, 331031, 332000, 311310, 311180, 311320, 313040, 311340,
+         311020, 311230, 284210, 312060, 284133, 312131, 284134, 312160, 311270,
+         332080, 313020, 312140, 284140, 312150, 314010, 312090, 311210, 311260,
+         284150, 284160, 323080, 311080, 312170, 312180, 323020, 321030, 323110,
+         284180, 321010, 284190, 322010, 244010, 312130, 311350, 311050, 332040,
+         311390, 332060, 312200, 321020, 311090, 323120, 327050, 323150, 323010,
+         313050, 329010, 329020, 327040, 321040, 322020, 315030, 322110, 322030,
+         322060, 244020, 322070, 314060, 323200, 324020, 323160, 324030, 312100,
+         322040, 315001, 311140, 327120, 322190, 311111, 312190, 312050, 312080,
+         328010, 331040, 315040, 332030, 322100, 322160, 324040, 327110, 312250,
+         322170, 321060, 322090, 321070, 311380, 324010, 327812, 323170)
+
+get_volc_info <- function(num){
+
+  source <- "https://volcano.si.edu/volcano.cfm?vn={num}&vtab=Eruptions" %>%
+    str_glue() %>%
+    read_html()
+
+  name <- source %>%
+    html_nodes(xpath="//div[@class='volcano-title-container']/h3/text()") %>%
+    HTMLdecode()
+
+  info <- source %>%
+    html_nodes(xpath="//div[@class='volcano-info-table']//li//text()") %>%
+    as.character() %>%
+    {setNames(.[1:4],.[5:8])}
+
+  subinfo <- source %>%
+    html_nodes(xpath="//div[@class='volcano-subinfo-table']//li[position()<5]//text()") %>%
+    as.character() %>%
+    {setNames(.[1:4],.[5:8])}
+
+  c(name=name,info,subinfo)
+}
+
+library(parallel)
+cl <- makeCluster(detectCores()-1)
+clusterExport(cl,c("nums","get_volc_info"))
+volcanoes_raw <- mclapply(nums,get_volc_info) %>% as.data.frame %>% unname %>% t %>% as.data.frame
+stopCluster(cl)
+write_csv(volcanoes_raw,"data/volcanoes_raw.csv")
+```
+
+### Process volcano info
+
+```{r}
+volcanoes = volcanoes_raw %>% 
+  # these are already only US volcanoes, and Summit is just Elevation in meters
+  select(-Country,-Summit) %>% 
+  set_names(c("volcano","region","landform_type","last_known_eruption","latitude","longitude","summit_ft")) %>% 
+  mutate(landform_type = str_replace_all(landform_type,"\\(\\w+\\)|\\?",""),
+         last_known_eruption = parse_number(last_known_eruption) * if_else(str_detect(last_known_eruption,"BCE"),-1,1),
+         latitude = parse_number(latitude) * if_else(str_detect(latitude,"S"),-1,1),
+         longitude = parse_number(longitude) * if_else(str_detect(longitude,"W"),-1,1),
+         summit_ft = parse_number(summit_ft) * if_else(volcano=="Ruby",-1,1)) %>% 
+  separate(landform_type,into=c("landform","type"),sep=" \\| ") %>% 
+  mutate(underwater = summit_ft < -131)
+```
+
+### Write out volcanoes info
+
+```{r}
+write_csv(volcanoes,"data/volcanoes.csv")
+```
+
+```{r,eval=T,echo=F}
+volcanoes <- read_csv("data/volcanoes.csv")
+volcanoes_raw <- read_csv("data/volcanoes_raw.csv")
+```
+
+### Inspect volcanoes info
+
+```{r,eval=T}
+volcanoes
+volcanoes_raw
+```
+
+### Augment eruptions
+
+```{r}
+volcanoes %>% 
+  select(volcano, landform, type, summit_ft, underwater) %>% 
+  stringdist_right_join(eruptions_recent,by="volcano",max_dist=1) %>% View
+```
+
