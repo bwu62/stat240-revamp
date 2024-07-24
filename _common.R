@@ -6,11 +6,12 @@ list.of.packages = c(
   "sn"
 )
 
-# for now, make sure to use
-# my fork of bookdown, until
-# github.com/rstudio/bookdown/pull/1472
-# is merged into next release
-# devtools::install_github("bwu62/bookdown")
+# make sure to use the github dev
+# version of bookdown until v0.41
+# officially adds support for
+# changing the mathjax renderer
+# see bookdown PR #1472
+# devtools::install_github("rstudio/bookdown")
 
 new.packages <- list.of.packages[!(
   list.of.packages %in% 
