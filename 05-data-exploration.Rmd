@@ -372,7 +372,45 @@ When studying each plot type, it's important to keep the following questions in 
  3. How to interpret this plot?
 
 
-### 
+
+### ggplot2
+
+We will be making all plots using the [ggplot2](https://ggplot2.tidyverse.org/) package which is also a core Tidyverse package. It offers a robust syntax for easily creating and modifying plots. When making a ggplot2 plot, it's important to remember **everything is a layer** that you **add onto the base object using `+`** just like adding numbers. Whether you're adding a plot, a faceting structure, changing the axes, adding annotations (e.g. title/labels), etc. they're all layers that are added. This may seem strange at first, but you'll quickly grasp it in the examples that follow.
+
+I already have core Tidyverse packages loaded from section \@ref(mean) above, but if you need to load it again make sure to run the following:
+
+```{r,eval=F}
+# if you need to, reimport all core tidyverse packages
+library(tidyverse)
+```
+
+
+### Palmer penguins
+
+To properly demonstrate some of these plots, we need a slightly more feature-rich dataset. Let's import the [Palmer penguins](https://allisonhorst.github.io/palmerpenguins) dataset which is readily usable and has a good set of variables.^[Thanks to Hadley Wickham's excellent [R4DS](https://r4ds.hadley.nz/data-visualize) for the inspiration!] You can either get it from the `palmerpenguins` package or import/download from here: [`penguins.csv`](data/penguins.csv).
+
+```{r}
+# load in the penguins dataset
+penguins <- read_csv(
+  "https://bwu62.github.io/stat240-revamp/data/penguins.csv",
+  show_col_types = FALSE
+)
+# print the first few rows of the data frame to check;
+# this data frame is now too wide for our screen,
+# you can see some columns are cut off
+penguins
+# let's temporarily increase the width and reprint,
+# so you can see the entire data frame
+options(width = 92)
+penguins
+# reset width to its original value
+options(width = 80)
+```
+
+
+### One-variable plots
+
+Ok, now we're ready to explore some plots. We will start with some simple one-variable plots, i.e. plots that aim to visualize just a single column in a data frame. Depending on the type of that
 
 
 
@@ -381,17 +419,3 @@ When studying each plot type, it's important to keep the following questions in 
 
 
 
-
-
-
-<!--
-
- - skew
- - correlation?
-
-
-## Data visualization
-
- - all plots!
-
--->
