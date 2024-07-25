@@ -30,8 +30,11 @@ tryCatch({
 knitr::opts_chunk$set(
   eval=T, echo=T, comment="##", 
   warning=F, message=F,
-  dev="svg", fig.width=6,
-  fig.height=4
+  dev="svg", 
+  dev.args=list(bg="transparent"), 
+  fig.width=6,
+  fig.height=4, 
+  fig.align = "center"
 )
 
 
