@@ -130,9 +130,11 @@ ul+p,ol+p{
 }
 
 /* increase body width */
+/* chosen so that 80% width
+   matches fig.width=6 */
 @media (min-width: 1200px) {
     .container-fluid main {
-        max-width: 55rem;
+        max-width: 54.376rem;
     }
 }
 
