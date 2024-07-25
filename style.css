@@ -108,9 +108,11 @@ img.i6{
   margin: .5rem 20%;
 }
 
-/* deborder images */
+
+/* adjust image style */
 .inline-figure{
   border: none !important;
+  margin-top:.2rem;
 }
 
 /* tweak bullets */
