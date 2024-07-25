@@ -89,8 +89,9 @@ skew
 data-visualization
 ggplot2
 palmer-penguins
-variable-plots
+one-variable-plots
 histogram
+explanation-of-syntax
 datasets
 datasets-list
 eruptions

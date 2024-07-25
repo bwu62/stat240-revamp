@@ -130,6 +130,7 @@ To demonstrate the basic functionality of these different functions, I've prepar
  - [`eruptions_recent.delim`](data/eruptions_recent.delim)
  - [`eruptions_recent.xlsx`](data/eruptions_recent.xlsx)
 
+[![](https://volcano.si.edu/gallery/photos/GVP-05273.jpg){.i6}](https://volcano.si.edu/gallery/ShowImage.cfm?photo=GVP-05273)
 
 
 ### CSV file

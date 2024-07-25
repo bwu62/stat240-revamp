@@ -127,7 +127,7 @@ The ` [1] ` that appears at the start of the output line just means this is the 
 barplot(c(1, 3, 2))
 ```
 
-<img src="02-intro-r-rstudio_files/figure-html/visual-output-1.svg" width="672" />
+<img src="02-intro-r-rstudio_files/figure-html/visual-output-1.svg" width="672" style="display: block; margin: auto;" />
 
 
 

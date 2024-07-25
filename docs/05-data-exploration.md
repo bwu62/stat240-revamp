@@ -211,7 +211,7 @@ DescTools::Mode(eruptions_recent$volcano)
 
 Most common distributions have only 1 mode, i.e. they are unimodal, but some distributions may have 2 or more modes, in which case they're called bimodal (for 2 modes) or multimodal (for ≥2 modes). Here's an example of a bimodal distribution:
 
-<img src="05-data-exploration_files/figure-html/unnamed-chunk-8-1.svg" width="672" />
+<img src="05-data-exploration_files/figure-html/unnamed-chunk-8-1.svg" width="672" style="display: block; margin: auto;" />
 
 
 
@@ -376,7 +376,7 @@ Below, we have 3 example (unimodal) distributions showing the kinds of skewness,
  2. A positive, or right skewed distribution, where [**mode**]{style="color:#ff1919"} $<$ [**median**]{style="color:#3333ff"} $<$ [**mean**]{style="color:#009900"}.
  3. A negative, or left skewed distribution, where [**mean**]{style="color:#009900"} $<$ [**median**]{style="color:#3333ff"} $<$ [**mode**]{style="color:#ff1919"}.
 
-<img src="05-data-exploration_files/figure-html/unnamed-chunk-14-1.svg" width="672" />
+<img src="05-data-exploration_files/figure-html/unnamed-chunk-14-1.svg" width="672" style="display: block; margin: auto;" />
 
 This shows again, as we already learned, that the median is more robust vs the mean to "outliers"/skew, or in other words, the mean is more affected by "outliers"/skew and gets "dragged away" further by the skewness. 
 
@@ -411,14 +411,19 @@ I already have core Tidyverse packages loaded from section \@ref(mean) above, bu
 ``` r
 # if you need to, reimport all core tidyverse packages
 library(tidyverse)
+
+# optional: set a slightly prettier theme for ggplot2 demos
+#           (will also save ink if you print these notes)
+theme_set(theme_bw())
 ```
+
 
 
 ### Palmer penguins
 
 To properly demonstrate some of these plots, we need a slightly more feature-rich dataset. Let's import the [Palmer penguins](https://allisonhorst.github.io/palmerpenguins) dataset which is readily usable and has a good set of variables.^[Thanks to Hadley Wickham's excellent [R4DS](https://r4ds.hadley.nz/data-visualize) for the inspiration!] You can either get it from the `palmerpenguins` package or import/download from here: [`penguins.csv`](data/penguins.csv).
 
-![](https://allisonhorst.github.io/palmerpenguins/reference/figures/lter_penguins.png){.i6}
+[![](https://allisonhorst.github.io/palmerpenguins/reference/figures/lter_penguins.png){.i6}](https://allisonhorst.github.io/palmerpenguins/articles/art.html)
 
 
 ``` r
@@ -494,18 +499,68 @@ glimpse(penguins)
 The column variables are intuitively named so you should be able to guess their meaning; see the [`penguins`](https://allisonhorst.github.io/palmerpenguins/reference/penguins.html) help page for more info on the variables as well as papers detailing the data gathering process.
 
 
-### 1-variable plots
+### One-variable plots
 
 Ok, now we're finally ready to learn some plots. We will start with simple one-variable plots, i.e. plots that visualize just a single column in a data frame. Depending on the type of that variable, you may decide to end up choosing between several different plot types.
 
 
 ### Histogram
 
-Histograms are plots where **numeric values are grouped into "bins" and the count of each bin plotted as a bar**. They are extremely effective at visualizing the distribution of a single numeric column, allowing you to easily see the shape, spread, and even skewness of a datset. They are one of the most commonly used plots.
+Histograms are plots where **numeric values are grouped into "bins" and the count of each bin plotted as a bar**. They are extremely effective at visualizing the distribution of a single numeric column, allowing you to easily see the shape, spread, and even skewness of a datset. Histograms are one of the most common plots for numeric data.
+
+The following code makes a basic histogram in R using ggplot.
 
 
+``` r
+ggplot(penguins, aes(x = flipper_length_mm)) + geom_histogram()
+```
+
+<img src="05-data-exploration_files/figure-html/unnamed-chunk-18-1.svg" width="672" style="display: block; margin: auto;" />
 
 
+#### Explanation of syntax:
+
+The code may seem strange at first, but here's a quick explanation:
+
+ 1. The `ggplot()` function creates the base "plot object", kind of like setting up a canvas in preparation for painting. `ggplot()` takes 2 arguments in order:
+    i.  The first argument `penguins` is the data frame which will be used for the plot. As a general rule, **always put all data you want to plot into a SINGLE data frame** to pass to `ggplot()`.
+    ii. The second argument is an aesthetic mapping. Think of **aesthetics as choosing how to display each column of variables in your data frame**. Here's a *brief* list of some common aesthetics you can map:
+        - `x` controls the horizontal axis,
+        - `y` controls the vertical axis,
+        - `color` and `fill` control the point/line/boundary color and inside/fill colors respectively,
+        - `shape` and `size` control point shapes and sizes respectively,
+        - `linetype` controls the type of line (i.e. solid, dashed, dotted, etc.)
+ 2. Once the base plot object is setup with a data frame and aesthetic mapping, you simply need to "add on" a plot layer like `geom_histogram()` that specifies the type of plot you want and it will be drawn!
+    - You can also specify the aesthetic mapping in the plot layer (e.g. inside `geom_histogram()`), which will override the aesthetic mapping that it inherits from the base `ggplot()` object. Otherwise, the aesthetic mapping in the base `ggplot()` object will be used.
 
 
+:::{.note}
+
+Due to the slightly unusual nature of this syntax, there are a number of common failure modes we have observed. Make sure you take note of the following:
+
+ 1. Plot layers are ALWAYS added with `+` like numbers. This is just the design of the syntax. Attempting to use anything else will give errors!
+ 2. 
+ 3. If you have many layers, it's recommended to break them into multiple lines, but each incomplete line MUST have either an unclosed parenthetical `(` OR end in an unfinished addition `+`, for example:
+    
+    ``` r
+    # this is ok; R sees the incompletes, and
+    # continues reading the next line
+    ggplot(penguins,                       # unclosed ( parenthetical
+           aes(x = flipper_length_mm)) +   # unfinished + addition
+      geom_histogram()
+    ```
+    
+    ``` r
+    # but this will error, since the first line is NOT incomplete!!
+    ggplot(penguins, aes(x = flipper_length_mm))
+      + geom_histogram()
+    ```
+    
+    ```
+    ## Error in `+.gg`:
+    ## ! Cannot use `+` with a single argument.
+    ## ℹ Did you accidentally put `+` on a new line?
+    ```
+
+:::
 
