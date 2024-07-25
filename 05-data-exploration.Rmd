@@ -398,13 +398,16 @@ penguins <- read_csv(
 # print the first few rows of the data frame to check;
 # this data frame is now too wide for our screen,
 # you can see some columns are cut off
-penguins
+print(penguins, n = 5)
 # let's temporarily increase the width and reprint,
-# so you can see the entire data frame
+# so you can see all columns in the data frame
 options(width = 92)
 penguins
 # reset width to its original value
 options(width = 80)
+# another option is the glimpse() function which prints sideways,
+# avoiding the hidden columns due to insufficient width issue
+glimpse(penguins)
 ```
 
 
