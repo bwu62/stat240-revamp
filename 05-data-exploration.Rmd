@@ -412,11 +412,17 @@ options(width = 80)
 glimpse(penguins)
 ```
 
+The column variables are intuitively named so you should be able to guess their meaning; see the [`penguins`](https://allisonhorst.github.io/palmerpenguins/reference/penguins.html) help page for more info on the variables as well as papers detailing the data gathering process.
 
-### One-variable plots
 
-Ok, now we're ready to explore some plots. We will start with some simple one-variable plots, i.e. plots that aim to visualize just a single column in a data frame. Depending on the type of that
+### 1-variable plots
 
+Ok, now we're finally ready to learn some plots. We will start with simple one-variable plots, i.e. plots that visualize just a single column in a data frame. Depending on the type of that variable, you may decide to end up choosing between several different plot types.
+
+
+### Histogram
+
+Histograms are plots where **numeric values are grouped into "bins" and the count of each bin plotted as a bar**. They are extremely effective at visualizing the distribution of a single numeric column, allowing you to easily see the shape, spread, and even skewness of a datset. They are one of the most commonly used plots.
 
 
 
