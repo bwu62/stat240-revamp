@@ -62,7 +62,7 @@ log(10, base = data)
 
 We can combine these with summary functions to do some neat things. For example, suppose we want to manually calculate the [standard deviation](https://www.mathsisfun.com/data/standard-deviation.html)---i.e. the average deviation from the mean---of the sample. Again, we will discuss this in more detail later in the course, but for now here is the formula:
 
-$$SD = \sqrt{\frac1{n-1}\sum_{i=x}^n(x_i-\bar x)^2}\qquad\text{where $\bar{x}=\frac1n\sum_{x=i}^nx_i$}$$
+$$SD = \sqrt{\frac1{n-1}\sum_{i=1}^n(x_i-\bar x)^2}\qquad\text{where $\bar{x}=\frac1n\sum_{i=1}^nx_i$}$$
 
 In other words, the standard deviation is the square root of 1/(n-1) times the sum of the squared differences between the sample mean and each `data` value. This is very easy to do with vector arithmetic in R:
 
