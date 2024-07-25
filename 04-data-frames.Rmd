@@ -222,7 +222,7 @@ print(eruptions_recent, n = 5)
 
 Data is also commonly encountered as an XLS/XLSX spreadsheet file, which can be read with readxl's [`read_excel()`{.R}](https://rdrr.io/cran/readxl/man/read_excel.html) function. The [`eruptions_recent.xlsx`](data/eruptions_recent.xlsx) file again has the same dataset but exported to XLSX. Since XLSX is not a text format, it can't be embedded here, but here's what the first few rows look like when opened in Excel:
 
-![](https://i.imgur.com/lZbyh6Y.png){}
+![](https://i.imgur.com/lZbyh6Y.png){.i6}
 
 Unfortunately, [readxl does not support URLs](https://github.com/tidyverse/readxl/issues/278) so the data must be downloaded before loading.
 
