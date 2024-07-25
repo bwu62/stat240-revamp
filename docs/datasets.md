@@ -24,14 +24,6 @@ library(xlsx)
 
 Here's a convenient list of all dataset files generated. Note that **not ALL files are used in the notes!**. These are primarily for my own record keeping purposes. Also note that some files may automatically open a download prompt while others may not. To force download, right click on a file link and choose "Save link as".
 
-
-``` r
-library(readr)
-files <- list.files('data')
-write_lines(paste0("https://bwu62.github.io/stat240-revamp/data/",files),file="data_list.txt")
-stringr::str_glue(" - [`{files}`](data/{files})")
-```
-
  - [`eruptions_recent.csv`](data/eruptions_recent.csv)
  - [`eruptions_recent.delim`](data/eruptions_recent.delim)
  - [`eruptions_recent.tsv`](data/eruptions_recent.tsv)

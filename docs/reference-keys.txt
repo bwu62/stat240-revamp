@@ -88,7 +88,7 @@ other-measures-1
 skew
 data-visualization
 ggplot2
-palmer
+palmer-penguins
 one-variable-plots
 datasets
 datasets-list
@@ -97,6 +97,6 @@ load-raw-data
 process-data
 write-out-data
 inspect-data
-palmer-penguins
+palmer-penguins-1
 write-out-data-1
 inspect-data-1

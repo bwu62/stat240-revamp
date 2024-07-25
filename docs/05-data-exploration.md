@@ -414,25 +414,66 @@ library(tidyverse)
 ```
 
 
-### Palmer
+### Palmer penguins
 
-To properly demonstrate some of these data visualization techniques, we need a slightly more feature-rich dataset. 
+To properly demonstrate some of these plots, we need a slightly more feature-rich dataset. Let's import the [Palmer penguins](https://allisonhorst.github.io/palmerpenguins) dataset which is readily usable and has a good set of variables.^[Thanks to Hadley Wickham's excellent [R4DS](https://r4ds.hadley.nz/data-visualize) for the inspiration!] You can either get it from the `palmerpenguins` package or import/download from here: [`penguins.csv`](data/penguins.csv).
 
 
 ``` r
-# load in the augmented US eruptions dataset
-eruptions_recent2 <- read_csv(
-  "https://bwu62.github.io/stat240-revamp/data/eruptions_recent2.csv",
+# load in the penguins dataset
+penguins <- read_csv(
+  "https://bwu62.github.io/stat240-revamp/data/penguins.csv",
   show_col_types = FALSE
 )
-# print the first 5 rows of the data frame to check;
+# print the first few rows of the data frame to check;
 # this data frame is now too wide for our screen,
 # you can see some columns are cut off
-print(eruptions_recent2, n = 5)
+penguins
+```
+
+```
+## # A tibble: 344 × 8
+##    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+##    <chr>   <chr>              <dbl>         <dbl>             <dbl>       <dbl>
+##  1 Adelie  Torgersen           39.1          18.7               181        3750
+##  2 Adelie  Torgersen           39.5          17.4               186        3800
+##  3 Adelie  Torgersen           40.3          18                 195        3250
+##  4 Adelie  Torgersen           NA            NA                  NA          NA
+##  5 Adelie  Torgersen           36.7          19.3               193        3450
+##  6 Adelie  Torgersen           39.3          20.6               190        3650
+##  7 Adelie  Torgersen           38.9          17.8               181        3625
+##  8 Adelie  Torgersen           39.2          19.6               195        4675
+##  9 Adelie  Torgersen           34.1          18.1               193        3475
+## 10 Adelie  Torgersen           42            20.2               190        4250
+## # ℹ 334 more rows
+## # ℹ 2 more variables: sex <chr>, year <dbl>
+```
+
+``` r
 # let's temporarily increase the width and reprint,
 # so you can see the entire data frame
-options(width = 118)
-print(eruptions_recent2, n = 5)
+options(width = 92)
+penguins
+```
+
+```
+## # A tibble: 344 × 8
+##    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex     year
+##    <chr>   <chr>              <dbl>         <dbl>             <dbl>       <dbl> <chr>  <dbl>
+##  1 Adelie  Torgersen           39.1          18.7               181        3750 male    2007
+##  2 Adelie  Torgersen           39.5          17.4               186        3800 female  2007
+##  3 Adelie  Torgersen           40.3          18                 195        3250 female  2007
+##  4 Adelie  Torgersen           NA            NA                  NA          NA <NA>    2007
+##  5 Adelie  Torgersen           36.7          19.3               193        3450 female  2007
+##  6 Adelie  Torgersen           39.3          20.6               190        3650 male    2007
+##  7 Adelie  Torgersen           38.9          17.8               181        3625 female  2007
+##  8 Adelie  Torgersen           39.2          19.6               195        4675 male    2007
+##  9 Adelie  Torgersen           34.1          18.1               193        3475 <NA>    2007
+## 10 Adelie  Torgersen           42            20.2               190        4250 <NA>    2007
+## # ℹ 334 more rows
+```
+
+``` r
 # reset width to its original value
 options(width = 80)
 ```
@@ -441,6 +482,8 @@ options(width = 80)
 ### One-variable plots
 
 Ok, now we're ready to explore some plots. We will start with some simple one-variable plots, i.e. plots that aim to visualize just a single column in a data frame. Depending on the type of that
+
+
 
 
 
