@@ -415,7 +415,7 @@ glimpse(penguins)
 The column variables are intuitively named so you should be able to guess their meaning; see the [`penguins`](https://allisonhorst.github.io/palmerpenguins/reference/penguins.html) help page for more info on the variables as well as papers detailing the data gathering process.
 
 
-### 1-variable plots
+### One-variable plots
 
 Ok, now we're finally ready to learn some plots. We will start with simple one-variable plots, i.e. plots that visualize just a single column in a data frame. Depending on the type of that variable, you may decide to end up choosing between several different plot types.
 
