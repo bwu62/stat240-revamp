@@ -241,7 +241,7 @@ Unlike measures of central tendency, measures of spread are typically location-a
 
 Let's get the easy one out of the way first. **Standard deviation is always defined as the (positive) square root of variance**. So what's the variance then? The **variance of a sample is defined as**:
 
-$$s^2=\frac1{n-1}\sum_{i=1}^n(x_i-\bar{x})^2=\frac{(x_1-\bar{x})^2+\cdots+(x_n-\bar{x})^2}n$$
+$$s^2=\frac1{n-1}\sum_{i=1}^n(x_i-\bar{x})^2=\frac{(x_1-\bar{x})^2+\cdots+(x_n-\bar{x})^2}{m-1}$$
 
 Basically, it's the **mean squared-distance from the mean**, $\bar{x}$, except we use $n-1$ instead of $n$ to correct for a [small bias]([Bessel's correction](https://en.wikipedia.org/wiki/Bessel%27s_correction)). For example, we can compute the variance of the duration of eruptions, in **days squared**:
 
@@ -428,30 +428,25 @@ penguins <- read_csv(
 # print the first few rows of the data frame to check;
 # this data frame is now too wide for our screen,
 # you can see some columns are cut off
-penguins
+print(penguins, n = 5)
 ```
 
 ```
 ## # A tibble: 344 × 8
-##    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
-##    <chr>   <chr>              <dbl>         <dbl>             <dbl>       <dbl>
-##  1 Adelie  Torgersen           39.1          18.7               181        3750
-##  2 Adelie  Torgersen           39.5          17.4               186        3800
-##  3 Adelie  Torgersen           40.3          18                 195        3250
-##  4 Adelie  Torgersen           NA            NA                  NA          NA
-##  5 Adelie  Torgersen           36.7          19.3               193        3450
-##  6 Adelie  Torgersen           39.3          20.6               190        3650
-##  7 Adelie  Torgersen           38.9          17.8               181        3625
-##  8 Adelie  Torgersen           39.2          19.6               195        4675
-##  9 Adelie  Torgersen           34.1          18.1               193        3475
-## 10 Adelie  Torgersen           42            20.2               190        4250
-## # ℹ 334 more rows
+##   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+##   <chr>   <chr>              <dbl>         <dbl>             <dbl>       <dbl>
+## 1 Adelie  Torgersen           39.1          18.7               181        3750
+## 2 Adelie  Torgersen           39.5          17.4               186        3800
+## 3 Adelie  Torgersen           40.3          18                 195        3250
+## 4 Adelie  Torgersen           NA            NA                  NA          NA
+## 5 Adelie  Torgersen           36.7          19.3               193        3450
+## # ℹ 339 more rows
 ## # ℹ 2 more variables: sex <chr>, year <dbl>
 ```
 
 ``` r
 # let's temporarily increase the width and reprint,
-# so you can see the entire data frame
+# so you can see all columns in the data frame
 options(width = 92)
 penguins
 ```
@@ -476,6 +471,22 @@ penguins
 ``` r
 # reset width to its original value
 options(width = 80)
+# another option is the glimpse() function which prints sideways,
+# avoiding the hidden columns due to insufficient width issue
+glimpse(penguins)
+```
+
+```
+## Rows: 344
+## Columns: 8
+## $ species           <chr> "Adelie", "Adelie", "Adelie", "Adelie", "Adelie", "A…
+## $ island            <chr> "Torgersen", "Torgersen", "Torgersen", "Torgersen", …
+## $ bill_length_mm    <dbl> 39.1, 39.5, 40.3, NA, 36.7, 39.3, 38.9, 39.2, 34.1, …
+## $ bill_depth_mm     <dbl> 18.7, 17.4, 18.0, NA, 19.3, 20.6, 17.8, 19.6, 18.1, …
+## $ flipper_length_mm <dbl> 181, 186, 195, NA, 193, 190, 181, 195, 193, 190, 186…
+## $ body_mass_g       <dbl> 3750, 3800, 3250, NA, 3450, 3650, 3625, 4675, 3475, …
+## $ sex               <chr> "male", "female", "female", NA, "female", "male", "f…
+## $ year              <dbl> 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007…
 ```
 
 
