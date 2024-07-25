@@ -728,7 +728,7 @@ all.equal(sqrt(2)^2, 2)
 ### Packages
 
 
-Now, let's briefly discuss packages. One of the best features of R is the ability for anyone to easily write and distribute packages on [CRAN](https://cran.r-project.org) (**C**omprehensive **R** **A**rchive **N**etwork). Currently, there are 21093 packages available on CRAN. There are also a further 2300 packages on the bioinformatics-specific package archive [Bioconductor](https://www.bioconductor.org), as well as countless more on [GitHub](https://github.com/topics/r-package).
+Now, let's briefly discuss packages. One of the best features of R is the ability for anyone to easily write and distribute packages on [CRAN](https://cran.r-project.org) (**C**omprehensive **R** **A**rchive **N**etwork). Currently, there are 21094 packages available on CRAN. There are also a further 2300 packages on the bioinformatics-specific package archive [Bioconductor](https://www.bioconductor.org), as well as countless more on [GitHub](https://github.com/topics/r-package).
 
 In this course, we will primarily make use of the [Tidyverse](https://www.tidyverse.org) suite of packages, which contains several important packages for data science: `readr` for reading in data, `ggplot2` for plotting data, `dplyr` and `tidyr` for cleaning data, and `lubridate` and `stringr` for working with dates and strings. We will learn each of these as the course progresses.
 
@@ -1069,11 +1069,13 @@ This concludes the discussion of code chunks in R Markdown.
 
 ### Aside: $\LaTeX$
 
-This is also outside the scope of this course, so you **do NOT need to learn it**, but R Markdown natively supports $\LaTeX$ code as well. It's rendered using [MathJax](https://www.mathjax.org), an open-source Javascript engine for typesetting mathematical expressions in webpages. For example, `$$x={-b\pm\sqrt{b^2-4ac} \over 2a}$$`{.latex} becomes:
+This is also outside the scope of this course, so you **do NOT need to learn it**, but R Markdown natively supports $\LaTeX$ code as well. It's rendered using [MathJax](https://www.mathjax.org), an open-source Javascript engine for rendering equations online. For example, `$$x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$$`{.latex} becomes:
 
-$$x={-b\pm\sqrt{b^2-4ac} \over 2a}$$
+$$x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$$
 
-You will see lots of $\LaTeX$ later in the notes when we need to write math, so I just wanted to mention it here. If you wish to read more, start with Rong Zhuang's [MathJax cheat sheet](https://jojozhuang.github.io/tutorial/mathjax-cheat-sheet-for-mathematical-notation) or David Richeson's [quick guide](https://users.dickinson.edu/~richesod/latex/latexcheatsheet.pdf) which both have lots of great beginner-friendly examples. For a slightly more complete list of symbols, Eric Torrence's [cheat sheet](https://pages.uoregon.edu/torrence/391/labs/LaTeX-cheat-sheet.pdf) may also be useful. 
+You will see lots of $\LaTeX$ later in the notes when I need to write more math, so I just wanted to mention it here. You can right click on any equations you see in the notes and change the MathJax display options, or see its source code (you can of course also see the source code of the entire page using the link in the sidebar as mentioned previously).
+
+If you wish to read more on $\LaTeX$, start with Rong Zhuang's [MathJax cheat sheet](https://jojozhuang.github.io/tutorial/mathjax-cheat-sheet-for-mathematical-notation) or David Richeson's [quick guide](https://users.dickinson.edu/~richesod/latex/latexcheatsheet.pdf) which both have lots of great beginner-friendly examples. For a slightly more complete list of symbols, Eric Torrence's [cheat sheet](https://pages.uoregon.edu/torrence/391/labs/LaTeX-cheat-sheet.pdf) may also be useful. 
 
 
 
