@@ -25,7 +25,7 @@ library(xlsx)
 
 Here's a convenient list of all dataset files generated. Note that **not ALL files are used in the notes!**. These are primarily for my own record keeping purposes. Also note that some files may automatically open a download prompt while others may not. To force download, right click on a file link and choose "Save link as".
 
-```{r,eval=T,results='asis'}
+```{r,echo=F,eval=T,results='asis'}
 library(readr)
 files <- list.files('data')
 write_lines(paste0("https://bwu62.github.io/stat240-revamp/data/",files),file="data_list.txt")
