@@ -89,7 +89,8 @@ skew
 data-visualization
 ggplot2
 palmer-penguins
-one-variable-plots
+variable-plots
+histogram
 datasets
 datasets-list
 eruptions
@@ -100,3 +101,11 @@ inspect-data
 palmer-penguins-1
 write-out-data-1
 inspect-data-1
+cheat-sheets
+rstudio-ide
+base-r
+r-markdown-1
+latex
+readr
+lubridate
+ggplot2-1

@@ -58,6 +58,7 @@
 <li><a class="" href="data-exploration.html"><span class="header-section-number">5</span> Data Exploration</a></li>
 <li class="book-part">Appendix</li>
 <li><a class="" href="datasets.html"><span class="header-section-number">A</span> Datasets</a></li>
+<li><a class="" href="cheat-sheets.html"><span class="header-section-number">B</span> Cheat sheets</a></li>
 </ul>
 
         <div class="book-extra">
@@ -316,7 +317,7 @@ Ruby|2023-09-14|2023-09-15|1|TRUE|1</code></pre>
 <span class="header-section-number">4.2.7</span> XLS(X) file<a class="anchor" aria-label="anchor" href="#xlsx-file"><i class="fas fa-link"></i></a>
 </h3>
 <p>Data is also commonly encountered as an XLS/XLSX spreadsheet file, which can be read with readxl’s <a href="https://rdrr.io/cran/readxl/man/read_excel.html"><code class="sourceCode r"><span class="fu">read_excel</span>()</code></a> function. The <a href="data/eruptions_recent.xlsx"><code>eruptions_recent.xlsx</code></a> file again has the same dataset but exported to XLSX. Since XLSX is not a text format, it can’t be embedded here, but here’s what the first few rows look like when opened in Excel:</p>
-<div class="inline-figure"><img src="https://i.imgur.com/lZbyh6Y.png"></div>
+<div class="inline-figure"><img src="https://i.imgur.com/lZbyh6Y.png" class="i6"></div>
 <p>Unfortunately, <a href="https://github.com/tidyverse/readxl/issues/278">readxl does not support URLs</a> so the data must be downloaded before loading.</p>
 <div class="sourceCode" id="cb441"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># load readxl, which is NOT core tidyverse, so must be imported explicitly</span></span>

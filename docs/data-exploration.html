@@ -58,6 +58,7 @@
 <li><a class="active" href="data-exploration.html"><span class="header-section-number">5</span> Data Exploration</a></li>
 <li class="book-part">Appendix</li>
 <li><a class="" href="datasets.html"><span class="header-section-number">A</span> Datasets</a></li>
+<li><a class="" href="cheat-sheets.html"><span class="header-section-number">B</span> Cheat sheets</a></li>
 </ul>
 
         <div class="book-extra">
@@ -361,6 +362,7 @@
 <span class="header-section-number">5.2.2</span> Palmer penguins<a class="anchor" aria-label="anchor" href="#palmer-penguins"><i class="fas fa-link"></i></a>
 </h3>
 <p>To properly demonstrate some of these plots, we need a slightly more feature-rich dataset. Let’s import the <a href="https://allisonhorst.github.io/palmerpenguins">Palmer penguins</a> dataset which is readily usable and has a good set of variables.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;Thanks to Hadley Wickham’s excellent &lt;a href="https://r4ds.hadley.nz/data-visualize"&gt;R4DS&lt;/a&gt; for the inspiration!&lt;/p&gt;'><sup>20</sup></a> You can either get it from the <code>palmerpenguins</code> package or import/download from here: <a href="data/penguins.csv"><code>penguins.csv</code></a>.</p>
+<div class="inline-figure"><img src="https://allisonhorst.github.io/palmerpenguins/reference/figures/lter_penguins.png" class="i6"></div>
 <div class="sourceCode" id="cb527"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># load in the penguins dataset</span></span>
 <span><span class="va">penguins</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span></span>
@@ -416,12 +418,19 @@
 ## $ body_mass_g       &lt;dbl&gt; 3750, 3800, 3250, NA, 3450, 3650, 3625, 4675, 3475, …
 ## $ sex               &lt;chr&gt; "male", "female", "female", NA, "female", "male", "f…
 ## $ year              &lt;dbl&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007…</code></pre>
+<p>The column variables are intuitively named so you should be able to guess their meaning; see the <a href="https://allisonhorst.github.io/palmerpenguins/reference/penguins.html"><code>penguins</code></a> help page for more info on the variables as well as papers detailing the data gathering process.</p>
 </div>
-<div id="one-variable-plots" class="section level3" number="5.2.3">
+<div id="variable-plots" class="section level3" number="5.2.3">
 <h3>
-<span class="header-section-number">5.2.3</span> One-variable plots<a class="anchor" aria-label="anchor" href="#one-variable-plots"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.2.3</span> 1-variable plots<a class="anchor" aria-label="anchor" href="#variable-plots"><i class="fas fa-link"></i></a>
 </h3>
-<p>Ok, now we’re ready to explore some plots. We will start with some simple one-variable plots, i.e. plots that aim to visualize just a single column in a data frame. Depending on the type of that</p>
+<p>Ok, now we’re finally ready to learn some plots. We will start with simple one-variable plots, i.e. plots that visualize just a single column in a data frame. Depending on the type of that variable, you may decide to end up choosing between several different plot types.</p>
+</div>
+<div id="histogram" class="section level3" number="5.2.4">
+<h3>
+<span class="header-section-number">5.2.4</span> Histogram<a class="anchor" aria-label="anchor" href="#histogram"><i class="fas fa-link"></i></a>
+</h3>
+<p>Histograms are plots where <strong>numeric values are grouped into “bins” and the count of each bin plotted as a bar</strong>. They are extremely effective at visualizing the distribution of a single numeric column, allowing you to easily see the shape, spread, and even skewness of a datset. They are one of the most commonly used plots.</p>
 
 </div>
 </div>
@@ -467,7 +476,8 @@
 <a class="nav-link" href="#data-visualization"><span class="header-section-number">5.2</span> Data visualization</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#ggplot2"><span class="header-section-number">5.2.1</span> ggplot2</a></li>
 <li><a class="nav-link" href="#palmer-penguins"><span class="header-section-number">5.2.2</span> Palmer penguins</a></li>
-<li><a class="nav-link" href="#one-variable-plots"><span class="header-section-number">5.2.3</span> One-variable plots</a></li>
+<li><a class="nav-link" href="#variable-plots"><span class="header-section-number">5.2.3</span> 1-variable plots</a></li>
+<li><a class="nav-link" href="#histogram"><span class="header-section-number">5.2.4</span> Histogram</a></li>
 </ul>
 </li>
 </ul>
