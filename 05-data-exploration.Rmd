@@ -379,9 +379,18 @@ We will be making all plots using the [ggplot2](https://ggplot2.tidyverse.org/) 
 
 I already have core Tidyverse packages loaded from section \@ref(mean) above, but if you need to load it again make sure to run the following:
 
-```{r,eval=F}
+```{r}
 # if you need to, reimport all core tidyverse packages
 library(tidyverse)
+
+# optional: set a slightly prettier theme for ggplot2 demos
+#           (will also save ink if you print these notes)
+theme_set(theme_bw())
+```
+```{r,echo=F}
+# make background transparent, looks better in alert boxes
+theme_update(plot.background = element_rect(fill="transparent", color=NA),
+             panel.background = element_rect(fill=rgb(1,1,1,.75)))
 ```
 
 
