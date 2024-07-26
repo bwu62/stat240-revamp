@@ -464,7 +464,9 @@ The code may seem strange at first, but here's a quick explanation:
         - `shape` and `size` control point shapes and sizes respectively,
         - `linetype` controls the type of line (i.e. solid, dashed, dotted, etc.)
  2. Once the base plot object is setup with a data frame and aesthetic mapping, you simply need to "add on" a plot layer like `geom_histogram()` that specifies the type of plot you want and it will be drawn!
-    - You can also specify the aesthetic mapping in the plot layer (e.g. inside `geom_histogram()`), which will override the aesthetic mapping that it inherits from the base `ggplot()` object. Otherwise, the aesthetic mapping in the base `ggplot()` object will be used.
+    - You can also specify the aesthetic mapping in the plot layer (e.g. inside `geom_histogram()`), which will override the aesthetic mapping that it inherits from the base `ggplot()` object. Otherwise, the aesthetic mapping in the base `ggplot()` object will be used. For example, these will make the exact same plot:
+      - `ggplot(penguins, aes(x = flipper_length_mm)) + geom_histogram()`
+      - `ggplot(penguins) + geom_histogram(aes(x = flipper_length_mm))`
 
 
 :::{.note}
