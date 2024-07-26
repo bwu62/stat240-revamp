@@ -150,7 +150,7 @@ DescTools::Mode(eruptions_recent$volcano)
 ```
 
 
-#### Aside: Modality
+#### Aside: Modality {#modality}
 
 Most common distributions have only 1 mode, i.e. they are unimodal, but some distributions may have 2 or more modes, in which case they're called bimodal (for 2 modes) or multimodal (for ≥2 modes). Here's an example of a bimodal distribution:
 
@@ -431,7 +431,7 @@ Ok, now we're finally ready to learn some plots. We will start with simple one-v
 
 ### Histogram
 
-Histograms are plots where **numeric values are grouped into "bins" and the count of each bin plotted as a bar**. They are extremely effective at visualizing the distribution of a single numeric column, allowing you to easily see the shape, spread, and even skewness of a datset. Histograms are one of the most common plots for numeric data.
+Histograms are plots where **numeric values are grouped into "bins" (i.e. intervals) and the count of each bin plotted as a bar**. They are extremely effective at visualizing the distribution of a single numeric column, allowing you to easily see the shape, spread, and even skewness of a datset. Histograms are one of the most common plots for numeric data.
 
 The following code makes a basic histogram in R using ggplot.
 
@@ -463,7 +463,7 @@ Due to the slightly unusual nature of this syntax, there are a number of common 
  1. Plot layers are ALWAYS added with `+` like numbers. This is just the design of the syntax. Attempting to use anything else will give errors!
  2. You also MUST execute each layer like a function with `()`. If you try to just add `+ geom_histogram` without the `()`, the layer will not generate correctly and give errors!
  3. If you have many layers, it's recommended to break them into multiple lines, but each incomplete line MUST have either an unclosed parenthetical `(` OR end in an unfinished addition `+`, for example:
-    ```{r,eval=F}
+    ```{r,eval=F,tidy=F}
     # this is ok; R sees the incomplete lines
     # and continues reading the next line
     ggplot(penguins,                       # unclosed ( parenthetical
