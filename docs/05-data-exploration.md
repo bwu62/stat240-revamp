@@ -207,7 +207,7 @@ DescTools::Mode(eruptions_recent$volcano)
 ```
 
 
-#### Aside: Modality
+#### Aside: Modality {#modality}
 
 Most common distributions have only 1 mode, i.e. they are unimodal, but some distributions may have 2 or more modes, in which case they're called bimodal (for 2 modes) or multimodal (for ≥2 modes). Here's an example of a bimodal distribution:
 
@@ -506,7 +506,7 @@ Ok, now we're finally ready to learn some plots. We will start with simple one-v
 
 ### Histogram
 
-Histograms are plots where **numeric values are grouped into "bins" and the count of each bin plotted as a bar**. They are extremely effective at visualizing the distribution of a single numeric column, allowing you to easily see the shape, spread, and even skewness of a datset. Histograms are one of the most common plots for numeric data.
+Histograms are plots where **numeric values are grouped into "bins" (i.e. intervals) and the count of each bin plotted as a bar**. They are extremely effective at visualizing the distribution of a single numeric column, allowing you to easily see the shape, spread, and even skewness of a datset. Histograms are one of the most common plots for numeric data.
 
 The following code makes a basic histogram in R using ggplot.
 
@@ -516,6 +516,17 @@ ggplot(penguins, aes(x = flipper_length_mm)) + geom_histogram()
 ```
 
 <img src="05-data-exploration_files/figure-html/unnamed-chunk-18-1.svg" width="672" style="display: block; margin: auto;" />
+
+
+#### Interpretation
+
+Looking at this plot, we can make a few key observations:
+
+ - The distribution of flipper length is [bimodal](#modality), i.e. there are 2 peaks: around 190mm and 215mm.
+ - The peak around 190mm is higher (i.e. more numerous) than the peak around 215mm, but they have comparable spreads.
+   - This can mean either this group of observations is more prominent in the population studied, or was perhaps the result of some kind of selection or sampling bias.
+ - Between the two modes, between 200-205mm, there's a noticeable "gap" with comparatively much fewer observations.
+ - The vast majority of observations are around 180-220mm, with a few extremes almost as low as 170mm or just slightly above 230mm.
 
 
 #### Explanation of syntax:
@@ -531,7 +542,9 @@ The code may seem strange at first, but here's a quick explanation:
         - `shape` and `size` control point shapes and sizes respectively,
         - `linetype` controls the type of line (i.e. solid, dashed, dotted, etc.)
  2. Once the base plot object is setup with a data frame and aesthetic mapping, you simply need to "add on" a plot layer like `geom_histogram()` that specifies the type of plot you want and it will be drawn!
-    - You can also specify the aesthetic mapping in the plot layer (e.g. inside `geom_histogram()`), which will override the aesthetic mapping that it inherits from the base `ggplot()` object. Otherwise, the aesthetic mapping in the base `ggplot()` object will be used.
+    - You can also specify the aesthetic mapping in the plot layer (e.g. inside `geom_histogram()`), which will override the aesthetic mapping that it inherits from the base `ggplot()` object. Otherwise, the aesthetic mapping in the base `ggplot()` object will be used. For example, these will make the exact same plot:
+      - `ggplot(penguins, aes(x = flipper_length_mm)) + geom_histogram()`
+      - `ggplot(penguins) + geom_histogram(aes(x = flipper_length_mm))`
 
 
 :::{.note}
@@ -563,4 +576,102 @@ Due to the slightly unusual nature of this syntax, there are a number of common 
     ```
 
 :::
+
+
+#### Adding aesthetics
+
+Let's show how you can add additional aesthetics to a plot. Remember how the histogram shows bimodality? It turns out these represent different species of penguins. Let's use the `fill` aesthetic to differentiate between species.
+
+
+``` r
+ggplot(penguins, aes(x = flipper_length_mm, fill = species)) + 
+  geom_histogram()
+```
+
+<img src="05-data-exploration_files/figure-html/unnamed-chunk-22-1.svg" width="672" style="display: block; margin: auto;" />
+
+By default, ggplot will stack bars with the same position along the horizontal axis. Let's unstack them by setting [`position = "identity"`](https://ggplot2.tidyverse.org/reference/layer_positions.html) and make the bars only 50% opaque by setting `alpha = 0.5` so we can better see each group. Both these are set in the plot layer `geom_histogram()`.
+
+
+``` r
+ggplot(penguins, aes(x = flipper_length_mm, fill = species)) + 
+  geom_histogram(position = "identity", alpha = 0.5)
+```
+
+<img src="05-data-exploration_files/figure-html/unnamed-chunk-23-1.svg" width="672" style="display: block; margin: auto;" />
+
+This is already starting to look pretty good! We can now start to easily make a few interesting observations:
+
+ 1. Each species of penguin has a different average^[I'm being intentionally vague here since we're not yet doing specific statistical analysis on this data; you can substitute with either mean or median to your preference.] flipper length, with Gentoo penguins having the largest, Adelie penguins having the smallest, and Chinstrap penguins somewhere in between.
+ 2. There seems to be far more Adelie and Gentoo penguins in the dataset than Chinstrap penguins. We can investigate this further later.
+
+
+### Additional annotations
+
+We should do one final thing before we are done with this plot: annotate it! Specifically, we should **add a title and better axes labels**. This is something you should do for EVERY plot you make, not just in this class but throughout your data science career.
+
+All plot annotations (e.g. titles, axes/data labels, legends, etc.) should meet the following criteria:
+
+ 1. Accuracy: all annotations should contain accurate information.
+ 2. Precision: strive to be precise (e.g. instead of "average", specify mean, median, mode, or something else).
+ 3. Concision: strive to use as few words as necessary to convey only the most important information in the given context.
+ 4. Grammar/spelling: proper grammar and spelling should be used (abbreviations, if needed, should be standard and intuitive).
+ 5. Units: unless it's extremely obvious (or unitless), the data units should also be specified!
+
+
+:::{.note}
+Any plots submitted in this class without annotations or with annotations not meeting these criteria may be penalized!
+:::
+
+
+Annotations are hard to get right sometimes; practice adding them to every plot, and think critically as you write them or as you read other peoples' plots and you'll get good fast.
+
+You can add titles/labels by adding the `ggtitle()`, `xlab()`, and `ylab()` layers with the annotation string inside. Example:
+
+
+``` r
+ggplot(penguins, aes(x = flipper_length_mm, fill = species)) + 
+  geom_histogram(position = "identity", alpha = 0.5) + 
+  ggtitle("Flipper length distribution of Palmer Archipelago penguins") + 
+  xlab("Flipper length (mm)") + ylab("Count")
+```
+
+<img src="05-data-exploration_files/figure-html/unnamed-chunk-24-1.svg" width="672" style="display: block; margin: auto;" />
+
+This plot is now ready for use!
+
+
+### Extra options
+
+90% of the time, the steps we went through above is all you need to completely prepare a plot for use. The other 10% of the time, you may need to configure the plot further. Each plot layer function has additional specific options you can set, so as usual **check the help page or search online** for more!
+
+We will NOT cover every option for every plot type, but occasionally, we may highlight a few important options for you to experiment with and explore further on your own. For `geom_histogram()`, besides unstacking bars with `position = "identity"` argument as we showed above, you may also want to control how and where the bins are set. There's several ways of doing this briefly outlined below---note you can only choose ONE method!
+
+
+
+ - You can set the `bins` argument to set that many total bins, which will be used to evenly divide up the range of the data. E.g. by default, `bins = 30` is used to draw 30 bins, which is generally agreed to be a sensible default, even though it can create bins with strange decimal bounds (like in this example, where the bins are (171.91,173.95], (173.95,175.98], ..., (230.91,232.95]).
+   - If your data is integer-valued (like flipper length is here), this default method can actually cause problems, where some bins contain more whole numbers than others, creating strange artifacts in your data. For example, if we had two consecutive bins (1.8,3.2] and (3.2,4.6], even though they are both 1.4 units wide, the first covers 2 whole numbers (2 and 3) whereas the second only covers 1 whole number (just 4) which will distort the histogram shape.
+ - Alternatively, you can also set the `binwidth` and `boundary` arguments which wil start at the given boundary and count up and down by the given binwidth to create all bins.
+   - For example, if you want to make bins of (170,175], (175,180], ..., (230,235], you can set `binwidth = 5` and `boundary = 170` (or any other whole number divisible by 5).
+ - For maximum control, you can also set `breaks` equal to any numeric vector to use for the bin boundaries.
+   - For example, the same breaks (170,175], (175,180], ..., (230,235] can be chosen by setting `breaks = seq(170, 235, by = 5)`.
+
+Generally, you want to choose bins that are easy to visually interpret, so try using whole numbers that work well with our base-10 decimal system. You also want to avoid using [too few or too many bins](https://miro.medium.com/v2/resize:fit:1400/1*ciVNPBMo-Jvqo_k7pmDbqg.png) which can both cause problems.
+
+Let's improve the plot one final time by setting these more sensible bin widths:
+
+
+``` r
+ggplot(penguins, aes(x = flipper_length_mm, fill = species)) + 
+  geom_histogram(position = "identity", alpha = 0.5, 
+                 binwidth = 5, boundary = 170) + 
+  ggtitle("Flipper length distribution of Palmer Archipelago penguins") + 
+  xlab("Flipper length (mm)") + ylab("Count")
+```
+
+<img src="05-data-exploration_files/figure-html/unnamed-chunk-26-1.svg" width="672" style="display: block; margin: auto;" />
+
+This is now even easier to interpret, and the artifacts from the previous plots are gone. We can easily identify the average^[Again, strategically ambiguous here] in each group, and even identify specific counts for specific bins (e.g. I can tell for example 39 penguins Adelie penguins were observed in the (190,195] bin).
+
+
 

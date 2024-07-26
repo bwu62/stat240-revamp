@@ -208,9 +208,9 @@
 <pre><code>## [1] "Cleveland"
 ## attr(,"freq")
 ## [1] 13</code></pre>
-<div id="aside-modality" class="section level4" number="5.1.4.1">
+<div id="modality" class="section level4" number="5.1.4.1">
 <h4>
-<span class="header-section-number">5.1.4.1</span> Aside: Modality<a class="anchor" aria-label="anchor" href="#aside-modality"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.1.4.1</span> Aside: Modality<a class="anchor" aria-label="anchor" href="#modality"><i class="fas fa-link"></i></a>
 </h4>
 <p>Most common distributions have only 1 mode, i.e. they are unimodal, but some distributions may have 2 or more modes, in which case they’re called bimodal (for 2 modes) or multimodal (for ≥2 modes). Here’s an example of a bimodal distribution:</p>
 <div class="inline-figure"><img src="05-data-exploration_files/figure-html/unnamed-chunk-8-1.svg" width="672" style="display: block; margin: auto;"></div>
@@ -434,14 +434,30 @@
 <h3>
 <span class="header-section-number">5.2.4</span> Histogram<a class="anchor" aria-label="anchor" href="#histogram"><i class="fas fa-link"></i></a>
 </h3>
-<p>Histograms are plots where <strong>numeric values are grouped into “bins” and the count of each bin plotted as a bar</strong>. They are extremely effective at visualizing the distribution of a single numeric column, allowing you to easily see the shape, spread, and even skewness of a datset. Histograms are one of the most common plots for numeric data.</p>
+<p>Histograms are plots where <strong>numeric values are grouped into “bins” (i.e. intervals) and the count of each bin plotted as a bar</strong>. They are extremely effective at visualizing the distribution of a single numeric column, allowing you to easily see the shape, spread, and even skewness of a datset. Histograms are one of the most common plots for numeric data.</p>
 <p>The following code makes a basic histogram in R using ggplot.</p>
 <div class="sourceCode" id="cb533"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">penguins</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">flipper_length_mm</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="05-data-exploration_files/figure-html/unnamed-chunk-18-1.svg" width="672" style="display: block; margin: auto;"></div>
-<div id="explanation-of-syntax" class="section level4" number="5.2.4.1">
+<div id="interpretation" class="section level4" number="5.2.4.1">
 <h4>
-<span class="header-section-number">5.2.4.1</span> Explanation of syntax:<a class="anchor" aria-label="anchor" href="#explanation-of-syntax"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.2.4.1</span> Interpretation<a class="anchor" aria-label="anchor" href="#interpretation"><i class="fas fa-link"></i></a>
+</h4>
+<p>Looking at this plot, we can make a few key observations:</p>
+<ul>
+<li>The distribution of flipper length is <a href="data-exploration.html#modality">bimodal</a>, i.e. there are 2 peaks: around 190mm and 215mm.</li>
+<li>The peak around 190mm is higher (i.e. more numerous) than the peak around 215mm, but they have comparable spreads.
+<ul>
+<li>This can mean either this group of observations is more prominent in the population studied, or was perhaps the result of some kind of selection or sampling bias.</li>
+</ul>
+</li>
+<li>Between the two modes, between 200-205mm, there’s a noticeable “gap” with comparatively much fewer observations.</li>
+<li>The vast majority of observations are around 180-220mm, with a few extremes almost as low as 170mm or just slightly above 230mm.</li>
+</ul>
+</div>
+<div id="explanation-of-syntax" class="section level4" number="5.2.4.2">
+<h4>
+<span class="header-section-number">5.2.4.2</span> Explanation of syntax:<a class="anchor" aria-label="anchor" href="#explanation-of-syntax"><i class="fas fa-link"></i></a>
 </h4>
 <p>The code may seem strange at first, but here’s a quick explanation:</p>
 <ol style="list-style-type: decimal">
@@ -466,7 +482,12 @@
 </li>
 <li>Once the base plot object is setup with a data frame and aesthetic mapping, you simply need to “add on” a plot layer like <code><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram()</a></code> that specifies the type of plot you want and it will be drawn!
 <ul>
-<li>You can also specify the aesthetic mapping in the plot layer (e.g. inside <code><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram()</a></code>), which will override the aesthetic mapping that it inherits from the base <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code> object. Otherwise, the aesthetic mapping in the base <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code> object will be used.</li>
+<li>You can also specify the aesthetic mapping in the plot layer (e.g. inside <code><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram()</a></code>), which will override the aesthetic mapping that it inherits from the base <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code> object. Otherwise, the aesthetic mapping in the base <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code> object will be used. For example, these will make the exact same plot:
+<ul>
+<li><code>ggplot(penguins, aes(x = flipper_length_mm)) + geom_histogram()</code></li>
+<li><code>ggplot(penguins) + geom_histogram(aes(x = flipper_length_mm))</code></li>
+</ul>
+</li>
 </ul>
 </li>
 </ol>
@@ -493,8 +514,88 @@
 </li>
 </ol>
 </div>
-
 </div>
+<div id="adding-aesthetics" class="section level4" number="5.2.4.3">
+<h4>
+<span class="header-section-number">5.2.4.3</span> Adding aesthetics<a class="anchor" aria-label="anchor" href="#adding-aesthetics"><i class="fas fa-link"></i></a>
+</h4>
+<p>Let’s show how you can add additional aesthetics to a plot. Remember how the histogram shows bimodality? It turns out these represent different species of penguins. Let’s use the <code>fill</code> aesthetic to differentiate between species.</p>
+<div class="sourceCode" id="cb537"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">penguins</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">flipper_length_mm</span>, fill <span class="op">=</span> <span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="05-data-exploration_files/figure-html/unnamed-chunk-22-1.svg" width="672" style="display: block; margin: auto;"></div>
+<p>By default, ggplot will stack bars with the same position along the horizontal axis. Let’s unstack them by setting <a href="https://ggplot2.tidyverse.org/reference/layer_positions.html"><code>position = "identity"</code></a> and make the bars only 50% opaque by setting <code>alpha = 0.5</code> so we can better see each group. Both these are set in the plot layer <code><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram()</a></code>.</p>
+<div class="sourceCode" id="cb538"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">penguins</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">flipper_length_mm</span>, fill <span class="op">=</span> <span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>position <span class="op">=</span> <span class="st">"identity"</span>, alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="05-data-exploration_files/figure-html/unnamed-chunk-23-1.svg" width="672" style="display: block; margin: auto;"></div>
+<p>This is already starting to look pretty good! We can now start to easily make a few interesting observations:</p>
+<ol style="list-style-type: decimal">
+<li>Each species of penguin has a different average<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;I’m being intentionally vague here since we’re not yet doing specific statistical analysis on this data; you can substitute with either mean or median to your preference.&lt;/p&gt;"><sup>21</sup></a> flipper length, with Gentoo penguins having the largest, Adelie penguins having the smallest, and Chinstrap penguins somewhere in between.</li>
+<li>There seems to be far more Adelie and Gentoo penguins in the dataset than Chinstrap penguins. We can investigate this further later.</li>
+</ol>
+</div>
+</div>
+<div id="additional-annotations" class="section level3" number="5.2.5">
+<h3>
+<span class="header-section-number">5.2.5</span> Additional annotations<a class="anchor" aria-label="anchor" href="#additional-annotations"><i class="fas fa-link"></i></a>
+</h3>
+<p>We should do one final thing before we are done with this plot: annotate it! Specifically, we should <strong>add a title and better axes labels</strong>. This is something you should do for EVERY plot you make, not just in this class but throughout your data science career.</p>
+<p>All plot annotations (e.g. titles, axes/data labels, legends, etc.) should meet the following criteria:</p>
+<ol style="list-style-type: decimal">
+<li>Accuracy: all annotations should contain accurate information.</li>
+<li>Precision: strive to be precise (e.g. instead of “average”, specify mean, median, mode, or something else).</li>
+<li>Concision: strive to use as few words as necessary to convey only the most important information in the given context.</li>
+<li>Grammar/spelling: proper grammar and spelling should be used (abbreviations, if needed, should be standard and intuitive).</li>
+<li>Units: unless it’s extremely obvious (or unitless), the data units should also be specified!</li>
+</ol>
+<div class="note">
+<p>Any plots submitted in this class without annotations or with annotations not meeting these criteria may be penalized!</p>
+</div>
+<p>Annotations are hard to get right sometimes; practice adding them to every plot, and think critically as you write them or as you read other peoples’ plots and you’ll get good fast.</p>
+<p>You can add titles/labels by adding the <code><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle()</a></code>, <code><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab()</a></code>, and <code><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab()</a></code> layers with the annotation string inside. Example:</p>
+<div class="sourceCode" id="cb539"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">penguins</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">flipper_length_mm</span>, fill <span class="op">=</span> <span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>position <span class="op">=</span> <span class="st">"identity"</span>, alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"Flipper length distribution of Palmer Archipelago penguins"</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"Flipper length (mm)"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Count"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="05-data-exploration_files/figure-html/unnamed-chunk-24-1.svg" width="672" style="display: block; margin: auto;"></div>
+<p>This plot is now ready for use!</p>
+</div>
+<div id="extra-options" class="section level3" number="5.2.6">
+<h3>
+<span class="header-section-number">5.2.6</span> Extra options<a class="anchor" aria-label="anchor" href="#extra-options"><i class="fas fa-link"></i></a>
+</h3>
+<p>90% of the time, the steps we went through above is all you need to completely prepare a plot for use. The other 10% of the time, you may need to configure the plot further. Each plot layer function has additional specific options you can set, so as usual <strong>check the help page or search online</strong> for more!</p>
+<p>We will NOT cover every option for every plot type, but occasionally, we may highlight a few important options for you to experiment with and explore further on your own. For <code><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram()</a></code>, besides unstacking bars with <code>position = "identity"</code> argument as we showed above, you may also want to control how and where the bins are set. There’s several ways of doing this briefly outlined below—note you can only choose ONE method!</p>
+<ul>
+<li>You can set the <code>bins</code> argument to set that many total bins, which will be used to evenly divide up the range of the data. E.g. by default, <code>bins = 30</code> is used to draw 30 bins, which is generally agreed to be a sensible default, even though it can create bins with strange decimal bounds (like in this example, where the bins are (171.91,173.95], (173.95,175.98], …, (230.91,232.95]).
+<ul>
+<li>If your data is integer-valued (like flipper length is here), this default method can actually cause problems, where some bins contain more whole numbers than others, creating strange artifacts in your data. For example, if we had two consecutive bins (1.8,3.2] and (3.2,4.6], even though they are both 1.4 units wide, the first covers 2 whole numbers (2 and 3) whereas the second only covers 1 whole number (just 4) which will distort the histogram shape.</li>
+</ul>
+</li>
+<li>Alternatively, you can also set the <code>binwidth</code> and <code>boundary</code> arguments which wil start at the given boundary and count up and down by the given binwidth to create all bins.
+<ul>
+<li>For example, if you want to make bins of (170,175], (175,180], …, (230,235], you can set <code>binwidth = 5</code> and <code>boundary = 170</code> (or any other whole number divisible by 5).</li>
+</ul>
+</li>
+<li>For maximum control, you can also set <code>breaks</code> equal to any numeric vector to use for the bin boundaries.
+<ul>
+<li>For example, the same breaks (170,175], (175,180], …, (230,235] can be chosen by setting <code>breaks = seq(170, 235, by = 5)</code>.</li>
+</ul>
+</li>
+</ul>
+<p>Generally, you want to choose bins that are easy to visually interpret, so try using whole numbers that work well with our base-10 decimal system. You also want to avoid using <a href="https://miro.medium.com/v2/resize:fit:1400/1*ciVNPBMo-Jvqo_k7pmDbqg.png">too few or too many bins</a> which can both cause problems.</p>
+<p>Let’s improve the plot one final time by setting these more sensible bin widths:</p>
+<div class="sourceCode" id="cb540"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">penguins</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">flipper_length_mm</span>, fill <span class="op">=</span> <span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>position <span class="op">=</span> <span class="st">"identity"</span>, alpha <span class="op">=</span> <span class="fl">0.5</span>, </span>
+<span>                 binwidth <span class="op">=</span> <span class="fl">5</span>, boundary <span class="op">=</span> <span class="fl">170</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"Flipper length distribution of Palmer Archipelago penguins"</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"Flipper length (mm)"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Count"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="05-data-exploration_files/figure-html/unnamed-chunk-26-1.svg" width="672" style="display: block; margin: auto;"></div>
+<p>This is now even easier to interpret, and the artifacts from the previous plots are gone. We can easily identify the average<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Again, strategically ambiguous here&lt;/p&gt;"><sup>22</sup></a> in each group, and even identify specific counts for specific bins (e.g. I can tell for example 39 penguins Adelie penguins were observed in the (190,195] bin).</p>
+
 </div>
 </div>
 </div>
@@ -541,6 +642,8 @@
 <li><a class="nav-link" href="#palmer-penguins"><span class="header-section-number">5.2.2</span> Palmer penguins</a></li>
 <li><a class="nav-link" href="#one-variable-plots"><span class="header-section-number">5.2.3</span> One-variable plots</a></li>
 <li><a class="nav-link" href="#histogram"><span class="header-section-number">5.2.4</span> Histogram</a></li>
+<li><a class="nav-link" href="#additional-annotations"><span class="header-section-number">5.2.5</span> Additional annotations</a></li>
+<li><a class="nav-link" href="#extra-options"><span class="header-section-number">5.2.6</span> Extra options</a></li>
 </ul>
 </li>
 </ul>

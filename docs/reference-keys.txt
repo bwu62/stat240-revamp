@@ -77,7 +77,7 @@ measures-of-central-tendency
 mean
 median
 mode
-aside-modality
+modality
 other-measures
 measures-of-spread
 variance-and-standard-deviation
@@ -91,7 +91,11 @@ ggplot2
 palmer-penguins
 one-variable-plots
 histogram
+interpretation
 explanation-of-syntax
+adding-aesthetics
+additional-annotations
+extra-options
 datasets
 datasets-list
 eruptions
