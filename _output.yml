@@ -8,6 +8,7 @@ bookdown::bs4_book:
     code_font:
       google: "Roboto Mono"
   repo: https://github.com/bwu62/stat240-revamp
+# math_method: r-katex
 # bookdown::pdf_book:
 #   includes:
 #     in_header: preamble.tex
