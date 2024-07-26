@@ -494,3 +494,94 @@ Due to the slightly unusual nature of this syntax, there are a number of common 
 
 :::
 
+
+#### Adding aesthetics
+
+Let's show how you can add additional aesthetics to a plot. Remember how the histogram shows bimodality? It turns out these represent different species of penguins. Let's use the `fill` aesthetic to differentiate between species.
+
+```{r}
+ggplot(penguins, aes(x = flipper_length_mm, fill = species)) + 
+  geom_histogram()
+```
+
+By default, ggplot will stack bars with the same position along the horizontal axis. Let's unstack them by setting [`position = "identity"`](https://ggplot2.tidyverse.org/reference/layer_positions.html) and make the bars only 50% opaque by setting `alpha = 0.5` so we can better see each group. Both these are set in the plot layer `geom_histogram()`.
+
+```{r}
+ggplot(penguins, aes(x = flipper_length_mm, fill = species)) + 
+  geom_histogram(position = "identity", alpha = 0.5)
+```
+
+This is already starting to look pretty good! We can now start to easily make a few interesting observations:
+
+ 1. Each species of penguin has a different average^[I'm being intentionally vague here since we're not yet doing specific statistical analysis on this data; you can substitute with either mean or median to your preference.] flipper length, with Gentoo penguins having the largest, Adelie penguins having the smallest, and Chinstrap penguins somewhere in between.
+ 2. There seems to be far more Adelie and Gentoo penguins in the dataset than Chinstrap penguins. We can investigate this further later.
+
+
+### Additional annotations
+
+We should do one final thing before we are done with this plot: annotate it! Specifically, we should **add a title and better axes labels**. This is something you should do for EVERY plot you make, not just in this class but throughout your data science career.
+
+All plot annotations (e.g. titles, axes/data labels, legends, etc.) should meet the following criteria:
+
+ 1. Accuracy: all annotations should contain accurate information.
+ 2. Precision: strive to be precise (e.g. instead of "average", specify mean, median, mode, or something else).
+ 3. Concision: strive to use as few words as necessary to convey only the most important information in the given context.
+ 4. Grammar/spelling: proper grammar and spelling should be used (abbreviations, if needed, should be standard and intuitive).
+ 5. Units: unless it's extremely obvious (or unitless), the data units should also be specified!
+
+
+:::{.note}
+Any plots submitted in this class without annotations or with annotations not meeting these criteria may be penalized!
+:::
+
+
+Annotations are hard to get right sometimes; practice adding them to every plot, and think critically as you write them or as you read other peoples' plots and you'll get good fast.
+
+You can add titles/labels by adding the `ggtitle()`, `xlab()`, and `ylab()` layers with the annotation string inside. Example:
+
+```{r}
+ggplot(penguins, aes(x = flipper_length_mm, fill = species)) + 
+  geom_histogram(position = "identity", alpha = 0.5) + 
+  ggtitle("Flipper length distribution of Palmer Archipelago penguins") + 
+  xlab("Flipper length (mm)") + ylab("Count")
+```
+
+This plot is now ready for use!
+
+
+### Extra options
+
+90% of the time, the steps we went through above is all you need to completely prepare a plot for use. The other 10% of the time, you may need to configure the plot further. Each plot layer function has additional specific options you can set, so as usual **check the help page or search online** for more!
+
+We will NOT cover every option for every plot type, but occasionally, we may highlight a few important options for you to experiment with and explore further on your own. For `geom_histogram()`, besides unstacking bars with `position = "identity"` argument as we showed above, you may also want to control how and where the bins are set. There's several ways of doing this briefly outlined below---note you can only choose ONE method!
+
+```{r,include=F}
+p = ggplot(penguins, aes(x = flipper_length_mm)) + geom_histogram()
+bins = ggplot_build(p)$data[[1]] %>% 
+  {paste0("(",round(.$xmin,2),",",round(.$xmax,2),"]")} %>% 
+  suppressMessages %>% suppressWarnings
+```
+
+ - You can set the `bins` argument to set that many total bins, which will be used to evenly divide up the range of the data. E.g. by default, `bins = 30` is used to draw 30 bins, which is generally agreed to be a sensible default, even though it can create bins with strange decimal bounds (like in this example, where the bins are `r bins[1]`, `r bins[2]`, ..., `r bins[length(bins)]`).
+   - If your data is integer-valued (like flipper length is here), this default method can actually cause problems, where some bins contain more whole numbers than others, creating strange artifacts in your data. For example, if we had two consecutive bins (1.8,3.2] and (3.2,4.6], even though they are both 1.4 units wide, the first covers 2 whole numbers (2 and 3) whereas the second only covers 1 whole number (just 4) which will distort the histogram shape.
+ - Alternatively, you can also set the `binwidth` and `boundary` arguments which wil start at the given boundary and count up and down by the given binwidth to create all bins.
+   - For example, if you want to make bins of (170,175], (175,180], ..., (230,235], you can set `binwidth = 5` and `boundary = 170` (or any other whole number divisible by 5).
+ - For maximum control, you can also set `breaks` equal to any numeric vector to use for the bin boundaries.
+   - For example, the same breaks (170,175], (175,180], ..., (230,235] can be chosen by setting `breaks = seq(170, 235, by = 5)`.
+
+Generally, you want to choose bins that are easy to visually interpret, so try using whole numbers that work well with our base-10 decimal system. You also want to avoid using [too few or too many bins](https://miro.medium.com/v2/resize:fit:1400/1*ciVNPBMo-Jvqo_k7pmDbqg.png) which can both cause problems.
+
+Let's improve the plot one final time by setting these more sensible bin widths:
+
+```{r}
+ggplot(penguins, aes(x = flipper_length_mm, fill = species)) + 
+  geom_histogram(position = "identity", alpha = 0.5, 
+                 binwidth = 5, boundary = 170) + 
+  ggtitle("Flipper length distribution of Palmer Archipelago penguins") + 
+  xlab("Flipper length (mm)") + ylab("Count")
+```
+
+This is now even easier to interpret, and the artifacts from the previous plots are gone. We can easily identify the average^[Again, strategically ambiguous here] in each group, and even identify specific counts for specific bins (e.g. I can tell for example 39 penguins Adelie penguins were observed in the (190,195] bin).
+
+
+
