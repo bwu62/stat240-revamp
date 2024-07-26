@@ -440,6 +440,17 @@ ggplot(penguins, aes(x = flipper_length_mm)) + geom_histogram()
 ```
 
 
+#### Interpretation
+
+Looking at this plot, we can make a few key observations:
+
+ - The distribution of flipper length is [bimodal](#modality), i.e. there are 2 peaks: around 190mm and 215mm.
+ - The peak around 190mm is higher (i.e. more numerous) than the peak around 215mm, but they have comparable spreads.
+   - This can mean either this group of observations is more prominent in the population studied, or was perhaps the result of some kind of selection or sampling bias.
+ - Between the two modes, between 200-205mm, there's a noticeable "gap" with comparatively much fewer observations.
+ - The vast majority of observations are around 180-220mm, with a few extremes almost as low as 170mm or just slightly above 230mm.
+
+
 #### Explanation of syntax:
 
 The code may seem strange at first, but here's a quick explanation:
