@@ -539,12 +539,12 @@ The code may seem strange at first, but here's a quick explanation:
 Due to the slightly unusual nature of this syntax, there are a number of common failure modes we have observed. Make sure you take note of the following:
 
  1. Plot layers are ALWAYS added with `+` like numbers. This is just the design of the syntax. Attempting to use anything else will give errors!
- 2. 
+ 2. You also MUST execute each layer like a function with `()`. If you try to just add `+ geom_histogram` without the `()`, the layer will not generate correctly and give errors!
  3. If you have many layers, it's recommended to break them into multiple lines, but each incomplete line MUST have either an unclosed parenthetical `(` OR end in an unfinished addition `+`, for example:
     
     ``` r
-    # this is ok; R sees the incompletes, and
-    # continues reading the next line
+    # this is ok; R sees the incomplete lines
+    # and continues reading the next line
     ggplot(penguins,                       # unclosed ( parenthetical
            aes(x = flipper_length_mm)) +   # unfinished + addition
       geom_histogram()

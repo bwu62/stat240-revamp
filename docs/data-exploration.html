@@ -474,12 +474,12 @@
 <p>Due to the slightly unusual nature of this syntax, there are a number of common failure modes we have observed. Make sure you take note of the following:</p>
 <ol style="list-style-type: decimal">
 <li><p>Plot layers are ALWAYS added with <code>+</code> like numbers. This is just the design of the syntax. Attempting to use anything else will give errors!</p></li>
-<li>
+<li><p>You also MUST execute each layer like a function with <code>()</code>. If you try to just add <code>+ geom_histogram</code> without the <code>()</code>, the layer will not generate correctly and give errors!</p></li>
 <li>
 <p>If you have many layers, it’s recommended to break them into multiple lines, but each incomplete line MUST have either an unclosed parenthetical <code>(</code> OR end in an unfinished addition <code>+</code>, for example:</p>
 <div class="sourceCode" id="cb534"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># this is ok; R sees the incompletes, and</span></span>
-<span><span class="co"># continues reading the next line</span></span>
+<code class="sourceCode R"><span><span class="co"># this is ok; R sees the incomplete lines</span></span>
+<span><span class="co"># and continues reading the next line</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">penguins</span>,                       <span class="co"># unclosed ( parenthetical</span></span>
 <span>       <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">flipper_length_mm</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>   <span class="co"># unfinished + addition</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -560,7 +560,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, Bret Larget, Cameron Jones. It was last built on 2024-07-25.</p>
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, Bret Larget, Cameron Jones. It was last built on 2024-07-26.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
