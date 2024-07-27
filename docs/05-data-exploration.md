@@ -671,7 +671,7 @@ ggplot(penguins, aes(x = flipper_length_mm, fill = species)) +
 
 <img src="05-data-exploration_files/figure-html/unnamed-chunk-26-1.svg" width="672" style="display: block; margin: auto;" />
 
-This is now even easier to interpret, and the artifacts from the previous plots are gone. We can easily identify the average^[Again, strategically ambiguous here] in each group, and even identify specific counts for specific bins (e.g. I can tell for example 39 penguins Adelie penguins were observed in the (190,195] bin).
+This is now even easier to interpret, and the artifacts from the previous plots are gone. We can easily identify the average^[again, I'm being intentionally ambiguous here] in each group, and even identify specific counts for specific bins (e.g. I can tell for example 39 penguins Adelie penguins were observed in the (190,195] bin).
 
 
 
