@@ -426,7 +426,7 @@ The column variables are intuitively named so you should be able to guess their 
 
 ### One-variable plots
 
-Ok, now we're finally ready to learn some plots. We will start with simple one-variable plots, i.e. plots that visualize just a single column in a data frame. Depending on the type of that variable, you may decide to end up choosing between several different plot types.
+Ok, now we're finally ready to learn some plots. We will start with simple one-variable plots, i.e. plots that **can be made with a single column** in a data frame. Depending on the type of that variable, you may decide to end up choosing between several different plot types. Note these plot types can also all be enhanced to visualize two variables, as we will soon demonstrate.
 
 
 ### Histogram
@@ -497,7 +497,7 @@ Due to the slightly unusual nature of this syntax, there are a number of common 
 
 #### Adding aesthetics
 
-Let's show how you can add additional aesthetics to a plot. Remember how the histogram shows bimodality? It turns out these represent different species of penguins. Let's use the `fill` aesthetic to differentiate between species.
+With ggplot2, you can easily **add additional aesthetics to a plot, turning one-variable plots into two-variable plots**, allowing you to visualize how they vary together. Remember how the histogram shows bimodality? It turns out these represent different species of penguins. Let's use the `fill` aesthetic to differentiate between species.
 
 ```{r}
 ggplot(penguins, aes(x = flipper_length_mm, fill = species)) +
