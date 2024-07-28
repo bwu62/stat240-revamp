@@ -676,16 +676,31 @@ Confusingly, ggplot2 offers 2 different functions for making bar plots `geom_bar
 
 For example, we can use `geom_bar()` to compute AND plot the total count of each species in the sample:
 
-```{r}
-ggplot(penguins, aes())
+```{r,tidy=F}
+ggplot(penguins, aes(x = species)) + geom_bar() +
+  ggtitle("Count of each species in Palmer penguins sample") +
+  xlab("Species") + ylab("Count")
 ```
 
+If we wanted to make the same plot using `geom_col()`, we must FIRST summarize the dataset by computing the counts manually, then passing both the species and computed values in as `x` and `y` aesthetics, like this:
 
-
-
-
-
-
-
+```{r,tidy=F}
+# we will learn later how to do this more efficiently with tidyverse,
+# but for now we can summarize the counts using base R syntax
+penguins_species_counts <- tibble(
+  species = c("Adelie", "Chinstrap", "Gentoo"), 
+  count = c(
+    sum(penguins$species == "Adelie"),
+    sum(penguins$species == "Chinstrap"),
+    sum(penguins$species == "Gentoo")
+  )
+)
+# check the result
+penguins_species_counts
+# now, make the same plot using the summary data frame and geom_col()
+ggplot(penguins_species_counts, aes(x = species, y = count)) + geom_col() +
+  ggtitle("Count of each species in Palmer penguins sample") +
+  xlab("Species") + ylab("Count")
+```
 
 
