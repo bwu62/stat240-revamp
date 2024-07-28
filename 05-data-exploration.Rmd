@@ -516,6 +516,10 @@ This is already starting to look pretty good! We can now start to easily make a 
  1. Each species of penguin has a different average^[I'm being intentionally vague here since we're not yet doing specific statistical analysis on this data; you can substitute with either mean or median to your preference.] flipper length, with Gentoo penguins having the largest, Adelie penguins having the smallest, and Chinstrap penguins somewhere in between.
  2. There seems to be far more Adelie and Gentoo penguins in the dataset than Chinstrap penguins. We can investigate this further later.
 
+:::{.note}
+Aesthetics should always be mapped to **columns in the data frame**. Also note when columns have proper names (i.e. have ONLY letters, numbers, periods, and underscores and NO spaces or other symbols) they do not need quotes `" "` when used inside ggplot (as well as most other Tidyverse functions).
+:::
+
 :::{.tip}
 All plots can be flipped (i.e. changed from horizontal to vertical or vice versa) by swapping the `x` and `y` aesthetics, i.e. using `y = ...` instead of `x = ...` or vice versa. In some cases this may be preferred (e.g. when a dataset has [long labels](https://www.andrewheiss.com/blog/2022/06/23/long-labels-ggplot/#option-b-swap-the-x--and-y-axes)) but generally it's a matter of personal preference/style. Feel free to experiment with this yourself!
 :::
