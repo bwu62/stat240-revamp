@@ -224,7 +224,7 @@ Since the standard deviation is defined as the square root of the variance (and 
 The variance and standard deviation are the most common measures of spread, but like the arithmetic mean, they are also sensitive to outliers and may not be suitable with highly skewed data.
 
 
-### Interquartile range
+### Interquartile range {#iqr}
 
 The interquartile range, also called the IQR, is the **distance between the 1^st^ and 3^rd^ quartile**. To understand this, let's first briefly review percentiles.
 
@@ -517,9 +517,9 @@ This is already starting to look pretty good! We can now start to easily make a 
  2. There seems to be far more Adelie and Gentoo penguins in the dataset than Chinstrap penguins. We can investigate this further later.
 
 
-### Additional annotations
+### Title & labels
 
-We should do one final thing before we are done with this plot: annotate it! Specifically, we should **add a title and better axes labels**. This is something you should do for EVERY plot you make, not just in this class but throughout your data science career.
+We should do one final thing before we are done with this plot: title and label it! This is something you should do for EVERY plot you make, not just in this class but throughout your data science career.
 
 All plot annotations (e.g. titles, axes/data labels, legends, etc.) should meet the following criteria:
 
