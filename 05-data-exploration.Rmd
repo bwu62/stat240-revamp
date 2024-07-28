@@ -550,7 +550,7 @@ You can add titles/labels by adding the `ggtitle()`, `xlab()`, and `ylab()` laye
 ```{r}
 ggplot(penguins, aes(x = flipper_length_mm, fill = species)) +
   geom_histogram(position = "identity", alpha = 0.5) +
-  ggtitle("Flipper length distribution of Palmer Archipelago penguins") +
+  ggtitle("Flipper length histograms of species in Palmer penguins sample") +
   xlab("Flipper length (mm)") +
   ylab("Count")
 ```
@@ -590,7 +590,7 @@ Let's improve the plot one final time by setting these more sensible bin widths:
 ggplot(penguins, aes(x = flipper_length_mm, fill = species)) +
   geom_histogram(position = "identity", alpha = 0.5,
                  binwidth = 5, boundary = 170) +
-  ggtitle("Flipper length distribution of Palmer Archipelago penguins") +
+  ggtitle("Flipper length histograms of species in Palmer penguins sample") +
   xlab("Flipper length (mm)") +
   ylab("Count")
 ```
@@ -611,7 +611,7 @@ Similar to the histogram, we can also add additional aesthetics to differentiate
 ```{r,tidy=F}
 ggplot(penguins, aes(x = flipper_length_mm, fill = species)) +
   geom_density(alpha = 0.5) +
-  ggtitle("Flipper length distribution of Palmer Archipelago penguins") +
+  ggtitle("Flipper length densities of species in Palmer penguins sample") +
   xlab("Flipper length (mm)") + ylab("Density")
 ```
 
@@ -654,7 +654,7 @@ The boxplot can also be easily adapted to highlight the difference between speci
 ```{r,tidy=F}
 ggplot(penguins, aes(x = flipper_length_mm, y = species)) +
   geom_boxplot() +
-  ggtitle("Flipper length box plots for Palmer Archipelago penguins") +
+  ggtitle("Flipper length box plots of species in Palmer penguins sample") +
   xlab("Flipper length (mm)") + ylab("Species")
 ```
 
