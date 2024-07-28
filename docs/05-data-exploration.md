@@ -584,7 +584,7 @@ Let's show how you can add additional aesthetics to a plot. Remember how the his
 
 
 ``` r
-ggplot(penguins, aes(x = flipper_length_mm, fill = species)) + 
+ggplot(penguins, aes(x = flipper_length_mm, fill = species)) +
   geom_histogram()
 ```
 
@@ -594,7 +594,7 @@ By default, ggplot will stack bars with the same position along the horizontal a
 
 
 ``` r
-ggplot(penguins, aes(x = flipper_length_mm, fill = species)) + 
+ggplot(penguins, aes(x = flipper_length_mm, fill = species)) +
   geom_histogram(position = "identity", alpha = 0.5)
 ```
 
@@ -630,10 +630,11 @@ You can add titles/labels by adding the `ggtitle()`, `xlab()`, and `ylab()` laye
 
 
 ``` r
-ggplot(penguins, aes(x = flipper_length_mm, fill = species)) + 
-  geom_histogram(position = "identity", alpha = 0.5) + 
-  ggtitle("Flipper length distribution of Palmer Archipelago penguins") + 
-  xlab("Flipper length (mm)") + ylab("Count")
+ggplot(penguins, aes(x = flipper_length_mm, fill = species)) +
+  geom_histogram(position = "identity", alpha = 0.5) +
+  ggtitle("Flipper length distribution of Palmer Archipelago penguins") +
+  xlab("Flipper length (mm)") +
+  ylab("Count")
 ```
 
 <img src="05-data-exploration_files/figure-html/unnamed-chunk-24-1.svg" width="672" style="display: block; margin: auto;" />
@@ -662,11 +663,12 @@ Let's improve the plot one final time by setting these more sensible bin widths:
 
 
 ``` r
-ggplot(penguins, aes(x = flipper_length_mm, fill = species)) + 
-  geom_histogram(position = "identity", alpha = 0.5, 
-                 binwidth = 5, boundary = 170) + 
-  ggtitle("Flipper length distribution of Palmer Archipelago penguins") + 
-  xlab("Flipper length (mm)") + ylab("Count")
+ggplot(penguins, aes(x = flipper_length_mm, fill = species)) +
+  geom_histogram(position = "identity", alpha = 0.5,
+                 binwidth = 5, boundary = 170) +
+  ggtitle("Flipper length distribution of Palmer Archipelago penguins") +
+  xlab("Flipper length (mm)") +
+  ylab("Count")
 ```
 
 <img src="05-data-exploration_files/figure-html/unnamed-chunk-26-1.svg" width="672" style="display: block; margin: auto;" />
@@ -689,9 +691,9 @@ Similar to the histogram, we can also add additional aesthetics to differentiate
 
 
 ``` r
-ggplot(penguins, aes(x = flipper_length_mm, fill = species)) + 
-  geom_density(alpha = 0.5) + 
-  ggtitle("Flipper length distribution of Palmer Archipelago penguins") + 
+ggplot(penguins, aes(x = flipper_length_mm, fill = species)) +
+  geom_density(alpha = 0.5) +
+  ggtitle("Flipper length distribution of Palmer Archipelago penguins") +
   xlab("Flipper length (mm)") + ylab("Density")
 ```
 
@@ -745,9 +747,9 @@ The boxplot can also be easily adapted to highlight the difference between speci
 
 
 ``` r
-ggplot(penguins, aes(x = flipper_length_mm, y = species)) + 
-  geom_boxplot() + 
-  ggtitle("Flipper length box plots for Palmer Archipelago penguins") + 
+ggplot(penguins, aes(x = flipper_length_mm, y = species)) +
+  geom_boxplot() +
+  ggtitle("Flipper length box plots for Palmer Archipelago penguins") +
   xlab("Flipper length (mm)") + ylab("Species")
 ```
 
