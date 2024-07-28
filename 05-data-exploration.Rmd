@@ -387,10 +387,10 @@ library(tidyverse)
 #           (will also save ink if you print these notes)
 theme_set(theme_bw())
 ```
-```{r,echo=F}
+```{r,echo=F,tidy=F}
 # make background transparent, looks better in alert boxes
-theme_update(plot.background = element_rect(fill="transparent", color=NA),
-             panel.background = element_rect(fill=rgb(1,1,1,.75)))
+theme_update(plot.background = element_rect(fill = "transparent", color = NA),
+             panel.background = element_rect(fill = rgb(1, 1, 1, .75)))
 ```
 
 
@@ -488,7 +488,7 @@ Due to the slightly unusual nature of this syntax, there are a number of common 
     ggplot(penguins, aes(x = flipper_length_mm))
       + geom_histogram()
     ```
-    ```{r,echo=F,message=T}
+    ```{r,echo=F,message=T,tidy=F}
     message("Error in `+.gg`:\n! Cannot use `+` with a single argument.\nℹ Did you accidentally put `+` on a new line?")
     ```
 
@@ -500,14 +500,14 @@ Due to the slightly unusual nature of this syntax, there are a number of common 
 Let's show how you can add additional aesthetics to a plot. Remember how the histogram shows bimodality? It turns out these represent different species of penguins. Let's use the `fill` aesthetic to differentiate between species.
 
 ```{r}
-ggplot(penguins, aes(x = flipper_length_mm, fill = species)) + 
+ggplot(penguins, aes(x = flipper_length_mm, fill = species)) +
   geom_histogram()
 ```
 
 By default, ggplot will stack bars with the same position along the horizontal axis. Let's unstack them by setting [`position = "identity"`](https://ggplot2.tidyverse.org/reference/layer_positions.html) and make the bars only 50% opaque by setting `alpha = 0.5` so we can better see each group. Both these are set in the plot layer `geom_histogram()`.
 
 ```{r}
-ggplot(penguins, aes(x = flipper_length_mm, fill = species)) + 
+ggplot(penguins, aes(x = flipper_length_mm, fill = species)) +
   geom_histogram(position = "identity", alpha = 0.5)
 ```
 
@@ -540,10 +540,11 @@ Annotations are hard to get right sometimes; practice adding them to every plot,
 You can add titles/labels by adding the `ggtitle()`, `xlab()`, and `ylab()` layers with the annotation string inside. Example:
 
 ```{r}
-ggplot(penguins, aes(x = flipper_length_mm, fill = species)) + 
-  geom_histogram(position = "identity", alpha = 0.5) + 
-  ggtitle("Flipper length distribution of Palmer Archipelago penguins") + 
-  xlab("Flipper length (mm)") + ylab("Count")
+ggplot(penguins, aes(x = flipper_length_mm, fill = species)) +
+  geom_histogram(position = "identity", alpha = 0.5) +
+  ggtitle("Flipper length distribution of Palmer Archipelago penguins") +
+  xlab("Flipper length (mm)") +
+  ylab("Count")
 ```
 
 This plot is now ready for use!
@@ -556,10 +557,14 @@ This plot is now ready for use!
 We will NOT cover every option for every plot type, but occasionally, we may highlight a few important options for you to experiment with and explore further on your own. For `geom_histogram()`, besides unstacking bars with `position = "identity"` argument as we showed above, you may also want to control how and where the bins are set. There's several ways of doing this briefly outlined below---note you can only choose ONE method!
 
 ```{r,include=F}
-p = ggplot(penguins, aes(x = flipper_length_mm)) + geom_histogram()
-bins = ggplot_build(p)$data[[1]] %>% 
-  {paste0("(",round(.$xmin,2),",",round(.$xmax,2),"]")} %>% 
-  suppressMessages %>% suppressWarnings
+p <- ggplot(penguins, aes(x = flipper_length_mm)) +
+  geom_histogram()
+bins <- ggplot_build(p)$data[[1]] %>%
+  {
+    paste0("(", round(.$xmin, 2), ",", round(.$xmax, 2), "]")
+  } %>%
+  suppressMessages() %>%
+  suppressWarnings()
 ```
 
  - You can set the `bins` argument to set that many total bins, which will be used to evenly divide up the range of the data. E.g. by default, `bins = 30` is used to draw 30 bins, which is generally agreed to be a sensible default, even though it can create bins with strange decimal bounds (like in this example, where the bins are `r bins[1]`, `r bins[2]`, ..., `r bins[length(bins)]`).
@@ -573,12 +578,13 @@ Generally, you want to choose bins that are easy to visually interpret, so try u
 
 Let's improve the plot one final time by setting these more sensible bin widths:
 
-```{r}
-ggplot(penguins, aes(x = flipper_length_mm, fill = species)) + 
-  geom_histogram(position = "identity", alpha = 0.5, 
-                 binwidth = 5, boundary = 170) + 
-  ggtitle("Flipper length distribution of Palmer Archipelago penguins") + 
-  xlab("Flipper length (mm)") + ylab("Count")
+```{r,tidy=F}
+ggplot(penguins, aes(x = flipper_length_mm, fill = species)) +
+  geom_histogram(position = "identity", alpha = 0.5,
+                 binwidth = 5, boundary = 170) +
+  ggtitle("Flipper length distribution of Palmer Archipelago penguins") +
+  xlab("Flipper length (mm)") +
+  ylab("Count")
 ```
 
 This is now even easier to interpret, and the artifacts from the previous plots are gone. We can easily identify the average^[again, I'm being intentionally ambiguous here] in each group, and even identify specific counts for specific bins (e.g. I can tell for example 39 penguins Adelie penguins were observed in the (190,195] bin).
@@ -594,10 +600,10 @@ ggplot(penguins, aes(x = flipper_length_mm)) + geom_density()
 
 Similar to the histogram, we can also add additional aesthetics to differentiate by species:
 
-```{r}
-ggplot(penguins, aes(x = flipper_length_mm, fill = species)) + 
-  geom_density(alpha = 0.5) + 
-  ggtitle("Flipper length distribution of Palmer Archipelago penguins") + 
+```{r,tidy=F}
+ggplot(penguins, aes(x = flipper_length_mm, fill = species)) +
+  geom_density(alpha = 0.5) +
+  ggtitle("Flipper length distribution of Palmer Archipelago penguins") +
   xlab("Flipper length (mm)") + ylab("Density")
 ```
 
@@ -626,7 +632,7 @@ Compared to the histogram and density plot, there are a few key advantages and d
 
 Let's show both the five number summary with `fivenum()` as well as the corresponding box plot for the flipper length variable:
 
-```{r}
+```{r,tidy=F}
 # get the min, q1, median, q3, and max:
 fivenum(penguins$flipper_length_mm)
 # turn these into a box plot
@@ -637,10 +643,10 @@ Note that even though we can easily identify the median, quartiles, and min/max,
 
 The boxplot can also be easily adapted to highlight the difference between species, this time by adding a `y` aesthetic:
 
-```{r}
-ggplot(penguins, aes(x = flipper_length_mm, y = species)) + 
-  geom_boxplot() + 
-  ggtitle("Flipper length box plots for Palmer Archipelago penguins") + 
+```{r,tidy=F}
+ggplot(penguins, aes(x = flipper_length_mm, y = species)) +
+  geom_boxplot() +
+  ggtitle("Flipper length box plots for Palmer Archipelago penguins") +
   xlab("Flipper length (mm)") + ylab("Species")
 ```
 
