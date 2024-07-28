@@ -237,7 +237,7 @@ Percentiles are a generalization of the median. Recall the median is the data po
 quantile(eruptions_recent$duration, probs = c(0, 0.25, 0.5, 0.75, 1))
 ```
 
-These 5 numbers correspond to the **min**, **1^st^ quartile ($Q_1$)**, **median**, **3^rd^ quartile ($Q_3$)**, and max respectively, which are often collectively known as the [five-number summary](https://en.wikipedia.org/wiki/Five-number_summary).
+These 5 numbers correspond to the **min**, **1^st^ quartile ($Q_1$)**, **median**, **3^rd^ quartile ($Q_3$)**, and max respectively, which are often collectively known as the [five-number summary](https://en.wikipedia.org/wiki/Five-number_summary). $Q_1$ and $Q_3$ are also frequently called the upper and lower **hinges** of a dataset.
 
 The **difference $Q_3-Q_1$ is called the interquartile range**, and is often used instead of the variance/standard deviation when outliers/skewness is a significant concern in a dataset due to its increased robustness. The IQR can be computed with the `IQR()` function:
 
