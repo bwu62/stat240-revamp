@@ -81,7 +81,7 @@ modality
 other-measures
 measures-of-spread
 variance-and-standard-deviation
-interquartile-range
+iqr
 percentiles
 range
 other-measures-1
@@ -94,8 +94,10 @@ histogram
 interpretation
 explanation-of-syntax
 adding-aesthetics
-additional-annotations
+title-labels
 extra-options
+density-plots
+box-plots
 datasets
 datasets-list
 eruptions

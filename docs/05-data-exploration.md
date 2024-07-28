@@ -291,7 +291,7 @@ Since the standard deviation is defined as the square root of the variance (and 
 The variance and standard deviation are the most common measures of spread, but like the arithmetic mean, they are also sensitive to outliers and may not be suitable with highly skewed data.
 
 
-### Interquartile range
+### Interquartile range {#iqr}
 
 The interquartile range, also called the IQR, is the **distance between the 1^st^ and 3^rd^ quartile**. To understand this, let's first briefly review percentiles.
 
@@ -606,9 +606,9 @@ This is already starting to look pretty good! We can now start to easily make a 
  2. There seems to be far more Adelie and Gentoo penguins in the dataset than Chinstrap penguins. We can investigate this further later.
 
 
-### Additional annotations
+### Title & labels
 
-We should do one final thing before we are done with this plot: annotate it! Specifically, we should **add a title and better axes labels**. This is something you should do for EVERY plot you make, not just in this class but throughout your data science career.
+We should do one final thing before we are done with this plot: title and label it! This is something you should do for EVERY plot you make, not just in this class but throughout your data science career.
 
 All plot annotations (e.g. titles, axes/data labels, legends, etc.) should meet the following criteria:
 
@@ -672,6 +672,92 @@ ggplot(penguins, aes(x = flipper_length_mm, fill = species)) +
 <img src="05-data-exploration_files/figure-html/unnamed-chunk-26-1.svg" width="672" style="display: block; margin: auto;" />
 
 This is now even easier to interpret, and the artifacts from the previous plots are gone. We can easily identify the average^[again, I'm being intentionally ambiguous here] in each group, and even identify specific counts for specific bins (e.g. I can tell for example 39 penguins Adelie penguins were observed in the (190,195] bin).
+
+
+### Density plots
+
+A common variation on the histogram is the density plot, which can be thought of as like a **smoothed-curve version of a histogram, but with the area under the curve normalized to 1**. It represents a guess of what the entire population distribution looks like based on a sample drawn. It can be created by adding `geom_density()` as a plot layer.
+
+
+``` r
+ggplot(penguins, aes(x = flipper_length_mm)) + geom_density()
+```
+
+<img src="05-data-exploration_files/figure-html/unnamed-chunk-27-1.svg" width="672" style="display: block; margin: auto;" />
+
+Similar to the histogram, we can also add additional aesthetics to differentiate by species:
+
+
+``` r
+ggplot(penguins, aes(x = flipper_length_mm, fill = species)) + 
+  geom_density(alpha = 0.5) + 
+  ggtitle("Flipper length distribution of Palmer Archipelago penguins") + 
+  xlab("Flipper length (mm)") + ylab("Density")
+```
+
+<img src="05-data-exploration_files/figure-html/unnamed-chunk-28-1.svg" width="672" style="display: block; margin: auto;" />
+
+Note that this looks similar to the previously made histogram, but the Chinstrap distribution is no longer overshadowed by the other species, since the area normalization process effectively removes the effect sample size has on the height of the distribution of each species.
+
+We will learn a lot more about density plots later in the inference portion of this course, but for now we will move on.
+
+
+### Box plots
+
+Another common plot for numeric values is the box plot. Box plots are simply a way of **showing the following 5 summary statistics on a number line**:
+
+ 1. The **minimum** of the sample,
+ 2. The **first quartile** $Q_1$, i.e. the 25^th^ percentile,
+ 3. The **median**,
+ 4. The **third quartile** $Q_3$, i.e. the 75^th^ percentile, and
+ 5. The **maximum** of the sample.
+
+$Q_1$ and $Q_3$ form the ends of the "box", with the median shown as a line in between, while the min and max form the "whiskers" that stretch out on either end. Note the width of the box (i.e. $Q_3-Q_1$) is the [IQR](#iqr).
+
+Compared to the histogram and density plot, there are a few key advantages and drawbacks:
+
+ 1. It's easier to compare specific summary statistics like the median and quartiles using box plots,
+ 2. However it's often less effective at communicating more complex features like modality and skew.
+ 3. Its simplicity sometimes works better for comparing many groups without appearing overly complex.
+
+Let's show both the five number summary with `fivenum()` as well as the corresponding box plot for the flipper length variable:
+
+
+``` r
+# get the min, q1, median, q3, and max:
+fivenum(penguins$flipper_length_mm)
+```
+
+```
+## [1] 172 190 197 213 231
+```
+
+``` r
+# turn these into a box plot
+ggplot(penguins, aes(x = flipper_length_mm)) + geom_boxplot()
+```
+
+<img src="05-data-exploration_files/figure-html/unnamed-chunk-29-1.svg" width="672" style="display: block; margin: auto;" />
+
+Note that even though we can easily identify the median, quartiles, and min/max, we can **no longer observe bimodality** like we previously did in the histogram or density plot. This is a tradeoff that is sometimes worth making and sometimes not.
+
+The boxplot can also be easily adapted to highlight the difference between species, this time by adding a `y` aesthetic:
+
+
+``` r
+ggplot(penguins, aes(x = flipper_length_mm, y = species)) + 
+  geom_boxplot() + 
+  ggtitle("Flipper length box plots for Palmer Archipelago penguins") + 
+  xlab("Flipper length (mm)") + ylab("Species")
+```
+
+<img src="05-data-exploration_files/figure-html/unnamed-chunk-30-1.svg" width="672" style="display: block; margin: auto;" />
+
+This plot sacrifices the distributional complexity of the density plot, but in return we can very easily compare the summary statistics of each group, and overall arguably just "looks nicer" in my opinion.
+
+Note 2 Adelie penguins were plotted as points instead, this is due to a common "rule of thumb" for box plots to label points more than 1.5*IQR away from each quartile as "outliers". Again, this is simply a default convention. See the help page for more details, as well as how to disable this.
+
+
 
 
 
