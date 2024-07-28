@@ -98,6 +98,7 @@ title-labels
 extra-options
 density-plots
 box-plots
+bar-plots
 datasets
 datasets-list
 eruptions

@@ -310,7 +310,7 @@ quantile(eruptions_recent$duration, probs = c(0, 0.25, 0.5, 0.75, 1))
 ##    0    6   71  195 1491
 ```
 
-These 5 numbers correspond to the **min**, **1^st^ quartile ($Q_1$)**, **median**, **3^rd^ quartile ($Q_3$)**, and max respectively, which are often collectively known as the [five-number summary](https://en.wikipedia.org/wiki/Five-number_summary).
+These 5 numbers correspond to the **min**, **1^st^ quartile ($Q_1$)**, **median**, **3^rd^ quartile ($Q_3$)**, and max respectively, which are often collectively known as the [five-number summary](https://en.wikipedia.org/wiki/Five-number_summary). $Q_1$ and $Q_3$ are also frequently called the upper and lower **hinges** of a dataset.
 
 The **difference $Q_3-Q_1$ is called the interquartile range**, and is often used instead of the variance/standard deviation when outliers/skewness is a significant concern in a dataset due to its increased robustness. The IQR can be computed with the `IQR()` function:
 
@@ -501,7 +501,7 @@ The column variables are intuitively named so you should be able to guess their 
 
 ### One-variable plots
 
-Ok, now we're finally ready to learn some plots. We will start with simple one-variable plots, i.e. plots that visualize just a single column in a data frame. Depending on the type of that variable, you may decide to end up choosing between several different plot types.
+Ok, now we're finally ready to learn some plots. We will start with simple one-variable plots, i.e. plots that **can be made with a single column** in a data frame. Depending on the type of that variable, you may decide to end up choosing between several different plot types. Note these plot types can also all be enhanced to visualize two variables, as we will soon demonstrate.
 
 
 ### Histogram
@@ -580,7 +580,7 @@ Due to the slightly unusual nature of this syntax, there are a number of common 
 
 #### Adding aesthetics
 
-Let's show how you can add additional aesthetics to a plot. Remember how the histogram shows bimodality? It turns out these represent different species of penguins. Let's use the `fill` aesthetic to differentiate between species.
+With ggplot2, you can easily **add additional aesthetics to a plot, turning one-variable plots into two-variable plots**, allowing you to visualize how they vary together. Remember how the histogram shows bimodality? It turns out these represent different species of penguins. Let's use the `fill` aesthetic to differentiate between species.
 
 
 ``` r
@@ -604,6 +604,14 @@ This is already starting to look pretty good! We can now start to easily make a 
 
  1. Each species of penguin has a different average^[I'm being intentionally vague here since we're not yet doing specific statistical analysis on this data; you can substitute with either mean or median to your preference.] flipper length, with Gentoo penguins having the largest, Adelie penguins having the smallest, and Chinstrap penguins somewhere in between.
  2. There seems to be far more Adelie and Gentoo penguins in the dataset than Chinstrap penguins. We can investigate this further later.
+
+:::{.note}
+Aesthetics should always be mapped to **columns in the data frame**. Also note when columns have proper names (i.e. have ONLY letters, numbers, periods, and underscores and NO spaces or other symbols) they do not need quotes `" "` when used inside ggplot (as well as most other Tidyverse functions).
+:::
+
+:::{.tip}
+All plots can be flipped (i.e. changed from horizontal to vertical or vice versa) by swapping the `x` and `y` aesthetics, i.e. using `y = ...` instead of `x = ...` or vice versa. In some cases this may be preferred (e.g. when a dataset has [long labels](https://www.andrewheiss.com/blog/2022/06/23/long-labels-ggplot/#option-b-swap-the-x--and-y-axes)) but generally it's a matter of personal preference/style. Feel free to experiment with this yourself!
+:::
 
 
 ### Title & labels
@@ -632,7 +640,7 @@ You can add titles/labels by adding the `ggtitle()`, `xlab()`, and `ylab()` laye
 ``` r
 ggplot(penguins, aes(x = flipper_length_mm, fill = species)) +
   geom_histogram(position = "identity", alpha = 0.5) +
-  ggtitle("Flipper length distribution of Palmer Archipelago penguins") +
+  ggtitle("Flipper length histograms of species in Palmer penguins sample") +
   xlab("Flipper length (mm)") +
   ylab("Count")
 ```
@@ -666,7 +674,7 @@ Let's improve the plot one final time by setting these more sensible bin widths:
 ggplot(penguins, aes(x = flipper_length_mm, fill = species)) +
   geom_histogram(position = "identity", alpha = 0.5,
                  binwidth = 5, boundary = 170) +
-  ggtitle("Flipper length distribution of Palmer Archipelago penguins") +
+  ggtitle("Flipper length histograms of species in Palmer penguins sample") +
   xlab("Flipper length (mm)") +
   ylab("Count")
 ```
@@ -693,7 +701,7 @@ Similar to the histogram, we can also add additional aesthetics to differentiate
 ``` r
 ggplot(penguins, aes(x = flipper_length_mm, fill = species)) +
   geom_density(alpha = 0.5) +
-  ggtitle("Flipper length distribution of Palmer Archipelago penguins") +
+  ggtitle("Flipper length densities of species in Palmer penguins sample") +
   xlab("Flipper length (mm)") + ylab("Density")
 ```
 
@@ -749,7 +757,7 @@ The boxplot can also be easily adapted to highlight the difference between speci
 ``` r
 ggplot(penguins, aes(x = flipper_length_mm, y = species)) +
   geom_boxplot() +
-  ggtitle("Flipper length box plots for Palmer Archipelago penguins") +
+  ggtitle("Flipper length box plots of species in Palmer penguins sample") +
   xlab("Flipper length (mm)") + ylab("Species")
 ```
 
@@ -757,9 +765,63 @@ ggplot(penguins, aes(x = flipper_length_mm, y = species)) +
 
 This plot sacrifices the distributional complexity of the density plot, but in return we can very easily compare the summary statistics of each group, and overall arguably just "looks nicer" in my opinion.
 
-Note 2 Adelie penguins were plotted as points instead, this is due to a common "rule of thumb" for box plots to label points more than 1.5*IQR away from each quartile as "outliers". Again, this is simply a default convention. See the help page for more details, as well as how to disable this.
+Note 2 Adelie penguins were plotted as points instead, this is due to a common "rule of thumb" for box plots to label points more than 1.5&times;IQR away from each quartile as "outliers". Again, this is simply a default convention. See the help page for more details, as well as how to disable this.
 
 
+### Bar plots
+
+So far, we have only discussed visualizing 1 numeric variable, for which there are several interesting options as shown in the sections above, each with their own pros/cons.
+
+For 1 categorical variable, bar plots where **bars of varying heights are plotted for each category** are the only real option. Generally, the most common thing to plot (without involving other columns) is either the count or proportion of each category observed in the sample. Note that for proportion, pie charts are also often used, but these have fallen out of fashion and [are no longer recommended](https://www.data-to-viz.com/caveat/pie.html).
+
+Confusingly, ggplot2 offers 2 different functions for making bar plots `geom_bar()` and `geom_col()` which appear similar but are NOT the same!
+
+ - `geom_bar()` by default only accepts **one aesthetic** (either `x` or `y` but NOT both) and will **tally a given column**, counting the number of rows for each category and plotting the total counts. This is generally used with the full original dataset.
+ - `geom_col()` by default demands **two aesthetics** (both `x` AND `y`) and performs **no further computation** and simply plots one against the other. This is generally used only with **summaries** of the dataset, NOT the full original dataset.
+
+For example, we can use `geom_bar()` to compute AND plot the total count of each species in the sample:
 
 
+``` r
+ggplot(penguins, aes(x = species)) + geom_bar() +
+  ggtitle("Count of each species in Palmer penguins sample") +
+  xlab("Species") + ylab("Count")
+```
 
+<img src="05-data-exploration_files/figure-html/unnamed-chunk-31-1.svg" width="672" style="display: block; margin: auto;" />
+
+If we wanted to make the same plot using `geom_col()`, we must FIRST summarize the dataset by computing the counts manually, then passing both the species and computed values in as `x` and `y` aesthetics, like this:
+
+
+``` r
+# we will learn later how to do this more efficiently with tidyverse,
+# but for now we can summarize the counts using base R syntax
+penguins_species_counts <- tibble(
+  species = c("Adelie", "Chinstrap", "Gentoo"), 
+  count = c(
+    sum(penguins$species == "Adelie"),
+    sum(penguins$species == "Chinstrap"),
+    sum(penguins$species == "Gentoo")
+  )
+)
+# check the result
+penguins_species_counts
+```
+
+```
+## # A tibble: 3 × 2
+##   species   count
+##   <chr>     <int>
+## 1 Adelie      152
+## 2 Chinstrap    68
+## 3 Gentoo      124
+```
+
+``` r
+# now, make the same plot using the summary data frame and geom_col()
+ggplot(penguins_species_counts, aes(x = species, y = count)) + geom_col() +
+  ggtitle("Count of each species in Palmer penguins sample") +
+  xlab("Species") + ylab("Count")
+```
+
+<img src="05-data-exploration_files/figure-html/unnamed-chunk-32-1.svg" width="672" style="display: block; margin: auto;" />
