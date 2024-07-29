@@ -709,4 +709,42 @@ ggplot(penguins_species_counts, aes(x = species, y = count)) + geom_col() +
   xlab("Species") + ylab("Count")
 ```
 
+In the next chapter, we will learn how to more efficiently summarize datasets into similar "summary" data frames like above, which will allow us to fully appreciate the versatility of `geom_col()`.
+
+
+#### Extra options
+
+`geom_bar()` has two important arguments that significantly improve its utility. You can set `stat = "summary"` and `fun = "..."` where `...` is the name of some summary function (e.g. mean, median, sd, var, IQR, range, or any other "summary" function, i.e. something that ingests a vector and outputs a single value). This will allow you to set the other axis aesthetic as well (e.g. `y = ...`) to another column which will be summarized using the given function.
+
+For example, supposed we want to use a bar plot to compare the median flipper length for each species. We can set `stat = "summary"`, `fun = "median"`, and map `y = flipper_length_mm` to make the following plot:
+
+```{r,tidy=F}
+ggplot(penguins, aes(x = species, y = flipper_length_mm)) + 
+  geom_bar(stat = "summary", fun = "median") + 
+  ggtitle("Median flipper length by species in Palmer penguins sample") + 
+  xlab("Species") + ylab("Median flipper length (mm)")
+```
+
+
+#### Adding aesthetics
+
+Bar plots are also often good candidates for adding additional aesthetics like `fill`. I'll show 2 examples of this: a stacked and unstacked bar version.
+
+By default, adding `fill` creates a stacked bar plot, which is good for showing proportions of each bar with respect to a second categorical variable. For example, suppose we want to show which island each species came from. We can do this by adding `fill = island` to the aesthetic mapping:
+
+```{r,tidy=F}
+ggplot(penguins, aes(x = species, fill = island)) + geom_bar() +
+    ggtitle("Count of each species (by island) in Palmer penguins sample") +
+    xlab("Species") + ylab("Count")
+```
+
+We can also unstack the bars by setting `position = "dodge"` inside `geom_bar()`, making the bars appear side by side. For example, suppose we want to compare median flipper length not only by species but also by sex. We can easily do this by adding `fill = sex` to our aesthetic mapping, as well as setting `position` as mentioned above:
+
+```{r}
+ggplot(penguins, aes(x = species, y = flipper_length_mm, fill = sex)) +
+  geom_bar(stat = "summary", fun = "median", position = "dodge") +
+  ggtitle("Median flipper length by species & sex in Palmer penguins sample") +
+  xlab("Species") + ylab("Median flipper length (mm)")
+```
+
 
