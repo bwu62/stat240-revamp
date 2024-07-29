@@ -622,10 +622,11 @@ Note that this looks similar to the previously made histogram, but the Chinstrap
 
 We will learn a lot more about density plots later in the inference portion of this course, but for now we will move on.
 
-
+<!--
 :::{.tip}
 You can make the above plot more accessible to readers with color vision deficiencies by adding additional aesthetics. For example, try adding `linetype = species` to the aesthetic mapping, as well as increasing border thickness by adding `linewidth = 1` inside `geom_density()` and observe the output.
 :::
+-->
 
 
 ### Box plots
