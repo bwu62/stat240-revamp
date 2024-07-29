@@ -412,9 +412,11 @@ I already have core Tidyverse packages loaded from section \@ref(mean) above, bu
 # if you need to, reimport all core tidyverse packages
 library(tidyverse)
 
-# optional: set a slightly prettier theme for ggplot2 demos
-#           (will also save ink if you print these notes)
+# optional: set a prettier theme and colorblind-friendly palette for plots
+#           (also looks better if printed with most printers, even in b/w)
 theme_set(theme_bw())
+options(ggplot2.discrete.fill = 
+          function(...) scale_fill_brewer(..., type = "qual", palette = 3))
 ```
 
 
@@ -712,10 +714,11 @@ Note that this looks similar to the previously made histogram, but the Chinstrap
 
 We will learn a lot more about density plots later in the inference portion of this course, but for now we will move on.
 
-
+<!--
 :::{.tip}
 You can make the above plot more accessible to readers with color vision deficiencies by adding additional aesthetics. For example, try adding `linetype = species` to the aesthetic mapping, as well as increasing border thickness by adding `linewidth = 1` inside `geom_density()` and observe the output.
 :::
+-->
 
 
 ### Box plots
@@ -878,5 +881,6 @@ ggplot(penguins, aes(x = species, y = flipper_length_mm, fill = sex)) +
 ```
 
 <img src="05-data-exploration_files/figure-html/unnamed-chunk-35-1.svg" width="672" style="display: block; margin: auto;" />
+
 
 
