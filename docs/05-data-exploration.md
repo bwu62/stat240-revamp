@@ -415,8 +415,7 @@ library(tidyverse)
 # optional: set a prettier theme and colorblind-friendly palette for plots
 #           (also looks better if printed with most printers, even in b/w)
 theme_set(theme_bw())
-options(ggplot2.discrete.fill = 
-          function(...) scale_fill_brewer(..., type = "qual", palette = 3))
+options(ggplot2.discrete.fill = \(...) scale_fill_brewer(..., palette = "Set2"))
 ```
 
 
@@ -881,6 +880,5 @@ ggplot(penguins, aes(x = species, y = flipper_length_mm, fill = sex)) +
 ```
 
 <img src="05-data-exploration_files/figure-html/unnamed-chunk-35-1.svg" width="672" style="display: block; margin: auto;" />
-
 
 
