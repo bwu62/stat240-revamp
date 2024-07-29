@@ -678,7 +678,7 @@ For 1 categorical variable, bar plots where **bars of varying heights are plotte
 Confusingly, ggplot2 offers 2 different functions for making bar plots `geom_bar()` and `geom_col()` which appear similar but are NOT the same!
 
  - `geom_bar()` by default only accepts **one aesthetic** (either `x` or `y` but NOT both) and will **tally a given column**, counting the number of rows for each category and plotting the total counts. This is generally used with the full original dataset.
- - `geom_col()` by default demands **two aesthetics** (both `x` AND `y`) and performs **no further computation** and simply plots one against the other. This is generally used only with **summaries** of the dataset, NOT the full original dataset.
+ - `geom_col()` by default demands **two aesthetics** (both `x` AND `y`) and performs **no further computation** and simply plots one against the other. This is generally used only with summaries of the dataset, NOT the full original dataset.
 
 For example, we can use `geom_bar()` to compute AND plot the total count of each species in the sample:
 
