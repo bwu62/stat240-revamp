@@ -402,8 +402,9 @@ To properly demonstrate some of these plots, we need a slightly more feature-ric
 
 ```{r}
 # load in the penguins dataset
+# (note: a few rows with NAs have been removed for simplicity)
 penguins <- read_csv(
-  "https://bwu62.github.io/stat240-revamp/data/penguins.csv",
+  "https://bwu62.github.io/stat240-revamp/data/penguins_complete.csv",
   show_col_types = FALSE
 )
 # print the first few rows of the data frame to check;
