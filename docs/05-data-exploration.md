@@ -428,8 +428,9 @@ To properly demonstrate some of these plots, we need a slightly more feature-ric
 
 ``` r
 # load in the penguins dataset
+# (note: a few rows with NAs have been removed for simplicity)
 penguins <- read_csv(
-  "https://bwu62.github.io/stat240-revamp/data/penguins.csv",
+  "https://bwu62.github.io/stat240-revamp/data/penguins_complete.csv",
   show_col_types = FALSE
 )
 # print the first few rows of the data frame to check;
@@ -439,15 +440,15 @@ print(penguins, n = 5)
 ```
 
 ```
-## # A tibble: 344 × 8
+## # A tibble: 333 × 8
 ##   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
 ##   <chr>   <chr>              <dbl>         <dbl>             <dbl>       <dbl>
 ## 1 Adelie  Torgersen           39.1          18.7               181        3750
 ## 2 Adelie  Torgersen           39.5          17.4               186        3800
 ## 3 Adelie  Torgersen           40.3          18                 195        3250
-## 4 Adelie  Torgersen           NA            NA                  NA          NA
-## 5 Adelie  Torgersen           36.7          19.3               193        3450
-## # ℹ 339 more rows
+## 4 Adelie  Torgersen           36.7          19.3               193        3450
+## 5 Adelie  Torgersen           39.3          20.6               190        3650
+## # ℹ 328 more rows
 ## # ℹ 2 more variables: sex <chr>, year <dbl>
 ```
 
@@ -459,20 +460,20 @@ penguins
 ```
 
 ```
-## # A tibble: 344 × 8
+## # A tibble: 333 × 8
 ##    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex     year
 ##    <chr>   <chr>              <dbl>         <dbl>             <dbl>       <dbl> <chr>  <dbl>
 ##  1 Adelie  Torgersen           39.1          18.7               181        3750 male    2007
 ##  2 Adelie  Torgersen           39.5          17.4               186        3800 female  2007
 ##  3 Adelie  Torgersen           40.3          18                 195        3250 female  2007
-##  4 Adelie  Torgersen           NA            NA                  NA          NA <NA>    2007
-##  5 Adelie  Torgersen           36.7          19.3               193        3450 female  2007
-##  6 Adelie  Torgersen           39.3          20.6               190        3650 male    2007
-##  7 Adelie  Torgersen           38.9          17.8               181        3625 female  2007
-##  8 Adelie  Torgersen           39.2          19.6               195        4675 male    2007
-##  9 Adelie  Torgersen           34.1          18.1               193        3475 <NA>    2007
-## 10 Adelie  Torgersen           42            20.2               190        4250 <NA>    2007
-## # ℹ 334 more rows
+##  4 Adelie  Torgersen           36.7          19.3               193        3450 female  2007
+##  5 Adelie  Torgersen           39.3          20.6               190        3650 male    2007
+##  6 Adelie  Torgersen           38.9          17.8               181        3625 female  2007
+##  7 Adelie  Torgersen           39.2          19.6               195        4675 male    2007
+##  8 Adelie  Torgersen           41.1          17.6               182        3200 female  2007
+##  9 Adelie  Torgersen           38.6          21.2               191        3800 male    2007
+## 10 Adelie  Torgersen           34.6          21.1               198        4400 male    2007
+## # ℹ 323 more rows
 ```
 
 ``` r
@@ -484,15 +485,15 @@ glimpse(penguins)
 ```
 
 ```
-## Rows: 344
+## Rows: 333
 ## Columns: 8
 ## $ species           <chr> "Adelie", "Adelie", "Adelie", "Adelie", "Adelie", "A…
 ## $ island            <chr> "Torgersen", "Torgersen", "Torgersen", "Torgersen", …
-## $ bill_length_mm    <dbl> 39.1, 39.5, 40.3, NA, 36.7, 39.3, 38.9, 39.2, 34.1, …
-## $ bill_depth_mm     <dbl> 18.7, 17.4, 18.0, NA, 19.3, 20.6, 17.8, 19.6, 18.1, …
-## $ flipper_length_mm <dbl> 181, 186, 195, NA, 193, 190, 181, 195, 193, 190, 186…
-## $ body_mass_g       <dbl> 3750, 3800, 3250, NA, 3450, 3650, 3625, 4675, 3475, …
-## $ sex               <chr> "male", "female", "female", NA, "female", "male", "f…
+## $ bill_length_mm    <dbl> 39.1, 39.5, 40.3, 36.7, 39.3, 38.9, 39.2, 41.1, 38.6…
+## $ bill_depth_mm     <dbl> 18.7, 17.4, 18.0, 19.3, 20.6, 17.8, 19.6, 17.6, 21.2…
+## $ flipper_length_mm <dbl> 181, 186, 195, 193, 190, 181, 195, 182, 191, 198, 18…
+## $ body_mass_g       <dbl> 3750, 3800, 3250, 3450, 3650, 3625, 4675, 3200, 3800…
+## $ sex               <chr> "male", "female", "female", "female", "male", "femal…
 ## $ year              <dbl> 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007…
 ```
 
@@ -681,7 +682,7 @@ ggplot(penguins, aes(x = flipper_length_mm, fill = species)) +
 
 <img src="05-data-exploration_files/figure-html/unnamed-chunk-26-1.svg" width="672" style="display: block; margin: auto;" />
 
-This is now even easier to interpret, and the artifacts from the previous plots are gone. We can easily identify the average^[again, I'm being intentionally ambiguous here] in each group, and even identify specific counts for specific bins (e.g. I can tell for example 39 penguins Adelie penguins were observed in the (190,195] bin).
+This is now even easier to interpret, and the artifacts from the previous plots are gone. We can easily identify the average^[Again, I'm being intentionally ambiguous here.] in each group, and even identify specific counts for specific bins (e.g. I can tell for example 39 penguins Adelie penguins were observed in the (190,195] bin).
 
 
 ### Density plots
@@ -710,6 +711,11 @@ ggplot(penguins, aes(x = flipper_length_mm, fill = species)) +
 Note that this looks similar to the previously made histogram, but the Chinstrap distribution is no longer overshadowed by the other species, since the area normalization process effectively removes the effect sample size has on the height of the distribution of each species.
 
 We will learn a lot more about density plots later in the inference portion of this course, but for now we will move on.
+
+
+:::{.tip}
+You can make the above plot more accessible to readers with color vision deficiencies by adding additional aesthetics. For example, try adding `linetype = species` to the aesthetic mapping, as well as increasing border thickness by adding `linewidth = 1` inside `geom_density()` and observe the output.
+:::
 
 
 ### Box plots
@@ -777,7 +783,7 @@ For 1 categorical variable, bar plots where **bars of varying heights are plotte
 Confusingly, ggplot2 offers 2 different functions for making bar plots `geom_bar()` and `geom_col()` which appear similar but are NOT the same!
 
  - `geom_bar()` by default only accepts **one aesthetic** (either `x` or `y` but NOT both) and will **tally a given column**, counting the number of rows for each category and plotting the total counts. This is generally used with the full original dataset.
- - `geom_col()` by default demands **two aesthetics** (both `x` AND `y`) and performs **no further computation** and simply plots one against the other. This is generally used only with **summaries** of the dataset, NOT the full original dataset.
+ - `geom_col()` by default demands **two aesthetics** (both `x` AND `y`) and performs **no further computation** and simply plots one against the other. This is generally used only with summaries of the dataset, NOT the full original dataset.
 
 For example, we can use `geom_bar()` to compute AND plot the total count of each species in the sample:
 
@@ -812,9 +818,9 @@ penguins_species_counts
 ## # A tibble: 3 × 2
 ##   species   count
 ##   <chr>     <int>
-## 1 Adelie      152
+## 1 Adelie      146
 ## 2 Chinstrap    68
-## 3 Gentoo      124
+## 3 Gentoo      119
 ```
 
 ``` r
@@ -825,3 +831,52 @@ ggplot(penguins_species_counts, aes(x = species, y = count)) + geom_col() +
 ```
 
 <img src="05-data-exploration_files/figure-html/unnamed-chunk-32-1.svg" width="672" style="display: block; margin: auto;" />
+
+In the next chapter, we will learn how to more efficiently summarize datasets into similar "summary" data frames like above, which will allow us to fully appreciate the versatility of `geom_col()`.
+
+
+#### Extra options
+
+`geom_bar()` has two important arguments that significantly improve its utility. You can set `stat = "summary"` and `fun = "..."` where `...` is the name of some summary function (e.g. mean, median, sd, var, IQR, range, or any other "summary" function, i.e. something that ingests a vector and outputs a single value). This will allow you to set the other axis aesthetic as well (e.g. `y = ...`) to another column which will be summarized using the given function.
+
+For example, supposed we want to use a bar plot to compare the median flipper length for each species. We can set `stat = "summary"`, `fun = "median"`, and map `y = flipper_length_mm` to make the following plot:
+
+
+``` r
+ggplot(penguins, aes(x = species, y = flipper_length_mm)) + 
+  geom_bar(stat = "summary", fun = "median") + 
+  ggtitle("Median flipper length by species in Palmer penguins sample") + 
+  xlab("Species") + ylab("Median flipper length (mm)")
+```
+
+<img src="05-data-exploration_files/figure-html/unnamed-chunk-33-1.svg" width="672" style="display: block; margin: auto;" />
+
+
+#### Adding aesthetics
+
+Bar plots are also often good candidates for adding additional aesthetics like `fill`. I'll show 2 examples of this: a stacked and unstacked bar version.
+
+By default, adding `fill` creates a stacked bar plot, which is good for showing proportions of each bar with respect to a second categorical variable. For example, suppose we want to show which island each species came from. We can do this by adding `fill = island` to the aesthetic mapping:
+
+
+``` r
+ggplot(penguins, aes(x = species, fill = island)) + geom_bar() +
+    ggtitle("Count of each species (by island) in Palmer penguins sample") +
+    xlab("Species") + ylab("Count")
+```
+
+<img src="05-data-exploration_files/figure-html/unnamed-chunk-34-1.svg" width="672" style="display: block; margin: auto;" />
+
+We can also unstack the bars by setting `position = "dodge"` inside `geom_bar()`, making the bars appear side by side. For example, suppose we want to compare median flipper length not only by species but also by sex. We can easily do this by adding `fill = sex` to our aesthetic mapping, as well as setting `position` as mentioned above:
+
+
+``` r
+ggplot(penguins, aes(x = species, y = flipper_length_mm, fill = sex)) +
+  geom_bar(stat = "summary", fun = "median", position = "dodge") +
+  ggtitle("Median flipper length by species & sex in Palmer penguins sample") +
+  xlab("Species") + ylab("Median flipper length (mm)")
+```
+
+<img src="05-data-exploration_files/figure-html/unnamed-chunk-35-1.svg" width="672" style="display: block; margin: auto;" />
+
+

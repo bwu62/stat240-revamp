@@ -99,6 +99,8 @@ extra-options
 density-plots
 box-plots
 bar-plots
+extra-options-1
+adding-aesthetics-1
 datasets
 datasets-list
 eruptions
