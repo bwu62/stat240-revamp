@@ -383,9 +383,11 @@ I already have core Tidyverse packages loaded from section \@ref(mean) above, bu
 # if you need to, reimport all core tidyverse packages
 library(tidyverse)
 
-# optional: set a slightly prettier theme for ggplot2 demos
-#           (will also save ink if you print these notes)
+# optional: set a prettier theme and colorblind-friendly palette for plots
+#           (also looks better if printed with most printers, even in b/w)
 theme_set(theme_bw())
+options(ggplot2.discrete.fill = 
+          function(...) scale_fill_brewer(..., type = "qual", palette = 3))
 ```
 ```{r,echo=F,tidy=F}
 # make background transparent, looks better in alert boxes
