@@ -743,7 +743,7 @@ ggplot(penguins, aes(x = species, fill = island)) + geom_bar() +
 
 We can also unstack the bars by setting `position = "dodge"` inside `geom_bar()`, making the bars appear side by side. For example, suppose we want to compare median flipper length not only by species but also by sex. We can easily do this by adding `fill = sex` to our aesthetic mapping, as well as setting `position` as mentioned above:
 
-```{r}
+```{r,tidy=F}
 ggplot(penguins, aes(x = species, y = flipper_length_mm, fill = sex)) +
   geom_bar(stat = "summary", fun = "median", position = "dodge") +
   ggtitle("Median flipper length by species & sex in Palmer penguins sample") +
@@ -763,7 +763,7 @@ Scatter plots are perhaps the most famous plot type, and one most people are wel
 
 For example, suppose we want to make a scatter plot of flipper length vs bill depth to see if there is any correlation between the two. Note we always say **y vs x**, never x vs y. This would be the code:
 
-```{r}
+```{r,tidy=F}
 ggplot(penguins, aes(y = flipper_length_mm, x = bill_depth_mm)) + geom_point() +
   ggtitle("Flipper length vs bill depth for Palmer penguins sample") +
   xlab("Bill depth (mm)") + ylab("Flipper length (mm)")
@@ -776,7 +776,7 @@ It may surprise you to see that these two are negatively correlated, i.e. that a
 
 To improve readability, we can set both the `color` and `shape` aesthetics to be controlled by the species column, as well as slightly increase the size of the points by setting `size = 2` inside `geom_point()`, like this:
 
-```{r}
+```{r,tidy=F}
 ggplot(penguins, aes(y = flipper_length_mm, x = bill_depth_mm,
                      color = species, shape = species)) +
   geom_point(size = 2) +
@@ -793,7 +793,7 @@ When making scatter plots, it's important to remember that **correlation does NO
 
 We can also add a smoothed trend curve/line (depending on context) to this plot to highlight the direction of correlation within each species group. We do this by adding an additional `geom_smooth()` layer to the plot. By default, this will plot a smoothed trend curve (using [LOESS smoothing](https://towardsdatascience.com/loess-373d43b03564)) through each group:
 
-```{r}
+```{r,tidy=F}
 ggplot(penguins, aes(y = flipper_length_mm, x = bill_depth_mm,
                      color = species, shape = species)) +
   geom_point(size = 2) + geom_smooth() +
@@ -803,7 +803,7 @@ ggplot(penguins, aes(y = flipper_length_mm, x = bill_depth_mm,
 
 This is clearly not right here; the data shows strong signs of linearity. We can force `geom_smooth()` to fit and plot linear regression models to each species by setting `method = "lm"`. We can also turn off the unnecessarily cluttering gray error margins with `se = FALSE` and get this much improved plot:
 
-```{r}
+```{r,tidy=F}
 ggplot(penguins, aes(y = flipper_length_mm, x = bill_depth_mm,
                      color = species, shape = species)) +
   geom_point(size = 2) + geom_smooth(method = "lm", se = FALSE) +
