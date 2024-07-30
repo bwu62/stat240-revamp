@@ -875,3 +875,61 @@ ggplot(enrollment, aes(x = year, y = enrolled_millions, fill = sex)) +
 Compared to line plots with one line per category, the stacked area plot has the advantage of easily showing both relative proportions of categories as well as total sum of all categories, but this comes at a cost of being able to easily compare individual categories to each other. So a tradeoff, as usual.
 
 
+### Facet subplots
+
+Another way to incorporate additional aesthetics is to use facets, i.e. instead of having everything on one plot, **breaking off into multiple subplots** to visualize extra dimentions of your dataset.
+
+There are two primary functions for this:
+
+ - `facet_wrap()` creates a **series of subplots along ONE additional categorical column** with one panel for each category, then allows the plots to **wrap onto multiple rows**, the same way a sentence can wrap onto multiple lines. This is best for when you want to incorporate a single additional variable with many levels that wouldn't all fit onto one row.
+ - `facet_grid()` creates a **grid of subplots along one or two additional categorical column(s)**. You can make either a row of subplots, or a column of subplots, or even a matrix of them, incorporating two additional columns into your visualizations.
+
+Let's demonstrate each of these briefly.
+
+
+#### `facet_wrap()`
+
+Going back to the penguins dataset, suppose you wanted to look at the relationship between body mass and flipper length. You start by making this plot:
+
+```{r,tidy=F}
+ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm)) + geom_point()
+```
+
+Maybe you decide to also incorporate species as a variable, so you can see if there are differences between the different species:
+
+```{r,tidy=F}
+ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm,
+                     color = species, shape = species)) +
+  geom_point(size = 2)
+```
+
+Some interesting patterns start to emerge. Suppose you want to take this a step further and also incorporate sex, to see if that adds anything interesting to the picture. You could change for example the mapping to set `shape = sex`, but I think this results in a plot that's a little too complicated and hard to read:
+
+```{r,tidy=F}
+ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm,
+                     color = species, shape = sex)) +
+  geom_point(size = 2)
+```
+
+A better way may be to `facet_wrap()` the species variable, and switch to using both `color` and `shape` to differentiate sex. The syntax for this is to add the faceting layer `facet_wrap()` with the argument `~species` which will automagically split each species into its own facet subplot. You can also set `ncol = 2` to control how/when to wrap the plots:
+
+```{r}
+ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm,
+                     color = sex, shape = sex)) +
+  geom_point(size = 2) + facet_wrap(~species, ncol = 2)
+```
+
+
+
+
+
+<!--
+facets,
+basic scales
+decision tree for plots https://www.data-to-viz.com/
+dont dos https://www.data-to-viz.com/caveats.html
+ - unnecessary colors
+ - colorblindness
+ - unnecessary 3d
+ - aesthetic choices
+-->
