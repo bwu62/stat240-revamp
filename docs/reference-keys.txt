@@ -107,6 +107,8 @@ adding-aesthetics-2
 smoothed-trend-curveslines
 line-plots
 bonus-area-plots
+facet-subplots
+facet_wrap
 datasets
 datasets-list
 eruptions

@@ -18,7 +18,7 @@
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Roboto_Mono-0.4.9/font.css" rel="stylesheet">
-<script src="libs/bs3compat-0.7.0.9000/transition.js"></script><script src="libs/bs3compat-0.7.0.9000/tabs.js"></script><script src="libs/bs3compat-0.7.0.9000/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs3compat-0.8.0/transition.js"></script><script src="libs/bs3compat-0.8.0/tabs.js"></script><script src="libs/bs3compat-0.8.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-E0YDB40HWY"></script><script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -858,6 +858,57 @@ You can make the above plot more accessible to readers with color vision deficie
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"Year"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Enrolled (millions)"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="05-data-exploration_files/figure-html/unnamed-chunk-44-1.svg" width="672" style="display: block; margin: auto;"></div>
 <p>Compared to line plots with one line per category, the stacked area plot has the advantage of easily showing both relative proportions of categories as well as total sum of all categories, but this comes at a cost of being able to easily compare individual categories to each other. So a tradeoff, as usual.</p>
+</div>
+</div>
+<div id="facet-subplots" class="section level3" number="5.2.14">
+<h3>
+<span class="header-section-number">5.2.14</span> Facet subplots<a class="anchor" aria-label="anchor" href="#facet-subplots"><i class="fas fa-link"></i></a>
+</h3>
+<p>Another way to incorporate additional aesthetics is to use facets, i.e. instead of having everything on one plot, <strong>breaking off into multiple subplots</strong> to visualize extra dimentions of your dataset.</p>
+<p>There are two primary functions for this:</p>
+<ul>
+<li>
+<code><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap()</a></code> creates a <strong>series of subplots along ONE additional categorical column</strong> with one panel for each category, then allows the plots to <strong>wrap onto multiple rows</strong>, the same way a sentence can wrap onto multiple lines. This is best for when you want to incorporate a single additional variable with many levels that wouldn’t all fit onto one row.</li>
+<li>
+<code><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html">facet_grid()</a></code> creates a <strong>grid of subplots along one or two additional categorical column(s)</strong>. You can make either a row of subplots, or a column of subplots, or even a matrix of them, incorporating two additional columns into your visualizations.</li>
+</ul>
+<p>Let’s demonstrate each of these briefly.</p>
+<div id="facet_wrap" class="section level4" number="5.2.14.1">
+<h4>
+<span class="header-section-number">5.2.14.1</span> <code>facet_wrap()</code><a class="anchor" aria-label="anchor" href="#facet_wrap"><i class="fas fa-link"></i></a>
+</h4>
+<p>Going back to the penguins dataset, suppose you wanted to look at the relationship between body mass and flipper length. You start by making this plot:</p>
+<div class="sourceCode" id="cb564"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">penguins</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">body_mass_g</span>, y <span class="op">=</span> <span class="va">flipper_length_mm</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="05-data-exploration_files/figure-html/unnamed-chunk-45-1.svg" width="672" style="display: block; margin: auto;"></div>
+<p>Maybe you decide to also incorporate species as a variable, so you can see if there are differences between the different species:</p>
+<div class="sourceCode" id="cb565"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">penguins</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">body_mass_g</span>, y <span class="op">=</span> <span class="va">flipper_length_mm</span>,</span>
+<span>                     color <span class="op">=</span> <span class="va">species</span>, shape <span class="op">=</span> <span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="05-data-exploration_files/figure-html/unnamed-chunk-46-1.svg" width="672" style="display: block; margin: auto;"></div>
+<p>Some interesting patterns start to emerge. Suppose you want to take this a step further and also incorporate sex, to see if that adds anything interesting to the picture. You could change for example the mapping to set <code>shape = sex</code>, but I think this results in a plot that’s a little too complicated and hard to read:</p>
+<div class="sourceCode" id="cb566"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">penguins</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">body_mass_g</span>, y <span class="op">=</span> <span class="va">flipper_length_mm</span>,</span>
+<span>                     color <span class="op">=</span> <span class="va">species</span>, shape <span class="op">=</span> <span class="va">sex</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="05-data-exploration_files/figure-html/unnamed-chunk-47-1.svg" width="672" style="display: block; margin: auto;"></div>
+<p>A better way may be to <code><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap()</a></code> the species variable, and switch to using both <code>color</code> and <code>shape</code> to differentiate sex. The syntax for this is to add the faceting layer <code><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap()</a></code> with the argument <code>~species</code> which will automagically split each species into its own facet subplot. You can also set <code>ncol = 2</code> to control how/when to wrap the plots:</p>
+<div class="sourceCode" id="cb567"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">penguins</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">body_mass_g</span>, y <span class="op">=</span> <span class="va">flipper_length_mm</span>,</span>
+<span>                     color <span class="op">=</span> <span class="va">sex</span>, shape <span class="op">=</span> <span class="va">sex</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">species</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="05-data-exploration_files/figure-html/unnamed-chunk-48-1.svg" width="672" style="display: block; margin: auto;"></div>
+<!--
+facets,
+basic scales
+decision tree for plots https://www.data-to-viz.com/
+dont dos https://www.data-to-viz.com/caveats.html
+ - unnecessary colors
+ - colorblindness
+ - unnecessary 3d
+ - aesthetic choices
+-->
 
 </div>
 </div>
@@ -915,6 +966,7 @@ You can make the above plot more accessible to readers with color vision deficie
 <li><a class="nav-link" href="#scatter-plot"><span class="header-section-number">5.2.11</span> Scatter plot</a></li>
 <li><a class="nav-link" href="#smoothed-trend-curveslines"><span class="header-section-number">5.2.12</span> Smoothed trend curves/lines</a></li>
 <li><a class="nav-link" href="#line-plots"><span class="header-section-number">5.2.13</span> Line plots</a></li>
+<li><a class="nav-link" href="#facet-subplots"><span class="header-section-number">5.2.14</span> Facet subplots</a></li>
 </ul>
 </li>
 </ul>
