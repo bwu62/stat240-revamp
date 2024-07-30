@@ -258,7 +258,7 @@ options(width=80)
 
 -->
 
-## Palmer Penguins
+## Palmer penguins
 
 For the data visualization, I wanted a more feature rich dataset with a healthy combination of numerics and characters that is ready to go, easy to use, fun & interesting, and would make good looking plots for the demos. I spent too long brainstorming ideas, including scraping additional info on the volcanoes, but wasn't happy with the result. Then, while looking for inspiration, I found through Hadley Wickham's excellent [R4DS book](https://r4ds.hadley.nz/data-visualize) the [Palmer penguins](https://allisonhorst.github.io/palmerpenguins/) dataset, which is absolutely perfect.
 
@@ -279,5 +279,57 @@ penguins <- read_csv("data/penguins_complete.csv")
 
 ```{r}
 penguins
+```
+
+
+## College enrollment
+
+```{r,eval=T}
+last.yy = rvest::read_html("https://nces.ed.gov/programs/digest/current_tables.asp") %>%
+  rvest::html_nodes(xpath="//select[@name='quickjump']/option[2]/text()") %>% 
+  as.character %>% as.numeric %>% {.%%100}
+```
+
+I also briefly needed a nice time series dataset with more than 1 groups to demonstrate line plots. Eventually I settled on [table 303.10](`r stringr::str_glue("https://nces.ed.gov/programs/digest/d{last.yy}/tables/dt{last.yy}_303.10.asp")`) of the National Center for Education Statistics (NCES) which contains historic college enrollment data, stratified by sex.
+
+### Process data
+
+```{r}
+enrollment = "https://nces.ed.gov/programs/digest/d{last.yy}/tables/dt{last.yy}_303.10.asp" %>% 
+  str_glue %>% 
+  read_html %>% 
+  html_nodes(xpath="//div[@class='nces']/table[1]") %>% 
+  html_table %>% 
+  {.[[1]][-3,]} %>% 
+  t %>% as.data.frame %>% 
+  rownames_to_column %>% 
+  unite("name",1:3) %>% 
+  column_to_rownames("name") %>% 
+  t %>% as.data.frame %>% 
+  select(matches("Year|(Sex.*(Male|Female))|Nonprofit",ignore.case=F)) %>% 
+  set_names(c("year","male","female","nonprofit")) %>% 
+  mutate(year = str_sub(year,1,4)) %>% 
+  mutate_all(parse_number) %>% 
+  filter(!(is.na(year)&is.na(male)&is.na(female))&year>20,
+         year<year(today())-10|!is.na(nonprofit)) %>% 
+  select(-nonprofit) %>% 
+  mutate(male = male/1e6, female = female/1e6) %>% 
+  pivot_longer(male:female,names_to="sex",values_to="enrolled_mil")
+```
+
+### Write out data
+
+```{r}
+write_csv(enrollment, file="data/enrollment.csv")
+```
+
+### Inspect data
+
+```{r,eval=T,include=F}
+enrollment = read_csv("data/enrollment.csv")
+```
+
+```{r,eval=T}
+enrollment
 ```
 
