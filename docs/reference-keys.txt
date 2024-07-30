@@ -105,6 +105,8 @@ two-variable-plots
 scatter-plot
 adding-aesthetics-2
 smoothed-trend-curveslines
+line-plots
+bonus-area-plots
 datasets
 datasets-list
 eruptions

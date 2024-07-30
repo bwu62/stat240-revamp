@@ -803,7 +803,63 @@ You can make the above plot more accessible to readers with color vision deficie
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"Bill depth (mm)"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Flipper length (mm)"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="05-data-exploration_files/figure-html/unnamed-chunk-39-1.svg" width="672" style="display: block; margin: auto;"></div>
 <p>Note that since <code>x</code>, <code>y</code>, and <code>color</code> are set in the base <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code> object, all subsequent layers automagically inherit those aesthetics; this is how both <code><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point()</a></code> and <code><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth()</a></code> know to use those aesthetic mappings to construct their own plot layers. Trend curves don’t make use of the <code>shape</code> aesthetic which only applies to the scatter plot layer, so that’s simply ignored by <code><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth()</a></code>.</p>
+</div>
+<div id="line-plots" class="section level3" number="5.2.13">
+<h3>
+<span class="header-section-number">5.2.13</span> Line plots<a class="anchor" aria-label="anchor" href="#line-plots"><i class="fas fa-link"></i></a>
+</h3>
+<p>For some specific datasets, especially chronological datasets where some variable is plotted against time, it may make sense to <strong>directly connect each individual data point with the points before and after it to form a line plot</strong>. Note this is NOT the same as the smoothed trend plot shown above since for a line plot there is <strong>no smoothing performed</strong>!</p>
+<p>Unfortunately, the Palmer penguins dataset isn’t the best example for this last plot type, so I’m temporarily borrowing another dataset for this example. The chunk below imports <a href="https://bwu62.github.io/stat240-revamp/data/enrollment.csv"><code>enrollment.csv</code></a> which contains historic U.S. college enrollment data by each sex.</p>
+<div class="sourceCode" id="cb558"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">enrollment</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span></span>
+<span>  <span class="st">"https://bwu62.github.io/stat240-revamp/data/enrollment.csv"</span>,</span>
+<span>  show_col_types <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co"># show a glimpse of the dataset</span></span>
+<span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">enrollment</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Rows: 146
+## Columns: 3
+## $ year              &lt;dbl&gt; 1947, 1947, 1948, 1948, 1949, 1949, 1950, 1950, 1951…
+## $ sex               &lt;chr&gt; "male", "female", "male", "female", "male", "female"…
+## $ enrolled_millions &lt;dbl&gt; 1.659249, 0.678977, 1.709367, 0.694029, 1.721572, 0.…</code></pre>
+<p>Here, each row is a pair of male and female college enrollment counts (in millions) for a specific year. We can obviously just make a scatter plot of enrollment vs year, with additional aesthetics differentiating between male and female data points, like this:</p>
+<div class="sourceCode" id="cb560"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">enrollment</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">year</span>, y <span class="op">=</span> <span class="va">enrolled_millions</span>,</span>
+<span>                       color <span class="op">=</span> <span class="va">sex</span>, shape <span class="op">=</span> <span class="va">sex</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"U.S. college enrollment by sex"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"Year"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Enrolled (millions)"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="05-data-exploration_files/figure-html/unnamed-chunk-41-1.svg" width="672" style="display: block; margin: auto;"></div>
+<p>However, the chronological nature of this data means <strong>each data point has a specific predecessor and successor</strong>, i.e. for each point (except the end points) there is a specific single point that comes before and after it. Thus, it makes more sense to connect these points with a single continuous line for each sex. This can be done by using <code><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line()</a></code> instead. We can also drop the <code>shape</code> aesthetic since it doesn’t apply to lines:</p>
+<div class="sourceCode" id="cb561"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">enrollment</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">year</span>, y <span class="op">=</span> <span class="va">enrolled_millions</span>, color <span class="op">=</span> <span class="va">sex</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"U.S. college enrollment by sex"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"Year"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Enrolled (millions)"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="05-data-exploration_files/figure-html/unnamed-chunk-42-1.svg" width="672" style="display: block; margin: auto;"></div>
+<p>By default the line appears very thin and may be hard to read for some people. We can add <code>linewidth = 1.2</code> to <code><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line()</a></code> to increase the thickness. We can also add another aesthetic <code>linetype = sex</code> for additional disambiguation so it’s extremely clear which line corresponds to which sex:</p>
+<div class="sourceCode" id="cb562"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">enrollment</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">year</span>, y <span class="op">=</span> <span class="va">enrolled_millions</span>,</span>
+<span>                       color <span class="op">=</span> <span class="va">sex</span>, linetype <span class="op">=</span> <span class="va">sex</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>linewidth <span class="op">=</span> <span class="fl">1.2</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"U.S. college enrollment by sex"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"Year"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Enrolled (millions)"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="05-data-exploration_files/figure-html/unnamed-chunk-43-1.svg" width="672" style="display: block; margin: auto;"></div>
+<p>We can see that since the late 70’s, college enrollment of female students has consistently outpaced that of male students.</p>
+<div id="bonus-area-plots" class="section level4" number="5.2.13.1">
+<h4>
+<span class="header-section-number">5.2.13.1</span> Bonus: area plots<a class="anchor" aria-label="anchor" href="#bonus-area-plots"><i class="fas fa-link"></i></a>
+</h4>
+<p>I wanted to throw in a bonus plot type here. This kind of composition-over-time data is also VERY commonly shown as a <a href="https://r-graph-gallery.com/136-stacked-area-chart.html">stacked area plot</a> which can be made with <code><a href="https://ggplot2.tidyverse.org/reference/geom_ribbon.html">geom_area()</a></code>. I’ve also added a <code><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual()</a></code> configuration layer to manually specify a color palette to use more intuitive colors for each category.</p>
+<div class="sourceCode" id="cb563"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">enrollment</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">year</span>, y <span class="op">=</span> <span class="va">enrolled_millions</span>, fill <span class="op">=</span> <span class="va">sex</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_ribbon.html">geom_area</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#fb9a99"</span>, <span class="st">"#a6cee3"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"U.S. college enrollment by sex"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"Year"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Enrolled (millions)"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="05-data-exploration_files/figure-html/unnamed-chunk-44-1.svg" width="672" style="display: block; margin: auto;"></div>
+<p>Compared to line plots with one line per category, the stacked area plot has the advantage of easily showing both relative proportions of categories as well as total sum of all categories, but this comes at a cost of being able to easily compare individual categories to each other. So a tradeoff, as usual.</p>
 
+</div>
 </div>
 </div>
 </div>
@@ -858,6 +914,7 @@ You can make the above plot more accessible to readers with color vision deficie
 <li><a class="nav-link" href="#two-variable-plots"><span class="header-section-number">5.2.10</span> Two-variable plots</a></li>
 <li><a class="nav-link" href="#scatter-plot"><span class="header-section-number">5.2.11</span> Scatter plot</a></li>
 <li><a class="nav-link" href="#smoothed-trend-curveslines"><span class="header-section-number">5.2.12</span> Smoothed trend curves/lines</a></li>
+<li><a class="nav-link" href="#line-plots"><span class="header-section-number">5.2.13</span> Line plots</a></li>
 </ul>
 </li>
 </ul>

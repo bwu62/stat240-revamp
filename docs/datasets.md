@@ -336,7 +336,7 @@ enrollment = "https://nces.ed.gov/programs/digest/d{last.yy}/tables/dt{last.yy}_
          year<year(today())-10|!is.na(nonprofit)) %>% 
   select(-nonprofit) %>% 
   mutate(male = male/1e6, female = female/1e6) %>% 
-  pivot_longer(male:female,names_to="sex",values_to="enrolled_mil")
+  pivot_longer(male:female,names_to="sex",values_to="enrolled_millions")
 ```
 
 ### Write out data
@@ -357,18 +357,18 @@ enrollment
 
 ```
 ## # A tibble: 146 × 3
-##     year sex    enrolled_mil
-##    <dbl> <chr>         <dbl>
-##  1  1947 male          1.66 
-##  2  1947 female        0.679
-##  3  1948 male          1.71 
-##  4  1948 female        0.694
-##  5  1949 male          1.72 
-##  6  1949 female        0.723
-##  7  1950 male          1.56 
-##  8  1950 female        0.721
-##  9  1951 male          1.39 
-## 10  1951 female        0.711
+##     year sex    enrolled_millions
+##    <dbl> <chr>              <dbl>
+##  1  1947 male               1.66 
+##  2  1947 female             0.679
+##  3  1948 male               1.71 
+##  4  1948 female             0.694
+##  5  1949 male               1.72 
+##  6  1949 female             0.723
+##  7  1950 male               1.56 
+##  8  1950 female             0.721
+##  9  1951 male               1.39 
+## 10  1951 female             0.711
 ## # ℹ 136 more rows
 ```
 
