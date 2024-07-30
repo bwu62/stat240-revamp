@@ -115,6 +115,10 @@ inspect-data
 palmer-penguins-1
 write-out-data-1
 inspect-data-1
+college-enrollment
+process-data-1
+write-out-data-2
+inspect-data-2
 cheat-sheets
 rstudio-ide
 base-r

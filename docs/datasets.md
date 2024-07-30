@@ -24,6 +24,7 @@ library(xlsx)
 
 Here's a convenient list of all dataset files generated. Note that **not ALL files are used in the notes!**. These are primarily for my own record keeping purposes. Also note that some files may automatically open a download prompt while others may not. To force download, right click on a file link and choose "Save link as".
 
+ - [`enrollment.csv`](data/enrollment.csv)
  - [`eruptions_recent.csv`](data/eruptions_recent.csv)
  - [`eruptions_recent.delim`](data/eruptions_recent.delim)
  - [`eruptions_recent.tsv`](data/eruptions_recent.tsv)
@@ -277,7 +278,7 @@ options(width=80)
 
 -->
 
-## Palmer Penguins
+## Palmer penguins
 
 For the data visualization, I wanted a more feature rich dataset with a healthy combination of numerics and characters that is ready to go, easy to use, fun & interesting, and would make good looking plots for the demos. I spent too long brainstorming ideas, including scraping additional info on the volcanoes, but wasn't happy with the result. Then, while looking for inspiration, I found through Hadley Wickham's excellent [R4DS book](https://r4ds.hadley.nz/data-visualize) the [Palmer penguins](https://allisonhorst.github.io/palmerpenguins/) dataset, which is absolutely perfect.
 
@@ -298,5 +299,76 @@ write_csv(penguins %>% drop_na,"data/penguins_complete.csv")
 
 ``` r
 penguins
+```
+
+
+## College enrollment
+
+
+``` r
+last.yy = rvest::read_html("https://nces.ed.gov/programs/digest/current_tables.asp") %>%
+  rvest::html_nodes(xpath="//select[@name='quickjump']/option[2]/text()") %>% 
+  as.character %>% as.numeric %>% {.%%100}
+```
+
+I also briefly needed a nice time series dataset with more than 1 groups to demonstrate line plots. Eventually I settled on [table 303.10](https://nces.ed.gov/programs/digest/d23/tables/dt23_303.10.asp) of the National Center for Education Statistics (NCES) which contains historic college enrollment data, stratified by sex.
+
+### Process data
+
+
+``` r
+enrollment = "https://nces.ed.gov/programs/digest/d{last.yy}/tables/dt{last.yy}_303.10.asp" %>% 
+  str_glue %>% 
+  read_html %>% 
+  html_nodes(xpath="//div[@class='nces']/table[1]") %>% 
+  html_table %>% 
+  {.[[1]][-3,]} %>% 
+  t %>% as.data.frame %>% 
+  rownames_to_column %>% 
+  unite("name",1:3) %>% 
+  column_to_rownames("name") %>% 
+  t %>% as.data.frame %>% 
+  select(matches("Year|(Sex.*(Male|Female))|Nonprofit",ignore.case=F)) %>% 
+  set_names(c("year","male","female","nonprofit")) %>% 
+  mutate(year = str_sub(year,1,4)) %>% 
+  mutate_all(parse_number) %>% 
+  filter(!(is.na(year)&is.na(male)&is.na(female))&year>20,
+         year<year(today())-10|!is.na(nonprofit)) %>% 
+  select(-nonprofit) %>% 
+  mutate(male = male/1e6, female = female/1e6) %>% 
+  pivot_longer(male:female,names_to="sex",values_to="enrolled_mil")
+```
+
+### Write out data
+
+
+``` r
+write_csv(enrollment, file="data/enrollment.csv")
+```
+
+### Inspect data
+
+
+
+
+``` r
+enrollment
+```
+
+```
+## # A tibble: 146 × 3
+##     year sex    enrolled_mil
+##    <dbl> <chr>         <dbl>
+##  1  1947 male          1.66 
+##  2  1947 female        0.679
+##  3  1948 male          1.71 
+##  4  1948 female        0.694
+##  5  1949 male          1.72 
+##  6  1949 female        0.723
+##  7  1950 male          1.56 
+##  8  1950 female        0.721
+##  9  1951 male          1.39 
+## 10  1951 female        0.711
+## # ℹ 136 more rows
 ```
 

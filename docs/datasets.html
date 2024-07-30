@@ -83,6 +83,7 @@
 </h2>
 <p>Here’s a convenient list of all dataset files generated. Note that <strong>not ALL files are used in the notes!</strong>. These are primarily for my own record keeping purposes. Also note that some files may automatically open a download prompt while others may not. To force download, right click on a file link and choose “Save link as”.</p>
 <ul>
+<li><a href="data/enrollment.csv"><code>enrollment.csv</code></a></li>
 <li><a href="data/eruptions_recent.csv"><code>eruptions_recent.csv</code></a></li>
 <li><a href="data/eruptions_recent.delim"><code>eruptions_recent.delim</code></a></li>
 <li><a href="data/eruptions_recent.tsv"><code>eruptions_recent.tsv</code></a></li>
@@ -328,7 +329,7 @@ options(width=80)
 </div>
 <div id="palmer-penguins-1" class="section level2" number="6.3">
 <h2>
-<span class="header-section-number">A.3</span> Palmer Penguins<a class="anchor" aria-label="anchor" href="#palmer-penguins-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">A.3</span> Palmer penguins<a class="anchor" aria-label="anchor" href="#palmer-penguins-1"><i class="fas fa-link"></i></a>
 </h2>
 <p>For the data visualization, I wanted a more feature rich dataset with a healthy combination of numerics and characters that is ready to go, easy to use, fun &amp; interesting, and would make good looking plots for the demos. I spent too long brainstorming ideas, including scraping additional info on the volcanoes, but wasn’t happy with the result. Then, while looking for inspiration, I found through Hadley Wickham’s excellent <a href="https://r4ds.hadley.nz/data-visualize">R4DS book</a> the <a href="https://allisonhorst.github.io/palmerpenguins/">Palmer penguins</a> dataset, which is absolutely perfect.</p>
 <p>Now, I want students to continue practicing reading datasets, so the following code simple extracts the dataset therein and rewrites it out.</p>
@@ -346,6 +347,70 @@ options(width=80)
 </h3>
 <div class="sourceCode" id="cb566"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">penguins</span></span></code></pre></div>
+</div>
+</div>
+<div id="college-enrollment" class="section level2" number="6.4">
+<h2>
+<span class="header-section-number">A.4</span> College enrollment<a class="anchor" aria-label="anchor" href="#college-enrollment"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb567"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">last.yy</span> <span class="op">=</span> <span class="fu">rvest</span><span class="fu">::</span><span class="fu"><a href="http://xml2.r-lib.org/reference/read_xml.html">read_html</a></span><span class="op">(</span><span class="st">"https://nces.ed.gov/programs/digest/current_tables.asp"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">rvest</span><span class="fu">::</span><span class="fu"><a href="https://rvest.tidyverse.org/reference/rename.html">html_nodes</a></span><span class="op">(</span>xpath<span class="op">=</span><span class="st">"//select[@name='quickjump']/option[2]/text()"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="va">as.character</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">as.numeric</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="op">{</span><span class="va">.</span><span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html">%%</a></span><span class="fl">100</span><span class="op">}</span></span></code></pre></div>
+<p>I also briefly needed a nice time series dataset with more than 1 groups to demonstrate line plots. Eventually I settled on <a href="https://nces.ed.gov/programs/digest/d23/tables/dt23_303.10.asp">table 303.10</a> of the National Center for Education Statistics (NCES) which contains historic college enrollment data, stratified by sex.</p>
+<div id="process-data-1" class="section level3" number="6.4.1">
+<h3>
+<span class="header-section-number">A.4.1</span> Process data<a class="anchor" aria-label="anchor" href="#process-data-1"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb568"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">enrollment</span> <span class="op">=</span> <span class="st">"https://nces.ed.gov/programs/digest/d{last.yy}/tables/dt{last.yy}_303.10.asp"</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="va">str_glue</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="va">read_html</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rvest.tidyverse.org/reference/rename.html">html_nodes</a></span><span class="op">(</span>xpath<span class="op">=</span><span class="st">"//div[@class='nces']/table[1]"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="va">html_table</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="op">{</span><span class="va">.</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="op">-</span><span class="fl">3</span>,<span class="op">]</span><span class="op">}</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="va">t</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">as.data.frame</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="va">rownames_to_column</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unite.html">unite</a></span><span class="op">(</span><span class="st">"name"</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">column_to_rownames</a></span><span class="op">(</span><span class="st">"name"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="va">t</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">as.data.frame</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">matches</a></span><span class="op">(</span><span class="st">"Year|(Sex.*(Male|Female))|Nonprofit"</span>,ignore.case<span class="op">=</span><span class="cn">F</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rlang.r-lib.org/reference/set_names.html">set_names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"year"</span>,<span class="st">"male"</span>,<span class="st">"female"</span>,<span class="st">"nonprofit"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_sub.html">str_sub</a></span><span class="op">(</span><span class="va">year</span>,<span class="fl">1</span>,<span class="fl">4</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_all</a></span><span class="op">(</span><span class="va">parse_number</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span><span class="op">&amp;</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">male</span><span class="op">)</span><span class="op">&amp;</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">female</span><span class="op">)</span><span class="op">)</span><span class="op">&amp;</span><span class="va">year</span><span class="op">&gt;</span><span class="fl">20</span>,</span>
+<span>         <span class="va">year</span><span class="op">&lt;</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/year.html">year</a></span><span class="op">(</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/now.html">today</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">-</span><span class="fl">10</span><span class="op">|</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">nonprofit</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">nonprofit</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>male <span class="op">=</span> <span class="va">male</span><span class="op">/</span><span class="fl">1e6</span>, female <span class="op">=</span> <span class="va">female</span><span class="op">/</span><span class="fl">1e6</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span><span class="va">male</span><span class="op">:</span><span class="va">female</span>,names_to<span class="op">=</span><span class="st">"sex"</span>,values_to<span class="op">=</span><span class="st">"enrolled_mil"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="write-out-data-2" class="section level3" number="6.4.2">
+<h3>
+<span class="header-section-number">A.4.2</span> Write out data<a class="anchor" aria-label="anchor" href="#write-out-data-2"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb569"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html">write_csv</a></span><span class="op">(</span><span class="va">enrollment</span>, file<span class="op">=</span><span class="st">"data/enrollment.csv"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="inspect-data-2" class="section level3" number="6.4.3">
+<h3>
+<span class="header-section-number">A.4.3</span> Inspect data<a class="anchor" aria-label="anchor" href="#inspect-data-2"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb570"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">enrollment</span></span></code></pre></div>
+<pre><code>## # A tibble: 146 × 3
+##     year sex    enrolled_mil
+##    &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;
+##  1  1947 male          1.66 
+##  2  1947 female        0.679
+##  3  1948 male          1.71 
+##  4  1948 female        0.694
+##  5  1949 male          1.72 
+##  6  1949 female        0.723
+##  7  1950 male          1.56 
+##  8  1950 female        0.721
+##  9  1951 male          1.39 
+## 10  1951 female        0.711
+## # ℹ 136 more rows</code></pre>
 
 </div>
 </div>
@@ -377,9 +442,16 @@ options(width=80)
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#palmer-penguins-1"><span class="header-section-number">A.3</span> Palmer Penguins</a><ul class="nav navbar-nav">
+<a class="nav-link" href="#palmer-penguins-1"><span class="header-section-number">A.3</span> Palmer penguins</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#write-out-data-1"><span class="header-section-number">A.3.1</span> Write out data</a></li>
 <li><a class="nav-link" href="#inspect-data-1"><span class="header-section-number">A.3.2</span> Inspect data</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#college-enrollment"><span class="header-section-number">A.4</span> College enrollment</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#process-data-1"><span class="header-section-number">A.4.1</span> Process data</a></li>
+<li><a class="nav-link" href="#write-out-data-2"><span class="header-section-number">A.4.2</span> Write out data</a></li>
+<li><a class="nav-link" href="#inspect-data-2"><span class="header-section-number">A.4.3</span> Inspect data</a></li>
 </ul>
 </li>
 </ul>
@@ -399,7 +471,7 @@ options(width=80)
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, Bret Larget, Cameron Jones. It was last built on 2024-07-29.</p>
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, Bret Larget, Cameron Jones. It was last built on 2024-07-30.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
