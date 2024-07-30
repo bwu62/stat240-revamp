@@ -314,7 +314,7 @@ enrollment = "https://nces.ed.gov/programs/digest/d{last.yy}/tables/dt{last.yy}_
          year<year(today())-10|!is.na(nonprofit)) %>% 
   select(-nonprofit) %>% 
   mutate(male = male/1e6, female = female/1e6) %>% 
-  pivot_longer(male:female,names_to="sex",values_to="enrolled_mil")
+  pivot_longer(male:female,names_to="sex",values_to="enrolled_millions")
 ```
 
 ### Write out data
