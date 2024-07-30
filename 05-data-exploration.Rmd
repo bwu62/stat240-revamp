@@ -814,5 +814,64 @@ ggplot(penguins, aes(y = flipper_length_mm, x = bill_depth_mm,
 Note that since `x`, `y`, and `color` are set in the base `ggplot()` object, all subsequent layers automagically inherit those aesthetics; this is how both `geom_point()` and `geom_smooth()` know to use those aesthetic mappings to construct their own plot layers. Trend curves don't make use of the `shape` aesthetic which only applies to the scatter plot layer, so that's simply ignored by `geom_smooth()`.
 
 
+### Line plots
+
+For some specific datasets, especially chronological datasets where some variable is plotted against time, it may make sense to **directly connect each individual data point with the points before and after it to form a line plot**. Note this is NOT the same as the smoothed trend plot shown above since for a line plot there is **no smoothing performed**!
+
+Unfortunately, the Palmer penguins dataset isn't the best example for this last plot type, so I'm temporarily borrowing another dataset for this example. The chunk below imports [`enrollment.csv`](https://bwu62.github.io/stat240-revamp/data/enrollment.csv) which contains historic U.S. college enrollment data by each sex.
+
+```{r}
+enrollment <- read_csv(
+  "https://bwu62.github.io/stat240-revamp/data/enrollment.csv",
+  show_col_types = FALSE
+)
+# show a glimpse of the dataset
+glimpse(enrollment)
+```
+
+Here, each row is a pair of male and female college enrollment counts (in millions) for a specific year. We can obviously just make a scatter plot of enrollment vs year, with additional aesthetics differentiating between male and female data points, like this:
+
+```{r,tidy=F}
+ggplot(enrollment, aes(x = year, y = enrolled_millions,
+                       color = sex, shape = sex)) +
+  geom_point(size = 2) +
+  ggtitle("U.S. college enrollment by sex") +
+  xlab("Year") + ylab("Enrolled (millions)")
+```
+
+However, the chronological nature of this data means **each data point has a specific predecessor and successor**, i.e. for each point (except the end points) there is a specific single point that comes before and after it. Thus, it makes more sense to connect these points with a single continuous line for each sex. This can be done by using `geom_line()` instead. We can also drop the `shape` aesthetic since it doesn't apply to lines:
+
+```{r,tidy=F}
+ggplot(enrollment, aes(x = year, y = enrolled_millions, color = sex)) +
+  geom_line() +
+  ggtitle("U.S. college enrollment by sex") +
+  xlab("Year") + ylab("Enrolled (millions)")
+```
+
+By default the line appears very thin and may be hard to read for some people. We can add `linewidth = 1.2` to `geom_line()` to increase the thickness. We can also add another aesthetic `linetype = sex` for additional disambiguation so it's extremely clear which line corresponds to which sex:
+
+```{r,tidy=F}
+ggplot(enrollment, aes(x = year, y = enrolled_millions,
+                       color = sex, linetype = sex)) +
+  geom_line(linewidth = 1.2) +
+  ggtitle("U.S. college enrollment by sex") +
+  xlab("Year") + ylab("Enrolled (millions)")
+```
+
+We can see that since the late 70's, college enrollment of female students has consistently outpaced that of male students.
+
+
+#### Bonus: area plots
+
+I wanted to throw in a bonus plot type here. This kind of composition-over-time data is also VERY commonly shown as a [stacked area plot](https://r-graph-gallery.com/136-stacked-area-chart.html) which can be made with `geom_area()`. I've also added a `scale_fill_manual()` configuration layer to manually specify a color palette to use more intuitive colors for each category.
+
+```{r,tidy=F}
+ggplot(enrollment, aes(x = year, y = enrolled_millions, fill = sex)) +
+  geom_area() + scale_fill_manual(values = c("#fb9a99", "#a6cee3")) +
+  ggtitle("U.S. college enrollment by sex") +
+  xlab("Year") + ylab("Enrolled (millions)")
+```
+
+Compared to line plots with one line per category, the stacked area plot has the advantage of easily showing both relative proportions of categories as well as total sum of all categories, but this comes at a cost of being able to easily compare individual categories to each other. So a tradeoff, as usual.
 
 
