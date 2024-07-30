@@ -101,6 +101,10 @@ box-plots
 bar-plots
 extra-options-1
 adding-aesthetics-1
+two-variable-plots
+scatter-plot
+adding-aesthetics-2
+smoothed-trend-curveslines
 datasets
 datasets-list
 eruptions

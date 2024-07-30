@@ -403,7 +403,7 @@ When studying each plot type, it's important to keep the following questions in 
 
 ### ggplot2
 
-We will be making all plots using the [ggplot2](https://ggplot2.tidyverse.org/) package which is also a core Tidyverse package. It offers a robust syntax for easily creating and modifying plots. When making a ggplot2 plot, it's important to remember **everything is a layer** that you **add onto the base object using `+`** just like adding numbers. Whether you're adding a plot, a faceting structure, changing the axes, adding annotations (e.g. title/labels), etc. they're all layers that are added. This may seem strange at first, but you'll quickly grasp it in the examples that follow.
+We will be making all plots using the [ggplot2](https://ggplot2.tidyverse.org) package which is also a core Tidyverse package. It offers a robust syntax for easily creating and modifying plots. When making a ggplot2 plot, it's important to remember **everything is a layer** that you **add onto the base object using `+`** just like adding numbers. Whether you're adding a plot, a faceting structure, changing the axes, adding annotations (e.g. title/labels), etc. they're all layers that are added. This may seem strange at first, but you'll quickly grasp it in the examples that follow.
 
 I already have core Tidyverse packages loaded from section \@ref(mean) above, but if you need to load it again make sure to run the following:
 
@@ -415,7 +415,8 @@ library(tidyverse)
 # optional: set a prettier theme and colorblind-friendly palette for plots
 #           (also looks better if printed with most printers, even in b/w)
 theme_set(theme_bw())
-options(ggplot2.discrete.fill = \(...) scale_fill_brewer(..., palette = "Set2"))
+options(ggplot2.discrete.fill = \(...) scale_fill_brewer(..., palette = "Set2"),
+        ggplot2.discrete.colour = \(...) scale_color_brewer(..., palette = "Dark2"))
 ```
 
 
@@ -880,5 +881,82 @@ ggplot(penguins, aes(x = species, y = flipper_length_mm, fill = sex)) +
 ```
 
 <img src="05-data-exploration_files/figure-html/unnamed-chunk-35-1.svg" width="672" style="display: block; margin: auto;" />
+
+
+
+### Two-variable plots
+
+In contrast with the previous types, the plot types below MUST be made with at least two variables; they are not possible with a single column.
+
+
+### Scatter plot
+
+Scatter plots are perhaps the most famous plot type, and one most people are well familiar with. Scatter plots are your classic **y vs x plot of two numeric variables as Cartesian coordinates** on a 2-dimensional grid. To make a scatter plot with ggplot2, you just need to map the `x` and `y` aesthetics to two columns, then add `geom_point()` as a layer.
+
+For example, suppose we want to make a scatter plot of flipper length vs bill depth to see if there is any correlation between the two. Note we always say **y vs x**, never x vs y. This would be the code:
+
+
+``` r
+ggplot(penguins, aes(y = flipper_length_mm, x = bill_depth_mm)) + geom_point() +
+  ggtitle("Flipper length vs bill depth for Palmer penguins sample") +
+  xlab("Bill depth (mm)") + ylab("Flipper length (mm)")
+```
+
+<img src="05-data-exploration_files/figure-html/unnamed-chunk-36-1.svg" width="672" style="display: block; margin: auto;" />
+
+
+#### Adding aesthetics
+
+It may surprise you to see that these two are negatively correlated, i.e. that an increase in bill depth seems to correlate with a decrease in flipper length, or vice versa. However, if we again add species to the plot, you will see an interesting pattern emerge.
+
+To improve readability, we can set both the `color` and `shape` aesthetics to be controlled by the species column, as well as slightly increase the size of the points by setting `size = 2` inside `geom_point()`, like this:
+
+
+``` r
+ggplot(penguins, aes(y = flipper_length_mm, x = bill_depth_mm,
+                     color = species, shape = species)) +
+  geom_point(size = 2) +
+  ggtitle("Flipper length vs bill depth by species for Palmer penguins sample") +
+  xlab("Bill depth (mm)") + ylab("Flipper length (mm)")
+```
+
+<img src="05-data-exploration_files/figure-html/unnamed-chunk-37-1.svg" width="672" style="display: block; margin: auto;" />
+
+Now we can clearly see bill depth and flipper length are in fact positively correlated within each species, as we might expect. This is an effect called [Simpson's paradox](https://en.wikipedia.org/wiki/Simpson%27s_paradox) and arises surprisingly often in datasets, most notably in 1973 when [UC Berkeley was accused of gender discrimination](www.brookings.edu/articles/when-average-isnt-good-enough-simpsons-paradox-in-education-and-earnings) and almost sued.^[Apparently [no lawsuit was actually ever filed](https://www.refsmmat.com/posts/2016-05-08-simpsons-paradox-berkeley.html){target="_blank"}, though many sources wrongly claim otherwise. This incident has become rather infamous in the annals of statistics.]
+
+When making scatter plots, it's important to remember that **correlation does NOT necessarily imply causation**. Do flippers grow longer BECAUSE they have long bills or vice versa? Obviously probably not, some penguins just grow bigger than others in their species by winning the genetic lottery and have bigger features overall.^[[Relevant XKCD](https://xkcd.com/552){target="_blank"}.]
+
+
+### Smoothed trend curves/lines
+
+We can also add a smoothed trend curve/line (depending on context) to this plot to highlight the direction of correlation within each species group. We do this by adding an additional `geom_smooth()` layer to the plot. By default, this will plot a smoothed trend curve (using [LOESS smoothing](https://towardsdatascience.com/loess-373d43b03564)) through each group:
+
+
+``` r
+ggplot(penguins, aes(y = flipper_length_mm, x = bill_depth_mm,
+                     color = species, shape = species)) +
+  geom_point(size = 2) + geom_smooth() +
+  ggtitle("Flipper length vs bill depth by species for Palmer penguins sample") +
+  xlab("Bill depth (mm)") + ylab("Flipper length (mm)")
+```
+
+<img src="05-data-exploration_files/figure-html/unnamed-chunk-38-1.svg" width="672" style="display: block; margin: auto;" />
+
+This is clearly not right here; the data shows strong signs of linearity. We can force `geom_smooth()` to fit and plot linear regression models to each species by setting `method = "lm"`. We can also turn off the unnecessarily cluttering gray error margins with `se = FALSE` and get this much improved plot:
+
+
+``` r
+ggplot(penguins, aes(y = flipper_length_mm, x = bill_depth_mm,
+                     color = species, shape = species)) +
+  geom_point(size = 2) + geom_smooth(method = "lm", se = FALSE) +
+  ggtitle("Flipper length vs bill depth by species for Palmer penguins sample") +
+  xlab("Bill depth (mm)") + ylab("Flipper length (mm)")
+```
+
+<img src="05-data-exploration_files/figure-html/unnamed-chunk-39-1.svg" width="672" style="display: block; margin: auto;" />
+
+Note that since `x`, `y`, and `color` are set in the base `ggplot()` object, all subsequent layers automagically inherit those aesthetics; this is how both `geom_point()` and `geom_smooth()` know to use those aesthetic mappings to construct their own plot layers. Trend curves don't make use of the `shape` aesthetic which only applies to the scatter plot layer, so that's simply ignored by `geom_smooth()`.
+
+
 
 

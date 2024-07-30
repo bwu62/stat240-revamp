@@ -351,7 +351,7 @@
 <h3>
 <span class="header-section-number">5.2.1</span> ggplot2<a class="anchor" aria-label="anchor" href="#ggplot2"><i class="fas fa-link"></i></a>
 </h3>
-<p>We will be making all plots using the <a href="https://ggplot2.tidyverse.org/">ggplot2</a> package which is also a core Tidyverse package. It offers a robust syntax for easily creating and modifying plots. When making a ggplot2 plot, it’s important to remember <strong>everything is a layer</strong> that you <strong>add onto the base object using <code>+</code></strong> just like adding numbers. Whether you’re adding a plot, a faceting structure, changing the axes, adding annotations (e.g. title/labels), etc. they’re all layers that are added. This may seem strange at first, but you’ll quickly grasp it in the examples that follow.</p>
+<p>We will be making all plots using the <a href="https://ggplot2.tidyverse.org">ggplot2</a> package which is also a core Tidyverse package. It offers a robust syntax for easily creating and modifying plots. When making a ggplot2 plot, it’s important to remember <strong>everything is a layer</strong> that you <strong>add onto the base object using <code>+</code></strong> just like adding numbers. Whether you’re adding a plot, a faceting structure, changing the axes, adding annotations (e.g. title/labels), etc. they’re all layers that are added. This may seem strange at first, but you’ll quickly grasp it in the examples that follow.</p>
 <p>I already have core Tidyverse packages loaded from section <a href="data-exploration.html#mean">5.1.2</a> above, but if you need to load it again make sure to run the following:</p>
 <div class="sourceCode" id="cb526"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># if you need to, reimport all core tidyverse packages</span></span>
@@ -360,7 +360,8 @@
 <span><span class="co"># optional: set a prettier theme and colorblind-friendly palette for plots</span></span>
 <span><span class="co">#           (also looks better if printed with most printers, even in b/w)</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html">theme_set</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>ggplot2.discrete.fill <span class="op">=</span> \<span class="op">(</span><span class="va">...</span><span class="op">)</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_fill_brewer</a></span><span class="op">(</span><span class="va">...</span>, palette <span class="op">=</span> <span class="st">"Set2"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>ggplot2.discrete.fill <span class="op">=</span> \<span class="op">(</span><span class="va">...</span><span class="op">)</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_fill_brewer</a></span><span class="op">(</span><span class="va">...</span>, palette <span class="op">=</span> <span class="st">"Set2"</span><span class="op">)</span>,</span>
+<span>        ggplot2.discrete.colour <span class="op">=</span> \<span class="op">(</span><span class="va">...</span><span class="op">)</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_color_brewer</a></span><span class="op">(</span><span class="va">...</span>, palette <span class="op">=</span> <span class="st">"Dark2"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div id="palmer-penguins" class="section level3" number="5.2.2">
 <h3>
@@ -745,8 +746,64 @@ You can make the above plot more accessible to readers with color vision deficie
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"Median flipper length by species &amp; sex in Palmer penguins sample"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"Species"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Median flipper length (mm)"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="05-data-exploration_files/figure-html/unnamed-chunk-35-1.svg" width="672" style="display: block; margin: auto;"></div>
-
 </div>
+</div>
+<div id="two-variable-plots" class="section level3" number="5.2.10">
+<h3>
+<span class="header-section-number">5.2.10</span> Two-variable plots<a class="anchor" aria-label="anchor" href="#two-variable-plots"><i class="fas fa-link"></i></a>
+</h3>
+<p>In contrast with the previous types, the plot types below MUST be made with at least two variables; they are not possible with a single column.</p>
+</div>
+<div id="scatter-plot" class="section level3" number="5.2.11">
+<h3>
+<span class="header-section-number">5.2.11</span> Scatter plot<a class="anchor" aria-label="anchor" href="#scatter-plot"><i class="fas fa-link"></i></a>
+</h3>
+<p>Scatter plots are perhaps the most famous plot type, and one most people are well familiar with. Scatter plots are your classic <strong>y vs x plot of two numeric variables as Cartesian coordinates</strong> on a 2-dimensional grid. To make a scatter plot with ggplot2, you just need to map the <code>x</code> and <code>y</code> aesthetics to two columns, then add <code><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point()</a></code> as a layer.</p>
+<p>For example, suppose we want to make a scatter plot of flipper length vs bill depth to see if there is any correlation between the two. Note we always say <strong>y vs x</strong>, never x vs y. This would be the code:</p>
+<div class="sourceCode" id="cb554"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">penguins</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">flipper_length_mm</span>, x <span class="op">=</span> <span class="va">bill_depth_mm</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"Flipper length vs bill depth for Palmer penguins sample"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"Bill depth (mm)"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Flipper length (mm)"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="05-data-exploration_files/figure-html/unnamed-chunk-36-1.svg" width="672" style="display: block; margin: auto;"></div>
+<div id="adding-aesthetics-2" class="section level4" number="5.2.11.1">
+<h4>
+<span class="header-section-number">5.2.11.1</span> Adding aesthetics<a class="anchor" aria-label="anchor" href="#adding-aesthetics-2"><i class="fas fa-link"></i></a>
+</h4>
+<p>It may surprise you to see that these two are negatively correlated, i.e. that an increase in bill depth seems to correlate with a decrease in flipper length, or vice versa. However, if we again add species to the plot, you will see an interesting pattern emerge.</p>
+<p>To improve readability, we can set both the <code>color</code> and <code>shape</code> aesthetics to be controlled by the species column, as well as slightly increase the size of the points by setting <code>size = 2</code> inside <code><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point()</a></code>, like this:</p>
+<div class="sourceCode" id="cb555"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">penguins</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">flipper_length_mm</span>, x <span class="op">=</span> <span class="va">bill_depth_mm</span>,</span>
+<span>                     color <span class="op">=</span> <span class="va">species</span>, shape <span class="op">=</span> <span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"Flipper length vs bill depth by species for Palmer penguins sample"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"Bill depth (mm)"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Flipper length (mm)"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="05-data-exploration_files/figure-html/unnamed-chunk-37-1.svg" width="672" style="display: block; margin: auto;"></div>
+<p>Now we can clearly see bill depth and flipper length are in fact positively correlated within each species, as we might expect. This is an effect called <a href="https://en.wikipedia.org/wiki/Simpson%27s_paradox">Simpson’s paradox</a> and arises surprisingly often in datasets, most notably in 1973 when <a href="www.brookings.edu/articles/when-average-isnt-good-enough-simpsons-paradox-in-education-and-earnings">UC Berkeley was accused of gender discrimination</a> and almost sued.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;Apparently &lt;a href="https://www.refsmmat.com/posts/2016-05-08-simpsons-paradox-berkeley.html" target="_blank"&gt;no lawsuit was actually ever filed&lt;/a&gt;, though many sources wrongly claim otherwise. This incident has become rather infamous in the annals of statistics.&lt;/p&gt;'><sup>23</sup></a></p>
+<p>When making scatter plots, it’s important to remember that <strong>correlation does NOT necessarily imply causation</strong>. Do flippers grow longer BECAUSE they have long bills or vice versa? Obviously probably not, some penguins just grow bigger than others in their species by winning the genetic lottery and have bigger features overall.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="https://xkcd.com/552" target="_blank"&gt;Relevant XKCD&lt;/a&gt;.&lt;/p&gt;'><sup>24</sup></a></p>
+</div>
+</div>
+<div id="smoothed-trend-curveslines" class="section level3" number="5.2.12">
+<h3>
+<span class="header-section-number">5.2.12</span> Smoothed trend curves/lines<a class="anchor" aria-label="anchor" href="#smoothed-trend-curveslines"><i class="fas fa-link"></i></a>
+</h3>
+<p>We can also add a smoothed trend curve/line (depending on context) to this plot to highlight the direction of correlation within each species group. We do this by adding an additional <code><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth()</a></code> layer to the plot. By default, this will plot a smoothed trend curve (using <a href="https://towardsdatascience.com/loess-373d43b03564">LOESS smoothing</a>) through each group:</p>
+<div class="sourceCode" id="cb556"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">penguins</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">flipper_length_mm</span>, x <span class="op">=</span> <span class="va">bill_depth_mm</span>,</span>
+<span>                     color <span class="op">=</span> <span class="va">species</span>, shape <span class="op">=</span> <span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"Flipper length vs bill depth by species for Palmer penguins sample"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"Bill depth (mm)"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Flipper length (mm)"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="05-data-exploration_files/figure-html/unnamed-chunk-38-1.svg" width="672" style="display: block; margin: auto;"></div>
+<p>This is clearly not right here; the data shows strong signs of linearity. We can force <code><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth()</a></code> to fit and plot linear regression models to each species by setting <code>method = "lm"</code>. We can also turn off the unnecessarily cluttering gray error margins with <code>se = FALSE</code> and get this much improved plot:</p>
+<div class="sourceCode" id="cb557"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">penguins</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">flipper_length_mm</span>, x <span class="op">=</span> <span class="va">bill_depth_mm</span>,</span>
+<span>                     color <span class="op">=</span> <span class="va">species</span>, shape <span class="op">=</span> <span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>, se <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"Flipper length vs bill depth by species for Palmer penguins sample"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"Bill depth (mm)"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Flipper length (mm)"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="05-data-exploration_files/figure-html/unnamed-chunk-39-1.svg" width="672" style="display: block; margin: auto;"></div>
+<p>Note that since <code>x</code>, <code>y</code>, and <code>color</code> are set in the base <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code> object, all subsequent layers automagically inherit those aesthetics; this is how both <code><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point()</a></code> and <code><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth()</a></code> know to use those aesthetic mappings to construct their own plot layers. Trend curves don’t make use of the <code>shape</code> aesthetic which only applies to the scatter plot layer, so that’s simply ignored by <code><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth()</a></code>.</p>
+
 </div>
 </div>
 </div>
@@ -798,6 +855,9 @@ You can make the above plot more accessible to readers with color vision deficie
 <li><a class="nav-link" href="#density-plots"><span class="header-section-number">5.2.7</span> Density plots</a></li>
 <li><a class="nav-link" href="#box-plots"><span class="header-section-number">5.2.8</span> Box plots</a></li>
 <li><a class="nav-link" href="#bar-plots"><span class="header-section-number">5.2.9</span> Bar plots</a></li>
+<li><a class="nav-link" href="#two-variable-plots"><span class="header-section-number">5.2.10</span> Two-variable plots</a></li>
+<li><a class="nav-link" href="#scatter-plot"><span class="header-section-number">5.2.11</span> Scatter plot</a></li>
+<li><a class="nav-link" href="#smoothed-trend-curveslines"><span class="header-section-number">5.2.12</span> Smoothed trend curves/lines</a></li>
 </ul>
 </li>
 </ul>
@@ -817,7 +877,7 @@ You can make the above plot more accessible to readers with color vision deficie
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, Bret Larget, Cameron Jones. It was last built on 2024-07-28.</p>
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, Bret Larget, Cameron Jones. It was last built on 2024-07-29.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
