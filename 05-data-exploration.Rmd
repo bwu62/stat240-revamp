@@ -386,7 +386,8 @@ library(tidyverse)
 # optional: set a prettier theme and colorblind-friendly palette for plots
 #           (also looks better if printed with most printers, even in b/w)
 theme_set(theme_bw())
-options(ggplot2.discrete.fill = \(...) scale_fill_brewer(..., palette = "Set2"))
+options(ggplot2.discrete.fill = \(...) scale_fill_brewer(..., palette = "Set2"),
+        ggplot2.discrete.colour = \(...) scale_color_brewer(..., palette = "Dark2"))
 ```
 ```{r,echo=F,tidy=F}
 # make background transparent, looks better in alert boxes
