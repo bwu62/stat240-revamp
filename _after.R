@@ -16,7 +16,8 @@ copy.file = function(file,dest=NULL){
 copy.list = c(
   "demo.html",
   "data/",
-  "data_list.txt"
+  "data_list.txt",
+  "icons/"
 )
 
 # iterate over copy list
