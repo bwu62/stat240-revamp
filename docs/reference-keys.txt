@@ -110,6 +110,7 @@ facet-subplots
 facet_wrap
 facet_grid
 additional-config-layers
+scales
 datasets
 datasets-list
 eruptions

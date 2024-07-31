@@ -763,15 +763,55 @@ ggplot(penguins, aes(y = flipper_length_mm, fill = sex)) +
 <img src="06-data-visualization_files/figure-html/unnamed-chunk-37-2.svg" width="672" style="display: block; margin: auto;" />
 
 
+
 ## Additional config layers
 
-95% of the time, you
+95% of the time (or perhaps for 95% of readers) the plot will be good enough at this point and you won't want to make any other changes. For the other 5%, there's a few additional configuration layers you can use to further tweak the plot to your perfect satisfaction.
+
+
+### Scales
+
+Perhaps the most common tweak is to the scales of the plot. **Scales control how every aesthetic is displayed** on a plot, and there are scales for every aesthetic. Aesthetics added to a plot automatically come with a scale layer with default settings, but you can replace this with a custom-tuned scale with your own settings by adding one on.
+
+Every scale layer has the folowing name pattern: `scale_aes_type` where `aes` and `type` are the name of the aesthetic and type of scale used. For example, if you're making a density plot and set `x = flipper_length_mm` this is controlled by `scale_x_continuous()` because the `flipper_length_mm` column is a continuous, numeric type variable. However if you are making a bar plot and set `x = species` this is controlled by `scale_x_discrete()` since `species` is a discrete, categorical type variable.
+
+These also apply to other aesthetics. If you set `fill = species` and `color = sex` by default these are controlled by `scale_fill_discrete()` and `scale_color_discrete()` since these are both discrete. There are automatic color choosing functions like `scale_fill_brewer()` and `scale_color_brewer()` which use the excellent [Brewer color palettes](https://www.datanovia.com/en/blog/the-a-z-of-rcolorbrewer-palette), but you can also set your own with `scale_fill_manual()` and `scale_color_manual()`.
+
+:::{.tip}
+With tidyverse loaded, try typing `scale_` into the console and use the autocomplete popup (if it doesn't appear automatically, use [TAB]{.k} to trigger it) to explore the different scale layers available. Hover over each scale function and read the short summary as well as scan the available arguments. If you need more details, check the help page!
+:::
+
+We don't have time to go into detail about every possible scale function; see [this page on scales](https://ggplot2-book.org/scales-guides) or read the help pages for a particular function for more info! Here's an example of some of these scale layers being used to modify the last plot we made just above where we faceted by species:
+
+
+``` r
+ggplot(penguins, aes(y = flipper_length_mm, fill = sex)) +
+  geom_density(alpha = 0.5) + facet_grid(. ~ species) +
+  ggtitle("Flipper length densities (by species & sex) in Palmer penguins sample") +
+  xlab("Density") + ylab("Flipper length (mm)") +
+  scale_x_continuous(
+    limits = c(0, 0.1),              # set limits
+    breaks = seq(0, 0.08, 0.02),     # set breaks
+    expand = c(0, 0)                 # remove padding (extra spacing at either end)
+    # if you need to transform x, you can also set transform = something (see help!)
+  ) +
+  scale_y_continuous(
+    minor_breaks = seq(170, 230, 2), # set minor breaks
+    expand = c(0, 0)                 # remove padding here as well
+  ) +
+  scale_fill_manual(
+    values = c("red", "blue")        # set custom colors, full list of possible names:
+  )                                  # www.stat.columbia.edu/~tzheng/files/Rcolor.pdf
+```
+
+<img src="06-data-visualization_files/figure-html/unnamed-chunk-38-1.svg" width="672" style="display: block; margin: auto;" />
+
+
+
 
 
 
 <!--
-facets,
-basic scales
 decision tree for plots https://www.data-to-viz.com/
 dont dos https://www.data-to-viz.com/caveats.html
  - unnecessary colors
