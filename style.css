@@ -288,6 +288,18 @@ div#datasets li:nth-last-of-type(1),div#eruptions-example > ul:first-of-type li:
   margin-bottom: 0.5rem !important;
 }
 
+
+ul.book-toc > li{
+  margin-left: .5rem !important;
+  margin-bottom: .3rem !important;
+}
+
+ul.book-toc > li:not(:has(span.header-section-number)) {
+  margin-left: 0rem !important;
+  margin-top: 1.2rem !important;
+}
+
+
 /* REMEMBER TO REMOVE LATER!! */
 main > div[class*="section level1"] {
     padding-bottom: 500px;
