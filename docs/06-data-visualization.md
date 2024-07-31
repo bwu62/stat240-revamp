@@ -602,7 +602,7 @@ ggplot(enrollment, aes(x = year, y = enrolled_millions,
                        color = sex, shape = sex)) +
   geom_point(size = 2) +
   ggtitle("U.S. college enrollment by sex") +
-  xlab("Year") + ylab("Enrolled (millions)")
+  xlab("Time") + ylab("Enrolled (millions)")
 ```
 
 <img src="06-data-visualization_files/figure-html/unnamed-chunk-27-1.svg" width="672" style="display: block; margin: auto;" />
@@ -614,7 +614,7 @@ However, the chronological nature of this data means **each data point has a spe
 ggplot(enrollment, aes(x = year, y = enrolled_millions, color = sex)) +
   geom_line() +
   ggtitle("U.S. college enrollment by sex") +
-  xlab("Year") + ylab("Enrolled (millions)")
+  xlab("Time") + ylab("Enrolled (millions)")
 ```
 
 <img src="06-data-visualization_files/figure-html/unnamed-chunk-28-1.svg" width="672" style="display: block; margin: auto;" />
@@ -627,7 +627,7 @@ ggplot(enrollment, aes(x = year, y = enrolled_millions,
                        color = sex, linetype = sex)) +
   geom_line(linewidth = 1.2) +
   ggtitle("U.S. college enrollment by sex") +
-  xlab("Year") + ylab("Enrolled (millions)")
+  xlab("Time") + ylab("Enrolled (millions)")
 ```
 
 <img src="06-data-visualization_files/figure-html/unnamed-chunk-29-1.svg" width="672" style="display: block; margin: auto;" />
@@ -652,6 +652,51 @@ ggplot(enrollment, aes(x = year, y = enrolled_millions, fill = sex)) +
 Compared to line plots with one line per category, the stacked area plot has the advantage of easily showing both relative proportions of categories as well as total sum of all categories, but this comes at a cost of being able to easily compare individual categories to each other. So a tradeoff, as usual.
 
 
+### Aside: time axis
+
+Note the previous example used just the year number on the horizontal axis (since the data was already summarized as annual totals) but you can of course also use dates on an axis. For a quick example, we can load the [FRED U.S. unemployment rate](https://fred.stlouisfed.org/series/UNRATE) dataset and plot it.
+
+
+``` r
+unemployment <- read_csv(
+  "https://fred.stlouisfed.org/graph/fredgraph.csv?id=UNRATE",
+  show_col_types = FALSE
+)
+glimpse(unemployment)
+```
+
+```
+## Rows: 918
+## Columns: 2
+## $ DATE   <date> 1948-01-01, 1948-02-01, 1948-03-01, 1948-04-01, 1948-05-01, 19…
+## $ UNRATE <dbl> 3.4, 3.8, 4.0, 3.9, 3.5, 3.6, 3.6, 3.9, 3.8, 3.7, 3.8, 4.0, 4.3…
+```
+
+``` r
+ggplot(unemployment, aes(x = DATE, y = UNRATE)) + geom_line() +
+  ggtitle("U.S. Unemployment rate") +
+  xlab("Time") + ylab("Unemployment rate (%)")
+```
+
+<img src="06-data-visualization_files/figure-html/unnamed-chunk-31-1.svg" width="672" style="display: block; margin: auto;" />
+
+The  superficially look the same as the previous plot, however if we zoom in and plot just the last year of data, we can see the horizontal axis is in fact a special date type of axis:
+
+
+``` r
+# plot just the last 12 months of data
+n = nrow(unemployment)
+ggplot(unemployment[(n-11):n,], aes(x = DATE, y = UNRATE)) + geom_line() +
+  ggtitle("U.S. Unemployment rate") +
+  xlab("Time") + ylab("Unemployment rate (%)")
+```
+
+<img src="06-data-visualization_files/figure-html/unnamed-chunk-32-1.svg" width="672" style="display: block; margin: auto;" />
+
+The choppiness is because the data is only summarized monthly.
+
+
+
 ## Facet subplots
 
 Another way to incorporate additional aesthetics is to use facets, i.e. instead of having everything on one plot, **breaking off into multiple subplots** to visualize extra dimentions of your dataset.
@@ -673,7 +718,7 @@ Going back to the penguins dataset, suppose you wanted to look at the relationsh
 ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm)) + geom_point()
 ```
 
-<img src="06-data-visualization_files/figure-html/unnamed-chunk-31-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="06-data-visualization_files/figure-html/unnamed-chunk-33-1.svg" width="672" style="display: block; margin: auto;" />
 
 Maybe you decide to also incorporate species as a variable, so you can see if there are differences between the different species:
 
@@ -684,7 +729,7 @@ ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm,
   geom_point(size = 2)
 ```
 
-<img src="06-data-visualization_files/figure-html/unnamed-chunk-32-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="06-data-visualization_files/figure-html/unnamed-chunk-34-1.svg" width="672" style="display: block; margin: auto;" />
 
 Some interesting patterns start to emerge. Suppose you want to take this a step further and also incorporate sex, to see if that adds anything interesting to the picture. You could change for example the mapping to set `shape = sex`, but I think this results in a plot that's a little too complicated and hard to read:
 
@@ -697,7 +742,7 @@ ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm,
   xlab("Body mass (g)") + ylab("Flipper length (mm)")
 ```
 
-<img src="06-data-visualization_files/figure-html/unnamed-chunk-33-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="06-data-visualization_files/figure-html/unnamed-chunk-35-1.svg" width="672" style="display: block; margin: auto;" />
 
 A better way may be to `facet_wrap()` the species variable, and switch to using both `color` and `shape` to differentiate sex. The syntax for this is to add the faceting layer `facet_wrap()` with the argument `~species` which will automagically split each species into its own facet subplot. You can also set `ncol = 2` to control how/when to wrap the plots:
 
@@ -710,7 +755,7 @@ ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm,
   xlab("Body mass (g)") + ylab("Flipper length (mm)")
 ```
 
-<img src="06-data-visualization_files/figure-html/unnamed-chunk-34-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="06-data-visualization_files/figure-html/unnamed-chunk-36-1.svg" width="672" style="display: block; margin: auto;" />
 
 
 ### `facet_grid()`
@@ -725,7 +770,7 @@ ggplot(penguins, aes(x = flipper_length_mm, fill = species)) +
   xlab("Flipper length (mm)") + ylab("Density")
 ```
 
-<img src="06-data-visualization_files/figure-html/unnamed-chunk-35-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="06-data-visualization_files/figure-html/unnamed-chunk-37-1.svg" width="672" style="display: block; margin: auto;" />
 
 Suppose we want to also add sex in as a variable of interest, but we also want to more closely scrutinize the distributions. One way this can be done is to add the faceting layer `facet_grid()` with the argument `sex ~ species` which will construct a matrix of plots with one row for each sex and one column for each species:
 
@@ -737,7 +782,7 @@ ggplot(penguins, aes(x = flipper_length_mm)) + geom_density() +
   xlab("Flipper length (mm)") + ylab("Density")
 ```
 
-<img src="06-data-visualization_files/figure-html/unnamed-chunk-36-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="06-data-visualization_files/figure-html/unnamed-chunk-38-1.svg" width="672" style="display: block; margin: auto;" />
 
 You can also replace one side of the `a ~ b` syntax with a period `.` which will not facet in that direction. For example, `sex ~ .` will make a matrix of plots with one row for each sex, but only a single column all together, whereas `. ~ species` will make a matrix of plots with one column for each species, but only one row all together.
 
@@ -751,7 +796,7 @@ ggplot(penguins, aes(x = flipper_length_mm, fill = species)) +
   xlab("Flipper length (mm)") + ylab("Density")
 ```
 
-<img src="06-data-visualization_files/figure-html/unnamed-chunk-37-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="06-data-visualization_files/figure-html/unnamed-chunk-39-1.svg" width="672" style="display: block; margin: auto;" />
 
 ``` r
 ggplot(penguins, aes(y = flipper_length_mm, fill = sex)) +
@@ -760,7 +805,40 @@ ggplot(penguins, aes(y = flipper_length_mm, fill = sex)) +
   xlab("Density") + ylab("Flipper length (mm)")
 ```
 
-<img src="06-data-visualization_files/figure-html/unnamed-chunk-37-2.svg" width="672" style="display: block; margin: auto;" />
+<img src="06-data-visualization_files/figure-html/unnamed-chunk-39-2.svg" width="672" style="display: block; margin: auto;" />
+
+:::{.tip}
+By default, both `facet_wrap()` and `facet_grid()` will match `x` and `y` axes across subplots. You can turn off either or both by setting the `scales` argument in your faceting function to either `free_x` or `free_y` to free one axis, or `free` to free both axes.
+:::
+
+
+## Additional geoms
+
+Many other geoms exist (see the [ggplot2 cheat sheet](https://rstudio.github.io/cheatsheets/data-visualization.pdf) for a full list). Here are just a *few* other extremely useful ones you should know about.
+
+
+### Straight lines
+
+Sometimes you may want to draw specific lines to annotate your plot. You can use [`geom_hline(yintercept = ...)`{.R}](https://rdrr.io/cran/ggplot2/man/geom_abline.html), [`geom_vline(xintercept = ...)`{.R}](https://rdrr.io/cran/ggplot2/man/geom_abline.html), and [`geom_abline(slope = ..., intercept = ...)`{.R}](https://rdrr.io/cran/ggplot2/man/geom_abline.html) to manually draw horizontal, vertical, and arbitrary lines on top of another plot. You can also directly set things like `color`, `alpha`, `linetype`, or `linewidth` inside each function to control the style. If you need multiple lines, you can use a vector of inputs, or add multiple layers. For example:
+
+
+``` r
+ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm,
+                     color = species, shape = species)) +
+  geom_point(size = 2) +
+  geom_hline(yintercept = c(190, 210), color = "navyblue", linetype = "dashed") +
+  geom_vline(xintercept = 4500, linewidth = 2, alpha = 0.5) +
+  geom_abline(slope = 0.015, intercept = 140, color = "magenta", size = 1)
+```
+
+<img src="06-data-visualization_files/figure-html/unnamed-chunk-40-1.svg" width="672" style="display: block; margin: auto;" />
+
+
+### Functions
+
+Functions can be easily plotted with `geom_function()`
+
+
 
 
 
@@ -804,7 +882,7 @@ ggplot(penguins, aes(y = flipper_length_mm, fill = sex)) +
   )                                  # www.stat.columbia.edu/~tzheng/files/Rcolor.pdf
 ```
 
-<img src="06-data-visualization_files/figure-html/unnamed-chunk-38-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="06-data-visualization_files/figure-html/unnamed-chunk-41-1.svg" width="672" style="display: block; margin: auto;" />
 
 
 

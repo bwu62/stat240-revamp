@@ -106,9 +106,13 @@ adding-aesthetics-2
 smoothed-trend-curveslines
 line-plots
 bonus-area-plots
+aside-time-axis
 facet-subplots
 facet_wrap
 facet_grid
+additional-geoms
+straight-lines
+functions
 additional-config-layers
 scales
 datasets
