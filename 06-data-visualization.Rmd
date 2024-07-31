@@ -599,6 +599,9 @@ ggplot(penguins, aes(y = flipper_length_mm, fill = sex)) +
   xlab("Density") + ylab("Flipper length (mm)")
 ```
 
+:::{.tip}
+By default, both `facet_wrap()` and `facet_grid()` will match `x` and `y` axes across subplots. You can turn off either or both by setting the `scales` argument in your faceting function to either `free_x` or `free_y` to free one axis, or `free` to free both axes.
+:::
 
 
 ## Additional config layers
