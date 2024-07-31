@@ -17,7 +17,7 @@ copy.list = c(
   "demo.html",
   "data/",
   "data_list.txt",
-  "icons/"
+  "favicon.ico"
 )
 
 # iterate over copy list
