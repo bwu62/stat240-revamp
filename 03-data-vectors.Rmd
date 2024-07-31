@@ -1,5 +1,5 @@
 
-# (PART) R crash course {.unnumbered}
+
 
 # Data Vectors
 
