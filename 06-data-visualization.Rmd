@@ -633,6 +633,33 @@ By default, both `facet_wrap()` and `facet_grid()` will match `x` and `y` axes a
 :::
 
 
+## Additional geoms
+
+Many other geoms exist (see the [ggplot2 cheat sheet](https://rstudio.github.io/cheatsheets/data-visualization.pdf) for a full list). Here are just a *few* other extremely useful ones you should know about.
+
+
+### Straight lines
+
+Sometimes you may want to draw specific lines to annotate your plot. You can use [`geom_hline(yintercept = ...)`{.R}](https://rdrr.io/cran/ggplot2/man/geom_abline.html), [`geom_vline(xintercept = ...)`{.R}](https://rdrr.io/cran/ggplot2/man/geom_abline.html), and [`geom_abline(slope = ..., intercept = ...)`{.R}](https://rdrr.io/cran/ggplot2/man/geom_abline.html) to manually draw horizontal, vertical, and arbitrary lines on top of another plot. You can also directly set things like `color`, `alpha`, `linetype`, or `linewidth` inside each function to control the style. If you need multiple lines, you can use a vector of inputs, or add multiple layers. For example:
+
+```{r, tidy=F}
+ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm,
+                     color = species, shape = species)) +
+  geom_point(size = 2) +
+  geom_hline(yintercept = c(190, 210), color = "navyblue", linetype = "dashed") +
+  geom_vline(xintercept = 4500, linewidth = 2, alpha = 0.5) +
+  geom_abline(slope = 0.015, intercept = 140, color = "magenta", size = 1)
+```
+
+
+### Functions
+
+Functions can be easily plotted with `geom_function()`
+
+
+
+
+
 ## Additional config layers
 
 95% of the time (or perhaps for 95% of readers) the plot will be good enough at this point and you won't want to make any other changes. For the other 5%, there's a few additional configuration layers you can use to further tweak the plot to your perfect satisfaction.
