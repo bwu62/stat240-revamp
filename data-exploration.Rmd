@@ -1,7 +1,5 @@
 
-# (PART) Data Exploration {.unnumbered}
-
-# Objectives {.unnumbered}
+# Data Exploration {.unnumbered}
 
 One of the first and most important things you should do after obtaining a dataset is to **explore the data thoroughly** using a combination of summary statistics and visualizations. Careful data exploration will help you do the following:
   
