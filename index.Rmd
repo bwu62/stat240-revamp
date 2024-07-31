@@ -7,7 +7,6 @@ documentclass: book
 bibliography: [book.bib, packages.bib]
 url: https://bwu62.github.io/stat240-revamp
 # cover-image: path to the social sharing image like images/cover.jpg
-favicon: favicon.ico
 description: Revamped STAT240 notes
 biblio-style: apalike
 csl: chicago-fullnote-bibliography.csl
