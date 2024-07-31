@@ -8,7 +8,9 @@ rmd_files:
   - "02-intro-r-rstudio.Rmd"
   - "03-data-vectors.Rmd"
   - "04-data-frames.Rmd"
-  - "05-data-exploration.Rmd"
+  - "data-exploration.Rmd"
+  - "05-descriptive-statistics.Rmd"
+  - "06-data-visualization.Rmd"
   - "datasets.Rmd"
   - "cheat-sheets.Rmd"
 delete_merged_file: true
