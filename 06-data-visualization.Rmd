@@ -640,7 +640,7 @@ Many other geoms exist (see the [ggplot2 cheat sheet](https://rstudio.github.io/
 
 ### Straight lines
 
-Sometimes you may want to draw specific lines to annotate your plot. You can use [`geom_hline(yintercept = ...)`{.R}](https://rdrr.io/cran/ggplot2/man/geom_abline.html), [`geom_vline(xintercept = ...)`{.R}](https://rdrr.io/cran/ggplot2/man/geom_abline.html), and [`geom_abline(slope = ..., intercept = ...)`{.R}](https://rdrr.io/cran/ggplot2/man/geom_abline.html) to manually draw horizontal, vertical, and arbitrary lines on top of another plot. You can also directly set things like `color`, `alpha`, `linetype`, or `linewidth` inside each function to control the style. If you need multiple lines, you can use a vector of inputs, or add multiple layers. For example:
+Sometimes you may want to draw specific lines to annotate your plot. You can use [`geom_hline(yintercept = ...)`{.R}](https://ggplot2.tidyverse.org/reference/geom_abline.html), [`geom_vline(xintercept = ...)`{.R}](https://ggplot2.tidyverse.org/reference/geom_abline.html), and [`geom_abline(slope = ..., intercept = ...)`{.R}](https://ggplot2.tidyverse.org/reference/geom_abline.html) to manually draw horizontal, vertical, and arbitrary lines on top of another plot. You can also directly set things like `color`, `alpha`, `linetype`, or `linewidth` inside each function to control the style. If you need multiple lines, you can use a vector of inputs, or add multiple layers. For example:
 
 ```{r, tidy=F}
 ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm,
