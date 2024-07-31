@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 4 Data Frames | STAT 240 Revamp</title>
-<meta name="author" content="Bi Cheng Wu, Bret Larget, Cameron Jones">
+<meta name="author" content="Bi Cheng Wu, with help from Bret Larget and Cameron Jones">
 <meta name="description" content="Moving on from vectors, the next most important data structure in R is the data frame. Think of a data frame as similar to a matrix, but (ideally) each column is a vector of a single type...">
 <meta name="generator" content="bookdown 0.40.1 with bs4_book()">
 <meta property="og:title" content="Chapter 4 Data Frames | STAT 240 Revamp">
@@ -53,9 +53,12 @@
 <li><a class="" href="index.html">Welcome</a></li>
 <li><a class="" href="setup.html"><span class="header-section-number">1</span> Setup</a></li>
 <li><a class="" href="rstudio-intro.html"><span class="header-section-number">2</span> Intro to R/Rstudio</a></li>
+<li class="book-part">R crash course</li>
 <li><a class="" href="data-vectors.html"><span class="header-section-number">3</span> Data Vectors</a></li>
 <li><a class="active" href="data-frames.html"><span class="header-section-number">4</span> Data Frames</a></li>
-<li><a class="" href="data-exploration.html"><span class="header-section-number">5</span> Data Exploration</a></li>
+<li class="book-part">Data Exploration</li>
+<li><a class="" href="descriptive-statistics.html"><span class="header-section-number">5</span> Descriptive statistics</a></li>
+<li><a class="" href="data-visualization.html"><span class="header-section-number">6</span> Data visualization</a></li>
 <li class="book-part">Appendix</li>
 <li><a class="" href="datasets.html"><span class="header-section-number">A</span> Datasets</a></li>
 <li><a class="" href="cheat-sheets.html"><span class="header-section-number">B</span> Cheat sheets</a></li>
@@ -744,19 +747,21 @@ For example, suppose a data frame had in order from left to right a numeric colu
 </div>
 </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/@xiee/utils/js/external-link.min.js" defer></script><script>
-  $(function(){
-    $(".note").addClass("alert alert-warning");
-  });
-  $(function(){
-    $(".tip").addClass("alert alert-success");
-  });
-  $(function(){
-    $(".def").addClass("alert alert-info");
-  });
-</script><div class="chapter-nav">
+
+
+
+<ol style="list-style-type: decimal">
+<li>Understand the dataset,</li>
+<li>Discover interesting, sometimes unexpected patterns and trends,</li>
+<li>Identify potential sources of problems (e.g. errors, biases, other obstacles to later analysis),</li>
+<li>Formulate meaningful questions to ask using the data, and</li>
+<li>Choose the most appropriate path of analysis.</li>
+</ol>
+<p>In this next section, we will cover a variety of data exploration techniques, starting with descriptive (i.e. summary) statistics, then move on to data visualization (i.e. graphing/plotting).</p>
+
+<div class="chapter-nav">
 <div class="prev"><a href="data-vectors.html"><span class="header-section-number">3</span> Data Vectors</a></div>
-<div class="next"><a href="data-exploration.html"><span class="header-section-number">5</span> Data Exploration</a></div>
+<div class="next"><a href="descriptive-statistics.html"><span class="header-section-number">5</span> Descriptive statistics</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
@@ -791,14 +796,26 @@ For example, suppose a data frame had in order from left to right a numeric colu
 </div>
     </nav>
 </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@xiee/utils/js/external-link.min.js" defer></script><script>
+  $(function(){
+    $(".note").addClass("alert alert-warning");
+  });
+  $(function(){
+    $(".tip").addClass("alert alert-success");
+  });
+  $(function(){
+    $(".def").addClass("alert alert-info");
+  });
+</script>
 
 </div>
-</div> <!-- .container -->
+ <!-- .container -->
 
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, Bret Larget, Cameron Jones. It was last built on 2024-07-30.</p>
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2024-07-30.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

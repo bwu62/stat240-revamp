@@ -71,7 +71,6 @@ paths-file-management
 working-with-data-frames
 basic-operations
 subsetting-data-frames
-data-exploration
 descriptive-statistics
 measures-of-central-tendency
 mean
@@ -109,6 +108,8 @@ line-plots
 bonus-area-plots
 facet-subplots
 facet_wrap
+facet_grid
+additional-config-layers
 datasets
 datasets-list
 eruptions
