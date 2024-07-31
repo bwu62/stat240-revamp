@@ -476,7 +476,7 @@ ggplot(enrollment, aes(x = year, y = enrolled_millions,
                        color = sex, shape = sex)) +
   geom_point(size = 2) +
   ggtitle("U.S. college enrollment by sex") +
-  xlab("Year") + ylab("Enrolled (millions)")
+  xlab("Time") + ylab("Enrolled (millions)")
 ```
 
 However, the chronological nature of this data means **each data point has a specific predecessor and successor**, i.e. for each point (except the end points) there is a specific single point that comes before and after it. Thus, it makes more sense to connect these points with a single continuous line for each sex. This can be done by using `geom_line()` instead. We can also drop the `shape` aesthetic since it doesn't apply to lines:
@@ -485,7 +485,7 @@ However, the chronological nature of this data means **each data point has a spe
 ggplot(enrollment, aes(x = year, y = enrolled_millions, color = sex)) +
   geom_line() +
   ggtitle("U.S. college enrollment by sex") +
-  xlab("Year") + ylab("Enrolled (millions)")
+  xlab("Time") + ylab("Enrolled (millions)")
 ```
 
 By default the line appears very thin and may be hard to read for some people. We can add `linewidth = 1.2` to `geom_line()` to increase the thickness. We can also add another aesthetic `linetype = sex` for additional disambiguation so it's extremely clear which line corresponds to which sex:
@@ -495,7 +495,7 @@ ggplot(enrollment, aes(x = year, y = enrolled_millions,
                        color = sex, linetype = sex)) +
   geom_line(linewidth = 1.2) +
   ggtitle("U.S. college enrollment by sex") +
-  xlab("Year") + ylab("Enrolled (millions)")
+  xlab("Time") + ylab("Enrolled (millions)")
 ```
 
 We can see that since the late 70's, college enrollment of female students has consistently outpaced that of male students.
