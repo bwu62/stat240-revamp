@@ -1,5 +1,6 @@
 
 
+
 # Setup {#setup}
 
 This chapter will take you through all steps necessary to fully setup your computer. There are several things we need to do:
