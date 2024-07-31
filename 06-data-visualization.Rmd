@@ -515,6 +515,35 @@ ggplot(enrollment, aes(x = year, y = enrolled_millions, fill = sex)) +
 Compared to line plots with one line per category, the stacked area plot has the advantage of easily showing both relative proportions of categories as well as total sum of all categories, but this comes at a cost of being able to easily compare individual categories to each other. So a tradeoff, as usual.
 
 
+### Aside: time axis
+
+Note the previous example used just the year number on the horizontal axis (since the data was already summarized as annual totals) but you can of course also use dates on an axis. For a quick example, we can load the [FRED U.S. unemployment rate](https://fred.stlouisfed.org/series/UNRATE) dataset and plot it.
+
+```{r,tidy=F}
+unemployment <- read_csv(
+  "https://fred.stlouisfed.org/graph/fredgraph.csv?id=UNRATE",
+  show_col_types = FALSE
+)
+glimpse(unemployment)
+ggplot(unemployment, aes(x = DATE, y = UNRATE)) + geom_line() +
+  ggtitle("U.S. Unemployment rate") +
+  xlab("Time") + ylab("Unemployment rate (%)")
+```
+
+The  superficially look the same as the previous plot, however if we zoom in and plot just the last year of data, we can see the horizontal axis is in fact a special date type of axis:
+
+```{r,tidy=F}
+# plot just the last 12 months of data
+n = nrow(unemployment)
+ggplot(unemployment[(n-11):n,], aes(x = DATE, y = UNRATE)) + geom_line() +
+  ggtitle("U.S. Unemployment rate") +
+  xlab("Time") + ylab("Unemployment rate (%)")
+```
+
+The choppiness is because the data is only summarized monthly.
+
+
+
 ## Facet subplots
 
 Another way to incorporate additional aesthetics is to use facets, i.e. instead of having everything on one plot, **breaking off into multiple subplots** to visualize extra dimentions of your dataset.
