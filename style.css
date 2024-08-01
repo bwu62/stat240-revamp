@@ -52,29 +52,16 @@ pre code {
 /* fix some other sizing
    discontinuities */
 
-@media (min-width: 1332px) {
-  .container-fluid {
-    max-width: 98rem;
-  }
-  .container-fluid .row {
-    justify-content: space-evenly;
-  }
+@media (min-width: 1200px) {
   .container-fluid main {
-    max-width: 54.375rem;
-  }
-  .sidebar-chapter{
-    max-width: 15rem;
-  }
-  .sidebar-book{
-    max-width: 13.625rem;
-  }
-
-  /* Increase font-size for very wide devices */
-  body {
-    font-size: 18px
+    max-width: 66.66667%;
   }
 }
-
+@media (min-width: 1306px) {
+  .container-fluid main {
+    max-width: 54.376rem;
+  }
+}
 @media (max-width: 767.98px) {
   .section > .sourceCode > pre {
     margin-left: 0rem !important;
