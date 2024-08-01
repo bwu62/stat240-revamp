@@ -648,15 +648,9 @@ By default, both `facet_wrap()` and `facet_grid()` will match `x` and `y` axes a
 :::
 
 
+## Scales
 
-## Additional config
-
-95% of the time (or perhaps for 95% of readers) the plot will be good enough at this point and you won't want to make any other changes. For the other 5%, there's a few additional configuration layers you can use to further tweak the plot to your perfect satisfaction.
-
-
-### Scales
-
-Perhaps the most common tweak is to the scales of the plot. **Scales control how every aesthetic is displayed** on a plot, and there are scales for every aesthetic. Aesthetics added to a plot automatically come with a scale layer with default settings, but you can replace this with a custom-tuned scale with your own settings by adding one on.
+Generally, the default axes are fine, but if you need to you can modify them with scale layers. **Scales control how every aesthetic is displayed** on a plot, and there are scales for every aesthetic. Aesthetics added to a plot automatically come with a scale layer with default settings, but you can replace this with a custom-tuned scale with your own settings by adding another scale on.
 
 Every scale layer has the folowing name pattern: `scale_aes_type` where `aes` and `type` are the name of the aesthetic and type of scale used. For example, if you're making a density plot and set `x = flipper_length_mm` this is controlled by `scale_x_continuous()` because the `flipper_length_mm` column is a continuous, numeric type variable. However if you are making a bar plot and set `x = species` this is controlled by `scale_x_discrete()` since `species` is a discrete, categorical type variable.
 
