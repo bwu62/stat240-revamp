@@ -110,11 +110,12 @@ aside-time-axis
 facet-subplots
 facet_wrap
 facet_grid
-additional-geoms
+scales
+section
+other-geoms
 straight-lines
 functions
-additional-config-layers
-scales
+further-readings
 datasets
 datasets-list
 eruptions

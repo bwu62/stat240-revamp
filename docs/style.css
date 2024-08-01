@@ -45,6 +45,32 @@ pre code {
 }
 */
 
+
+/* increase body width */
+/* chosen so that 80% width
+   matches fig.width=6 */
+/* fix some other sizing
+   discontinuities */
+
+@media (min-width: 1200px) {
+  .container-fluid main {
+    max-width: 66.66667%;
+  }
+}
+@media (min-width: 1306px) {
+  .container-fluid main {
+    max-width: 54.376rem;
+  }
+}
+@media (max-width: 767.98px) {
+  .section > .sourceCode > pre {
+    margin-left: 0rem !important;
+    margin-right: 0rem !important;
+    width: unset !important;
+  }
+}
+
+
 body{
   line-height:1.5;
 }
@@ -133,22 +159,6 @@ ul+p,ol+p{
   margin-top:1.2rem;
 }
 
-/* increase body width */
-/* chosen so that 80% width
-   matches fig.width=6 */
-@media (min-width: 1200px) {
-    .container-fluid main {
-        max-width: 54.376rem;
-    }
-}
-
-@media (max-width: 767.98px) {
-  .section > .sourceCode > pre {
-    margin-left: 0rem !important;
-    margin-right: 0rem !important;
-    width: unset !important;
-  }
-}
 
 /* tweak code+output style */
 div.sourceCode{
@@ -219,7 +229,7 @@ div.alert pre{
 }
 
 /* improve heading margins for legibility */
-h2{
+main#content h2{
   margin-top: 3.5rem !important;
   margin-bottom: 1rem !important;
   font-size: 1.7rem !important;

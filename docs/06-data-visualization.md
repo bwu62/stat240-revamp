@@ -15,7 +15,9 @@ When studying each plot type, it's important to keep the following questions in 
 
 ## ggplot2
 
-We will be making all plots using the [ggplot2](https://ggplot2.tidyverse.org) package which is also a core Tidyverse package. It offers a robust syntax for easily creating and modifying plots. When making a ggplot2 plot, it's important to remember **everything is a layer** that you **add onto the base object using `+`** just like adding numbers. Whether you're adding a plot, a faceting structure, changing the axes, adding annotations (e.g. title/labels), etc. they're all layers that are added. This may seem strange at first, but you'll quickly grasp it in the examples that follow.
+We will be making all plots using the [ggplot2](https://ggplot2.tidyverse.org) package which is also a core Tidyverse package. It offers a robust syntax for easily creating and modifying plots ([link to cheat sheet](https://rstudio.github.io/cheatsheets/data-visualization.pdf)).
+
+When making a ggplot2 plot, it's important to remember **everything is a layer** that you **add onto the base object using `+`** just like adding numbers. Whether you're adding a plot, a faceting structure, changing the axes, adding annotations (e.g. title/labels), etc. they're all layers that are added. This may seem strange at first, but you'll quickly grasp it in the examples that follow.
 
 I already have core Tidyverse packages loaded from section \@ref(mean) above, but if you need to load it again make sure to run the following:
 
@@ -249,15 +251,22 @@ Any plots submitted in this class without annotations or with annotations not me
 
 Annotations are hard to get right sometimes; practice adding them to every plot, and think critically as you write them or as you read other peoples' plots and you'll get good fast.
 
-You can add titles/labels by adding the `ggtitle()`, `xlab()`, and `ylab()` layers with the annotation string inside. Example:
+You can add titles/labels by adding the `labs()` layer. Inside `labs()`, you can simultaneously set some/all of the following:
+
+ - `x = "..."` or `y = "..."` sets axes labels for `x` or `y`
+ - `title` sets the plot title
+ - labels for other aesthetics can also be set using the aesthetic name
+   - for example, if you used `fill`, set its legend label with `fill = "..."`
+ - other less frequently used labels include `subtitle`, `caption`, and `alt` for alt-text
+
+For example:
 
 
 ``` r
 ggplot(penguins, aes(x = flipper_length_mm, fill = species)) +
   geom_histogram(position = "identity", alpha = 0.5) +
-  ggtitle("Flipper length histograms of species in Palmer penguins sample") +
-  xlab("Flipper length (mm)") +
-  ylab("Count")
+  labs(x = "Flipper length (mm)", y = "Count", fill = "Species",
+    title = "Flipper length histograms of species in Palmer penguins sample")
 ```
 
 <img src="06-data-visualization_files/figure-html/unnamed-chunk-10-1.svg" width="672" style="display: block; margin: auto;" />
@@ -289,9 +298,8 @@ Let's improve the plot one final time by setting these more sensible bin widths:
 ggplot(penguins, aes(x = flipper_length_mm, fill = species)) +
   geom_histogram(position = "identity", alpha = 0.5,
                  binwidth = 5, boundary = 170) +
-  ggtitle("Flipper length histograms of species in Palmer penguins sample") +
-  xlab("Flipper length (mm)") +
-  ylab("Count")
+  labs(x = "Flipper length (mm)", y = "Count", fill = "Species",
+    title = "Flipper length histograms of species in Palmer penguins sample")
 ```
 
 <img src="06-data-visualization_files/figure-html/unnamed-chunk-12-1.svg" width="672" style="display: block; margin: auto;" />
@@ -316,8 +324,8 @@ Similar to the histogram, we can also add additional aesthetics to differentiate
 ``` r
 ggplot(penguins, aes(x = flipper_length_mm, fill = species)) +
   geom_density(alpha = 0.5) +
-  ggtitle("Flipper length densities of species in Palmer penguins sample") +
-  xlab("Flipper length (mm)") + ylab("Density")
+  labs(x = "Flipper length (mm)", y = "Density", fill = "Species",
+    title = "Flipper length densities of species in Palmer penguins sample")
 ```
 
 <img src="06-data-visualization_files/figure-html/unnamed-chunk-14-1.svg" width="672" style="display: block; margin: auto;" />
@@ -378,8 +386,8 @@ The boxplot can also be easily adapted to highlight the difference between speci
 ``` r
 ggplot(penguins, aes(x = flipper_length_mm, y = species)) +
   geom_boxplot() +
-  ggtitle("Flipper length box plots of species in Palmer penguins sample") +
-  xlab("Flipper length (mm)") + ylab("Species")
+  labs(x = "Flipper length (mm)", y = "Species",
+       title = "Flipper length box plots of species in Palmer penguins sample")
 ```
 
 <img src="06-data-visualization_files/figure-html/unnamed-chunk-16-1.svg" width="672" style="display: block; margin: auto;" />
@@ -405,8 +413,8 @@ For example, we can use `geom_bar()` to compute AND plot the total count of each
 
 ``` r
 ggplot(penguins, aes(x = species)) + geom_bar() +
-  ggtitle("Count of each species in Palmer penguins sample") +
-  xlab("Species") + ylab("Count")
+  labs(x = "Species", y = "Count",
+       title = "Count of each species in Palmer penguins sample")
 ```
 
 <img src="06-data-visualization_files/figure-html/unnamed-chunk-17-1.svg" width="672" style="display: block; margin: auto;" />
@@ -441,8 +449,8 @@ penguins_species_counts
 ``` r
 # now, make the same plot using the summary data frame and geom_col()
 ggplot(penguins_species_counts, aes(x = species, y = count)) + geom_col() +
-  ggtitle("Count of each species in Palmer penguins sample") +
-  xlab("Species") + ylab("Count")
+  labs(x = "Species", y = "Count",
+       title = "Count of each species in Palmer penguins sample")
 ```
 
 <img src="06-data-visualization_files/figure-html/unnamed-chunk-18-1.svg" width="672" style="display: block; margin: auto;" />
@@ -458,10 +466,10 @@ For example, supposed we want to use a bar plot to compare the median flipper le
 
 
 ``` r
-ggplot(penguins, aes(x = species, y = flipper_length_mm)) + 
-  geom_bar(stat = "summary", fun = "median") + 
-  ggtitle("Median flipper length by species in Palmer penguins sample") + 
-  xlab("Species") + ylab("Median flipper length (mm)")
+ggplot(penguins, aes(x = species, y = flipper_length_mm)) +
+  geom_bar(stat = "summary", fun = "median") +
+  labs(x = "Species", y = "Median flipper length (mm)",
+       title = "Median flipper length by species in Palmer penguins sample")
 ```
 
 <img src="06-data-visualization_files/figure-html/unnamed-chunk-19-1.svg" width="672" style="display: block; margin: auto;" />
@@ -476,8 +484,8 @@ By default, adding `fill` creates a stacked bar plot, which is good for showing 
 
 ``` r
 ggplot(penguins, aes(x = species, fill = island)) + geom_bar() +
-    ggtitle("Count of each species (by island) in Palmer penguins sample") +
-    xlab("Species") + ylab("Count")
+  labs(x = "Species", y = "Count", fill = "Island",
+       title = "Count of each species (by island) in Palmer penguins sample")
 ```
 
 <img src="06-data-visualization_files/figure-html/unnamed-chunk-20-1.svg" width="672" style="display: block; margin: auto;" />
@@ -488,8 +496,8 @@ We can also unstack the bars by setting `position = "dodge"` inside `geom_bar()`
 ``` r
 ggplot(penguins, aes(x = species, y = flipper_length_mm, fill = sex)) +
   geom_bar(stat = "summary", fun = "median", position = "dodge") +
-  ggtitle("Median flipper length by species & sex in Palmer penguins sample") +
-  xlab("Species") + ylab("Median flipper length (mm)")
+  labs(x = "Species", y = "Median flipper length (mm)", fill = "Sex",
+       title = "Median flipper length by species & sex in Palmer penguins sample")
 ```
 
 <img src="06-data-visualization_files/figure-html/unnamed-chunk-21-1.svg" width="672" style="display: block; margin: auto;" />
@@ -510,8 +518,8 @@ For example, suppose we want to make a scatter plot of flipper length vs bill de
 
 ``` r
 ggplot(penguins, aes(y = flipper_length_mm, x = bill_depth_mm)) + geom_point() +
-  ggtitle("Flipper length vs bill depth for Palmer penguins sample") +
-  xlab("Bill depth (mm)") + ylab("Flipper length (mm)")
+  labs(x = "Bill depth (mm)", y = "Flipper length (mm)",
+       title = "Flipper length vs bill depth for Palmer penguins sample")
 ```
 
 <img src="06-data-visualization_files/figure-html/unnamed-chunk-22-1.svg" width="672" style="display: block; margin: auto;" />
@@ -528,8 +536,9 @@ To improve readability, we can set both the `color` and `shape` aesthetics to be
 ggplot(penguins, aes(y = flipper_length_mm, x = bill_depth_mm,
                      color = species, shape = species)) +
   geom_point(size = 2) +
-  ggtitle("Flipper length vs bill depth by species for Palmer penguins sample") +
-  xlab("Bill depth (mm)") + ylab("Flipper length (mm)")
+  labs(x = "Bill depth (mm)", y = "Flipper length (mm)",
+       color = "Species", shape = "Species",
+       title = "Flipper length vs bill depth by species for Palmer penguins sample")
 ```
 
 <img src="06-data-visualization_files/figure-html/unnamed-chunk-23-1.svg" width="672" style="display: block; margin: auto;" />
@@ -548,8 +557,9 @@ We can also add a smoothed trend curve/line (depending on context) to this plot 
 ggplot(penguins, aes(y = flipper_length_mm, x = bill_depth_mm,
                      color = species, shape = species)) +
   geom_point(size = 2) + geom_smooth() +
-  ggtitle("Flipper length vs bill depth by species for Palmer penguins sample") +
-  xlab("Bill depth (mm)") + ylab("Flipper length (mm)")
+  labs(x = "Bill depth (mm)", y = "Flipper length (mm)",
+       color = "Species", shape = "Species",
+       title = "Flipper length vs bill depth by species for Palmer penguins sample")
 ```
 
 <img src="06-data-visualization_files/figure-html/unnamed-chunk-24-1.svg" width="672" style="display: block; margin: auto;" />
@@ -561,8 +571,9 @@ This is clearly not right here; the data shows strong signs of linearity. We can
 ggplot(penguins, aes(y = flipper_length_mm, x = bill_depth_mm,
                      color = species, shape = species)) +
   geom_point(size = 2) + geom_smooth(method = "lm", se = FALSE) +
-  ggtitle("Flipper length vs bill depth by species for Palmer penguins sample") +
-  xlab("Bill depth (mm)") + ylab("Flipper length (mm)")
+  labs(x = "Bill depth (mm)", y = "Flipper length (mm)",
+       color = "Species", shape = "Species",
+       title = "Flipper length vs bill depth by species for Palmer penguins sample")
 ```
 
 <img src="06-data-visualization_files/figure-html/unnamed-chunk-25-1.svg" width="672" style="display: block; margin: auto;" />
@@ -601,8 +612,9 @@ Here, each row is a pair of male and female college enrollment counts (in millio
 ggplot(enrollment, aes(x = year, y = enrolled_millions,
                        color = sex, shape = sex)) +
   geom_point(size = 2) +
-  ggtitle("U.S. college enrollment by sex") +
-  xlab("Time") + ylab("Enrolled (millions)")
+  labs(x = "Time", y = "Enrolled (millions)",
+       color = "Sex", shape = "Sex",
+       title = "U.S. College enrollment by sex")
 ```
 
 <img src="06-data-visualization_files/figure-html/unnamed-chunk-27-1.svg" width="672" style="display: block; margin: auto;" />
@@ -613,8 +625,9 @@ However, the chronological nature of this data means **each data point has a spe
 ``` r
 ggplot(enrollment, aes(x = year, y = enrolled_millions, color = sex)) +
   geom_line() +
-  ggtitle("U.S. college enrollment by sex") +
-  xlab("Time") + ylab("Enrolled (millions)")
+  labs(x = "Time", y = "Enrolled (millions)",
+       color = "Sex", shape = "Sex",
+       title = "U.S. College enrollment by sex")
 ```
 
 <img src="06-data-visualization_files/figure-html/unnamed-chunk-28-1.svg" width="672" style="display: block; margin: auto;" />
@@ -626,8 +639,9 @@ By default the line appears very thin and may be hard to read for some people. W
 ggplot(enrollment, aes(x = year, y = enrolled_millions,
                        color = sex, linetype = sex)) +
   geom_line(linewidth = 1.2) +
-  ggtitle("U.S. college enrollment by sex") +
-  xlab("Time") + ylab("Enrolled (millions)")
+  labs(x = "Time", y = "Enrolled (millions)",
+       color = "Sex", shape = "Sex",
+       title = "U.S. College enrollment by sex")
 ```
 
 <img src="06-data-visualization_files/figure-html/unnamed-chunk-29-1.svg" width="672" style="display: block; margin: auto;" />
@@ -643,8 +657,8 @@ I wanted to throw in a bonus plot type here. This kind of composition-over-time 
 ``` r
 ggplot(enrollment, aes(x = year, y = enrolled_millions, fill = sex)) +
   geom_area() + scale_fill_manual(values = c("#fb9a99", "#a6cee3")) +
-  ggtitle("U.S. college enrollment by sex") +
-  xlab("Year") + ylab("Enrolled (millions)")
+  labs(x = "Time", y = "Enrolled (millions)", fill = "Sex",
+       title = "U.S. College enrollment by sex")
 ```
 
 <img src="06-data-visualization_files/figure-html/unnamed-chunk-30-1.svg" width="672" style="display: block; margin: auto;" />
@@ -674,8 +688,8 @@ glimpse(unemployment)
 
 ``` r
 ggplot(unemployment, aes(x = DATE, y = UNRATE)) + geom_line() +
-  ggtitle("U.S. Unemployment rate") +
-  xlab("Time") + ylab("Unemployment rate (%)")
+  labs(x = "Time", y = "Unemployment rate (%)",
+       title = "U.S. Unemployment rate")
 ```
 
 <img src="06-data-visualization_files/figure-html/unnamed-chunk-31-1.svg" width="672" style="display: block; margin: auto;" />
@@ -687,8 +701,8 @@ The  superficially look the same as the previous plot, however if we zoom in and
 # plot just the last 12 months of data
 n = nrow(unemployment)
 ggplot(unemployment[(n-11):n,], aes(x = DATE, y = UNRATE)) + geom_line() +
-  ggtitle("U.S. Unemployment rate") +
-  xlab("Time") + ylab("Unemployment rate (%)")
+  labs(x = "Time", y = "Unemployment rate (%)",
+       title = "U.S. Unemployment rate")
 ```
 
 <img src="06-data-visualization_files/figure-html/unnamed-chunk-32-1.svg" width="672" style="display: block; margin: auto;" />
@@ -738,8 +752,8 @@ Some interesting patterns start to emerge. Suppose you want to take this a step 
 ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm,
                      color = species, shape = sex)) +
   geom_point(size = 2) +
-  ggtitle("Flipper length vs body mass (by species & sex) for Palmer penguins sample") +
-  xlab("Body mass (g)") + ylab("Flipper length (mm)")
+  labs(x = "Body mass (g)", y = "Flipper length (mm)",
+       title = "Flipper length vs body mass (by species & sex) for Palmer penguins")
 ```
 
 <img src="06-data-visualization_files/figure-html/unnamed-chunk-35-1.svg" width="672" style="display: block; margin: auto;" />
@@ -751,8 +765,9 @@ A better way may be to `facet_wrap()` the species variable, and switch to using 
 ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm,
                      color = sex, shape = sex)) +
   geom_point(size = 2) + facet_wrap(~species, ncol = 2) +
-  ggtitle("Flipper length vs body mass (by species & sex) for Palmer penguins sample") +
-  xlab("Body mass (g)") + ylab("Flipper length (mm)")
+  labs(x = "Body mass (g)", y = "Flipper length (mm)",
+       color = "Sex", shape = "Sex",
+       title = "Flipper length vs body mass (by species & sex) for Palmer penguins")
 ```
 
 <img src="06-data-visualization_files/figure-html/unnamed-chunk-36-1.svg" width="672" style="display: block; margin: auto;" />
@@ -766,8 +781,8 @@ Suppose we wanted to look more closely again at the distribution of flipper leng
 ``` r
 ggplot(penguins, aes(x = flipper_length_mm, fill = species)) +
   geom_density(alpha = 0.5) +
-  ggtitle("Flipper length densities of species in Palmer penguins sample") +
-  xlab("Flipper length (mm)") + ylab("Density")
+  labs(x = "Flipper length (mm)", y = "Density", fill = "Species",
+       title = "Flipper length densities of species in Palmer penguins")
 ```
 
 <img src="06-data-visualization_files/figure-html/unnamed-chunk-37-1.svg" width="672" style="display: block; margin: auto;" />
@@ -778,8 +793,8 @@ Suppose we want to also add sex in as a variable of interest, but we also want t
 ``` r
 ggplot(penguins, aes(x = flipper_length_mm)) + geom_density() +
   facet_grid(sex ~ species) +
-  ggtitle("Flipper length densities (by species & sex) in Palmer penguins sample") +
-  xlab("Flipper length (mm)") + ylab("Density")
+  labs(x = "Flipper length (mm)", y = "Density",
+       title = "Flipper length densities (by species & sex) in Palmer penguins")
 ```
 
 <img src="06-data-visualization_files/figure-html/unnamed-chunk-38-1.svg" width="672" style="display: block; margin: auto;" />
@@ -792,8 +807,8 @@ We can demonstrate both of these. Each time we can reassign the variable not fac
 ``` r
 ggplot(penguins, aes(x = flipper_length_mm, fill = species)) +
   geom_density(alpha = 0.5) + facet_grid(sex ~ .) +
-  ggtitle("Flipper length densities (by species & sex) in Palmer penguins sample") +
-  xlab("Flipper length (mm)") + ylab("Density")
+  labs(x = "Flipper length (mm)", y = "Density", fill = "Species",
+       title = "Flipper length densities (by species & sex) in Palmer penguins")
 ```
 
 <img src="06-data-visualization_files/figure-html/unnamed-chunk-39-1.svg" width="672" style="display: block; margin: auto;" />
@@ -801,8 +816,8 @@ ggplot(penguins, aes(x = flipper_length_mm, fill = species)) +
 ``` r
 ggplot(penguins, aes(y = flipper_length_mm, fill = sex)) +
   geom_density(alpha = 0.5) + facet_grid(. ~ species) +
-  ggtitle("Flipper length densities (by species & sex) in Palmer penguins sample") +
-  xlab("Density") + ylab("Flipper length (mm)")
+  labs(x = "Flipper length (mm)", y = "Density", fill = "Sex",
+       title = "Flipper length densities (by species & sex) in Palmer penguins")
 ```
 
 <img src="06-data-visualization_files/figure-html/unnamed-chunk-39-2.svg" width="672" style="display: block; margin: auto;" />
@@ -812,44 +827,9 @@ By default, both `facet_wrap()` and `facet_grid()` will match `x` and `y` axes a
 :::
 
 
-## Additional geoms
+## Scales
 
-Many other geoms exist (see the [ggplot2 cheat sheet](https://rstudio.github.io/cheatsheets/data-visualization.pdf) for a full list). Here are just a *few* other extremely useful ones you should know about.
-
-
-### Straight lines
-
-Sometimes you may want to draw specific lines to annotate your plot. You can use [`geom_hline(yintercept = ...)`{.R}](https://rdrr.io/cran/ggplot2/man/geom_abline.html), [`geom_vline(xintercept = ...)`{.R}](https://rdrr.io/cran/ggplot2/man/geom_abline.html), and [`geom_abline(slope = ..., intercept = ...)`{.R}](https://rdrr.io/cran/ggplot2/man/geom_abline.html) to manually draw horizontal, vertical, and arbitrary lines on top of another plot. You can also directly set things like `color`, `alpha`, `linetype`, or `linewidth` inside each function to control the style. If you need multiple lines, you can use a vector of inputs, or add multiple layers. For example:
-
-
-``` r
-ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm,
-                     color = species, shape = species)) +
-  geom_point(size = 2) +
-  geom_hline(yintercept = c(190, 210), color = "navyblue", linetype = "dashed") +
-  geom_vline(xintercept = 4500, linewidth = 2, alpha = 0.5) +
-  geom_abline(slope = 0.015, intercept = 140, color = "magenta", size = 1)
-```
-
-<img src="06-data-visualization_files/figure-html/unnamed-chunk-40-1.svg" width="672" style="display: block; margin: auto;" />
-
-
-### Functions
-
-Functions can be easily plotted with `geom_function()`
-
-
-
-
-
-## Additional config layers
-
-95% of the time (or perhaps for 95% of readers) the plot will be good enough at this point and you won't want to make any other changes. For the other 5%, there's a few additional configuration layers you can use to further tweak the plot to your perfect satisfaction.
-
-
-### Scales
-
-Perhaps the most common tweak is to the scales of the plot. **Scales control how every aesthetic is displayed** on a plot, and there are scales for every aesthetic. Aesthetics added to a plot automatically come with a scale layer with default settings, but you can replace this with a custom-tuned scale with your own settings by adding one on.
+Generally, the default axes are fine, but if you need to you can modify them with scale layers. **Scales control how every aesthetic is displayed** on a plot, and there are scales for every aesthetic. Aesthetics added to a plot automatically come with a scale layer with default settings, but you can replace this with a custom-tuned scale with your own settings by adding another scale on.
 
 Every scale layer has the folowing name pattern: `scale_aes_type` where `aes` and `type` are the name of the aesthetic and type of scale used. For example, if you're making a density plot and set `x = flipper_length_mm` this is controlled by `scale_x_continuous()` because the `flipper_length_mm` column is a continuous, numeric type variable. However if you are making a bar plot and set `x = species` this is controlled by `scale_x_discrete()` since `species` is a discrete, categorical type variable.
 
@@ -882,18 +862,76 @@ ggplot(penguins, aes(y = flipper_length_mm, fill = sex)) +
   )                                  # www.stat.columbia.edu/~tzheng/files/Rcolor.pdf
 ```
 
+<img src="06-data-visualization_files/figure-html/unnamed-chunk-40-1.svg" width="672" style="display: block; margin: auto;" />
+
+
+### 
+
+
+## Other geoms
+
+Many other geoms exist (see the [ggplot2 cheat sheet](https://rstudio.github.io/cheatsheets/data-visualization.pdf) for a full list). Here are just a *few* other extremely useful ones you should know about.
+
+
+### Straight lines
+
+Sometimes you may want to draw specific lines to annotate your plot. You can use [`geom_hline(yintercept = ...)`{.R}](https://ggplot2.tidyverse.org/reference/geom_abline.html), [`geom_vline(xintercept = ...)`{.R}](https://ggplot2.tidyverse.org/reference/geom_abline.html), and [`geom_abline(slope = ..., intercept = ...)`{.R}](https://ggplot2.tidyverse.org/reference/geom_abline.html) to manually draw horizontal, vertical, and arbitrary lines on top of another plot. You can also directly set things like `color`, `alpha`, `linetype`, or `linewidth` inside each function to control the style. If you need multiple lines, you can use a vector of inputs, or add multiple layers. For example:
+
+
+``` r
+ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm,
+                     color = species, shape = species)) +
+  geom_point(size = 2) +
+  geom_hline(yintercept = c(190, 210), color = "navyblue", linetype = "dashed") +
+  geom_vline(xintercept = 4500, linewidth = 2, alpha = 0.5) +
+  geom_abline(slope = 0.015, intercept = 140, color = "magenta", size = 1)
+```
+
 <img src="06-data-visualization_files/figure-html/unnamed-chunk-41-1.svg" width="672" style="display: block; margin: auto;" />
 
 
+### Functions
+
+Functions can be easily plotted with [`geom_function(fun = ...)`{.R}](https://ggplot2.tidyverse.org/reference/geom_function.html) where `...` is the target function. This can be added either on top of an existing plot as another layer, or plotted by itself as a new plot, in which case the base object `ggplot()` requires no additional arguments.
+
+If the function isn't predefined, you can easily define it with `\(x) ...` for example:
 
 
+``` r
+ggplot() + geom_function(
+  fun = \(x) x^2 + 1,      # define x²+1
+  xlim = c(-2, 2),         # set limits
+  n = 1001                 # increase number of points used in drawing
+)                          # (improves smoothness of resulting curve)
+```
+
+<img src="06-data-visualization_files/figure-html/unnamed-chunk-42-1.svg" width="672" style="display: block; margin: auto;" />
+
+If the function exists, but you need to modify itthe arguments, you can use `args = list(...)` any arguments specified inside will be directly passed to the chose function, for example:
 
 
-<!--
-decision tree for plots https://www.data-to-viz.com/
-dont dos https://www.data-to-viz.com/caveats.html
- - unnecessary colors
- - colorblindness
- - unnecessary 3d
- - aesthetic choices
--->
+``` r
+# plot the normal distribution with mean 10 sd 2
+ggplot() + geom_function(
+  fun = dnorm,                     # dnorm() is the normal distribution function
+  args = list(mean = 10, sd = 2),  # set mean and sd arguments inside dnorm()
+  xlim = c(4, 16),                 # set limits
+  n = 1001                         # increase number of points
+)
+```
+
+<img src="06-data-visualization_files/figure-html/unnamed-chunk-43-1.svg" width="672" style="display: block; margin: auto;" />
+
+
+## Further readings
+
+These are beyond the scope of this course, but here's a few other links if you want to learn more:
+
+ - If you haven't already, make sure to check out the [ggplot2 cheat sheet](https://rstudio.github.io/cheatsheets/data-visualization.pdf).
+ - If you need help picking a plot, [Data to Viz](https://www.data-to-viz.com) has a nice flow chart with links to example R code.
+ - I also recommend scanning the Data to Viz [page on caveats](https://www.data-to-viz.com/caveats.html), i.e. common pitfalls in data science.
+ - You can add additional [text annotations](https://ggplot2.tidyverse.org/reference/geom_text.html) to your plots if necessary.
+ - You can also [modify the coordinate systems](https://ggplot2-book.org/coord), for example to make polar plots which are especially effective for cyclical or directional data.
+ - There are also other [plot themes](https://ggplot2.tidyverse.org/reference/ggtheme.html) you can try out.
+ - Here's a [gallery of R plots](https://r-graph-gallery.com) if you want to learn more advanced types of plots and see examples of how to make them.
+

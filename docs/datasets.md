@@ -306,9 +306,13 @@ penguins
 
 
 ``` r
-last.yy = rvest::read_html("https://nces.ed.gov/programs/digest/current_tables.asp") %>%
+last.yy = tryCatch({
+  rvest::read_html("https://nces.ed.gov/programs/digest/current_tables.asp") %>%
   rvest::html_nodes(xpath="//select[@name='quickjump']/option[2]/text()") %>% 
-  as.character %>% as.numeric %>% {.%%100}
+  as.character %>% as.numeric
+},error = \(e){
+  (lubridate::year(Sys.Date()-3*30)-1)
+}) %% 100
 ```
 
 I also briefly needed a nice time series dataset with more than 1 groups to demonstrate line plots. Eventually I settled on [table 303.10](https://nces.ed.gov/programs/digest/d23/tables/dt23_303.10.asp) of the National Center for Education Statistics (NCES) which contains historic college enrollment data, stratified by sex.
