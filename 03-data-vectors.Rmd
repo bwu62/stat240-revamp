@@ -538,6 +538,7 @@ Note however that nothingness, i.e. the absence of a character (such as when a s
 "STAT240" < "STAT340"
 # however symbols come before numbers, thus
 "1,000" < "1000"
+# remember: these have NO numberic meaning, so "-" is just a character
 "-3.00" < "-3.14"
 # and remember ending a string comes before any other character
 "-3" < "-3.14"
