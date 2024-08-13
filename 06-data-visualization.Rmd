@@ -467,6 +467,24 @@ ggplot(penguins, aes(y = flipper_length_mm, x = bill_depth_mm,
 Note that since `x`, `y`, and `color` are set in the base `ggplot()` object, all subsequent layers automagically inherit those aesthetics; this is how both `geom_point()` and `geom_smooth()` know to use those aesthetic mappings to construct their own plot layers. Trend curves don't make use of the `shape` aesthetic which only applies to the scatter plot layer, so that's simply ignored by `geom_smooth()`.
 
 
+:::{.note}
+This is a good time to point out the difference between mapping an aesthetic in the base object vs mapping it in a plot layer.
+
+In the last example code chunk above, note we set the `x`, `y`, `color`, and `shape` aesthetics all in the base `ggplot()` object, which is inherited by both the `geom_point()` and `geom_smooth()` layers. If instead we don't want one of these to inherit certain aesthetics, we can set it directly in the other layer instead.
+
+For example, suppose we each species to have points of differing color and shape, but we don't want a different trend line for each species, but rather 1 single trend line across all points. We can easily achieve this by setting `color` and `shape` inside `geom_point()` instead of `ggplot()`. This will cause `geom_smooth()` to inherit only `x` and `y` from `ggplot()` and a single trend line will be made for all species:
+
+```{r,tidy=F}
+ggplot(penguins, aes(y = flipper_length_mm, x = bill_depth_mm)) +
+  geom_point(aes(color = species, shape = species), size = 2) +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(x = "Bill depth (mm)", y = "Flipper length (mm)",
+       color = "Species", shape = "Species",
+       title = "Flipper length vs bill depth by species for Palmer penguins")
+```
+:::
+
+
 ### Line plots
 
 For some specific datasets, especially chronological datasets where some variable is plotted against time, it may make sense to **directly connect each individual data point with the points before and after it to form a line plot**. Note this is NOT the same as the smoothed trend plot shown above since for a line plot there is **no smoothing performed**!
