@@ -11,6 +11,8 @@ rmd_files:
   - "data-exploration.Rmd"
   - "05-descriptive-statistics.Rmd"
   - "06-data-visualization.Rmd"
+  - "data-transformation.Rmd"
+  - "07-intro-dplyr.Rmd"
   - "datasets.Rmd"
   - "cheat-sheets.Rmd"
 delete_merged_file: true
