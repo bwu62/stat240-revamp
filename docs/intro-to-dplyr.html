@@ -83,28 +83,58 @@
 <span class="header-section-number">7</span> Intro to dplyr<a class="anchor" aria-label="anchor" href="#intro-to-dplyr"><i class="fas fa-link"></i></a>
 </h1>
 <p><a href="https://dplyr.tidyverse.org">dplyr</a> is the core Tidyverse package for transforming and your raw datasets into a clean and usable format (<a href="https://rstudio.github.io/cheatsheets/data-transformation.pdf">link to cheat sheet</a>). Its functions are versatile, performant, and have a consistent and user friendly syntax. These traits make it highly suitable for data science at all levels.</p>
+<div class="sourceCode" id="cb581"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># import all core tidyverse packages</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code></pre></div>
 <div id="syntax-design" class="section level2" number="7.1">
 <h2>
 <span class="header-section-number">7.1</span> Syntax design<a class="anchor" aria-label="anchor" href="#syntax-design"><i class="fas fa-link"></i></a>
 </h2>
-<p>First, I think it’s important to briefly comment on the syntax design of dplyr to avoid confusion later on. <strong>All functions covered in this chapter satisfy the following design principles:</strong></p>
+<p>First, I think it’s important to briefly comment on the syntax design of dplyr to avoid confusion later on. All functions covered in this chapter satisfy the following design principles:</p>
 <ol style="list-style-type: decimal">
-<li>Functions in dplyr are designed to <strong>only work on data frames</strong>. They can NOT be used with any other type of structure (e.g. vectors).
+<li>Functions in dplyr are designed to <strong>only work on data frames</strong>, not other objects (e.g. vectors).
 <ul>
-<li>If you wish to use any operations on a vector, you must first wrap the vector inside a data frame (see section <a href="data-frames.html#creating-dfs">4.1</a>).</li>
+<li>To run on a vector, it must first be wrapped inside a data frame (see section <a href="data-frames.html#creating-dfs">4.1</a>).</li>
 </ul>
 </li>
-<li>Functions in dplyr are all <strong>able to be run with pipes</strong> like <code>%&gt;%</code> or <code>|&gt;</code>, which will be discussed in the next subsection.</li>
-<li>Functions in dplyr, similar to other R operations, <strong>do NOT modify the input</strong>, so you must always remember to manually save the output.</li>
+<li>Functions in dplyr are all <strong>able to be run with pipes</strong> like <code>%&gt;%</code> or <code>|&gt;</code> (more on this soon).</li>
+<li>Functions in dplyr, <strong>do NOT modify the input</strong>, so you must always manually save the output.</li>
 </ol>
 </div>
-<div id="section" class="section level2" number="7.2">
+<div id="pipes" class="section level2" number="7.2">
 <h2>
-<span class="header-section-number">7.2</span> <a class="anchor" aria-label="anchor" href="#section"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.2</span> Pipes<a class="anchor" aria-label="anchor" href="#pipes"><i class="fas fa-link"></i></a>
+</h2>
+<p>All dplyr functions are setup so that <strong>the first argument is the input data frame</strong>. In other words, they’re always run like <code>f(df, ...)</code> where <code>f</code> is some dplyr function, <code>df</code> is the data frame you wish to operate on, and <code>...</code> can be further arguments. This also applies to most other Tidyverse functions, e.g. recall the first argument to <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code> must also be a data frame.</p>
+<p>This design makes it easy to <strong>chain many functions together with pipes</strong> <code>%&gt;%</code> and <code>|&gt;</code>, which are <a href="https://www.tidyverse.org/blog/2023/04/base-vs-magrittr-pipe">basically the same</a> and both used to <strong>pass the left-side expression as the first argument to a function</strong>. In this class, we will stick to <code>%&gt;%</code> for consistency, but you can use <code>|&gt;</code> if you prefer. For example,</p>
+<ul>
+<li>
+<code>x %&gt;% f</code> is equivalent to <code>f(x)</code>
+</li>
+<li>
+<code>x %&gt;% f(y)</code> is equivalent to <code>f(x, y)</code> <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;These examples come from the &lt;a href="https://magrittr.tidyverse.org/index.html#usage" target="_blank"&gt;magrittr help page&lt;/a&gt;.&lt;/p&gt;'><sup>25</sup></a>
+</li>
+</ul>
+<p>Why is this useful? Suppose you start with a data frame <code>df</code> and want to run the functions <code>f</code>, <code>g</code>, and <code>h</code> on it in order. You can of course do the following:</p>
+<pre><code>h(g(f(df)))</code></pre>
+<p>but this quickly becomes awkward, due to the many nested parentheticals. A much cleaner syntax is to use <code>%&gt;%</code> to pipe <code>df</code> from one function to the next, resulting in this much cleaner equivalent syntax:</p>
+<pre><code>df %&gt;% f %&gt;% g %&gt;% h</code></pre>
+<p>This is not only much neater but also significantly easier to modify and debug. You can also easily specify additional arguments. For example, suppose <code>f</code>, <code>g</code>, and <code>h</code> need the additional arguments <code>a = 1</code>, <code>b = 2</code>, and <code>c = 3</code> in order. Compare these two equivalent syntax options:</p>
+<pre><code>h(g(f(df, a = 1), b = 2), c = 3)</code></pre>
+<pre><code>df %&gt;% f(a = 1) %&gt;% g(b = 2) %&gt;% g(c = 3)</code></pre>
+<p>As long as each function in the chain accepts a data frame as the first argument AND outputs a data frame as the result, you can string together as many functions as you need to perform several data operations in a single step.</p>
+<div class="tip">
+<p>The <a href="https://magrittr.tidyverse.org/index.html#usage">magrittr help page</a> has some additional usage tips for <code>%&gt;%</code>, such as how to pass the left side to a different argument position, using <code>%&gt;%</code> to create simple functions, and other <a href="https://magrittr.tidyverse.org/articles/magrittr.html#additional-pipe-operators">advanced pipes</a>. These are outside the scope of this course, so read at your own discretion!</p>
+</div>
+</div>
+<div id="section" class="section level2" number="7.3">
+<h2>
+<span class="header-section-number">7.3</span> <a class="anchor" aria-label="anchor" href="#section"><i class="fas fa-link"></i></a>
 </h2>
 
 </div>
 </div>
+
 
 
 
@@ -127,6 +157,47 @@
   $(function(){
     $(".col-lg-7").addClass("col-lg-8").removeClass("col-lg-7");
   });
+</script><!-- https://stackoverflow.com/a/37839683/25278020 --><script>
+  $(document).ready(function() {
+
+  $chunks = $('.fold');
+
+  $chunks.each(function () {
+
+    // add button to source code chunks
+    if ( $(this).hasClass('s') ) {
+      $('pre.r', this).prepend("<div class=\"showopt\">Show Source</div><br style=\"line-height:22px;\"/>");
+      $('pre.r', this).children('code').attr('class', 'folded');
+    }
+
+    // add button to output chunks
+    if ( $(this).hasClass('o') ) {
+      $('pre:not(.r)', this).has('code').prepend("<div class=\"showopt\">Show Output</div><br style=\"line-height:22px;\"/>");
+      $('pre:not(.r)', this).children('code:not(r)').addClass('folded');
+
+      // add button to plots
+      $(this).find('img').wrap('<pre class=\"plot\"></pre>');
+      $('pre.plot', this).prepend("<div class=\"showopt\">Show Plot</div><br style=\"line-height:22px;\"/>");
+      $('pre.plot', this).children('img').addClass('folded');
+
+    }
+  });
+
+  // hide all chunks when document is loaded
+  $('.folded').css('display', 'none')
+
+  // function to toggle the visibility
+  $('.showopt').click(function() {
+    var label = $(this).html();
+    if (label.indexOf("Show") >= 0) {
+      $(this).html(label.replace("Show", "Hide"));
+    } else {
+      $(this).html(label.replace("Hide", "Show"));
+    }
+    $(this).siblings('code, img').slideToggle('fast', 'swing');
+  });
+});
+
 </script><div class="chapter-nav">
 <div class="prev"><a href="data-transformation.html">Data Transformation</a></div>
 <div class="next"><a href="datasets.html"><span class="header-section-number">A</span> Datasets</a></div>
@@ -135,7 +206,8 @@
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#intro-to-dplyr"><span class="header-section-number">7</span> Intro to dplyr</a></li>
 <li><a class="nav-link" href="#syntax-design"><span class="header-section-number">7.1</span> Syntax design</a></li>
-<li><a class="nav-link" href="#section"><span class="header-section-number">7.2</span></a></li>
+<li><a class="nav-link" href="#pipes"><span class="header-section-number">7.2</span> Pipes</a></li>
+<li><a class="nav-link" href="#section"><span class="header-section-number">7.3</span></a></li>
 </ul>
 
       <div class="book-extra">

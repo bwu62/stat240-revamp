@@ -777,6 +777,32 @@ You can make the above plot more accessible to readers with color vision deficie
 <span>    values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"blue"</span><span class="op">)</span>        <span class="co"># set custom colors, full list of possible names:</span></span>
 <span>  <span class="op">)</span>                                  <span class="co"># www.stat.columbia.edu/~tzheng/files/Rcolor.pdf</span></span></code></pre></div>
 <div class="inline-figure"><img src="06-data-visualization_files/figure-html/unnamed-chunk-41-1.svg" width="672" style="display: block; margin: auto;"></div>
+<!--
+<details>
+<summary>*Bonus bar plot*</summary>
+What do you think the following code will produce?
+
+:::{.fold .o}
+
+``` r
+df = tibble(
+  x = c("a","a","a","b","b","b","c","c","c","d","d","e","e"),
+  y = c(20,20,25,40,20,40,15,15,18,28,15,18,11),
+  z = c("a","b","c","d","c","e","f","g","c","h","c","i","c")
+)
+ggplot(df,aes(x=x,y=y,fill=z)) + geom_col() +   
+  scale_fill_manual(
+    values=c("#4F76DF","#FFFFFF","#FFD90F","#83C33F","#2359F1",
+             "#6686C7","#E65120","#DA6901","#72C7E7")
+  )
+```
+
+<img src="06-data-visualization_files/figure-html/unnamed-chunk-42-1.svg" width="528" style="display: block; margin: auto;" />
+([*credit*](https://www.r-bloggers.com/2016/03/the-simpsons-as-a-chart-2/))
+:::
+
+</details>
+-->
 </div>
 <div id="other-geoms" class="section level2" number="6.7">
 <h2>
@@ -795,7 +821,7 @@ You can make the above plot more accessible to readers with color vision deficie
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_hline</a></span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">190</span>, <span class="fl">210</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"navyblue"</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">4500</span>, linewidth <span class="op">=</span> <span class="fl">2</span>, alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_abline</a></span><span class="op">(</span>slope <span class="op">=</span> <span class="fl">0.015</span>, intercept <span class="op">=</span> <span class="fl">140</span>, color <span class="op">=</span> <span class="st">"magenta"</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="06-data-visualization_files/figure-html/unnamed-chunk-42-1.svg" width="672" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="06-data-visualization_files/figure-html/unnamed-chunk-43-1.svg" width="672" style="display: block; margin: auto;"></div>
 </div>
 <div id="functions" class="section level3" number="6.7.2">
 <h3>
@@ -809,7 +835,7 @@ You can make the above plot more accessible to readers with color vision deficie
 <span>  xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>,         <span class="co"># set limits</span></span>
 <span>  n <span class="op">=</span> <span class="fl">1001</span>                 <span class="co"># increase number of points used in drawing</span></span>
 <span><span class="op">)</span>                          <span class="co"># (improves smoothness of resulting curve)</span></span></code></pre></div>
-<div class="inline-figure"><img src="06-data-visualization_files/figure-html/unnamed-chunk-43-1.svg" width="672" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="06-data-visualization_files/figure-html/unnamed-chunk-44-1.svg" width="672" style="display: block; margin: auto;"></div>
 <p>If the function exists, but you need to modify itthe arguments, you can use <code>args = list(...)</code> any arguments specified inside will be directly passed to the chose function, for example:</p>
 <div class="sourceCode" id="cb580"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># plot the normal distribution with mean 10 sd 2</span></span>
@@ -819,7 +845,7 @@ You can make the above plot more accessible to readers with color vision deficie
 <span>  xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">16</span><span class="op">)</span>,                 <span class="co"># set limits</span></span>
 <span>  n <span class="op">=</span> <span class="fl">1001</span>                         <span class="co"># increase number of points</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="06-data-visualization_files/figure-html/unnamed-chunk-44-1.svg" width="672" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="06-data-visualization_files/figure-html/unnamed-chunk-45-1.svg" width="672" style="display: block; margin: auto;"></div>
 </div>
 </div>
 <div id="further-readings" class="section level2" number="6.8">
@@ -858,6 +884,47 @@ You can make the above plot more accessible to readers with color vision deficie
   $(function(){
     $(".col-lg-7").addClass("col-lg-8").removeClass("col-lg-7");
   });
+</script><!-- https://stackoverflow.com/a/37839683/25278020 --><script>
+  $(document).ready(function() {
+
+  $chunks = $('.fold');
+
+  $chunks.each(function () {
+
+    // add button to source code chunks
+    if ( $(this).hasClass('s') ) {
+      $('pre.r', this).prepend("<div class=\"showopt\">Show Source</div><br style=\"line-height:22px;\"/>");
+      $('pre.r', this).children('code').attr('class', 'folded');
+    }
+
+    // add button to output chunks
+    if ( $(this).hasClass('o') ) {
+      $('pre:not(.r)', this).has('code').prepend("<div class=\"showopt\">Show Output</div><br style=\"line-height:22px;\"/>");
+      $('pre:not(.r)', this).children('code:not(r)').addClass('folded');
+
+      // add button to plots
+      $(this).find('img').wrap('<pre class=\"plot\"></pre>');
+      $('pre.plot', this).prepend("<div class=\"showopt\">Show Plot</div><br style=\"line-height:22px;\"/>");
+      $('pre.plot', this).children('img').addClass('folded');
+
+    }
+  });
+
+  // hide all chunks when document is loaded
+  $('.folded').css('display', 'none')
+
+  // function to toggle the visibility
+  $('.showopt').click(function() {
+    var label = $(this).html();
+    if (label.indexOf("Show") >= 0) {
+      $(this).html(label.replace("Show", "Hide"));
+    } else {
+      $(this).html(label.replace("Hide", "Show"));
+    }
+    $(this).siblings('code, img').slideToggle('fast', 'swing');
+  });
+});
+
 </script><div class="chapter-nav">
 <div class="prev"><a href="descriptive-statistics.html"><span class="header-section-number">5</span> Descriptive statistics</a></div>
 <div class="next"><a href="data-transformation.html">Data Transformation</a></div>

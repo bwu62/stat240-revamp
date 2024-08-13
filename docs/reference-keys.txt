@@ -117,6 +117,7 @@ functions
 further-readings
 intro-to-dplyr
 syntax-design
+pipes
 section
 datasets
 datasets-list

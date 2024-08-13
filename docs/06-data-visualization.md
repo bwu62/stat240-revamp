@@ -886,6 +886,34 @@ ggplot(penguins, aes(y = flipper_length_mm, fill = sex)) +
 <img src="06-data-visualization_files/figure-html/unnamed-chunk-41-1.svg" width="672" style="display: block; margin: auto;" />
 
 
+<!--
+<details>
+<summary>*Bonus bar plot*</summary>
+What do you think the following code will produce?
+
+:::{.fold .o}
+
+``` r
+df = tibble(
+  x = c("a","a","a","b","b","b","c","c","c","d","d","e","e"),
+  y = c(20,20,25,40,20,40,15,15,18,28,15,18,11),
+  z = c("a","b","c","d","c","e","f","g","c","h","c","i","c")
+)
+ggplot(df,aes(x=x,y=y,fill=z)) + geom_col() +   
+  scale_fill_manual(
+    values=c("#4F76DF","#FFFFFF","#FFD90F","#83C33F","#2359F1",
+             "#6686C7","#E65120","#DA6901","#72C7E7")
+  )
+```
+
+<img src="06-data-visualization_files/figure-html/unnamed-chunk-42-1.svg" width="528" style="display: block; margin: auto;" />
+([*credit*](https://www.r-bloggers.com/2016/03/the-simpsons-as-a-chart-2/))
+:::
+
+</details>
+-->
+
+
 ## Other geoms
 
 Many other geoms exist (see the [ggplot2 cheat sheet](https://rstudio.github.io/cheatsheets/data-visualization.pdf) for a full list). Here are just a *few* other extremely useful ones you should know about.
@@ -905,7 +933,7 @@ ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm,
   geom_abline(slope = 0.015, intercept = 140, color = "magenta", size = 1)
 ```
 
-<img src="06-data-visualization_files/figure-html/unnamed-chunk-42-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="06-data-visualization_files/figure-html/unnamed-chunk-43-1.svg" width="672" style="display: block; margin: auto;" />
 
 
 ### Functions
@@ -923,7 +951,7 @@ ggplot() + geom_function(
 )                          # (improves smoothness of resulting curve)
 ```
 
-<img src="06-data-visualization_files/figure-html/unnamed-chunk-43-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="06-data-visualization_files/figure-html/unnamed-chunk-44-1.svg" width="672" style="display: block; margin: auto;" />
 
 If the function exists, but you need to modify itthe arguments, you can use `args = list(...)` any arguments specified inside will be directly passed to the chose function, for example:
 
@@ -938,7 +966,7 @@ ggplot() + geom_function(
 )
 ```
 
-<img src="06-data-visualization_files/figure-html/unnamed-chunk-44-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="06-data-visualization_files/figure-html/unnamed-chunk-45-1.svg" width="672" style="display: block; margin: auto;" />
 
 
 ## Further readings
