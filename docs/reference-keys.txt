@@ -57,7 +57,7 @@ getset-components
 date-math
 printing-dates
 data-frames
-creating-data-frames
+creating-dfs
 importing-data-frames
 aside-file-formats-extensions
 importing-functions
@@ -115,6 +115,9 @@ other-geoms
 straight-lines
 functions
 further-readings
+intro-to-dplyr
+syntax-design
+section
 datasets
 datasets-list
 eruptions
@@ -137,3 +140,4 @@ latex
 readr
 lubridate
 ggplot2-1
+dplyr

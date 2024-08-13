@@ -9,7 +9,7 @@ It's actually really helpful to think of a data frame as a collection of paralle
 
 
 
-## Creating data frames
+## Creating data frames {#creating-dfs}
 
 
 There are 2 common ways of creating a new data frame manually: `data.frame()` from base R, or `tibble()` from the [tibble](https://tibble.tidyverse.org) package, another of the core Tidyverse packages. They are extremely similar, but we recommend `tibble()` due to some nice extra features such as better printing, referencing other columns during creation, and stricter subsetting rules. Example:
@@ -27,7 +27,7 @@ library(lubridate)
 df <- tibble(
   name = c("Alice", "Bob", "Charlie"),
   sex = c("F", "M", "M"),
-  date_of_birth = mdy(c("8/12/03", "7/4/99", "10/31/06")),
+  date_of_birth = mdy(c("8/13/03", "7/4/99", "10/31/06")),
   age = floor(as.numeric(today() - birthday)/365.24),
   declared_major = c(TRUE, TRUE, FALSE),
   school = "UW-Madison"
@@ -40,7 +40,7 @@ df
 ## # A tibble: 3 × 6
 ##   name    sex   date_of_birth   age declared_major school    
 ##   <chr>   <chr> <date>        <dbl> <lgl>          <chr>     
-## 1 Alice   F     2003-08-12       21 TRUE           UW-Madison
+## 1 Alice   F     2003-08-13       21 TRUE           UW-Madison
 ## 2 Bob     M     1999-07-04       25 TRUE           UW-Madison
 ## 3 Charlie M     2006-10-31       17 FALSE          UW-Madison
 ```

@@ -66,6 +66,8 @@
 <li><a class="" href="data-exploration.html">Data Exploration</a></li>
 <li><a class="" href="descriptive-statistics.html"><span class="header-section-number">5</span> Descriptive statistics</a></li>
 <li><a class="" href="data-visualization.html"><span class="header-section-number">6</span> Data visualization</a></li>
+<li><a class="" href="data-transformation.html">Data Transformation</a></li>
+<li><a class="" href="intro-to-dplyr.html"><span class="header-section-number">7</span> Intro to dplyr</a></li>
 <li class="book-part">Appendix</li>
 <li><a class="active" href="datasets.html"><span class="header-section-number">A</span> Datasets</a></li>
 <li><a class="" href="cheat-sheets.html"><span class="header-section-number">B</span> Cheat sheets</a></li>
@@ -76,7 +78,7 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="datasets" class="section level1" number="7">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="datasets" class="section level1" number="8">
 <h1>
 <span class="header-section-number">A</span> Datasets<a class="anchor" aria-label="anchor" href="#datasets"><i class="fas fa-link"></i></a>
 </h1>
@@ -87,7 +89,7 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rvest.tidyverse.org/">rvest</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://lubridate.tidyverse.org">lubridate</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/colearendt/xlsx">xlsx</a></span><span class="op">)</span></span></code></pre></div>
-<div id="datasets-list" class="section level2" number="7.1">
+<div id="datasets-list" class="section level2" number="8.1">
 <h2>
 <span class="header-section-number">A.1</span> List of datasets<a class="anchor" aria-label="anchor" href="#datasets-list"><i class="fas fa-link"></i></a>
 </h2>
@@ -105,12 +107,12 @@
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span><span class="op">(</span><span class="st">"https://bwu62.github.io/stat240-revamp/data_list.txt"</span><span class="op">)</span>,</span>
 <span>       \<span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span><span class="op">(</span><span class="va">.</span>,<span class="fu"><a href="https://rdrr.io/r/base/basename.html">basename</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="eruptions" class="section level2" number="7.2">
+<div id="eruptions" class="section level2" number="8.2">
 <h2>
 <span class="header-section-number">A.2</span> Eruptions<a class="anchor" aria-label="anchor" href="#eruptions"><i class="fas fa-link"></i></a>
 </h2>
 <p>For introducing reading CSVs, I wanted a dataset with all 4 data types we discussed (numeric, logical, character, and date) and was interesting enough, but without too many columns or rows, and without any problems that would add to complexity since we’re just starting out. The <a href="https://volcano.si.edu/volcanolist_countries.cfm?country=United%20States">volcanic eruptions</a> dataset (specifically the “Holocene Eruptions”) table seemed to fit the bill nicely.</p>
-<div id="load-raw-data" class="section level3" number="7.2.1">
+<div id="load-raw-data" class="section level3" number="8.2.1">
 <h3>
 <span class="header-section-number">A.2.1</span> Load raw data<a class="anchor" aria-label="anchor" href="#load-raw-data"><i class="fas fa-link"></i></a>
 </h3>
@@ -128,7 +130,7 @@
 <span>  <span class="co"># make names nice</span></span>
 <span>  <span class="fu"><a href="https://rlang.r-lib.org/reference/set_names.html">set_names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"volcano"</span>,<span class="st">"start"</span>,<span class="st">"stop"</span>,<span class="st">"confirmed"</span>,<span class="st">"vei"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="process-data" class="section level3" number="7.2.2">
+<div id="process-data" class="section level3" number="8.2.2">
 <h3>
 <span class="header-section-number">A.2.2</span> Process data<a class="anchor" aria-label="anchor" href="#process-data"><i class="fas fa-link"></i></a>
 </h3>
@@ -182,7 +184,7 @@
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">start_error</span> <span class="op">&lt;=</span> <span class="fl">30</span>, <span class="va">start_year</span> <span class="op">&gt;</span> <span class="fl">2000</span>, <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">stop</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">contains</a></span><span class="op">(</span><span class="st">"_"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="write-out-data" class="section level3" number="7.2.3">
+<div id="write-out-data" class="section level3" number="8.2.3">
 <h3>
 <span class="header-section-number">A.2.3</span> Write out data<a class="anchor" aria-label="anchor" href="#write-out-data"><i class="fas fa-link"></i></a>
 </h3>
@@ -207,7 +209,7 @@
 <span><span class="co"># eruptions_recent %&gt;% as.data.frame %&gt;% print(print.gap=2,width=1000,row.names=F,right=F) %&gt;% capture.output() %&gt;% </span></span>
 <span><span class="co">#   str_replace("&lt;NA&gt;","NA  ") %&gt;% str_replace("^ *",'"') %&gt;% str_replace("( {2,})",'"\\1') %&gt;% str_replace('"name"',"name  ") %&gt;% write_lines(file="data/eruptions_recent.txt")</span></span></code></pre></div>
 </div>
-<div id="inspect-data" class="section level3" number="7.2.4">
+<div id="inspect-data" class="section level3" number="8.2.4">
 <h3>
 <span class="header-section-number">A.2.4</span> Inspect data<a class="anchor" aria-label="anchor" href="#inspect-data"><i class="fas fa-link"></i></a>
 </h3>
@@ -337,13 +339,13 @@ options(width=80)
 -->
 </div>
 </div>
-<div id="palmer-penguins-1" class="section level2" number="7.3">
+<div id="palmer-penguins-1" class="section level2" number="8.3">
 <h2>
 <span class="header-section-number">A.3</span> Palmer penguins<a class="anchor" aria-label="anchor" href="#palmer-penguins-1"><i class="fas fa-link"></i></a>
 </h2>
 <p>For the data visualization, I wanted a more feature rich dataset with a healthy combination of numerics and characters that is ready to go, easy to use, fun &amp; interesting, and would make good looking plots for the demos. I spent too long brainstorming ideas, including scraping additional info on the volcanoes, but wasn’t happy with the result. Then, while looking for inspiration, I found through Hadley Wickham’s excellent <a href="https://r4ds.hadley.nz/data-visualize">R4DS book</a> the <a href="https://allisonhorst.github.io/palmerpenguins/">Palmer penguins</a> dataset, which is absolutely perfect.</p>
 <p>Now, I want students to continue practicing reading datasets, so the following code simple extracts the dataset therein and rewrites it out.</p>
-<div id="write-out-data-1" class="section level3" number="7.3.1">
+<div id="write-out-data-1" class="section level3" number="8.3.1">
 <h3>
 <span class="header-section-number">A.3.1</span> Write out data<a class="anchor" aria-label="anchor" href="#write-out-data-1"><i class="fas fa-link"></i></a>
 </h3>
@@ -351,7 +353,7 @@ options(width=80)
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://allisonhorst.github.io/palmerpenguins/">palmerpenguins</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html">write_csv</a></span><span class="op">(</span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">drop_na</span>,<span class="st">"data/penguins_complete.csv"</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="inspect-data-1" class="section level3" number="7.3.2">
+<div id="inspect-data-1" class="section level3" number="8.3.2">
 <h3>
 <span class="header-section-number">A.3.2</span> Inspect data<a class="anchor" aria-label="anchor" href="#inspect-data-1"><i class="fas fa-link"></i></a>
 </h3>
@@ -359,7 +361,7 @@ options(width=80)
 <code class="sourceCode R"><span><span class="va">penguins</span></span></code></pre></div>
 </div>
 </div>
-<div id="college-enrollment" class="section level2" number="7.4">
+<div id="college-enrollment" class="section level2" number="8.4">
 <h2>
 <span class="header-section-number">A.4</span> College enrollment<a class="anchor" aria-label="anchor" href="#college-enrollment"><i class="fas fa-link"></i></a>
 </h2>
@@ -372,7 +374,7 @@ options(width=80)
 <span>  <span class="op">(</span><span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/year.html">year</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.Date</a></span><span class="op">(</span><span class="op">)</span><span class="op">-</span><span class="fl">3</span><span class="op">*</span><span class="fl">30</span><span class="op">)</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html">%%</a></span> <span class="fl">100</span></span></code></pre></div>
 <p>I also briefly needed a nice time series dataset with more than 1 groups to demonstrate line plots. Eventually I settled on <a href="https://nces.ed.gov/programs/digest/d23/tables/dt23_303.10.asp">table 303.10</a> of the National Center for Education Statistics (NCES) which contains historic college enrollment data, stratified by sex.</p>
-<div id="process-data-1" class="section level3" number="7.4.1">
+<div id="process-data-1" class="section level3" number="8.4.1">
 <h3>
 <span class="header-section-number">A.4.1</span> Process data<a class="anchor" aria-label="anchor" href="#process-data-1"><i class="fas fa-link"></i></a>
 </h3>
@@ -398,14 +400,14 @@ options(width=80)
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>male <span class="op">=</span> <span class="va">male</span><span class="op">/</span><span class="fl">1e6</span>, female <span class="op">=</span> <span class="va">female</span><span class="op">/</span><span class="fl">1e6</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span><span class="va">male</span><span class="op">:</span><span class="va">female</span>,names_to<span class="op">=</span><span class="st">"sex"</span>,values_to<span class="op">=</span><span class="st">"enrolled_millions"</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="write-out-data-2" class="section level3" number="7.4.2">
+<div id="write-out-data-2" class="section level3" number="8.4.2">
 <h3>
 <span class="header-section-number">A.4.2</span> Write out data<a class="anchor" aria-label="anchor" href="#write-out-data-2"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb592"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html">write_csv</a></span><span class="op">(</span><span class="va">enrollment</span>, file<span class="op">=</span><span class="st">"data/enrollment.csv"</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="inspect-data-2" class="section level3" number="7.4.3">
+<div id="inspect-data-2" class="section level3" number="8.4.3">
 <h3>
 <span class="header-section-number">A.4.3</span> Inspect data<a class="anchor" aria-label="anchor" href="#inspect-data-2"><i class="fas fa-link"></i></a>
 </h3>
@@ -449,7 +451,7 @@ options(width=80)
     $(".col-lg-7").addClass("col-lg-8").removeClass("col-lg-7");
   });
 </script><div class="chapter-nav">
-<div class="prev"><a href="data-visualization.html"><span class="header-section-number">6</span> Data visualization</a></div>
+<div class="prev"><a href="intro-to-dplyr.html"><span class="header-section-number">7</span> Intro to dplyr</a></div>
 <div class="next"><a href="cheat-sheets.html"><span class="header-section-number">B</span> Cheat sheets</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
@@ -494,7 +496,7 @@ options(width=80)
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2024-08-12.</p>
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2024-08-13.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

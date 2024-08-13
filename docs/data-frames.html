@@ -66,6 +66,8 @@
 <li><a class="" href="data-exploration.html">Data Exploration</a></li>
 <li><a class="" href="descriptive-statistics.html"><span class="header-section-number">5</span> Descriptive statistics</a></li>
 <li><a class="" href="data-visualization.html"><span class="header-section-number">6</span> Data visualization</a></li>
+<li><a class="" href="data-transformation.html">Data Transformation</a></li>
+<li><a class="" href="intro-to-dplyr.html"><span class="header-section-number">7</span> Intro to dplyr</a></li>
 <li class="book-part">Appendix</li>
 <li><a class="" href="datasets.html"><span class="header-section-number">A</span> Datasets</a></li>
 <li><a class="" href="cheat-sheets.html"><span class="header-section-number">B</span> Cheat sheets</a></li>
@@ -82,9 +84,9 @@
 </h1>
 <p>Moving on from vectors, the next most important data structure in R is the data frame. Think of a data frame as similar to a matrix, but (ideally) <strong>each column is a vector of a single type representing a variable or attribute, and each row is an observation in your sample</strong>.</p>
 <p>It’s actually really helpful to think of a data frame as a collection of parallel vectors with the same length, each to a column with its own type. E.g. suppose you survey a sample of college students; maybe you’d have a sex column of character type, a GPA column of numeric type, a birthday column of date type, and a column for if they have declared a major with logical type.</p>
-<div id="creating-data-frames" class="section level2" number="4.1">
+<div id="creating-dfs" class="section level2" number="4.1">
 <h2>
-<span class="header-section-number">4.1</span> Creating data frames<a class="anchor" aria-label="anchor" href="#creating-data-frames"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.1</span> Creating data frames<a class="anchor" aria-label="anchor" href="#creating-dfs"><i class="fas fa-link"></i></a>
 </h2>
 <p>There are 2 common ways of creating a new data frame manually: <code><a href="https://rdrr.io/r/base/data.frame.html">data.frame()</a></code> from base R, or <code><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble()</a></code> from the <a href="https://tibble.tidyverse.org">tibble</a> package, another of the core Tidyverse packages. They are extremely similar, but we recommend <code><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble()</a></code> due to some nice extra features such as better printing, referencing other columns during creation, and stricter subsetting rules. Example:</p>
 <div class="sourceCode" id="cb426"><pre class="downlit sourceCode r">
@@ -98,7 +100,7 @@
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
 <span>  name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Alice"</span>, <span class="st">"Bob"</span>, <span class="st">"Charlie"</span><span class="op">)</span>,</span>
 <span>  sex <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"F"</span>, <span class="st">"M"</span>, <span class="st">"M"</span><span class="op">)</span>,</span>
-<span>  date_of_birth <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html">mdy</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"8/12/03"</span>, <span class="st">"7/4/99"</span>, <span class="st">"10/31/06"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  date_of_birth <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html">mdy</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"8/13/03"</span>, <span class="st">"7/4/99"</span>, <span class="st">"10/31/06"</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">floor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/now.html">today</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">birthday</span><span class="op">)</span><span class="op">/</span><span class="fl">365.24</span><span class="op">)</span>,</span>
 <span>  declared_major <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>,</span>
 <span>  school <span class="op">=</span> <span class="st">"UW-Madison"</span></span>
@@ -108,7 +110,7 @@
 <pre><code>## # A tibble: 3 × 6
 ##   name    sex   date_of_birth   age declared_major school    
 ##   &lt;chr&gt;   &lt;chr&gt; &lt;date&gt;        &lt;dbl&gt; &lt;lgl&gt;          &lt;chr&gt;     
-## 1 Alice   F     2003-08-12       21 TRUE           UW-Madison
+## 1 Alice   F     2003-08-13       21 TRUE           UW-Madison
 ## 2 Bob     M     1999-07-04       25 TRUE           UW-Madison
 ## 3 Charlie M     2006-10-31       17 FALSE          UW-Madison</code></pre>
 <p>Note the following:</p>
@@ -780,7 +782,7 @@ For example, suppose a data frame had in order from left to right a numeric colu
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#data-frames"><span class="header-section-number">4</span> Data Frames</a></li>
-<li><a class="nav-link" href="#creating-data-frames"><span class="header-section-number">4.1</span> Creating data frames</a></li>
+<li><a class="nav-link" href="#creating-dfs"><span class="header-section-number">4.1</span> Creating data frames</a></li>
 <li>
 <a class="nav-link" href="#importing-data-frames"><span class="header-section-number">4.2</span> Importing data frames</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#aside-file-formats-extensions"><span class="header-section-number">4.2.1</span> Aside: file formats &amp; extensions</a></li>
@@ -817,7 +819,7 @@ For example, suppose a data frame had in order from left to right a numeric colu
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2024-08-12.</p>
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2024-08-13.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
