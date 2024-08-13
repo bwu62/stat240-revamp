@@ -581,6 +581,27 @@ ggplot(penguins, aes(y = flipper_length_mm, x = bill_depth_mm,
 Note that since `x`, `y`, and `color` are set in the base `ggplot()` object, all subsequent layers automagically inherit those aesthetics; this is how both `geom_point()` and `geom_smooth()` know to use those aesthetic mappings to construct their own plot layers. Trend curves don't make use of the `shape` aesthetic which only applies to the scatter plot layer, so that's simply ignored by `geom_smooth()`.
 
 
+:::{.note}
+This is a good time to point out the difference between mapping an aesthetic in the base object vs mapping it in a plot layer.
+
+In the last example code chunk above, note we set the `x`, `y`, `color`, and `shape` aesthetics all in the base `ggplot()` object, which is inherited by both the `geom_point()` and `geom_smooth()` layers. If instead we don't want one of these to inherit certain aesthetics, we can set it directly in the other layer instead.
+
+For example, suppose we each species to have points of differing color and shape, but we don't want a different trend line for each species, but rather 1 single trend line across all points. We can easily achieve this by setting `color` and `shape` inside `geom_point()` instead of `ggplot()`. This will cause `geom_smooth()` to inherit only `x` and `y` from `ggplot()` and a single trend line will be made for all species:
+
+
+``` r
+ggplot(penguins, aes(y = flipper_length_mm, x = bill_depth_mm)) +
+  geom_point(aes(color = species, shape = species), size = 2) +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(x = "Bill depth (mm)", y = "Flipper length (mm)",
+       color = "Species", shape = "Species",
+       title = "Flipper length vs bill depth by species for Palmer penguins")
+```
+
+<img src="06-data-visualization_files/figure-html/unnamed-chunk-26-1.svg" width="672" style="display: block; margin: auto;" />
+:::
+
+
 ### Line plots
 
 For some specific datasets, especially chronological datasets where some variable is plotted against time, it may make sense to **directly connect each individual data point with the points before and after it to form a line plot**. Note this is NOT the same as the smoothed trend plot shown above since for a line plot there is **no smoothing performed**!
@@ -617,7 +638,7 @@ ggplot(enrollment, aes(x = year, y = enrolled_millions,
        title = "U.S. College enrollment by sex")
 ```
 
-<img src="06-data-visualization_files/figure-html/unnamed-chunk-27-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="06-data-visualization_files/figure-html/unnamed-chunk-28-1.svg" width="672" style="display: block; margin: auto;" />
 
 However, the chronological nature of this data means **each data point has a specific predecessor and successor**, i.e. for each point (except the end points) there is a specific single point that comes before and after it. Thus, it makes more sense to connect these points with a single continuous line for each sex. This can be done by using `geom_line()` instead. We can also drop the `shape` aesthetic since it doesn't apply to lines:
 
@@ -630,7 +651,7 @@ ggplot(enrollment, aes(x = year, y = enrolled_millions, color = sex)) +
        title = "U.S. College enrollment by sex")
 ```
 
-<img src="06-data-visualization_files/figure-html/unnamed-chunk-28-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="06-data-visualization_files/figure-html/unnamed-chunk-29-1.svg" width="672" style="display: block; margin: auto;" />
 
 By default the line appears very thin and may be hard to read for some people. We can add `linewidth = 1.2` to `geom_line()` to increase the thickness. We can also add another aesthetic `linetype = sex` for additional disambiguation so it's extremely clear which line corresponds to which sex:
 
@@ -644,7 +665,7 @@ ggplot(enrollment, aes(x = year, y = enrolled_millions,
        title = "U.S. College enrollment by sex")
 ```
 
-<img src="06-data-visualization_files/figure-html/unnamed-chunk-29-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="06-data-visualization_files/figure-html/unnamed-chunk-30-1.svg" width="672" style="display: block; margin: auto;" />
 
 We can see that since the late 70's, college enrollment of female students has consistently outpaced that of male students.
 
@@ -661,7 +682,7 @@ ggplot(enrollment, aes(x = year, y = enrolled_millions, fill = sex)) +
        title = "U.S. College enrollment by sex")
 ```
 
-<img src="06-data-visualization_files/figure-html/unnamed-chunk-30-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="06-data-visualization_files/figure-html/unnamed-chunk-31-1.svg" width="672" style="display: block; margin: auto;" />
 
 Compared to line plots with one line per category, the stacked area plot has the advantage of easily showing both relative proportions of categories as well as total sum of all categories, but this comes at a cost of being able to easily compare individual categories to each other. So a tradeoff, as usual.
 
@@ -692,7 +713,7 @@ ggplot(unemployment, aes(x = DATE, y = UNRATE)) + geom_line() +
        title = "U.S. Unemployment rate")
 ```
 
-<img src="06-data-visualization_files/figure-html/unnamed-chunk-31-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="06-data-visualization_files/figure-html/unnamed-chunk-32-1.svg" width="672" style="display: block; margin: auto;" />
 
 The  superficially look the same as the previous plot, however if we zoom in and plot just the last year of data, we can see the horizontal axis is in fact a special date type of axis:
 
@@ -705,7 +726,7 @@ ggplot(unemployment[(n-11):n,], aes(x = DATE, y = UNRATE)) + geom_line() +
        title = "U.S. Unemployment rate")
 ```
 
-<img src="06-data-visualization_files/figure-html/unnamed-chunk-32-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="06-data-visualization_files/figure-html/unnamed-chunk-33-1.svg" width="672" style="display: block; margin: auto;" />
 
 The choppiness is because the data is only summarized monthly.
 
@@ -732,7 +753,7 @@ Going back to the penguins dataset, suppose you wanted to look at the relationsh
 ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm)) + geom_point()
 ```
 
-<img src="06-data-visualization_files/figure-html/unnamed-chunk-33-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="06-data-visualization_files/figure-html/unnamed-chunk-34-1.svg" width="672" style="display: block; margin: auto;" />
 
 Maybe you decide to also incorporate species as a variable, so you can see if there are differences between the different species:
 
@@ -743,7 +764,7 @@ ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm,
   geom_point(size = 2)
 ```
 
-<img src="06-data-visualization_files/figure-html/unnamed-chunk-34-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="06-data-visualization_files/figure-html/unnamed-chunk-35-1.svg" width="672" style="display: block; margin: auto;" />
 
 Some interesting patterns start to emerge. Suppose you want to take this a step further and also incorporate sex, to see if that adds anything interesting to the picture. You could change for example the mapping to set `shape = sex`, but I think this results in a plot that's a little too complicated and hard to read:
 
@@ -756,7 +777,7 @@ ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm,
        title = "Flipper length vs body mass (by species & sex) for Palmer penguins")
 ```
 
-<img src="06-data-visualization_files/figure-html/unnamed-chunk-35-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="06-data-visualization_files/figure-html/unnamed-chunk-36-1.svg" width="672" style="display: block; margin: auto;" />
 
 A better way may be to `facet_wrap()` the species variable, and switch to using both `color` and `shape` to differentiate sex. The syntax for this is to add the faceting layer `facet_wrap()` with the argument `~species` which will automagically split each species into its own facet subplot. You can also set `ncol = 2` to control how/when to wrap the plots:
 
@@ -770,7 +791,7 @@ ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm,
        title = "Flipper length vs body mass (by species & sex) for Palmer penguins")
 ```
 
-<img src="06-data-visualization_files/figure-html/unnamed-chunk-36-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="06-data-visualization_files/figure-html/unnamed-chunk-37-1.svg" width="672" style="display: block; margin: auto;" />
 
 
 ### `facet_grid()`
@@ -785,7 +806,7 @@ ggplot(penguins, aes(x = flipper_length_mm, fill = species)) +
        title = "Flipper length densities of species in Palmer penguins")
 ```
 
-<img src="06-data-visualization_files/figure-html/unnamed-chunk-37-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="06-data-visualization_files/figure-html/unnamed-chunk-38-1.svg" width="672" style="display: block; margin: auto;" />
 
 Suppose we want to also add sex in as a variable of interest, but we also want to more closely scrutinize the distributions. One way this can be done is to add the faceting layer `facet_grid()` with the argument `sex ~ species` which will construct a matrix of plots with one row for each sex and one column for each species:
 
@@ -797,7 +818,7 @@ ggplot(penguins, aes(x = flipper_length_mm)) + geom_density() +
        title = "Flipper length densities (by species & sex) in Palmer penguins")
 ```
 
-<img src="06-data-visualization_files/figure-html/unnamed-chunk-38-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="06-data-visualization_files/figure-html/unnamed-chunk-39-1.svg" width="672" style="display: block; margin: auto;" />
 
 You can also replace one side of the `a ~ b` syntax with a period `.` which will not facet in that direction. For example, `sex ~ .` will make a matrix of plots with one row for each sex, but only a single column all together, whereas `. ~ species` will make a matrix of plots with one column for each species, but only one row all together.
 
@@ -811,7 +832,7 @@ ggplot(penguins, aes(x = flipper_length_mm, fill = species)) +
        title = "Flipper length densities (by species & sex) in Palmer penguins")
 ```
 
-<img src="06-data-visualization_files/figure-html/unnamed-chunk-39-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="06-data-visualization_files/figure-html/unnamed-chunk-40-1.svg" width="672" style="display: block; margin: auto;" />
 
 ``` r
 ggplot(penguins, aes(y = flipper_length_mm, fill = sex)) +
@@ -820,7 +841,7 @@ ggplot(penguins, aes(y = flipper_length_mm, fill = sex)) +
        title = "Flipper length densities (by species & sex) in Palmer penguins")
 ```
 
-<img src="06-data-visualization_files/figure-html/unnamed-chunk-39-2.svg" width="672" style="display: block; margin: auto;" />
+<img src="06-data-visualization_files/figure-html/unnamed-chunk-40-2.svg" width="672" style="display: block; margin: auto;" />
 
 :::{.tip}
 By default, both `facet_wrap()` and `facet_grid()` will match `x` and `y` axes across subplots. You can turn off either or both by setting the `scales` argument in your faceting function to either `free_x` or `free_y` to free one axis, or `free` to free both axes.
@@ -862,7 +883,7 @@ ggplot(penguins, aes(y = flipper_length_mm, fill = sex)) +
   )                                  # www.stat.columbia.edu/~tzheng/files/Rcolor.pdf
 ```
 
-<img src="06-data-visualization_files/figure-html/unnamed-chunk-40-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="06-data-visualization_files/figure-html/unnamed-chunk-41-1.svg" width="672" style="display: block; margin: auto;" />
 
 
 ## Other geoms
@@ -884,7 +905,7 @@ ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm,
   geom_abline(slope = 0.015, intercept = 140, color = "magenta", size = 1)
 ```
 
-<img src="06-data-visualization_files/figure-html/unnamed-chunk-41-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="06-data-visualization_files/figure-html/unnamed-chunk-42-1.svg" width="672" style="display: block; margin: auto;" />
 
 
 ### Functions
@@ -902,7 +923,7 @@ ggplot() + geom_function(
 )                          # (improves smoothness of resulting curve)
 ```
 
-<img src="06-data-visualization_files/figure-html/unnamed-chunk-42-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="06-data-visualization_files/figure-html/unnamed-chunk-43-1.svg" width="672" style="display: block; margin: auto;" />
 
 If the function exists, but you need to modify itthe arguments, you can use `args = list(...)` any arguments specified inside will be directly passed to the chose function, for example:
 
@@ -917,7 +938,7 @@ ggplot() + geom_function(
 )
 ```
 
-<img src="06-data-visualization_files/figure-html/unnamed-chunk-43-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="06-data-visualization_files/figure-html/unnamed-chunk-44-1.svg" width="672" style="display: block; margin: auto;" />
 
 
 ## Further readings

@@ -447,7 +447,6 @@
 <use xlink:href="#glyph-2-5" x="14.351563" y="165.064453"/>
 <use xlink:href="#glyph-2-6" x="14.351563" y="162.008301"/>
 </g>
-<path fill-rule="nonzero" fill="rgb(100%, 100%, 100%)" fill-opacity="1" d="M 427.140625 215.082031 L 498.519531 215.082031 L 498.519531 134.613281 L 427.140625 134.613281 Z M 427.140625 215.082031 "/>
 <g fill="rgb(0%, 0%, 0%)" fill-opacity="1">
 <use xlink:href="#glyph-1-14" x="432.621094" y="150.625"/>
 <use xlink:href="#glyph-1-3" x="439.958008" y="150.625"/>
@@ -457,11 +456,8 @@
 <use xlink:href="#glyph-1-4" x="460.137207" y="150.625"/>
 <use xlink:href="#glyph-1-16" x="466.254883" y="150.625"/>
 </g>
-<path fill-rule="nonzero" fill="rgb(100%, 100%, 100%)" fill-opacity="0.74902" d="M 432.621094 175.042969 L 449.902344 175.042969 L 449.902344 157.761719 L 432.621094 157.761719 Z M 432.621094 175.042969 "/>
 <path fill-rule="nonzero" fill="rgb(40%, 76.078431%, 64.705882%)" fill-opacity="0.501961" stroke-width="1.066978" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(0%, 0%, 0%)" stroke-opacity="1" stroke-miterlimit="10" d="M 433.328125 174.332031 L 449.191406 174.332031 L 449.191406 158.46875 L 433.328125 158.46875 Z M 433.328125 174.332031 "/>
-<path fill-rule="nonzero" fill="rgb(100%, 100%, 100%)" fill-opacity="0.74902" d="M 432.621094 192.320312 L 449.902344 192.320312 L 449.902344 175.039062 L 432.621094 175.039062 Z M 432.621094 192.320312 "/>
 <path fill-rule="nonzero" fill="rgb(98.823529%, 55.294118%, 38.431373%)" fill-opacity="0.501961" stroke-width="1.066978" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(0%, 0%, 0%)" stroke-opacity="1" stroke-miterlimit="10" d="M 433.328125 191.613281 L 449.191406 191.613281 L 449.191406 175.75 L 433.328125 175.75 Z M 433.328125 191.613281 "/>
-<path fill-rule="nonzero" fill="rgb(100%, 100%, 100%)" fill-opacity="0.74902" d="M 432.621094 209.601562 L 449.902344 209.601562 L 449.902344 192.320312 L 432.621094 192.320312 Z M 432.621094 209.601562 "/>
 <path fill-rule="nonzero" fill="rgb(55.294118%, 62.745098%, 79.607843%)" fill-opacity="0.501961" stroke-width="1.066978" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(0%, 0%, 0%)" stroke-opacity="1" stroke-miterlimit="10" d="M 433.328125 208.894531 L 449.191406 208.894531 L 449.191406 193.03125 L 433.328125 193.03125 Z M 433.328125 208.894531 "/>
 <g fill="rgb(0%, 0%, 0%)" fill-opacity="1">
 <use xlink:href="#glyph-0-10" x="455.378906" y="170.050781"/>
