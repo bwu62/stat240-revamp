@@ -683,9 +683,6 @@ ggplot(penguins, aes(y = flipper_length_mm, fill = sex)) +
 ```
 
 
-### 
-
-
 ## Other geoms
 
 Many other geoms exist (see the [ggplot2 cheat sheet](https://rstudio.github.io/cheatsheets/data-visualization.pdf) for a full list). Here are just a *few* other extremely useful ones you should know about.

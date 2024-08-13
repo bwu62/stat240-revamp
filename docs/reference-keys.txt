@@ -111,7 +111,6 @@ facet-subplots
 facet_wrap
 facet_grid
 scales
-section
 other-geoms
 straight-lines
 functions

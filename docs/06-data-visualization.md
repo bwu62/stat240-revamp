@@ -680,7 +680,7 @@ glimpse(unemployment)
 ```
 
 ```
-## Rows: 918
+## Rows: 919
 ## Columns: 2
 ## $ DATE   <date> 1948-01-01, 1948-02-01, 1948-03-01, 1948-04-01, 1948-05-01, 19…
 ## $ UNRATE <dbl> 3.4, 3.8, 4.0, 3.9, 3.5, 3.6, 3.6, 3.9, 3.8, 3.7, 3.8, 4.0, 4.3…
@@ -863,9 +863,6 @@ ggplot(penguins, aes(y = flipper_length_mm, fill = sex)) +
 ```
 
 <img src="06-data-visualization_files/figure-html/unnamed-chunk-40-1.svg" width="672" style="display: block; margin: auto;" />
-
-
-### 
 
 
 ## Other geoms
