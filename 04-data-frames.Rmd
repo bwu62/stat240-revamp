@@ -152,11 +152,14 @@ library(readr)
 ```{r,include=F}
 options(width = 70)
 ```
-```{r,message=T,class.message="message"}
+```{r,eval=F}
 # read in CSV file from link
 eruptions_recent <- read_csv(
   "https://bwu62.github.io/stat240-revamp/data/eruptions_recent.csv"
 )
+```
+```{r,echo=F,message=T,class.message="message"}
+eruptions_recent <- read_csv("data/eruptions_recent.csv")
 ```
 ```{r,include=F}
 options(width = 80)
@@ -188,13 +191,17 @@ The other functions are all similar. Here's the first few lines of the TSV-versi
 
 Here it is read in with the `read_tsv()` function. This time, to save space, I've disabled the diagnostic messages by setting `show_col_types = FALSE` and reduced the final print checking to 5 lines. Otherwise, you can see we have the exact same result.
 
-```{r}
+```{r,eval=F}
 # read in TSV file from link
 eruptions_recent <- read_tsv(
   "https://bwu62.github.io/stat240-revamp/data/eruptions_recent.tsv",
   show_col_types = FALSE
 )
 # print first 5 lines instead of 10 to still check, but save space
+print(eruptions_recent, n = 5)
+```
+```{r,echo=F}
+eruptions_recent <- read_tsv("data/eruptions_recent.tsv", show_col_types = FALSE)
 print(eruptions_recent, n = 5)
 ```
 
@@ -206,7 +213,7 @@ If your data file has columns delimited (i.e. separated) by other characters, yo
 
 ```{embed,echo=1:6,file="data/eruptions_recent.delim"}
 ```
-```{r}
+```{r,eval=F}
 # read in | delimited file from link
 eruptions_recent <- read_delim(
   "https://bwu62.github.io/stat240-revamp/data/eruptions_recent.delim",
@@ -214,6 +221,10 @@ eruptions_recent <- read_delim(
   show_col_types = FALSE
 )
 # print first 5 lines
+print(eruptions_recent, n = 5)
+```
+```{r,echo=F}
+eruptions_recent <- read_delim("data/eruptions_recent.delim",delim = "|",show_col_types = FALSE)
 print(eruptions_recent, n = 5)
 ```
 
@@ -389,7 +400,7 @@ Paths in R **always use forward [/]{.k} slashes**, NEVER back [\\]{.k} slashes, 
 
 We will be using data frames extensively throughout this class. Let's start by learning some basic manipulations with them. First, I'm going to reload the `eruptions_recent` dataset using the CSV file, so that we have the correct `start`/`stop` columns.
 
-```{r}
+```{r,eval=F}
 # set R to print fewer rows by default, to save space in demos below
 options(pillar.print_min = 5)
 
@@ -399,6 +410,11 @@ eruptions_recent <- read_csv(
   show_col_types = FALSE
 )
 # print first few rows
+eruptions_recent
+```
+```{r,echo=F}
+options(pillar.print_min = 5)
+eruptions_recent <- read_csv("data/eruptions_recent.csv",show_col_types = FALSE)
 eruptions_recent
 ```
 

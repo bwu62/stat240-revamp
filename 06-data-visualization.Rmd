@@ -46,7 +46,7 @@ To properly demonstrate some of these plots, we need a slightly more feature-ric
 
 [![](https://allisonhorst.github.io/palmerpenguins/reference/figures/lter_penguins.png){.i6}](https://allisonhorst.github.io/palmerpenguins/articles/art.html)
 
-```{r}
+```{r,eval=F}
 # load in the penguins dataset
 # (note: a few rows with NAs have been removed for simplicity)
 penguins <- read_csv(
@@ -57,6 +57,14 @@ penguins <- read_csv(
 # this data frame is now too wide for our screen,
 # you can see some columns are cut off
 print(penguins, n = 5)
+```
+```{r,echo=F}
+penguins <- read_csv("data/penguins_complete.csv",show_col_types = FALSE)
+print(penguins, n = 5)
+```
+
+
+```{r}
 # let's temporarily increase the width and reprint,
 # so you can see all columns in the data frame
 options(width = 92)
@@ -491,12 +499,16 @@ For some specific datasets, especially chronological datasets where some variabl
 
 Unfortunately, the Palmer penguins dataset isn't the best example for this last plot type, so I'm temporarily borrowing another dataset for this example. The chunk below imports [`enrollment.csv`](https://bwu62.github.io/stat240-revamp/data/enrollment.csv) which contains historic U.S. college enrollment data by each sex.
 
-```{r}
+```{r,eval=F}
 enrollment <- read_csv(
   "https://bwu62.github.io/stat240-revamp/data/enrollment.csv",
   show_col_types = FALSE
 )
 # show a glimpse of the dataset
+glimpse(enrollment)
+```
+```{r,echo=F}
+enrollment <- read_csv("data/enrollment.csv",show_col_types = FALSE)
 glimpse(enrollment)
 ```
 

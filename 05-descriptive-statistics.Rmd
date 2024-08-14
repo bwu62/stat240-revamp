@@ -35,7 +35,7 @@ The mean may seem the most natural and intuitive central tendency measure, but i
 
 Continuing with our previous 21^st^ century US volcanic eruptions dataset, you can use `mean()` to, for example, find the mean length of eruptions in days:
 
-```{r}
+```{r,eval=F}
 # import all core tidyverse packages, since we will need several
 # (again, this imports readr, tibble, and stringr, as well as several others)
 library(tidyverse)
@@ -44,6 +44,10 @@ eruptions_recent <- read_csv(
   "https://bwu62.github.io/stat240-revamp/data/eruptions_recent.csv",
   show_col_types = FALSE
 )
+```
+```{r,echo=F}
+library(tidyverse)
+eruptions_recent <- read_csv("data/eruptions_recent.csv",show_col_types = FALSE)
 ```
 
 ```{r}
