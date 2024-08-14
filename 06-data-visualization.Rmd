@@ -487,7 +487,7 @@ ggplot(penguins, aes(y = flipper_length_mm, x = bill_depth_mm)) +
 
 ### Line plots
 
-For some specific datasets, especially chronological datasets where some variable is plotted against time, it may make sense to **directly connect each individual data point with the points before and after it to form a line plot**. Note this is NOT the same as the smoothed trend plot shown above since for a line plot there is **no smoothing performed**!
+For some specific datasets, especially chronological datasets where some variable is plotted against time, it may make sense to **directly connect each individual data point with the points before and after it to form a line (or trace) plot**. Note this is NOT the same as the smoothed trend plot shown above since for a line plot there is **no smoothing performed**!
 
 Unfortunately, the Palmer penguins dataset isn't the best example for this last plot type, so I'm temporarily borrowing another dataset for this example. The chunk below imports [`enrollment.csv`](https://bwu62.github.io/stat240-revamp/data/enrollment.csv) which contains historic U.S. college enrollment data by each sex.
 
