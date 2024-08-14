@@ -535,6 +535,11 @@ ggplot(enrollment, aes(x = year, y = enrolled_millions,
 We can see that since the late 70's, college enrollment of female students has consistently outpaced that of male students.
 
 
+:::{.note}
+For the purposes of this course, "line plot" or "trace plot" refer to `geom_line()`, and "smoothed line" or "trend line" or "straight line" refer to `geom_smooth(method = "lm")`. Take care not to mix these up!
+:::
+
+
 ### Bonus: area plots
 
 I wanted to throw in a bonus plot type here. This kind of composition-over-time data is also VERY commonly shown as a [stacked area plot](https://r-graph-gallery.com/136-stacked-area-chart.html) which can be made with `geom_area()`. I've also added a `scale_fill_manual()` configuration layer to manually specify a color palette to use more intuitive colors for each category.
