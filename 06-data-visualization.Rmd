@@ -511,7 +511,7 @@ ggplot(enrollment, aes(x = year, y = enrolled_millions,
        title = "U.S. College enrollment by sex")
 ```
 
-However, the chronological nature of this data means **each data point has a specific predecessor and successor**, i.e. for each point (except the end points) there is a specific single point that comes before and after it. Thus, it makes more sense to connect these points with a single continuous line for each sex. This can be done by using `geom_line()` instead. We can also drop the `shape` aesthetic since it doesn't apply to lines:
+However, the chronological nature of this data means **each data point has a specific predecessor and successor**, i.e. for each point (except the end points) there are specific points that comes before and after it in chronological order. Thus, it makes more sense to connect these points with a single continuous line for each sex. This can be done by using `geom_line()` instead. We can also drop the `shape` aesthetic since it doesn't apply to lines:
 
 ```{r,tidy=F}
 ggplot(enrollment, aes(x = year, y = enrolled_millions, color = sex)) +
