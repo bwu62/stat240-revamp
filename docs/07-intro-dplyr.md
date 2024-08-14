@@ -62,5 +62,23 @@ The [magrittr help page](https://magrittr.tidyverse.org/index.html#usage) has so
 :::
 
 
-## 
+## Column-wise functions
+
+### `select()`
+
+### `rename()`
+
+### `mutate()`
+
+### `summarize()`
+
+## Row-wise functions
+
+### `slice()`
+
+### `drop_na()`
+
+### `filter()`
+
+### `arrange()`
 

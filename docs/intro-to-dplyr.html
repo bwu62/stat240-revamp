@@ -127,11 +127,56 @@
 <p>The <a href="https://magrittr.tidyverse.org/index.html#usage">magrittr help page</a> has some additional usage tips for <code>%&gt;%</code>, such as how to pass the left side to a different argument position, using <code>%&gt;%</code> to create simple functions, and other <a href="https://magrittr.tidyverse.org/articles/magrittr.html#additional-pipe-operators">advanced pipes</a>. These are outside the scope of this course, so read at your own discretion!</p>
 </div>
 </div>
-<div id="section" class="section level2" number="7.3">
+<div id="column-wise-functions" class="section level2" number="7.3">
 <h2>
-<span class="header-section-number">7.3</span> <a class="anchor" aria-label="anchor" href="#section"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.3</span> Column-wise functions<a class="anchor" aria-label="anchor" href="#column-wise-functions"><i class="fas fa-link"></i></a>
 </h2>
+<div id="select" class="section level3" number="7.3.1">
+<h3>
+<span class="header-section-number">7.3.1</span> <code>select()</code><a class="anchor" aria-label="anchor" href="#select"><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="rename" class="section level3" number="7.3.2">
+<h3>
+<span class="header-section-number">7.3.2</span> <code>rename()</code><a class="anchor" aria-label="anchor" href="#rename"><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="mutate" class="section level3" number="7.3.3">
+<h3>
+<span class="header-section-number">7.3.3</span> <code>mutate()</code><a class="anchor" aria-label="anchor" href="#mutate"><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="summarize" class="section level3" number="7.3.4">
+<h3>
+<span class="header-section-number">7.3.4</span> <code>summarize()</code><a class="anchor" aria-label="anchor" href="#summarize"><i class="fas fa-link"></i></a>
+</h3>
+</div>
+</div>
+<div id="row-wise-functions" class="section level2" number="7.4">
+<h2>
+<span class="header-section-number">7.4</span> Row-wise functions<a class="anchor" aria-label="anchor" href="#row-wise-functions"><i class="fas fa-link"></i></a>
+</h2>
+<div id="slice" class="section level3" number="7.4.1">
+<h3>
+<span class="header-section-number">7.4.1</span> <code>slice()</code><a class="anchor" aria-label="anchor" href="#slice"><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="drop_na" class="section level3" number="7.4.2">
+<h3>
+<span class="header-section-number">7.4.2</span> <code>drop_na()</code><a class="anchor" aria-label="anchor" href="#drop_na"><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="filter" class="section level3" number="7.4.3">
+<h3>
+<span class="header-section-number">7.4.3</span> <code>filter()</code><a class="anchor" aria-label="anchor" href="#filter"><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="arrange" class="section level3" number="7.4.4">
+<h3>
+<span class="header-section-number">7.4.4</span> <code>arrange()</code><a class="anchor" aria-label="anchor" href="#arrange"><i class="fas fa-link"></i></a>
+</h3>
 
+</div>
 </div>
 </div>
 
@@ -207,7 +252,22 @@
 <li><a class="nav-link" href="#intro-to-dplyr"><span class="header-section-number">7</span> Intro to dplyr</a></li>
 <li><a class="nav-link" href="#syntax-design"><span class="header-section-number">7.1</span> Syntax design</a></li>
 <li><a class="nav-link" href="#pipes"><span class="header-section-number">7.2</span> Pipes</a></li>
-<li><a class="nav-link" href="#section"><span class="header-section-number">7.3</span></a></li>
+<li>
+<a class="nav-link" href="#column-wise-functions"><span class="header-section-number">7.3</span> Column-wise functions</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#select"><span class="header-section-number">7.3.1</span> select()</a></li>
+<li><a class="nav-link" href="#rename"><span class="header-section-number">7.3.2</span> rename()</a></li>
+<li><a class="nav-link" href="#mutate"><span class="header-section-number">7.3.3</span> mutate()</a></li>
+<li><a class="nav-link" href="#summarize"><span class="header-section-number">7.3.4</span> summarize()</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#row-wise-functions"><span class="header-section-number">7.4</span> Row-wise functions</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#slice"><span class="header-section-number">7.4.1</span> slice()</a></li>
+<li><a class="nav-link" href="#drop_na"><span class="header-section-number">7.4.2</span> drop_na()</a></li>
+<li><a class="nav-link" href="#filter"><span class="header-section-number">7.4.3</span> filter()</a></li>
+<li><a class="nav-link" href="#arrange"><span class="header-section-number">7.4.4</span> arrange()</a></li>
+</ul>
+</li>
 </ul>
 
       <div class="book-extra">
