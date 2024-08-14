@@ -604,7 +604,7 @@ ggplot(penguins, aes(y = flipper_length_mm, x = bill_depth_mm)) +
 
 ### Line plots
 
-For some specific datasets, especially chronological datasets where some variable is plotted against time, it may make sense to **directly connect each individual data point with the points before and after it to form a line plot**. Note this is NOT the same as the smoothed trend plot shown above since for a line plot there is **no smoothing performed**!
+For some specific datasets, especially chronological datasets where some variable is plotted against time, it may make sense to **directly connect each individual data point with the points before and after it to form a line (or trace) plot**. Note this is NOT the same as the smoothed trend plot shown above since for a line plot there is **no smoothing performed**!
 
 Unfortunately, the Palmer penguins dataset isn't the best example for this last plot type, so I'm temporarily borrowing another dataset for this example. The chunk below imports [`enrollment.csv`](https://bwu62.github.io/stat240-revamp/data/enrollment.csv) which contains historic U.S. college enrollment data by each sex.
 
@@ -640,7 +640,7 @@ ggplot(enrollment, aes(x = year, y = enrolled_millions,
 
 <img src="06-data-visualization_files/figure-html/unnamed-chunk-28-1.svg" width="672" style="display: block; margin: auto;" />
 
-However, the chronological nature of this data means **each data point has a specific predecessor and successor**, i.e. for each point (except the end points) there is a specific single point that comes before and after it. Thus, it makes more sense to connect these points with a single continuous line for each sex. This can be done by using `geom_line()` instead. We can also drop the `shape` aesthetic since it doesn't apply to lines:
+However, the chronological nature of this data means **each data point has a specific predecessor and successor**, i.e. for each point (except the end points) there are specific points that comes before and after it in chronological order. Thus, it makes more sense to connect these points with a single continuous line for each sex. This can be done by using `geom_line()` instead. We can also drop the `shape` aesthetic since it doesn't apply to lines:
 
 
 ``` r
@@ -668,6 +668,11 @@ ggplot(enrollment, aes(x = year, y = enrolled_millions,
 <img src="06-data-visualization_files/figure-html/unnamed-chunk-30-1.svg" width="672" style="display: block; margin: auto;" />
 
 We can see that since the late 70's, college enrollment of female students has consistently outpaced that of male students.
+
+
+:::{.note}
+For the purposes of this course, "line plot" or "trace plot" refer to `geom_line()`, and "smoothed line" or "trend line" or "straight line" refer to `geom_smooth(method = "lm")`. Take care not to mix these up!
+:::
 
 
 ### Bonus: area plots

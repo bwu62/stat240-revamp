@@ -579,7 +579,7 @@ You can make the above plot more accessible to readers with color vision deficie
 <h3>
 <span class="header-section-number">6.4.3</span> Line plots<a class="anchor" aria-label="anchor" href="#line-plots"><i class="fas fa-link"></i></a>
 </h3>
-<p>For some specific datasets, especially chronological datasets where some variable is plotted against time, it may make sense to <strong>directly connect each individual data point with the points before and after it to form a line plot</strong>. Note this is NOT the same as the smoothed trend plot shown above since for a line plot there is <strong>no smoothing performed</strong>!</p>
+<p>For some specific datasets, especially chronological datasets where some variable is plotted against time, it may make sense to <strong>directly connect each individual data point with the points before and after it to form a line (or trace) plot</strong>. Note this is NOT the same as the smoothed trend plot shown above since for a line plot there is <strong>no smoothing performed</strong>!</p>
 <p>Unfortunately, the Palmer penguins dataset isn’t the best example for this last plot type, so I’m temporarily borrowing another dataset for this example. The chunk below imports <a href="https://bwu62.github.io/stat240-revamp/data/enrollment.csv"><code>enrollment.csv</code></a> which contains historic U.S. college enrollment data by each sex.</p>
 <div class="sourceCode" id="cb559"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">enrollment</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span></span>
@@ -602,7 +602,7 @@ You can make the above plot more accessible to readers with color vision deficie
 <span>       color <span class="op">=</span> <span class="st">"Sex"</span>, shape <span class="op">=</span> <span class="st">"Sex"</span>,</span>
 <span>       title <span class="op">=</span> <span class="st">"U.S. College enrollment by sex"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="06-data-visualization_files/figure-html/unnamed-chunk-28-1.svg" width="672" style="display: block; margin: auto;"></div>
-<p>However, the chronological nature of this data means <strong>each data point has a specific predecessor and successor</strong>, i.e. for each point (except the end points) there is a specific single point that comes before and after it. Thus, it makes more sense to connect these points with a single continuous line for each sex. This can be done by using <code><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line()</a></code> instead. We can also drop the <code>shape</code> aesthetic since it doesn’t apply to lines:</p>
+<p>However, the chronological nature of this data means <strong>each data point has a specific predecessor and successor</strong>, i.e. for each point (except the end points) there are specific points that comes before and after it in chronological order. Thus, it makes more sense to connect these points with a single continuous line for each sex. This can be done by using <code><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line()</a></code> instead. We can also drop the <code>shape</code> aesthetic since it doesn’t apply to lines:</p>
 <div class="sourceCode" id="cb562"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">enrollment</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">year</span>, y <span class="op">=</span> <span class="va">enrolled_millions</span>, color <span class="op">=</span> <span class="va">sex</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
@@ -620,6 +620,9 @@ You can make the above plot more accessible to readers with color vision deficie
 <span>       title <span class="op">=</span> <span class="st">"U.S. College enrollment by sex"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="06-data-visualization_files/figure-html/unnamed-chunk-30-1.svg" width="672" style="display: block; margin: auto;"></div>
 <p>We can see that since the late 70’s, college enrollment of female students has consistently outpaced that of male students.</p>
+<div class="note">
+<p>For the purposes of this course, “line plot” or “trace plot” refer to <code><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line()</a></code>, and “smoothed line” or “trend line” or “straight line” refer to <code>geom_smooth(method = "lm")</code>. Take care not to mix these up!</p>
+</div>
 </div>
 <div id="bonus-area-plots" class="section level3" number="6.4.4">
 <h3>
@@ -982,7 +985,7 @@ ggplot(df,aes(x=x,y=y,fill=z)) + geom_col() +
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2024-08-13.</p>
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2024-08-14.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
