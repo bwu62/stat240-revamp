@@ -901,7 +901,7 @@ What do you think the following code will produce?
 :::{.fold .o}
 
 ``` r
-df = tibble(
+df <- tibble(
   x = c("a","a","a","b","b","b","c","c","c","d","d","e","e"),
   y = c(20,20,25,40,20,40,15,15,18,28,15,18,11),
   z = c("a","b","c","d","c","e","f","g","c","h","c","i","c")

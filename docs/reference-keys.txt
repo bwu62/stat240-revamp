@@ -118,6 +118,7 @@ further-readings
 intro-to-dplyr
 syntax-design
 pipes
+data-example
 column-wise-functions
 select
 rename

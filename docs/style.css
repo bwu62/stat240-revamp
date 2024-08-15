@@ -180,6 +180,7 @@ div.sourceCode + pre{
   background-color: unset !important;
   background-image: unset !important;
   margin-top: 0.2rem !important;
+  margin-bottom: 0.75rem !important;
 }
 div.sourceCode + p{
   margin-top: 1rem !important
@@ -187,7 +188,7 @@ div.sourceCode + p{
 .sourceCode + .alert{
   margin-top: 1rem !important;
 }
-.alert code{
+.alert p code{
   background-color: rgba(255,255,255,.6) !important;
 }
 .alert .sourceCode .sourceCode code.sourceCode{

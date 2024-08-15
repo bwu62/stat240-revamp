@@ -17,7 +17,7 @@
 <meta name="twitter:description" content="Moving on from vectors, the next most important data structure in R is the data frame. Think of a data frame as similar to a matrix, but (ideally) each column is a vector of a single type...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Roboto_Mono-0.4.9/font.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Noto_Sans_Mono-0.4.9/font.css" rel="stylesheet">
 <script src="libs/bs3compat-0.8.0/transition.js"></script><script src="libs/bs3compat-0.8.0/tabs.js"></script><script src="libs/bs3compat-0.8.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-E0YDB40HWY"></script><script>
       window.dataLayer = window.dataLayer || [];
@@ -100,7 +100,7 @@
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
 <span>  name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Alice"</span>, <span class="st">"Bob"</span>, <span class="st">"Charlie"</span><span class="op">)</span>,</span>
 <span>  sex <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"F"</span>, <span class="st">"M"</span>, <span class="st">"M"</span><span class="op">)</span>,</span>
-<span>  date_of_birth <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html">mdy</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"8/14/03"</span>, <span class="st">"7/4/99"</span>, <span class="st">"10/31/06"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  date_of_birth <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html">mdy</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"8/15/03"</span>, <span class="st">"7/4/99"</span>, <span class="st">"10/31/06"</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">floor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/now.html">today</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">birthday</span><span class="op">)</span><span class="op">/</span><span class="fl">365.24</span><span class="op">)</span>,</span>
 <span>  declared_major <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>,</span>
 <span>  school <span class="op">=</span> <span class="st">"UW-Madison"</span></span>
@@ -110,7 +110,7 @@
 <pre><code>## # A tibble: 3 × 6
 ##   name    sex   date_of_birth   age declared_major school    
 ##   &lt;chr&gt;   &lt;chr&gt; &lt;date&gt;        &lt;dbl&gt; &lt;lgl&gt;          &lt;chr&gt;     
-## 1 Alice   F     2003-08-14       21 TRUE           UW-Madison
+## 1 Alice   F     2003-08-15       21 TRUE           UW-Madison
 ## 2 Bob     M     1999-07-04       25 TRUE           UW-Madison
 ## 3 Charlie M     2006-10-31       17 FALSE          UW-Madison</code></pre>
 <p>Note the following:</p>
@@ -860,7 +860,7 @@ For example, suppose a data frame had in order from left to right a numeric colu
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2024-08-14.</p>
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2024-08-15.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
