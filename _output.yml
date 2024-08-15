@@ -6,7 +6,7 @@ bookdown::bs4_book:
   theme:
     primary: "#9B0000"
     code_font:
-      google: "Roboto Mono"
+      google: "Noto Sans Mono"
   repo: https://github.com/bwu62/stat240-revamp
 # math_method: r-katex
 # bookdown::pdf_book:
