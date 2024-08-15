@@ -8,6 +8,8 @@
 ```{r}
 # import all core tidyverse packages
 library(tidyverse)
+# optional: change default print to 5 rows to save vertical space
+options(pillar.print_min = 5)
 ```
 
 
