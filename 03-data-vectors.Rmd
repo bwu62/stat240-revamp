@@ -489,7 +489,7 @@ str_pad(friends, width = 12, side = "right", pad = ".")
 ### Comparing strings
 
 
-Strings, like numbers, can also be logically compared in R using the same `==`, `!=`, `<`, `<=`, `>`, `>=` operators (also all vectorized of course). Checking equality is self-explanatory, and **inequalities evaluate by dictionary sorting order**, i.e. what order they might appear in in a dictionary, except generalized to include not just letters but also number and symbols.
+Strings, like numbers, can also be logically compared in R using the same `==`, `!=`, `<`, `<=`, `>`, `>=` operators (also all vectorized of course). Checking equality is self-explanatory, and **inequalities evaluate by dictionary sorting order**, i.e. what order they might appear in a dictionary, except generalized to include not just letters but also numbers and symbols.
 
 This snippet of code below (which you do NOT have to worry about learning right now) prints the "dictionary" sorting order for all ordinary keyboard characters typable on a standard US English keyboard layout in ascending order.
 
@@ -516,11 +516,11 @@ cat(
 `r paste(sort(unlist(strsplit(c(letters,LETTERS,0:9,"\x60~!@#$%^&*()_+-=[]\\{}|;':\",./<>? "),""))),collapse="")`
 </pre>
 
-Note the third character in the sequence is a space, which comes after single quote and hyphen, but before any other symbol, number, or letter.
+Notice the third character in the sequence is a space, which comes after single quote and hyphen, but before any other symbol, number, or letter.
 
-Characters are sorted by their order in this sequence of characters, with characters earlier in the sequence being "less than" later characters. Strings with the same first character will be sorted by the second character; if the second character is also the same, they will be sorted by the third, and so on (just like normal dictionaries)
+Characters are sorted by their order in this sequence of characters, with characters earlier in the sequence being "less than" later characters. Strings with the same first character will be sorted by the second character; if the second character is also the same, they will be sorted by the third, and so on (just like normal dictionaries).
 
-Note however that nothingness, i.e. the absence of a character (such as when a string ends), comes before any character, which makes sense because otherwise "app" would appear after "apple". Below is a series of examples demonstrating string sorting.
+Note: nothingness, i.e. the absence of a character (such as when a string ends), comes before any character, which makes sense because otherwise "app" would appear after "apple". Below is a series of examples demonstrating string sorting.
 
 ```{r string-compare-examples}
 "apple" == "apple"
@@ -663,7 +663,7 @@ x
 :::{.note}
 R conforms to [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) standards, i.e. **dates ALWAYS show as `"YYYY-MM-DD"`** (even though they're stored numerically). This is arguably the best format for dates, because it's the unique format where [chronological order and lexicographical order are identical](https://en.wikipedia.org/wiki/ISO_8601#General_principles), which is an extremely useful property.
 
-Also note despite `date` appearing to be a character, it is NOT a character. Using `identical()` (which compares if two objects are the same) will show this to be false. Furthermore, `as.numeric()` confirms `date` converts to `r .dnum` as expected, whereas the string ``"`r date`"`` cannot be converted and returns `NA`.
+Also, despite `date` appearing to be a character, it is NOT a character. Using `identical()` (which compares if two objects are the same) will show this to be false. Furthermore, `as.numeric()` confirms `date` converts to `r .dnum` as expected, whereas the string ``"`r date`"`` cannot be converted and returns `NA`.
 
 ```{r date-vs-character}
 date
@@ -693,9 +693,9 @@ This is just to warn you that **even though they may print similarly, date objec
 
 ### Parsing dates
 
-In some cases (specifically, if dates in a dataset are already represented in standard ISO-8601 format) R will automagically parse (i.e. convert) the dates for you. In other cases, you may need to manually parse them yourself. We will continue to use lubridate, since it has the most robust and user-friendly functions for working with dates.
+In some cases, such as when dates in a dataset are already represented in standard ISO-8601 format, R will automagically parse (i.e. convert) the dates for you. In other cases, you may need to manually parse them yourself. We will continue to use lubridate since it has the most robust and user-friendly functions for working with dates.
 
-In lubridate, the [parser functions](https://lubridate.tidyverse.org/reference/ymd.html) `mdy()`, `dmy()`, `ymd()` (as well as their rarer siblings `ydm()`, `myd()`, and `dym()`) are used to parse date data into proper date objects. The **only difference between these functions is the *order* they expect to see date components**, e.g. `mdy()` is used when the data is ordered month, day, then year (which is common in the US), and `dmy()` is used when the date data is data is ordered day, month, then year (which is generally preferred outside the US). These functions are **extremely robust and automagically recognize a wide range of formats**, and of course they're all vectorized! Here's a few examples:
+In lubridate, the [parser functions](https://lubridate.tidyverse.org/reference/ymd.html) `mdy()`, `dmy()`, `ymd()` (as well as their rarer siblings `ydm()`, `myd()`, and `dym()`) are used to parse date data into proper date objects. The **only difference between these functions is the *order* they expect to see date components**, e.g. `mdy()` is used when the data is ordered month, day, then year (which is common in the US), and `dmy()` is used when the date data is data is ordered day, month, then year (which is generally preferred outside the US). These functions are extremely robust and automagically recognize a wide range of formats, and of course they're all vectorized! Here's a few examples:
 
 ```{r .mdyDemos,include=F}
 # create some date strings to demo parsing
@@ -797,7 +797,7 @@ Fun fact: R's calendar is more rigorous than Excel's calendar, since it correctl
 
 ### Get/set components
 
-Lubridate provides many get/set functions (often called getters and setters) for getting and setting different components (i.e. properties) associated with a date. Some common ones include `year()`, `month()`, `day()`, `wday()` (for day of the week), and `quarter()`.
+Lubridate provides many get/set functions, aka "getters" and "setters", for getting and setting different components (i.e. properties) associated with a date. Some common ones include `year()`, `month()`, `day()`, `wday()` (for day of the week), and `quarter()`.
 
 Let's continue using the generated `dates2` object above, except I will add today `` `r date` `` into the vector as the first element.
 
@@ -852,7 +852,7 @@ year(new_dates2) <- 2000:2004
 new_dates2
 ```
 
-This works with all the getters above, feel free to experiment more with this on your own. There are also several other getter/setter functions such as `qday()` for day of the quarter, `week()` for week number, and `semester()` for 1^st^ or 2^nd^ semester of the year.
+This works with all the getters above: feel free to experiment more with this on your own. There are also several other getter/setter functions such as `qday()` for day of the quarter, `week()` for week number, and `semester()` for 1^st^ or 2^nd^ semester of the year.
 
 
 
