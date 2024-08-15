@@ -63,11 +63,108 @@ The [magrittr help page](https://magrittr.tidyverse.org/index.html#usage) has so
 :::
 
 
+## Data example
+
+For now, we're going to continue using the Palmer penguins dataset as an example data frame, but this time using the original dataset [`penguins.csv`](https://bwu62.github.io/stat240-revamp/data/penguins.csv) without removing the couple of rows with NAs. Let's load the data in:
+
+```{r,eval=F}
+# load in the original penguins dataset
+penguins <- read_csv(
+  "https://bwu62.github.io/stat240-revamp/data/penguins.csv",
+  show_col_types = FALSE
+)
+# print the first few rows of the data frame to check
+# again this data frame is too wide, and some columns are cut off
+print(penguins, n = 5)
+```
+```{r,echo=F}
+penguins <- read_csv("data/penguins.csv", show_col_types = FALSE)
+print(penguins, n = 5)
+```
+
+
+
 ## Column-wise functions
+
+We begin with the column-wise dplyr functions, i.e. the functions that primarily focus on manipulating columns in certain ways. Again, there are many of these, but 4 of the most important are the following:
+
+ - `select()` for selecting a subset of columns to work with,
+ - `rename()` for renaming columns,
+ - `mutate()` for both editing and adding columns, **without reducing the number of rows**,
+ - `summarize()` for computing data summaries, often using **statistical summary functions** like mean, median, sd, etc. and usually results in **reducing the number of rows**.
+
 
 ### `select()`
 
+`select()` is used to subset columns in a data frame and is often one of the first operations used after loading in a dataset (to remove columns unnecessary for your analysis).
+
+It has a very flexible syntax: you can use subset either by numeric position, by name, by ranges, by exlusion, or even using special [selector functions](https://tidyselect.r-lib.org/reference/starts_with.html). It can also be used to reorder columns. Here are a few examples:
+
+```{r}
+# select just species, sex, flipper length, and body mass
+penguins %>%
+  select(species, sex, flipper_length_mm, body_mass_g)
+# note this is syntactically equivalent to the following:
+select(penguins, species, sex, flipper_length_mm, body_mass_g)
+# you can also select by position, or with a range, or both
+# e.g. we can select the 1st, 3rd to 5th, and year columns:
+penguins %>%
+  select(1, 3:5, year)
+# you can also use ranges with names
+# e.g. select from 1st to island, then body mass to last col
+penguins %>%
+  select(1:island, body_mass_g:last_col())
+# you can also select by excluding specific columns with !
+# e.g. select everything except island and everything after body mass
+penguins %>%
+  select(-island, -(body_mass_g:last_col()), body_mass_g)
+# select with selector functions, see ?starts_with help page for details,
+# you can also use & as AND, | as OR, ! as NOT during selection
+# e.g. get cols that start with "s", or end with "mm" or "g",
+#      but do NOT contain "length" anywhere in the name
+penguins %>%
+  select(
+    (starts_with("s") | ends_with(c("mm", "g"))) & !contains("length")
+  )
+# notice in all examples above, columns are always returned in order
+# select() can therefore also be used to reorder columns
+# e.g. move year, island, species, sex cols in front of everything else
+#      (here, everything() selects all the other cols in original order)
+penguins %>%
+  select(year, island, species, sex, everything())
+```
+
+:::{.note}
+Here it's worth reminding that `df %>% select(...)` **does NOT modify the original input `df`**, instead it effectively makes a copy of `df` and runs on that instead. Example:
+```{r}
+# show starting data frame
+print(penguins)
+# select a subset of columns
+penguins %>% select(species, flipper_length_mm)
+# check original input is unchanged
+print(penguins)
+```
+If you want to save the result of `df %>% select(...)` you must **manually save the output with `<-`**. In general, we always recommend saving to a NEW object instead of overwriting the original object because this is non-destructive (i.e. does not lose any data) and less likely to create code errors later on. It's also easier to debug.
+```{r}
+# saving to a new object with a descriptive name is ALWAYS recommended!
+penguins_fewcols <- penguins %>% select(species, flipper_length_mm)
+print(penguins_fewcols)
+# overwriting the original input is STRONGLY discouraged
+# because it's destructive and often causes problems later
+penguins <- penguins %>% select(species, flipper_length_mm)
+print(penguins)
+# reload data frame since we need it for other examples
+penguins <- read_csv("data/penguins.csv", show_col_types = FALSE)
+```
+
+**This note applies to all functions on this page**, i.e. all of them do NOT modify the input, so desired changes must always be manually saved!
+:::
+
+
 ### `rename()`
+
+`rename()` is used to rename columns
+
 
 ### `mutate()`
 
@@ -82,4 +179,3 @@ The [magrittr help page](https://magrittr.tidyverse.org/index.html#usage) has so
 ### `filter()`
 
 ### `arrange()`
-
