@@ -65,3 +65,15 @@
 });
 
 </script>
+
+
+<script>
+  $(document).ready(function(){
+    $("a.anchorjs-link").each(function(){
+      var oldUrl = $(this).attr("href"); // Get current url
+      var newUrl = oldUrl.replace(/^#(\d+-)+/,"#"); // Create new url
+      $(this).attr("href", "#" + $(this).closest("div").attr("id"));  // Set href value
+      $(this).attr("title", location.protocol + "//" + location.host + location.pathname + $(this).attr("href")); // Set title value
+    });
+  });
+</script>
