@@ -163,7 +163,34 @@ penguins <- read_csv("data/penguins_complete.csv", show_col_types = FALSE)
 
 ### `rename()`
 
-`rename()` is used to rename columns
+`rename()` is used to rename columns. This is another common operation right after loading a dataset. Examples:
+
+```{r}
+# rename species as species_name, and island as island_name
+penguins %>%
+  rename(species_name = species, island_name = island)
+# if you want to use irregular names, i.e. names with spaces or symbols,
+# you must surround them with " " quotes
+penguins %>%
+  rename("Bill Length (mm)" = bill_length_mm)
+# if you have a data frame with an extremely long and awkward name,
+# you can also use selector functions to help you rename it
+# (see ?starts_with help page for more details/examples)
+df_badname <- tibble(
+  x = 1:3,
+  "Really long (and awkward) name with !@#$% symbols" = 4:6
+)
+df_badname
+df_badname %>%
+  rename(y = starts_with("Really") & ends_with("symbols"))
+```
+
+This is outside our scope, but you can also apply a function to many/all columns using `rename_with()`. For example:
+
+```{r}
+penguins %>%
+  rename_with(toupper)
+```
 
 
 ### `mutate()`
