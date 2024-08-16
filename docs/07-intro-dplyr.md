@@ -66,13 +66,13 @@ The [magrittr help page](https://magrittr.tidyverse.org/index.html#usage) has so
 
 ## Data example
 
-For now, we're going to continue using the Palmer penguins dataset as an example data frame, but this time using the original dataset [`penguins.csv`](https://bwu62.github.io/stat240-revamp/data/penguins.csv) without removing the couple of rows with NAs. Let's load the data in:
+For now, we're going to continue using the Palmer penguins dataset [`penguins_complete.csv`](https://bwu62.github.io/stat240-revamp/data/penguins_complete.csv) as an example data frame. Let's load the data in:
 
 
 ``` r
-# load in the original penguins dataset
+# load in the familiar penguins dataset
 penguins <- read_csv(
-  "https://bwu62.github.io/stat240-revamp/data/penguins.csv",
+  "https://bwu62.github.io/stat240-revamp/data/penguins_complete.csv",
   show_col_types = FALSE
 )
 # print the first few rows of the data frame to check
@@ -81,15 +81,15 @@ print(penguins, n = 5)
 ```
 
 ```
-## # A tibble: 344 × 8
+## # A tibble: 333 × 8
 ##   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
 ##   <chr>   <chr>              <dbl>         <dbl>             <dbl>       <dbl>
 ## 1 Adelie  Torgersen           39.1          18.7               181        3750
 ## 2 Adelie  Torgersen           39.5          17.4               186        3800
 ## 3 Adelie  Torgersen           40.3          18                 195        3250
-## 4 Adelie  Torgersen           NA            NA                  NA          NA
-## 5 Adelie  Torgersen           36.7          19.3               193        3450
-## # ℹ 339 more rows
+## 4 Adelie  Torgersen           36.7          19.3               193        3450
+## 5 Adelie  Torgersen           39.3          20.6               190        3650
+## # ℹ 328 more rows
 ## # ℹ 2 more variables: sex <chr>, year <dbl>
 ```
 
@@ -119,15 +119,15 @@ penguins %>%
 ```
 
 ```
-## # A tibble: 344 × 4
+## # A tibble: 333 × 4
 ##   species sex    flipper_length_mm body_mass_g
 ##   <chr>   <chr>              <dbl>       <dbl>
 ## 1 Adelie  male                 181        3750
 ## 2 Adelie  female               186        3800
 ## 3 Adelie  female               195        3250
-## 4 Adelie  <NA>                  NA          NA
-## 5 Adelie  female               193        3450
-## # ℹ 339 more rows
+## 4 Adelie  female               193        3450
+## 5 Adelie  male                 190        3650
+## # ℹ 328 more rows
 ```
 
 ``` r
@@ -136,15 +136,15 @@ select(penguins, species, sex, flipper_length_mm, body_mass_g)
 ```
 
 ```
-## # A tibble: 344 × 4
+## # A tibble: 333 × 4
 ##   species sex    flipper_length_mm body_mass_g
 ##   <chr>   <chr>              <dbl>       <dbl>
 ## 1 Adelie  male                 181        3750
 ## 2 Adelie  female               186        3800
 ## 3 Adelie  female               195        3250
-## 4 Adelie  <NA>                  NA          NA
-## 5 Adelie  female               193        3450
-## # ℹ 339 more rows
+## 4 Adelie  female               193        3450
+## 5 Adelie  male                 190        3650
+## # ℹ 328 more rows
 ```
 
 ``` r
@@ -155,15 +155,15 @@ penguins %>%
 ```
 
 ```
-## # A tibble: 344 × 5
+## # A tibble: 333 × 5
 ##   species bill_length_mm bill_depth_mm flipper_length_mm  year
 ##   <chr>            <dbl>         <dbl>             <dbl> <dbl>
 ## 1 Adelie            39.1          18.7               181  2007
 ## 2 Adelie            39.5          17.4               186  2007
 ## 3 Adelie            40.3          18                 195  2007
-## 4 Adelie            NA            NA                  NA  2007
-## 5 Adelie            36.7          19.3               193  2007
-## # ℹ 339 more rows
+## 4 Adelie            36.7          19.3               193  2007
+## 5 Adelie            39.3          20.6               190  2007
+## # ℹ 328 more rows
 ```
 
 ``` r
@@ -174,15 +174,15 @@ penguins %>%
 ```
 
 ```
-## # A tibble: 344 × 5
+## # A tibble: 333 × 5
 ##   species island    body_mass_g sex     year
 ##   <chr>   <chr>           <dbl> <chr>  <dbl>
 ## 1 Adelie  Torgersen        3750 male    2007
 ## 2 Adelie  Torgersen        3800 female  2007
 ## 3 Adelie  Torgersen        3250 female  2007
-## 4 Adelie  Torgersen          NA <NA>    2007
-## 5 Adelie  Torgersen        3450 female  2007
-## # ℹ 339 more rows
+## 4 Adelie  Torgersen        3450 female  2007
+## 5 Adelie  Torgersen        3650 male    2007
+## # ℹ 328 more rows
 ```
 
 ``` r
@@ -193,15 +193,15 @@ penguins %>%
 ```
 
 ```
-## # A tibble: 344 × 5
+## # A tibble: 333 × 5
 ##   species bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
 ##   <chr>            <dbl>         <dbl>             <dbl>       <dbl>
 ## 1 Adelie            39.1          18.7               181        3750
 ## 2 Adelie            39.5          17.4               186        3800
 ## 3 Adelie            40.3          18                 195        3250
-## 4 Adelie            NA            NA                  NA          NA
-## 5 Adelie            36.7          19.3               193        3450
-## # ℹ 339 more rows
+## 4 Adelie            36.7          19.3               193        3450
+## 5 Adelie            39.3          20.6               190        3650
+## # ℹ 328 more rows
 ```
 
 ``` r
@@ -216,15 +216,15 @@ penguins %>%
 ```
 
 ```
-## # A tibble: 344 × 4
+## # A tibble: 333 × 4
 ##   species sex    bill_depth_mm body_mass_g
 ##   <chr>   <chr>          <dbl>       <dbl>
 ## 1 Adelie  male            18.7        3750
 ## 2 Adelie  female          17.4        3800
 ## 3 Adelie  female          18          3250
-## 4 Adelie  <NA>            NA            NA
-## 5 Adelie  female          19.3        3450
-## # ℹ 339 more rows
+## 4 Adelie  female          19.3        3450
+## 5 Adelie  male            20.6        3650
+## # ℹ 328 more rows
 ```
 
 ``` r
@@ -237,15 +237,15 @@ penguins %>%
 ```
 
 ```
-## # A tibble: 344 × 8
+## # A tibble: 333 × 8
 ##    year island    species sex    bill_length_mm bill_depth_mm flipper_length_mm
 ##   <dbl> <chr>     <chr>   <chr>           <dbl>         <dbl>             <dbl>
 ## 1  2007 Torgersen Adelie  male             39.1          18.7               181
 ## 2  2007 Torgersen Adelie  female           39.5          17.4               186
 ## 3  2007 Torgersen Adelie  female           40.3          18                 195
-## 4  2007 Torgersen Adelie  <NA>             NA            NA                  NA
-## 5  2007 Torgersen Adelie  female           36.7          19.3               193
-## # ℹ 339 more rows
+## 4  2007 Torgersen Adelie  female           36.7          19.3               193
+## 5  2007 Torgersen Adelie  male             39.3          20.6               190
+## # ℹ 328 more rows
 ## # ℹ 1 more variable: body_mass_g <dbl>
 ```
 
@@ -258,15 +258,15 @@ print(penguins)
 ```
 
 ```
-## # A tibble: 344 × 8
+## # A tibble: 333 × 8
 ##   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
 ##   <chr>   <chr>              <dbl>         <dbl>             <dbl>       <dbl>
 ## 1 Adelie  Torgersen           39.1          18.7               181        3750
 ## 2 Adelie  Torgersen           39.5          17.4               186        3800
 ## 3 Adelie  Torgersen           40.3          18                 195        3250
-## 4 Adelie  Torgersen           NA            NA                  NA          NA
-## 5 Adelie  Torgersen           36.7          19.3               193        3450
-## # ℹ 339 more rows
+## 4 Adelie  Torgersen           36.7          19.3               193        3450
+## 5 Adelie  Torgersen           39.3          20.6               190        3650
+## # ℹ 328 more rows
 ## # ℹ 2 more variables: sex <chr>, year <dbl>
 ```
 
@@ -276,15 +276,15 @@ penguins %>% select(species, flipper_length_mm)
 ```
 
 ```
-## # A tibble: 344 × 2
+## # A tibble: 333 × 2
 ##   species flipper_length_mm
 ##   <chr>               <dbl>
 ## 1 Adelie                181
 ## 2 Adelie                186
 ## 3 Adelie                195
-## 4 Adelie                 NA
-## 5 Adelie                193
-## # ℹ 339 more rows
+## 4 Adelie                193
+## 5 Adelie                190
+## # ℹ 328 more rows
 ```
 
 ``` r
@@ -293,15 +293,15 @@ print(penguins)
 ```
 
 ```
-## # A tibble: 344 × 8
+## # A tibble: 333 × 8
 ##   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
 ##   <chr>   <chr>              <dbl>         <dbl>             <dbl>       <dbl>
 ## 1 Adelie  Torgersen           39.1          18.7               181        3750
 ## 2 Adelie  Torgersen           39.5          17.4               186        3800
 ## 3 Adelie  Torgersen           40.3          18                 195        3250
-## 4 Adelie  Torgersen           NA            NA                  NA          NA
-## 5 Adelie  Torgersen           36.7          19.3               193        3450
-## # ℹ 339 more rows
+## 4 Adelie  Torgersen           36.7          19.3               193        3450
+## 5 Adelie  Torgersen           39.3          20.6               190        3650
+## # ℹ 328 more rows
 ## # ℹ 2 more variables: sex <chr>, year <dbl>
 ```
 If you want to save the result of `df %>% select(...)` you must **manually save the output with `<-`**. In general, we always recommend saving to a NEW object instead of overwriting the original object because this is non-destructive (i.e. does not lose any data) and less likely to create code errors later on. It's also easier to debug.
@@ -313,15 +313,15 @@ print(penguins_fewcols)
 ```
 
 ```
-## # A tibble: 344 × 2
+## # A tibble: 333 × 2
 ##   species flipper_length_mm
 ##   <chr>               <dbl>
 ## 1 Adelie                181
 ## 2 Adelie                186
 ## 3 Adelie                195
-## 4 Adelie                 NA
-## 5 Adelie                193
-## # ℹ 339 more rows
+## 4 Adelie                193
+## 5 Adelie                190
+## # ℹ 328 more rows
 ```
 
 ``` r
@@ -332,32 +332,259 @@ print(penguins)
 ```
 
 ```
-## # A tibble: 344 × 2
+## # A tibble: 333 × 2
 ##   species flipper_length_mm
 ##   <chr>               <dbl>
 ## 1 Adelie                181
 ## 2 Adelie                186
 ## 3 Adelie                195
-## 4 Adelie                 NA
-## 5 Adelie                193
-## # ℹ 339 more rows
+## 4 Adelie                193
+## 5 Adelie                190
+## # ℹ 328 more rows
 ```
 
 ``` r
 # reload data frame since we need it for other examples
-penguins <- read_csv("data/penguins.csv", show_col_types = FALSE)
+penguins <- read_csv("data/penguins_complete.csv", show_col_types = FALSE)
 ```
 
-**This note applies to all functions on this page**, i.e. all of them do NOT modify the input, so desired changes must always be manually saved!
+**This note applies to all functions on this page**, i.e. all of them do NOT modify the input, so desired **changes must always be manually saved**!
 :::
 
 
 ### `rename()`
 
-`rename()` is used to rename columns
+`rename()` is used to rename columns. This is another common operation right after loading a dataset. Examples:
+
+
+``` r
+# rename species as species_name, and island as island_name
+penguins %>%
+  rename(species_name = species, island_name = island)
+```
+
+```
+## # A tibble: 333 × 8
+##   species_name island_name bill_length_mm bill_depth_mm flipper_length_mm
+##   <chr>        <chr>                <dbl>         <dbl>             <dbl>
+## 1 Adelie       Torgersen             39.1          18.7               181
+## 2 Adelie       Torgersen             39.5          17.4               186
+## 3 Adelie       Torgersen             40.3          18                 195
+## 4 Adelie       Torgersen             36.7          19.3               193
+## 5 Adelie       Torgersen             39.3          20.6               190
+## # ℹ 328 more rows
+## # ℹ 3 more variables: body_mass_g <dbl>, sex <chr>, year <dbl>
+```
+
+``` r
+# if you want to use irregular names, i.e. names with spaces or symbols,
+# you must surround them with " " quotes
+penguins %>%
+  rename("Bill Length (mm)" = bill_length_mm)
+```
+
+```
+## # A tibble: 333 × 8
+##   species island  `Bill Length (mm)` bill_depth_mm flipper_length_mm body_mass_g
+##   <chr>   <chr>                <dbl>         <dbl>             <dbl>       <dbl>
+## 1 Adelie  Torger…               39.1          18.7               181        3750
+## 2 Adelie  Torger…               39.5          17.4               186        3800
+## 3 Adelie  Torger…               40.3          18                 195        3250
+## 4 Adelie  Torger…               36.7          19.3               193        3450
+## 5 Adelie  Torger…               39.3          20.6               190        3650
+## # ℹ 328 more rows
+## # ℹ 2 more variables: sex <chr>, year <dbl>
+```
+
+``` r
+# if you have a data frame with an extremely long and awkward name,
+# you can also use selector functions to help you rename it
+# (see ?starts_with help page for more details/examples)
+df_badname <- tibble(
+  x = 1:3,
+  "Really long (and awkward) name with !@#$% symbols" = 4:6
+)
+df_badname
+```
+
+```
+## # A tibble: 3 × 2
+##       x `Really long (and awkward) name with !@#$% symbols`
+##   <int>                                               <int>
+## 1     1                                                   4
+## 2     2                                                   5
+## 3     3                                                   6
+```
+
+``` r
+df_badname %>%
+  rename(y = starts_with("Really") & ends_with("symbols"))
+```
+
+```
+## # A tibble: 3 × 2
+##       x     y
+##   <int> <int>
+## 1     1     4
+## 2     2     5
+## 3     3     6
+```
+
+This is outside our scope, but you can also apply a function to many/all columns using `rename_with()`. For example:
+
+
+``` r
+penguins %>%
+  rename_with(toupper)
+```
+
+```
+## # A tibble: 333 × 8
+##   SPECIES ISLAND    BILL_LENGTH_MM BILL_DEPTH_MM FLIPPER_LENGTH_MM BODY_MASS_G
+##   <chr>   <chr>              <dbl>         <dbl>             <dbl>       <dbl>
+## 1 Adelie  Torgersen           39.1          18.7               181        3750
+## 2 Adelie  Torgersen           39.5          17.4               186        3800
+## 3 Adelie  Torgersen           40.3          18                 195        3250
+## 4 Adelie  Torgersen           36.7          19.3               193        3450
+## 5 Adelie  Torgersen           39.3          20.6               190        3650
+## # ℹ 328 more rows
+## # ℹ 2 more variables: SEX <chr>, YEAR <dbl>
+```
 
 
 ### `mutate()`
+
+`mutate()` is used to either change an existing column, or add new columns. It's an easy function to introduce but a tough one to master. The basic syntax is `col = ...` where `col` is the name of the column to change/add (depending on if it already exists) and `...` is some R expression.
+
+The key thing to remember is the `...` expression can be **any vector computation using one or more columns in the data frame that produces a vector of the same length OR a single value** (which would be recycled).
+
+For convenience, let's select just a few columns to continue with the demonstration:
+
+
+``` r
+penguins2 <- penguins %>%
+  select(species, sex, bill_length_mm, bill_depth_mm)
+print(penguins2)
+```
+
+```
+## # A tibble: 333 × 4
+##   species sex    bill_length_mm bill_depth_mm
+##   <chr>   <chr>           <dbl>         <dbl>
+## 1 Adelie  male             39.1          18.7
+## 2 Adelie  female           39.5          17.4
+## 3 Adelie  female           40.3          18  
+## 4 Adelie  female           36.7          19.3
+## 5 Adelie  male             39.3          20.6
+## # ℹ 328 more rows
+```
+
+Now, here's a few example applications of `mutate()` using `penguins2`
+
+
+``` r
+# we can easily add columns of constants
+penguins2 %>%
+  mutate(study = "Palmer", century = 21, true = TRUE)
+```
+
+```
+## # A tibble: 333 × 7
+##   species sex    bill_length_mm bill_depth_mm study  century true 
+##   <chr>   <chr>           <dbl>         <dbl> <chr>    <dbl> <lgl>
+## 1 Adelie  male             39.1          18.7 Palmer      21 TRUE 
+## 2 Adelie  female           39.5          17.4 Palmer      21 TRUE 
+## 3 Adelie  female           40.3          18   Palmer      21 TRUE 
+## 4 Adelie  female           36.7          19.3 Palmer      21 TRUE 
+## 5 Adelie  male             39.3          20.6 Palmer      21 TRUE 
+## # ℹ 328 more rows
+```
+
+``` r
+# we can also change existing columns using the same syntax,
+# e.g. we can capitalize and abbreviate sex to M and F
+penguins2 %>%
+  mutate(sex = substr(toupper(sex), 1, 1))
+```
+
+```
+## # A tibble: 333 × 4
+##   species sex   bill_length_mm bill_depth_mm
+##   <chr>   <chr>          <dbl>         <dbl>
+## 1 Adelie  M               39.1          18.7
+## 2 Adelie  F               39.5          17.4
+## 3 Adelie  F               40.3          18  
+## 4 Adelie  F               36.7          19.3
+## 5 Adelie  M               39.3          20.6
+## # ℹ 328 more rows
+```
+
+``` r
+# we can also use multiple columns in expressions
+# e.g. we can roughly estimate the volume of each bill,
+# see: https://allisonhorst.github.io/palmerpenguins/#bill-dimensions
+penguins2 %>%
+  mutate(bill_vol_mm3 = pi * (bill_depth_mm / 2)^2 * bill_length_mm)
+```
+
+```
+## # A tibble: 333 × 5
+##   species sex    bill_length_mm bill_depth_mm bill_vol_mm3
+##   <chr>   <chr>           <dbl>         <dbl>        <dbl>
+## 1 Adelie  male             39.1          18.7       10739.
+## 2 Adelie  female           39.5          17.4        9393.
+## 3 Adelie  female           40.3          18         10255.
+## 4 Adelie  female           36.7          19.3       10737.
+## 5 Adelie  male             39.3          20.6       13098.
+## # ℹ 328 more rows
+```
+
+``` r
+# you can also break this into steps, using intermediate variables
+# note intermediate variables can be used immediately in the same mutate() call
+penguins2 %>%
+  mutate(
+    bill_cross_section_mm2 = pi * (bill_depth_mm / 2)^2,
+    bill_vol_mm3 = bill_cross_section_mm2 * bill_length_mm
+  )
+```
+
+```
+## # A tibble: 333 × 6
+##   species sex   bill_length_mm bill_depth_mm bill_cross_section_mm2 bill_vol_mm3
+##   <chr>   <chr>          <dbl>         <dbl>                  <dbl>        <dbl>
+## 1 Adelie  male            39.1          18.7                   275.       10739.
+## 2 Adelie  fema…           39.5          17.4                   238.        9393.
+## 3 Adelie  fema…           40.3          18                     254.       10255.
+## 4 Adelie  fema…           36.7          19.3                   293.       10737.
+## 5 Adelie  male            39.3          20.6                   333.       13098.
+## # ℹ 328 more rows
+```
+
+``` r
+# you can even mix summary functions into your expression
+# e.g. standardize bill length and depth by subtracting mean and dividing by sd
+penguins2 %>%
+  mutate(
+    bill_length_std = (bill_length_mm - mean(bill_length_mm)) / sd(bill_length_mm),
+    bill_depth_std = (bill_depth_mm - mean(bill_depth_mm)) / sd(bill_depth_mm)
+  )
+```
+
+```
+## # A tibble: 333 × 6
+##   species sex    bill_length_mm bill_depth_mm bill_length_std bill_depth_std
+##   <chr>   <chr>           <dbl>         <dbl>           <dbl>          <dbl>
+## 1 Adelie  male             39.1          18.7          -0.895          0.780
+## 2 Adelie  female           39.5          17.4          -0.822          0.119
+## 3 Adelie  female           40.3          18            -0.675          0.424
+## 4 Adelie  female           36.7          19.3          -1.33           1.08 
+## 5 Adelie  male             39.3          20.6          -0.858          1.74 
+## # ℹ 328 more rows
+```
+
+
+
 
 ### `summarize()`
 

@@ -17,7 +17,7 @@
 <meta name="twitter:description" content="dplyr is the core Tidyverse package for transforming and your raw datasets into a clean and usable format (link to cheat sheet). Its functions are versatile, performant, and have a consistent and...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Noto_Sans_Mono-0.4.9/font.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Roboto_Mono-0.4.9/font.css" rel="stylesheet">
 <script src="libs/bs3compat-0.8.0/transition.js"></script><script src="libs/bs3compat-0.8.0/tabs.js"></script><script src="libs/bs3compat-0.8.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-E0YDB40HWY"></script><script>
       window.dataLayer = window.dataLayer || [];
@@ -133,25 +133,25 @@
 <h2>
 <span class="header-section-number">7.3</span> Data example<a class="anchor" aria-label="anchor" href="#data-example"><i class="fas fa-link"></i></a>
 </h2>
-<p>For now, we’re going to continue using the Palmer penguins dataset as an example data frame, but this time using the original dataset <a href="https://bwu62.github.io/stat240-revamp/data/penguins.csv"><code>penguins.csv</code></a> without removing the couple of rows with NAs. Let’s load the data in:</p>
+<p>For now, we’re going to continue using the Palmer penguins dataset <a href="https://bwu62.github.io/stat240-revamp/data/penguins_complete.csv"><code>penguins_complete.csv</code></a> as an example data frame. Let’s load the data in:</p>
 <div class="sourceCode" id="cb586"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># load in the original penguins dataset</span></span>
+<code class="sourceCode R"><span><span class="co"># load in the familiar penguins dataset</span></span>
 <span><span class="va">penguins</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span></span>
-<span>  <span class="st">"https://bwu62.github.io/stat240-revamp/data/penguins.csv"</span>,</span>
+<span>  <span class="st">"https://bwu62.github.io/stat240-revamp/data/penguins_complete.csv"</span>,</span>
 <span>  show_col_types <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co"># print the first few rows of the data frame to check</span></span>
 <span><span class="co"># again this data frame is too wide, and some columns are cut off</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">penguins</span>, n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## # A tibble: 344 × 8
+<pre><code>## # A tibble: 333 × 8
 ##   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
 ##   &lt;chr&gt;   &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;       &lt;dbl&gt;
 ## 1 Adelie  Torgersen           39.1          18.7               181        3750
 ## 2 Adelie  Torgersen           39.5          17.4               186        3800
 ## 3 Adelie  Torgersen           40.3          18                 195        3250
-## 4 Adelie  Torgersen           NA            NA                  NA          NA
-## 5 Adelie  Torgersen           36.7          19.3               193        3450
-## # ℹ 339 more rows
+## 4 Adelie  Torgersen           36.7          19.3               193        3450
+## 5 Adelie  Torgersen           39.3          20.6               190        3650
+## # ℹ 328 more rows
 ## # ℹ 2 more variables: sex &lt;chr&gt;, year &lt;dbl&gt;</code></pre>
 </div>
 <div id="column-wise-functions" class="section level2" number="7.4">
@@ -179,69 +179,69 @@
 <code class="sourceCode R"><span><span class="co"># select just species, sex, flipper length, and body mass</span></span>
 <span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">species</span>, <span class="va">sex</span>, <span class="va">flipper_length_mm</span>, <span class="va">body_mass_g</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## # A tibble: 344 × 4
+<pre><code>## # A tibble: 333 × 4
 ##   species sex    flipper_length_mm body_mass_g
 ##   &lt;chr&gt;   &lt;chr&gt;              &lt;dbl&gt;       &lt;dbl&gt;
 ## 1 Adelie  male                 181        3750
 ## 2 Adelie  female               186        3800
 ## 3 Adelie  female               195        3250
-## 4 Adelie  &lt;NA&gt;                  NA          NA
-## 5 Adelie  female               193        3450
-## # ℹ 339 more rows</code></pre>
+## 4 Adelie  female               193        3450
+## 5 Adelie  male                 190        3650
+## # ℹ 328 more rows</code></pre>
 <div class="sourceCode" id="cb590"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># note this is syntactically equivalent to the following:</span></span>
 <span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">penguins</span>, <span class="va">species</span>, <span class="va">sex</span>, <span class="va">flipper_length_mm</span>, <span class="va">body_mass_g</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## # A tibble: 344 × 4
+<pre><code>## # A tibble: 333 × 4
 ##   species sex    flipper_length_mm body_mass_g
 ##   &lt;chr&gt;   &lt;chr&gt;              &lt;dbl&gt;       &lt;dbl&gt;
 ## 1 Adelie  male                 181        3750
 ## 2 Adelie  female               186        3800
 ## 3 Adelie  female               195        3250
-## 4 Adelie  &lt;NA&gt;                  NA          NA
-## 5 Adelie  female               193        3450
-## # ℹ 339 more rows</code></pre>
+## 4 Adelie  female               193        3450
+## 5 Adelie  male                 190        3650
+## # ℹ 328 more rows</code></pre>
 <div class="sourceCode" id="cb592"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># you can also select by position, or with a range, or both</span></span>
 <span><span class="co"># e.g. we can select the 1st, 3rd to 5th, and year columns:</span></span>
 <span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">:</span><span class="fl">5</span>, <span class="va">year</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## # A tibble: 344 × 5
+<pre><code>## # A tibble: 333 × 5
 ##   species bill_length_mm bill_depth_mm flipper_length_mm  year
 ##   &lt;chr&gt;            &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt; &lt;dbl&gt;
 ## 1 Adelie            39.1          18.7               181  2007
 ## 2 Adelie            39.5          17.4               186  2007
 ## 3 Adelie            40.3          18                 195  2007
-## 4 Adelie            NA            NA                  NA  2007
-## 5 Adelie            36.7          19.3               193  2007
-## # ℹ 339 more rows</code></pre>
+## 4 Adelie            36.7          19.3               193  2007
+## 5 Adelie            39.3          20.6               190  2007
+## # ℹ 328 more rows</code></pre>
 <div class="sourceCode" id="cb594"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># you can also use ranges with names</span></span>
 <span><span class="co"># e.g. select from 1st to island, then body mass to last col</span></span>
 <span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">island</span>, <span class="va">body_mass_g</span><span class="op">:</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">last_col</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## # A tibble: 344 × 5
+<pre><code>## # A tibble: 333 × 5
 ##   species island    body_mass_g sex     year
 ##   &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt;
 ## 1 Adelie  Torgersen        3750 male    2007
 ## 2 Adelie  Torgersen        3800 female  2007
 ## 3 Adelie  Torgersen        3250 female  2007
-## 4 Adelie  Torgersen          NA &lt;NA&gt;    2007
-## 5 Adelie  Torgersen        3450 female  2007
-## # ℹ 339 more rows</code></pre>
+## 4 Adelie  Torgersen        3450 female  2007
+## 5 Adelie  Torgersen        3650 male    2007
+## # ℹ 328 more rows</code></pre>
 <div class="sourceCode" id="cb596"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># you can also select by excluding specific columns with !</span></span>
 <span><span class="co"># e.g. select everything except island and everything after body mass</span></span>
 <span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">island</span>, <span class="op">-</span><span class="op">(</span><span class="va">body_mass_g</span><span class="op">:</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">last_col</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>, <span class="va">body_mass_g</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## # A tibble: 344 × 5
+<pre><code>## # A tibble: 333 × 5
 ##   species bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
 ##   &lt;chr&gt;            &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;       &lt;dbl&gt;
 ## 1 Adelie            39.1          18.7               181        3750
 ## 2 Adelie            39.5          17.4               186        3800
 ## 3 Adelie            40.3          18                 195        3250
-## 4 Adelie            NA            NA                  NA          NA
-## 5 Adelie            36.7          19.3               193        3450
-## # ℹ 339 more rows</code></pre>
+## 4 Adelie            36.7          19.3               193        3450
+## 5 Adelie            39.3          20.6               190        3650
+## # ℹ 328 more rows</code></pre>
 <div class="sourceCode" id="cb598"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># select with selector functions, see ?starts_with help page for details,</span></span>
 <span><span class="co"># you can also use &amp; as AND, | as OR, ! as NOT during selection</span></span>
@@ -251,15 +251,15 @@
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span></span>
 <span>    <span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">"s"</span><span class="op">)</span> <span class="op">|</span> <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">ends_with</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"mm"</span>, <span class="st">"g"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">&amp;</span> <span class="op">!</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">contains</a></span><span class="op">(</span><span class="st">"length"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<pre><code>## # A tibble: 344 × 4
+<pre><code>## # A tibble: 333 × 4
 ##   species sex    bill_depth_mm body_mass_g
 ##   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;       &lt;dbl&gt;
 ## 1 Adelie  male            18.7        3750
 ## 2 Adelie  female          17.4        3800
 ## 3 Adelie  female          18          3250
-## 4 Adelie  &lt;NA&gt;            NA            NA
-## 5 Adelie  female          19.3        3450
-## # ℹ 339 more rows</code></pre>
+## 4 Adelie  female          19.3        3450
+## 5 Adelie  male            20.6        3650
+## # ℹ 328 more rows</code></pre>
 <div class="sourceCode" id="cb600"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># notice in all examples above, columns are always returned in order</span></span>
 <span><span class="co"># select() can therefore also be used to reorder columns</span></span>
@@ -267,100 +267,260 @@
 <span><span class="co">#      (here, everything() selects all the other cols in original order)</span></span>
 <span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">island</span>, <span class="va">species</span>, <span class="va">sex</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## # A tibble: 344 × 8
+<pre><code>## # A tibble: 333 × 8
 ##    year island    species sex    bill_length_mm bill_depth_mm flipper_length_mm
 ##   &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;
 ## 1  2007 Torgersen Adelie  male             39.1          18.7               181
 ## 2  2007 Torgersen Adelie  female           39.5          17.4               186
 ## 3  2007 Torgersen Adelie  female           40.3          18                 195
-## 4  2007 Torgersen Adelie  &lt;NA&gt;             NA            NA                  NA
-## 5  2007 Torgersen Adelie  female           36.7          19.3               193
-## # ℹ 339 more rows
+## 4  2007 Torgersen Adelie  female           36.7          19.3               193
+## 5  2007 Torgersen Adelie  male             39.3          20.6               190
+## # ℹ 328 more rows
 ## # ℹ 1 more variable: body_mass_g &lt;dbl&gt;</code></pre>
 <div class="note">
 <p>Here it’s worth reminding that <code>df %&gt;% select(...)</code> <strong>does NOT modify the original input <code>df</code></strong>, instead it effectively makes a copy of <code>df</code> and runs on that instead. Example:</p>
 <div class="sourceCode" id="cb602"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># show starting data frame</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## # A tibble: 344 × 8
+<pre><code>## # A tibble: 333 × 8
 ##   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
 ##   &lt;chr&gt;   &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;       &lt;dbl&gt;
 ## 1 Adelie  Torgersen           39.1          18.7               181        3750
 ## 2 Adelie  Torgersen           39.5          17.4               186        3800
 ## 3 Adelie  Torgersen           40.3          18                 195        3250
-## 4 Adelie  Torgersen           NA            NA                  NA          NA
-## 5 Adelie  Torgersen           36.7          19.3               193        3450
-## # ℹ 339 more rows
+## 4 Adelie  Torgersen           36.7          19.3               193        3450
+## 5 Adelie  Torgersen           39.3          20.6               190        3650
+## # ℹ 328 more rows
 ## # ℹ 2 more variables: sex &lt;chr&gt;, year &lt;dbl&gt;</code></pre>
 <div class="sourceCode" id="cb604"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># select a subset of columns</span></span>
 <span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">species</span>, <span class="va">flipper_length_mm</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## # A tibble: 344 × 2
+<pre><code>## # A tibble: 333 × 2
 ##   species flipper_length_mm
 ##   &lt;chr&gt;               &lt;dbl&gt;
 ## 1 Adelie                181
 ## 2 Adelie                186
 ## 3 Adelie                195
-## 4 Adelie                 NA
-## 5 Adelie                193
-## # ℹ 339 more rows</code></pre>
+## 4 Adelie                193
+## 5 Adelie                190
+## # ℹ 328 more rows</code></pre>
 <div class="sourceCode" id="cb606"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># check original input is unchanged</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## # A tibble: 344 × 8
+<pre><code>## # A tibble: 333 × 8
 ##   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
 ##   &lt;chr&gt;   &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;       &lt;dbl&gt;
 ## 1 Adelie  Torgersen           39.1          18.7               181        3750
 ## 2 Adelie  Torgersen           39.5          17.4               186        3800
 ## 3 Adelie  Torgersen           40.3          18                 195        3250
-## 4 Adelie  Torgersen           NA            NA                  NA          NA
-## 5 Adelie  Torgersen           36.7          19.3               193        3450
-## # ℹ 339 more rows
+## 4 Adelie  Torgersen           36.7          19.3               193        3450
+## 5 Adelie  Torgersen           39.3          20.6               190        3650
+## # ℹ 328 more rows
 ## # ℹ 2 more variables: sex &lt;chr&gt;, year &lt;dbl&gt;</code></pre>
 <p>If you want to save the result of <code>df %&gt;% select(...)</code> you must <strong>manually save the output with <code>&lt;-</code></strong>. In general, we always recommend saving to a NEW object instead of overwriting the original object because this is non-destructive (i.e. does not lose any data) and less likely to create code errors later on. It’s also easier to debug.</p>
 <div class="sourceCode" id="cb608"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># saving to a new object with a descriptive name is ALWAYS recommended!</span></span>
 <span><span class="va">penguins_fewcols</span> <span class="op">&lt;-</span> <span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">species</span>, <span class="va">flipper_length_mm</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">penguins_fewcols</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## # A tibble: 344 × 2
+<pre><code>## # A tibble: 333 × 2
 ##   species flipper_length_mm
 ##   &lt;chr&gt;               &lt;dbl&gt;
 ## 1 Adelie                181
 ## 2 Adelie                186
 ## 3 Adelie                195
-## 4 Adelie                 NA
-## 5 Adelie                193
-## # ℹ 339 more rows</code></pre>
+## 4 Adelie                193
+## 5 Adelie                190
+## # ℹ 328 more rows</code></pre>
 <div class="sourceCode" id="cb610"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># overwriting the original input is STRONGLY discouraged</span></span>
 <span><span class="co"># because it's destructive and often causes problems later</span></span>
 <span><span class="va">penguins</span> <span class="op">&lt;-</span> <span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">species</span>, <span class="va">flipper_length_mm</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## # A tibble: 344 × 2
+<pre><code>## # A tibble: 333 × 2
 ##   species flipper_length_mm
 ##   &lt;chr&gt;               &lt;dbl&gt;
 ## 1 Adelie                181
 ## 2 Adelie                186
 ## 3 Adelie                195
-## 4 Adelie                 NA
-## 5 Adelie                193
-## # ℹ 339 more rows</code></pre>
+## 4 Adelie                193
+## 5 Adelie                190
+## # ℹ 328 more rows</code></pre>
 <div class="sourceCode" id="cb612"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># reload data frame since we need it for other examples</span></span>
-<span><span class="va">penguins</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/penguins.csv"</span>, show_col_types <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<p><strong>This note applies to all functions on this page</strong>, i.e. all of them do NOT modify the input, so desired changes must always be manually saved!</p>
+<span><span class="va">penguins</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/penguins_complete.csv"</span>, show_col_types <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<p><strong>This note applies to all functions on this page</strong>, i.e. all of them do NOT modify the input, so desired <strong>changes must always be manually saved</strong>!</p>
 </div>
 </div>
 <div id="rename" class="section level3" number="7.4.2">
 <h3>
 <span class="header-section-number">7.4.2</span> <code>rename()</code><a class="anchor" aria-label="anchor" href="#rename"><i class="fas fa-link"></i></a>
 </h3>
-<p><code><a href="https://dplyr.tidyverse.org/reference/rename.html">rename()</a></code> is used to rename columns</p>
+<p><code><a href="https://dplyr.tidyverse.org/reference/rename.html">rename()</a></code> is used to rename columns. This is another common operation right after loading a dataset. Examples:</p>
+<div class="sourceCode" id="cb613"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># rename species as species_name, and island as island_name</span></span>
+<span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>species_name <span class="op">=</span> <span class="va">species</span>, island_name <span class="op">=</span> <span class="va">island</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 333 × 8
+##   species_name island_name bill_length_mm bill_depth_mm flipper_length_mm
+##   &lt;chr&gt;        &lt;chr&gt;                &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;
+## 1 Adelie       Torgersen             39.1          18.7               181
+## 2 Adelie       Torgersen             39.5          17.4               186
+## 3 Adelie       Torgersen             40.3          18                 195
+## 4 Adelie       Torgersen             36.7          19.3               193
+## 5 Adelie       Torgersen             39.3          20.6               190
+## # ℹ 328 more rows
+## # ℹ 3 more variables: body_mass_g &lt;dbl&gt;, sex &lt;chr&gt;, year &lt;dbl&gt;</code></pre>
+<div class="sourceCode" id="cb615"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># if you want to use irregular names, i.e. names with spaces or symbols,</span></span>
+<span><span class="co"># you must surround them with " " quotes</span></span>
+<span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span><span class="st">"Bill Length (mm)"</span> <span class="op">=</span> <span class="va">bill_length_mm</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 333 × 8
+##   species island  `Bill Length (mm)` bill_depth_mm flipper_length_mm body_mass_g
+##   &lt;chr&gt;   &lt;chr&gt;                &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;       &lt;dbl&gt;
+## 1 Adelie  Torger…               39.1          18.7               181        3750
+## 2 Adelie  Torger…               39.5          17.4               186        3800
+## 3 Adelie  Torger…               40.3          18                 195        3250
+## 4 Adelie  Torger…               36.7          19.3               193        3450
+## 5 Adelie  Torger…               39.3          20.6               190        3650
+## # ℹ 328 more rows
+## # ℹ 2 more variables: sex &lt;chr&gt;, year &lt;dbl&gt;</code></pre>
+<div class="sourceCode" id="cb617"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># if you have a data frame with an extremely long and awkward name,</span></span>
+<span><span class="co"># you can also use selector functions to help you rename it</span></span>
+<span><span class="co"># (see ?starts_with help page for more details/examples)</span></span>
+<span><span class="va">df_badname</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
+<span>  x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>,</span>
+<span>  <span class="st">"Really long (and awkward) name with !@#$% symbols"</span> <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">6</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">df_badname</span></span></code></pre></div>
+<pre><code>## # A tibble: 3 × 2
+##       x `Really long (and awkward) name with !@#$% symbols`
+##   &lt;int&gt;                                               &lt;int&gt;
+## 1     1                                                   4
+## 2     2                                                   5
+## 3     3                                                   6</code></pre>
+<div class="sourceCode" id="cb619"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df_badname</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">"Really"</span><span class="op">)</span> <span class="op">&amp;</span> <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">ends_with</a></span><span class="op">(</span><span class="st">"symbols"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 3 × 2
+##       x     y
+##   &lt;int&gt; &lt;int&gt;
+## 1     1     4
+## 2     2     5
+## 3     3     6</code></pre>
+<p>This is outside our scope, but you can also apply a function to many/all columns using <code><a href="https://dplyr.tidyverse.org/reference/rename.html">rename_with()</a></code>. For example:</p>
+<div class="sourceCode" id="cb621"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename_with</a></span><span class="op">(</span><span class="va">toupper</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 333 × 8
+##   SPECIES ISLAND    BILL_LENGTH_MM BILL_DEPTH_MM FLIPPER_LENGTH_MM BODY_MASS_G
+##   &lt;chr&gt;   &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;       &lt;dbl&gt;
+## 1 Adelie  Torgersen           39.1          18.7               181        3750
+## 2 Adelie  Torgersen           39.5          17.4               186        3800
+## 3 Adelie  Torgersen           40.3          18                 195        3250
+## 4 Adelie  Torgersen           36.7          19.3               193        3450
+## 5 Adelie  Torgersen           39.3          20.6               190        3650
+## # ℹ 328 more rows
+## # ℹ 2 more variables: SEX &lt;chr&gt;, YEAR &lt;dbl&gt;</code></pre>
 </div>
 <div id="mutate" class="section level3" number="7.4.3">
 <h3>
 <span class="header-section-number">7.4.3</span> <code>mutate()</code><a class="anchor" aria-label="anchor" href="#mutate"><i class="fas fa-link"></i></a>
 </h3>
+<p><code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> is used to either change an existing column, or add new columns. It’s an easy function to introduce but a tough one to master. The basic syntax is <code>col = ...</code> where <code>col</code> is the name of the column to change/add (depending on if it already exists) and <code>...</code> is some R expression.</p>
+<p>The key thing to remember is the <code>...</code> expression can be <strong>any vector computation using one or more columns in the data frame that produces a vector of the same length OR a single value</strong> (which would be recycled).</p>
+<p>For convenience, let’s select just a few columns to continue with the demonstration:</p>
+<div class="sourceCode" id="cb623"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">penguins2</span> <span class="op">&lt;-</span> <span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">species</span>, <span class="va">sex</span>, <span class="va">bill_length_mm</span>, <span class="va">bill_depth_mm</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">penguins2</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 333 × 4
+##   species sex    bill_length_mm bill_depth_mm
+##   &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;
+## 1 Adelie  male             39.1          18.7
+## 2 Adelie  female           39.5          17.4
+## 3 Adelie  female           40.3          18  
+## 4 Adelie  female           36.7          19.3
+## 5 Adelie  male             39.3          20.6
+## # ℹ 328 more rows</code></pre>
+<p>Now, here’s a few example applications of <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> using <code>penguins2</code></p>
+<div class="sourceCode" id="cb625"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># we can easily add columns of constants</span></span>
+<span><span class="va">penguins2</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>study <span class="op">=</span> <span class="st">"Palmer"</span>, century <span class="op">=</span> <span class="fl">21</span>, true <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 333 × 7
+##   species sex    bill_length_mm bill_depth_mm study  century true 
+##   &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;lgl&gt;
+## 1 Adelie  male             39.1          18.7 Palmer      21 TRUE 
+## 2 Adelie  female           39.5          17.4 Palmer      21 TRUE 
+## 3 Adelie  female           40.3          18   Palmer      21 TRUE 
+## 4 Adelie  female           36.7          19.3 Palmer      21 TRUE 
+## 5 Adelie  male             39.3          20.6 Palmer      21 TRUE 
+## # ℹ 328 more rows</code></pre>
+<div class="sourceCode" id="cb627"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># we can also change existing columns using the same syntax,</span></span>
+<span><span class="co"># e.g. we can capitalize and abbreviate sex to M and F</span></span>
+<span><span class="va">penguins2</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>sex <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/substr.html">substr</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/chartr.html">toupper</a></span><span class="op">(</span><span class="va">sex</span><span class="op">)</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 333 × 4
+##   species sex   bill_length_mm bill_depth_mm
+##   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;         &lt;dbl&gt;
+## 1 Adelie  M               39.1          18.7
+## 2 Adelie  F               39.5          17.4
+## 3 Adelie  F               40.3          18  
+## 4 Adelie  F               36.7          19.3
+## 5 Adelie  M               39.3          20.6
+## # ℹ 328 more rows</code></pre>
+<div class="sourceCode" id="cb629"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># we can also use multiple columns in expressions</span></span>
+<span><span class="co"># e.g. we can roughly estimate the volume of each bill,</span></span>
+<span><span class="co"># see: https://allisonhorst.github.io/palmerpenguins/#bill-dimensions</span></span>
+<span><span class="va">penguins2</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>bill_vol_mm3 <span class="op">=</span> <span class="va">pi</span> <span class="op">*</span> <span class="op">(</span><span class="va">bill_depth_mm</span> <span class="op">/</span> <span class="fl">2</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span> <span class="op">*</span> <span class="va">bill_length_mm</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 333 × 5
+##   species sex    bill_length_mm bill_depth_mm bill_vol_mm3
+##   &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;        &lt;dbl&gt;
+## 1 Adelie  male             39.1          18.7       10739.
+## 2 Adelie  female           39.5          17.4        9393.
+## 3 Adelie  female           40.3          18         10255.
+## 4 Adelie  female           36.7          19.3       10737.
+## 5 Adelie  male             39.3          20.6       13098.
+## # ℹ 328 more rows</code></pre>
+<div class="sourceCode" id="cb631"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># you can also break this into steps, using intermediate variables</span></span>
+<span><span class="co"># note intermediate variables can be used immediately in the same mutate() call</span></span>
+<span><span class="va">penguins2</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    bill_cross_section_mm2 <span class="op">=</span> <span class="va">pi</span> <span class="op">*</span> <span class="op">(</span><span class="va">bill_depth_mm</span> <span class="op">/</span> <span class="fl">2</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span>,</span>
+<span>    bill_vol_mm3 <span class="op">=</span> <span class="va">bill_cross_section_mm2</span> <span class="op">*</span> <span class="va">bill_length_mm</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 333 × 6
+##   species sex   bill_length_mm bill_depth_mm bill_cross_section_mm2 bill_vol_mm3
+##   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;         &lt;dbl&gt;                  &lt;dbl&gt;        &lt;dbl&gt;
+## 1 Adelie  male            39.1          18.7                   275.       10739.
+## 2 Adelie  fema…           39.5          17.4                   238.        9393.
+## 3 Adelie  fema…           40.3          18                     254.       10255.
+## 4 Adelie  fema…           36.7          19.3                   293.       10737.
+## 5 Adelie  male            39.3          20.6                   333.       13098.
+## # ℹ 328 more rows</code></pre>
+<div class="sourceCode" id="cb633"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># you can even mix summary functions into your expression</span></span>
+<span><span class="co"># e.g. standardize bill length and depth by subtracting mean and dividing by sd</span></span>
+<span><span class="va">penguins2</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    bill_length_std <span class="op">=</span> <span class="op">(</span><span class="va">bill_length_mm</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">bill_length_mm</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">bill_length_mm</span><span class="op">)</span>,</span>
+<span>    bill_depth_std <span class="op">=</span> <span class="op">(</span><span class="va">bill_depth_mm</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">bill_depth_mm</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">bill_depth_mm</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 333 × 6
+##   species sex    bill_length_mm bill_depth_mm bill_length_std bill_depth_std
+##   &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;           &lt;dbl&gt;          &lt;dbl&gt;
+## 1 Adelie  male             39.1          18.7          -0.895          0.780
+## 2 Adelie  female           39.5          17.4          -0.822          0.119
+## 3 Adelie  female           40.3          18            -0.675          0.424
+## 4 Adelie  female           36.7          19.3          -1.33           1.08 
+## 5 Adelie  male             39.3          20.6          -0.858          1.74 
+## # ℹ 328 more rows</code></pre>
 </div>
 <div id="summarize" class="section level3" number="7.4.4">
 <h3>
