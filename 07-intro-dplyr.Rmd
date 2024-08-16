@@ -195,6 +195,52 @@ penguins %>%
 
 ### `mutate()`
 
+`mutate()` is used to either change an existing column, or add new columns. It's an easy function to introduce but a tough one to master. The basic syntax is `col = ...` where `col` is the name of the column to change/add (depending on if it already exists) and `...` is some R expression.
+
+The key thing to remember is the `...` expression can be **any vector computation using one or more columns in the data frame that produces a vector of the same length OR a single value** (which would be recycled).
+
+For convenience, let's select just a few columns to continue with the demonstration:
+
+```{r}
+penguins2 <- penguins %>%
+  select(species, sex, bill_length_mm, bill_depth_mm)
+print(penguins2)
+```
+
+Now, here's a few example applications of `mutate()` using `penguins2`
+
+```{r}
+# we can easily add columns of constants
+penguins2 %>%
+  mutate(study = "Palmer", century = 21, true = TRUE)
+# we can also change existing columns using the same syntax,
+# e.g. we can capitalize and abbreviate sex to M and F
+penguins2 %>%
+  mutate(sex = substr(toupper(sex), 1, 1))
+# we can also use multiple columns in expressions
+# e.g. we can roughly estimate the volume of each bill,
+# see: https://allisonhorst.github.io/palmerpenguins/#bill-dimensions
+penguins2 %>%
+  mutate(bill_vol_mm3 = pi * (bill_depth_mm / 2)^2 * bill_length_mm)
+# you can also break this into steps, using intermediate variables
+# note intermediate variables can be used immediately in the same mutate() call
+penguins2 %>%
+  mutate(
+    bill_cross_section_mm2 = pi * (bill_depth_mm / 2)^2,
+    bill_vol_mm3 = bill_cross_section_mm2 * bill_length_mm
+  )
+# you can even mix summary functions into your expression
+# e.g. standardize bill length and depth by subtracting mean and dividing by sd
+penguins2 %>%
+  mutate(
+    bill_length_std = (bill_length_mm - mean(bill_length_mm)) / sd(bill_length_mm),
+    bill_depth_std = (bill_depth_mm - mean(bill_depth_mm)) / sd(bill_depth_mm)
+  )
+```
+
+
+
+
 ### `summarize()`
 
 ## Row-wise functions
