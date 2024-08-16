@@ -339,3 +339,10 @@ main > div[class*="section level1"] {
 pre.plot {
   background-color: white !important;
 }
+
+.anchor{
+  display:none!important;
+}
+a.anchorjs-link{
+  margin-left:0!important;
+}
