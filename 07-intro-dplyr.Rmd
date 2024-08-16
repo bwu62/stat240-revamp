@@ -236,8 +236,33 @@ penguins2 %>%
     bill_length_std = (bill_length_mm - mean(bill_length_mm)) / sd(bill_length_mm),
     bill_depth_std = (bill_depth_mm - mean(bill_depth_mm)) / sd(bill_depth_mm)
   )
+# you can of course create columns of other data types
+penguins2 %>%
+  mutate(
+    small_bill = bill_length_mm < 39 | bill_depth_mm < 18,
+    fake_dates = seq(today(), today() + nrow(penguins) - 1, by = 1)
+  )
 ```
 
+A notable function that is extremely useful inside `mutate()` is `case_when()` which can be set to return different values depending on different conditions.^[It's similar to a switch function in other languages.] The syntax is `case_when(condition1 ~ expression1, condition2 ~ expression2, ...)`. For example, suppose we want to create some new column differently depending on sex and bill depth:
+
+```{r}
+# use case_when() inside a mutate() depending on some conditions
+# .default sets the "default" result, when no conditions match OR when we have NAs
+penguins2 %>%
+  mutate(
+    new_col = case_when(
+      sex == "male" & bill_depth_mm <= 19 ~ bill_length_mm * 100,
+      sex == "male" & bill_depth_mm > 19 ~ bill_length_mm * -1,
+      sex == "female" ~ round(log((bill_length_mm / bill_depth_mm)^2), 2),
+      .default = 0
+    )
+  )
+```
+
+It's worth restating that **ANY vectorized operation of the columns can be used inside `mutate()`**, as long as the result is a same-length vector (or single value to be recycled). This includes essentially every function from 
+
+The [dplyr cheat sheet](https://rstudio.github.io/cheatsheets/data-transformation.pdf) has on page 2 a small list of some other functions that may be useful inside `mutate()` for more advanced situations like `cumsum()` for finding cumulative sums of columns (i.e. "running" sum), `lag()` and `lead()` for creating a lagged or leading vectors useful for computing changes in time series data, various ranking functions like `dense_rank()` or `min_rank()`, and more.
 
 
 
