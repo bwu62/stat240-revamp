@@ -583,6 +583,59 @@ penguins2 %>%
 ## # ℹ 328 more rows
 ```
 
+``` r
+# you can of course create columns of other data types
+penguins2 %>%
+  mutate(
+    small_bill = bill_length_mm < 39 | bill_depth_mm < 18,
+    fake_dates = seq(today(), today() + nrow(penguins) - 1, by = 1)
+  )
+```
+
+```
+## # A tibble: 333 × 6
+##   species sex    bill_length_mm bill_depth_mm small_bill fake_dates
+##   <chr>   <chr>           <dbl>         <dbl> <lgl>      <date>    
+## 1 Adelie  male             39.1          18.7 FALSE      2024-08-16
+## 2 Adelie  female           39.5          17.4 TRUE       2024-08-17
+## 3 Adelie  female           40.3          18   FALSE      2024-08-18
+## 4 Adelie  female           36.7          19.3 TRUE       2024-08-19
+## 5 Adelie  male             39.3          20.6 FALSE      2024-08-20
+## # ℹ 328 more rows
+```
+
+A notable function that is extremely useful inside `mutate()` is `case_when()` which can be set to return different values depending on different conditions.^[It's similar to a switch function in other languages.] The syntax is `case_when(condition1 ~ expression1, condition2 ~ expression2, ...)`. For example, suppose we want to create some new column differently depending on sex and bill depth:
+
+
+``` r
+# use case_when() inside a mutate() depending on some conditions
+# .default sets the "default" result, when no conditions match OR when we have NAs
+penguins2 %>%
+  mutate(
+    new_col = case_when(
+      sex == "male" & bill_depth_mm <= 19 ~ bill_length_mm * 100,
+      sex == "male" & bill_depth_mm > 19 ~ bill_length_mm * -1,
+      sex == "female" ~ round(log((bill_length_mm / bill_depth_mm)^2), 2),
+      .default = 0
+    )
+  )
+```
+
+```
+## # A tibble: 333 × 5
+##   species sex    bill_length_mm bill_depth_mm new_col
+##   <chr>   <chr>           <dbl>         <dbl>   <dbl>
+## 1 Adelie  male             39.1          18.7 3910   
+## 2 Adelie  female           39.5          17.4    1.64
+## 3 Adelie  female           40.3          18      1.61
+## 4 Adelie  female           36.7          19.3    1.29
+## 5 Adelie  male             39.3          20.6  -39.3 
+## # ℹ 328 more rows
+```
+
+It's worth restating that **ANY vectorized operation of the columns can be used inside `mutate()`**, as long as the result is a same-length vector (or single value to be recycled). This includes essentially every function from 
+
+The [dplyr cheat sheet](https://rstudio.github.io/cheatsheets/data-transformation.pdf) has on page 2 a small list of some other functions that may be useful inside `mutate()` for more advanced situations like `cumsum()` for finding cumulative sums of columns (i.e. "running" sum), `lag()` and `lead()` for creating a lagged or leading vectors useful for computing changes in time series data, various ranking functions like `dense_rank()` or `min_rank()`, and more.
 
 
 
