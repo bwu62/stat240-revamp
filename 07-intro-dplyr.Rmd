@@ -195,9 +195,9 @@ penguins %>%
 
 ### `mutate()`
 
-`mutate()` is used to either change an existing column, or add new columns. It's an easy function to introduce but a tough one to master. The basic syntax is `col = ...` where `col` is the name of the column to change/add (depending on if it already exists) and `...` is some R expression.
+`mutate()` is used to either change an existing column, or add new columns. It's an easy function to introduce but a tough one to master. The basic syntax is `df %>% mutate(col1 = expr1, col2 = expr2, ...)` where `col1`, `col2`, ... are the columns being changed/added (depending on if it already exists) and `expr1`, `expr2`, ... are some R expressions.
 
-The key thing to remember is the `...` expression can be **any vector computation using one or more columns in the data frame that produces a vector of the same length OR a single value** (which would be recycled).
+The key thing to remember is the expressions can be **any vector computation using one or more columns in the data frame that produces a vector of the same length OR a single value** (which gets recycled).
 
 For convenience, let's select just a few columns to continue with the demonstration:
 
@@ -244,7 +244,9 @@ penguins2 %>%
   )
 ```
 
-A notable function that is extremely useful inside `mutate()` is `case_when()` which can be set to return different values depending on different conditions.^[It's similar to a switch function in other languages.] The syntax is `case_when(condition1 ~ expression1, condition2 ~ expression2, ...)`. For example, suppose we want to create some new column differently depending on sex and bill depth:
+A notable function that is extremely useful inside `mutate()` is `case_when()` which can return different values depending on certain conditions.^[It's similar to a switch function in other languages.] The basic syntax is `df %>% mutate(new_col = case_when(cond1 ~ expr1, cond2 ~ expr2, ...))` where `cond1`, `cond2`, ... are logical conditions checked one by one in the given order, and `expr1`, `expr2`, ... are R expressions that are activated when a condition matches.
+
+For example, suppose we want to create some new column differently depending on sex and bill depth:
 
 ```{r}
 # use case_when() inside a mutate() depending on some conditions
@@ -260,13 +262,24 @@ penguins2 %>%
   )
 ```
 
-It's worth restating that **ANY vectorized operation of the columns can be used inside `mutate()`**, as long as the result is a same-length vector (or single value to be recycled). This includes essentially every function from 
+It's worth restating that **ANY vectorized operation of the columns can be used inside `mutate()`**, as long as the result is a same-length vector (or single value to be recycled). This includes essentially every function from chapter \@ref(data-vectors)!
 
-The [dplyr cheat sheet](https://rstudio.github.io/cheatsheets/data-transformation.pdf) has on page 2 a small list of some other functions that may be useful inside `mutate()` for more advanced situations like `cumsum()` for finding cumulative sums of columns (i.e. "running" sum), `lag()` and `lead()` for creating a lagged or leading vectors useful for computing changes in time series data, various ranking functions like `dense_rank()` or `min_rank()`, and more.
-
+The [dplyr cheat sheet](https://rstudio.github.io/cheatsheets/data-transformation.pdf) has on page 2 a small list of some other functions that may be useful inside `mutate()` for more advanced situations, such as `cumsum()` for finding cumulative sums of columns (i.e. "running" sum), `lag()` and `lead()` for creating a lagged or leading vector useful for computing changes in time series data, `na_if()` for selectively replacing specific values with NA, several ranking functions like `dense_rank()` or `min_rank()`, and many more.
 
 
 ### `summarize()`
+
+`summarize()` is similar to `mutate()` except you **MUST use summary functions**, i.e. function that always **reduce a vector down to a single value**. Again, you can again use any arbitrary function or combination of functions of any columns in the data frame, and the result can be any type (e.g. numeric, character, logical, date, etc.), as long as the result is singular.
+
+Some examples:
+
+```{r}
+# let's compute several summary statistics of body mass
+penguins %>% 
+  summarize()
+```
+
+
 
 ## Row-wise functions
 
