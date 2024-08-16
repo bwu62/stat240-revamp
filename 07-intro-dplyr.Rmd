@@ -157,7 +157,7 @@ print(penguins)
 penguins <- read_csv("data/penguins_complete.csv", show_col_types = FALSE)
 ```
 
-**This note applies to all functions on this page**, i.e. all of them do NOT modify the input, so desired changes must always be manually saved!
+**This note applies to all functions on this page**, i.e. all of them do NOT modify the input, so desired **changes must always be manually saved**!
 :::
 
 
