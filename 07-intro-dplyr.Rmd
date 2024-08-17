@@ -244,7 +244,7 @@ penguins2 %>%
   )
 ```
 
-A notable function that is extremely useful inside `mutate()` is `case_when()` which can return different values depending on certain conditions.^[It's similar to a switch function in other languages.] The basic syntax is `df %>% mutate(new_col = case_when(cond1 ~ expr1, cond2 ~ expr2, ...))` where `cond1`, `cond2`, ... are logical conditions checked one by one in the given order, and `expr1`, `expr2`, ... are R expressions that are activated when a condition matches.
+A notable function that is extremely useful inside `mutate()` is `case_when()` which can calculate different values depending on certain conditions.^[It's similar to a switch function in other languages.] The basic syntax is `df %>% mutate(new_col = case_when(cond1 ~ expr1, cond2 ~ expr2, ...))` where `cond1`, `cond2`, ... are logical condition vectors checked one by one in the given order, and `expr1`, `expr2`, ... are R expressions that are activated when a condition matches.
 
 For example, suppose we want to create some new column differently depending on sex and bill depth:
 
