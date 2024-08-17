@@ -271,11 +271,11 @@ The [dplyr cheat sheet](https://rstudio.github.io/cheatsheets/data-transformatio
 
 `summarize()` is similar to `mutate()` except you **MUST use summary functions**, i.e. function that always **reduce a vector down to a single value**. Again, you can again use any arbitrary function or combination of functions of any columns in the data frame, and the result can be any type (e.g. numeric, character, logical, date, etc.), as long as the result is singular.
 
-The basic syntax is `df %>% summarize(col1 = expr1, col2 = expr2, ...)` where again `col1`, `col2`, ... are names of new summary columns, and `expr1`, `expr2`, ... are R expressions that reduce to a single value. Examples:
+The basic syntax is `df %>% summarize(col1 = expr1, col2 = expr2, ...)` where again `col1`, `col2`, ... are names of new summary columns, and `expr1`, `expr2`, ... are R expressions that reduce to a single value. Example:
 
 ```{r}
-# let's compute several summary statistics of body mass
-penguins %>%
+# let's compute several summary statistics of bill length
+penguins2 %>%
   summarize(
     mean_length   = mean(bill_length_mm),
     median_length = median(bill_length_mm),
