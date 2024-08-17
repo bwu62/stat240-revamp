@@ -31,7 +31,7 @@ All dplyr functions are setup so that **the first argument is the input data fra
 This design makes it easy to **chain many functions together with pipes** `%>%` and `|>`, which are [basically the same](https://www.tidyverse.org/blog/2023/04/base-vs-magrittr-pipe) and both used to **pass the left-side expression as the first argument to a function**. In this class, we will stick to `%>%` for consistency, but you can use `|>` if you prefer. For example,
 
  - `x %>% f` is equivalent to `f(x)`
- - `x %>% f(y)` is equivalent to `f(x, y)` ^[These examples come from the [magrittr help page](https://magrittr.tidyverse.org/index.html#usage){target="_blank"}.]
+ - `x %>% f(y)` is equivalent to `f(x, y)` ^[These examples come from the [magrittr help page](https://magrittr.tidyverse.org/index.html#usage).]
 
 Why is this useful? Suppose you start with a data frame `df` and want to run the functions `f`, `g`, and `h` on it in order. You can of course do the following:
 
