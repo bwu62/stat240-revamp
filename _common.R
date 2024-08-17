@@ -28,7 +28,7 @@ tryCatch({
 
 # example chunk options set globally
 knitr::opts_chunk$set(
-  eval=T, echo=T, comment="##", 
+  eval=T, echo=T, comment="", 
   warning=F, message=F,
   dev="svg", 
   dev.args=list(bg="transparent"), 
@@ -154,6 +154,7 @@ page.find = function(url,pattern,md=F,n=1){
 # }
 
 # set a better width
-options(width=80)
+full_width = 85
+options(width = full_width)
 
 set.seed(1)

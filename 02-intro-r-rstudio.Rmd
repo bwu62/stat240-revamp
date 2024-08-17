@@ -498,7 +498,7 @@ options(width = 70)
 library(tidyverse)
 ```
 ```{r,include=F}
-options(width = 80)
+options(width = full_width)
 ```
 
 Upon loading, many packages will print various diagnostic messages to the console. These are generally completely ignorable. Sometimes these will warn about "Conflicts", this is standard and just means it has overridden other default functions. E.g. You can see above the `filter()` function from the package `dplyr` has overwritten the pre-loaded [`filter()`{.R}](https://rdrr.io/r/stats/filter.html) function from the `stats` package.

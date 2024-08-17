@@ -69,12 +69,21 @@ print(penguins, n = 5)
 # so you can see all columns in the data frame
 options(width = 92)
 penguins
+```
+```{r date-unclass1,echo=F,results='asis'}
+cat(glue::glue('``` r
 # reset width to its original value
-options(width = 80)
+options(width = {full_width})
 # another option is the glimpse() function which prints sideways,
 # avoiding the hidden columns due to insufficient width issue
 glimpse(penguins)
+```'))
 ```
+```{r date-unclass2,echo=F}
+options(width = full_width)
+glimpse(penguins)
+```
+
 
 The column variables are intuitively named so you should be able to guess their meaning; see the [`penguins`](https://allisonhorst.github.io/palmerpenguins/reference/penguins.html) help page for more info on the variables as well as papers detailing the data gathering process.
 

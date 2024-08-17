@@ -162,7 +162,7 @@ eruptions_recent <- read_csv(
 eruptions_recent <- read_csv("data/eruptions_recent.csv")
 ```
 ```{r,include=F}
-options(width = 80)
+options(width = full_width)
 ```
 ```{r,message=T,class.message="message"}
 # print first few lines of result to check
