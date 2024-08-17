@@ -31,7 +31,7 @@
 <link rel="mask-icon" href="icons/safari-pinned-tab.svg" color="#5bbad5">
 <meta name="msapplication-TileColor" content="#da532c">
 <meta name="theme-color" content="#ffffff">
-<script src="https://cdn.jsdelivr.net/npm/anchor-js/anchor.min.js"></script><script>
+<!-- https://www.bryanbraun.com/anchorjs/ --><script src="https://cdn.jsdelivr.net/npm/anchor-js/anchor.min.js"></script><script>
       // Add anchors on DOMContentLoaded
     document.addEventListener('DOMContentLoaded', function(event) {
       anchors.add('h1');
@@ -152,7 +152,7 @@
   });
 });
 
-</script><script>
+</script><!-- https://www.tutorialrepublic.com/faq/how-to-change-href-attribute-of-a-hyperlink-using-jquery.php--><script>
   $(document).ready(function(){
     $("a.anchorjs-link").each(function(){
       var oldUrl = $(this).attr("href"); // Get current url
@@ -161,6 +161,30 @@
       $(this).attr("title", location.protocol + "//" + location.host + location.pathname + $(this).attr("href")); // Set title value
     });
   });
+</script><!-- https://stackoverflow.com/a/10415599/25278020 --><script>
+  var observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+        if (mutation.addedNodes && mutation.addedNodes.length > 0) {
+            // element added to DOM
+            var hasClass = [].some.call(mutation.addedNodes, function(el) {
+                return el.classList.contains('bs-popover-top')
+            });
+            if (hasClass) {
+              $("div.bs-popover-top a").each(function(){
+                $(this).attr("target", "_blank");
+              });
+          }
+        }
+    });
+});
+
+var config = {
+    attributes: true,
+    childList: true,
+    characterData: true
+};
+
+observer.observe(document.body, config);
 </script><div class="chapter-nav">
 <div class="prev"><a href="data-visualization.html"><span class="header-section-number">6</span> Data visualization</a></div>
 <div class="next"><a href="intro-to-dplyr.html"><span class="header-section-number">7</span> Intro to dplyr</a></div>

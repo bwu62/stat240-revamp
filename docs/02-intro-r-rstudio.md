@@ -168,7 +168,7 @@ R will sometimes output in scientific notation, especially if the number cannot 
 ## [1] 1.1259e+15
 ```
 
-Also note due to limitations of [how computers represent numbers](https://en.wikipedia.org/wiki/IEEE_754), R often cannot distinguish between numbers that differ by less than about 10^-15^, i.e. 0.000000000000001.^[This is a MASSIVE oversimplification, but it'll have to suffice because the rabbit hole on ["machine precision"](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/.Machine){target="_blank"} and [floating-point arithmetic errors](https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html){target="_blank"} is---like the nights in ASOIAF---dark and full of terrors.]
+Also note due to limitations of [how computers represent numbers](https://en.wikipedia.org/wiki/IEEE_754), R often cannot distinguish between numbers that differ by less than about 10^-15^, i.e. 0.000000000000001.^[This is a MASSIVE oversimplification, but it'll have to suffice because the rabbit hole on ["machine precision"](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/.Machine) and [floating-point arithmetic errors](https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html) is---like the nights in ASOIAF---dark and full of terrors.]
 :::
 
 
@@ -330,7 +330,7 @@ Additionally, [`NA`{.R}](https://rdrr.io/r/base/NA.html) is used to represent mi
 ### Assignment
 
 
-In R, variables are typically assigned using the `<-` operator, which is just a less than `<` and minus `-` put together. You can also use `=` but `<-` is recommended for stylistic reasons (see [this blog post](https://colinfay.me/r-assignment) for more details). For this class, **both are acceptable** but we will prefer `<-` in the notes.^[A comprehensive R style guide written by Hadley Wickham can be found here: <https://style.tidyverse.org/>{target="_blank"}.]
+In R, variables are typically assigned using the `<-` operator, which is just a less than `<` and minus `-` put together. You can also use `=` but `<-` is recommended for stylistic reasons (see [this blog post](https://colinfay.me/r-assignment) for more details). For this class, **both are acceptable** but we will prefer `<-` in the notes.^[A comprehensive R style guide written by Hadley Wickham can be found here: <https://style.tidyverse.org/>.]
 
 
 ``` r
@@ -371,7 +371,7 @@ log(3^5, base = 3)
 ## [1] 5
 ```
 
-Variable names can be any combination of upper and lower-case letters, numbers, or period `.` and underscore `_` (which are both treated similar to letters), with one caveat: **variables must begin with a letter or period**, not a number or underscore. You may not use any other characters in variable names.^[This is only a short summary. Technically, any set of ANY characters can be used to create a [non-syntactic name](https://adv-r.hadley.nz/names-values.html#non-syntactic){target="_blank"}, but this is beyond our current scope.]
+Variable names can be any combination of upper and lower-case letters, numbers, or period `.` and underscore `_` (which are both treated similar to letters), with one caveat: **variables must begin with a letter or period**, not a number or underscore. You may not use any other characters in variable names.^[This is only a short summary. Technically, any set of ANY characters can be used to create a [non-syntactic name](https://adv-r.hadley.nz/names-values.html#non-syntactic), but this is beyond our current scope.]
 
 
 ``` r
@@ -731,7 +731,7 @@ all.equal(sqrt(2)^2, 2)
 ### Packages
 
 
-Now, let's briefly discuss packages. One of the best features of R is the ability for anyone to easily write and distribute packages on [CRAN](https://cran.r-project.org) (**C**omprehensive **R** **A**rchive **N**etwork). Currently, there are 21144 packages available on CRAN. There are also a further 2300 packages on the bioinformatics-specific package archive [Bioconductor](https://www.bioconductor.org), as well as countless more on [GitHub](https://github.com/topics/r-package).
+Now, let's briefly discuss packages. One of the best features of R is the ability for anyone to easily write and distribute packages on [CRAN](https://cran.r-project.org) (**C**omprehensive **R** **A**rchive **N**etwork). Currently, there are 21143 packages available on CRAN. There are also a further 2300 packages on the bioinformatics-specific package archive [Bioconductor](https://www.bioconductor.org), as well as countless more on [GitHub](https://github.com/topics/r-package).
 
 In this course, we will primarily make use of the [Tidyverse](https://www.tidyverse.org) suite of packages, which contains several important packages for data science: `readr` for reading in data, `ggplot2` for plotting data, `dplyr` and `tidyr` for cleaning data, and `lubridate` and `stringr` for working with dates and strings. We will learn each of these as the course progresses.
 
@@ -768,7 +768,7 @@ It's important to check the output messages to see if the install was successful
 #### Loading a package
 
 
-You can load a package with either `library()` or `require()`, which are basically the same.^[The only difference is `require()` can be used to check if a package exists and will return `FALSE` if it doesn't, whereas `library()` will just error out, see <https://www.geeksforgeeks.org/the-difference-between-require-and-library-in-r/>{target="_blank"} for more details.] Some package names actually load a group of other packages, e.g. `library(tidyverse)` will load all the ["core" Tidyverse](https://www.tidyverse.org/packages/#core-tidyverse) packages, which include [ggplot2](https://ggplot2.tidyverse.org), [dplyr](https://dplyr.tidyverse.org), [tidyr](https://tidyr.tidyverse.org), [readr](https://readr.tidyverse.org), [purrr](https://purrr.tidyverse.org), [tibble](https://tibble.tidyverse.org), [stringr](https://stringr.tidyverse.org), and [forcats](https://forcats.tidyverse.org).
+You can load a package with either `library()` or `require()`, which are basically the same.^[The only difference is `require()` can be used to check if a package exists and will return `FALSE` if it doesn't, whereas `library()` will just error out, see <https://www.geeksforgeeks.org/the-difference-between-require-and-library-in-r/> for more details.] Some package names actually load a group of other packages, e.g. `library(tidyverse)` will load all the ["core" Tidyverse](https://www.tidyverse.org/packages/#core-tidyverse) packages, which include [ggplot2](https://ggplot2.tidyverse.org), [dplyr](https://dplyr.tidyverse.org), [tidyr](https://tidyr.tidyverse.org), [readr](https://readr.tidyverse.org), [purrr](https://purrr.tidyverse.org), [tibble](https://tibble.tidyverse.org), [stringr](https://stringr.tidyverse.org), and [forcats](https://forcats.tidyverse.org).
 
 
 
@@ -861,7 +861,7 @@ Those are probably the most important R commands you need to know for now. Below
 
 In this next section, we will introduce you to R Markdown, which is a document format that allows you to seamlessly organize and integrate text and R code/output in an easily readable and editable way. It supports many [output file types](https://rmarkdown.rstudio.com/lesson-9.html) including HTML, PDF, and DOCX, and can be used to write reports, articles, presentations, ebooks, and even websites (in fact, this entire website is written in R Markdown, and the GitHub repo even maintained using Rstudio; you can view the source code of any page using the "View source" button in the right sidebar).
 
-Let's start with an example! Below is a basic R Markdown demo file called [`demo.Rmd`](demo.Rmd), which produces [`demo.html`](demo.html){target="_blank"} as output. We will use this example below to learn how to work with Rmd files.
+Let's start with an example! Below is a basic R Markdown demo file called [`demo.Rmd`](demo.Rmd), which produces [`demo.html`](demo.html) as output. We will use this example below to learn how to work with Rmd files.
 
 
 ````{.md .wrapCode}
@@ -967,7 +967,7 @@ There are lots of other [YAML options](https://github.com/hao203/rmarkdown-YAML)
 ### Markdown
 
 
-R Markdown is based on [Markdown](https://markdownguide.offshoot.io/cheat-sheet)^[Fun fact: Markdown was co-created by computer prodigy [Aaron Swartz](https://en.wikipedia.org/wiki/Aaron_Swartz){target="_blank"} who also famously co-created RSS and Reddit. He was an earlier pioneer of the [Open Access](https://en.wikipedia.org/wiki/Open_access){target="_blank"} movement and was persecuted by the government for distributing already freely-accessible journal articles. If you're interested in learning more, I highly recommend the excellent biopic [The Internet's Own Boy: The Story of Aaron Swartz](https://www.imdb.com/title/tt3268458){target="_blank"}.]
+R Markdown is based on [Markdown](https://markdownguide.offshoot.io/cheat-sheet)^[Fun fact: Markdown was co-created by computer prodigy [Aaron Swartz](https://en.wikipedia.org/wiki/Aaron_Swartz) who also famously co-created RSS and Reddit. He was an earlier pioneer of the [Open Access](https://en.wikipedia.org/wiki/Open_access) movement and was persecuted by the government for distributing already freely-accessible journal articles. If you're interested in learning more, I highly recommend the excellent biopic [The Internet's Own Boy: The Story of Aaron Swartz](https://www.imdb.com/title/tt3268458).]
   which is a simple syntax for "marking up" text with additional formatting. You can see mixed in with paragraphs of ordinary text, there are `# Section` and `## Subsection` headings, `[links](url)` and `**bold text**`, lists and sublists, and both inline and separate "chunks" of source code.
 
 We will not expect you to learn ALL of markdown, but minimally **you should learn to use section and subsection headings, links and lists, and both inline code and code chunks**.
@@ -1042,7 +1042,7 @@ A code chunk has this basic structure:
     | `error` | TRUE, **FALSE** | Controls whether to allow errors and continue knitting. Note this option is FALSE by default, meaning R will halt and not produce output if it encounters any errors. |
     | `fig.width`, `fig.height` | any number; default: **7**, **5** | These control the size of the plot output, if there is one. |
     | `fig.align` | **"default"**, "left", "right", "center" | This controls the alignment of the plot output, if there is one. Note this option MUST be set with quotes. "default" does not set an alignment. |
-    | `cache` | TRUE, **FALSE** | If a chunk is time consuming, you can "cache" it. Cached chunks will not be rerun unless the code inside is modified. Note this is set FALSE by default. This option should be **used with caution**! Improper usage may cause code chunks to not update properly.^[Phil Karlton, developer at Xerox and Netscape, [famously said](https://www.karlton.org/2017/12/naming-things-hard) *"There are only two hard things in Computer Science: cache invalidation and naming things."* For a more detailed discussion on caching in R, see [this intro page](https://bookdown.org/yihui/rmarkdown-cookbook/cache.html){target="_blank"} and [this follow-up discussion](https://yihui.org/en/2018/06/cache-invalidation){target="_blank"}.] |
+    | `cache` | TRUE, **FALSE** | If a chunk is time consuming, you can "cache" it. Cached chunks will not be rerun unless the code inside is modified. Note this is set FALSE by default. This option should be **used with caution**! Improper usage may cause code chunks to not update properly.^[Phil Karlton, developer at Xerox and Netscape, [famously said](https://www.karlton.org/2017/12/naming-things-hard) *"There are only two hard things in Computer Science: cache invalidation and naming things."* For a more detailed discussion on caching in R, see [this intro page](https://bookdown.org/yihui/rmarkdown-cookbook/cache.html) and [this follow-up discussion](https://yihui.org/en/2018/06/cache-invalidation).] |
     :::
     
     One last note: remember the "setup" chunk at the top of the demo file? Here it is again:
@@ -1172,7 +1172,7 @@ Before I end this chapter, I want to offer a few tips for your workflow that I f
  3. Remember **knitting always creates a NEW, empty background R session, sets the working directory to the Rmd file location, then runs the entire file top to bottom**. This means:
     - If you run a line in the console without copying it into the Rmd file, that line will NOT be run when you knit.
     - If you define an object in the console, forgot to copy it into the Rmd file, then try to use it somewhere else in the file, you WILL get an error.
-    - Objects must be defined BEFORE they are used in an Rmd file. If you define `data` on line 20 but try computing `mean(data)` on line 10, you WILL get an error.^[For sake of pedantry, technically you can refer to an object before defining it, but this is an extremely advanced R Markdown technique and is not recommended since it's nonintuitive, much harder to debug, and just generally clumsy and bad practice. See <https://bookdown.org/yihui/rmarkdown-cookbook/load-cache.html>{target="_blank"} for more.]
+    - Objects must be defined BEFORE they are used in an Rmd file. If you define `data` on line 20 but try computing `mean(data)` on line 10, you WILL get an error.^[For sake of pedantry, technically you can refer to an object before defining it, but this is an extremely advanced R Markdown technique and is not recommended since it's nonintuitive, much harder to debug, and just generally clumsy and bad practice. See <https://bookdown.org/yihui/rmarkdown-cookbook/load-cache.html> for more.]
     - If your working directory does not match the location of your current Rmd file, this may also cause errors if you need to load any datasets. Remember to always set your working directory!
  
  4. You have an error? Have you tried the following?

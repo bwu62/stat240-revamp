@@ -32,7 +32,7 @@ All dplyr functions are setup so that **the first argument is the input data fra
 This design makes it easy to **chain many functions together with pipes** `%>%` and `|>`, which are [basically the same](https://www.tidyverse.org/blog/2023/04/base-vs-magrittr-pipe) and both used to **pass the left-side expression as the first argument to a function**. In this class, we will stick to `%>%` for consistency, but you can use `|>` if you prefer. For example,
 
  - `x %>% f` is equivalent to `f(x)`
- - `x %>% f(y)` is equivalent to `f(x, y)` ^[These examples come from the [magrittr help page](https://magrittr.tidyverse.org/index.html#usage){target="_blank"}.]
+ - `x %>% f(y)` is equivalent to `f(x, y)` ^[These examples come from the [magrittr help page](https://magrittr.tidyverse.org/index.html#usage).]
 
 Why is this useful? Suppose you start with a data frame `df` and want to run the functions `f`, `g`, and `h` on it in order. You can of course do the following:
 
@@ -454,9 +454,9 @@ penguins %>%
 
 ### `mutate()`
 
-`mutate()` is used to either change an existing column, or add new columns. It's an easy function to introduce but a tough one to master. The basic syntax is `col = ...` where `col` is the name of the column to change/add (depending on if it already exists) and `...` is some R expression.
+`mutate()` is used to either change an existing column, or add new columns. It's an easy function to introduce but a tough one to master. The basic syntax is `df %>% mutate(col1 = expr1, col2 = expr2, ...)` where `col1`, `col2`, ... are the columns being changed/added (depending on if it already exists) and `expr1`, `expr2`, ... are some R expressions.
 
-The key thing to remember is the `...` expression can be **any vector computation using one or more columns in the data frame that produces a vector of the same length OR a single value** (which would be recycled).
+The key thing to remember is the expressions can be **any vector computation using one or more columns in the data frame that produces a vector of the same length OR a single value** (which gets recycled).
 
 For convenience, let's select just a few columns to continue with the demonstration:
 
@@ -604,7 +604,9 @@ penguins2 %>%
 ## # ℹ 328 more rows
 ```
 
-A notable function that is extremely useful inside `mutate()` is `case_when()` which can be set to return different values depending on different conditions.^[It's similar to a switch function in other languages.] The syntax is `case_when(condition1 ~ expression1, condition2 ~ expression2, ...)`. For example, suppose we want to create some new column differently depending on sex and bill depth:
+A notable function that is extremely useful inside `mutate()` is `case_when()` which can calculate different values depending on certain conditions.^[It's similar to a switch function in other languages.] The basic syntax is `df %>% mutate(new_col = case_when(cond1 ~ expr1, cond2 ~ expr2, ...))` where `cond1`, `cond2`, ... are logical condition vectors checked one by one in the given order, and `expr1`, `expr2`, ... are R expressions that are activated when a condition matches.
+
+For example, suppose we want to create some new column differently depending on sex and bill depth:
 
 
 ``` r
@@ -633,13 +635,41 @@ penguins2 %>%
 ## # ℹ 328 more rows
 ```
 
-It's worth restating that **ANY vectorized operation of the columns can be used inside `mutate()`**, as long as the result is a same-length vector (or single value to be recycled). This includes essentially every function from 
+It's worth restating that **ANY vectorized operation of the columns can be used inside `mutate()`**, as long as the result is a same-length vector (or single value to be recycled). This includes essentially every function from chapter \@ref(data-vectors)!
 
-The [dplyr cheat sheet](https://rstudio.github.io/cheatsheets/data-transformation.pdf) has on page 2 a small list of some other functions that may be useful inside `mutate()` for more advanced situations like `cumsum()` for finding cumulative sums of columns (i.e. "running" sum), `lag()` and `lead()` for creating a lagged or leading vectors useful for computing changes in time series data, various ranking functions like `dense_rank()` or `min_rank()`, and more.
-
+The [dplyr cheat sheet](https://rstudio.github.io/cheatsheets/data-transformation.pdf) has on page 2 a small list of some other functions that may be useful inside `mutate()` for more advanced situations, such as `cumsum()` for finding cumulative sums of columns (i.e. "running" sum), `lag()` and `lead()` for creating a lagged or leading vector useful for computing changes in time series data, `na_if()` for selectively replacing specific values with NA, several ranking functions like `dense_rank()` or `min_rank()`, and many more.
 
 
 ### `summarize()`
+
+`summarize()` is similar to `mutate()` except you **MUST use summary functions**, i.e. function that always **reduce a vector down to a single value**. Again, you can again use any arbitrary function or combination of functions of any columns in the data frame, and the result can be any type (e.g. numeric, character, logical, date, etc.), as long as the result is singular.
+
+The basic syntax is `df %>% summarize(col1 = expr1, col2 = expr2, ...)` where again `col1`, `col2`, ... are names of new summary columns, and `expr1`, `expr2`, ... are R expressions that reduce to a single value. Examples:
+
+
+``` r
+# let's compute several summary statistics of body mass
+penguins %>%
+  summarize(
+    mean_mass = mean(body_mass_g),
+    median_mass = median(body_mass_g),
+    sd_mass = sd(body_mass_g),
+    max_mass = max(body_mass_g),
+    min_mass = min(body_mass_g),
+    n = n()
+  )
+```
+
+```
+## # A tibble: 1 × 6
+##   mean_mass median_mass sd_mass max_mass min_mass     n
+##       <dbl>       <dbl>   <dbl>    <dbl>    <dbl> <int>
+## 1     4207.        4050    805.     6300     2700   333
+```
+
+The last function in the chunk above `n()` is a special function that **takes NO arguments and returns the number of rows**.^[This is an example of what's called a [nullary function](https://en.wikipedia.org/wiki/Arity)]
+
+
 
 ## Row-wise functions
 

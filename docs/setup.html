@@ -31,7 +31,7 @@
 <link rel="mask-icon" href="icons/safari-pinned-tab.svg" color="#5bbad5">
 <meta name="msapplication-TileColor" content="#da532c">
 <meta name="theme-color" content="#ffffff">
-<script src="https://cdn.jsdelivr.net/npm/anchor-js/anchor.min.js"></script><script>
+<!-- https://www.bryanbraun.com/anchorjs/ --><script src="https://cdn.jsdelivr.net/npm/anchor-js/anchor.min.js"></script><script>
       // Add anchors on DOMContentLoaded
     document.addEventListener('DOMContentLoaded', function(event) {
       anchors.add('h1');
@@ -217,7 +217,7 @@
 </li>
 </ol>
 </li>
-<li>(Optional) If you wish to customize the interface, you can go to the <a href="https://i.imgur.com/WsnSWNM.png">“Appearance” page</a> and change your font or theme.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;If you like working in the dark and have an OLED-screen, you may want to check out the &lt;a href="https://github.com/roshandarji/synthwaveBLACK" target="_blank"&gt;synthwaveBLACK&lt;/a&gt; theme.&lt;/p&gt;'><sup>1</sup></a>
+<li>(Optional) If you wish to customize the interface, you can go to the <a href="https://i.imgur.com/WsnSWNM.png">“Appearance” page</a> and change your font or theme.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;If you like working in the dark and have an OLED-screen, you may want to check out the &lt;a href="https://github.com/roshandarji/synthwaveBLACK"&gt;synthwaveBLACK&lt;/a&gt; theme.&lt;/p&gt;'><sup>1</sup></a>
 </li>
 <li>Press OK to save your changes.</li>
 </ol>
@@ -338,7 +338,7 @@
   });
 });
 
-</script><script>
+</script><!-- https://www.tutorialrepublic.com/faq/how-to-change-href-attribute-of-a-hyperlink-using-jquery.php--><script>
   $(document).ready(function(){
     $("a.anchorjs-link").each(function(){
       var oldUrl = $(this).attr("href"); // Get current url
@@ -347,6 +347,30 @@
       $(this).attr("title", location.protocol + "//" + location.host + location.pathname + $(this).attr("href")); // Set title value
     });
   });
+</script><!-- https://stackoverflow.com/a/10415599/25278020 --><script>
+  var observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+        if (mutation.addedNodes && mutation.addedNodes.length > 0) {
+            // element added to DOM
+            var hasClass = [].some.call(mutation.addedNodes, function(el) {
+                return el.classList.contains('bs-popover-top')
+            });
+            if (hasClass) {
+              $("div.bs-popover-top a").each(function(){
+                $(this).attr("target", "_blank");
+              });
+          }
+        }
+    });
+});
+
+var config = {
+    attributes: true,
+    childList: true,
+    characterData: true
+};
+
+observer.observe(document.body, config);
 </script><div class="chapter-nav">
 <div class="prev"><a href="index.html">Welcome</a></div>
 <div class="next"><a href="rstudio-intro.html"><span class="header-section-number">2</span> Intro to R/Rstudio</a></div>
