@@ -227,14 +227,14 @@ penguins2 %>%
 penguins2 %>%
   mutate(
     bill_cross_section_mm2 = pi * (bill_depth_mm / 2)^2,
-    bill_vol_mm3 = bill_cross_section_mm2 * bill_length_mm
+    bill_vol_mm3           = bill_cross_section_mm2 * bill_length_mm
   )
 # you can even mix summary functions into your expression
 # e.g. standardize bill length and depth by subtracting mean and dividing by sd
 penguins2 %>%
   mutate(
     bill_length_std = (bill_length_mm - mean(bill_length_mm)) / sd(bill_length_mm),
-    bill_depth_std = (bill_depth_mm - mean(bill_depth_mm)) / sd(bill_depth_mm)
+    bill_depth_std  = (bill_depth_mm - mean(bill_depth_mm)) / sd(bill_depth_mm)
   )
 # you can of course create columns of other data types
 penguins2 %>%
@@ -277,12 +277,12 @@ The basic syntax is `df %>% summarize(col1 = expr1, col2 = expr2, ...)` where ag
 # let's compute several summary statistics of body mass
 penguins %>%
   summarize(
-    mean_mass = mean(body_mass_g),
-    median_mass = median(body_mass_g),
-    sd_mass = sd(body_mass_g),
-    max_mass = max(body_mass_g),
-    min_mass = min(body_mass_g),
-    n = n()
+    mean_length   = mean(bill_length_mm),
+    median_length = median(bill_length_mm),
+    sd_length     = sd(bill_length_mm),
+    max_length    = max(bill_length_mm),
+    min_length    = min(bill_length_mm),
+    n             = n()
   )
 ```
 
