@@ -81,16 +81,16 @@ print(penguins, n = 5)
 ```
 
 ```
-## # A tibble: 333 × 8
-##   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
-##   <chr>   <chr>              <dbl>         <dbl>             <dbl>       <dbl>
-## 1 Adelie  Torgersen           39.1          18.7               181        3750
-## 2 Adelie  Torgersen           39.5          17.4               186        3800
-## 3 Adelie  Torgersen           40.3          18                 195        3250
-## 4 Adelie  Torgersen           36.7          19.3               193        3450
-## 5 Adelie  Torgersen           39.3          20.6               190        3650
-## # ℹ 328 more rows
-## # ℹ 2 more variables: sex <chr>, year <dbl>
+# A tibble: 333 × 8
+  species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex   
+  <chr>   <chr>              <dbl>         <dbl>             <dbl>       <dbl> <chr> 
+1 Adelie  Torgersen           39.1          18.7               181        3750 male  
+2 Adelie  Torgersen           39.5          17.4               186        3800 female
+3 Adelie  Torgersen           40.3          18                 195        3250 female
+4 Adelie  Torgersen           36.7          19.3               193        3450 female
+5 Adelie  Torgersen           39.3          20.6               190        3650 male  
+# ℹ 328 more rows
+# ℹ 1 more variable: year <dbl>
 ```
 
 
@@ -119,15 +119,15 @@ penguins %>%
 ```
 
 ```
-## # A tibble: 333 × 4
-##   species sex    flipper_length_mm body_mass_g
-##   <chr>   <chr>              <dbl>       <dbl>
-## 1 Adelie  male                 181        3750
-## 2 Adelie  female               186        3800
-## 3 Adelie  female               195        3250
-## 4 Adelie  female               193        3450
-## 5 Adelie  male                 190        3650
-## # ℹ 328 more rows
+# A tibble: 333 × 4
+  species sex    flipper_length_mm body_mass_g
+  <chr>   <chr>              <dbl>       <dbl>
+1 Adelie  male                 181        3750
+2 Adelie  female               186        3800
+3 Adelie  female               195        3250
+4 Adelie  female               193        3450
+5 Adelie  male                 190        3650
+# ℹ 328 more rows
 ```
 
 ``` r
@@ -136,15 +136,15 @@ select(penguins, species, sex, flipper_length_mm, body_mass_g)
 ```
 
 ```
-## # A tibble: 333 × 4
-##   species sex    flipper_length_mm body_mass_g
-##   <chr>   <chr>              <dbl>       <dbl>
-## 1 Adelie  male                 181        3750
-## 2 Adelie  female               186        3800
-## 3 Adelie  female               195        3250
-## 4 Adelie  female               193        3450
-## 5 Adelie  male                 190        3650
-## # ℹ 328 more rows
+# A tibble: 333 × 4
+  species sex    flipper_length_mm body_mass_g
+  <chr>   <chr>              <dbl>       <dbl>
+1 Adelie  male                 181        3750
+2 Adelie  female               186        3800
+3 Adelie  female               195        3250
+4 Adelie  female               193        3450
+5 Adelie  male                 190        3650
+# ℹ 328 more rows
 ```
 
 ``` r
@@ -155,15 +155,15 @@ penguins %>%
 ```
 
 ```
-## # A tibble: 333 × 5
-##   species bill_length_mm bill_depth_mm flipper_length_mm  year
-##   <chr>            <dbl>         <dbl>             <dbl> <dbl>
-## 1 Adelie            39.1          18.7               181  2007
-## 2 Adelie            39.5          17.4               186  2007
-## 3 Adelie            40.3          18                 195  2007
-## 4 Adelie            36.7          19.3               193  2007
-## 5 Adelie            39.3          20.6               190  2007
-## # ℹ 328 more rows
+# A tibble: 333 × 5
+  species bill_length_mm bill_depth_mm flipper_length_mm  year
+  <chr>            <dbl>         <dbl>             <dbl> <dbl>
+1 Adelie            39.1          18.7               181  2007
+2 Adelie            39.5          17.4               186  2007
+3 Adelie            40.3          18                 195  2007
+4 Adelie            36.7          19.3               193  2007
+5 Adelie            39.3          20.6               190  2007
+# ℹ 328 more rows
 ```
 
 ``` r
@@ -174,15 +174,15 @@ penguins %>%
 ```
 
 ```
-## # A tibble: 333 × 5
-##   species island    body_mass_g sex     year
-##   <chr>   <chr>           <dbl> <chr>  <dbl>
-## 1 Adelie  Torgersen        3750 male    2007
-## 2 Adelie  Torgersen        3800 female  2007
-## 3 Adelie  Torgersen        3250 female  2007
-## 4 Adelie  Torgersen        3450 female  2007
-## 5 Adelie  Torgersen        3650 male    2007
-## # ℹ 328 more rows
+# A tibble: 333 × 5
+  species island    body_mass_g sex     year
+  <chr>   <chr>           <dbl> <chr>  <dbl>
+1 Adelie  Torgersen        3750 male    2007
+2 Adelie  Torgersen        3800 female  2007
+3 Adelie  Torgersen        3250 female  2007
+4 Adelie  Torgersen        3450 female  2007
+5 Adelie  Torgersen        3650 male    2007
+# ℹ 328 more rows
 ```
 
 ``` r
@@ -193,15 +193,15 @@ penguins %>%
 ```
 
 ```
-## # A tibble: 333 × 5
-##   species bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
-##   <chr>            <dbl>         <dbl>             <dbl>       <dbl>
-## 1 Adelie            39.1          18.7               181        3750
-## 2 Adelie            39.5          17.4               186        3800
-## 3 Adelie            40.3          18                 195        3250
-## 4 Adelie            36.7          19.3               193        3450
-## 5 Adelie            39.3          20.6               190        3650
-## # ℹ 328 more rows
+# A tibble: 333 × 5
+  species bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+  <chr>            <dbl>         <dbl>             <dbl>       <dbl>
+1 Adelie            39.1          18.7               181        3750
+2 Adelie            39.5          17.4               186        3800
+3 Adelie            40.3          18                 195        3250
+4 Adelie            36.7          19.3               193        3450
+5 Adelie            39.3          20.6               190        3650
+# ℹ 328 more rows
 ```
 
 ``` r
@@ -216,15 +216,15 @@ penguins %>%
 ```
 
 ```
-## # A tibble: 333 × 4
-##   species sex    bill_depth_mm body_mass_g
-##   <chr>   <chr>          <dbl>       <dbl>
-## 1 Adelie  male            18.7        3750
-## 2 Adelie  female          17.4        3800
-## 3 Adelie  female          18          3250
-## 4 Adelie  female          19.3        3450
-## 5 Adelie  male            20.6        3650
-## # ℹ 328 more rows
+# A tibble: 333 × 4
+  species sex    bill_depth_mm body_mass_g
+  <chr>   <chr>          <dbl>       <dbl>
+1 Adelie  male            18.7        3750
+2 Adelie  female          17.4        3800
+3 Adelie  female          18          3250
+4 Adelie  female          19.3        3450
+5 Adelie  male            20.6        3650
+# ℹ 328 more rows
 ```
 
 ``` r
@@ -237,16 +237,16 @@ penguins %>%
 ```
 
 ```
-## # A tibble: 333 × 8
-##    year island    species sex    bill_length_mm bill_depth_mm flipper_length_mm
-##   <dbl> <chr>     <chr>   <chr>           <dbl>         <dbl>             <dbl>
-## 1  2007 Torgersen Adelie  male             39.1          18.7               181
-## 2  2007 Torgersen Adelie  female           39.5          17.4               186
-## 3  2007 Torgersen Adelie  female           40.3          18                 195
-## 4  2007 Torgersen Adelie  female           36.7          19.3               193
-## 5  2007 Torgersen Adelie  male             39.3          20.6               190
-## # ℹ 328 more rows
-## # ℹ 1 more variable: body_mass_g <dbl>
+# A tibble: 333 × 8
+   year island    species sex    bill_length_mm bill_depth_mm flipper_length_mm
+  <dbl> <chr>     <chr>   <chr>           <dbl>         <dbl>             <dbl>
+1  2007 Torgersen Adelie  male             39.1          18.7               181
+2  2007 Torgersen Adelie  female           39.5          17.4               186
+3  2007 Torgersen Adelie  female           40.3          18                 195
+4  2007 Torgersen Adelie  female           36.7          19.3               193
+5  2007 Torgersen Adelie  male             39.3          20.6               190
+# ℹ 328 more rows
+# ℹ 1 more variable: body_mass_g <dbl>
 ```
 
 :::{.note}
@@ -258,16 +258,16 @@ print(penguins)
 ```
 
 ```
-## # A tibble: 333 × 8
-##   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
-##   <chr>   <chr>              <dbl>         <dbl>             <dbl>       <dbl>
-## 1 Adelie  Torgersen           39.1          18.7               181        3750
-## 2 Adelie  Torgersen           39.5          17.4               186        3800
-## 3 Adelie  Torgersen           40.3          18                 195        3250
-## 4 Adelie  Torgersen           36.7          19.3               193        3450
-## 5 Adelie  Torgersen           39.3          20.6               190        3650
-## # ℹ 328 more rows
-## # ℹ 2 more variables: sex <chr>, year <dbl>
+# A tibble: 333 × 8
+  species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex   
+  <chr>   <chr>              <dbl>         <dbl>             <dbl>       <dbl> <chr> 
+1 Adelie  Torgersen           39.1          18.7               181        3750 male  
+2 Adelie  Torgersen           39.5          17.4               186        3800 female
+3 Adelie  Torgersen           40.3          18                 195        3250 female
+4 Adelie  Torgersen           36.7          19.3               193        3450 female
+5 Adelie  Torgersen           39.3          20.6               190        3650 male  
+# ℹ 328 more rows
+# ℹ 1 more variable: year <dbl>
 ```
 
 ``` r
@@ -276,15 +276,15 @@ penguins %>% select(species, flipper_length_mm)
 ```
 
 ```
-## # A tibble: 333 × 2
-##   species flipper_length_mm
-##   <chr>               <dbl>
-## 1 Adelie                181
-## 2 Adelie                186
-## 3 Adelie                195
-## 4 Adelie                193
-## 5 Adelie                190
-## # ℹ 328 more rows
+# A tibble: 333 × 2
+  species flipper_length_mm
+  <chr>               <dbl>
+1 Adelie                181
+2 Adelie                186
+3 Adelie                195
+4 Adelie                193
+5 Adelie                190
+# ℹ 328 more rows
 ```
 
 ``` r
@@ -293,16 +293,16 @@ print(penguins)
 ```
 
 ```
-## # A tibble: 333 × 8
-##   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
-##   <chr>   <chr>              <dbl>         <dbl>             <dbl>       <dbl>
-## 1 Adelie  Torgersen           39.1          18.7               181        3750
-## 2 Adelie  Torgersen           39.5          17.4               186        3800
-## 3 Adelie  Torgersen           40.3          18                 195        3250
-## 4 Adelie  Torgersen           36.7          19.3               193        3450
-## 5 Adelie  Torgersen           39.3          20.6               190        3650
-## # ℹ 328 more rows
-## # ℹ 2 more variables: sex <chr>, year <dbl>
+# A tibble: 333 × 8
+  species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex   
+  <chr>   <chr>              <dbl>         <dbl>             <dbl>       <dbl> <chr> 
+1 Adelie  Torgersen           39.1          18.7               181        3750 male  
+2 Adelie  Torgersen           39.5          17.4               186        3800 female
+3 Adelie  Torgersen           40.3          18                 195        3250 female
+4 Adelie  Torgersen           36.7          19.3               193        3450 female
+5 Adelie  Torgersen           39.3          20.6               190        3650 male  
+# ℹ 328 more rows
+# ℹ 1 more variable: year <dbl>
 ```
 If you want to save the result of `df %>% select(...)` you must **manually save the output with `<-`**. In general, we always recommend saving to a NEW object instead of overwriting the original object because this is non-destructive (i.e. does not lose any data) and less likely to create code errors later on. It's also easier to debug.
 
@@ -313,15 +313,15 @@ print(penguins_fewcols)
 ```
 
 ```
-## # A tibble: 333 × 2
-##   species flipper_length_mm
-##   <chr>               <dbl>
-## 1 Adelie                181
-## 2 Adelie                186
-## 3 Adelie                195
-## 4 Adelie                193
-## 5 Adelie                190
-## # ℹ 328 more rows
+# A tibble: 333 × 2
+  species flipper_length_mm
+  <chr>               <dbl>
+1 Adelie                181
+2 Adelie                186
+3 Adelie                195
+4 Adelie                193
+5 Adelie                190
+# ℹ 328 more rows
 ```
 
 ``` r
@@ -332,15 +332,15 @@ print(penguins)
 ```
 
 ```
-## # A tibble: 333 × 2
-##   species flipper_length_mm
-##   <chr>               <dbl>
-## 1 Adelie                181
-## 2 Adelie                186
-## 3 Adelie                195
-## 4 Adelie                193
-## 5 Adelie                190
-## # ℹ 328 more rows
+# A tibble: 333 × 2
+  species flipper_length_mm
+  <chr>               <dbl>
+1 Adelie                181
+2 Adelie                186
+3 Adelie                195
+4 Adelie                193
+5 Adelie                190
+# ℹ 328 more rows
 ```
 
 ``` r
@@ -364,16 +364,16 @@ penguins %>%
 ```
 
 ```
-## # A tibble: 333 × 8
-##   species_name island_name bill_length_mm bill_depth_mm flipper_length_mm
-##   <chr>        <chr>                <dbl>         <dbl>             <dbl>
-## 1 Adelie       Torgersen             39.1          18.7               181
-## 2 Adelie       Torgersen             39.5          17.4               186
-## 3 Adelie       Torgersen             40.3          18                 195
-## 4 Adelie       Torgersen             36.7          19.3               193
-## 5 Adelie       Torgersen             39.3          20.6               190
-## # ℹ 328 more rows
-## # ℹ 3 more variables: body_mass_g <dbl>, sex <chr>, year <dbl>
+# A tibble: 333 × 8
+  species_name island_name bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+  <chr>        <chr>                <dbl>         <dbl>             <dbl>       <dbl>
+1 Adelie       Torgersen             39.1          18.7               181        3750
+2 Adelie       Torgersen             39.5          17.4               186        3800
+3 Adelie       Torgersen             40.3          18                 195        3250
+4 Adelie       Torgersen             36.7          19.3               193        3450
+5 Adelie       Torgersen             39.3          20.6               190        3650
+# ℹ 328 more rows
+# ℹ 2 more variables: sex <chr>, year <dbl>
 ```
 
 ``` r
@@ -384,16 +384,16 @@ penguins %>%
 ```
 
 ```
-## # A tibble: 333 × 8
-##   species island  `Bill Length (mm)` bill_depth_mm flipper_length_mm body_mass_g
-##   <chr>   <chr>                <dbl>         <dbl>             <dbl>       <dbl>
-## 1 Adelie  Torger…               39.1          18.7               181        3750
-## 2 Adelie  Torger…               39.5          17.4               186        3800
-## 3 Adelie  Torger…               40.3          18                 195        3250
-## 4 Adelie  Torger…               36.7          19.3               193        3450
-## 5 Adelie  Torger…               39.3          20.6               190        3650
-## # ℹ 328 more rows
-## # ℹ 2 more variables: sex <chr>, year <dbl>
+# A tibble: 333 × 8
+  species island `Bill Length (mm)` bill_depth_mm flipper_length_mm body_mass_g sex  
+  <chr>   <chr>               <dbl>         <dbl>             <dbl>       <dbl> <chr>
+1 Adelie  Torge…               39.1          18.7               181        3750 male 
+2 Adelie  Torge…               39.5          17.4               186        3800 fema…
+3 Adelie  Torge…               40.3          18                 195        3250 fema…
+4 Adelie  Torge…               36.7          19.3               193        3450 fema…
+5 Adelie  Torge…               39.3          20.6               190        3650 male 
+# ℹ 328 more rows
+# ℹ 1 more variable: year <dbl>
 ```
 
 ``` r
@@ -408,12 +408,12 @@ df_badname
 ```
 
 ```
-## # A tibble: 3 × 2
-##       x `Really long (and awkward) name with !@#$% symbols`
-##   <int>                                               <int>
-## 1     1                                                   4
-## 2     2                                                   5
-## 3     3                                                   6
+# A tibble: 3 × 2
+      x `Really long (and awkward) name with !@#$% symbols`
+  <int>                                               <int>
+1     1                                                   4
+2     2                                                   5
+3     3                                                   6
 ```
 
 ``` r
@@ -422,12 +422,12 @@ df_badname %>%
 ```
 
 ```
-## # A tibble: 3 × 2
-##       x     y
-##   <int> <int>
-## 1     1     4
-## 2     2     5
-## 3     3     6
+# A tibble: 3 × 2
+      x     y
+  <int> <int>
+1     1     4
+2     2     5
+3     3     6
 ```
 
 This is outside our scope, but you can also apply a function to many/all columns using `rename_with()`. For example:
@@ -439,16 +439,16 @@ penguins %>%
 ```
 
 ```
-## # A tibble: 333 × 8
-##   SPECIES ISLAND    BILL_LENGTH_MM BILL_DEPTH_MM FLIPPER_LENGTH_MM BODY_MASS_G
-##   <chr>   <chr>              <dbl>         <dbl>             <dbl>       <dbl>
-## 1 Adelie  Torgersen           39.1          18.7               181        3750
-## 2 Adelie  Torgersen           39.5          17.4               186        3800
-## 3 Adelie  Torgersen           40.3          18                 195        3250
-## 4 Adelie  Torgersen           36.7          19.3               193        3450
-## 5 Adelie  Torgersen           39.3          20.6               190        3650
-## # ℹ 328 more rows
-## # ℹ 2 more variables: SEX <chr>, YEAR <dbl>
+# A tibble: 333 × 8
+  SPECIES ISLAND    BILL_LENGTH_MM BILL_DEPTH_MM FLIPPER_LENGTH_MM BODY_MASS_G SEX   
+  <chr>   <chr>              <dbl>         <dbl>             <dbl>       <dbl> <chr> 
+1 Adelie  Torgersen           39.1          18.7               181        3750 male  
+2 Adelie  Torgersen           39.5          17.4               186        3800 female
+3 Adelie  Torgersen           40.3          18                 195        3250 female
+4 Adelie  Torgersen           36.7          19.3               193        3450 female
+5 Adelie  Torgersen           39.3          20.6               190        3650 male  
+# ℹ 328 more rows
+# ℹ 1 more variable: YEAR <dbl>
 ```
 
 
@@ -468,15 +468,15 @@ print(penguins2)
 ```
 
 ```
-## # A tibble: 333 × 4
-##   species sex    bill_length_mm bill_depth_mm
-##   <chr>   <chr>           <dbl>         <dbl>
-## 1 Adelie  male             39.1          18.7
-## 2 Adelie  female           39.5          17.4
-## 3 Adelie  female           40.3          18  
-## 4 Adelie  female           36.7          19.3
-## 5 Adelie  male             39.3          20.6
-## # ℹ 328 more rows
+# A tibble: 333 × 4
+  species sex    bill_length_mm bill_depth_mm
+  <chr>   <chr>           <dbl>         <dbl>
+1 Adelie  male             39.1          18.7
+2 Adelie  female           39.5          17.4
+3 Adelie  female           40.3          18  
+4 Adelie  female           36.7          19.3
+5 Adelie  male             39.3          20.6
+# ℹ 328 more rows
 ```
 
 Now, here's a few example applications of `mutate()` using `penguins2`
@@ -489,15 +489,15 @@ penguins2 %>%
 ```
 
 ```
-## # A tibble: 333 × 7
-##   species sex    bill_length_mm bill_depth_mm study  century true 
-##   <chr>   <chr>           <dbl>         <dbl> <chr>    <dbl> <lgl>
-## 1 Adelie  male             39.1          18.7 Palmer      21 TRUE 
-## 2 Adelie  female           39.5          17.4 Palmer      21 TRUE 
-## 3 Adelie  female           40.3          18   Palmer      21 TRUE 
-## 4 Adelie  female           36.7          19.3 Palmer      21 TRUE 
-## 5 Adelie  male             39.3          20.6 Palmer      21 TRUE 
-## # ℹ 328 more rows
+# A tibble: 333 × 7
+  species sex    bill_length_mm bill_depth_mm study  century true 
+  <chr>   <chr>           <dbl>         <dbl> <chr>    <dbl> <lgl>
+1 Adelie  male             39.1          18.7 Palmer      21 TRUE 
+2 Adelie  female           39.5          17.4 Palmer      21 TRUE 
+3 Adelie  female           40.3          18   Palmer      21 TRUE 
+4 Adelie  female           36.7          19.3 Palmer      21 TRUE 
+5 Adelie  male             39.3          20.6 Palmer      21 TRUE 
+# ℹ 328 more rows
 ```
 
 ``` r
@@ -508,15 +508,15 @@ penguins2 %>%
 ```
 
 ```
-## # A tibble: 333 × 4
-##   species sex   bill_length_mm bill_depth_mm
-##   <chr>   <chr>          <dbl>         <dbl>
-## 1 Adelie  M               39.1          18.7
-## 2 Adelie  F               39.5          17.4
-## 3 Adelie  F               40.3          18  
-## 4 Adelie  F               36.7          19.3
-## 5 Adelie  M               39.3          20.6
-## # ℹ 328 more rows
+# A tibble: 333 × 4
+  species sex   bill_length_mm bill_depth_mm
+  <chr>   <chr>          <dbl>         <dbl>
+1 Adelie  M               39.1          18.7
+2 Adelie  F               39.5          17.4
+3 Adelie  F               40.3          18  
+4 Adelie  F               36.7          19.3
+5 Adelie  M               39.3          20.6
+# ℹ 328 more rows
 ```
 
 ``` r
@@ -528,15 +528,15 @@ penguins2 %>%
 ```
 
 ```
-## # A tibble: 333 × 5
-##   species sex    bill_length_mm bill_depth_mm bill_vol_mm3
-##   <chr>   <chr>           <dbl>         <dbl>        <dbl>
-## 1 Adelie  male             39.1          18.7       10739.
-## 2 Adelie  female           39.5          17.4        9393.
-## 3 Adelie  female           40.3          18         10255.
-## 4 Adelie  female           36.7          19.3       10737.
-## 5 Adelie  male             39.3          20.6       13098.
-## # ℹ 328 more rows
+# A tibble: 333 × 5
+  species sex    bill_length_mm bill_depth_mm bill_vol_mm3
+  <chr>   <chr>           <dbl>         <dbl>        <dbl>
+1 Adelie  male             39.1          18.7       10739.
+2 Adelie  female           39.5          17.4        9393.
+3 Adelie  female           40.3          18         10255.
+4 Adelie  female           36.7          19.3       10737.
+5 Adelie  male             39.3          20.6       13098.
+# ℹ 328 more rows
 ```
 
 ``` r
@@ -545,20 +545,20 @@ penguins2 %>%
 penguins2 %>%
   mutate(
     bill_cross_section_mm2 = pi * (bill_depth_mm / 2)^2,
-    bill_vol_mm3 = bill_cross_section_mm2 * bill_length_mm
+    bill_vol_mm3           = bill_cross_section_mm2 * bill_length_mm
   )
 ```
 
 ```
-## # A tibble: 333 × 6
-##   species sex   bill_length_mm bill_depth_mm bill_cross_section_mm2 bill_vol_mm3
-##   <chr>   <chr>          <dbl>         <dbl>                  <dbl>        <dbl>
-## 1 Adelie  male            39.1          18.7                   275.       10739.
-## 2 Adelie  fema…           39.5          17.4                   238.        9393.
-## 3 Adelie  fema…           40.3          18                     254.       10255.
-## 4 Adelie  fema…           36.7          19.3                   293.       10737.
-## 5 Adelie  male            39.3          20.6                   333.       13098.
-## # ℹ 328 more rows
+# A tibble: 333 × 6
+  species sex    bill_length_mm bill_depth_mm bill_cross_section_mm2 bill_vol_mm3
+  <chr>   <chr>           <dbl>         <dbl>                  <dbl>        <dbl>
+1 Adelie  male             39.1          18.7                   275.       10739.
+2 Adelie  female           39.5          17.4                   238.        9393.
+3 Adelie  female           40.3          18                     254.       10255.
+4 Adelie  female           36.7          19.3                   293.       10737.
+5 Adelie  male             39.3          20.6                   333.       13098.
+# ℹ 328 more rows
 ```
 
 ``` r
@@ -567,20 +567,20 @@ penguins2 %>%
 penguins2 %>%
   mutate(
     bill_length_std = (bill_length_mm - mean(bill_length_mm)) / sd(bill_length_mm),
-    bill_depth_std = (bill_depth_mm - mean(bill_depth_mm)) / sd(bill_depth_mm)
+    bill_depth_std  = (bill_depth_mm - mean(bill_depth_mm)) / sd(bill_depth_mm)
   )
 ```
 
 ```
-## # A tibble: 333 × 6
-##   species sex    bill_length_mm bill_depth_mm bill_length_std bill_depth_std
-##   <chr>   <chr>           <dbl>         <dbl>           <dbl>          <dbl>
-## 1 Adelie  male             39.1          18.7          -0.895          0.780
-## 2 Adelie  female           39.5          17.4          -0.822          0.119
-## 3 Adelie  female           40.3          18            -0.675          0.424
-## 4 Adelie  female           36.7          19.3          -1.33           1.08 
-## 5 Adelie  male             39.3          20.6          -0.858          1.74 
-## # ℹ 328 more rows
+# A tibble: 333 × 6
+  species sex    bill_length_mm bill_depth_mm bill_length_std bill_depth_std
+  <chr>   <chr>           <dbl>         <dbl>           <dbl>          <dbl>
+1 Adelie  male             39.1          18.7          -0.895          0.780
+2 Adelie  female           39.5          17.4          -0.822          0.119
+3 Adelie  female           40.3          18            -0.675          0.424
+4 Adelie  female           36.7          19.3          -1.33           1.08 
+5 Adelie  male             39.3          20.6          -0.858          1.74 
+# ℹ 328 more rows
 ```
 
 ``` r
@@ -593,15 +593,15 @@ penguins2 %>%
 ```
 
 ```
-## # A tibble: 333 × 6
-##   species sex    bill_length_mm bill_depth_mm small_bill fake_dates
-##   <chr>   <chr>           <dbl>         <dbl> <lgl>      <date>    
-## 1 Adelie  male             39.1          18.7 FALSE      2024-08-16
-## 2 Adelie  female           39.5          17.4 TRUE       2024-08-17
-## 3 Adelie  female           40.3          18   FALSE      2024-08-18
-## 4 Adelie  female           36.7          19.3 TRUE       2024-08-19
-## 5 Adelie  male             39.3          20.6 FALSE      2024-08-20
-## # ℹ 328 more rows
+# A tibble: 333 × 6
+  species sex    bill_length_mm bill_depth_mm small_bill fake_dates
+  <chr>   <chr>           <dbl>         <dbl> <lgl>      <date>    
+1 Adelie  male             39.1          18.7 FALSE      2024-08-16
+2 Adelie  female           39.5          17.4 TRUE       2024-08-17
+3 Adelie  female           40.3          18   FALSE      2024-08-18
+4 Adelie  female           36.7          19.3 TRUE       2024-08-19
+5 Adelie  male             39.3          20.6 FALSE      2024-08-20
+# ℹ 328 more rows
 ```
 
 A notable function that is extremely useful inside `mutate()` is `case_when()` which can calculate different values depending on certain conditions.^[It's similar to a switch function in other languages.] The basic syntax is `df %>% mutate(new_col = case_when(cond1 ~ expr1, cond2 ~ expr2, ...))` where `cond1`, `cond2`, ... are logical condition vectors checked one by one in the given order, and `expr1`, `expr2`, ... are R expressions that are activated when a condition matches.
@@ -624,15 +624,15 @@ penguins2 %>%
 ```
 
 ```
-## # A tibble: 333 × 5
-##   species sex    bill_length_mm bill_depth_mm new_col
-##   <chr>   <chr>           <dbl>         <dbl>   <dbl>
-## 1 Adelie  male             39.1          18.7 3910   
-## 2 Adelie  female           39.5          17.4    1.64
-## 3 Adelie  female           40.3          18      1.61
-## 4 Adelie  female           36.7          19.3    1.29
-## 5 Adelie  male             39.3          20.6  -39.3 
-## # ℹ 328 more rows
+# A tibble: 333 × 5
+  species sex    bill_length_mm bill_depth_mm new_col
+  <chr>   <chr>           <dbl>         <dbl>   <dbl>
+1 Adelie  male             39.1          18.7 3910   
+2 Adelie  female           39.5          17.4    1.64
+3 Adelie  female           40.3          18      1.61
+4 Adelie  female           36.7          19.3    1.29
+5 Adelie  male             39.3          20.6  -39.3 
+# ℹ 328 more rows
 ```
 
 It's worth restating that **ANY vectorized operation of the columns can be used inside `mutate()`**, as long as the result is a same-length vector (or single value to be recycled). This includes essentially every function from chapter \@ref(data-vectors)!
@@ -644,31 +644,94 @@ The [dplyr cheat sheet](https://rstudio.github.io/cheatsheets/data-transformatio
 
 `summarize()` is similar to `mutate()` except you **MUST use summary functions**, i.e. function that always **reduce a vector down to a single value**. Again, you can again use any arbitrary function or combination of functions of any columns in the data frame, and the result can be any type (e.g. numeric, character, logical, date, etc.), as long as the result is singular.
 
-The basic syntax is `df %>% summarize(col1 = expr1, col2 = expr2, ...)` where again `col1`, `col2`, ... are names of new summary columns, and `expr1`, `expr2`, ... are R expressions that reduce to a single value. Examples:
+The basic syntax is `df %>% summarize(col1 = expr1, col2 = expr2, ...)` where again `col1`, `col2`, ... are names of new summary columns, and `expr1`, `expr2`, ... are R expressions that reduce to a single value. Example:
 
 
 ``` r
-# let's compute several summary statistics of body mass
-penguins %>%
+# let's compute several summary statistics of bill length
+penguins2 %>%
   summarize(
-    mean_mass = mean(body_mass_g),
-    median_mass = median(body_mass_g),
-    sd_mass = sd(body_mass_g),
-    max_mass = max(body_mass_g),
-    min_mass = min(body_mass_g),
-    n = n()
+    mean_length   = mean(bill_length_mm),
+    median_length = median(bill_length_mm),
+    sd_length     = sd(bill_length_mm),
+    iqr_length    = IQR(bill_length_mm),
+    max_length    = max(bill_length_mm),
+    min_length    = min(bill_length_mm),
+    n             = n()
   )
 ```
 
 ```
-## # A tibble: 1 × 6
-##   mean_mass median_mass sd_mass max_mass min_mass     n
-##       <dbl>       <dbl>   <dbl>    <dbl>    <dbl> <int>
-## 1     4207.        4050    805.     6300     2700   333
+# A tibble: 1 × 7
+  mean_length median_length sd_length iqr_length max_length min_length     n
+        <dbl>         <dbl>     <dbl>      <dbl>      <dbl>      <dbl> <int>
+1        44.0          44.5      5.47        9.1       59.6       32.1   333
 ```
 
 The last function in the chunk above `n()` is a special function that **takes NO arguments and returns the number of rows**.^[This is an example of what's called a [nullary function](https://en.wikipedia.org/wiki/Arity)]
 
+A few other common applications of `summarize()` in data exploration:
+
+
+``` r
+# compute a few other summaries to explore the data
+# note similar to mutate, we can immediately use a summarized column
+penguins2 %>%
+  summarize(
+    n            = n(),
+    n_male       = sum(sex == "male"),
+    pct_male     = 100 * n_male / n,
+    n_female     = sum(sex == "female"),
+    pct_female   = 100 * n_female / n,
+    pct_NA       = 100 * mean(
+      is.na(species) | is.na(sex) | is.na(bill_length_mm) | is.na(bill_depth_mm)
+    ), # get proportion of rows with NA (mean of logicals gives proportion of TRUEs)
+    q90_len      = quantile(bill_length_mm, 0.90),
+    q90_dep      = quantile(bill_depth_mm,  0.90),
+    pmed_len     = mean(bill_length_mm <= median(bill_length_mm)),
+    pmed_dep     = mean(bill_depth_mm  <= median(bill_depth_mm))
+  )
+```
+
+```
+# A tibble: 1 × 10
+      n n_male pct_male n_female pct_female pct_NA q90_len q90_dep pmed_len pmed_dep
+  <int>  <int>    <dbl>    <int>      <dbl>  <dbl>   <dbl>   <dbl>    <dbl>    <dbl>
+1   333    168     50.5      165       49.5      0    50.8    19.5    0.502    0.508
+```
+
+It's also common to use `summarize()` to compute statistical results. For example we can calculate the 95% confidence intervals for the mean bill length and depth (ignoring species/sex) which is something we will cover in more detail later in the course:
+
+
+``` r
+# we first compute some intermediate statistics,
+# then use those to compute the intervals
+penguins2 %>%
+  summarize(
+    n            = n(),
+    mean_length  = mean(bill_length_mm),
+    sd_length    = sd(bill_length_mm),
+    mean_depth   = mean(bill_depth_mm),
+    sd_depth     = sd(bill_depth_mm),
+    length_95_ci = paste(
+      round(mean_length + c(-1, 1) * 1.96 * sd_length / sqrt(n), 2),
+      collapse = ","
+    ),
+    depth_95_ci  = paste(
+      round(mean_depth  + c(-1, 1) * 1.96 * sd_depth  / sqrt(n), 2),
+      collapse = ","
+    )
+  )
+```
+
+```
+# A tibble: 1 × 7
+      n mean_length sd_length mean_depth sd_depth length_95_ci depth_95_ci
+  <int>       <dbl>     <dbl>      <dbl>    <dbl> <chr>        <chr>      
+1   333        44.0      5.47       17.2     1.97 43.41,44.58  16.95,17.38
+```
+
+Again, I think it's important to stress **ANY expression involving columns that results in a single value** can be used inside `summarize()`. The [dplyr cheat sheet](https://rstudio.github.io/cheatsheets/data-transformation.pdf) has on page 2 some more examples of useful summarizing functions if you wish to read more.
 
 
 ## Row-wise functions

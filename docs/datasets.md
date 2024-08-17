@@ -154,20 +154,20 @@ eruptions_recent
 ```
 
 ```
-## # A tibble: 73 × 6
-##    volcano               start      stop       duration confirmed   vei
-##    <chr>                 <date>     <date>        <dbl> <lgl>     <dbl>
-##  1 Kīlauea               2024-06-03 2024-06-03        0 TRUE         NA
-##  2 Atka Volcanic Complex 2024-03-27 2024-03-27        0 TRUE         NA
-##  3 Ahyi                  2024-01-01 2024-03-27       86 TRUE         NA
-##  4 Kanaga                2023-12-18 2023-12-18        0 TRUE          1
-##  5 Ruby                  2023-09-14 2023-09-15        1 TRUE          1
-##  6 Shishaldin            2023-07-11 2023-11-03      115 TRUE          3
-##  7 Mauna Loa             2022-11-27 2022-12-10       13 TRUE          0
-##  8 Ahyi                  2022-11-18 2023-06-11      205 TRUE          1
-##  9 Kīlauea               2021-09-29 2023-09-16      717 TRUE          0
-## 10 Pavlof                2021-08-05 2022-12-07      489 TRUE          2
-## # ℹ 63 more rows
+# A tibble: 73 × 6
+   volcano               start      stop       duration confirmed   vei
+   <chr>                 <date>     <date>        <dbl> <lgl>     <dbl>
+ 1 Kīlauea               2024-06-03 2024-06-03        0 TRUE         NA
+ 2 Atka Volcanic Complex 2024-03-27 2024-03-27        0 TRUE         NA
+ 3 Ahyi                  2024-01-01 2024-03-27       86 TRUE         NA
+ 4 Kanaga                2023-12-18 2023-12-18        0 TRUE          1
+ 5 Ruby                  2023-09-14 2023-09-15        1 TRUE          1
+ 6 Shishaldin            2023-07-11 2023-11-03      115 TRUE          3
+ 7 Mauna Loa             2022-11-27 2022-12-10       13 TRUE          0
+ 8 Ahyi                  2022-11-18 2023-06-11      205 TRUE          1
+ 9 Kīlauea               2021-09-29 2023-09-16      717 TRUE          0
+10 Pavlof                2021-08-05 2022-12-07      489 TRUE          2
+# ℹ 63 more rows
 ```
 
 <!--
@@ -362,19 +362,19 @@ enrollment
 ```
 
 ```
-## # A tibble: 146 × 3
-##     year sex    enrolled_millions
-##    <dbl> <chr>              <dbl>
-##  1  1947 male               1.66 
-##  2  1947 female             0.679
-##  3  1948 male               1.71 
-##  4  1948 female             0.694
-##  5  1949 male               1.72 
-##  6  1949 female             0.723
-##  7  1950 male               1.56 
-##  8  1950 female             0.721
-##  9  1951 male               1.39 
-## 10  1951 female             0.711
-## # ℹ 136 more rows
+# A tibble: 146 × 3
+    year sex    enrolled_millions
+   <dbl> <chr>              <dbl>
+ 1  1947 male               1.66 
+ 2  1947 female             0.679
+ 3  1948 male               1.71 
+ 4  1948 female             0.694
+ 5  1949 male               1.72 
+ 6  1949 female             0.723
+ 7  1950 male               1.56 
+ 8  1950 female             0.721
+ 9  1951 male               1.39 
+10  1951 female             0.711
+# ℹ 136 more rows
 ```
 

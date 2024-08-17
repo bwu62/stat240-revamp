@@ -55,7 +55,7 @@ mean(eruptions_recent$duration)
 ```
 
 ```
-## [1] 192.1233
+[1] 192.1233
 ```
 
 ``` r
@@ -64,7 +64,7 @@ sum(eruptions_recent$duration) / length(eruptions_recent$duration)
 ```
 
 ```
-## [1] 192.1233
+[1] 192.1233
 ```
 
 :::{.note}
@@ -76,7 +76,7 @@ mean(c(1, 6, NA, 2))
 ```
 
 ```
-## [1] NA
+[1] NA
 ```
 
 ``` r
@@ -85,7 +85,7 @@ mean(c(1, 6, NA, 2), na.rm = TRUE)
 ```
 
 ```
-## [1] 3
+[1] 3
 ```
 :::
 
@@ -109,7 +109,7 @@ median(eruptions_recent$duration)
 ```
 
 ```
-## [1] 71
+[1] 71
 ```
 
 ``` r
@@ -127,7 +127,7 @@ c(
 ```
 
 ```
-## [1] 0.5068493 0.5205479
+[1] 0.5068493 0.5205479
 ```
 
 Note the median length of eruptions, 71, is significantly smaller than the mean, 192.1232877, because the data is extremely skewed, i.e. there are a few extremely long eruptions, which pull the mean up to be much higher (since it's more sensitive to extreme values).
@@ -167,7 +167,7 @@ Mode(eruptions_recent$volcano)
 ```
 
 ```
-## [1] "Cleveland"
+[1] "Cleveland"
 ```
 
 ``` r
@@ -176,7 +176,7 @@ sum(eruptions_recent$volcano == "Cleveland")
 ```
 
 ```
-## [1] 13
+[1] 13
 ```
 
 
@@ -188,9 +188,9 @@ DescTools::Mode(eruptions_recent$volcano)
 ```
 
 ```
-## [1] "Cleveland"
-## attr(,"freq")
-## [1] 13
+[1] "Cleveland"
+attr(,"freq")
+[1] 13
 ```
 
 
@@ -239,7 +239,7 @@ var(eruptions_recent$duration)
 ```
 
 ```
-## [1] 101204.7
+[1] 101204.7
 ```
 
 In other words, the "average" squared difference of an eruption's duration and the mean duration is about 101.2k days^2^.
@@ -257,7 +257,7 @@ sd(eruptions_recent$duration)
 ```
 
 ```
-## [1] 318.1269
+[1] 318.1269
 ```
 
 ``` r
@@ -266,7 +266,7 @@ sqrt(var(eruptions_recent$duration))
 ```
 
 ```
-## [1] 318.1269
+[1] 318.1269
 ```
 
 In other words, the "average" distance in days between the duration of eruptions and the mean is about 318.1 days.
@@ -293,8 +293,8 @@ quantile(eruptions_recent$duration, probs = c(0, 0.25, 0.5, 0.75, 1))
 ```
 
 ```
-##   0%  25%  50%  75% 100% 
-##    0    6   71  195 1491
+  0%  25%  50%  75% 100% 
+   0    6   71  195 1491 
 ```
 
 These 5 numbers correspond to the **min**, **1^st^ quartile ($Q_1$)**, **median**, **3^rd^ quartile ($Q_3$)**, and max respectively, which are often collectively known as the [five-number summary](https://en.wikipedia.org/wiki/Five-number_summary). $Q_1$ and $Q_3$ are also frequently called the upper and lower **hinges** of a dataset.
@@ -308,7 +308,7 @@ IQR(eruptions_recent$duration)
 ```
 
 ```
-## [1] 189
+[1] 189
 ```
 
 
@@ -326,7 +326,7 @@ range(eruptions_recent$duration)
 ```
 
 ```
-## [1]    0 1491
+[1]    0 1491
 ```
 
 ``` r
@@ -335,7 +335,7 @@ diff(range(eruptions_recent$duration))
 ```
 
 ```
-## [1] 1491
+[1] 1491
 ```
 
 

@@ -93,7 +93,7 @@
 <code class="sourceCode R"><span><span class="co"># create an example dataset of a small sample of numbers</span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">6</span>, <span class="fl">6</span>, <span class="fl">2</span>, <span class="fl">4</span>, <span class="fl">1</span>, <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="va">data</span></span></code></pre></div>
-<pre><code>## [1] 3 6 6 2 4 1 5</code></pre>
+<pre><code>[1] 3 6 6 2 4 1 5</code></pre>
 <p>Last chapter, we mostly used vectors to demonstrate summary functions like <code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code>, <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code>, or <code><a href="https://rdrr.io/r/stats/sd.html">sd()</a></code>, but this is just the tip of the iceberg. In fact, <strong>most functions in R run on vectors directly, <em>one value at a time</em></strong>, and are actually most efficient when used this way.</p>
 <div class="note">
 <p>In R, a vector can only have ONE “type” (or “class”) of object at a time, e.g. a vector of ALL numbers, or a vector of ALL characters, or a vector of ALL dates, etc. Vectors of mixed-type are NOT allowed in R.</p>
@@ -101,10 +101,10 @@
 <div class="sourceCode" id="cb121"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">5</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">is.vector</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] TRUE</code></pre>
+<pre><code>[1] TRUE</code></pre>
 <div class="sourceCode" id="cb123"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 1</code></pre>
+<pre><code>[1] 1</code></pre>
 <p>This is why vectors are the most fundamental structure. It may be useful going forward to think of numbers instead as numeric vectors, logicals (TRUE/FALSE) as logical vectors, characters (i.e. strings) as character vectors, etc. <strong>Everything runs on vectors</strong>!</p>
 </div>
 <div id="types-of-vectors" class="section level2" number="3.1">
@@ -137,24 +137,24 @@
 <p>Let’s start with numeric vectors. For example, suppose we want to double, or square, or take the arc-tangent, or find the rounded base-2 logarithm of each <code>data</code> value, we can just do so directly on the vector, and it runs one value at a time:</p>
 <div class="sourceCode" id="cb125"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op">*</span> <span class="fl">2</span></span></code></pre></div>
-<pre><code>## [1]  6 12 12  4  8  2 10</code></pre>
+<pre><code>[1]  6 12 12  4  8  2 10</code></pre>
 <div class="sourceCode" id="cb127"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span><span class="op">^</span><span class="fl">2</span></span></code></pre></div>
-<pre><code>## [1]  9 36 36  4 16  1 25</code></pre>
+<pre><code>[1]  9 36 36  4 16  1 25</code></pre>
 <div class="sourceCode" id="cb129"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Trig.html">atan</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 1.2490458 1.4056476 1.4056476 1.1071487 1.3258177 0.7853982 1.3734008</code></pre>
+<pre><code>[1] 1.2490458 1.4056476 1.4056476 1.1071487 1.3258177 0.7853982 1.3734008</code></pre>
 <div class="sourceCode" id="cb131"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log2</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 2 3 3 1 2 0 2</code></pre>
+<pre><code>[1] 2 3 3 1 2 0 2</code></pre>
 <p>Note you can also use <code>data</code> on the other side of these operators, or as the argument to certain functions:</p>
 <div class="sourceCode" id="cb133"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fl">2</span><span class="op">^</span><span class="va">data</span></span></code></pre></div>
-<pre><code>## [1]  8 64 64  4 16  2 32</code></pre>
+<pre><code>[1]  8 64 64  4 16  2 32</code></pre>
 <div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># log(10) with various bases; note the Inf due to base 1</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fl">10</span>, base <span class="op">=</span> <span class="va">data</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 2.095903 1.285097 1.285097 3.321928 1.660964      Inf 1.430677</code></pre>
+<pre><code>[1] 2.095903 1.285097 1.285097 3.321928 1.660964      Inf 1.430677</code></pre>
 <p>We can combine these with summary functions to do some neat things. For example, suppose we want to manually calculate the <a href="https://www.mathsisfun.com/data/standard-deviation.html">standard deviation</a>—i.e. the average deviation from the mean—of the sample. Again, we will discuss this in more detail later in the course, but for now here is the formula:</p>
 <p><span class="math display">\[SD = \sqrt{\frac1{n-1}\sum_{i=1}^n(x_i-\bar x)^2}\qquad\text{where $\bar{x}=\frac1n\sum_{i=1}^nx_i$}\]</span></p>
 <p>In other words, the standard deviation is the square root of 1/(n-1) times the sum of the squared differences between the sample mean and each <code>data</code> value. This is very easy to do with vector arithmetic in R:</p>
@@ -162,19 +162,19 @@
 <code class="sourceCode R"><span><span class="co"># implementing sd() using vector arithmetic syntax</span></span>
 <span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="op">(</span><span class="fl">1</span> <span class="op">/</span> <span class="op">(</span><span class="va">n</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">(</span><span class="va">data</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 1.9518</code></pre>
+<pre><code>[1] 1.9518</code></pre>
 <p>Let’s break this down. On the inside, <code>data - mean(data)</code> subtracts the mean from each data value one at a time:</p>
 <div class="sourceCode" id="cb139"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] -0.8571429  2.1428571  2.1428571 -1.8571429  0.1428571 -2.8571429  1.1428571</code></pre>
+<pre><code>[1] -0.8571429  2.1428571  2.1428571 -1.8571429  0.1428571 -2.8571429  1.1428571</code></pre>
 <p>This is then squared <code>( ... )^2</code> and again, this operates one at a time:</p>
 <div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">(</span><span class="va">data</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span></span></code></pre></div>
-<pre><code>## [1] 0.73469388 4.59183673 4.59183673 3.44897959 0.02040816 8.16326531 1.30612245</code></pre>
+<pre><code>[1] 0.73469388 4.59183673 4.59183673 3.44897959 0.02040816 8.16326531 1.30612245</code></pre>
 <p>Finally, this vector is summed, scaled by 1/(n-1), and square rooted to get the standard deviation. We can check this is correct by comparing with the built-in <code><a href="https://rdrr.io/r/stats/sd.html">sd()</a></code> function.</p>
 <div class="sourceCode" id="cb143"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 1.9518</code></pre>
+<pre><code>[1] 1.9518</code></pre>
 </div>
 <div id="logical-vectors" class="section level2" number="3.3">
 <h2>
@@ -184,19 +184,19 @@
 <div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># recall %% gives the division remainder</span></span>
 <span><span class="va">data</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html">%%</a></span> <span class="fl">2</span> <span class="op">==</span> <span class="fl">0</span></span></code></pre></div>
-<pre><code>## [1] FALSE  TRUE  TRUE  TRUE  TRUE FALSE FALSE</code></pre>
+<pre><code>[1] FALSE  TRUE  TRUE  TRUE  TRUE FALSE FALSE</code></pre>
 <p>Or we can ask which of our values are within 1 standard deviation of the mean:</p>
 <div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># recall &amp; is the AND operator</span></span>
 <span><span class="co"># note the inequality checks EACH value of data against the other side</span></span>
 <span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">&lt;=</span> <span class="va">data</span><span class="op">)</span> <span class="op">&amp;</span> <span class="op">(</span><span class="va">data</span> <span class="op">&lt;=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1]  TRUE FALSE FALSE  TRUE  TRUE FALSE  TRUE</code></pre>
+<pre><code>[1]  TRUE FALSE FALSE  TRUE  TRUE FALSE  TRUE</code></pre>
 <p>Remember from section <a href="rstudio-intro.html#r-specials">2.3.4</a> how any <strong>math turns <code>TRUE</code> into 1 and <code>FALSE</code> into 0</strong>? This turns out to be extremely useful. For example, we can use <code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code> to count how many values are even:</p>
 <div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># sum(logical vector) counts the number of TRUEs</span></span>
 <span><span class="co"># here, we find 4 data values are even</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">data</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html">%%</a></span> <span class="fl">2</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 4</code></pre>
+<pre><code>[1] 4</code></pre>
 <p>Or we can ask what <em>proportion</em> of our data is within 1 standard deviation of the mean, which involves taking the sum of a logical comparison and dividing by the length, i.e. computing the mean:</p>
 <div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># mean(logical vector) = sum(logical vector) / length(logical vector)</span></span>
@@ -205,7 +205,7 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span></span>
 <span>  <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">&lt;=</span> <span class="va">data</span><span class="op">)</span> <span class="op">&amp;</span> <span class="op">(</span><span class="va">data</span> <span class="op">&lt;=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 0.5714286</code></pre>
+<pre><code>[1] 0.5714286</code></pre>
 <div class="tip">
 <p>Remember: whenever you have a vector of <code>TRUE</code>/<code>FALSE</code> values—usually as a result of some logical comparison—you can use <code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code> to count how many are <code>TRUE</code>, or <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code> to compute the proportion of <code>TRUE</code> values. You can of course also use these in other numeric operations, just remember <code>TRUE</code><span class="math inline">\(\rightarrow1\)</span>, <code>FALSE</code><span class="math inline">\(\rightarrow0\)</span>.</p>
 </div>
@@ -218,45 +218,45 @@
 <p>One of the easiest, if you just need a sequence of integers, is to use the <code>:</code> operator:</p>
 <div class="sourceCode" id="cb153"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span></span></code></pre></div>
-<pre><code>## [1] 1 2 3 4 5</code></pre>
+<pre><code>[1] 1 2 3 4 5</code></pre>
 <div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fl">10</span><span class="op">:</span><span class="op">-</span><span class="fl">10</span></span></code></pre></div>
-<pre><code>##  [1]  10   9   8   7   6   5   4   3   2   1   0  -1  -2  -3  -4  -5  -6  -7  -8
-## [20]  -9 -10</code></pre>
+<pre><code> [1]  10   9   8   7   6   5   4   3   2   1   0  -1  -2  -3  -4  -5  -6  -7  -8  -9
+[21] -10</code></pre>
 <p>The <code><a href="https://rdrr.io/r/base/seq.html">seq()</a></code> function does something similar, except it also has additional arguments <code>by</code> to specify the step size and <code>length.out</code> which specifies how many numbers to have in total (note: only ONE of these arguments can be set at a time).</p>
 <div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 1 2 3 4 5</code></pre>
+<pre><code>[1] 1 2 3 4 5</code></pre>
 <div class="sourceCode" id="cb159"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">100</span>, by <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
-<pre><code>##  [1]   0  10  20  30  40  50  60  70  80  90 100</code></pre>
+<pre><code> [1]   0  10  20  30  40  50  60  70  80  90 100</code></pre>
 <div class="sourceCode" id="cb161"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, length.out <span class="op">=</span> <span class="fl">101</span><span class="op">)</span></span></code></pre></div>
-<pre><code>##   [1] 0.00 0.01 0.02 0.03 0.04 0.05 0.06 0.07 0.08 0.09 0.10 0.11 0.12 0.13 0.14
-##  [16] 0.15 0.16 0.17 0.18 0.19 0.20 0.21 0.22 0.23 0.24 0.25 0.26 0.27 0.28 0.29
-##  [31] 0.30 0.31 0.32 0.33 0.34 0.35 0.36 0.37 0.38 0.39 0.40 0.41 0.42 0.43 0.44
-##  [46] 0.45 0.46 0.47 0.48 0.49 0.50 0.51 0.52 0.53 0.54 0.55 0.56 0.57 0.58 0.59
-##  [61] 0.60 0.61 0.62 0.63 0.64 0.65 0.66 0.67 0.68 0.69 0.70 0.71 0.72 0.73 0.74
-##  [76] 0.75 0.76 0.77 0.78 0.79 0.80 0.81 0.82 0.83 0.84 0.85 0.86 0.87 0.88 0.89
-##  [91] 0.90 0.91 0.92 0.93 0.94 0.95 0.96 0.97 0.98 0.99 1.00</code></pre>
+<pre><code>  [1] 0.00 0.01 0.02 0.03 0.04 0.05 0.06 0.07 0.08 0.09 0.10 0.11 0.12 0.13 0.14 0.15
+ [17] 0.16 0.17 0.18 0.19 0.20 0.21 0.22 0.23 0.24 0.25 0.26 0.27 0.28 0.29 0.30 0.31
+ [33] 0.32 0.33 0.34 0.35 0.36 0.37 0.38 0.39 0.40 0.41 0.42 0.43 0.44 0.45 0.46 0.47
+ [49] 0.48 0.49 0.50 0.51 0.52 0.53 0.54 0.55 0.56 0.57 0.58 0.59 0.60 0.61 0.62 0.63
+ [65] 0.64 0.65 0.66 0.67 0.68 0.69 0.70 0.71 0.72 0.73 0.74 0.75 0.76 0.77 0.78 0.79
+ [81] 0.80 0.81 0.82 0.83 0.84 0.85 0.86 0.87 0.88 0.89 0.90 0.91 0.92 0.93 0.94 0.95
+ [97] 0.96 0.97 0.98 0.99 1.00</code></pre>
 <p>Vectors can also be created with the <code><a href="https://rdrr.io/r/base/rep.html">rep()</a></code> function which lets you repeat the contents. There are two arguments: <code>times</code> which controls how many times to repeat the entire input, and <code>each</code> which controls how many times to repeat each element if the input is a vector. You can specify either or both of these arguments.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;code&gt;rep()&lt;/code&gt; is actually simultaneously an extremely useful and also extremely infuriating function, due to the bafflingly nonintuitive design of its arguments. See Hadley Wickham’s &lt;a href="https://design.tidyverse.org/cs-rep.html"&gt;thoughtful diatribe&lt;/a&gt; on the matter for more.&lt;/p&gt;'><sup>15</sup></a> Note <code><a href="https://rdrr.io/r/base/rep.html">rep()</a></code> can be used to repeat other objects too, not just numbers.</p>
 <div class="sourceCode" id="cb163"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># repeat a single number</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 2 2 2 2 2</code></pre>
+<pre><code>[1] 2 2 2 2 2</code></pre>
 <div class="sourceCode" id="cb165"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># repeat a vector, specifying both times and each</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, times <span class="op">=</span> <span class="fl">3</span>, each <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></code></pre></div>
-<pre><code>##  [1] 1 1 1 1 2 2 2 2 3 3 3 3 1 1 1 1 2 2 2 2 3 3 3 3 1 1 1 1 2 2 2 2 3 3 3 3</code></pre>
+<pre><code> [1] 1 1 1 1 2 2 2 2 3 3 3 3 1 1 1 1 2 2 2 2 3 3 3 3 1 1 1 1 2 2 2 2 3 3 3 3</code></pre>
 <div class="sourceCode" id="cb167"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># you can also let times be a vector, as well as repeat other objects</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>, times <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1]  TRUE  TRUE FALSE FALSE FALSE FALSE</code></pre>
+<pre><code>[1]  TRUE  TRUE FALSE FALSE FALSE FALSE</code></pre>
 <p>Finally, you can mix and match all these constructors, using a combination of <code><a href="https://rdrr.io/r/base/c.html">c()</a></code>, <code>:</code>, <code><a href="https://rdrr.io/r/base/seq.html">seq()</a></code>, and <code><a href="https://rdrr.io/r/base/rep.html">rep()</a></code> to your heart’s content.</p>
 <div class="sourceCode" id="cb169"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span>, <span class="fl">7</span><span class="op">:</span><span class="fl">9</span>, <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">12</span>, by <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span>, each <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
-<pre><code>##  [1]  1.0  1.0  3.0  3.0  7.0  7.0  8.0  8.0  9.0  9.0 10.0 10.0 10.5 10.5 11.0
-## [16] 11.0 11.5 11.5 12.0 12.0</code></pre>
+<pre><code> [1]  1.0  1.0  3.0  3.0  7.0  7.0  8.0  8.0  9.0  9.0 10.0 10.0 10.5 10.5 11.0 11.0
+[17] 11.5 11.5 12.0 12.0</code></pre>
 </div>
 <div id="multiple-vectors-vector-recycling" class="section level2" number="3.5">
 <h2>
@@ -274,30 +274,30 @@
 <div class="sourceCode" id="cb172"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># sum vectors one element at a time</span></span>
 <span><span class="va">x1</span> <span class="op">+</span> <span class="va">x2</span></span></code></pre></div>
-<pre><code>## [1] -2  0  2  4  6  8</code></pre>
+<pre><code>[1] -2  0  2  4  6  8</code></pre>
 <div class="sourceCode" id="cb174"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># take powers, again one element at a time from each vector</span></span>
 <span><span class="va">x2</span><span class="op">^</span><span class="va">x1</span></span></code></pre></div>
-<pre><code>## [1]   1  -1   0   1  16 243</code></pre>
+<pre><code>[1]   1  -1   0   1  16 243</code></pre>
 <div class="sourceCode" id="cb176"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># take differences, one element at a time, recycling y</span></span>
 <span><span class="va">x1</span> <span class="op">-</span> <span class="va">y</span></span></code></pre></div>
-<pre><code>## [1] -1 -1 -1  2  2  2</code></pre>
+<pre><code>[1] -1 -1 -1  2  2  2</code></pre>
 <div class="sourceCode" id="cb178"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># log y with x1+2 as base, again recycling y</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">y</span>, base <span class="op">=</span> <span class="va">x1</span> <span class="op">+</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 0.0000000 0.6309298 0.7924813 0.0000000 0.3868528 0.5645750</code></pre>
+<pre><code>[1] 0.0000000 0.6309298 0.7924813 0.0000000 0.3868528 0.5645750</code></pre>
 <div class="sourceCode" id="cb180"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># more complex operation that recycles multiple vectors,</span></span>
 <span><span class="co"># as well as some numbers (which are just length 1 vectors)</span></span>
 <span><span class="fl">2</span><span class="op">^</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">x1</span> <span class="op">*</span> <span class="va">z</span><span class="op">)</span> <span class="op">-</span> <span class="va">x2</span><span class="op">^</span><span class="va">y</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] -1 -3  0  3  8  1</code></pre>
+<pre><code>[1] -1 -3  0  3  8  1</code></pre>
 <div class="sourceCode" id="cb182"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># these also work with other numeric/logical functions we've seen so far</span></span>
 <span><span class="co"># here, left side is a length 6 vector, right side is a length 2 vector,</span></span>
 <span><span class="co"># so right side is recycled three times then compared with left</span></span>
 <span><span class="va">x2</span> <span class="op">&lt;=</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html">atan</a></span><span class="op">(</span><span class="va">z</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x1</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1]  TRUE  TRUE FALSE  TRUE FALSE FALSE</code></pre>
+<pre><code>[1]  TRUE  TRUE FALSE  TRUE FALSE FALSE</code></pre>
 <div class="note">
 <p>In this class, <strong>you should <em>never</em> need a for loop</strong> for any exercises (hence why it’s considered a bonus topic and not covered in the notes but instead left as optional additional reading).</p>
 <p>Instead, <strong><em>always</em> look for a solution using vectorized operations</strong>. In R, vectorized operations are basically always <a href="https://datakuity.com/2018/01/17/for-loop-vs-vectorization-in-r">MUCH faster than for loops</a>, due to low-level parallelization optimizations.</p>
@@ -310,15 +310,15 @@
 <p>One notable exception to all this is the <a href="https://rdrr.io/r/base/match.html"><code class="sourceCode r"><span class="sc">%in%</span></code></a> operator, which only “vectorizes” on the left side. For example, suppose we want to know which elements of <code>z</code> are in <code>x1</code>. Here’s how:</p>
 <div class="sourceCode" id="cb184"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">z</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">x1</span></span></code></pre></div>
-<pre><code>## [1] FALSE  TRUE</code></pre>
+<pre><code>[1] FALSE  TRUE</code></pre>
 <p>If you want to ask which elements of <code>z</code> are NOT in <code>x1</code>, you must prepend the expression with <code>!</code> to negate it:</p>
 <div class="sourceCode" id="cb186"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">!</span><span class="va">z</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">x1</span></span></code></pre></div>
-<pre><code>## [1]  TRUE FALSE</code></pre>
+<pre><code>[1]  TRUE FALSE</code></pre>
 <p>Note the difference between this and <code>z == x1</code>, which recycles <code>z</code>, <em>then</em> checks element-wise equality:</p>
 <div class="sourceCode" id="cb188"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">z</span> <span class="op">==</span> <span class="va">x1</span></span></code></pre></div>
-<pre><code>## [1] FALSE  TRUE FALSE FALSE FALSE FALSE</code></pre>
+<pre><code>[1] FALSE  TRUE FALSE FALSE FALSE FALSE</code></pre>
 <p>This is another common point of confusion for first time R users. Make sure you understand the <strong>difference between checking vector membership</strong>, i.e. if each element of one vector is also contained <em>somewhere</em> in another vector, <strong>vs checking element-by-element equality</strong>, i.e. checking if the 1<sup>st</sup> elements are the same, and the 2<sup>nd</sup> elements are the same, and the 3<sup>rd</sup> elements are the same, etc. (possibly with recycling). See <a href="https://stackoverflow.com/a/42637186/25278020">this StackOverflow page</a> for more examples.</p>
 <div class="note">
 <p>Going forward, we will continue to use vectorized functions and vector recycling in code examples, sometimes without drawing attention to it, for sake of brevity. Pretty soon, these concepts should also feel like second nature to you!</p>
@@ -338,52 +338,52 @@
 <p>Knowing this, let’s learn subsetting with some examples. A pair of useful built-in objects are the vectors <a href="https://rdrr.io/r/base/Constants.html"><code class="sourceCode r">letters</code></a> and <a href="https://rdrr.io/r/base/Constants.html"><code class="sourceCode r">LETTERS</code></a>, which contain respectively the 26 lowercase and uppercase letters of the English alphabet. These letters make up a character vector (which we will discuss in detail in the next section).</p>
 <div class="sourceCode" id="cb190"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">letters</span></span></code></pre></div>
-<pre><code>##  [1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s"
-## [20] "t" "u" "v" "w" "x" "y" "z"</code></pre>
+<pre><code> [1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s" "t"
+[21] "u" "v" "w" "x" "y" "z"</code></pre>
 <p>You can extract elements from a vector with the <code>[]</code> operator, giving either a vector of numeric positions, a vector of <code>TRUE</code>/<code>FALSE</code> values, or a negative vector for exclusions (i.e. anything <em>except</em>). Examples:</p>
 <div class="sourceCode" id="cb192"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># giving numeric positions of desired elements</span></span>
 <span><span class="co"># remember numbers are numeric vectors of length 1</span></span>
 <span><span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span></code></pre></div>
-<pre><code>## [1] "a"</code></pre>
+<pre><code>[1] "a"</code></pre>
 <div class="sourceCode" id="cb194"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># of course this also works with longer vectors</span></span>
 <span><span class="va">letters</span><span class="op">[</span><span class="fl">5</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span></span></code></pre></div>
-<pre><code>## [1] "e" "f" "g" "h" "i" "j"</code></pre>
+<pre><code>[1] "e" "f" "g" "h" "i" "j"</code></pre>
 <div class="sourceCode" id="cb196"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># naturally you can use more complex syntax if needed,</span></span>
 <span><span class="co"># as long as the result is a numeric vector,</span></span>
 <span><span class="co"># repeating indices give duplicate values</span></span>
 <span><span class="va">letters</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">24</span><span class="op">:</span><span class="fl">26</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">8</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
-<pre><code>##  [1] "a" "x" "y" "z" "e" "e" "e" "e" "e" "e" "e" "e"</code></pre>
+<pre><code> [1] "a" "x" "y" "z" "e" "e" "e" "e" "e" "e" "e" "e"</code></pre>
 <div class="sourceCode" id="cb198"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># you can also use a logical vector, here we check if</span></span>
 <span><span class="co"># each position is even, returning every second letter</span></span>
 <span><span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">26</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html">%%</a></span> <span class="fl">2</span> <span class="op">==</span> <span class="fl">0</span><span class="op">]</span></span></code></pre></div>
-<pre><code>##  [1] "b" "d" "f" "h" "j" "l" "n" "p" "r" "t" "v" "x" "z"</code></pre>
+<pre><code> [1] "b" "d" "f" "h" "j" "l" "n" "p" "r" "t" "v" "x" "z"</code></pre>
 <div class="sourceCode" id="cb200"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># logical vectors will be recycled if necessary, so this also works</span></span>
 <span><span class="va">letters</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
-<pre><code>##  [1] "b" "d" "f" "h" "j" "l" "n" "p" "r" "t" "v" "x" "z"</code></pre>
+<pre><code> [1] "b" "d" "f" "h" "j" "l" "n" "p" "r" "t" "v" "x" "z"</code></pre>
 <div class="sourceCode" id="cb202"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># using negative vectors is like saying "anything EXCEPT"</span></span>
 <span><span class="va">letters</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span></span></code></pre></div>
-<pre><code>##  [1] "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s" "t"
-## [20] "u" "v" "w" "x" "y" "z"</code></pre>
+<pre><code> [1] "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s" "t" "u"
+[21] "v" "w" "x" "y" "z"</code></pre>
 <div class="sourceCode" id="cb204"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># again, this also works with vectors of negatives</span></span>
 <span><span class="va">letters</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">:</span><span class="op">-</span><span class="fl">10</span><span class="op">]</span></span></code></pre></div>
-<pre><code>##  [1] "k" "l" "m" "n" "o" "p" "q" "r" "s" "t" "u" "v" "w" "x" "y" "z"</code></pre>
+<pre><code> [1] "k" "l" "m" "n" "o" "p" "q" "r" "s" "t" "u" "v" "w" "x" "y" "z"</code></pre>
 <div class="sourceCode" id="cb206"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># of course this is equivalent to</span></span>
 <span><span class="va">letters</span><span class="op">[</span><span class="op">-</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
-<pre><code>##  [1] "k" "l" "m" "n" "o" "p" "q" "r" "s" "t" "u" "v" "w" "x" "y" "z"</code></pre>
+<pre><code> [1] "k" "l" "m" "n" "o" "p" "q" "r" "s" "t" "u" "v" "w" "x" "y" "z"</code></pre>
 <div class="sourceCode" id="cb208"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># note the parentheses there, without it you get -1,0,1,...,10</span></span>
 <span><span class="co"># which raises an error (what we want is -1,-2,...,-10)</span></span>
 <span><span class="co"># this is because positive and negative position syntax cannot be mixed</span></span>
 <span><span class="va">letters</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span></span></code></pre></div>
-<pre><code>## Error in letters[-1:10] : only 0's may be mixed with negative subscripts</code></pre>
+<pre><code>Error in letters[-1:10] : only 0's may be mixed with negative subscripts</code></pre>
 </div>
 <div id="sortingreordering" class="section level2" number="3.8">
 <h2>
@@ -395,62 +395,62 @@
 <span><span class="co"># trust me, this will REALLY help clarify what's happening in a minute</span></span>
 <span><span class="va">data2</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op">*</span> <span class="fl">10</span></span>
 <span><span class="va">data2</span></span></code></pre></div>
-<pre><code>## [1] 30 60 60 20 40 10 50</code></pre>
+<pre><code>[1] 30 60 60 20 40 10 50</code></pre>
 <div class="sourceCode" id="cb212"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># ok, now let's proceed with the demos, first up:</span></span>
 <span><span class="co"># manual reordering, e.g. swapping the first and last elements</span></span>
 <span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">data2</span><span class="op">)</span></span>
 <span><span class="va">data2</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">n</span>, <span class="fl">2</span><span class="op">:</span><span class="op">(</span><span class="va">n</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
-<pre><code>## [1] 50 60 60 20 40 10 30</code></pre>
+<pre><code>[1] 50 60 60 20 40 10 30</code></pre>
 <p>You can of course also have R sort a vector for you. There are two main functions for sorting: <code><a href="https://rdrr.io/r/base/sort.html">sort()</a></code>, which does what you expect and returns a vector with the elements rearranged from lowest to highest (unless you set the argument <code>decreasing = TRUE</code> which does the opposite); and <code><a href="https://rdrr.io/r/base/order.html">order()</a></code>, which simply returns the order the elements would go in (i.e. a vector of positions where they belong) if they were to be sorted lowest to highest (again, unless you set <code>decreasing = TRUE</code>).</p>
 <div class="sourceCode" id="cb214"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># simply sort the data in ascending order</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">data2</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 10 20 30 40 50 60 60</code></pre>
+<pre><code>[1] 10 20 30 40 50 60 60</code></pre>
 <div class="sourceCode" id="cb216"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># sort in descending order</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">data2</span>, decreasing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 60 60 50 40 30 20 10</code></pre>
+<pre><code>[1] 60 60 50 40 30 20 10</code></pre>
 <div class="sourceCode" id="cb218"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># return the order of positions that WOULD sort it</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">data2</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 6 4 1 5 7 2 3</code></pre>
+<pre><code>[1] 6 4 1 5 7 2 3</code></pre>
 <div class="sourceCode" id="cb220"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># passing this as a subsetting vector gives the sorted vector</span></span>
 <span><span class="va">data2</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">data2</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
-<pre><code>## [1] 10 20 30 40 50 60 60</code></pre>
+<pre><code>[1] 10 20 30 40 50 60 60</code></pre>
 <p>A final function that is sometimes handy is the <code><a href="https://rdrr.io/r/base/rev.html">rev()</a></code> function, which reverses the vector.</p>
 <div class="sourceCode" id="cb222"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># reverse the vector</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span><span class="op">(</span><span class="va">data2</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 50 10 40 20 60 60 30</code></pre>
+<pre><code>[1] 50 10 40 20 60 60 30</code></pre>
 <div class="note">
 <p>In general, <strong>most R operations do NOT change the input object in place</strong>. E.g. <code>sort(data2)</code> returns a COPY of <code>data2</code> with the elements sorted; it does NOT actually change <code>data2</code>. This is true for most functions in R, with few exceptions. For example, observe:</p>
 <div class="sourceCode" id="cb224"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># original data2 vector</span></span>
 <span><span class="va">data2</span></span></code></pre></div>
-<pre><code>## [1] 30 60 60 20 40 10 50</code></pre>
+<pre><code>[1] 30 60 60 20 40 10 50</code></pre>
 <div class="sourceCode" id="cb226"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># sort data2</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">data2</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 10 20 30 40 50 60 60</code></pre>
+<pre><code>[1] 10 20 30 40 50 60 60</code></pre>
 <div class="sourceCode" id="cb228"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># is it changed?</span></span>
 <span><span class="va">data2</span></span></code></pre></div>
-<pre><code>## [1] 30 60 60 20 40 10 50</code></pre>
+<pre><code>[1] 30 60 60 20 40 10 50</code></pre>
 <p>If you want an object to be updated in place, you should explicitly tell R to overwrite it again with the assignment <code>&lt;-</code> operator, like this:</p>
 <div class="sourceCode" id="cb230"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># overwrite data2 with the sorted copy (discouraged syntax)</span></span>
 <span><span class="va">data2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">data2</span><span class="op">)</span></span>
 <span><span class="co"># now it's changed</span></span>
 <span><span class="va">data2</span></span></code></pre></div>
-<pre><code>## [1] 10 20 30 40 50 60 60</code></pre>
+<pre><code>[1] 10 20 30 40 50 60 60</code></pre>
 <p>It’s often considered bad practice to overwrite input like this, since it can be destructive and, if not used with caution, can more easily lead to errors down the road. <strong>We recommend whenever possible writing the output to a new object instead</strong>, like this:</p>
 <div class="sourceCode" id="cb232"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># save sorted data2 to new object (encouraged syntax)</span></span>
 <span><span class="va">data2_sorted</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">data2</span><span class="op">)</span></span>
 <span><span class="va">data2_sorted</span></span></code></pre></div>
-<pre><code>## [1] 10 20 30 40 50 60 60</code></pre>
+<pre><code>[1] 10 20 30 40 50 60 60</code></pre>
 <p>In general, R inputs and outputs are totally independent objects with no special “connections”.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Put another way, R passes by value not reference, and copies are usually deep not shallow. Yes this can be very inefficient, but it’s also arguably more user-friendly and intuitive to less technical users, which is by design.&lt;/p&gt;"><sup>16</sup></a>. If you want an operation to be saved, <strong>make sure to remember to assign the output to something!</strong></p>
 </div>
 </div>
@@ -464,13 +464,13 @@
 <span><span class="va">friends</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Alice"</span>, <span class="st">"Bob"</span>, <span class="st">"Charlie"</span>, <span class="st">"Donny"</span>, <span class="st">"Emmy"</span>,</span>
 <span>             <span class="st">"Francine"</span>, <span class="st">"Genevieve"</span>, <span class="st">"Heinemann"</span><span class="op">)</span></span>
 <span><span class="va">friends</span></span></code></pre></div>
-<pre><code>## [1] "Alice"     "Bob"       "Charlie"   "Donny"     "Emmy"      "Francine" 
-## [7] "Genevieve" "Heinemann"</code></pre>
+<pre><code>[1] "Alice"     "Bob"       "Charlie"   "Donny"     "Emmy"      "Francine" 
+[7] "Genevieve" "Heinemann"</code></pre>
 <div class="sourceCode" id="cb236"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># you can also use rep, e.g. I can assign my friends into 2 groups</span></span>
 <span><span class="va">groups</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="va">LETTERS</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span>, time <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
 <span><span class="va">groups</span></span></code></pre></div>
-<pre><code>## [1] "A" "B" "A" "B" "A" "B" "A" "B"</code></pre>
+<pre><code>[1] "A" "B" "A" "B" "A" "B" "A" "B"</code></pre>
 <div id="basic-string-functions" class="section level3" number="3.9.1">
 <h3>
 <span class="header-section-number">3.9.1</span> Basic string functions<a class="anchor" aria-label="anchor" href="#basic-string-functions"><i class="fas fa-link"></i></a>
@@ -479,77 +479,76 @@
 <div class="sourceCode" id="cb238"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># get the number of characters in each name</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/nchar.html">nchar</a></span><span class="op">(</span><span class="va">friends</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 5 3 7 5 4 8 9 9</code></pre>
+<pre><code>[1] 5 3 7 5 4 8 9 9</code></pre>
 <div class="sourceCode" id="cb240"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># convert names to all upper or all lower</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/chartr.html">toupper</a></span><span class="op">(</span><span class="va">friends</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] "ALICE"     "BOB"       "CHARLIE"   "DONNY"     "EMMY"      "FRANCINE" 
-## [7] "GENEVIEVE" "HEINEMANN"</code></pre>
+<pre><code>[1] "ALICE"     "BOB"       "CHARLIE"   "DONNY"     "EMMY"      "FRANCINE" 
+[7] "GENEVIEVE" "HEINEMANN"</code></pre>
 <div class="sourceCode" id="cb242"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/chartr.html">tolower</a></span><span class="op">(</span><span class="va">friends</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] "alice"     "bob"       "charlie"   "donny"     "emmy"      "francine" 
-## [7] "genevieve" "heinemann"</code></pre>
+<pre><code>[1] "alice"     "bob"       "charlie"   "donny"     "emmy"      "francine" 
+[7] "genevieve" "heinemann"</code></pre>
 <div class="sourceCode" id="cb244"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># get the first 3 characters of each name</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/substr.html">substr</a></span><span class="op">(</span><span class="va">friends</span>, <span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] "Ali" "Bob" "Cha" "Don" "Emm" "Fra" "Gen" "Hei"</code></pre>
+<pre><code>[1] "Ali" "Bob" "Cha" "Don" "Emm" "Fra" "Gen" "Hei"</code></pre>
 <div class="sourceCode" id="cb246"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># get the last 3 characters of each name;</span></span>
 <span><span class="co"># remember R always includes bounds, so to get the last three,</span></span>
 <span><span class="co"># we want to get n-2,n-1,n where n is the number of characters</span></span>
 <span><span class="co"># note this is done once again with our old friend, vectorization!</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/substr.html">substr</a></span><span class="op">(</span><span class="va">friends</span>, <span class="fu"><a href="https://rdrr.io/r/base/nchar.html">nchar</a></span><span class="op">(</span><span class="va">friends</span><span class="op">)</span> <span class="op">-</span> <span class="fl">2</span>, <span class="fu"><a href="https://rdrr.io/r/base/nchar.html">nchar</a></span><span class="op">(</span><span class="va">friends</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] "ice" "Bob" "lie" "nny" "mmy" "ine" "eve" "ann"</code></pre>
+<pre><code>[1] "ice" "Bob" "lie" "nny" "mmy" "ine" "eve" "ann"</code></pre>
 <div class="sourceCode" id="cb248"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># remove the first and last characters of each name</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/substr.html">substr</a></span><span class="op">(</span><span class="va">friends</span>, <span class="fl">2</span>, <span class="fu"><a href="https://rdrr.io/r/base/nchar.html">nchar</a></span><span class="op">(</span><span class="va">friends</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] "lic"     "o"       "harli"   "onn"     "mm"      "rancin"  "eneviev"
-## [8] "eineman"</code></pre>
+<pre><code>[1] "lic"     "o"       "harli"   "onn"     "mm"      "rancin"  "eneviev" "eineman"</code></pre>
 <div class="sourceCode" id="cb250"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># paste can "glue" on single or (recycled) vectors of strings</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">friends</span>, <span class="st">"is my friend"</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] "Alice is my friend"     "Bob is my friend"       "Charlie is my friend"  
-## [4] "Donny is my friend"     "Emmy is my friend"      "Francine is my friend" 
-## [7] "Genevieve is my friend" "Heinemann is my friend"</code></pre>
+<pre><code>[1] "Alice is my friend"     "Bob is my friend"       "Charlie is my friend"  
+[4] "Donny is my friend"     "Emmy is my friend"      "Francine is my friend" 
+[7] "Genevieve is my friend" "Heinemann is my friend"</code></pre>
 <div class="sourceCode" id="cb252"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"My friend"</span>, <span class="va">friends</span>, <span class="st">"is in group"</span>, <span class="va">groups</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] "My friend Alice is in group A"     "My friend Bob is in group B"      
-## [3] "My friend Charlie is in group A"   "My friend Donny is in group B"    
-## [5] "My friend Emmy is in group A"      "My friend Francine is in group B" 
-## [7] "My friend Genevieve is in group A" "My friend Heinemann is in group B"</code></pre>
+<pre><code>[1] "My friend Alice is in group A"     "My friend Bob is in group B"      
+[3] "My friend Charlie is in group A"   "My friend Donny is in group B"    
+[5] "My friend Emmy is in group A"      "My friend Francine is in group B" 
+[7] "My friend Genevieve is in group A" "My friend Heinemann is in group B"</code></pre>
 <div class="sourceCode" id="cb254"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># paste0(...) is a shortcut for paste(..., sep="")</span></span>
 <span><span class="co"># sep sets the separator between each string (default: a space " ")</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">friends</span>, <span class="st">"123"</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] "Alice123"     "Bob123"       "Charlie123"   "Donny123"     "Emmy123"     
-## [6] "Francine123"  "Genevieve123" "Heinemann123"</code></pre>
+<pre><code>[1] "Alice123"     "Bob123"       "Charlie123"   "Donny123"     "Emmy123"     
+[6] "Francine123"  "Genevieve123" "Heinemann123"</code></pre>
 <div class="sourceCode" id="cb256"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">friends</span>, <span class="st">"123"</span>, sep <span class="op">=</span> <span class="st">"_"</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] "Alice_123"     "Bob_123"       "Charlie_123"   "Donny_123"    
-## [5] "Emmy_123"      "Francine_123"  "Genevieve_123" "Heinemann_123"</code></pre>
+<pre><code>[1] "Alice_123"     "Bob_123"       "Charlie_123"   "Donny_123"     "Emmy_123"     
+[6] "Francine_123"  "Genevieve_123" "Heinemann_123"</code></pre>
 <div class="sourceCode" id="cb258"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># paste also has an argument called collapse, which sets a separator,</span></span>
 <span><span class="co"># then uses that separator to collapse the vector into a single string</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">friends</span>, collapse <span class="op">=</span> <span class="st">", "</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] "Alice, Bob, Charlie, Donny, Emmy, Francine, Genevieve, Heinemann"</code></pre>
+<pre><code>[1] "Alice, Bob, Charlie, Donny, Emmy, Francine, Genevieve, Heinemann"</code></pre>
 <div class="sourceCode" id="cb260"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># repeat characters in each string a set number of times</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/strrep.html">strrep</a></span><span class="op">(</span><span class="va">friends</span>, <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] "AliceAliceAlice"             "BobBobBob"                  
-## [3] "CharlieCharlieCharlie"       "DonnyDonnyDonny"            
-## [5] "EmmyEmmyEmmy"                "FrancineFrancineFrancine"   
-## [7] "GenevieveGenevieveGenevieve" "HeinemannHeinemannHeinemann"</code></pre>
+<pre><code>[1] "AliceAliceAlice"             "BobBobBob"                  
+[3] "CharlieCharlieCharlie"       "DonnyDonnyDonny"            
+[5] "EmmyEmmyEmmy"                "FrancineFrancineFrancine"   
+[7] "GenevieveGenevieveGenevieve" "HeinemannHeinemannHeinemann"</code></pre>
 <div class="sourceCode" id="cb262"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># of course, this can also be vectorized!</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/strrep.html">strrep</a></span><span class="op">(</span><span class="va">friends</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] "Alice"                                                                   
-## [2] "BobBob"                                                                  
-## [3] "CharlieCharlieCharlie"                                                   
-## [4] "DonnyDonnyDonnyDonny"                                                    
-## [5] "EmmyEmmyEmmyEmmyEmmy"                                                    
-## [6] "FrancineFrancineFrancineFrancineFrancineFrancine"                        
-## [7] "GenevieveGenevieveGenevieveGenevieveGenevieveGenevieveGenevieve"         
-## [8] "HeinemannHeinemannHeinemannHeinemannHeinemannHeinemannHeinemannHeinemann"</code></pre>
+<pre><code>[1] "Alice"                                                                   
+[2] "BobBob"                                                                  
+[3] "CharlieCharlieCharlie"                                                   
+[4] "DonnyDonnyDonnyDonny"                                                    
+[5] "EmmyEmmyEmmyEmmyEmmy"                                                    
+[6] "FrancineFrancineFrancineFrancineFrancineFrancine"                        
+[7] "GenevieveGenevieveGenevieveGenevieveGenevieveGenevieveGenevieve"         
+[8] "HeinemannHeinemannHeinemannHeinemannHeinemannHeinemannHeinemannHeinemann"</code></pre>
 </div>
 <div id="pattern-string-functions" class="section level3" number="3.9.2">
 <h3>
@@ -560,40 +559,40 @@
 <div class="sourceCode" id="cb264"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># which friends (by position) have a lowercase "e" in their name?</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="st">"e"</span>, <span class="va">friends</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 1 3 6 7 8</code></pre>
+<pre><code>[1] 1 3 6 7 8</code></pre>
 <div class="sourceCode" id="cb266"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># alternatively, return a TRUE/FALSE vector result instead for each element</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span><span class="st">"e"</span>, <span class="va">friends</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1]  TRUE FALSE  TRUE FALSE FALSE  TRUE  TRUE  TRUE</code></pre>
+<pre><code>[1]  TRUE FALSE  TRUE FALSE FALSE  TRUE  TRUE  TRUE</code></pre>
 <div class="sourceCode" id="cb268"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># you can use either one to subset the original vector to get actual names</span></span>
 <span><span class="va">friends</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="st">"e"</span>, <span class="va">friends</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
-<pre><code>## [1] "Alice"     "Charlie"   "Francine"  "Genevieve" "Heinemann"</code></pre>
+<pre><code>[1] "Alice"     "Charlie"   "Francine"  "Genevieve" "Heinemann"</code></pre>
 <div class="sourceCode" id="cb270"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># you can disable case sensitivity, which adds Emmy to the results</span></span>
 <span><span class="va">friends</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="st">"e"</span>, <span class="va">friends</span>, ignore.case <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
-<pre><code>## [1] "Alice"     "Charlie"   "Emmy"      "Francine"  "Genevieve" "Heinemann"</code></pre>
+<pre><code>[1] "Alice"     "Charlie"   "Emmy"      "Francine"  "Genevieve" "Heinemann"</code></pre>
 <div class="sourceCode" id="cb272"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># you can use sub() to replace patterns</span></span>
 <span><span class="co"># here we can create a set of variant spellings, changing -y to -ie</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">sub</a></span><span class="op">(</span><span class="st">"y"</span>, <span class="st">"ie"</span>, <span class="va">friends</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] "Alice"     "Bob"       "Charlie"   "Donnie"    "Emmie"     "Francine" 
-## [7] "Genevieve" "Heinemann"</code></pre>
+<pre><code>[1] "Alice"     "Bob"       "Charlie"   "Donnie"    "Emmie"     "Francine" 
+[7] "Genevieve" "Heinemann"</code></pre>
 <div class="sourceCode" id="cb274"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># sub() can only replace once (inside each element),</span></span>
 <span><span class="co"># but gsub() can replace ALL occurrences</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">sub</a></span><span class="op">(</span><span class="st">"n"</span>, <span class="st">"m"</span>, <span class="va">friends</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] "Alice"     "Bob"       "Charlie"   "Domny"     "Emmy"      "Framcine" 
-## [7] "Gemevieve" "Heimemann"</code></pre>
+<pre><code>[1] "Alice"     "Bob"       "Charlie"   "Domny"     "Emmy"      "Framcine" 
+[7] "Gemevieve" "Heimemann"</code></pre>
 <div class="sourceCode" id="cb276"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">"n"</span>, <span class="st">"m"</span>, <span class="va">friends</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] "Alice"     "Bob"       "Charlie"   "Dommy"     "Emmy"      "Framcime" 
-## [7] "Gemevieve" "Heimemamm"</code></pre>
+<pre><code>[1] "Alice"     "Bob"       "Charlie"   "Dommy"     "Emmy"      "Framcime" 
+[7] "Gemevieve" "Heimemamm"</code></pre>
 <div class="sourceCode" id="cb278"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># which friends have a name that endsWith() "y"?</span></span>
 <span><span class="co"># (startsWith() does the opposite)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/startsWith.html">endsWith</a></span><span class="op">(</span><span class="va">friends</span>, <span class="st">"y"</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] FALSE FALSE FALSE  TRUE  TRUE FALSE FALSE FALSE</code></pre>
+<pre><code>[1] FALSE FALSE FALSE  TRUE  TRUE FALSE FALSE FALSE</code></pre>
 <p>Each of these functions (as well as several more listed in the <code><a href="https://rdrr.io/r/base/grep.html">grep()</a></code> help page), actually accept more complex pattern syntax for the search pattern. This advanced search pattern syntax is called “regular expressions” or “regex” for short. You can do things like match groups of characters, match repeated characters or groups, match to specific locations in words or sentences, and more.</p>
 <p>In this class we will NOT cover regular expressions to any real detail again due to limited time, but feel free to explore <a href="https://paulvanderlaken.com/wp-content/uploads/2017/08/r-regular-expression-cheetsheat.pdf">this cheat sheet</a> as well as <a href="https://paulvanderlaken.com/2017/10/03/regular-expressions-in-r-part-1-introduction-and-base-r-functions">these</a> <a href="https://bookdown.org/rdpeng/rprogdatascience/regular-expressions.html">two</a> additional articles on the matter.</p>
 </div>
@@ -611,17 +610,17 @@
 <div class="sourceCode" id="cb281"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># count how many times a pattern occurs</span></span>
 <span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_count.html">str_count</a></span><span class="op">(</span><span class="va">friends</span>, <span class="st">"e"</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 1 0 1 0 0 1 4 2</code></pre>
+<pre><code>[1] 1 0 1 0 0 1 4 2</code></pre>
 <div class="sourceCode" id="cb283"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># change strings to title case, i.e. first letter uppercase, all else lower</span></span>
 <span><span class="fu"><a href="https://stringr.tidyverse.org/reference/case.html">str_to_title</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/chartr.html">toupper</a></span><span class="op">(</span><span class="va">friends</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] "Alice"     "Bob"       "Charlie"   "Donny"     "Emmy"      "Francine" 
-## [7] "Genevieve" "Heinemann"</code></pre>
+<pre><code>[1] "Alice"     "Bob"       "Charlie"   "Donny"     "Emmy"      "Francine" 
+[7] "Genevieve" "Heinemann"</code></pre>
 <div class="sourceCode" id="cb285"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># "pad" a vector of strings to a constant length</span></span>
 <span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_pad.html">str_pad</a></span><span class="op">(</span><span class="va">friends</span>, width <span class="op">=</span> <span class="fl">12</span>, side <span class="op">=</span> <span class="st">"right"</span>, pad <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] "Alice......." "Bob........." "Charlie....." "Donny......." "Emmy........"
-## [6] "Francine...." "Genevieve..." "Heinemann..."</code></pre>
+<pre><code>[1] "Alice......." "Bob........." "Charlie....." "Donny......." "Emmy........"
+[6] "Francine...." "Genevieve..." "Heinemann..."</code></pre>
 </div>
 <div id="comparing-strings" class="section level3" number="3.9.4">
 <h3>
@@ -655,67 +654,67 @@
 <p>Note however that nothingness, i.e. the absence of a character (such as when a string ends), comes before any character, which makes sense because otherwise “app” would appear after “apple”. Below is a series of examples demonstrating string sorting.</p>
 <div class="sourceCode" id="cb288"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="st">"apple"</span> <span class="op">==</span> <span class="st">"apple"</span></span></code></pre></div>
-<pre><code>## [1] TRUE</code></pre>
+<pre><code>[1] TRUE</code></pre>
 <div class="sourceCode" id="cb290"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># note equality also implies both &gt;= and &lt;=</span></span>
 <span><span class="st">"apple"</span> <span class="op">&gt;=</span> <span class="st">"apple"</span></span></code></pre></div>
-<pre><code>## [1] TRUE</code></pre>
+<pre><code>[1] TRUE</code></pre>
 <div class="sourceCode" id="cb292"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># remember R is case sensitive, so these are different</span></span>
 <span><span class="st">"apple"</span> <span class="op">!=</span> <span class="st">"Apple"</span></span></code></pre></div>
-<pre><code>## [1] TRUE</code></pre>
+<pre><code>[1] TRUE</code></pre>
 <div class="sourceCode" id="cb294"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># comparing apples and oranges</span></span>
 <span><span class="st">"apple"</span> <span class="op">==</span> <span class="st">"orange"</span></span></code></pre></div>
-<pre><code>## [1] FALSE</code></pre>
+<pre><code>[1] FALSE</code></pre>
 <div class="sourceCode" id="cb296"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="st">"apple"</span> <span class="op">&lt;</span> <span class="st">"orange"</span></span></code></pre></div>
-<pre><code>## [1] TRUE</code></pre>
+<pre><code>[1] TRUE</code></pre>
 <div class="sourceCode" id="cb298"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># numbers and symbols can also dictionary-sort like letters</span></span>
 <span><span class="co"># note these numeral characters have NO numeric meaning!</span></span>
 <span><span class="st">"42"</span> <span class="op">&lt;</span> <span class="st">"43"</span></span></code></pre></div>
-<pre><code>## [1] TRUE</code></pre>
+<pre><code>[1] TRUE</code></pre>
 <div class="sourceCode" id="cb300"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="st">"1 pm"</span> <span class="op">&lt;</span> <span class="st">"2 pm"</span></span></code></pre></div>
-<pre><code>## [1] TRUE</code></pre>
+<pre><code>[1] TRUE</code></pre>
 <div class="sourceCode" id="cb302"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="st">"STAT240"</span> <span class="op">&lt;</span> <span class="st">"STAT340"</span></span></code></pre></div>
-<pre><code>## [1] TRUE</code></pre>
+<pre><code>[1] TRUE</code></pre>
 <div class="sourceCode" id="cb304"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># however symbols come before numbers, thus</span></span>
 <span><span class="st">"1,000"</span> <span class="op">&lt;</span> <span class="st">"1000"</span></span></code></pre></div>
-<pre><code>## [1] TRUE</code></pre>
+<pre><code>[1] TRUE</code></pre>
 <div class="sourceCode" id="cb306"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="st">"-3.00"</span> <span class="op">&lt;</span> <span class="st">"-3.14"</span></span></code></pre></div>
-<pre><code>## [1] TRUE</code></pre>
+<pre><code>[1] TRUE</code></pre>
 <div class="sourceCode" id="cb308"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># and remember ending a string comes before any other character</span></span>
 <span><span class="st">"-3"</span> <span class="op">&lt;</span> <span class="st">"-3.14"</span></span></code></pre></div>
-<pre><code>## [1] TRUE</code></pre>
+<pre><code>[1] TRUE</code></pre>
 <p>Using our newfound wisdom, we can now conclusively settle some age old debates!</p>
 <div class="sourceCode" id="cb310"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># what is the greatest state? (head prints the first 6)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">state.name</span>, decreasing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] "Wyoming"       "Wisconsin"     "West Virginia" "Washington"   
-## [5] "Virginia"      "Vermont"</code></pre>
+<pre><code>[1] "Wyoming"       "Wisconsin"     "West Virginia" "Washington"    "Virginia"     
+[6] "Vermont"      </code></pre>
 <div class="sourceCode" id="cb312"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># note by definition of inequalities, we can also use min/max</span></span>
 <span><span class="co"># which will find the first and last alphabetically</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">state.name</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">state.name</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] "Alabama" "Wyoming"</code></pre>
+<pre><code>[1] "Alabama" "Wyoming"</code></pre>
 <div class="sourceCode" id="cb314"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># is the pen mightier than the sword?</span></span>
 <span><span class="st">"pen"</span> <span class="op">&gt;</span> <span class="st">"sword"</span></span></code></pre></div>
-<pre><code>## [1] FALSE</code></pre>
+<pre><code>[1] FALSE</code></pre>
 <div class="sourceCode" id="cb316"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># is Windows better than Mac?</span></span>
 <span><span class="st">"Windows"</span> <span class="op">&gt;</span> <span class="st">"Mac"</span></span></code></pre></div>
-<pre><code>## [1] TRUE</code></pre>
+<pre><code>[1] TRUE</code></pre>
 <div class="sourceCode" id="cb318"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># and most importantly, did the chicken come before the egg?</span></span>
 <span><span class="st">"chicken"</span> <span class="op">&lt;</span> <span class="st">"egg"</span></span></code></pre></div>
-<pre><code>## [1] TRUE</code></pre>
+<pre><code>[1] TRUE</code></pre>
 </div>
 </div>
 <div id="coercion" class="section level2" number="3.10">
@@ -726,16 +725,16 @@
 <div class="sourceCode" id="cb320"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">prices_raw</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"$1,000"</span>, <span class="st">"$1,500"</span>, <span class="st">"$850"</span>, <span class="st">"$2,000"</span><span class="op">)</span></span>
 <span><span class="va">prices_raw</span></span></code></pre></div>
-<pre><code>## [1] "$1,000" "$1,500" "$850"   "$2,000"</code></pre>
+<pre><code>[1] "$1,000" "$1,500" "$850"   "$2,000"</code></pre>
 <p>Since R doesn’t natively understand dollar signs or comma grouping, this must start as a character vector. You can check the type of a vector by using the <code><a href="https://rdrr.io/r/base/numeric.html">is.numeric()</a></code>, <code><a href="https://rdrr.io/r/base/logical.html">is.logical()</a></code>, <code><a href="https://rdrr.io/r/base/character.html">is.character()</a></code> functions.</p>
 <div class="sourceCode" id="cb322"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/character.html">is.character</a></span><span class="op">(</span><span class="va">prices_raw</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] TRUE</code></pre>
+<pre><code>[1] TRUE</code></pre>
 <p>If the data has been “cleaned-up” then you can coerce (i.e. convert) the vector into other types with the corresponding <code><a href="https://rdrr.io/r/base/numeric.html">as.numeric()</a></code>, <code><a href="https://rdrr.io/r/base/logical.html">as.logical()</a></code>, <code><a href="https://rdrr.io/r/base/character.html">as.character()</a></code> functions. In this case however, the data is not yet “cleaned-up” so this coercion operation will give an error.</p>
 <div class="sourceCode" id="cb324"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">prices_raw</span><span class="op">)</span></span></code></pre></div>
-<pre class="warning"><code>## Warning: NAs introduced by coercion</code></pre>
-<pre><code>## [1] NA NA NA NA</code></pre>
+<pre class="warning"><code>Warning: NAs introduced by coercion</code></pre>
+<pre><code>[1] NA NA NA NA</code></pre>
 <p>In R, it’s important to remember <strong>not to reinvent the wheel</strong>; most actions already have an associated package/function, and it’s probably better than what you can write (if you’re a beginner). Here, it may be tempting to write your own parsing function by using <code><a href="https://rdrr.io/r/base/grep.html">sub()</a></code>/<code><a href="https://rdrr.io/r/base/grep.html">gsub()</a></code> to replace the dollar and commas then coerce, but there’s a better option.</p>
 <p><a href="https://readr.tidyverse.org/index.html">readr</a> is another one of the <a href="https://www.tidyverse.org/packages/#core-tidyverse">core Tidyverse</a> packages. It’s designed to make ingesting data as easy as possible.</p>
 <p>One set of readr functions useful here are the <code><a href="https://readr.tidyverse.org/reference/parse_number.html">parse_number()</a></code> and <code><a href="https://readr.tidyverse.org/reference/parse_atomic.html">parse_logical()</a></code> functions (converting to a string is trivial and can basically always be done using the <code><a href="https://rdrr.io/r/base/character.html">as.character()</a></code> function). These functions are quite smart and can ignore extra characters and just extract the relevant numerical info.</p>
@@ -746,15 +745,15 @@
 <div class="sourceCode" id="cb328"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">prices</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/parse_number.html">parse_number</a></span><span class="op">(</span><span class="va">prices_raw</span><span class="op">)</span></span>
 <span><span class="va">prices</span></span></code></pre></div>
-<pre><code>## [1] 1000 1500  850 2000</code></pre>
+<pre><code>[1] 1000 1500  850 2000</code></pre>
 <div class="sourceCode" id="cb330"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">is.numeric</a></span><span class="op">(</span><span class="va">prices</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] TRUE</code></pre>
+<pre><code>[1] TRUE</code></pre>
 <p>This will also work with things like percent symbols, but note it simply ignores the symbol instead of treating it as dividing by 100.</p>
 <div class="sourceCode" id="cb332"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># demonstrate parsing percentages</span></span>
 <span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_number.html">parse_number</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"30%"</span>, <span class="st">"100%"</span>, <span class="st">"1,500%"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1]   30  100 1500</code></pre>
+<pre><code>[1]   30  100 1500</code></pre>
 <p>See the help page for <code><a href="https://readr.tidyverse.org/reference/parse_number.html">parse_number()</a></code> for more examples and usage notes.</p>
 </div>
 <div id="date-vectors" class="section level2" number="3.11">
@@ -770,42 +769,42 @@
 <code class="sourceCode R"><span><span class="co"># create today as an example date object</span></span>
 <span><span class="va">date</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/now.html">today</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">date</span></span></code></pre></div>
-<pre><code>## [1] "2024-08-16"</code></pre>
+<pre><code>[1] "2024-08-16"</code></pre>
 <p>We can see that even though our date object has <code>"Date"</code> class, it actually has <code>"double"</code> type, which means behind the scenes, it’s secretly stored as a number.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;The distinction between class, type, and mode (which we haven’t even mentioned and won’t ever discuss) is highly technical to the mechanics of R and not worth concerning yourself over. If you’re dying of curiosity, I recommend this excellent video on the matter: &lt;a href="https://youtu.be/RwEzWZA9uTw" class="uri"&gt;https://youtu.be/RwEzWZA9uTw&lt;/a&gt;.&lt;/p&gt;'><sup>17</sup></a> If you <code><a href="https://rdrr.io/r/base/class.html">unclass()</a></code> the object, i.e. strip away the <code>"Date"</code> property, you can see it’s just the number 19951 underneath, and you can check that in fact Aug 16, 2024 is indeed <a href="https://www.wolframalpha.com/input?i=19951+days+after+Jan+1+1970">19951 days after Jan 1 1970</a>.</p>
 <div class="sourceCode" id="cb337"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># looks like a date</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">date</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] "Date"</code></pre>
+<pre><code>[1] "Date"</code></pre>
 <div class="sourceCode" id="cb339"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/date_utils.html">is.Date</a></span><span class="op">(</span><span class="va">date</span><span class="op">)</span> <span class="op">&amp;</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">is.numeric</a></span><span class="op">(</span><span class="va">date</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] TRUE</code></pre>
+<pre><code>[1] TRUE</code></pre>
 <div class="sourceCode" id="cb341"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># but it's secretly a number underneath!</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/class.html">unclass</a></span><span class="op">(</span><span class="va">date</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 19951</code></pre>
+<pre><code>[1] 19951</code></pre>
 <div class="sourceCode" id="cb343"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># we can reverse this too, start with a number,</span></span>
 <span><span class="co"># then change the class to "Date", and voila!</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">19951</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"Date"</span></span>
 <span><span class="va">x</span></span></code></pre></div>
-<pre><code>## [1] "2024-08-16"</code></pre>
+<pre><code>[1] "2024-08-16"</code></pre>
 <div class="note">
 <p>R conforms to <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO-8601</a> standards, i.e. <strong>dates ALWAYS show as <code>"YYYY-MM-DD"</code></strong> (even though they’re stored numerically). This is arguably the best format for dates, because it’s the unique format where <a href="https://en.wikipedia.org/wiki/ISO_8601#General_principles">chronological order and lexicographical order are identical</a>, which is an extremely useful property.</p>
 <p>Also note despite <code>date</code> appearing to be a character, it is NOT a character. Using <code><a href="https://rdrr.io/r/base/identical.html">identical()</a></code> (which compares if two objects are the same) will show this to be false. Furthermore, <code><a href="https://rdrr.io/r/base/numeric.html">as.numeric()</a></code> confirms <code>date</code> converts to 19951 as expected, whereas the string <code>"2024-08-16"</code> cannot be converted and returns <code>NA</code>.</p>
 <div class="sourceCode" id="cb345"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">date</span></span></code></pre></div>
-<pre><code>## [1] "2024-08-16"</code></pre>
+<pre><code>[1] "2024-08-16"</code></pre>
 <div class="sourceCode" id="cb347"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/character.html">is.character</a></span><span class="op">(</span><span class="va">date</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] FALSE</code></pre>
+<pre><code>[1] FALSE</code></pre>
 <div class="sourceCode" id="cb349"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/identical.html">identical</a></span><span class="op">(</span><span class="va">date</span>, <span class="st">"2024-08-16"</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] FALSE</code></pre>
+<pre><code>[1] FALSE</code></pre>
 <div class="sourceCode" id="cb351"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">date</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="st">"2024-08-16"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre class="warning"><code>## Warning: NAs introduced by coercion</code></pre>
-<pre><code>## [1] 19951    NA</code></pre>
+<pre class="warning"><code>Warning: NAs introduced by coercion</code></pre>
+<pre><code>[1] 19951    NA</code></pre>
 <p>This is just to warn you that <strong>even though they may print similarly, date objects and date-like strings are <em>NOT</em> the same</strong>, so to avoid errors and unexpected behavior, make sure you properly convert all date data to be true date objects.</p>
 </div>
 <div id="parsing-dates" class="section level3" number="3.11.1">
@@ -818,12 +817,12 @@
 <code class="sourceCode R"><span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html">mdy</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
 <span>  <span class="st">"8/16/24, 08-16-2024, 081624, Aug 16 '24, Friday, August 16th, 2024"</span></span>
 <span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] "2024-08-16" "2024-08-16" "2024-08-16" "2024-08-16" "2024-08-16"</code></pre>
+<pre><code>[1] "2024-08-16" "2024-08-16" "2024-08-16" "2024-08-16" "2024-08-16"</code></pre>
 <div class="sourceCode" id="cb356"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html">dmy</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
 <span>  <span class="st">"16/8/24, 16-08-2024, 160824, 16 Aug '24, Friday, 16th of August, 2024"</span></span>
 <span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] "2024-08-16" "2024-08-16" "2024-08-16" "2024-08-16" "2024-08-16"</code></pre>
+<pre><code>[1] "2024-08-16" "2024-08-16" "2024-08-16" "2024-08-16" "2024-08-16"</code></pre>
 <p>As you can see, you just need to tell R which order to expect the date components and it will handle the rest! We only demonstrated the <code><a href="https://lubridate.tidyverse.org/reference/ymd.html">mdy()</a></code> and <code><a href="https://lubridate.tidyverse.org/reference/ymd.html">dmy()</a></code> functions here since they are by far the most common formats, but the other functions all behave the same.</p>
 <p>One last parser. Sometimes data gives dates as a decimal, e.g. <code>2024-08-16</code> would be <code>2024.623</code> since it’s the 229th day of the year which means it’s <code>(229-1)/366*100%=62.3%</code> of the way into the year.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;The -1 in the numerator is due to the date being treated as 12am midnight, hence the 229th day, &lt;code&gt;2024-08-16&lt;/code&gt; is just about to start, so only 229 days have passed so far.&lt;/p&gt;"><sup>18</sup></a> R also has a dedicated function for this. <code><a href="https://lubridate.tidyverse.org/reference/date_decimal.html">date_decimal()</a></code> converts the decimal to a date+time object, which we can then round to the nearest date with <a href="https://lubridate.tidyverse.org/reference/round_date.html"><code class="sourceCode r"><span class="fu">round_date</span>(...,<span class="at">unit=</span><span class="st">"day"</span>)</code></a> and drop the time component with <code><a href="https://lubridate.tidyverse.org/reference/date.html">date()</a></code> which converts date+time objects to pure date objects (again, we are not covering date+time objects due to complexity &amp; limited time).</p>
 <div class="sourceCode" id="cb358"><pre class="downlit sourceCode r">
@@ -832,16 +831,16 @@
 <span><span class="co"># (here, runif uniformly samples 4 numbers from 2000 to 2024.623)</span></span>
 <span><span class="va">dates2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">2000</span>, <span class="fl">2024.623</span><span class="op">)</span></span>
 <span><span class="va">dates2</span></span></code></pre></div>
-<pre><code>## [1] 2006.538 2009.163 2014.105 2022.363</code></pre>
+<pre><code>[1] 2006.538 2009.163 2014.105 2022.363</code></pre>
 <div class="sourceCode" id="cb360"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># convert decimals to dates</span></span>
 <span><span class="va">dates2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/date.html">date</a></span><span class="op">(</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/round_date.html">round_date</a></span><span class="op">(</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/date_decimal.html">date_decimal</a></span><span class="op">(</span><span class="va">dates2</span><span class="op">)</span>, unit <span class="op">=</span> <span class="st">"day"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">dates2</span></span></code></pre></div>
-<pre><code>## [1] "2006-07-16" "2009-03-01" "2014-02-08" "2022-05-13"</code></pre>
+<pre><code>[1] "2006-07-16" "2009-03-01" "2014-02-08" "2022-05-13"</code></pre>
 <p>There is also a reverse function <code><a href="https://lubridate.tidyverse.org/reference/decimal_date.html">decimal_date()</a></code> that converts a date back into a decimal.</p>
 <div class="sourceCode" id="cb362"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/decimal_date.html">decimal_date</a></span><span class="op">(</span><span class="va">dates2</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 2006.537 2009.162 2014.104 2022.362</code></pre>
+<pre><code>[1] 2006.537 2009.162 2014.104 2022.362</code></pre>
 </div>
 <div id="aside-rs-calendar" class="section level3" number="3.11.2">
 <h3>
@@ -851,26 +850,26 @@
 <div class="sourceCode" id="cb364"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># the most recent leap year is 2024, since it's divisible by 4</span></span>
 <span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html">mdy</a></span><span class="op">(</span><span class="st">"Feb 29, 2024"</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] "2024-02-29"</code></pre>
+<pre><code>[1] "2024-02-29"</code></pre>
 <div class="sourceCode" id="cb366"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># however, years like 1900 or 2100 are not leap,</span></span>
 <span><span class="co"># since they're also divisible by 100</span></span>
 <span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html">mdy</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Feb 29, 1900"</span>, <span class="st">"Feb 29, 2100"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre class="warning"><code>## Warning: 2 failed to parse.</code></pre>
-<pre><code>## [1] NA NA</code></pre>
+<pre class="warning"><code>Warning: 2 failed to parse.</code></pre>
+<pre><code>[1] NA NA</code></pre>
 <div class="sourceCode" id="cb369"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># but 2000 is leap, since it's also divisible by 400</span></span>
 <span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html">mdy</a></span><span class="op">(</span><span class="st">"Feb 29, 2000"</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] "2000-02-29"</code></pre>
+<pre><code>[1] "2000-02-29"</code></pre>
 <div class="sourceCode" id="cb371"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># you can also use the leap_year() function instead</span></span>
 <span><span class="co"># is the year that a given date is in leap?</span></span>
 <span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/leap_year.html">leap_year</a></span><span class="op">(</span><span class="va">date</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] TRUE</code></pre>
+<pre><code>[1] TRUE</code></pre>
 <div class="sourceCode" id="cb373"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># which of these given years are leap?</span></span>
 <span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/leap_year.html">leap_year</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1900</span>, <span class="fl">2000</span>, <span class="fl">2024</span>, <span class="fl">2100</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] FALSE  TRUE  TRUE FALSE</code></pre>
+<pre><code>[1] FALSE  TRUE  TRUE FALSE</code></pre>
 <p>Fun fact: R’s calendar is more rigorous than Excel’s calendar, since it correctly treats 1900 as non-leap, <a href="https://learn.microsoft.com/en-us/office/troubleshoot/excel/wrongly-assumes-1900-is-leap-year">unlike Excel</a>. This is of course probably immaterial in the 21<sup>st</sup> century, I just think it’s an amusing bit of trivia.</p>
 </div>
 <div id="getset-components" class="section level3" number="3.11.3">
@@ -883,35 +882,35 @@
 <code class="sourceCode R"><span><span class="co"># add in today, then print (to remind us what it contains)</span></span>
 <span><span class="va">dates2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">date</span>, <span class="va">dates2</span><span class="op">)</span></span>
 <span><span class="va">dates2</span></span></code></pre></div>
-<pre><code>## [1] "2024-08-16" "2006-07-16" "2009-03-01" "2014-02-08" "2022-05-13"</code></pre>
+<pre><code>[1] "2024-08-16" "2006-07-16" "2009-03-01" "2014-02-08" "2022-05-13"</code></pre>
 <div class="sourceCode" id="cb377"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># extract the year, month, day, wday, quarter</span></span>
 <span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/year.html">year</a></span><span class="op">(</span><span class="va">dates2</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 2024 2006 2009 2014 2022</code></pre>
+<pre><code>[1] 2024 2006 2009 2014 2022</code></pre>
 <div class="sourceCode" id="cb379"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/month.html">month</a></span><span class="op">(</span><span class="va">dates2</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 8 7 3 2 5</code></pre>
+<pre><code>[1] 8 7 3 2 5</code></pre>
 <div class="sourceCode" id="cb381"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/day.html">day</a></span><span class="op">(</span><span class="va">dates2</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 16 16  1  8 13</code></pre>
+<pre><code>[1] 16 16  1  8 13</code></pre>
 <div class="sourceCode" id="cb383"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># wday starts counting from Sunday, i.e. 1=Sunday, 2=Monday, etc.</span></span>
 <span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/day.html">wday</a></span><span class="op">(</span><span class="va">dates2</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 6 1 1 7 6</code></pre>
+<pre><code>[1] 6 1 1 7 6</code></pre>
 <div class="sourceCode" id="cb385"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/quarter.html">quarter</a></span><span class="op">(</span><span class="va">dates2</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 3 3 1 1 2</code></pre>
+<pre><code>[1] 3 3 1 1 2</code></pre>
 <p>Some functions (where it makes sense) like <code><a href="https://lubridate.tidyverse.org/reference/month.html">month()</a></code> and <code><a href="https://lubridate.tidyverse.org/reference/day.html">wday()</a></code> have additional arguments like <code>label</code> and <code>abbr</code> to control the output format when you have the option to output names instead of numbers. Again, I recommend you briefly check the help page of every new function you learn for additional options.</p>
 <div class="sourceCode" id="cb387"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># output month as abbreviated names instead (abbr = TRUE by default)</span></span>
 <span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/month.html">month</a></span><span class="op">(</span><span class="va">dates2</span>, label <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] Aug Jul Mar Feb May
-## 12 Levels: Jan &lt; Feb &lt; Mar &lt; Apr &lt; May &lt; Jun &lt; Jul &lt; Aug &lt; Sep &lt; ... &lt; Dec</code></pre>
+<pre><code>[1] Aug Jul Mar Feb May
+12 Levels: Jan &lt; Feb &lt; Mar &lt; Apr &lt; May &lt; Jun &lt; Jul &lt; Aug &lt; Sep &lt; Oct &lt; ... &lt; Dec</code></pre>
 <div class="sourceCode" id="cb389"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># output day of week as full, unabridged names</span></span>
 <span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/day.html">wday</a></span><span class="op">(</span><span class="va">dates2</span>, label <span class="op">=</span> <span class="cn">TRUE</span>, abbr <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] Friday   Sunday   Sunday   Saturday Friday  
-## 7 Levels: Sunday &lt; Monday &lt; Tuesday &lt; Wednesday &lt; Thursday &lt; ... &lt; Saturday</code></pre>
+<pre><code>[1] Friday   Sunday   Sunday   Saturday Friday  
+7 Levels: Sunday &lt; Monday &lt; Tuesday &lt; Wednesday &lt; Thursday &lt; ... &lt; Saturday</code></pre>
 <div class="note">
 <p>If your system is in a different language, you may see the code above output non-English names for the months and days of the week. This is because R uses your <a href="https://en.wikipedia.org/wiki/Locale_(computer_software)">system’s locale</a> to determine how to output some values. This is extremely easy to fix; simply run the line of code below ONCE in your console, then close and restart Rstudio for the changes to permanently take effect.</p>
 <div class="sourceCode" id="cb391"><pre class="downlit sourceCode r">
@@ -927,12 +926,12 @@
 <span><span class="co"># change year of all dates to 2000</span></span>
 <span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/year.html">year</a></span><span class="op">(</span><span class="va">new_dates2</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fl">2000</span></span>
 <span><span class="va">new_dates2</span></span></code></pre></div>
-<pre><code>## [1] "2000-08-16" "2000-07-16" "2000-03-01" "2000-02-08" "2000-05-13"</code></pre>
+<pre><code>[1] "2000-08-16" "2000-07-16" "2000-03-01" "2000-02-08" "2000-05-13"</code></pre>
 <div class="sourceCode" id="cb394"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># of course this is also vectorized!</span></span>
 <span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/year.html">year</a></span><span class="op">(</span><span class="va">new_dates2</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fl">2000</span><span class="op">:</span><span class="fl">2004</span></span>
 <span><span class="va">new_dates2</span></span></code></pre></div>
-<pre><code>## [1] "2000-08-16" "2001-07-16" "2002-03-01" "2003-02-08" "2004-05-13"</code></pre>
+<pre><code>[1] "2000-08-16" "2001-07-16" "2002-03-01" "2003-02-08" "2004-05-13"</code></pre>
 <p>This works with all the getters above, feel free to experiment more with this on your own. There are also several other getter/setter functions such as <code><a href="https://lubridate.tidyverse.org/reference/day.html">qday()</a></code> for day of the quarter, <code><a href="https://lubridate.tidyverse.org/reference/week.html">week()</a></code> for week number, and <code><a href="https://lubridate.tidyverse.org/reference/quarter.html">semester()</a></code> for 1<sup>st</sup> or 2<sup>nd</sup> semester of the year.</p>
 </div>
 <div id="date-math" class="section level3" number="3.11.4">
@@ -943,60 +942,59 @@
 <div class="sourceCode" id="cb396"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># get tomorrow by adding +1 to today</span></span>
 <span><span class="va">date</span> <span class="op">+</span> <span class="fl">1</span></span></code></pre></div>
-<pre><code>## [1] "2024-08-17"</code></pre>
+<pre><code>[1] "2024-08-17"</code></pre>
 <div class="sourceCode" id="cb398"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># what date was 1000 days ago?</span></span>
 <span><span class="va">date</span> <span class="op">-</span> <span class="fl">1000</span></span></code></pre></div>
-<pre><code>## [1] "2021-11-20"</code></pre>
+<pre><code>[1] "2021-11-20"</code></pre>
 <div class="sourceCode" id="cb400"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># how many days has it been since y2k?</span></span>
 <span><span class="co"># note that subtracting dates gives a "difftime" class object</span></span>
 <span><span class="co"># you can convert this to a number using the familiar as.numeric()</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">date</span> <span class="op">-</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html">mdy</a></span><span class="op">(</span><span class="st">"1/1/00"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 8994</code></pre>
+<pre><code>[1] 8994</code></pre>
 <div class="sourceCode" id="cb402"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># make a sequence of dates from today to the end of the month</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="va">date</span>, <span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html">mdy</a></span><span class="op">(</span><span class="st">"8/31/24"</span><span class="op">)</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<pre><code>##  [1] "2024-08-16" "2024-08-17" "2024-08-18" "2024-08-19" "2024-08-20"
-##  [6] "2024-08-21" "2024-08-22" "2024-08-23" "2024-08-24" "2024-08-25"
-## [11] "2024-08-26" "2024-08-27" "2024-08-28" "2024-08-29" "2024-08-30"
-## [16] "2024-08-31"</code></pre>
+<pre><code> [1] "2024-08-16" "2024-08-17" "2024-08-18" "2024-08-19" "2024-08-20" "2024-08-21"
+ [7] "2024-08-22" "2024-08-23" "2024-08-24" "2024-08-25" "2024-08-26" "2024-08-27"
+[13] "2024-08-28" "2024-08-29" "2024-08-30" "2024-08-31"</code></pre>
 <div class="sourceCode" id="cb404"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># make a sequence of every Friday from today to the end of the year</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="va">date</span>, <span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html">mdy</a></span><span class="op">(</span><span class="st">"12/31/24"</span><span class="op">)</span>, by <span class="op">=</span> <span class="fl">7</span><span class="op">)</span></span></code></pre></div>
-<pre><code>##  [1] "2024-08-16" "2024-08-23" "2024-08-30" "2024-09-06" "2024-09-13"
-##  [6] "2024-09-20" "2024-09-27" "2024-10-04" "2024-10-11" "2024-10-18"
-## [11] "2024-10-25" "2024-11-01" "2024-11-08" "2024-11-15" "2024-11-22"
-## [16] "2024-11-29" "2024-12-06" "2024-12-13" "2024-12-20" "2024-12-27"</code></pre>
+<pre><code> [1] "2024-08-16" "2024-08-23" "2024-08-30" "2024-09-06" "2024-09-13" "2024-09-20"
+ [7] "2024-09-27" "2024-10-04" "2024-10-11" "2024-10-18" "2024-10-25" "2024-11-01"
+[13] "2024-11-08" "2024-11-15" "2024-11-22" "2024-11-29" "2024-12-06" "2024-12-13"
+[19] "2024-12-20" "2024-12-27"</code></pre>
 <div class="sourceCode" id="cb406"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># has independence day already happened this year?</span></span>
 <span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html">mdy</a></span><span class="op">(</span><span class="st">"7/4/24"</span><span class="op">)</span> <span class="op">&lt;=</span> <span class="va">date</span></span></code></pre></div>
-<pre><code>## [1] TRUE</code></pre>
+<pre><code>[1] TRUE</code></pre>
 <div class="sourceCode" id="cb408"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># what is the earliest date in the dates2 vector?</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">dates2</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] "2006-07-16"</code></pre>
+<pre><code>[1] "2006-07-16"</code></pre>
 <div class="sourceCode" id="cb410"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># organize dates2 in chronological order</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">dates2</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] "2006-07-16" "2009-03-01" "2014-02-08" "2022-05-13" "2024-08-16"</code></pre>
+<pre><code>[1] "2006-07-16" "2009-03-01" "2014-02-08" "2022-05-13" "2024-08-16"</code></pre>
 <div class="sourceCode" id="cb412"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># is today in dates2?</span></span>
 <span><span class="va">date</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">dates2</span></span></code></pre></div>
-<pre><code>## [1] TRUE</code></pre>
+<pre><code>[1] TRUE</code></pre>
 <div class="sourceCode" id="cb414"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># some statistical functions can also be run on dates</span></span>
 <span><span class="co"># e.g. we can find the mean and median date of dates2</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">dates2</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] "2015-05-11"</code></pre>
+<pre><code>[1] "2015-05-11"</code></pre>
 <div class="sourceCode" id="cb416"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">dates2</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] "2014-02-08"</code></pre>
+<pre><code>[1] "2014-02-08"</code></pre>
 <div class="sourceCode" id="cb418"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># we can even find the standard deviation of dates,</span></span>
 <span><span class="co"># though this does NOT return a date itself but rather a number of days</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">dates2</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 2902.888</code></pre>
+<pre><code>[1] 2902.888</code></pre>
 </div>
 <div id="printing-dates" class="section level3" number="3.11.5">
 <h3>
@@ -1006,15 +1004,15 @@
 <div class="sourceCode" id="cb420"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># print today as mm/dd/yy which is common in the US</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">date</span>, <span class="st">"%m/%d/%y"</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] "08/16/24"</code></pre>
+<pre><code>[1] "08/16/24"</code></pre>
 <div class="sourceCode" id="cb422"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># another way, slightly more written out</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">date</span>, <span class="st">"%b %d, %Y"</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] "Aug 16, 2024"</code></pre>
+<pre><code>[1] "Aug 16, 2024"</code></pre>
 <div class="sourceCode" id="cb424"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># fully written out, including weekday</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">date</span>, <span class="st">"%A, %B %e, %Y"</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] "Friday, August 16, 2024"</code></pre>
+<pre><code>[1] "Friday, August 16, 2024"</code></pre>
 <p>A full list of these percent codes can be found in the help page of <code><a href="https://rdrr.io/r/base/strptime.html">strptime()</a></code>, a base R function for parsing date/time objects.</p>
 
 </div>

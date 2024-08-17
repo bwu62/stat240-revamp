@@ -211,7 +211,7 @@
 <code class="sourceCode R"><span><span class="co"># this line is a comment and will not be run</span></span>
 <span><span class="co"># use the copy button in the top corner to easily run this example ---&gt;</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"output is shown here"</span><span class="op">)</span> <span class="co"># you can also add comments here</span></span></code></pre></div>
-<pre><code>## [1] "output is shown here"</code></pre>
+<pre><code>[1] "output is shown here"</code></pre>
 <div class="note">
 <p>The <code>[1]</code> that appears at the start of the output line just means this is the first output value. These bracketed numbers are not part of the actual output and should be ignored.</p>
 </div>
@@ -231,42 +231,42 @@
 <p>One of the first things you should learn about R is how to use it as a calculator to do basic math. Operators like <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>^</code>, and parentheses <code>( )</code> work just like how you’d expect. Note <strong>R respects standard order of operations</strong> (see <a href="https://rdrr.io/r/base/Syntax.html">this page on operation order</a> for more details).</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">(</span><span class="op">-</span><span class="fl">5</span> <span class="op">*</span> <span class="op">-</span><span class="fl">3</span><span class="op">^</span><span class="fl">2</span> <span class="op">+</span> <span class="fl">4</span><span class="op">)</span> <span class="op">/</span> <span class="fl">7</span> <span class="op">-</span> <span class="fl">6</span></span></code></pre></div>
-<pre><code>## [1] 1</code></pre>
+<pre><code>[1] 1</code></pre>
 <div class="note">
 <p>R will sometimes output in scientific notation, especially if the number cannot be exactly numerically represented due to limitations of computers. For example, if you compute <code>2^50</code> R will show the result as <code>1.1259e+15</code>, i.e. 1.1259×10<sup>15</sup>. You can also type in <code>1.1259e+15</code> and R will understand it as 1.1259×10<sup>15</sup>.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fl">2</span><span class="op">^</span><span class="fl">50</span></span></code></pre></div>
-<pre><code>## [1] 1.1259e+15</code></pre>
+<pre><code>[1] 1.1259e+15</code></pre>
 <p>Also note due to limitations of <a href="https://en.wikipedia.org/wiki/IEEE_754">how computers represent numbers</a>, R often cannot distinguish between numbers that differ by less than about 10<sup>-15</sup>, i.e. 0.000000000000001.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;This is a MASSIVE oversimplification, but it’ll have to suffice because the rabbit hole on &lt;a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/.Machine"&gt;“machine precision”&lt;/a&gt; and &lt;a href="https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html"&gt;floating-point arithmetic errors&lt;/a&gt; is—like the nights in ASOIAF—dark and full of terrors.&lt;/p&gt;'><sup>2</sup></a></p>
 </div>
 <p>You can also perform integer division in R, i.e. dividing to get the quotient and remainder, by using <a href="https://rdrr.io/r/base/Arithmetic.html"><code class="sourceCode r"><span class="sc">%/%</span></code></a> for the quotient and <a href="https://rdrr.io/r/base/Arithmetic.html"><code class="sourceCode r"><span class="sc">%%</span></code></a> for the remainder. This allows you to check, for example, if a number is even or odd.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fl">13</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html">%/%</a></span> <span class="fl">2</span></span></code></pre></div>
-<pre><code>## [1] 6</code></pre>
+<pre><code>[1] 6</code></pre>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fl">13</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html">%%</a></span> <span class="fl">2</span></span></code></pre></div>
-<pre><code>## [1] 1</code></pre>
+<pre><code>[1] 1</code></pre>
 <div class="note">
 <p>Operators like <a href="https://rdrr.io/r/base/Arithmetic.html"><code class="sourceCode r"><span class="sc">%/%</span></code></a> or <a href="https://rdrr.io/r/base/Arithmetic.html"><code class="sourceCode r"><span class="sc">%%</span></code></a> may seem strange at first, but they work just like any other <a href="https://www.datacamp.com/tutorial/operators-in-r">binary operators</a> in R such as <code>+</code> or <code>^</code> . There are other examples of such operators like <a href="https://rdrr.io/r/base/match.html"><code class="sourceCode r"><span class="sc">%in%</span></code></a> and <a href="https://magrittr.tidyverse.org/reference/pipe.html"><code class="sourceCode r"><span class="sc">%&gt;%</span></code></a> which we will learn about later.</p>
 </div>
 <p>Trigonometric functions <code><a href="https://rdrr.io/r/base/Trig.html">sin()</a></code>, <code><a href="https://rdrr.io/r/base/Trig.html">cos()</a></code>, <code><a href="https://rdrr.io/r/base/Trig.html">tan()</a></code>, (and their inverses <code><a href="https://rdrr.io/r/base/Trig.html">asin()</a></code>, <code><a href="https://rdrr.io/r/base/Trig.html">acos()</a></code>, <code><a href="https://rdrr.io/r/base/Trig.html">atan()</a></code> where the a– prefix means arc–), also work as you’d expect and use radian units. Note <a href="https://rdrr.io/r/base/Constants.html"><code class="sourceCode r">pi</code></a> is conveniently predefined as <span class="math inline">\(\pi\)</span>. <a href="https://rdrr.io/r/base/Hyperbolic.html">Hyperbolic trig functions</a> also exist if you need them.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Trig.html">cos</a></span><span class="op">(</span><span class="fl">2</span> <span class="op">*</span> <span class="va">pi</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 1</code></pre>
+<pre><code>[1] 1</code></pre>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Trig.html">atan</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span> <span class="op">*</span> <span class="fl">4</span></span></code></pre></div>
-<pre><code>## [1] -3.141593</code></pre>
+<pre><code>[1] -3.141593</code></pre>
 <p>Exponential and logarithm functions <code><a href="https://rdrr.io/r/base/Log.html">exp()</a></code> and <code><a href="https://rdrr.io/r/base/Log.html">log()</a></code>, also work as you’d expect and default to the natural base <span class="math inline">\(e\)</span>. Note the log function has an optional <code>base</code> argument for using a different base. There are also special base 10 and 2 versions <code><a href="https://rdrr.io/r/base/Log.html">log10()</a></code> and <code><a href="https://rdrr.io/r/base/Log.html">log2()</a></code> .</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log10</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 4</code></pre>
+<pre><code>[1] 4</code></pre>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fl">3</span><span class="op">^</span><span class="fl">5</span>, base <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 5</code></pre>
+<pre><code>[1] 5</code></pre>
 <p>Additionally, <code><a href="https://rdrr.io/r/base/MathFun.html">abs()</a></code> computes the absolute value and <code><a href="https://rdrr.io/r/base/MathFun.html">sqrt()</a></code> the square root (note by convention, ONLY the positive root is returned). Taking the square root of a negative number will return <code>NaN</code>.</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="op">-</span><span class="fl">9</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 3</code></pre>
+<pre><code>[1] 3</code></pre>
 </div>
 <div id="aside-function-arguments" class="section level3" number="2.3.3">
 <h3>
@@ -283,24 +283,24 @@
 <p>We already mentioned <a href="https://rdrr.io/r/base/Constants.html"><code class="sourceCode r">pi</code></a> is predefined. There are a few other important special values in R. <a href="https://rdrr.io/r/base/logical.html"><code class="sourceCode r"><span class="cn">TRUE</span></code></a> and <a href="https://rdrr.io/r/base/logical.html"><code class="sourceCode r"><span class="cn">FALSE</span></code></a>, along with their abbreviations <code>T</code> and <code>F</code> are also predefined. Note the capitalization; <strong>R is a case-sensitive language</strong> so <code>true</code>, <code>True</code>, and <code>t</code> are NOT the same as <code>TRUE</code> (the first two are not defined, while <code><a href="https://rdrr.io/r/base/t.html">t()</a></code> is the matrix transpose function).</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="cn">T</span></span></code></pre></div>
-<pre><code>## [1] TRUE</code></pre>
+<pre><code>[1] TRUE</code></pre>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">true</span></span></code></pre></div>
-<pre><code>## Error: object 'true' not found</code></pre>
+<pre><code>Error: object 'true' not found</code></pre>
 <p>An important thing to note is that in R, doing any kind of <strong>math turns <code>TRUE</code> into 1 and <code>FALSE</code> into 0</strong>.</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">*</span> <span class="op">(</span><span class="cn">TRUE</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 2</code></pre>
+<pre><code>[1] 2</code></pre>
 <p>Mathematical expressions may also return <a href="https://rdrr.io/r/base/is.finite.html"><code class="sourceCode r"><span class="cn">NaN</span></code></a> for <strong>N</strong>ot <strong>a</strong> <strong>N</strong>umber, i.e. undefined; or <a href="https://rdrr.io/r/base/is.finite.html"><code class="sourceCode r"><span class="cn">Inf</span></code></a> for infinite. Note R differentiates between positive infinity <a href="https://rdrr.io/r/base/is.finite.html"><code class="sourceCode r"><span class="cn">Inf</span></code></a> and negative infinity <a href="https://rdrr.io/r/base/is.finite.html"><code class="sourceCode r"><span class="sc">-</span><span class="cn">Inf</span></code></a>.</p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="op">-</span><span class="fl">4</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] NaN</code></pre>
+<pre><code>[1] NaN</code></pre>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fl">1</span> <span class="op">/</span> <span class="fl">0</span></span></code></pre></div>
-<pre><code>## [1] Inf</code></pre>
+<pre><code>[1] Inf</code></pre>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] -Inf</code></pre>
+<pre><code>[1] -Inf</code></pre>
 <p>Additionally, <a href="https://rdrr.io/r/base/NA.html"><code class="sourceCode r"><span class="cn">NA</span></code></a> is used to represent missing values, i.e. when data is not available. <strong>Note <code>NA</code> and <code>NaN</code> are NOT the same</strong>. We will learn later about how to handle <a href="https://rdrr.io/r/base/NA.html"><code class="sourceCode r"><span class="cn">NA</span></code></a> missing values.</p>
 </div>
 <div id="assignment" class="section level3" number="2.3.5">
@@ -312,19 +312,19 @@
 <code class="sourceCode R"><span><span class="co"># this is preferred</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">5</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 5</code></pre>
+<pre><code>[1] 5</code></pre>
 <div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># this is equivalent and acceptable, but discouraged</span></span>
 <span><span class="va">x</span> <span class="op">=</span> <span class="fl">5</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 5</code></pre>
+<pre><code>[1] 5</code></pre>
 <div class="tip">
 <p>You can quickly insert the assignment <code>&lt;-</code> operator with <span class="k">ALT</span>+<span class="k">-</span> on Windows or <span class="k">⌥</span>+<span class="k">-</span> on Mac.</p>
 </div>
 <p>Generally, <code>=</code> is reserved for setting arguments inside functions, e.g. like the previous code chunk where we computed <code><a href="https://rdrr.io/r/base/Log.html">log()</a></code> with a custom base by setting the <code>base</code> argument.</p>
 <div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fl">3</span><span class="op">^</span><span class="fl">5</span>, base <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 5</code></pre>
+<pre><code>[1] 5</code></pre>
 <p>Variable names can be any combination of upper and lower-case letters, numbers, or period <code>.</code> and underscore <code>_</code> (which are both treated similar to letters), with one caveat: <strong>variables must begin with a letter or period</strong>, not a number or underscore. You may not use any other characters in variable names.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;This is only a short summary. Technically, any set of ANY characters can be used to create a &lt;a href="https://adv-r.hadley.nz/names-values.html#non-syntactic"&gt;non-syntactic name&lt;/a&gt;, but this is beyond our current scope.&lt;/p&gt;'><sup>4</sup></a></p>
 <div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># these variable names are ok,</span></span>
@@ -335,7 +335,7 @@
 <span><span class="va">another.variable_42</span> <span class="op">&lt;-</span> <span class="fl">4</span></span>
 <span></span>
 <span><span class="va">var1</span> <span class="op">+</span> <span class="va">Var1</span> <span class="op">+</span> <span class="va">.OtherVariable</span> <span class="op">+</span> <span class="va">another.variable_42</span></span></code></pre></div>
-<pre><code>## [1] 10</code></pre>
+<pre><code>[1] 10</code></pre>
 <div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># even these morse code looking variable names,</span></span>
 <span><span class="co"># while not recommended, are technically ok:</span></span>
@@ -345,11 +345,11 @@
 <span><span class="va">._..__</span> <span class="op">&lt;-</span> <span class="fl">4</span></span>
 <span></span>
 <span><span class="va">.</span> <span class="op">+</span> <span class="va">..</span> <span class="op">+</span> <span class="va">._</span> <span class="op">+</span> <span class="va">._..__</span></span></code></pre></div>
-<pre><code>## [1] 10</code></pre>
+<pre><code>[1] 10</code></pre>
 <div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="rstudio-intro.html#cb45-1" tabindex="-1"></a><span class="co"># these variable names will raise errors:</span></span>
 <span id="cb45-2"><a href="rstudio-intro.html#cb45-2" tabindex="-1"></a><span class="co">#   1var, _var, bad-var,   e.g.:</span></span>
 <span id="cb45-3"><a href="rstudio-intro.html#cb45-3" tabindex="-1"></a><span class="dv">1</span>var <span class="ot">&lt;-</span> <span class="dv">1</span></span></code></pre></div>
-<pre><code>## Error: unexpected symbol in "1var"</code></pre>
+<pre><code>Error: unexpected symbol in "1var"</code></pre>
 <div class="note">
 <p>Observe that if the results of an expression are saved to a variable, R will NOT print it by default. This is often confusing to first time R users, since it may seem like nothing happened. For example, running the following:</p>
 <div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
@@ -357,7 +357,7 @@
 <p>produces no visible output. This is normal behavior, since the output has been redirected into a variable. To inspect the result, you must explicitly call or <code><a href="https://rdrr.io/r/base/print.html">print()</a></code> the object again:</p>
 <div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">result</span></span></code></pre></div>
-<pre><code>## [1] 7</code></pre>
+<pre><code>[1] 7</code></pre>
 </div>
 </div>
 <div id="summary-functions" class="section level3" number="2.3.6">
@@ -369,52 +369,52 @@
 <div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">6</span>, <span class="fl">6</span>, <span class="fl">2</span>, <span class="fl">4</span>, <span class="fl">1</span>, <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="va">data</span></span></code></pre></div>
-<pre><code>## [1] 3 6 6 2 4 1 5</code></pre>
+<pre><code>[1] 3 6 6 2 4 1 5</code></pre>
 <p>The <code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code> and <code><a href="https://rdrr.io/r/base/length.html">length()</a></code> functions work like you expect and produce the sum and length of the sample. You can use them to compute the <a href="https://www.mathsisfun.com/mean.html">mean</a> of your sample, which can also be done directly using <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code>.</p>
 <div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 3.857143</code></pre>
+<pre><code>[1] 3.857143</code></pre>
 <div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 3.857143</code></pre>
+<pre><code>[1] 3.857143</code></pre>
 <p>We can also find the <a href="https://www.mathsisfun.com/median.html">median</a> (i.e. middle number) with the <code><a href="https://rdrr.io/r/stats/median.html">median()</a></code> function. (Sadly, there’s no built-in <a href="https://www.mathsisfun.com/mode.html">mode</a> function in R, but this can be achieved with <a href="https://rdrr.io/cran/DescTools/man/Mode.html">other packages</a>.)</p>
 <div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 4</code></pre>
+<pre><code>[1] 4</code></pre>
 <p>We can generalize from the median (which is the 50-th percentile) to compute <a href="https://www.mathsisfun.com/data/percentiles.html">any percentile</a> using the <code><a href="https://rdrr.io/r/stats/quantile.html">quantile()</a></code> function, e.g. suppose we want to compute the 30-th percentile:</p>
 <div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">data</span>, <span class="fl">0.3</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## 30% 
-## 2.8</code></pre>
+<pre><code>30% 
+2.8 </code></pre>
 <p>The <a href="https://www.mathsisfun.com/data/standard-deviation.html">standard deviation</a> is another important statistic (think of it as the distance of the average observation from the mean) and can be computed using <code><a href="https://rdrr.io/r/stats/sd.html">sd()</a></code>. Note this is equivalent to the square root of the variance which can be found with <code><a href="https://rdrr.io/r/stats/cor.html">var()</a></code>.</p>
 <div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 1.9518</code></pre>
+<pre><code>[1] 1.9518</code></pre>
 <div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 1.9518</code></pre>
+<pre><code>[1] 1.9518</code></pre>
 <p>We can also find the <code><a href="https://rdrr.io/r/base/Extremes.html">min()</a></code> and <code><a href="https://rdrr.io/r/base/Extremes.html">max()</a></code> of the sample (which together give us the <code><a href="https://rdrr.io/r/base/range.html">range()</a></code> of the dataset).</p>
 <div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 1</code></pre>
+<pre><code>[1] 1</code></pre>
 <div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 6</code></pre>
+<pre><code>[1] 6</code></pre>
 <p>Another important function for working with samples is the <code>%in%</code> operator, which lets us check if a value exists in the dataset.</p>
 <div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 6 appears in the sample</span></span>
 <span><span class="fl">6</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">data</span></span></code></pre></div>
-<pre><code>## [1] TRUE</code></pre>
+<pre><code>[1] TRUE</code></pre>
 <div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 7 does not appear in the sample</span></span>
 <span><span class="fl">7</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">data</span></span></code></pre></div>
-<pre><code>## [1] FALSE</code></pre>
+<pre><code>[1] FALSE</code></pre>
 <p>One final statistical function that is extremely common is <code><a href="https://rdrr.io/r/stats/cor.html">cor()</a></code> which computes the correlation between 2 vectors. E.g. suppose you had the following <span class="math inline">\((x,y)\)</span> points: (3.4,1), (5,4.6), (5.7,6.8), (6.5,5.3). You can compute the correlation between the <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> points like so:</p>
 <div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">6.5</span>, <span class="fl">3.4</span>, <span class="fl">5.7</span><span class="op">)</span></span>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4.6</span>, <span class="fl">5.3</span>, <span class="fl">1</span>, <span class="fl">6.8</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 0.8690548</code></pre>
+<pre><code>[1] 0.8690548</code></pre>
 <p>There are other miscellaneous functions for working with vectors that are sometimes useful that we won’t cover in detail now, but you can explore them on your own, such as <code><a href="https://rdrr.io/r/base/prod.html">prod()</a></code> for computing the product of all numbers in a vector, <code><a href="https://rdrr.io/r/base/sort.html">sort()</a></code> for sorting a vector, <code><a href="https://rdrr.io/r/base/rev.html">rev()</a></code> for reversing a vector, <code><a href="https://rdrr.io/r/base/unique.html">unique()</a></code> for getting the unique values in a vector, <code><a href="https://rdrr.io/r/base/scale.html">scale()</a></code> for linearly shifting and scaling the data to have mean 0 and standard deviation 1, and <code><a href="https://rdrr.io/r/base/cumsum.html">cumsum()</a></code> and <code><a href="https://rdrr.io/r/base/cumsum.html">cumprod()</a></code> for the cumulative sum and product along a vector, and many many more…</p>
 </div>
 <div id="logical-comparison" class="section level3" number="2.3.7">
@@ -426,62 +426,62 @@
 <div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fl">2</span> <span class="op">+</span> <span class="fl">3</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span></span>
 <span><span class="va">x</span> <span class="op">==</span> <span class="fl">25</span></span></code></pre></div>
-<pre><code>## [1] TRUE</code></pre>
+<pre><code>[1] TRUE</code></pre>
 <div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># if instead we ask "is x not equal to 25", we should get FALSE</span></span>
 <span><span class="va">x</span> <span class="op">!=</span> <span class="fl">25</span></span></code></pre></div>
-<pre><code>## [1] FALSE</code></pre>
+<pre><code>[1] FALSE</code></pre>
 <p>Note <code>!</code> used individually is the NOT operator, i.e. it turns <code>TRUE</code> into <code>FALSE</code> and vice versa.</p>
 <div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">!</span><span class="cn">TRUE</span></span></code></pre></div>
-<pre><code>## [1] FALSE</code></pre>
+<pre><code>[1] FALSE</code></pre>
 <div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># this is equivalent to x != 25</span></span>
 <span><span class="op">!</span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="fl">25</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] FALSE</code></pre>
+<pre><code>[1] FALSE</code></pre>
 <p>Inequalities are done using <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>, <code>&gt;=</code>, for less than (or equal to) and greater than (or equal to).</p>
 <div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;</span> <span class="fl">30</span></span></code></pre></div>
-<pre><code>## [1] TRUE</code></pre>
+<pre><code>[1] TRUE</code></pre>
 <div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&gt;=</span> <span class="fl">25</span></span></code></pre></div>
-<pre><code>## [1] TRUE</code></pre>
+<pre><code>[1] TRUE</code></pre>
 <p>Logical statements can be chained together using the <code>&amp;</code> AND operator as well as the <code>|</code> OR operator (on most keyboards, this vertical bar character is typed using <span class="k">SHIFT</span>+<span class="k">\</span>).</p>
 <p><code>&amp;</code> will only return true if the expressions on both sides are both true; <code>|</code> will return true if at least one of the expressions on both sides is true. Note that <code>&amp;</code> appears higher on R’s <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/Syntax.html">order of operations</a> than <code>|</code>.</p>
 <div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;</span> <span class="fl">20</span><span class="op">)</span> <span class="op">&amp;</span> <span class="op">(</span><span class="va">x</span> <span class="op">&lt;=</span> <span class="fl">30</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] TRUE</code></pre>
+<pre><code>[1] TRUE</code></pre>
 <div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;</span> <span class="fl">20</span><span class="op">)</span> <span class="op">|</span> <span class="op">(</span><span class="va">x</span> <span class="op">!=</span> <span class="fl">25</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] TRUE</code></pre>
+<pre><code>[1] TRUE</code></pre>
 <p>You can of course chain these together with other R commands to compare more complicated expressions. The sky is the limit!</p>
 <div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># check if x² is even OR if mean of data + 2 * sd is greater than the max</span></span>
 <span><span class="co"># note order of operations means we don't need extra parentheses</span></span>
 <span><span class="co"># of course, you can add extra parentheses for readability if you wish!</span></span>
 <span><span class="va">x</span><span class="op">^</span><span class="fl">2</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html">%%</a></span> <span class="fl">2</span> <span class="op">==</span> <span class="fl">0</span> <span class="op">|</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">+</span> <span class="fl">2</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] TRUE</code></pre>
+<pre><code>[1] TRUE</code></pre>
 <div class="note">
 <p>Since computers don’t have infinite precision, some arithmetic operations can introduce small errors, especially those producing repeating-decimal or irrational numbers:</p>
 <div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fl">1</span><span class="op">/</span><span class="fl">2</span> <span class="op">+</span> <span class="fl">1</span><span class="op">/</span><span class="fl">3</span> <span class="op">==</span> <span class="fl">5</span><span class="op">/</span><span class="fl">6</span></span></code></pre></div>
-<pre><code>## [1] FALSE</code></pre>
+<pre><code>[1] FALSE</code></pre>
 <div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fl">1</span><span class="op">/</span><span class="fl">2</span> <span class="op">+</span> <span class="fl">1</span><span class="op">/</span><span class="fl">3</span> <span class="op">-</span> <span class="fl">5</span><span class="op">/</span><span class="fl">6</span></span></code></pre></div>
-<pre><code>## [1] -1.110223e-16</code></pre>
+<pre><code>[1] -1.110223e-16</code></pre>
 <div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span> <span class="op">==</span> <span class="fl">2</span></span></code></pre></div>
-<pre><code>## [1] FALSE</code></pre>
+<pre><code>[1] FALSE</code></pre>
 <div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span> <span class="op">-</span> <span class="fl">2</span></span></code></pre></div>
-<pre><code>## [1] 4.440892e-16</code></pre>
+<pre><code>[1] 4.440892e-16</code></pre>
 <p>These imprecisions usually result in errors of 10<sup>-15</sup> or less. Generally values around this magnitude in R should be treated as indistinguishable from 0. When comparing inexact values like these, it’s recommended to use <code><a href="https://rdrr.io/r/base/all.equal.html">all.equal()</a></code> instead of <code>==</code>, which allows for a small tolerance.</p>
 <div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html">all.equal</a></span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="fl">2</span> <span class="op">+</span> <span class="fl">1</span><span class="op">/</span><span class="fl">3</span>, <span class="fl">5</span><span class="op">/</span><span class="fl">6</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] TRUE</code></pre>
+<pre><code>[1] TRUE</code></pre>
 <div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html">all.equal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] TRUE</code></pre>
+<pre><code>[1] TRUE</code></pre>
 </div>
 </div>
 <div id="packages" class="section level3" number="2.3.8">
@@ -522,18 +522,18 @@
 <p>You can load a package with either <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> or <code><a href="https://rdrr.io/r/base/library.html">require()</a></code>, which are basically the same.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;The only difference is &lt;code&gt;require()&lt;/code&gt; can be used to check if a package exists and will return &lt;code&gt;FALSE&lt;/code&gt; if it doesn’t, whereas &lt;code&gt;library()&lt;/code&gt; will just error out, see &lt;a href="https://www.geeksforgeeks.org/the-difference-between-require-and-library-in-r/" class="uri"&gt;https://www.geeksforgeeks.org/the-difference-between-require-and-library-in-r/&lt;/a&gt; for more details.&lt;/p&gt;'><sup>5</sup></a> Some package names actually load a group of other packages, e.g. <code><a href="https://tidyverse.tidyverse.org">library(tidyverse)</a></code> will load all the <a href="https://www.tidyverse.org/packages/#core-tidyverse">“core” Tidyverse</a> packages, which include <a href="https://ggplot2.tidyverse.org">ggplot2</a>, <a href="https://dplyr.tidyverse.org">dplyr</a>, <a href="https://tidyr.tidyverse.org">tidyr</a>, <a href="https://readr.tidyverse.org">readr</a>, <a href="https://purrr.tidyverse.org">purrr</a>, <a href="https://tibble.tidyverse.org">tibble</a>, <a href="https://stringr.tidyverse.org">stringr</a>, and <a href="https://forcats.tidyverse.org">forcats</a>.</p>
 <div class="sourceCode" id="cb105"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code></pre></div>
-<pre class="wrapcode"><code>## ── Attaching core tidyverse packages ────────────── tidyverse 2.0.0 ──
-## ✔ dplyr     1.1.4     ✔ readr     2.1.5
-## ✔ forcats   1.0.0     ✔ stringr   1.5.1
-## ✔ ggplot2   3.5.1     ✔ tibble    3.2.1
-## ✔ lubridate 1.9.3     ✔ tidyr     1.3.1
-## ✔ purrr     1.0.2     
-## ── Conflicts ──────────────────────────────── tidyverse_conflicts() ──
-## ✖ tidyr::extract()   masks magrittr::extract()
-## ✖ dplyr::filter()    masks stats::filter()
-## ✖ dplyr::lag()       masks stats::lag()
-## ✖ purrr::set_names() masks magrittr::set_names()
-## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+<pre class="wrapcode"><code>── Attaching core tidyverse packages ────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+✔ purrr     1.0.2     
+── Conflicts ──────────────────────────────── tidyverse_conflicts() ──
+✖ tidyr::extract()   masks magrittr::extract()
+✖ dplyr::filter()    masks stats::filter()
+✖ dplyr::lag()       masks stats::lag()
+✖ purrr::set_names() masks magrittr::set_names()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 <p>Upon loading, many packages will print various diagnostic messages to the console. These are generally completely ignorable. Sometimes these will warn about “Conflicts”, this is standard and just means it has overridden other default functions. E.g. You can see above the <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code> function from the package <code>dplyr</code> has overwritten the pre-loaded <a href="https://rdrr.io/r/stats/filter.html"><code class="sourceCode r"><span class="fu">filter</span>()</code></a> function from the <code>stats</code> package.</p>
 <div class="tip">
 <p>You may have already guessed from the message in the output above, but you can also access a function from another package without loading the entire package by using the syntax <code>package::function()</code>. This is often done to either avoid name conflicts or to clarify to the reader which functions come from which packages.</p>
@@ -549,15 +549,15 @@
 <div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># these are all the same</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 3.857143</code></pre>
+<pre><code>[1] 3.857143</code></pre>
 <div class="sourceCode" id="cb109"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span> <span class="op">(</span> <span class="va">data</span> <span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 3.857143</code></pre>
+<pre><code>[1] 3.857143</code></pre>
 <div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span> <span class="op">(</span></span>
 <span>  <span class="va">data</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 3.857143</code></pre>
+<pre><code>[1] 3.857143</code></pre>
 <p>A long line of code is often broken across several lines for readability. We will see many examples of this shortly in the data visualization chapter.</p>
 <p>However, make sure if you break a line up to finish the line eventually, otherwise you’ll get an error. For example, if you type <code>mean(data</code> in the console but forget to close the parenthesis (try this!) you will see the prompt character <code>&gt;</code> be replaced with <code>+</code>. It will continue to do this, patiently waiting for you to finish the line, until you either close it by typing <code>)</code> OR cancel the line by hitting <span class="k">ESC</span>.</p>
 </div>
@@ -824,7 +824,7 @@ which becomes 3.86 is much better.</p>
 <div class="sourceCode" id="cb117"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># check current working directory</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] "C:/Users/bi/Desktop/stat240-revamp"</code></pre>
+<pre><code>[1] "C:/Users/bi/Desktop/stat240-revamp"</code></pre>
 <p>You can see my current Rstudio session (while writing these notes) is running from the <code>stat240-revamp</code> directory which is itself located in <code>C:/Users/bi/Desktop</code>.</p>
 <p>Generally, when you start a new Rstudio session, the working directory will default to <code>C:/Users/username/</code> for Windows and <code>/Users/username/</code> for Mac, where <code>username</code> is your account name (my working directory is different because I have it intentionally set to my notes project folder).</p>
 <p>This default working directory actually presents a problem, because it is usually different from where your current Rmd file is. For example, suppose you’re working on homework 1. If you organized your files properly—which you should!—your Rmd file is probably located at <code>.../STAT240/homework/hw01/hw01.Rmd</code>. For reasons explained in the next section, your working directory should <strong>always match the location of your current Rmd file</strong>.</p>
@@ -917,13 +917,13 @@ head(mtcars)
 ```
 
 ```
-##                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
-## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
-## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
-## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
-## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
-## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
-## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
+                   mpg cyl disp  hp drat    wt  qsec vs am gear carb
+Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
 ```
 </details> 
 -->

@@ -112,7 +112,7 @@ print("output is shown here") # you can also add comments here
 ```
 
 ```
-## [1] "output is shown here"
+[1] "output is shown here"
 ```
 
 
@@ -153,7 +153,7 @@ One of the first things you should learn about R is how to use it as a calculato
 ```
 
 ```
-## [1] 1
+[1] 1
 ```
 
 
@@ -165,7 +165,7 @@ R will sometimes output in scientific notation, especially if the number cannot 
 ```
 
 ```
-## [1] 1.1259e+15
+[1] 1.1259e+15
 ```
 
 Also note due to limitations of [how computers represent numbers](https://en.wikipedia.org/wiki/IEEE_754), R often cannot distinguish between numbers that differ by less than about 10^-15^, i.e. 0.000000000000001.^[This is a MASSIVE oversimplification, but it'll have to suffice because the rabbit hole on ["machine precision"](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/.Machine) and [floating-point arithmetic errors](https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html) is---like the nights in ASOIAF---dark and full of terrors.]
@@ -180,7 +180,7 @@ You can also perform integer division in R, i.e. dividing to get the quotient an
 ```
 
 ```
-## [1] 6
+[1] 6
 ```
 
 ``` r
@@ -188,7 +188,7 @@ You can also perform integer division in R, i.e. dividing to get the quotient an
 ```
 
 ```
-## [1] 1
+[1] 1
 ```
 
 
@@ -205,7 +205,7 @@ cos(2 * pi)
 ```
 
 ```
-## [1] 1
+[1] 1
 ```
 
 ``` r
@@ -213,7 +213,7 @@ atan(-1) * 4
 ```
 
 ```
-## [1] -3.141593
+[1] -3.141593
 ```
 
 Exponential and logarithm functions `exp()` and `log()`, also work as you'd expect and default to the natural base $e$. Note the log function has an optional `base` argument for using a different base. There are also special base 10 and 2 versions `log10()` and `log2()` .
@@ -224,7 +224,7 @@ log(exp(2)) * log10(100)
 ```
 
 ```
-## [1] 4
+[1] 4
 ```
 
 
@@ -233,7 +233,7 @@ log(3^5, base = 3)
 ```
 
 ```
-## [1] 5
+[1] 5
 ```
 
 Additionally, `abs()` computes the absolute value and `sqrt()` the square root (note by convention, ONLY the positive root is returned). Taking the square root of a negative number will return `NaN`.
@@ -244,7 +244,7 @@ sqrt(abs(-9))
 ```
 
 ```
-## [1] 3
+[1] 3
 ```
 
 
@@ -272,7 +272,7 @@ T
 ```
 
 ```
-## [1] TRUE
+[1] TRUE
 ```
 
 ``` r
@@ -280,7 +280,7 @@ true
 ```
 
 ```
-## Error: object 'true' not found
+Error: object 'true' not found
 ```
 
 
@@ -292,7 +292,7 @@ exp(FALSE) * (TRUE + sqrt(TRUE))
 ```
 
 ```
-## [1] 2
+[1] 2
 ```
 
 Mathematical expressions may also return [`NaN`{.R}](https://rdrr.io/r/base/is.finite.html) for **N**ot **a** **N**umber, i.e. undefined; or [`Inf`{.R}](https://rdrr.io/r/base/is.finite.html) for infinite. Note R differentiates between positive infinity [`Inf`{.R}](https://rdrr.io/r/base/is.finite.html) and negative infinity [`-Inf`{.R}](https://rdrr.io/r/base/is.finite.html).
@@ -303,7 +303,7 @@ sqrt(-4)
 ```
 
 ```
-## [1] NaN
+[1] NaN
 ```
 
 ``` r
@@ -311,7 +311,7 @@ sqrt(-4)
 ```
 
 ```
-## [1] Inf
+[1] Inf
 ```
 
 ``` r
@@ -319,7 +319,7 @@ log(0)
 ```
 
 ```
-## [1] -Inf
+[1] -Inf
 ```
 
 Additionally, [`NA`{.R}](https://rdrr.io/r/base/NA.html) is used to represent missing values, i.e. when data is not available. **Note `NA` and `NaN` are NOT the same**. We will learn later about how to handle [`NA`{.R}](https://rdrr.io/r/base/NA.html) missing values.
@@ -340,7 +340,7 @@ print(x)
 ```
 
 ```
-## [1] 5
+[1] 5
 ```
 
 
@@ -351,7 +351,7 @@ print(x)
 ```
 
 ```
-## [1] 5
+[1] 5
 ```
 
 
@@ -368,7 +368,7 @@ log(3^5, base = 3)
 ```
 
 ```
-## [1] 5
+[1] 5
 ```
 
 Variable names can be any combination of upper and lower-case letters, numbers, or period `.` and underscore `_` (which are both treated similar to letters), with one caveat: **variables must begin with a letter or period**, not a number or underscore. You may not use any other characters in variable names.^[This is only a short summary. Technically, any set of ANY characters can be used to create a [non-syntactic name](https://adv-r.hadley.nz/names-values.html#non-syntactic), but this is beyond our current scope.]
@@ -386,7 +386,7 @@ var1 + Var1 + .OtherVariable + another.variable_42
 ```
 
 ```
-## [1] 10
+[1] 10
 ```
 
 ``` r
@@ -401,7 +401,7 @@ var1 + Var1 + .OtherVariable + another.variable_42
 ```
 
 ```
-## [1] 10
+[1] 10
 ```
 
 
@@ -412,7 +412,7 @@ var1 + Var1 + .OtherVariable + another.variable_42
 ```
 
 ```
-## Error: unexpected symbol in "1var"
+Error: unexpected symbol in "1var"
 ```
 
 
@@ -429,7 +429,7 @@ result
 ```
 
 ```
-## [1] 7
+[1] 7
 ```
 :::
 
@@ -450,7 +450,7 @@ data
 ```
 
 ```
-## [1] 3 6 6 2 4 1 5
+[1] 3 6 6 2 4 1 5
 ```
 
 The `sum()` and `length()` functions work like you expect and produce the sum and length of the sample. You can use them to compute the [mean](https://www.mathsisfun.com/mean.html) of your sample, which can also be done directly using `mean()`.
@@ -461,7 +461,7 @@ sum(data) / length(data)
 ```
 
 ```
-## [1] 3.857143
+[1] 3.857143
 ```
 
 ``` r
@@ -469,7 +469,7 @@ mean(data)
 ```
 
 ```
-## [1] 3.857143
+[1] 3.857143
 ```
 
 We can also find the [median](https://www.mathsisfun.com/median.html) (i.e. middle number) with the `median()` function. (Sadly, there's no built-in [mode](https://www.mathsisfun.com/mode.html) function in R, but this can be achieved with [other packages](https://rdrr.io/cran/DescTools/man/Mode.html).)
@@ -480,7 +480,7 @@ median(data)
 ```
 
 ```
-## [1] 4
+[1] 4
 ```
 
 We can generalize from the median (which is the 50-th percentile) to compute [any percentile](https://www.mathsisfun.com/data/percentiles.html) using the `quantile()` function, e.g. suppose we want to compute the 30-th percentile:
@@ -491,8 +491,8 @@ quantile(data, 0.3)
 ```
 
 ```
-## 30% 
-## 2.8
+30% 
+2.8 
 ```
 
 The [standard deviation](https://www.mathsisfun.com/data/standard-deviation.html) is another important statistic (think of it as the distance of the average observation from the mean) and can be computed using `sd()`. Note this is equivalent to the square root of the variance which can be found with `var()`.
@@ -503,7 +503,7 @@ sqrt(var(data))
 ```
 
 ```
-## [1] 1.9518
+[1] 1.9518
 ```
 
 ``` r
@@ -511,7 +511,7 @@ sd(data)
 ```
 
 ```
-## [1] 1.9518
+[1] 1.9518
 ```
 
 We can also find the `min()` and `max()` of the sample (which together give us the `range()` of the dataset).
@@ -522,7 +522,7 @@ min(data)
 ```
 
 ```
-## [1] 1
+[1] 1
 ```
 
 ``` r
@@ -530,7 +530,7 @@ max(data)
 ```
 
 ```
-## [1] 6
+[1] 6
 ```
 
 Another important function for working with samples is the `%in%` operator, which lets us check if a value exists in the dataset.
@@ -542,7 +542,7 @@ Another important function for working with samples is the `%in%` operator, whic
 ```
 
 ```
-## [1] TRUE
+[1] TRUE
 ```
 
 ``` r
@@ -551,7 +551,7 @@ Another important function for working with samples is the `%in%` operator, whic
 ```
 
 ```
-## [1] FALSE
+[1] FALSE
 ```
 
 One final statistical function that is extremely common is `cor()` which computes the correlation between 2 vectors. E.g. suppose you had the following $(x,y)$ points: (3.4,1), (5,4.6), (5.7,6.8), (6.5,5.3). You can compute the correlation between the $x$ and $y$ points like so:
@@ -564,7 +564,7 @@ cor(x, y)
 ```
 
 ```
-## [1] 0.8690548
+[1] 0.8690548
 ```
 
 There are other miscellaneous functions for working with vectors that are sometimes useful that we won't cover in detail now, but you can explore them on your own, such as `prod()` for computing the product of all numbers in a vector, `sort()` for sorting a vector, `rev()` for reversing a vector, `unique()` for getting the unique values in a vector, `scale()` for linearly shifting and scaling the data to have mean 0 and standard deviation 1, and `cumsum()` and `cumprod()` for the cumulative sum and product along a vector, and many many more...
@@ -585,7 +585,7 @@ x == 25
 ```
 
 ```
-## [1] TRUE
+[1] TRUE
 ```
 
 ``` r
@@ -594,7 +594,7 @@ x != 25
 ```
 
 ```
-## [1] FALSE
+[1] FALSE
 ```
 
 Note `!` used individually is the NOT operator, i.e. it turns `TRUE` into `FALSE` and vice versa.
@@ -605,7 +605,7 @@ Note `!` used individually is the NOT operator, i.e. it turns `TRUE` into `FALSE
 ```
 
 ```
-## [1] FALSE
+[1] FALSE
 ```
 
 ``` r
@@ -614,7 +614,7 @@ Note `!` used individually is the NOT operator, i.e. it turns `TRUE` into `FALSE
 ```
 
 ```
-## [1] FALSE
+[1] FALSE
 ```
 
 Inequalities are done using `<`, `<=`, `>`, `>=`, for less than (or equal to) and greater than (or equal to).
@@ -625,7 +625,7 @@ x < 30
 ```
 
 ```
-## [1] TRUE
+[1] TRUE
 ```
 
 ``` r
@@ -633,7 +633,7 @@ x >= 25
 ```
 
 ```
-## [1] TRUE
+[1] TRUE
 ```
 
 Logical statements can be chained together using the `&` AND operator as well as the `|` OR operator (on most keyboards, this vertical bar character is typed using [SHIFT]{.k}+[\\]{.k}).
@@ -646,7 +646,7 @@ Logical statements can be chained together using the `&` AND operator as well as
 ```
 
 ```
-## [1] TRUE
+[1] TRUE
 ```
 
 ``` r
@@ -654,7 +654,7 @@ Logical statements can be chained together using the `&` AND operator as well as
 ```
 
 ```
-## [1] TRUE
+[1] TRUE
 ```
 
 You can of course chain these together with other R commands to compare more complicated expressions. The sky is the limit!
@@ -668,7 +668,7 @@ x^2 %% 2 == 0 | mean(data) + 2 * sd(data) > max(data)
 ```
 
 ```
-## [1] TRUE
+[1] TRUE
 ```
 
 
@@ -680,7 +680,7 @@ Since computers don't have infinite precision, some arithmetic operations can in
 ```
 
 ```
-## [1] FALSE
+[1] FALSE
 ```
 
 ``` r
@@ -688,7 +688,7 @@ Since computers don't have infinite precision, some arithmetic operations can in
 ```
 
 ```
-## [1] -1.110223e-16
+[1] -1.110223e-16
 ```
 
 ``` r
@@ -696,7 +696,7 @@ sqrt(2)^2 == 2
 ```
 
 ```
-## [1] FALSE
+[1] FALSE
 ```
 
 ``` r
@@ -704,7 +704,7 @@ sqrt(2)^2 - 2
 ```
 
 ```
-## [1] 4.440892e-16
+[1] 4.440892e-16
 ```
 These imprecisions usually result in errors of 10^-15^ or less. Generally values around this magnitude in R should be treated as indistinguishable from 0. When comparing inexact values like these, it's recommended to use `all.equal()` instead of `==`, which allows for a small tolerance.
 
@@ -713,7 +713,7 @@ all.equal(1/2 + 1/3, 5/6)
 ```
 
 ```
-## [1] TRUE
+[1] TRUE
 ```
 
 ``` r
@@ -721,7 +721,7 @@ all.equal(sqrt(2)^2, 2)
 ```
 
 ```
-## [1] TRUE
+[1] TRUE
 ```
 :::
 
@@ -777,18 +777,18 @@ library(tidyverse)
 ```
 
 ``` wrapcode
-## ── Attaching core tidyverse packages ────────────── tidyverse 2.0.0 ──
-## ✔ dplyr     1.1.4     ✔ readr     2.1.5
-## ✔ forcats   1.0.0     ✔ stringr   1.5.1
-## ✔ ggplot2   3.5.1     ✔ tibble    3.2.1
-## ✔ lubridate 1.9.3     ✔ tidyr     1.3.1
-## ✔ purrr     1.0.2     
-## ── Conflicts ──────────────────────────────── tidyverse_conflicts() ──
-## ✖ tidyr::extract()   masks magrittr::extract()
-## ✖ dplyr::filter()    masks stats::filter()
-## ✖ dplyr::lag()       masks stats::lag()
-## ✖ purrr::set_names() masks magrittr::set_names()
-## ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+── Attaching core tidyverse packages ────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+✔ purrr     1.0.2     
+── Conflicts ──────────────────────────────── tidyverse_conflicts() ──
+✖ tidyr::extract()   masks magrittr::extract()
+✖ dplyr::filter()    masks stats::filter()
+✖ dplyr::lag()       masks stats::lag()
+✖ purrr::set_names() masks magrittr::set_names()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
 ```
 
 
@@ -814,7 +814,7 @@ mean(data)
 ```
 
 ```
-## [1] 3.857143
+[1] 3.857143
 ```
 
 ``` r
@@ -822,7 +822,7 @@ mean ( data )
 ```
 
 ```
-## [1] 3.857143
+[1] 3.857143
 ```
 
 ``` r
@@ -832,7 +832,7 @@ mean (
 ```
 
 ```
-## [1] 3.857143
+[1] 3.857143
 ```
 
 A long line of code is often broken across several lines for readability. We will see many examples of this shortly in the data visualization chapter.
@@ -1112,7 +1112,7 @@ getwd()
 ```
 
 ```
-## [1] "C:/Users/bi/Desktop/stat240-revamp"
+[1] "C:/Users/bi/Desktop/stat240-revamp"
 ```
 
 You can see my current Rstudio session (while writing these notes) is running from the `` stat240-revamp `` directory which is itself located in `` C:/Users/bi/Desktop ``.
@@ -1212,13 +1212,13 @@ head(mtcars)
 ```
 
 ```
-##                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
-## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
-## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
-## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
-## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
-## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
-## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
+                   mpg cyl disp  hp drat    wt  qsec vs am gear carb
+Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
 ```
 </details> 
 -->

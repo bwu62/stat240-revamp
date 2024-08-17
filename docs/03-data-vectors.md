@@ -13,7 +13,7 @@ data
 ```
 
 ```
-## [1] 3 6 6 2 4 1 5
+[1] 3 6 6 2 4 1 5
 ```
 
 Last chapter, we mostly used vectors to demonstrate summary functions like `sum()`, `mean()`, or `sd()`, but this is just the tip of the iceberg. In fact, **most functions in R run on vectors directly, *one value at a time***, and are actually most efficient when used this way.
@@ -29,7 +29,7 @@ is.vector(x)
 ```
 
 ```
-## [1] TRUE
+[1] TRUE
 ```
 
 ``` r
@@ -37,7 +37,7 @@ length(x)
 ```
 
 ```
-## [1] 1
+[1] 1
 ```
 
 This is why vectors are the most fundamental structure. It may be useful going forward to think of numbers instead as numeric vectors, logicals (TRUE/FALSE) as logical vectors, characters (i.e. strings) as character vectors, etc. **Everything runs on vectors**!
@@ -69,7 +69,7 @@ data * 2
 ```
 
 ```
-## [1]  6 12 12  4  8  2 10
+[1]  6 12 12  4  8  2 10
 ```
 
 ``` r
@@ -77,7 +77,7 @@ data^2
 ```
 
 ```
-## [1]  9 36 36  4 16  1 25
+[1]  9 36 36  4 16  1 25
 ```
 
 ``` r
@@ -85,7 +85,7 @@ atan(data)
 ```
 
 ```
-## [1] 1.2490458 1.4056476 1.4056476 1.1071487 1.3258177 0.7853982 1.3734008
+[1] 1.2490458 1.4056476 1.4056476 1.1071487 1.3258177 0.7853982 1.3734008
 ```
 
 ``` r
@@ -93,7 +93,7 @@ round(log2(data))
 ```
 
 ```
-## [1] 2 3 3 1 2 0 2
+[1] 2 3 3 1 2 0 2
 ```
 
 Note you can also use `data` on the other side of these operators, or as the argument to certain functions:
@@ -104,7 +104,7 @@ Note you can also use `data` on the other side of these operators, or as the arg
 ```
 
 ```
-## [1]  8 64 64  4 16  2 32
+[1]  8 64 64  4 16  2 32
 ```
 
 ``` r
@@ -113,7 +113,7 @@ log(10, base = data)
 ```
 
 ```
-## [1] 2.095903 1.285097 1.285097 3.321928 1.660964      Inf 1.430677
+[1] 2.095903 1.285097 1.285097 3.321928 1.660964      Inf 1.430677
 ```
 
 We can combine these with summary functions to do some neat things. For example, suppose we want to manually calculate the [standard deviation](https://www.mathsisfun.com/data/standard-deviation.html)---i.e. the average deviation from the mean---of the sample. Again, we will discuss this in more detail later in the course, but for now here is the formula:
@@ -130,7 +130,7 @@ sqrt((1 / (n - 1)) * sum((data - mean(data))^2))
 ```
 
 ```
-## [1] 1.9518
+[1] 1.9518
 ```
 
 Let's break this down. On the inside, `data - mean(data)` subtracts the mean from each data value one at a time:
@@ -141,7 +141,7 @@ data - mean(data)
 ```
 
 ```
-## [1] -0.8571429  2.1428571  2.1428571 -1.8571429  0.1428571 -2.8571429  1.1428571
+[1] -0.8571429  2.1428571  2.1428571 -1.8571429  0.1428571 -2.8571429  1.1428571
 ```
 
 This is then squared `( ... )^2` and again, this operates one at a time:
@@ -152,7 +152,7 @@ This is then squared `( ... )^2` and again, this operates one at a time:
 ```
 
 ```
-## [1] 0.73469388 4.59183673 4.59183673 3.44897959 0.02040816 8.16326531 1.30612245
+[1] 0.73469388 4.59183673 4.59183673 3.44897959 0.02040816 8.16326531 1.30612245
 ```
 
 Finally, this vector is summed, scaled by 1/(n-1), and square rooted to get the standard deviation. We can check this is correct by comparing with the built-in `sd()` function.
@@ -163,7 +163,7 @@ sd(data)
 ```
 
 ```
-## [1] 1.9518
+[1] 1.9518
 ```
 
 
@@ -181,7 +181,7 @@ data %% 2 == 0
 ```
 
 ```
-## [1] FALSE  TRUE  TRUE  TRUE  TRUE FALSE FALSE
+[1] FALSE  TRUE  TRUE  TRUE  TRUE FALSE FALSE
 ```
 
 Or we can ask which of our values are within 1 standard deviation of the mean:
@@ -194,7 +194,7 @@ Or we can ask which of our values are within 1 standard deviation of the mean:
 ```
 
 ```
-## [1]  TRUE FALSE FALSE  TRUE  TRUE FALSE  TRUE
+[1]  TRUE FALSE FALSE  TRUE  TRUE FALSE  TRUE
 ```
 
 Remember from section \@ref(r-specials) how any **math turns `TRUE` into 1 and `FALSE` into 0**? This turns out to be extremely useful. For example, we can use `sum()` to count how many values are even:
@@ -207,7 +207,7 @@ sum(data %% 2 == 0)
 ```
 
 ```
-## [1] 4
+[1] 4
 ```
 
 Or we can ask what *proportion* of our data is within 1 standard deviation of the mean, which involves taking the sum of a logical comparison and dividing by the length, i.e. computing the mean:
@@ -223,7 +223,7 @@ mean(
 ```
 
 ```
-## [1] 0.5714286
+[1] 0.5714286
 ```
 
 :::{.tip}
@@ -246,7 +246,7 @@ One of the easiest, if you just need a sequence of integers, is to use the `:` o
 ```
 
 ```
-## [1] 1 2 3 4 5
+[1] 1 2 3 4 5
 ```
 
 ``` r
@@ -254,8 +254,8 @@ One of the easiest, if you just need a sequence of integers, is to use the `:` o
 ```
 
 ```
-##  [1]  10   9   8   7   6   5   4   3   2   1   0  -1  -2  -3  -4  -5  -6  -7  -8
-## [20]  -9 -10
+ [1]  10   9   8   7   6   5   4   3   2   1   0  -1  -2  -3  -4  -5  -6  -7  -8  -9
+[21] -10
 ```
 
 The `seq()` function does something similar, except it also has additional arguments `by` to specify the step size and `length.out` which specifies how many numbers to have in total (note: only ONE of these arguments can be set at a time).
@@ -266,7 +266,7 @@ seq(1, 5)
 ```
 
 ```
-## [1] 1 2 3 4 5
+[1] 1 2 3 4 5
 ```
 
 ``` r
@@ -274,7 +274,7 @@ seq(0, 100, by = 10)
 ```
 
 ```
-##  [1]   0  10  20  30  40  50  60  70  80  90 100
+ [1]   0  10  20  30  40  50  60  70  80  90 100
 ```
 
 ``` r
@@ -282,13 +282,13 @@ seq(0, 1, length.out = 101)
 ```
 
 ```
-##   [1] 0.00 0.01 0.02 0.03 0.04 0.05 0.06 0.07 0.08 0.09 0.10 0.11 0.12 0.13 0.14
-##  [16] 0.15 0.16 0.17 0.18 0.19 0.20 0.21 0.22 0.23 0.24 0.25 0.26 0.27 0.28 0.29
-##  [31] 0.30 0.31 0.32 0.33 0.34 0.35 0.36 0.37 0.38 0.39 0.40 0.41 0.42 0.43 0.44
-##  [46] 0.45 0.46 0.47 0.48 0.49 0.50 0.51 0.52 0.53 0.54 0.55 0.56 0.57 0.58 0.59
-##  [61] 0.60 0.61 0.62 0.63 0.64 0.65 0.66 0.67 0.68 0.69 0.70 0.71 0.72 0.73 0.74
-##  [76] 0.75 0.76 0.77 0.78 0.79 0.80 0.81 0.82 0.83 0.84 0.85 0.86 0.87 0.88 0.89
-##  [91] 0.90 0.91 0.92 0.93 0.94 0.95 0.96 0.97 0.98 0.99 1.00
+  [1] 0.00 0.01 0.02 0.03 0.04 0.05 0.06 0.07 0.08 0.09 0.10 0.11 0.12 0.13 0.14 0.15
+ [17] 0.16 0.17 0.18 0.19 0.20 0.21 0.22 0.23 0.24 0.25 0.26 0.27 0.28 0.29 0.30 0.31
+ [33] 0.32 0.33 0.34 0.35 0.36 0.37 0.38 0.39 0.40 0.41 0.42 0.43 0.44 0.45 0.46 0.47
+ [49] 0.48 0.49 0.50 0.51 0.52 0.53 0.54 0.55 0.56 0.57 0.58 0.59 0.60 0.61 0.62 0.63
+ [65] 0.64 0.65 0.66 0.67 0.68 0.69 0.70 0.71 0.72 0.73 0.74 0.75 0.76 0.77 0.78 0.79
+ [81] 0.80 0.81 0.82 0.83 0.84 0.85 0.86 0.87 0.88 0.89 0.90 0.91 0.92 0.93 0.94 0.95
+ [97] 0.96 0.97 0.98 0.99 1.00
 ```
 
 Vectors can also be created with the `rep()` function which lets you repeat the contents. There are two arguments: `times` which controls how many times to repeat the entire input, and `each` which controls how many times to repeat each element if the input is a vector. You can specify either or both of these arguments.^[`rep()` is actually simultaneously an extremely useful and also extremely infuriating function, due to the bafflingly nonintuitive design of its arguments. See Hadley Wickham's [thoughtful diatribe](https://design.tidyverse.org/cs-rep.html) on the matter for more.] Note `rep()` can be used to repeat other objects too, not just numbers.
@@ -300,7 +300,7 @@ rep(2, 5)
 ```
 
 ```
-## [1] 2 2 2 2 2
+[1] 2 2 2 2 2
 ```
 
 ``` r
@@ -309,7 +309,7 @@ rep(1:3, times = 3, each = 4)
 ```
 
 ```
-##  [1] 1 1 1 1 2 2 2 2 3 3 3 3 1 1 1 1 2 2 2 2 3 3 3 3 1 1 1 1 2 2 2 2 3 3 3 3
+ [1] 1 1 1 1 2 2 2 2 3 3 3 3 1 1 1 1 2 2 2 2 3 3 3 3 1 1 1 1 2 2 2 2 3 3 3 3
 ```
 
 ``` r
@@ -318,7 +318,7 @@ rep(c(TRUE, FALSE), times = c(2, 4))
 ```
 
 ```
-## [1]  TRUE  TRUE FALSE FALSE FALSE FALSE
+[1]  TRUE  TRUE FALSE FALSE FALSE FALSE
 ```
 
 Finally, you can mix and match all these constructors, using a combination of `c()`, `:`, `seq()`, and `rep()` to your heart's content.
@@ -329,8 +329,8 @@ rep(c(1, 3, 7:9, seq(10, 12, by = 0.5)), each = 2)
 ```
 
 ```
-##  [1]  1.0  1.0  3.0  3.0  7.0  7.0  8.0  8.0  9.0  9.0 10.0 10.0 10.5 10.5 11.0
-## [16] 11.0 11.5 11.5 12.0 12.0
+ [1]  1.0  1.0  3.0  3.0  7.0  7.0  8.0  8.0  9.0  9.0 10.0 10.0 10.5 10.5 11.0 11.0
+[17] 11.5 11.5 12.0 12.0
 ```
 
 
@@ -359,7 +359,7 @@ x1 + x2
 ```
 
 ```
-## [1] -2  0  2  4  6  8
+[1] -2  0  2  4  6  8
 ```
 
 ``` r
@@ -368,7 +368,7 @@ x2^x1
 ```
 
 ```
-## [1]   1  -1   0   1  16 243
+[1]   1  -1   0   1  16 243
 ```
 
 ``` r
@@ -377,7 +377,7 @@ x1 - y
 ```
 
 ```
-## [1] -1 -1 -1  2  2  2
+[1] -1 -1 -1  2  2  2
 ```
 
 ``` r
@@ -386,7 +386,7 @@ log(y, base = x1 + 2)
 ```
 
 ```
-## [1] 0.0000000 0.6309298 0.7924813 0.0000000 0.3868528 0.5645750
+[1] 0.0000000 0.6309298 0.7924813 0.0000000 0.3868528 0.5645750
 ```
 
 ``` r
@@ -396,7 +396,7 @@ log(y, base = x1 + 2)
 ```
 
 ```
-## [1] -1 -3  0  3  8  1
+[1] -1 -3  0  3  8  1
 ```
 
 ``` r
@@ -407,7 +407,7 @@ x2 <= atan(z) * mean(x1)
 ```
 
 ```
-## [1]  TRUE  TRUE FALSE  TRUE FALSE FALSE
+[1]  TRUE  TRUE FALSE  TRUE FALSE FALSE
 ```
 
 :::{.note}
@@ -430,7 +430,7 @@ z %in% x1
 ```
 
 ```
-## [1] FALSE  TRUE
+[1] FALSE  TRUE
 ```
 
 If you want to ask which elements of `z` are NOT in `x1`, you must prepend the expression with `!` to negate it:
@@ -441,7 +441,7 @@ If you want to ask which elements of `z` are NOT in `x1`, you must prepend the e
 ```
 
 ```
-## [1]  TRUE FALSE
+[1]  TRUE FALSE
 ```
 
 Note the difference between this and `z == x1`, which recycles `z`, *then* checks element-wise equality:
@@ -452,7 +452,7 @@ z == x1
 ```
 
 ```
-## [1] FALSE  TRUE FALSE FALSE FALSE FALSE
+[1] FALSE  TRUE FALSE FALSE FALSE FALSE
 ```
 
 This is another common point of confusion for first time R users. Make sure you understand the **difference between checking vector membership**, i.e. if each element of one vector is also contained *somewhere* in another vector, **vs checking element-by-element equality**, i.e. checking if the 1^st^ elements are the same, and the 2^nd^ elements are the same, and the 3^rd^ elements are the same, etc. (possibly with recycling). See [this StackOverflow page](https://stackoverflow.com/a/42637186/25278020) for more examples.
@@ -481,8 +481,8 @@ letters
 ```
 
 ```
-##  [1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s"
-## [20] "t" "u" "v" "w" "x" "y" "z"
+ [1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s" "t"
+[21] "u" "v" "w" "x" "y" "z"
 ```
 
 You can extract elements from a vector with the `[]` operator, giving either a vector of numeric positions, a vector of `TRUE`/`FALSE` values, or a negative vector for exclusions (i.e. anything *except*). Examples:
@@ -495,7 +495,7 @@ letters[1]
 ```
 
 ```
-## [1] "a"
+[1] "a"
 ```
 
 ``` r
@@ -504,7 +504,7 @@ letters[5:10]
 ```
 
 ```
-## [1] "e" "f" "g" "h" "i" "j"
+[1] "e" "f" "g" "h" "i" "j"
 ```
 
 ``` r
@@ -515,7 +515,7 @@ letters[c(1, 24:26, rep(5, 8))]
 ```
 
 ```
-##  [1] "a" "x" "y" "z" "e" "e" "e" "e" "e" "e" "e" "e"
+ [1] "a" "x" "y" "z" "e" "e" "e" "e" "e" "e" "e" "e"
 ```
 
 ``` r
@@ -525,7 +525,7 @@ letters[1:26 %% 2 == 0]
 ```
 
 ```
-##  [1] "b" "d" "f" "h" "j" "l" "n" "p" "r" "t" "v" "x" "z"
+ [1] "b" "d" "f" "h" "j" "l" "n" "p" "r" "t" "v" "x" "z"
 ```
 
 ``` r
@@ -534,7 +534,7 @@ letters[c(FALSE, TRUE)]
 ```
 
 ```
-##  [1] "b" "d" "f" "h" "j" "l" "n" "p" "r" "t" "v" "x" "z"
+ [1] "b" "d" "f" "h" "j" "l" "n" "p" "r" "t" "v" "x" "z"
 ```
 
 ``` r
@@ -543,8 +543,8 @@ letters[-1]
 ```
 
 ```
-##  [1] "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s" "t"
-## [20] "u" "v" "w" "x" "y" "z"
+ [1] "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s" "t" "u"
+[21] "v" "w" "x" "y" "z"
 ```
 
 ``` r
@@ -553,7 +553,7 @@ letters[-1:-10]
 ```
 
 ```
-##  [1] "k" "l" "m" "n" "o" "p" "q" "r" "s" "t" "u" "v" "w" "x" "y" "z"
+ [1] "k" "l" "m" "n" "o" "p" "q" "r" "s" "t" "u" "v" "w" "x" "y" "z"
 ```
 
 ``` r
@@ -562,7 +562,7 @@ letters[-(1:10)]
 ```
 
 ```
-##  [1] "k" "l" "m" "n" "o" "p" "q" "r" "s" "t" "u" "v" "w" "x" "y" "z"
+ [1] "k" "l" "m" "n" "o" "p" "q" "r" "s" "t" "u" "v" "w" "x" "y" "z"
 ```
 
 ``` r
@@ -573,7 +573,7 @@ letters[-1:10]
 ```
 
 ```
-## Error in letters[-1:10] : only 0's may be mixed with negative subscripts
+Error in letters[-1:10] : only 0's may be mixed with negative subscripts
 ```
 
 
@@ -593,7 +593,7 @@ data2
 ```
 
 ```
-## [1] 30 60 60 20 40 10 50
+[1] 30 60 60 20 40 10 50
 ```
 
 ``` r
@@ -604,7 +604,7 @@ data2[c(n, 2:(n-1), 1)]
 ```
 
 ```
-## [1] 50 60 60 20 40 10 30
+[1] 50 60 60 20 40 10 30
 ```
 
 You can of course also have R sort a vector for you. There are two main functions for sorting: `sort()`, which does what you expect and returns a vector with the elements rearranged from lowest to highest (unless you set the argument `decreasing = TRUE` which does the opposite); and `order()`, which simply returns the order the elements would go in (i.e. a vector of positions where they belong) if they were to be sorted lowest to highest (again, unless you set `decreasing = TRUE`).
@@ -616,7 +616,7 @@ sort(data2)
 ```
 
 ```
-## [1] 10 20 30 40 50 60 60
+[1] 10 20 30 40 50 60 60
 ```
 
 ``` r
@@ -625,7 +625,7 @@ sort(data2, decreasing = TRUE)
 ```
 
 ```
-## [1] 60 60 50 40 30 20 10
+[1] 60 60 50 40 30 20 10
 ```
 
 ``` r
@@ -634,7 +634,7 @@ order(data2)
 ```
 
 ```
-## [1] 6 4 1 5 7 2 3
+[1] 6 4 1 5 7 2 3
 ```
 
 ``` r
@@ -643,7 +643,7 @@ data2[order(data2)]
 ```
 
 ```
-## [1] 10 20 30 40 50 60 60
+[1] 10 20 30 40 50 60 60
 ```
 
 A final function that is sometimes handy is the `rev()` function, which reverses the vector.
@@ -655,7 +655,7 @@ rev(data2)
 ```
 
 ```
-## [1] 50 10 40 20 60 60 30
+[1] 50 10 40 20 60 60 30
 ```
 
 
@@ -668,7 +668,7 @@ data2
 ```
 
 ```
-## [1] 30 60 60 20 40 10 50
+[1] 30 60 60 20 40 10 50
 ```
 
 ``` r
@@ -677,7 +677,7 @@ sort(data2)
 ```
 
 ```
-## [1] 10 20 30 40 50 60 60
+[1] 10 20 30 40 50 60 60
 ```
 
 ``` r
@@ -686,7 +686,7 @@ data2
 ```
 
 ```
-## [1] 30 60 60 20 40 10 50
+[1] 30 60 60 20 40 10 50
 ```
 If you want an object to be updated in place, you should explicitly tell R to overwrite it again with the assignment `<-` operator, like this:
 
@@ -698,7 +698,7 @@ data2
 ```
 
 ```
-## [1] 10 20 30 40 50 60 60
+[1] 10 20 30 40 50 60 60
 ```
 It's often considered bad practice to overwrite input like this, since it can be destructive and, if not used with caution, can more easily lead to errors down the road. **We recommend whenever possible writing the output to a new object instead**, like this:
 
@@ -709,7 +709,7 @@ data2_sorted
 ```
 
 ```
-## [1] 10 20 30 40 50 60 60
+[1] 10 20 30 40 50 60 60
 ```
 In general, R inputs and outputs are totally independent objects with no special "connections".^[Put another way, R passes by value not reference, and copies are usually deep not shallow. Yes this can be very inefficient, but it's also arguably more user-friendly and intuitive to less technical users, which is by design.]. If you want an operation to be saved, **make sure to remember to assign the output to something!**
 :::
@@ -731,8 +731,8 @@ friends
 ```
 
 ```
-## [1] "Alice"     "Bob"       "Charlie"   "Donny"     "Emmy"      "Francine" 
-## [7] "Genevieve" "Heinemann"
+[1] "Alice"     "Bob"       "Charlie"   "Donny"     "Emmy"      "Francine" 
+[7] "Genevieve" "Heinemann"
 ```
 
 ``` r
@@ -742,7 +742,7 @@ groups
 ```
 
 ```
-## [1] "A" "B" "A" "B" "A" "B" "A" "B"
+[1] "A" "B" "A" "B" "A" "B" "A" "B"
 ```
 
 
@@ -760,7 +760,7 @@ nchar(friends)
 ```
 
 ```
-## [1] 5 3 7 5 4 8 9 9
+[1] 5 3 7 5 4 8 9 9
 ```
 
 ``` r
@@ -769,8 +769,8 @@ toupper(friends)
 ```
 
 ```
-## [1] "ALICE"     "BOB"       "CHARLIE"   "DONNY"     "EMMY"      "FRANCINE" 
-## [7] "GENEVIEVE" "HEINEMANN"
+[1] "ALICE"     "BOB"       "CHARLIE"   "DONNY"     "EMMY"      "FRANCINE" 
+[7] "GENEVIEVE" "HEINEMANN"
 ```
 
 ``` r
@@ -778,8 +778,8 @@ tolower(friends)
 ```
 
 ```
-## [1] "alice"     "bob"       "charlie"   "donny"     "emmy"      "francine" 
-## [7] "genevieve" "heinemann"
+[1] "alice"     "bob"       "charlie"   "donny"     "emmy"      "francine" 
+[7] "genevieve" "heinemann"
 ```
 
 ``` r
@@ -788,7 +788,7 @@ substr(friends, 1, 3)
 ```
 
 ```
-## [1] "Ali" "Bob" "Cha" "Don" "Emm" "Fra" "Gen" "Hei"
+[1] "Ali" "Bob" "Cha" "Don" "Emm" "Fra" "Gen" "Hei"
 ```
 
 ``` r
@@ -800,7 +800,7 @@ substr(friends, nchar(friends) - 2, nchar(friends))
 ```
 
 ```
-## [1] "ice" "Bob" "lie" "nny" "mmy" "ine" "eve" "ann"
+[1] "ice" "Bob" "lie" "nny" "mmy" "ine" "eve" "ann"
 ```
 
 ``` r
@@ -809,8 +809,7 @@ substr(friends, 2, nchar(friends) - 1)
 ```
 
 ```
-## [1] "lic"     "o"       "harli"   "onn"     "mm"      "rancin"  "eneviev"
-## [8] "eineman"
+[1] "lic"     "o"       "harli"   "onn"     "mm"      "rancin"  "eneviev" "eineman"
 ```
 
 ``` r
@@ -819,9 +818,9 @@ paste(friends, "is my friend")
 ```
 
 ```
-## [1] "Alice is my friend"     "Bob is my friend"       "Charlie is my friend"  
-## [4] "Donny is my friend"     "Emmy is my friend"      "Francine is my friend" 
-## [7] "Genevieve is my friend" "Heinemann is my friend"
+[1] "Alice is my friend"     "Bob is my friend"       "Charlie is my friend"  
+[4] "Donny is my friend"     "Emmy is my friend"      "Francine is my friend" 
+[7] "Genevieve is my friend" "Heinemann is my friend"
 ```
 
 ``` r
@@ -829,10 +828,10 @@ paste("My friend", friends, "is in group", groups)
 ```
 
 ```
-## [1] "My friend Alice is in group A"     "My friend Bob is in group B"      
-## [3] "My friend Charlie is in group A"   "My friend Donny is in group B"    
-## [5] "My friend Emmy is in group A"      "My friend Francine is in group B" 
-## [7] "My friend Genevieve is in group A" "My friend Heinemann is in group B"
+[1] "My friend Alice is in group A"     "My friend Bob is in group B"      
+[3] "My friend Charlie is in group A"   "My friend Donny is in group B"    
+[5] "My friend Emmy is in group A"      "My friend Francine is in group B" 
+[7] "My friend Genevieve is in group A" "My friend Heinemann is in group B"
 ```
 
 ``` r
@@ -842,8 +841,8 @@ paste0(friends, "123")
 ```
 
 ```
-## [1] "Alice123"     "Bob123"       "Charlie123"   "Donny123"     "Emmy123"     
-## [6] "Francine123"  "Genevieve123" "Heinemann123"
+[1] "Alice123"     "Bob123"       "Charlie123"   "Donny123"     "Emmy123"     
+[6] "Francine123"  "Genevieve123" "Heinemann123"
 ```
 
 ``` r
@@ -851,8 +850,8 @@ paste(friends, "123", sep = "_")
 ```
 
 ```
-## [1] "Alice_123"     "Bob_123"       "Charlie_123"   "Donny_123"    
-## [5] "Emmy_123"      "Francine_123"  "Genevieve_123" "Heinemann_123"
+[1] "Alice_123"     "Bob_123"       "Charlie_123"   "Donny_123"     "Emmy_123"     
+[6] "Francine_123"  "Genevieve_123" "Heinemann_123"
 ```
 
 ``` r
@@ -862,7 +861,7 @@ paste(friends, collapse = ", ")
 ```
 
 ```
-## [1] "Alice, Bob, Charlie, Donny, Emmy, Francine, Genevieve, Heinemann"
+[1] "Alice, Bob, Charlie, Donny, Emmy, Francine, Genevieve, Heinemann"
 ```
 
 ``` r
@@ -871,10 +870,10 @@ strrep(friends, 3)
 ```
 
 ```
-## [1] "AliceAliceAlice"             "BobBobBob"                  
-## [3] "CharlieCharlieCharlie"       "DonnyDonnyDonny"            
-## [5] "EmmyEmmyEmmy"                "FrancineFrancineFrancine"   
-## [7] "GenevieveGenevieveGenevieve" "HeinemannHeinemannHeinemann"
+[1] "AliceAliceAlice"             "BobBobBob"                  
+[3] "CharlieCharlieCharlie"       "DonnyDonnyDonny"            
+[5] "EmmyEmmyEmmy"                "FrancineFrancineFrancine"   
+[7] "GenevieveGenevieveGenevieve" "HeinemannHeinemannHeinemann"
 ```
 
 ``` r
@@ -883,14 +882,14 @@ strrep(friends, 1:8)
 ```
 
 ```
-## [1] "Alice"                                                                   
-## [2] "BobBob"                                                                  
-## [3] "CharlieCharlieCharlie"                                                   
-## [4] "DonnyDonnyDonnyDonny"                                                    
-## [5] "EmmyEmmyEmmyEmmyEmmy"                                                    
-## [6] "FrancineFrancineFrancineFrancineFrancineFrancine"                        
-## [7] "GenevieveGenevieveGenevieveGenevieveGenevieveGenevieveGenevieve"         
-## [8] "HeinemannHeinemannHeinemannHeinemannHeinemannHeinemannHeinemannHeinemann"
+[1] "Alice"                                                                   
+[2] "BobBob"                                                                  
+[3] "CharlieCharlieCharlie"                                                   
+[4] "DonnyDonnyDonnyDonny"                                                    
+[5] "EmmyEmmyEmmyEmmyEmmy"                                                    
+[6] "FrancineFrancineFrancineFrancineFrancineFrancine"                        
+[7] "GenevieveGenevieveGenevieveGenevieveGenevieveGenevieveGenevieve"         
+[8] "HeinemannHeinemannHeinemannHeinemannHeinemannHeinemannHeinemannHeinemann"
 ```
 
 
@@ -910,7 +909,7 @@ grep("e", friends)
 ```
 
 ```
-## [1] 1 3 6 7 8
+[1] 1 3 6 7 8
 ```
 
 ``` r
@@ -919,7 +918,7 @@ grepl("e", friends)
 ```
 
 ```
-## [1]  TRUE FALSE  TRUE FALSE FALSE  TRUE  TRUE  TRUE
+[1]  TRUE FALSE  TRUE FALSE FALSE  TRUE  TRUE  TRUE
 ```
 
 ``` r
@@ -928,7 +927,7 @@ friends[grep("e", friends)]
 ```
 
 ```
-## [1] "Alice"     "Charlie"   "Francine"  "Genevieve" "Heinemann"
+[1] "Alice"     "Charlie"   "Francine"  "Genevieve" "Heinemann"
 ```
 
 ``` r
@@ -937,7 +936,7 @@ friends[grep("e", friends, ignore.case = TRUE)]
 ```
 
 ```
-## [1] "Alice"     "Charlie"   "Emmy"      "Francine"  "Genevieve" "Heinemann"
+[1] "Alice"     "Charlie"   "Emmy"      "Francine"  "Genevieve" "Heinemann"
 ```
 
 ``` r
@@ -947,8 +946,8 @@ sub("y", "ie", friends)
 ```
 
 ```
-## [1] "Alice"     "Bob"       "Charlie"   "Donnie"    "Emmie"     "Francine" 
-## [7] "Genevieve" "Heinemann"
+[1] "Alice"     "Bob"       "Charlie"   "Donnie"    "Emmie"     "Francine" 
+[7] "Genevieve" "Heinemann"
 ```
 
 ``` r
@@ -958,8 +957,8 @@ sub("n", "m", friends)
 ```
 
 ```
-## [1] "Alice"     "Bob"       "Charlie"   "Domny"     "Emmy"      "Framcine" 
-## [7] "Gemevieve" "Heimemann"
+[1] "Alice"     "Bob"       "Charlie"   "Domny"     "Emmy"      "Framcine" 
+[7] "Gemevieve" "Heimemann"
 ```
 
 ``` r
@@ -967,8 +966,8 @@ gsub("n", "m", friends)
 ```
 
 ```
-## [1] "Alice"     "Bob"       "Charlie"   "Dommy"     "Emmy"      "Framcime" 
-## [7] "Gemevieve" "Heimemamm"
+[1] "Alice"     "Bob"       "Charlie"   "Dommy"     "Emmy"      "Framcime" 
+[7] "Gemevieve" "Heimemamm"
 ```
 
 ``` r
@@ -978,7 +977,7 @@ endsWith(friends, "y")
 ```
 
 ```
-## [1] FALSE FALSE FALSE  TRUE  TRUE FALSE FALSE FALSE
+[1] FALSE FALSE FALSE  TRUE  TRUE FALSE FALSE FALSE
 ```
 
 Each of these functions (as well as several more listed in the `grep()` help page), actually accept more complex pattern syntax for the search pattern. This advanced search pattern syntax is called "regular expressions" or "regex" for short. You can do things like match groups of characters, match repeated characters or groups, match to specific locations in words or sentences, and more.
@@ -1010,7 +1009,7 @@ str_count(friends, "e")
 ```
 
 ```
-## [1] 1 0 1 0 0 1 4 2
+[1] 1 0 1 0 0 1 4 2
 ```
 
 ``` r
@@ -1019,8 +1018,8 @@ str_to_title(toupper(friends))
 ```
 
 ```
-## [1] "Alice"     "Bob"       "Charlie"   "Donny"     "Emmy"      "Francine" 
-## [7] "Genevieve" "Heinemann"
+[1] "Alice"     "Bob"       "Charlie"   "Donny"     "Emmy"      "Francine" 
+[7] "Genevieve" "Heinemann"
 ```
 
 ``` r
@@ -1029,8 +1028,8 @@ str_pad(friends, width = 12, side = "right", pad = ".")
 ```
 
 ```
-## [1] "Alice......." "Bob........." "Charlie....." "Donny......." "Emmy........"
-## [6] "Francine...." "Genevieve..." "Heinemann..."
+[1] "Alice......." "Bob........." "Charlie....." "Donny......." "Emmy........"
+[6] "Francine...." "Genevieve..." "Heinemann..."
 ```
 
 
@@ -1079,7 +1078,7 @@ Note however that nothingness, i.e. the absence of a character (such as when a s
 ```
 
 ```
-## [1] TRUE
+[1] TRUE
 ```
 
 ``` r
@@ -1088,7 +1087,7 @@ Note however that nothingness, i.e. the absence of a character (such as when a s
 ```
 
 ```
-## [1] TRUE
+[1] TRUE
 ```
 
 ``` r
@@ -1097,7 +1096,7 @@ Note however that nothingness, i.e. the absence of a character (such as when a s
 ```
 
 ```
-## [1] TRUE
+[1] TRUE
 ```
 
 ``` r
@@ -1106,7 +1105,7 @@ Note however that nothingness, i.e. the absence of a character (such as when a s
 ```
 
 ```
-## [1] FALSE
+[1] FALSE
 ```
 
 ``` r
@@ -1114,7 +1113,7 @@ Note however that nothingness, i.e. the absence of a character (such as when a s
 ```
 
 ```
-## [1] TRUE
+[1] TRUE
 ```
 
 ``` r
@@ -1124,7 +1123,7 @@ Note however that nothingness, i.e. the absence of a character (such as when a s
 ```
 
 ```
-## [1] TRUE
+[1] TRUE
 ```
 
 ``` r
@@ -1132,7 +1131,7 @@ Note however that nothingness, i.e. the absence of a character (such as when a s
 ```
 
 ```
-## [1] TRUE
+[1] TRUE
 ```
 
 ``` r
@@ -1140,7 +1139,7 @@ Note however that nothingness, i.e. the absence of a character (such as when a s
 ```
 
 ```
-## [1] TRUE
+[1] TRUE
 ```
 
 ``` r
@@ -1149,7 +1148,7 @@ Note however that nothingness, i.e. the absence of a character (such as when a s
 ```
 
 ```
-## [1] TRUE
+[1] TRUE
 ```
 
 ``` r
@@ -1157,7 +1156,7 @@ Note however that nothingness, i.e. the absence of a character (such as when a s
 ```
 
 ```
-## [1] TRUE
+[1] TRUE
 ```
 
 ``` r
@@ -1166,7 +1165,7 @@ Note however that nothingness, i.e. the absence of a character (such as when a s
 ```
 
 ```
-## [1] TRUE
+[1] TRUE
 ```
 
 Using our newfound wisdom, we can now conclusively settle some age old debates!
@@ -1178,8 +1177,8 @@ head(sort(state.name, decreasing = TRUE))
 ```
 
 ```
-## [1] "Wyoming"       "Wisconsin"     "West Virginia" "Washington"   
-## [5] "Virginia"      "Vermont"
+[1] "Wyoming"       "Wisconsin"     "West Virginia" "Washington"    "Virginia"     
+[6] "Vermont"      
 ```
 
 ``` r
@@ -1189,7 +1188,7 @@ c(min(state.name), max(state.name))
 ```
 
 ```
-## [1] "Alabama" "Wyoming"
+[1] "Alabama" "Wyoming"
 ```
 
 ``` r
@@ -1198,7 +1197,7 @@ c(min(state.name), max(state.name))
 ```
 
 ```
-## [1] FALSE
+[1] FALSE
 ```
 
 ``` r
@@ -1207,7 +1206,7 @@ c(min(state.name), max(state.name))
 ```
 
 ```
-## [1] TRUE
+[1] TRUE
 ```
 
 ``` r
@@ -1216,7 +1215,7 @@ c(min(state.name), max(state.name))
 ```
 
 ```
-## [1] TRUE
+[1] TRUE
 ```
 
 
@@ -1234,7 +1233,7 @@ prices_raw
 ```
 
 ```
-## [1] "$1,000" "$1,500" "$850"   "$2,000"
+[1] "$1,000" "$1,500" "$850"   "$2,000"
 ```
 
 Since R doesn't natively understand dollar signs or comma grouping, this must start as a character vector. You can check the type of a vector by using the `is.numeric()`, `is.logical()`, `is.character()` functions.
@@ -1245,7 +1244,7 @@ is.character(prices_raw)
 ```
 
 ```
-## [1] TRUE
+[1] TRUE
 ```
 
 If the data has been "cleaned-up" then you can coerce (i.e. convert) the vector into other types with the corresponding `as.numeric()`, `as.logical()`, `as.character()` functions. In this case however, the data is not yet "cleaned-up" so this coercion operation will give an error.
@@ -1256,11 +1255,11 @@ as.numeric(prices_raw)
 ```
 
 ``` warning
-## Warning: NAs introduced by coercion
+Warning: NAs introduced by coercion
 ```
 
 ```
-## [1] NA NA NA NA
+[1] NA NA NA NA
 ```
 
 In R, it's important to remember **not to reinvent the wheel**; most actions already have an associated package/function, and it's probably better than what you can write (if you're a beginner). Here, it may be tempting to write your own parsing function by using `sub()`/`gsub()` to replace the dollar and commas then coerce, but there's a better option.
@@ -1282,7 +1281,7 @@ prices
 ```
 
 ```
-## [1] 1000 1500  850 2000
+[1] 1000 1500  850 2000
 ```
 
 ``` r
@@ -1290,7 +1289,7 @@ is.numeric(prices)
 ```
 
 ```
-## [1] TRUE
+[1] TRUE
 ```
 
 This will also work with things like percent symbols, but note it simply ignores the symbol instead of treating it as dividing by 100.
@@ -1302,7 +1301,7 @@ parse_number(c("30%", "100%", "1,500%"))
 ```
 
 ```
-## [1]   30  100 1500
+[1]   30  100 1500
 ```
 
 See the help page for `parse_number()` for more examples and usage notes.
@@ -1332,7 +1331,7 @@ date
 ```
 
 ```
-## [1] "2024-08-16"
+[1] "2024-08-16"
 ```
 
 We can see that even though our date object has `"Date"` class, it actually has `"double"` type, which means behind the scenes, it's secretly stored as a number.^[The distinction between class, type, and mode (which we haven't even mentioned and won't ever discuss) is highly technical to the mechanics of R and not worth concerning yourself over. If you're dying of curiosity, I recommend this excellent video on the matter: <https://youtu.be/RwEzWZA9uTw>.] If you `unclass()` the object, i.e. strip away the `"Date"` property, you can see it's just the number 19951 underneath, and you can check that in fact Aug 16, 2024 is indeed [19951 days after Jan 1 1970](https://www.wolframalpha.com/input?i=19951+days+after+Jan+1+1970).
@@ -1344,7 +1343,7 @@ class(date)
 ```
 
 ```
-## [1] "Date"
+[1] "Date"
 ```
 
 ``` r
@@ -1352,7 +1351,7 @@ is.Date(date) & !is.numeric(date)
 ```
 
 ```
-## [1] TRUE
+[1] TRUE
 ```
 
 ``` r
@@ -1361,7 +1360,7 @@ unclass(date)
 ```
 
 ```
-## [1] 19951
+[1] 19951
 ```
 ``` r
 # we can reverse this too, start with a number,
@@ -1372,7 +1371,7 @@ x
 ```
 
 ```
-## [1] "2024-08-16"
+[1] "2024-08-16"
 ```
 
 :::{.note}
@@ -1386,7 +1385,7 @@ date
 ```
 
 ```
-## [1] "2024-08-16"
+[1] "2024-08-16"
 ```
 
 ``` r
@@ -1394,25 +1393,25 @@ is.character(date)
 ```
 
 ```
-## [1] FALSE
+[1] FALSE
 ```
 ``` r
 identical(date, "2024-08-16")
 ```
 
 ```
-## [1] FALSE
+[1] FALSE
 ```
 ``` r
 c(as.numeric(date), as.numeric("2024-08-16"))
 ```
 
 ``` warning
-## Warning: NAs introduced by coercion
+Warning: NAs introduced by coercion
 ```
 
 ```
-## [1] 19951    NA
+[1] 19951    NA
 ```
 
 This is just to warn you that **even though they may print similarly, date objects and date-like strings are *NOT* the same**, so to avoid errors and unexpected behavior, make sure you properly convert all date data to be true date objects.
@@ -1434,7 +1433,7 @@ mdy(c(
 ```
 
 ```
-## [1] "2024-08-16" "2024-08-16" "2024-08-16" "2024-08-16" "2024-08-16"
+[1] "2024-08-16" "2024-08-16" "2024-08-16" "2024-08-16" "2024-08-16"
 ```
 
 ``` r
@@ -1444,7 +1443,7 @@ dmy(c(
 ```
 
 ```
-## [1] "2024-08-16" "2024-08-16" "2024-08-16" "2024-08-16" "2024-08-16"
+[1] "2024-08-16" "2024-08-16" "2024-08-16" "2024-08-16" "2024-08-16"
 ```
 
 As you can see, you just need to tell R which order to expect the date components and it will handle the rest! We only demonstrated the `mdy()` and `dmy()` functions here since they are by far the most common formats, but the other functions all behave the same.
@@ -1460,7 +1459,7 @@ dates2
 ```
 
 ```
-## [1] 2006.538 2009.163 2014.105 2022.363
+[1] 2006.538 2009.163 2014.105 2022.363
 ```
 
 ``` r
@@ -1470,7 +1469,7 @@ dates2
 ```
 
 ```
-## [1] "2006-07-16" "2009-03-01" "2014-02-08" "2022-05-13"
+[1] "2006-07-16" "2009-03-01" "2014-02-08" "2022-05-13"
 ```
 
 There is also a reverse function `decimal_date()` that converts a date back into a decimal.
@@ -1481,7 +1480,7 @@ decimal_date(dates2)
 ```
 
 ```
-## [1] 2006.537 2009.162 2014.104 2022.362
+[1] 2006.537 2009.162 2014.104 2022.362
 ```
 
 
@@ -1497,7 +1496,7 @@ mdy("Feb 29, 2024")
 ```
 
 ```
-## [1] "2024-02-29"
+[1] "2024-02-29"
 ```
 
 ``` r
@@ -1507,11 +1506,11 @@ mdy(c("Feb 29, 1900", "Feb 29, 2100"))
 ```
 
 ``` warning
-## Warning: 2 failed to parse.
+Warning: 2 failed to parse.
 ```
 
 ```
-## [1] NA NA
+[1] NA NA
 ```
 
 ``` r
@@ -1520,7 +1519,7 @@ mdy("Feb 29, 2000")
 ```
 
 ```
-## [1] "2000-02-29"
+[1] "2000-02-29"
 ```
 
 ``` r
@@ -1530,7 +1529,7 @@ leap_year(date)
 ```
 
 ```
-## [1] TRUE
+[1] TRUE
 ```
 
 ``` r
@@ -1539,7 +1538,7 @@ leap_year(c(1900, 2000, 2024, 2100))
 ```
 
 ```
-## [1] FALSE  TRUE  TRUE FALSE
+[1] FALSE  TRUE  TRUE FALSE
 ```
 
 Fun fact: R's calendar is more rigorous than Excel's calendar, since it correctly treats 1900 as non-leap, [unlike Excel](https://learn.microsoft.com/en-us/office/troubleshoot/excel/wrongly-assumes-1900-is-leap-year). This is of course probably immaterial in the 21^st^ century, I just think it's an amusing bit of trivia.
@@ -1561,7 +1560,7 @@ dates2
 ```
 
 ```
-## [1] "2024-08-16" "2006-07-16" "2009-03-01" "2014-02-08" "2022-05-13"
+[1] "2024-08-16" "2006-07-16" "2009-03-01" "2014-02-08" "2022-05-13"
 ```
 
 ``` r
@@ -1570,7 +1569,7 @@ year(dates2)
 ```
 
 ```
-## [1] 2024 2006 2009 2014 2022
+[1] 2024 2006 2009 2014 2022
 ```
 
 ``` r
@@ -1578,7 +1577,7 @@ month(dates2)
 ```
 
 ```
-## [1] 8 7 3 2 5
+[1] 8 7 3 2 5
 ```
 
 ``` r
@@ -1586,7 +1585,7 @@ day(dates2)
 ```
 
 ```
-## [1] 16 16  1  8 13
+[1] 16 16  1  8 13
 ```
 
 ``` r
@@ -1595,7 +1594,7 @@ wday(dates2)
 ```
 
 ```
-## [1] 6 1 1 7 6
+[1] 6 1 1 7 6
 ```
 
 ``` r
@@ -1603,7 +1602,7 @@ quarter(dates2)
 ```
 
 ```
-## [1] 3 3 1 1 2
+[1] 3 3 1 1 2
 ```
 
 Some functions (where it makes sense) like `month()` and `wday()` have additional arguments like `label` and `abbr` to control the output format when you have the option to output names instead of numbers. Again, I recommend you briefly check the help page of every new function you learn for additional options.
@@ -1615,8 +1614,8 @@ month(dates2, label = TRUE)
 ```
 
 ```
-## [1] Aug Jul Mar Feb May
-## 12 Levels: Jan < Feb < Mar < Apr < May < Jun < Jul < Aug < Sep < ... < Dec
+[1] Aug Jul Mar Feb May
+12 Levels: Jan < Feb < Mar < Apr < May < Jun < Jul < Aug < Sep < Oct < ... < Dec
 ```
 
 ``` r
@@ -1625,8 +1624,8 @@ wday(dates2, label = TRUE, abbr = FALSE)
 ```
 
 ```
-## [1] Friday   Sunday   Sunday   Saturday Friday  
-## 7 Levels: Sunday < Monday < Tuesday < Wednesday < Thursday < ... < Saturday
+[1] Friday   Sunday   Sunday   Saturday Friday  
+7 Levels: Sunday < Monday < Tuesday < Wednesday < Thursday < ... < Saturday
 ```
 
 
@@ -1658,7 +1657,7 @@ new_dates2
 ```
 
 ```
-## [1] "2000-08-16" "2000-07-16" "2000-03-01" "2000-02-08" "2000-05-13"
+[1] "2000-08-16" "2000-07-16" "2000-03-01" "2000-02-08" "2000-05-13"
 ```
 
 ``` r
@@ -1668,7 +1667,7 @@ new_dates2
 ```
 
 ```
-## [1] "2000-08-16" "2001-07-16" "2002-03-01" "2003-02-08" "2004-05-13"
+[1] "2000-08-16" "2001-07-16" "2002-03-01" "2003-02-08" "2004-05-13"
 ```
 
 This works with all the getters above, feel free to experiment more with this on your own. There are also several other getter/setter functions such as `qday()` for day of the quarter, `week()` for week number, and `semester()` for 1^st^ or 2^nd^ semester of the year.
@@ -1686,7 +1685,7 @@ date + 1
 ```
 
 ```
-## [1] "2024-08-17"
+[1] "2024-08-17"
 ```
 
 ``` r
@@ -1695,7 +1694,7 @@ date - 1000
 ```
 
 ```
-## [1] "2021-11-20"
+[1] "2021-11-20"
 ```
 
 ``` r
@@ -1706,7 +1705,7 @@ as.numeric(date - mdy("1/1/00"))
 ```
 
 ```
-## [1] 8994
+[1] 8994
 ```
 ``` r
 # make a sequence of dates from today to the end of the month
@@ -1714,10 +1713,9 @@ seq(date, mdy("8/31/24"), by = 1)
 ```
 
 ```
-##  [1] "2024-08-16" "2024-08-17" "2024-08-18" "2024-08-19" "2024-08-20"
-##  [6] "2024-08-21" "2024-08-22" "2024-08-23" "2024-08-24" "2024-08-25"
-## [11] "2024-08-26" "2024-08-27" "2024-08-28" "2024-08-29" "2024-08-30"
-## [16] "2024-08-31"
+ [1] "2024-08-16" "2024-08-17" "2024-08-18" "2024-08-19" "2024-08-20" "2024-08-21"
+ [7] "2024-08-22" "2024-08-23" "2024-08-24" "2024-08-25" "2024-08-26" "2024-08-27"
+[13] "2024-08-28" "2024-08-29" "2024-08-30" "2024-08-31"
 ```
 ``` r
 # make a sequence of every Friday from today to the end of the year
@@ -1725,10 +1723,10 @@ seq(date, mdy("12/31/24"), by = 7)
 ```
 
 ```
-##  [1] "2024-08-16" "2024-08-23" "2024-08-30" "2024-09-06" "2024-09-13"
-##  [6] "2024-09-20" "2024-09-27" "2024-10-04" "2024-10-11" "2024-10-18"
-## [11] "2024-10-25" "2024-11-01" "2024-11-08" "2024-11-15" "2024-11-22"
-## [16] "2024-11-29" "2024-12-06" "2024-12-13" "2024-12-20" "2024-12-27"
+ [1] "2024-08-16" "2024-08-23" "2024-08-30" "2024-09-06" "2024-09-13" "2024-09-20"
+ [7] "2024-09-27" "2024-10-04" "2024-10-11" "2024-10-18" "2024-10-25" "2024-11-01"
+[13] "2024-11-08" "2024-11-15" "2024-11-22" "2024-11-29" "2024-12-06" "2024-12-13"
+[19] "2024-12-20" "2024-12-27"
 ```
 ``` r
 # has independence day already happened this year?
@@ -1736,7 +1734,7 @@ mdy("7/4/24") <= date
 ```
 
 ```
-## [1] TRUE
+[1] TRUE
 ```
 
 ``` r
@@ -1745,7 +1743,7 @@ min(dates2)
 ```
 
 ```
-## [1] "2006-07-16"
+[1] "2006-07-16"
 ```
 
 ``` r
@@ -1754,7 +1752,7 @@ sort(dates2)
 ```
 
 ```
-## [1] "2006-07-16" "2009-03-01" "2014-02-08" "2022-05-13" "2024-08-16"
+[1] "2006-07-16" "2009-03-01" "2014-02-08" "2022-05-13" "2024-08-16"
 ```
 
 ``` r
@@ -1763,7 +1761,7 @@ date %in% dates2
 ```
 
 ```
-## [1] TRUE
+[1] TRUE
 ```
 
 ``` r
@@ -1773,7 +1771,7 @@ mean(dates2)
 ```
 
 ```
-## [1] "2015-05-11"
+[1] "2015-05-11"
 ```
 
 ``` r
@@ -1781,7 +1779,7 @@ median(dates2)
 ```
 
 ```
-## [1] "2014-02-08"
+[1] "2014-02-08"
 ```
 
 ``` r
@@ -1791,7 +1789,7 @@ sd(dates2)
 ```
 
 ```
-## [1] 2902.888
+[1] 2902.888
 ```
 
 
@@ -1807,7 +1805,7 @@ format(date, "%m/%d/%y")
 ```
 
 ```
-## [1] "08/16/24"
+[1] "08/16/24"
 ```
 
 ``` r
@@ -1816,7 +1814,7 @@ format(date, "%b %d, %Y")
 ```
 
 ```
-## [1] "Aug 16, 2024"
+[1] "Aug 16, 2024"
 ```
 
 ``` r
@@ -1825,7 +1823,7 @@ format(date, "%A, %B %e, %Y")
 ```
 
 ```
-## [1] "Friday, August 16, 2024"
+[1] "Friday, August 16, 2024"
 ```
 
 A full list of these percent codes can be found in the help page of `strptime()`, a base R function for parsing date/time objects.

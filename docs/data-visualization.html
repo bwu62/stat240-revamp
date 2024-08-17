@@ -129,51 +129,51 @@
 <span><span class="co"># this data frame is now too wide for our screen,</span></span>
 <span><span class="co"># you can see some columns are cut off</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">penguins</span>, n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## # A tibble: 333 × 8
-##   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
-##   &lt;chr&gt;   &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;       &lt;dbl&gt;
-## 1 Adelie  Torgersen           39.1          18.7               181        3750
-## 2 Adelie  Torgersen           39.5          17.4               186        3800
-## 3 Adelie  Torgersen           40.3          18                 195        3250
-## 4 Adelie  Torgersen           36.7          19.3               193        3450
-## 5 Adelie  Torgersen           39.3          20.6               190        3650
-## # ℹ 328 more rows
-## # ℹ 2 more variables: sex &lt;chr&gt;, year &lt;dbl&gt;</code></pre>
+<pre><code># A tibble: 333 × 8
+  species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex   
+  &lt;chr&gt;   &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt; 
+1 Adelie  Torgersen           39.1          18.7               181        3750 male  
+2 Adelie  Torgersen           39.5          17.4               186        3800 female
+3 Adelie  Torgersen           40.3          18                 195        3250 female
+4 Adelie  Torgersen           36.7          19.3               193        3450 female
+5 Adelie  Torgersen           39.3          20.6               190        3650 male  
+# ℹ 328 more rows
+# ℹ 1 more variable: year &lt;dbl&gt;</code></pre>
 <div class="sourceCode" id="cb529"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># let's temporarily increase the width and reprint,</span></span>
 <span><span class="co"># so you can see all columns in the data frame</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">92</span><span class="op">)</span></span>
 <span><span class="va">penguins</span></span></code></pre></div>
-<pre><code>## # A tibble: 333 × 8
-##    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex     year
-##    &lt;chr&gt;   &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt;
-##  1 Adelie  Torgersen           39.1          18.7               181        3750 male    2007
-##  2 Adelie  Torgersen           39.5          17.4               186        3800 female  2007
-##  3 Adelie  Torgersen           40.3          18                 195        3250 female  2007
-##  4 Adelie  Torgersen           36.7          19.3               193        3450 female  2007
-##  5 Adelie  Torgersen           39.3          20.6               190        3650 male    2007
-##  6 Adelie  Torgersen           38.9          17.8               181        3625 female  2007
-##  7 Adelie  Torgersen           39.2          19.6               195        4675 male    2007
-##  8 Adelie  Torgersen           41.1          17.6               182        3200 female  2007
-##  9 Adelie  Torgersen           38.6          21.2               191        3800 male    2007
-## 10 Adelie  Torgersen           34.6          21.1               198        4400 male    2007
-## # ℹ 323 more rows</code></pre>
+<pre><code># A tibble: 333 × 8
+   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex     year
+   &lt;chr&gt;   &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt;
+ 1 Adelie  Torgersen           39.1          18.7               181        3750 male    2007
+ 2 Adelie  Torgersen           39.5          17.4               186        3800 female  2007
+ 3 Adelie  Torgersen           40.3          18                 195        3250 female  2007
+ 4 Adelie  Torgersen           36.7          19.3               193        3450 female  2007
+ 5 Adelie  Torgersen           39.3          20.6               190        3650 male    2007
+ 6 Adelie  Torgersen           38.9          17.8               181        3625 female  2007
+ 7 Adelie  Torgersen           39.2          19.6               195        4675 male    2007
+ 8 Adelie  Torgersen           41.1          17.6               182        3200 female  2007
+ 9 Adelie  Torgersen           38.6          21.2               191        3800 male    2007
+10 Adelie  Torgersen           34.6          21.1               198        4400 male    2007
+# ℹ 323 more rows</code></pre>
 <div class="sourceCode" id="cb531"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># reset width to its original value</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">80</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">85</span><span class="op">)</span></span>
 <span><span class="co"># another option is the glimpse() function which prints sideways,</span></span>
 <span><span class="co"># avoiding the hidden columns due to insufficient width issue</span></span>
 <span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## Rows: 333
-## Columns: 8
-## $ species           &lt;chr&gt; "Adelie", "Adelie", "Adelie", "Adelie", "Adelie", "A…
-## $ island            &lt;chr&gt; "Torgersen", "Torgersen", "Torgersen", "Torgersen", …
-## $ bill_length_mm    &lt;dbl&gt; 39.1, 39.5, 40.3, 36.7, 39.3, 38.9, 39.2, 41.1, 38.6…
-## $ bill_depth_mm     &lt;dbl&gt; 18.7, 17.4, 18.0, 19.3, 20.6, 17.8, 19.6, 17.6, 21.2…
-## $ flipper_length_mm &lt;dbl&gt; 181, 186, 195, 193, 190, 181, 195, 182, 191, 198, 18…
-## $ body_mass_g       &lt;dbl&gt; 3750, 3800, 3250, 3450, 3650, 3625, 4675, 3200, 3800…
-## $ sex               &lt;chr&gt; "male", "female", "female", "female", "male", "femal…
-## $ year              &lt;dbl&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007…</code></pre>
+<pre><code>Rows: 333
+Columns: 8
+$ species           &lt;chr&gt; "Adelie", "Adelie", "Adelie", "Adelie", "Adelie", "Adelie…
+$ island            &lt;chr&gt; "Torgersen", "Torgersen", "Torgersen", "Torgersen", "Torg…
+$ bill_length_mm    &lt;dbl&gt; 39.1, 39.5, 40.3, 36.7, 39.3, 38.9, 39.2, 41.1, 38.6, 34.…
+$ bill_depth_mm     &lt;dbl&gt; 18.7, 17.4, 18.0, 19.3, 20.6, 17.8, 19.6, 17.6, 21.2, 21.…
+$ flipper_length_mm &lt;dbl&gt; 181, 186, 195, 193, 190, 181, 195, 182, 191, 198, 185, 19…
+$ body_mass_g       &lt;dbl&gt; 3750, 3800, 3250, 3450, 3650, 3625, 4675, 3200, 3800, 440…
+$ sex               &lt;chr&gt; "male", "female", "female", "female", "male", "female", "…
+$ year              &lt;dbl&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 200…</code></pre>
 <p>The column variables are intuitively named so you should be able to guess their meaning; see the <a href="https://allisonhorst.github.io/palmerpenguins/reference/penguins.html"><code>penguins</code></a> help page for more info on the variables as well as papers detailing the data gathering process.</p>
 </div>
 <div id="one-variable-plots" class="section level2" number="6.3">
@@ -259,9 +259,9 @@
 <code class="sourceCode R"><span><span class="co"># but this will error, since the first line is NOT incomplete!!</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">penguins</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">flipper_length_mm</span><span class="op">)</span><span class="op">)</span></span>
 <span>  <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## Error in `+.gg`:
-## ! Cannot use `+` with a single argument.
-## ℹ Did you accidentally put `+` on a new line?</code></pre>
+<pre><code>Error in `+.gg`:
+! Cannot use `+` with a single argument.
+ℹ Did you accidentally put `+` on a new line?</code></pre>
 </li>
 </ol>
 </div>
@@ -414,7 +414,7 @@ You can make the above plot more accessible to readers with color vision deficie
 <div class="sourceCode" id="cb543"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># get the min, q1, median, q3, and max:</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/fivenum.html">fivenum</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">$</span><span class="va">flipper_length_mm</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 172 190 197 213 231</code></pre>
+<pre><code>[1] 172 190 197 213 231</code></pre>
 <div class="sourceCode" id="cb545"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># turn these into a box plot</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">penguins</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">flipper_length_mm</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -463,12 +463,12 @@ You can make the above plot more accessible to readers with color vision deficie
 <span><span class="op">)</span></span>
 <span><span class="co"># check the result</span></span>
 <span><span class="va">penguins_species_counts</span></span></code></pre></div>
-<pre><code>## # A tibble: 3 × 2
-##   species   count
-##   &lt;chr&gt;     &lt;int&gt;
-## 1 Adelie      146
-## 2 Chinstrap    68
-## 3 Gentoo      119</code></pre>
+<pre><code># A tibble: 3 × 2
+  species   count
+  &lt;chr&gt;     &lt;int&gt;
+1 Adelie      146
+2 Chinstrap    68
+3 Gentoo      119</code></pre>
 <div class="sourceCode" id="cb550"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># now, make the same plot using the summary data frame and geom_col()</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">penguins_species_counts</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">species</span>, y <span class="op">=</span> <span class="va">count</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
@@ -594,11 +594,11 @@ You can make the above plot more accessible to readers with color vision deficie
 <span><span class="op">)</span></span>
 <span><span class="co"># show a glimpse of the dataset</span></span>
 <span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">enrollment</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## Rows: 146
-## Columns: 3
-## $ year              &lt;dbl&gt; 1947, 1947, 1948, 1948, 1949, 1949, 1950, 1950, 1951…
-## $ sex               &lt;chr&gt; "male", "female", "male", "female", "male", "female"…
-## $ enrolled_millions &lt;dbl&gt; 1.659249, 0.678977, 1.709367, 0.694029, 1.721572, 0.…</code></pre>
+<pre><code>Rows: 146
+Columns: 3
+$ year              &lt;dbl&gt; 1947, 1947, 1948, 1948, 1949, 1949, 1950, 1950, 1951, 195…
+$ sex               &lt;chr&gt; "male", "female", "male", "female", "male", "female", "ma…
+$ enrolled_millions &lt;dbl&gt; 1.659249, 0.678977, 1.709367, 0.694029, 1.721572, 0.72332…</code></pre>
 <p>Here, each row is a pair of male and female college enrollment counts (in millions) for a specific year. We can obviously just make a scatter plot of enrollment vs year, with additional aesthetics differentiating between male and female data points, like this:</p>
 <div class="sourceCode" id="cb561"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">enrollment</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">year</span>, y <span class="op">=</span> <span class="va">enrolled_millions</span>,</span>
@@ -654,10 +654,10 @@ You can make the above plot more accessible to readers with color vision deficie
 <span>  show_col_types <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">unemployment</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## Rows: 919
-## Columns: 2
-## $ DATE   &lt;date&gt; 1948-01-01, 1948-02-01, 1948-03-01, 1948-04-01, 1948-05-01, 19…
-## $ UNRATE &lt;dbl&gt; 3.4, 3.8, 4.0, 3.9, 3.5, 3.6, 3.6, 3.9, 3.8, 3.7, 3.8, 4.0, 4.3…</code></pre>
+<pre><code>Rows: 919
+Columns: 2
+$ DATE   &lt;date&gt; 1948-01-01, 1948-02-01, 1948-03-01, 1948-04-01, 1948-05-01, 1948-06…
+$ UNRATE &lt;dbl&gt; 3.4, 3.8, 4.0, 3.9, 3.5, 3.6, 3.6, 3.9, 3.8, 3.7, 3.8, 4.0, 4.3, 4.7…</code></pre>
 <div class="sourceCode" id="cb567"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">unemployment</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">DATE</span>, y <span class="op">=</span> <span class="va">UNRATE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Time"</span>, y <span class="op">=</span> <span class="st">"Unemployment rate (%)"</span>,</span>

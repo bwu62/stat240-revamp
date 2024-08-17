@@ -56,16 +56,16 @@ print(penguins, n = 5)
 ```
 
 ```
-## # A tibble: 333 × 8
-##   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
-##   <chr>   <chr>              <dbl>         <dbl>             <dbl>       <dbl>
-## 1 Adelie  Torgersen           39.1          18.7               181        3750
-## 2 Adelie  Torgersen           39.5          17.4               186        3800
-## 3 Adelie  Torgersen           40.3          18                 195        3250
-## 4 Adelie  Torgersen           36.7          19.3               193        3450
-## 5 Adelie  Torgersen           39.3          20.6               190        3650
-## # ℹ 328 more rows
-## # ℹ 2 more variables: sex <chr>, year <dbl>
+# A tibble: 333 × 8
+  species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex   
+  <chr>   <chr>              <dbl>         <dbl>             <dbl>       <dbl> <chr> 
+1 Adelie  Torgersen           39.1          18.7               181        3750 male  
+2 Adelie  Torgersen           39.5          17.4               186        3800 female
+3 Adelie  Torgersen           40.3          18                 195        3250 female
+4 Adelie  Torgersen           36.7          19.3               193        3450 female
+5 Adelie  Torgersen           39.3          20.6               190        3650 male  
+# ℹ 328 more rows
+# ℹ 1 more variable: year <dbl>
 ```
 
 
@@ -78,42 +78,42 @@ penguins
 ```
 
 ```
-## # A tibble: 333 × 8
-##    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex     year
-##    <chr>   <chr>              <dbl>         <dbl>             <dbl>       <dbl> <chr>  <dbl>
-##  1 Adelie  Torgersen           39.1          18.7               181        3750 male    2007
-##  2 Adelie  Torgersen           39.5          17.4               186        3800 female  2007
-##  3 Adelie  Torgersen           40.3          18                 195        3250 female  2007
-##  4 Adelie  Torgersen           36.7          19.3               193        3450 female  2007
-##  5 Adelie  Torgersen           39.3          20.6               190        3650 male    2007
-##  6 Adelie  Torgersen           38.9          17.8               181        3625 female  2007
-##  7 Adelie  Torgersen           39.2          19.6               195        4675 male    2007
-##  8 Adelie  Torgersen           41.1          17.6               182        3200 female  2007
-##  9 Adelie  Torgersen           38.6          21.2               191        3800 male    2007
-## 10 Adelie  Torgersen           34.6          21.1               198        4400 male    2007
-## # ℹ 323 more rows
+# A tibble: 333 × 8
+   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex     year
+   <chr>   <chr>              <dbl>         <dbl>             <dbl>       <dbl> <chr>  <dbl>
+ 1 Adelie  Torgersen           39.1          18.7               181        3750 male    2007
+ 2 Adelie  Torgersen           39.5          17.4               186        3800 female  2007
+ 3 Adelie  Torgersen           40.3          18                 195        3250 female  2007
+ 4 Adelie  Torgersen           36.7          19.3               193        3450 female  2007
+ 5 Adelie  Torgersen           39.3          20.6               190        3650 male    2007
+ 6 Adelie  Torgersen           38.9          17.8               181        3625 female  2007
+ 7 Adelie  Torgersen           39.2          19.6               195        4675 male    2007
+ 8 Adelie  Torgersen           41.1          17.6               182        3200 female  2007
+ 9 Adelie  Torgersen           38.6          21.2               191        3800 male    2007
+10 Adelie  Torgersen           34.6          21.1               198        4400 male    2007
+# ℹ 323 more rows
 ```
-
 ``` r
 # reset width to its original value
-options(width = 80)
+options(width = 85)
 # another option is the glimpse() function which prints sideways,
 # avoiding the hidden columns due to insufficient width issue
 glimpse(penguins)
 ```
 
 ```
-## Rows: 333
-## Columns: 8
-## $ species           <chr> "Adelie", "Adelie", "Adelie", "Adelie", "Adelie", "A…
-## $ island            <chr> "Torgersen", "Torgersen", "Torgersen", "Torgersen", …
-## $ bill_length_mm    <dbl> 39.1, 39.5, 40.3, 36.7, 39.3, 38.9, 39.2, 41.1, 38.6…
-## $ bill_depth_mm     <dbl> 18.7, 17.4, 18.0, 19.3, 20.6, 17.8, 19.6, 17.6, 21.2…
-## $ flipper_length_mm <dbl> 181, 186, 195, 193, 190, 181, 195, 182, 191, 198, 18…
-## $ body_mass_g       <dbl> 3750, 3800, 3250, 3450, 3650, 3625, 4675, 3200, 3800…
-## $ sex               <chr> "male", "female", "female", "female", "male", "femal…
-## $ year              <dbl> 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007…
+Rows: 333
+Columns: 8
+$ species           <chr> "Adelie", "Adelie", "Adelie", "Adelie", "Adelie", "Adelie…
+$ island            <chr> "Torgersen", "Torgersen", "Torgersen", "Torgersen", "Torg…
+$ bill_length_mm    <dbl> 39.1, 39.5, 40.3, 36.7, 39.3, 38.9, 39.2, 41.1, 38.6, 34.…
+$ bill_depth_mm     <dbl> 18.7, 17.4, 18.0, 19.3, 20.6, 17.8, 19.6, 17.6, 21.2, 21.…
+$ flipper_length_mm <dbl> 181, 186, 195, 193, 190, 181, 195, 182, 191, 198, 185, 19…
+$ body_mass_g       <dbl> 3750, 3800, 3250, 3450, 3650, 3625, 4675, 3200, 3800, 440…
+$ sex               <chr> "male", "female", "female", "female", "male", "female", "…
+$ year              <dbl> 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 200…
 ```
+
 
 The column variables are intuitively named so you should be able to guess their meaning; see the [`penguins`](https://allisonhorst.github.io/palmerpenguins/reference/penguins.html) help page for more info on the variables as well as papers detailing the data gathering process.
 
@@ -189,9 +189,9 @@ Due to the slightly unusual nature of this syntax, there are a number of common 
     ```
     
     ```
-    ## Error in `+.gg`:
-    ## ! Cannot use `+` with a single argument.
-    ## ℹ Did you accidentally put `+` on a new line?
+    Error in `+.gg`:
+    ! Cannot use `+` with a single argument.
+    ℹ Did you accidentally put `+` on a new line?
     ```
 
 :::
@@ -370,7 +370,7 @@ fivenum(penguins$flipper_length_mm)
 ```
 
 ```
-## [1] 172 190 197 213 231
+[1] 172 190 197 213 231
 ```
 
 ``` r
@@ -440,12 +440,12 @@ penguins_species_counts
 ```
 
 ```
-## # A tibble: 3 × 2
-##   species   count
-##   <chr>     <int>
-## 1 Adelie      146
-## 2 Chinstrap    68
-## 3 Gentoo      119
+# A tibble: 3 × 2
+  species   count
+  <chr>     <int>
+1 Adelie      146
+2 Chinstrap    68
+3 Gentoo      119
 ```
 
 ``` r
@@ -621,11 +621,11 @@ glimpse(enrollment)
 ```
 
 ```
-## Rows: 146
-## Columns: 3
-## $ year              <dbl> 1947, 1947, 1948, 1948, 1949, 1949, 1950, 1950, 1951…
-## $ sex               <chr> "male", "female", "male", "female", "male", "female"…
-## $ enrolled_millions <dbl> 1.659249, 0.678977, 1.709367, 0.694029, 1.721572, 0.…
+Rows: 146
+Columns: 3
+$ year              <dbl> 1947, 1947, 1948, 1948, 1949, 1949, 1950, 1950, 1951, 195…
+$ sex               <chr> "male", "female", "male", "female", "male", "female", "ma…
+$ enrolled_millions <dbl> 1.659249, 0.678977, 1.709367, 0.694029, 1.721572, 0.72332…
 ```
 
 Here, each row is a pair of male and female college enrollment counts (in millions) for a specific year. We can obviously just make a scatter plot of enrollment vs year, with additional aesthetics differentiating between male and female data points, like this:
@@ -708,10 +708,10 @@ glimpse(unemployment)
 ```
 
 ```
-## Rows: 919
-## Columns: 2
-## $ DATE   <date> 1948-01-01, 1948-02-01, 1948-03-01, 1948-04-01, 1948-05-01, 19…
-## $ UNRATE <dbl> 3.4, 3.8, 4.0, 3.9, 3.5, 3.6, 3.6, 3.9, 3.8, 3.7, 3.8, 4.0, 4.3…
+Rows: 919
+Columns: 2
+$ DATE   <date> 1948-01-01, 1948-02-01, 1948-03-01, 1948-04-01, 1948-05-01, 1948-06…
+$ UNRATE <dbl> 3.4, 3.8, 4.0, 3.9, 3.5, 3.6, 3.6, 3.9, 3.8, 3.7, 3.8, 4.0, 4.3, 4.7…
 ```
 
 ``` r
