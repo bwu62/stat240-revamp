@@ -289,6 +289,51 @@ penguins2 %>%
 
 The last function in the chunk above `n()` is a special function that **takes NO arguments and returns the number of rows**.^[This is an example of what's called a [nullary function](https://en.wikipedia.org/wiki/Arity)]
 
+A few other common applications of `summarize()` in data exploration:
+
+```{r, tidy=F}
+# compute a few other summaries to explore the data
+# note similar to mutate, we can immediately use a summarized column
+penguins2 %>%
+  summarize(
+    n            = n(),
+    n_male       = sum(sex == "male"),
+    pct_male     = 100 * n_male / n,
+    n_female     = sum(sex == "female"),
+    pct_female   = 100 * n_female / n,
+    pct_NA       = 100 * mean(
+      is.na(species) | is.na(sex) | is.na(bill_length_mm) | is.na(bill_depth_mm)
+    ), # get proportion of rows with NA (mean of logicals gives proportion of TRUEs)
+    q90_len      = quantile(bill_length_mm, 0.90),
+    q90_dep      = quantile(bill_depth_mm,  0.90),
+    pmed_len     = mean(bill_length_mm <= median(bill_length_mm)),
+    pmed_dep     = mean(bill_depth_mm  <= median(bill_depth_mm))
+  )
+```
+
+It's also common to use `summarize()` to compute statistical results. For example we can calculate the 95% confidence intervals for the mean bill length and depth (ignoring species/sex) which is something we will cover in more detail later in the course:
+
+```{r,tidy=F}
+# we first compute some intermediate statistics,
+# then use those to compute the intervals
+penguins2 %>%
+  summarize(
+    n            = n(),
+    mean_length  = mean(bill_length_mm),
+    sd_length    = sd(bill_length_mm),
+    mean_depth   = mean(bill_depth_mm),
+    sd_depth     = sd(bill_depth_mm),
+    length_95_ci = paste(
+      round(mean_length + c(-1, 1) * 1.96 * sd_length / sqrt(n), 2),
+      collapse = ","
+    ),
+    depth_95_ci  = paste(
+      round(mean_depth  + c(-1, 1) * 1.96 * sd_depth  / sqrt(n), 2),
+      collapse = ","
+    )
+  )
+```
+
 
 
 ## Row-wise functions
