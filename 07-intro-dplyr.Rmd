@@ -280,6 +280,7 @@ penguins2 %>%
     mean_length   = mean(bill_length_mm),
     median_length = median(bill_length_mm),
     sd_length     = sd(bill_length_mm),
+    iqr_length    = IQR(bill_length_mm),
     max_length    = max(bill_length_mm),
     min_length    = min(bill_length_mm),
     n             = n()
