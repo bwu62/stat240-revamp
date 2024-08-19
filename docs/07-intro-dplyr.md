@@ -593,11 +593,11 @@ penguins2 %>% mutate(
 # A tibble: 333 × 6
   species sex    bill_length_mm bill_depth_mm small_bill fake_dates
   <chr>   <chr>           <dbl>         <dbl> <lgl>      <date>    
-1 Adelie  male             39.1          18.7 FALSE      2024-08-18
-2 Adelie  female           39.5          17.4 TRUE       2024-08-19
-3 Adelie  female           40.3          18   FALSE      2024-08-20
-4 Adelie  female           36.7          19.3 TRUE       2024-08-21
-5 Adelie  male             39.3          20.6 FALSE      2024-08-22
+1 Adelie  male             39.1          18.7 FALSE      2024-08-19
+2 Adelie  female           39.5          17.4 TRUE       2024-08-20
+3 Adelie  female           40.3          18   FALSE      2024-08-21
+4 Adelie  female           36.7          19.3 TRUE       2024-08-22
+5 Adelie  male             39.3          20.6 FALSE      2024-08-23
 # ℹ 328 more rows
 ```
 
@@ -891,34 +891,20 @@ penguins %>% slice(-(1:200))
 
 
 ``` r
-# get the first 20 rows
-penguins %>% slice_head(n = 20)
+# get the first 25 rows
+penguins %>% slice_head(n = 25)
 ```
 
 ```
-# A tibble: 20 × 8
-   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex  
-   <chr>   <chr>              <dbl>         <dbl>             <dbl>       <dbl> <chr>
- 1 Adelie  Torgersen           39.1          18.7               181        3750 male 
- 2 Adelie  Torgersen           39.5          17.4               186        3800 fema…
- 3 Adelie  Torgersen           40.3          18                 195        3250 fema…
- 4 Adelie  Torgersen           36.7          19.3               193        3450 fema…
- 5 Adelie  Torgersen           39.3          20.6               190        3650 male 
- 6 Adelie  Torgersen           38.9          17.8               181        3625 fema…
- 7 Adelie  Torgersen           39.2          19.6               195        4675 male 
- 8 Adelie  Torgersen           41.1          17.6               182        3200 fema…
- 9 Adelie  Torgersen           38.6          21.2               191        3800 male 
-10 Adelie  Torgersen           34.6          21.1               198        4400 male 
-11 Adelie  Torgersen           36.6          17.8               185        3700 fema…
-12 Adelie  Torgersen           38.7          19                 195        3450 fema…
-13 Adelie  Torgersen           42.5          20.7               197        4500 male 
-14 Adelie  Torgersen           34.4          18.4               184        3325 fema…
-15 Adelie  Torgersen           46            21.5               194        4200 male 
-16 Adelie  Biscoe              37.8          18.3               174        3400 fema…
-17 Adelie  Biscoe              37.7          18.7               180        3600 male 
-18 Adelie  Biscoe              35.9          19.2               189        3800 fema…
-19 Adelie  Biscoe              38.2          18.1               185        3950 male 
-20 Adelie  Biscoe              38.8          17.2               180        3800 male 
+# A tibble: 25 × 8
+  species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex   
+  <chr>   <chr>              <dbl>         <dbl>             <dbl>       <dbl> <chr> 
+1 Adelie  Torgersen           39.1          18.7               181        3750 male  
+2 Adelie  Torgersen           39.5          17.4               186        3800 female
+3 Adelie  Torgersen           40.3          18                 195        3250 female
+4 Adelie  Torgersen           36.7          19.3               193        3450 female
+5 Adelie  Torgersen           39.3          20.6               190        3650 male  
+# ℹ 20 more rows
 # ℹ 1 more variable: year <dbl>
 ```
 
@@ -940,10 +926,184 @@ penguins %>% slice_tail(prop = 0.1)
 # ℹ 1 more variable: year <dbl>
 ```
 
-`slice_min()` and `slice_max()` are used to slice rows which contain the min/max values for a specific variable. For example, supppose we want to to inspect the
+`slice_min()` and `slice_max()` are used to slice rows which contain the min/max values for a specific variable. For example, suppose we want to get the penguin with the smallest body mass:
 
+
+``` r
+# get smallest penguin by mass
+penguins %>% slice_min(body_mass_g, n = 1)
+```
+
+```
+# A tibble: 1 × 8
+  species   island bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex   
+  <chr>     <chr>           <dbl>         <dbl>             <dbl>       <dbl> <chr> 
+1 Chinstrap Dream            46.9          16.6               192        2700 female
+# ℹ 1 more variable: year <dbl>
+```
+
+If there are ties, by default **all tied rows are printed**, e.g. suppose we want the 3 penguins with the longest flipper lengths:
+
+
+``` r
+# get 3 penguins with longest flippers
+penguins %>% slice_max(flipper_length_mm, n = 3)
+```
+
+```
+# A tibble: 8 × 8
+  species island bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex  
+  <chr>   <chr>           <dbl>         <dbl>             <dbl>       <dbl> <chr>
+1 Gentoo  Biscoe           54.3          15.7               231        5650 male 
+2 Gentoo  Biscoe           50            16.3               230        5700 male 
+3 Gentoo  Biscoe           59.6          17                 230        6050 male 
+4 Gentoo  Biscoe           49.8          16.8               230        5700 male 
+5 Gentoo  Biscoe           48.6          16                 230        5800 male 
+6 Gentoo  Biscoe           52.1          17                 230        5550 male 
+7 Gentoo  Biscoe           51.5          16.3               230        5500 male 
+8 Gentoo  Biscoe           55.1          16                 230        5850 male 
+# ℹ 1 more variable: year <dbl>
+```
+
+It looks like 7 different Gentoo penguins are all tied for 2nd place, so they are ALL returned! You can disable this with an argument, but it's recommended to keep the default behavior here.
+
+You can also set `prop` instead of `n` to return by percent. E.g. let's get the top 1% of penguins by bill length:
+
+
+``` r
+# get top 1% of penguins by bill length
+penguins %>% slice_max(bill_length_mm, prop = 0.01)
+```
+
+```
+# A tibble: 3 × 8
+  species   island bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex   
+  <chr>     <chr>           <dbl>         <dbl>             <dbl>       <dbl> <chr> 
+1 Gentoo    Biscoe           59.6          17                 230        6050 male  
+2 Chinstrap Dream            58            17.8               181        3700 female
+3 Gentoo    Biscoe           55.9          17                 228        5600 male  
+# ℹ 1 more variable: year <dbl>
+```
 
 
 ### `arrange()`
 
-### `drop_na()`
+`arrange()` is used to sort rows. Note that since it only sorts rows, it does NOT change the dataframe in any "meaningful" way (generally, order of rows/columns is not considered a "meaningful" change). It's primarily used for visual appeal, i.e. for neater presentation of a dataset.
+
+The syntax is `df %>% arrange(expr1, expr2, ...)` where `expr1`, `expr2`, ... can be simply **a column, or some vector expression using columns in the data frame** (similar to `mutate()` or `filter()`) whose resultant values are used for sorting the rows. A few important notes:
+
+ 1. **Each next expression is ONLY used to break ties in the previous expressions**, otherwise it's ignored! E.g. if two rows can be sorted by `expr1`, only that is used. However if two rows are tied for `expr1`, then `expr2` (if it exists) will be used to try to break the tie, and so on. This is also a frequent point of confusiong for beginners.
+ 2. Default order is always **ascending**, i.e. small to largex, A to Z, earlier to later, FALSE to TRUE. For descending order, wrap your expression in `desc()`.
+ 3. Rows that are completely tied may be returned in any order.^[For the CS folks again, this means `arrange()` does not guarantee a [stable sort](https://en.wikipedia.org/wiki/Sorting_algorithm#Stability). It seems like this generally isn't a huge concern or priority for the Tidyverse developers, which is fair enough.]
+
+Examples of `arrange()`:
+
+
+``` r
+# sort penguins by ascending flipper length
+penguins %>% arrange(flipper_length_mm)
+```
+
+```
+# A tibble: 333 × 8
+  species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex   
+  <chr>   <chr>              <dbl>         <dbl>             <dbl>       <dbl> <chr> 
+1 Adelie  Biscoe              37.9          18.6               172        3150 female
+2 Adelie  Biscoe              37.8          18.3               174        3400 female
+3 Adelie  Torgersen           40.2          17                 176        3450 female
+4 Adelie  Dream               39.5          16.7               178        3250 female
+5 Adelie  Dream               37.2          18.1               178        3900 male  
+# ℹ 328 more rows
+# ℹ 1 more variable: year <dbl>
+```
+
+``` r
+# sort penguins by descending flipper length
+penguins %>% arrange(desc(flipper_length_mm))
+```
+
+```
+# A tibble: 333 × 8
+  species island bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex  
+  <chr>   <chr>           <dbl>         <dbl>             <dbl>       <dbl> <chr>
+1 Gentoo  Biscoe           54.3          15.7               231        5650 male 
+2 Gentoo  Biscoe           50            16.3               230        5700 male 
+3 Gentoo  Biscoe           59.6          17                 230        6050 male 
+4 Gentoo  Biscoe           49.8          16.8               230        5700 male 
+5 Gentoo  Biscoe           48.6          16                 230        5800 male 
+# ℹ 328 more rows
+# ℹ 1 more variable: year <dbl>
+```
+
+``` r
+# since mathematical expressions are allowed, this is also equivalent
+penguins %>% arrange(-flipper_length_mm)
+```
+
+```
+# A tibble: 333 × 8
+  species island bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex  
+  <chr>   <chr>           <dbl>         <dbl>             <dbl>       <dbl> <chr>
+1 Gentoo  Biscoe           54.3          15.7               231        5650 male 
+2 Gentoo  Biscoe           50            16.3               230        5700 male 
+3 Gentoo  Biscoe           59.6          17                 230        6050 male 
+4 Gentoo  Biscoe           49.8          16.8               230        5700 male 
+5 Gentoo  Biscoe           48.6          16                 230        5800 male 
+# ℹ 328 more rows
+# ℹ 1 more variable: year <dbl>
+```
+
+``` r
+# sort first by island, then by descending species (if there are ties)
+penguins %>% arrange(island, desc(species))
+```
+
+```
+# A tibble: 333 × 8
+  species island bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex   
+  <chr>   <chr>           <dbl>         <dbl>             <dbl>       <dbl> <chr> 
+1 Gentoo  Biscoe           46.1          13.2               211        4500 female
+2 Gentoo  Biscoe           50            16.3               230        5700 male  
+3 Gentoo  Biscoe           48.7          14.1               210        4450 female
+4 Gentoo  Biscoe           50            15.2               218        5700 male  
+5 Gentoo  Biscoe           47.6          14.5               215        5400 male  
+# ℹ 328 more rows
+# ℹ 1 more variable: year <dbl>
+```
+
+``` r
+# again, any expression is possible,
+# let's sort first by number of SDs away from mean body mass,
+# then by descending last letter of species name for ties,
+# then by ascending approximate bill volume if there are further ties
+penguins %>% arrange(
+  abs(body_mass_g - mean(body_mass_g)) / sd(body_mass_g),
+  desc(substr(species, nchar(species), nchar(species))),
+  pi * (bill_depth_mm / 2)^2 * bill_length_mm
+)
+```
+
+```
+# A tibble: 333 × 8
+  species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex   
+  <chr>   <chr>              <dbl>         <dbl>             <dbl>       <dbl> <chr> 
+1 Gentoo  Biscoe              45.3          13.8               208        4200 female
+2 Gentoo  Biscoe              45.5          13.9               210        4200 female
+3 Gentoo  Biscoe              45.8          14.6               210        4200 female
+4 Adelie  Torgersen           35.1          19.4               193        4200 male  
+5 Adelie  Torgersen           46            21.5               194        4200 male  
+# ℹ 328 more rows
+# ℹ 1 more variable: year <dbl>
+```
+
+
+## Missing values
+
+### Identifying
+
+### Dropping
+
+### Replacing
+
+- briefly mention MAR?
+- note on imputing

@@ -534,11 +534,11 @@
 <pre><code># A tibble: 333 × 6
   species sex    bill_length_mm bill_depth_mm small_bill fake_dates
   &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt; &lt;lgl&gt;      &lt;date&gt;    
-1 Adelie  male             39.1          18.7 FALSE      2024-08-18
-2 Adelie  female           39.5          17.4 TRUE       2024-08-19
-3 Adelie  female           40.3          18   FALSE      2024-08-20
-4 Adelie  female           36.7          19.3 TRUE       2024-08-21
-5 Adelie  male             39.3          20.6 FALSE      2024-08-22
+1 Adelie  male             39.1          18.7 FALSE      2024-08-19
+2 Adelie  female           39.5          17.4 TRUE       2024-08-20
+3 Adelie  female           40.3          18   FALSE      2024-08-21
+4 Adelie  female           36.7          19.3 TRUE       2024-08-22
+5 Adelie  male             39.3          20.6 FALSE      2024-08-23
 # ℹ 328 more rows</code></pre>
 <p>A notable function that is extremely useful inside <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> is <code><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when()</a></code> which can calculate different values depending on certain conditions.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;It’s similar to a switch function in other languages.&lt;/p&gt;"><sup>26</sup></a> The basic syntax is <code>df %&gt;% mutate(new_col = case_when(cond1 ~ expr1, cond2 ~ expr2, ...))</code> where <code>cond1</code>, <code>cond2</code>, … are logical condition vectors checked one by one in the given order, and <code>expr1</code>, <code>expr2</code>, … are R expressions that are activated when a condition matches.</p>
 <p>For example, suppose we want to create some new column differently depending on sex and bill depth:</p>
@@ -766,31 +766,17 @@
 # ℹ 1 more variable: year &lt;dbl&gt;</code></pre>
 <p><code><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_head()</a></code> and <code><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_tail()</a></code> specifically slice out rows at the top or bottom, by either number <code>n</code> or proportion <code>prop</code>. Examples:</p>
 <div class="sourceCode" id="cb659"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># get the first 20 rows</span></span>
-<span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_head</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></code></pre></div>
-<pre><code># A tibble: 20 × 8
-   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex  
-   &lt;chr&gt;   &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;
- 1 Adelie  Torgersen           39.1          18.7               181        3750 male 
- 2 Adelie  Torgersen           39.5          17.4               186        3800 fema…
- 3 Adelie  Torgersen           40.3          18                 195        3250 fema…
- 4 Adelie  Torgersen           36.7          19.3               193        3450 fema…
- 5 Adelie  Torgersen           39.3          20.6               190        3650 male 
- 6 Adelie  Torgersen           38.9          17.8               181        3625 fema…
- 7 Adelie  Torgersen           39.2          19.6               195        4675 male 
- 8 Adelie  Torgersen           41.1          17.6               182        3200 fema…
- 9 Adelie  Torgersen           38.6          21.2               191        3800 male 
-10 Adelie  Torgersen           34.6          21.1               198        4400 male 
-11 Adelie  Torgersen           36.6          17.8               185        3700 fema…
-12 Adelie  Torgersen           38.7          19                 195        3450 fema…
-13 Adelie  Torgersen           42.5          20.7               197        4500 male 
-14 Adelie  Torgersen           34.4          18.4               184        3325 fema…
-15 Adelie  Torgersen           46            21.5               194        4200 male 
-16 Adelie  Biscoe              37.8          18.3               174        3400 fema…
-17 Adelie  Biscoe              37.7          18.7               180        3600 male 
-18 Adelie  Biscoe              35.9          19.2               189        3800 fema…
-19 Adelie  Biscoe              38.2          18.1               185        3950 male 
-20 Adelie  Biscoe              38.8          17.2               180        3800 male 
+<code class="sourceCode R"><span><span class="co"># get the first 25 rows</span></span>
+<span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_head</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">25</span><span class="op">)</span></span></code></pre></div>
+<pre><code># A tibble: 25 × 8
+  species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex   
+  &lt;chr&gt;   &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt; 
+1 Adelie  Torgersen           39.1          18.7               181        3750 male  
+2 Adelie  Torgersen           39.5          17.4               186        3800 female
+3 Adelie  Torgersen           40.3          18                 195        3250 female
+4 Adelie  Torgersen           36.7          19.3               193        3450 female
+5 Adelie  Torgersen           39.3          20.6               190        3650 male  
+# ℹ 20 more rows
 # ℹ 1 more variable: year &lt;dbl&gt;</code></pre>
 <div class="sourceCode" id="cb661"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># get the last 10% of rows</span></span>
@@ -805,18 +791,154 @@
 5 Chinstrap Dream            53.5          19.9               205        4500 male  
 # ℹ 28 more rows
 # ℹ 1 more variable: year &lt;dbl&gt;</code></pre>
-<p><code><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_min()</a></code> and <code><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_max()</a></code> are used to slice rows which contain the min/max values for a specific variable. For example, supppose we want to to inspect the</p>
+<p><code><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_min()</a></code> and <code><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_max()</a></code> are used to slice rows which contain the min/max values for a specific variable. For example, suppose we want to get the penguin with the smallest body mass:</p>
+<div class="sourceCode" id="cb663"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># get smallest penguin by mass</span></span>
+<span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_min</a></span><span class="op">(</span><span class="va">body_mass_g</span>, n <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<pre><code># A tibble: 1 × 8
+  species   island bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex   
+  &lt;chr&gt;     &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt; 
+1 Chinstrap Dream            46.9          16.6               192        2700 female
+# ℹ 1 more variable: year &lt;dbl&gt;</code></pre>
+<p>If there are ties, by default <strong>all tied rows are printed</strong>, e.g. suppose we want the 3 penguins with the longest flipper lengths:</p>
+<div class="sourceCode" id="cb665"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># get 3 penguins with longest flippers</span></span>
+<span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_max</a></span><span class="op">(</span><span class="va">flipper_length_mm</span>, n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
+<pre><code># A tibble: 8 × 8
+  species island bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex  
+  &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;
+1 Gentoo  Biscoe           54.3          15.7               231        5650 male 
+2 Gentoo  Biscoe           50            16.3               230        5700 male 
+3 Gentoo  Biscoe           59.6          17                 230        6050 male 
+4 Gentoo  Biscoe           49.8          16.8               230        5700 male 
+5 Gentoo  Biscoe           48.6          16                 230        5800 male 
+6 Gentoo  Biscoe           52.1          17                 230        5550 male 
+7 Gentoo  Biscoe           51.5          16.3               230        5500 male 
+8 Gentoo  Biscoe           55.1          16                 230        5850 male 
+# ℹ 1 more variable: year &lt;dbl&gt;</code></pre>
+<p>It looks like 7 different Gentoo penguins are all tied for 2nd place, so they are ALL returned! You can disable this with an argument, but it’s recommended to keep the default behavior here.</p>
+<p>You can also set <code>prop</code> instead of <code>n</code> to return by percent. E.g. let’s get the top 1% of penguins by bill length:</p>
+<div class="sourceCode" id="cb667"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># get top 1% of penguins by bill length</span></span>
+<span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_max</a></span><span class="op">(</span><span class="va">bill_length_mm</span>, prop <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></span></code></pre></div>
+<pre><code># A tibble: 3 × 8
+  species   island bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex   
+  &lt;chr&gt;     &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt; 
+1 Gentoo    Biscoe           59.6          17                 230        6050 male  
+2 Chinstrap Dream            58            17.8               181        3700 female
+3 Gentoo    Biscoe           55.9          17                 228        5600 male  
+# ℹ 1 more variable: year &lt;dbl&gt;</code></pre>
 </div>
 <div id="arrange" class="section level3" number="7.5.3">
 <h3>
 <span class="header-section-number">7.5.3</span> <code>arrange()</code><a class="anchor" aria-label="anchor" href="#arrange"><i class="fas fa-link"></i></a>
 </h3>
+<p><code><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange()</a></code> is used to sort rows. Note that since it only sorts rows, it does NOT change the dataframe in any “meaningful” way (generally, order of rows/columns is not considered a “meaningful” change). It’s primarily used for visual appeal, i.e. for neater presentation of a dataset.</p>
+<p>The syntax is <code>df %&gt;% arrange(expr1, expr2, ...)</code> where <code>expr1</code>, <code>expr2</code>, … can be simply <strong>a column, or some vector expression using columns in the data frame</strong> (similar to <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> or <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code>) whose resultant values are used for sorting the rows. A few important notes:</p>
+<ol style="list-style-type: decimal">
+<li>
+<strong>Each next expression is ONLY used to break ties in the previous expressions</strong>, otherwise it’s ignored! E.g. if two rows can be sorted by <code>expr1</code>, only that is used. However if two rows are tied for <code>expr1</code>, then <code>expr2</code> (if it exists) will be used to try to break the tie, and so on. This is also a frequent point of confusiong for beginners.</li>
+<li>Default order is always <strong>ascending</strong>, i.e. small to largex, A to Z, earlier to later, FALSE to TRUE. For descending order, wrap your expression in <code><a href="https://dplyr.tidyverse.org/reference/desc.html">desc()</a></code>.</li>
+<li>Rows that are completely tied may be returned in any order.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;For the CS folks again, this means &lt;code&gt;arrange()&lt;/code&gt; does not guarantee a &lt;a href="https://en.wikipedia.org/wiki/Sorting_algorithm#Stability"&gt;stable sort&lt;/a&gt;. It seems like this generally isn’t a huge concern or priority for the Tidyverse developers, which is fair enough.&lt;/p&gt;'><sup>28</sup></a>
+</li>
+</ol>
+<p>Examples of <code><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange()</a></code>:</p>
+<div class="sourceCode" id="cb669"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># sort penguins by ascending flipper length</span></span>
+<span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">flipper_length_mm</span><span class="op">)</span></span></code></pre></div>
+<pre><code># A tibble: 333 × 8
+  species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex   
+  &lt;chr&gt;   &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt; 
+1 Adelie  Biscoe              37.9          18.6               172        3150 female
+2 Adelie  Biscoe              37.8          18.3               174        3400 female
+3 Adelie  Torgersen           40.2          17                 176        3450 female
+4 Adelie  Dream               39.5          16.7               178        3250 female
+5 Adelie  Dream               37.2          18.1               178        3900 male  
+# ℹ 328 more rows
+# ℹ 1 more variable: year &lt;dbl&gt;</code></pre>
+<div class="sourceCode" id="cb671"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># sort penguins by descending flipper length</span></span>
+<span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">flipper_length_mm</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code># A tibble: 333 × 8
+  species island bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex  
+  &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;
+1 Gentoo  Biscoe           54.3          15.7               231        5650 male 
+2 Gentoo  Biscoe           50            16.3               230        5700 male 
+3 Gentoo  Biscoe           59.6          17                 230        6050 male 
+4 Gentoo  Biscoe           49.8          16.8               230        5700 male 
+5 Gentoo  Biscoe           48.6          16                 230        5800 male 
+# ℹ 328 more rows
+# ℹ 1 more variable: year &lt;dbl&gt;</code></pre>
+<div class="sourceCode" id="cb673"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># since mathematical expressions are allowed, this is also equivalent</span></span>
+<span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="op">-</span><span class="va">flipper_length_mm</span><span class="op">)</span></span></code></pre></div>
+<pre><code># A tibble: 333 × 8
+  species island bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex  
+  &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;
+1 Gentoo  Biscoe           54.3          15.7               231        5650 male 
+2 Gentoo  Biscoe           50            16.3               230        5700 male 
+3 Gentoo  Biscoe           59.6          17                 230        6050 male 
+4 Gentoo  Biscoe           49.8          16.8               230        5700 male 
+5 Gentoo  Biscoe           48.6          16                 230        5800 male 
+# ℹ 328 more rows
+# ℹ 1 more variable: year &lt;dbl&gt;</code></pre>
+<div class="sourceCode" id="cb675"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># sort first by island, then by descending species (if there are ties)</span></span>
+<span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">island</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code># A tibble: 333 × 8
+  species island bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex   
+  &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt; 
+1 Gentoo  Biscoe           46.1          13.2               211        4500 female
+2 Gentoo  Biscoe           50            16.3               230        5700 male  
+3 Gentoo  Biscoe           48.7          14.1               210        4450 female
+4 Gentoo  Biscoe           50            15.2               218        5700 male  
+5 Gentoo  Biscoe           47.6          14.5               215        5400 male  
+# ℹ 328 more rows
+# ℹ 1 more variable: year &lt;dbl&gt;</code></pre>
+<div class="sourceCode" id="cb677"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># again, any expression is possible,</span></span>
+<span><span class="co"># let's sort first by number of SDs away from mean body mass,</span></span>
+<span><span class="co"># then by descending last letter of species name for ties,</span></span>
+<span><span class="co"># then by ascending approximate bill volume if there are further ties</span></span>
+<span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">body_mass_g</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">body_mass_g</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">body_mass_g</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/substr.html">substr</a></span><span class="op">(</span><span class="va">species</span>, <span class="fu"><a href="https://rdrr.io/r/base/nchar.html">nchar</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/nchar.html">nchar</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  <span class="va">pi</span> <span class="op">*</span> <span class="op">(</span><span class="va">bill_depth_mm</span> <span class="op">/</span> <span class="fl">2</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span> <span class="op">*</span> <span class="va">bill_length_mm</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<pre><code># A tibble: 333 × 8
+  species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex   
+  &lt;chr&gt;   &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt; 
+1 Gentoo  Biscoe              45.3          13.8               208        4200 female
+2 Gentoo  Biscoe              45.5          13.9               210        4200 female
+3 Gentoo  Biscoe              45.8          14.6               210        4200 female
+4 Adelie  Torgersen           35.1          19.4               193        4200 male  
+5 Adelie  Torgersen           46            21.5               194        4200 male  
+# ℹ 328 more rows
+# ℹ 1 more variable: year &lt;dbl&gt;</code></pre>
 </div>
-<div id="drop_na" class="section level3" number="7.5.4">
+</div>
+<div id="missing-values" class="section level2" number="7.6">
+<h2>
+<span class="header-section-number">7.6</span> Missing values<a class="anchor" aria-label="anchor" href="#missing-values"><i class="fas fa-link"></i></a>
+</h2>
+<div id="identifying" class="section level3" number="7.6.1">
 <h3>
-<span class="header-section-number">7.5.4</span> <code>drop_na()</code><a class="anchor" aria-label="anchor" href="#drop_na"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.6.1</span> Identifying<a class="anchor" aria-label="anchor" href="#identifying"><i class="fas fa-link"></i></a>
 </h3>
-
+</div>
+<div id="dropping" class="section level3" number="7.6.2">
+<h3>
+<span class="header-section-number">7.6.2</span> Dropping<a class="anchor" aria-label="anchor" href="#dropping"><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="replacing" class="section level3" number="7.6.3">
+<h3>
+<span class="header-section-number">7.6.3</span> Replacing<a class="anchor" aria-label="anchor" href="#replacing"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>briefly mention MAR?</li>
+<li>note on imputing</li>
+</ul>
 </div>
 </div>
 </div>
@@ -940,7 +1062,13 @@ observer.observe(document.body, config);
 <li><a class="nav-link" href="#filter"><span class="header-section-number">7.5.1</span> filter()</a></li>
 <li><a class="nav-link" href="#slice"><span class="header-section-number">7.5.2</span> slice()</a></li>
 <li><a class="nav-link" href="#arrange"><span class="header-section-number">7.5.3</span> arrange()</a></li>
-<li><a class="nav-link" href="#drop_na"><span class="header-section-number">7.5.4</span> drop_na()</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#missing-values"><span class="header-section-number">7.6</span> Missing values</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#identifying"><span class="header-section-number">7.6.1</span> Identifying</a></li>
+<li><a class="nav-link" href="#dropping"><span class="header-section-number">7.6.2</span> Dropping</a></li>
+<li><a class="nav-link" href="#replacing"><span class="header-section-number">7.6.3</span> Replacing</a></li>
 </ul>
 </li>
 </ul>
@@ -960,7 +1088,7 @@ observer.observe(document.body, config);
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2024-08-18.</p>
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2024-08-19.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

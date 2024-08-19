@@ -129,7 +129,10 @@ row-wise-functions
 filter
 slice
 arrange
-drop_na
+missing-values
+identifying
+dropping
+replacing
 datasets
 datasets-list
 eruptions
