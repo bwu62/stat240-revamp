@@ -331,10 +331,86 @@ Again, I think it's important to stress **ANY expression involving columns that 
 
 ## Row-wise functions
 
-### `slice()`
+Let's move on now to the row-wise functions, i.e. the functions that primarily focus on manipulating rows in certain ways. Again, there are many of these too, but here are 4 of the most important:
 
-### `drop_na()`
+ - `filter()` for filtering which rows to keep,
+ - `slice()` (plus some other sibling functions) for slicing out specific rows,
+ - `arrange()` for sorting rows,
+ - `drop_na()` for dropping missing values.
+
 
 ### `filter()`
 
+`filter()` is used to filter which rows to keep. Note the wording here; **rows that meet the conditions are KEPT, not dropped**. This is a frequent point of confusion for beginners.
+
+Similar to `mutate()` and `summarize()`, you can filter by **constructing a logical expression using ANY combination of columns**, as long as the result is a vector of TRUE/FALSE values, one for each row. In the end, only rows with TRUE will be returned as output.
+
+Let's return to using our original `penguins` data frame. Here's a few filtering examples:
+
+```{r}
+# filter to get penguins >=6kg
+penguins %>%
+  filter(body_mass_g >= 6000)
+# combining multiple filtering conditions using & and |
+penguins %>% filter(
+  (species == "Adelie" | species == "Gentoo") &
+    island %in% c("Biscoe", "Dream") & year < 2008
+)
+# you can of course use more complex functions and expressions,
+# you can also use , to separate multiple conditions in filter() instead of &
+# e.g. this code gets rows with no "e" in the species name, and also
+# bill depth is higher than median but flipper length is lower than median
+penguins %>% filter(
+  !grepl("e", species),
+  bill_depth_mm > median(bill_depth_mm),
+  flipper_length_mm < median(flipper_length_mm)
+)
+```
+
+```{r,tidy=F}
+# an example of an even more complicated expression,
+# this line gets penguins with body mass and bill length
+# within a 1 SD circle centered around the mean of both,
+# then plots the result to visually inspect
+# note the result df can be directly piped into ggplot()
+penguins %>%
+  filter(
+    ((body_mass_g - mean(body_mass_g)) / sd(body_mass_g))^2 +
+      ((bill_length_mm - mean(bill_length_mm)) / sd(bill_length_mm))^2 <= 1
+  ) %>%
+  ggplot(aes(x = bill_length_mm, y = body_mass_g)) + geom_point() +
+  labs(title = "Filter demo (points in a 1-SD circle around mean of x,y)",
+       x = "Bill length (mm)", y = "Body mass (g)") +
+  coord_fixed(.0067) # make the plot window a square
+```
+
+
+### `slice()`
+
+There are several [`slice...()`{.R}](https://dplyr.tidyverse.org/reference/slice.html) functions in dplyr for slicing out specific rows, similar to `filter()` but more specialized. The main one `slice()` is used to select by position (i.e. by row number). Examples:
+
+```{r}
+# slice rows 11-15
+penguins %>% slice(11:15)
+# slice every 10th row
+penguins %>% slice(seq(0, nrow(penguins), 10))
+# remove the first 200 rows
+penguins %>% slice(-(1:200))
+```
+
+`slice_head()` and `slice_tail()` specifically slice out rows at the top or bottom, by either number `n` or proportion `prop`. Examples:
+
+```{r}
+# get the first 20 rows
+penguins %>% slice_head(n = 20)
+# get the last 10% of rows
+penguins %>% slice_tail(prop = 0.1)
+```
+
+`slice_min()` and `slice_max()` are used to slice rows which contain the min/max values for a specific variable. For example, supppose we want to to inspect the
+
+
+
 ### `arrange()`
+
+### `drop_na()`
