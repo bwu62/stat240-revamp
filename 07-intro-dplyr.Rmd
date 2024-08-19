@@ -401,13 +401,13 @@ penguins %>% slice(-(1:200))
 `slice_head()` and `slice_tail()` specifically slice out rows at the top or bottom, by either number `n` or proportion `prop`. Examples:
 
 ```{r}
-# get the first 20 rows
-penguins %>% slice_head(n = 20)
+# get the first 25 rows
+penguins %>% slice_head(n = 25)
 # get the last 10% of rows
 penguins %>% slice_tail(prop = 0.1)
 ```
 
-`slice_min()` and `slice_max()` are used to slice rows which contain the min/max values for a specific variable. For example, supppose we want to to inspect the
+`slice_min()` and `slice_max()` are used to slice rows which contain the min/max values for a specific variable. For example, suppose we want to get the penguin with the smallest body mass:
 
 
 
