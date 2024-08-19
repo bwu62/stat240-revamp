@@ -409,8 +409,68 @@ penguins %>% slice_tail(prop = 0.1)
 
 `slice_min()` and `slice_max()` are used to slice rows which contain the min/max values for a specific variable. For example, suppose we want to get the penguin with the smallest body mass:
 
+```{r}
+# get smallest penguin by mass
+penguins %>% slice_min(body_mass_g, n = 1)
+```
+
+If there are ties, by default **all tied rows are printed**, e.g. suppose we want the 3 penguins with the longest flipper lengths:
+
+```{r}
+# get 3 penguins with longest flippers
+penguins %>% slice_max(flipper_length_mm, n = 3)
+```
+
+It looks like 7 different Gentoo penguins are all tied for 2nd place, so they are ALL returned! You can disable this with an argument, but it's recommended to keep the default behavior here.
+
+You can also set `prop` instead of `n` to return by percent. E.g. let's get the top 1% of penguins by bill length:
+
+```{r}
+# get top 1% of penguins by bill length
+penguins %>% slice_max(bill_length_mm, prop = 0.01)
+```
 
 
 ### `arrange()`
 
-### `drop_na()`
+`arrange()` is used to sort rows. Note that since it only sorts rows, it does NOT change the dataframe in any "meaningful" way (generally, order of rows/columns is not considered a "meaningful" change). It's primarily used for visual appeal, i.e. for neater presentation of a dataset.
+
+The syntax is `df %>% arrange(expr1, expr2, ...)` where `expr1`, `expr2`, ... can be simply **a column, or some vector expression using columns in the data frame** (similar to `mutate()` or `filter()`) whose resultant values are used for sorting the rows. A few important notes:
+
+ 1. **Each next expression is ONLY used to break ties in the previous expressions**, otherwise it's ignored! E.g. if two rows can be sorted by `expr1`, only that is used. However if two rows are tied for `expr1`, then `expr2` (if it exists) will be used to try to break the tie, and so on. This is also a frequent point of confusiong for beginners.
+ 2. Default order is always **ascending**, i.e. small to largex, A to Z, earlier to later, FALSE to TRUE. For descending order, wrap your expression in `desc()`.
+ 3. Rows that are completely tied may be returned in any order.^[For the CS folks again, this means `arrange()` does not guarantee a [stable sort](https://en.wikipedia.org/wiki/Sorting_algorithm#Stability). It seems like this generally isn't a huge concern or priority for the Tidyverse developers, which is fair enough.]
+
+Examples of `arrange()`:
+
+```{r}
+# sort penguins by ascending flipper length
+penguins %>% arrange(flipper_length_mm)
+# sort penguins by descending flipper length
+penguins %>% arrange(desc(flipper_length_mm))
+# since mathematical expressions are allowed, this is also equivalent
+penguins %>% arrange(-flipper_length_mm)
+# sort first by island, then by descending species (if there are ties)
+penguins %>% arrange(island, desc(species))
+# again, any expression is possible,
+# let's sort first by number of SDs away from mean body mass,
+# then by descending last letter of species name for ties,
+# then by ascending approximate bill volume if there are further ties
+penguins %>% arrange(
+  abs(body_mass_g - mean(body_mass_g)) / sd(body_mass_g),
+  desc(substr(species, nchar(species), nchar(species))),
+  pi * (bill_depth_mm / 2)^2 * bill_length_mm
+)
+```
+
+
+## Missing values
+
+### Identifying
+
+### Dropping
+
+### Replacing
+
+- briefly mention MAR?
+- note on imputing
