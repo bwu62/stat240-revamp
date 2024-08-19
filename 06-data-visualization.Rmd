@@ -800,6 +800,27 @@ ggplot() + geom_function(
 ```
 
 
+## Bonus: pairs plot
+
+I didn't know where to put this so I'm inserting it at the end of the chapter here. Here's a bonus plot type for you called a pairs plot, where every variable in a data frame is plotted against every other variable. The primary purpose of this plot is to rapidly orient you to a new dataset you're just starting to explore. It's usually recommended to limit yourself to 5-6 variables max in a pairs plot, lest it become too chaotic.
+
+There are many different implementions of this, but one of the best is [`GGally::ggpairs()`{.R}](https://ggobi.github.io/ggally/reference/ggpairs.html). The plot type is automatically determined based on variable types and can be density, histogram, point, bar, box, or more, and additionally some summary statistics like correlations are given where appropriate.
+
+:::{.i95}
+```{r,fig.width=8,fig.height=8}
+# to run this chunk, you need to have the package GGally installed
+# first, we subset out just a few columns (otherwise it gets too crazy)
+# aes(color = species) is optional but improves the plot greatly
+penguins_subset = penguins[
+  c("species", "body_mass_g", "bill_length_mm", "bill_depth_mm", "flipper_length_mm")
+]
+GGally::ggpairs(penguins_subset, aes(color = species))
+```
+:::
+
+This plot is recommended ONLY as an initial exploratory plot; it should NOT be used in a more purposeful setting like a report since it lacks direction/focus.
+
+
 ## Further readings
 
 These are beyond the scope of this course, but here's a few other links if you want to learn more:
