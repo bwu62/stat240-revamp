@@ -19,7 +19,7 @@ We will be making all plots using the [ggplot2](https://ggplot2.tidyverse.org) p
 
 When making a ggplot2 plot, it's important to remember **everything is a layer** that you **add onto the base object using `+`** just like adding numbers. Whether you're adding a plot, a faceting structure, changing the axes, adding annotations (e.g. title/labels), etc. they're all layers that are added. This may seem strange at first, but you'll quickly grasp it in the examples that follow.
 
-I already have core Tidyverse packages loaded from section \@ref(mean) above, but if you need to load it again make sure to run the following:
+Let's first import the necessary packages. We will need both `readr` and `ggplot2` for reading and plotting data. For convenience, I'll just load all core Tidyverse packages.
 
 
 ``` r
@@ -974,6 +974,30 @@ ggplot() + geom_function(
 ```
 
 <img src="06-data-visualization_files/figure-html/unnamed-chunk-48-1.svg" width="672" style="display: block; margin: auto;" />
+
+
+## Bonus: pairs plot
+
+I didn't know where to put this so I'm inserting it at the end of the chapter here. Here's a bonus plot type for you called a pairs plot, where every variable in a data frame is plotted against every other variable. The primary purpose of this plot is to rapidly orient you to a new dataset you're just starting to explore. It's usually recommended to limit yourself to 5-6 variables max in a pairs plot, lest it become too chaotic.
+
+There are many different implementions of this, but one of the best is [`GGally::ggpairs()`{.R}](https://ggobi.github.io/ggally/reference/ggpairs.html). The plot type is automatically determined based on variable types and can be density, histogram, point, bar, box, or more, and additionally some summary statistics like correlations are given where appropriate.
+
+:::{.i95}
+
+``` r
+# to run this chunk, you need to have the package GGally installed
+# first, we subset out just a few columns (otherwise it gets too crazy)
+# aes(color = species) is optional but improves the plot greatly
+penguins_subset = penguins[
+  c("species", "body_mass_g", "bill_length_mm", "bill_depth_mm", "flipper_length_mm")
+]
+GGally::ggpairs(penguins_subset, aes(color = species))
+```
+
+<img src="06-data-visualization_files/figure-html/unnamed-chunk-49-1.svg" width="768" style="display: block; margin: auto;" />
+:::
+
+This plot is recommended ONLY as an initial exploratory plot; it should NOT be used in a more purposeful setting like a report since it lacks direction/focus.
 
 
 ## Further readings

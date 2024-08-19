@@ -230,7 +230,7 @@ Let's get the easy one out of the way first. **Standard deviation is always defi
 
 $$s^2=\frac1{n-1}\sum_{i=1}^n(x_i-\bar{x})^2=\frac{(x_1-\bar{x})^2+\cdots+(x_n-\bar{x})^2}{n-1}$$
 
-Basically, it's the **mean squared-distance from the mean**, $\bar{x}$, except we use $n-1$ instead of $n$ to correct for a [small bias]([Bessel's correction](https://en.wikipedia.org/wiki/Bessel%27s_correction)). For example, we can compute the variance of the duration of eruptions, in **days squared**:
+Basically, it's the **mean squared-distance from the mean**, $\bar{x}$, except we use $n-1$ instead of $n$ to correct for a [small bias](https://en.wikipedia.org/wiki/Bessel%27s_correction). For example, we can compute the variance of the duration of eruptions, in **days squared**:
 
 
 ``` r

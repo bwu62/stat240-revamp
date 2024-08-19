@@ -1,7 +1,7 @@
 --- 
 title: "STAT 240 Revamp"
 author: "Bi Cheng Wu, with help from Bret Larget and Cameron Jones"
-date: "2024-08-16"
+date: "2024-08-18"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -27,6 +27,7 @@ things to hit:
   - syntax highlighting
   - auto link of help pages
   - footnotes and other bonus content
+  - scope (exclude bonus, extra, links, etc.)
 - view source & edit contributions
 - prerequisites
 - will not teach everything, just provide foundation for further learning

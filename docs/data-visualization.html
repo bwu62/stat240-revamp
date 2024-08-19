@@ -101,7 +101,7 @@
 </h2>
 <p>We will be making all plots using the <a href="https://ggplot2.tidyverse.org">ggplot2</a> package which is also a core Tidyverse package. It offers a robust syntax for easily creating and modifying plots (<a href="https://rstudio.github.io/cheatsheets/data-visualization.pdf">link to cheat sheet</a>).</p>
 <p>When making a ggplot2 plot, it’s important to remember <strong>everything is a layer</strong> that you <strong>add onto the base object using <code>+</code></strong> just like adding numbers. Whether you’re adding a plot, a faceting structure, changing the axes, adding annotations (e.g. title/labels), etc. they’re all layers that are added. This may seem strange at first, but you’ll quickly grasp it in the examples that follow.</p>
-<p>I already have core Tidyverse packages loaded from section <a href="descriptive-statistics.html#mean">5.1.1</a> above, but if you need to load it again make sure to run the following:</p>
+<p>Let’s first import the necessary packages. We will need both <code>readr</code> and <code>ggplot2</code> for reading and plotting data. For convenience, I’ll just load all core Tidyverse packages.</p>
 <div class="sourceCode" id="cb526"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># if you need to, reimport all core tidyverse packages</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
@@ -857,9 +857,28 @@ ggplot(df,aes(x=x,y=y,fill=z)) + geom_col() +
 <div class="inline-figure"><img src="06-data-visualization_files/figure-html/unnamed-chunk-48-1.svg" width="672" style="display: block; margin: auto;"></div>
 </div>
 </div>
-<div id="further-readings" class="section level2" number="6.8">
+<div id="bonus-pairs-plot" class="section level2" number="6.8">
 <h2>
-<span class="header-section-number">6.8</span> Further readings<a class="anchor" aria-label="anchor" href="#further-readings"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.8</span> Bonus: pairs plot<a class="anchor" aria-label="anchor" href="#bonus-pairs-plot"><i class="fas fa-link"></i></a>
+</h2>
+<p>I didn’t know where to put this so I’m inserting it at the end of the chapter here. Here’s a bonus plot type for you called a pairs plot, where every variable in a data frame is plotted against every other variable. The primary purpose of this plot is to rapidly orient you to a new dataset you’re just starting to explore. It’s usually recommended to limit yourself to 5-6 variables max in a pairs plot, lest it become too chaotic.</p>
+<p>There are many different implementions of this, but one of the best is <a href="https://ggobi.github.io/ggally/reference/ggpairs.html"><code class="sourceCode r">GGally<span class="sc">::</span><span class="fu">ggpairs</span>()</code></a>. The plot type is automatically determined based on variable types and can be density, histogram, point, bar, box, or more, and additionally some summary statistics like correlations are given where appropriate.</p>
+<div class="i95">
+<div class="sourceCode" id="cb581"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># to run this chunk, you need to have the package GGally installed</span></span>
+<span><span class="co"># first, we subset out just a few columns (otherwise it gets too crazy)</span></span>
+<span><span class="co"># aes(color = species) is optional but improves the plot greatly</span></span>
+<span><span class="va">penguins_subset</span> <span class="op">=</span> <span class="va">penguins</span><span class="op">[</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"species"</span>, <span class="st">"body_mass_g"</span>, <span class="st">"bill_length_mm"</span>, <span class="st">"bill_depth_mm"</span>, <span class="st">"flipper_length_mm"</span><span class="op">)</span></span>
+<span><span class="op">]</span></span>
+<span><span class="fu">GGally</span><span class="fu">::</span><span class="fu"><a href="https://ggobi.github.io/ggally/reference/ggpairs.html">ggpairs</a></span><span class="op">(</span><span class="va">penguins_subset</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">species</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="06-data-visualization_files/figure-html/unnamed-chunk-49-1.svg" width="768" style="display: block; margin: auto;"></div>
+</div>
+<p>This plot is recommended ONLY as an initial exploratory plot; it should NOT be used in a more purposeful setting like a report since it lacks direction/focus.</p>
+</div>
+<div id="further-readings" class="section level2" number="6.9">
+<h2>
+<span class="header-section-number">6.9</span> Further readings<a class="anchor" aria-label="anchor" href="#further-readings"><i class="fas fa-link"></i></a>
 </h2>
 <p>These are beyond the scope of this course, but here’s a few other links if you want to learn more:</p>
 <ul>
@@ -1006,7 +1025,8 @@ observer.observe(document.body, config);
 <li><a class="nav-link" href="#functions"><span class="header-section-number">6.7.2</span> Functions</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#further-readings"><span class="header-section-number">6.8</span> Further readings</a></li>
+<li><a class="nav-link" href="#bonus-pairs-plot"><span class="header-section-number">6.8</span> Bonus: pairs plot</a></li>
+<li><a class="nav-link" href="#further-readings"><span class="header-section-number">6.9</span> Further readings</a></li>
 </ul>
 
       <div class="book-extra">
@@ -1024,7 +1044,7 @@ observer.observe(document.body, config);
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2024-08-16.</p>
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2024-08-18.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -114,6 +114,7 @@ scales
 other-geoms
 straight-lines
 functions
+bonus-pairs-plot
 further-readings
 intro-to-dplyr
 syntax-design
@@ -125,10 +126,10 @@ rename
 mutate
 summarize
 row-wise-functions
-slice
-drop_na
 filter
+slice
 arrange
+drop_na
 datasets
 datasets-list
 eruptions

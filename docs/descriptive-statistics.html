@@ -250,7 +250,7 @@ attr(,"freq")
 </h3>
 <p>Let’s get the easy one out of the way first. <strong>Standard deviation is always defined as the (positive) square root of variance</strong>. So what’s the variance then? The <strong>variance of a sample is defined as</strong>:</p>
 <p><span class="math display">\[s^2=\frac1{n-1}\sum_{i=1}^n(x_i-\bar{x})^2=\frac{(x_1-\bar{x})^2+\cdots+(x_n-\bar{x})^2}{n-1}\]</span></p>
-<p>Basically, it’s the <strong>mean squared-distance from the mean</strong>, <span class="math inline">\(\bar{x}\)</span>, except we use <span class="math inline">\(n-1\)</span> instead of <span class="math inline">\(n\)</span> to correct for a <a href="%5BBessel's%20correction%5D(https://en.wikipedia.org/wiki/Bessel%27s_correction)">small bias</a>. For example, we can compute the variance of the duration of eruptions, in <strong>days squared</strong>:</p>
+<p>Basically, it’s the <strong>mean squared-distance from the mean</strong>, <span class="math inline">\(\bar{x}\)</span>, except we use <span class="math inline">\(n-1\)</span> instead of <span class="math inline">\(n\)</span> to correct for a <a href="https://en.wikipedia.org/wiki/Bessel%27s_correction">small bias</a>. For example, we can compute the variance of the duration of eruptions, in <strong>days squared</strong>:</p>
 <div class="sourceCode" id="cb512"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># compute variance of duration</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="va">eruptions_recent</span><span class="op">$</span><span class="va">duration</span><span class="op">)</span></span></code></pre></div>
@@ -479,7 +479,7 @@ observer.observe(document.body, config);
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2024-08-16.</p>
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2024-08-18.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

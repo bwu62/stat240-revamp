@@ -97,12 +97,12 @@ print(penguins, n = 5)
 
 ## Column-wise functions
 
-We begin with the column-wise dplyr functions, i.e. the functions that primarily focus on manipulating columns in certain ways. Again, there are many of these, but 4 of the most important are the following:
+We begin with the column-wise dplyr functions, i.e. the functions that primarily focus on manipulating columns in certain ways. There are many of these, but 4 of the most important are the following:
 
  - `select()` for selecting a subset of columns to work with,
  - `rename()` for renaming columns,
  - `mutate()` for both editing and adding columns, **without reducing the number of rows**,
- - `summarize()` for computing data summaries, often using **statistical summary functions** like mean, median, sd, etc. and usually results in **reducing the number of rows**.
+ - `summarize()` for computing data summaries, often using **statistical functions** like mean, median, sd, etc. and results in **reducing the number of rows**.
 
 
 ### `select()`
@@ -542,11 +542,10 @@ penguins2 %>%
 ``` r
 # you can also break this into steps, using intermediate variables
 # note intermediate variables can be used immediately in the same mutate() call
-penguins2 %>%
-  mutate(
-    bill_cross_section_mm2 = pi * (bill_depth_mm / 2)^2,
-    bill_vol_mm3           = bill_cross_section_mm2 * bill_length_mm
-  )
+penguins2 %>% mutate(
+  bill_cross_section_mm2 = pi * (bill_depth_mm / 2)^2,
+  bill_vol_mm3           = bill_cross_section_mm2 * bill_length_mm
+)
 ```
 
 ```
@@ -564,11 +563,10 @@ penguins2 %>%
 ``` r
 # you can even mix summary functions into your expression
 # e.g. standardize bill length and depth by subtracting mean and dividing by sd
-penguins2 %>%
-  mutate(
-    bill_length_std = (bill_length_mm - mean(bill_length_mm)) / sd(bill_length_mm),
-    bill_depth_std  = (bill_depth_mm - mean(bill_depth_mm)) / sd(bill_depth_mm)
-  )
+penguins2 %>% mutate(
+  bill_length_std = (bill_length_mm - mean(bill_length_mm)) / sd(bill_length_mm),
+  bill_depth_std  = (bill_depth_mm - mean(bill_depth_mm)) / sd(bill_depth_mm)
+)
 ```
 
 ```
@@ -585,22 +583,21 @@ penguins2 %>%
 
 ``` r
 # you can of course create columns of other data types
-penguins2 %>%
-  mutate(
-    small_bill = bill_length_mm < 39 | bill_depth_mm < 18,
-    fake_dates = seq(today(), today() + nrow(penguins) - 1, by = 1)
-  )
+penguins2 %>% mutate(
+  small_bill = bill_length_mm < 39 | bill_depth_mm < 18,
+  fake_dates = seq(today(), today() + nrow(penguins) - 1, by = 1)
+)
 ```
 
 ```
 # A tibble: 333 × 6
   species sex    bill_length_mm bill_depth_mm small_bill fake_dates
   <chr>   <chr>           <dbl>         <dbl> <lgl>      <date>    
-1 Adelie  male             39.1          18.7 FALSE      2024-08-16
-2 Adelie  female           39.5          17.4 TRUE       2024-08-17
-3 Adelie  female           40.3          18   FALSE      2024-08-18
-4 Adelie  female           36.7          19.3 TRUE       2024-08-19
-5 Adelie  male             39.3          20.6 FALSE      2024-08-20
+1 Adelie  male             39.1          18.7 FALSE      2024-08-18
+2 Adelie  female           39.5          17.4 TRUE       2024-08-19
+3 Adelie  female           40.3          18   FALSE      2024-08-20
+4 Adelie  female           36.7          19.3 TRUE       2024-08-21
+5 Adelie  male             39.3          20.6 FALSE      2024-08-22
 # ℹ 328 more rows
 ```
 
@@ -612,15 +609,14 @@ For example, suppose we want to create some new column differently depending on 
 ``` r
 # use case_when() inside a mutate() depending on some conditions
 # .default sets the "default" result, when no conditions match OR when we have NAs
-penguins2 %>%
-  mutate(
-    new_col = case_when(
-      sex == "male" & bill_depth_mm <= 19 ~ bill_length_mm * 100,
-      sex == "male" & bill_depth_mm > 19 ~ bill_length_mm * -1,
-      sex == "female" ~ round(log((bill_length_mm / bill_depth_mm)^2), 2),
-      .default = 0
-    )
+penguins2 %>% mutate(
+  new_col = case_when(
+    sex == "male" & bill_depth_mm <= 19 ~ bill_length_mm * 100,
+    sex == "male" & bill_depth_mm > 19 ~ bill_length_mm * -1,
+    sex == "female" ~ round(log((bill_length_mm / bill_depth_mm)^2), 2),
+    .default = 0
   )
+)
 ```
 
 ```
@@ -649,16 +645,15 @@ The basic syntax is `df %>% summarize(col1 = expr1, col2 = expr2, ...)` where ag
 
 ``` r
 # let's compute several summary statistics of bill length
-penguins2 %>%
-  summarize(
-    mean_length   = mean(bill_length_mm),
-    median_length = median(bill_length_mm),
-    sd_length     = sd(bill_length_mm),
-    iqr_length    = IQR(bill_length_mm),
-    max_length    = max(bill_length_mm),
-    min_length    = min(bill_length_mm),
-    n             = n()
-  )
+penguins2 %>% summarize(
+  mean_length   = mean(bill_length_mm),
+  median_length = median(bill_length_mm),
+  sd_length     = sd(bill_length_mm),
+  iqr_length    = IQR(bill_length_mm),
+  max_length    = max(bill_length_mm),
+  min_length    = min(bill_length_mm),
+  n             = n()
+)
 ```
 
 ```
@@ -676,28 +671,26 @@ A few other common applications of `summarize()` in data exploration:
 ``` r
 # compute a few other summaries to explore the data
 # note similar to mutate, we can immediately use a summarized column
-penguins2 %>%
-  summarize(
-    n            = n(),
-    n_male       = sum(sex == "male"),
-    pct_male     = 100 * n_male / n,
-    n_female     = sum(sex == "female"),
-    pct_female   = 100 * n_female / n,
-    pct_NA       = 100 * mean(
-      is.na(species) | is.na(sex) | is.na(bill_length_mm) | is.na(bill_depth_mm)
-    ), # get proportion of rows with NA (mean of logicals gives proportion of TRUEs)
-    q90_len      = quantile(bill_length_mm, 0.90),
-    q90_dep      = quantile(bill_depth_mm,  0.90),
-    pmed_len     = mean(bill_length_mm <= median(bill_length_mm)),
-    pmed_dep     = mean(bill_depth_mm  <= median(bill_depth_mm))
-  )
+penguins2 %>% summarize(
+  n            = n(),
+  n_male       = sum(sex == "male"),
+  pct_male     = 100 * n_male / n,
+  n_female     = sum(sex == "female"),
+  pct_female   = 100 * n_female / n,
+  pct_NA       = 100 * mean(
+    is.na(species) | is.na(sex) | is.na(bill_length_mm) | is.na(bill_depth_mm)
+  ), # get proportion of rows with NA (mean of logicals gives proportion of TRUEs)
+  q90_len      = quantile(bill_length_mm, 0.90),
+  pmed_len     = mean(bill_length_mm <= median(bill_length_mm)),
+  correlation  = cor(bill_length_mm, bill_depth_mm)
+)
 ```
 
 ```
-# A tibble: 1 × 10
-      n n_male pct_male n_female pct_female pct_NA q90_len q90_dep pmed_len pmed_dep
-  <int>  <int>    <dbl>    <int>      <dbl>  <dbl>   <dbl>   <dbl>    <dbl>    <dbl>
-1   333    168     50.5      165       49.5      0    50.8    19.5    0.502    0.508
+# A tibble: 1 × 9
+      n n_male pct_male n_female pct_female pct_NA q90_len pmed_len correlation
+  <int>  <int>    <dbl>    <int>      <dbl>  <dbl>   <dbl>    <dbl>       <dbl>
+1   333    168     50.5      165       49.5      0    50.8    0.502      -0.229
 ```
 
 It's also common to use `summarize()` to compute statistical results. For example we can calculate the 95% confidence intervals for the mean bill length and depth (ignoring species/sex) which is something we will cover in more detail later in the course:
@@ -706,22 +699,21 @@ It's also common to use `summarize()` to compute statistical results. For exampl
 ``` r
 # we first compute some intermediate statistics,
 # then use those to compute the intervals
-penguins2 %>%
-  summarize(
-    n            = n(),
-    mean_length  = mean(bill_length_mm),
-    sd_length    = sd(bill_length_mm),
-    mean_depth   = mean(bill_depth_mm),
-    sd_depth     = sd(bill_depth_mm),
-    length_95_ci = paste(
-      round(mean_length + c(-1, 1) * 1.96 * sd_length / sqrt(n), 2),
-      collapse = ","
-    ),
-    depth_95_ci  = paste(
-      round(mean_depth  + c(-1, 1) * 1.96 * sd_depth  / sqrt(n), 2),
-      collapse = ","
-    )
+penguins2 %>% summarize(
+  n            = n(),
+  mean_length  = mean(bill_length_mm),
+  sd_length    = sd(bill_length_mm),
+  mean_depth   = mean(bill_depth_mm),
+  sd_depth     = sd(bill_depth_mm),
+  length_95_ci = paste(
+    round(mean_length + c(-1, 1) * 1.96 * sd_length / sqrt(n), 2),
+    collapse = ","
+  ),
+  depth_95_ci  = paste(
+    round(mean_depth  + c(-1, 1) * 1.96 * sd_depth  / sqrt(n), 2),
+    collapse = ","
   )
+)
 ```
 
 ```
@@ -736,10 +728,222 @@ Again, I think it's important to stress **ANY expression involving columns that 
 
 ## Row-wise functions
 
-### `slice()`
+Let's move on now to the row-wise functions, i.e. the functions that primarily focus on manipulating rows in certain ways. Again, there are many of these too, but here are 4 of the most important:
 
-### `drop_na()`
+ - `filter()` for filtering which rows to keep,
+ - `slice()` (plus some other sibling functions) for slicing out specific rows,
+ - `arrange()` for sorting rows,
+ - `drop_na()` for dropping missing values.
+
 
 ### `filter()`
 
+`filter()` is used to filter which rows to keep. Note the wording here; **rows that meet the conditions are KEPT, not dropped**. This is a frequent point of confusion for beginners.
+
+Similar to `mutate()` and `summarize()`, you can filter by **constructing a logical expression using ANY combination of columns**, as long as the result is a vector of TRUE/FALSE values, one for each row. In the end, only rows with TRUE will be returned as output.
+
+Let's return to using our original `penguins` data frame. Here's a few filtering examples:
+
+
+``` r
+# filter to get penguins >=6kg
+penguins %>%
+  filter(body_mass_g >= 6000)
+```
+
+```
+# A tibble: 4 × 8
+  species island bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex  
+  <chr>   <chr>           <dbl>         <dbl>             <dbl>       <dbl> <chr>
+1 Gentoo  Biscoe           49.2          15.2               221        6300 male 
+2 Gentoo  Biscoe           59.6          17                 230        6050 male 
+3 Gentoo  Biscoe           51.1          16.3               220        6000 male 
+4 Gentoo  Biscoe           48.8          16.2               222        6000 male 
+# ℹ 1 more variable: year <dbl>
+```
+
+``` r
+# combining multiple filtering conditions using & and |
+penguins %>% filter(
+  (species == "Adelie" | species == "Gentoo") &
+    island %in% c("Biscoe", "Dream") & year < 2008
+)
+```
+
+```
+# A tibble: 62 × 8
+  species island bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex   
+  <chr>   <chr>           <dbl>         <dbl>             <dbl>       <dbl> <chr> 
+1 Adelie  Biscoe           37.8          18.3               174        3400 female
+2 Adelie  Biscoe           37.7          18.7               180        3600 male  
+3 Adelie  Biscoe           35.9          19.2               189        3800 female
+4 Adelie  Biscoe           38.2          18.1               185        3950 male  
+5 Adelie  Biscoe           38.8          17.2               180        3800 male  
+# ℹ 57 more rows
+# ℹ 1 more variable: year <dbl>
+```
+
+``` r
+# you can of course use more complex functions and expressions,
+# you can also use , to separate multiple conditions in filter() instead of &
+# e.g. this code gets rows with no "e" in the species name, and also
+# bill depth is higher than median but flipper length is lower than median
+penguins %>% filter(
+  !grepl("e", species),
+  bill_depth_mm > median(bill_depth_mm),
+  flipper_length_mm < median(flipper_length_mm)
+)
+```
+
+```
+# A tibble: 24 × 8
+  species   island bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex   
+  <chr>     <chr>           <dbl>         <dbl>             <dbl>       <dbl> <chr> 
+1 Chinstrap Dream            46.5          17.9               192        3500 female
+2 Chinstrap Dream            50            19.5               196        3900 male  
+3 Chinstrap Dream            51.3          19.2               193        3650 male  
+4 Chinstrap Dream            45.4          18.7               188        3525 female
+5 Chinstrap Dream            46.1          18.2               178        3250 female
+# ℹ 19 more rows
+# ℹ 1 more variable: year <dbl>
+```
+
+
+``` r
+# an example of an even more complicated expression,
+# this line gets penguins with body mass and bill length
+# within a 1 SD circle centered around the mean of both,
+# then plots the result to visually inspect
+# note the result df can be directly piped into ggplot()
+penguins %>%
+  filter(
+    ((body_mass_g - mean(body_mass_g)) / sd(body_mass_g))^2 +
+      ((bill_length_mm - mean(bill_length_mm)) / sd(bill_length_mm))^2 <= 1
+  ) %>%
+  ggplot(aes(x = bill_length_mm, y = body_mass_g)) + geom_point() +
+  labs(title = "Filter demo (points in a 1-SD circle around mean of x,y)",
+       x = "Bill length (mm)", y = "Body mass (g)") +
+  coord_fixed(.0067) # make the plot window a square
+```
+
+<img src="07-intro-dplyr_files/figure-html/unnamed-chunk-16-1.svg" width="672" style="display: block; margin: auto;" />
+
+
+### `slice()`
+
+There are several [`slice...()`{.R}](https://dplyr.tidyverse.org/reference/slice.html) functions in dplyr for slicing out specific rows, similar to `filter()` but more specialized. The main one `slice()` is used to select by position (i.e. by row number). Examples:
+
+
+``` r
+# slice rows 11-15
+penguins %>% slice(11:15)
+```
+
+```
+# A tibble: 5 × 8
+  species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex   
+  <chr>   <chr>              <dbl>         <dbl>             <dbl>       <dbl> <chr> 
+1 Adelie  Torgersen           36.6          17.8               185        3700 female
+2 Adelie  Torgersen           38.7          19                 195        3450 female
+3 Adelie  Torgersen           42.5          20.7               197        4500 male  
+4 Adelie  Torgersen           34.4          18.4               184        3325 female
+5 Adelie  Torgersen           46            21.5               194        4200 male  
+# ℹ 1 more variable: year <dbl>
+```
+
+``` r
+# slice every 10th row
+penguins %>% slice(seq(0, nrow(penguins), 10))
+```
+
+```
+# A tibble: 33 × 8
+  species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex   
+  <chr>   <chr>              <dbl>         <dbl>             <dbl>       <dbl> <chr> 
+1 Adelie  Torgersen           34.6          21.1               198        4400 male  
+2 Adelie  Biscoe              38.8          17.2               180        3800 male  
+3 Adelie  Dream               36.4          17                 195        3325 female
+4 Adelie  Dream               37            16.9               185        3000 female
+5 Adelie  Biscoe              41.4          18.6               191        3700 male  
+# ℹ 28 more rows
+# ℹ 1 more variable: year <dbl>
+```
+
+``` r
+# remove the first 200 rows
+penguins %>% slice(-(1:200))
+```
+
+```
+# A tibble: 133 × 8
+  species island bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex   
+  <chr>   <chr>           <dbl>         <dbl>             <dbl>       <dbl> <chr> 
+1 Gentoo  Biscoe           45            15.4               220        5050 male  
+2 Gentoo  Biscoe           43.8          13.9               208        4300 female
+3 Gentoo  Biscoe           45.5          15                 220        5000 male  
+4 Gentoo  Biscoe           43.2          14.5               208        4450 female
+5 Gentoo  Biscoe           50.4          15.3               224        5550 male  
+# ℹ 128 more rows
+# ℹ 1 more variable: year <dbl>
+```
+
+`slice_head()` and `slice_tail()` specifically slice out rows at the top or bottom, by either number `n` or proportion `prop`. Examples:
+
+
+``` r
+# get the first 20 rows
+penguins %>% slice_head(n = 20)
+```
+
+```
+# A tibble: 20 × 8
+   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex  
+   <chr>   <chr>              <dbl>         <dbl>             <dbl>       <dbl> <chr>
+ 1 Adelie  Torgersen           39.1          18.7               181        3750 male 
+ 2 Adelie  Torgersen           39.5          17.4               186        3800 fema…
+ 3 Adelie  Torgersen           40.3          18                 195        3250 fema…
+ 4 Adelie  Torgersen           36.7          19.3               193        3450 fema…
+ 5 Adelie  Torgersen           39.3          20.6               190        3650 male 
+ 6 Adelie  Torgersen           38.9          17.8               181        3625 fema…
+ 7 Adelie  Torgersen           39.2          19.6               195        4675 male 
+ 8 Adelie  Torgersen           41.1          17.6               182        3200 fema…
+ 9 Adelie  Torgersen           38.6          21.2               191        3800 male 
+10 Adelie  Torgersen           34.6          21.1               198        4400 male 
+11 Adelie  Torgersen           36.6          17.8               185        3700 fema…
+12 Adelie  Torgersen           38.7          19                 195        3450 fema…
+13 Adelie  Torgersen           42.5          20.7               197        4500 male 
+14 Adelie  Torgersen           34.4          18.4               184        3325 fema…
+15 Adelie  Torgersen           46            21.5               194        4200 male 
+16 Adelie  Biscoe              37.8          18.3               174        3400 fema…
+17 Adelie  Biscoe              37.7          18.7               180        3600 male 
+18 Adelie  Biscoe              35.9          19.2               189        3800 fema…
+19 Adelie  Biscoe              38.2          18.1               185        3950 male 
+20 Adelie  Biscoe              38.8          17.2               180        3800 male 
+# ℹ 1 more variable: year <dbl>
+```
+
+``` r
+# get the last 10% of rows
+penguins %>% slice_tail(prop = 0.1)
+```
+
+```
+# A tibble: 33 × 8
+  species   island bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex   
+  <chr>     <chr>           <dbl>         <dbl>             <dbl>       <dbl> <chr> 
+1 Chinstrap Dream            47.5          16.8               199        3900 female
+2 Chinstrap Dream            47.6          18.3               195        3850 female
+3 Chinstrap Dream            52            20.7               210        4800 male  
+4 Chinstrap Dream            46.9          16.6               192        2700 female
+5 Chinstrap Dream            53.5          19.9               205        4500 male  
+# ℹ 28 more rows
+# ℹ 1 more variable: year <dbl>
+```
+
+`slice_min()` and `slice_max()` are used to slice rows which contain the min/max values for a specific variable. For example, supppose we want to to inspect the
+
+
+
 ### `arrange()`
+
+### `drop_na()`
