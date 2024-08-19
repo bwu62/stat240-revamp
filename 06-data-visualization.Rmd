@@ -19,7 +19,7 @@ We will be making all plots using the [ggplot2](https://ggplot2.tidyverse.org) p
 
 When making a ggplot2 plot, it's important to remember **everything is a layer** that you **add onto the base object using `+`** just like adding numbers. Whether you're adding a plot, a faceting structure, changing the axes, adding annotations (e.g. title/labels), etc. they're all layers that are added. This may seem strange at first, but you'll quickly grasp it in the examples that follow.
 
-I already have core Tidyverse packages loaded from section \@ref(mean) above, but if you need to load it again make sure to run the following:
+Let's first import the necessary packages. We will need both `readr` and `ggplot2` for reading and plotting data. For convenience, I'll just load all core Tidyverse packages.
 
 ```{r}
 # if you need to, reimport all core tidyverse packages
