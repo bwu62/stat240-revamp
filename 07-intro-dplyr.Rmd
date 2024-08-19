@@ -86,12 +86,12 @@ print(penguins, n = 5)
 
 ## Column-wise functions
 
-We begin with the column-wise dplyr functions, i.e. the functions that primarily focus on manipulating columns in certain ways. Again, there are many of these, but 4 of the most important are the following:
+We begin with the column-wise dplyr functions, i.e. the functions that primarily focus on manipulating columns in certain ways. There are many of these, but 4 of the most important are the following:
 
  - `select()` for selecting a subset of columns to work with,
  - `rename()` for renaming columns,
  - `mutate()` for both editing and adding columns, **without reducing the number of rows**,
- - `summarize()` for computing data summaries, often using **statistical summary functions** like mean, median, sd, etc. and usually results in **reducing the number of rows**.
+ - `summarize()` for computing data summaries, often using **statistical functions** like mean, median, sd, etc. and results in **reducing the number of rows**.
 
 
 ### `select()`
