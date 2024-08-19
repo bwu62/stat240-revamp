@@ -224,24 +224,21 @@ penguins2 %>%
   mutate(bill_vol_mm3 = pi * (bill_depth_mm / 2)^2 * bill_length_mm)
 # you can also break this into steps, using intermediate variables
 # note intermediate variables can be used immediately in the same mutate() call
-penguins2 %>%
-  mutate(
-    bill_cross_section_mm2 = pi * (bill_depth_mm / 2)^2,
-    bill_vol_mm3           = bill_cross_section_mm2 * bill_length_mm
-  )
+penguins2 %>% mutate(
+  bill_cross_section_mm2 = pi * (bill_depth_mm / 2)^2,
+  bill_vol_mm3           = bill_cross_section_mm2 * bill_length_mm
+)
 # you can even mix summary functions into your expression
 # e.g. standardize bill length and depth by subtracting mean and dividing by sd
-penguins2 %>%
-  mutate(
-    bill_length_std = (bill_length_mm - mean(bill_length_mm)) / sd(bill_length_mm),
-    bill_depth_std  = (bill_depth_mm - mean(bill_depth_mm)) / sd(bill_depth_mm)
-  )
+penguins2 %>% mutate(
+  bill_length_std = (bill_length_mm - mean(bill_length_mm)) / sd(bill_length_mm),
+  bill_depth_std  = (bill_depth_mm - mean(bill_depth_mm)) / sd(bill_depth_mm)
+)
 # you can of course create columns of other data types
-penguins2 %>%
-  mutate(
-    small_bill = bill_length_mm < 39 | bill_depth_mm < 18,
-    fake_dates = seq(today(), today() + nrow(penguins) - 1, by = 1)
-  )
+penguins2 %>% mutate(
+  small_bill = bill_length_mm < 39 | bill_depth_mm < 18,
+  fake_dates = seq(today(), today() + nrow(penguins) - 1, by = 1)
+)
 ```
 
 A notable function that is extremely useful inside `mutate()` is `case_when()` which can calculate different values depending on certain conditions.^[It's similar to a switch function in other languages.] The basic syntax is `df %>% mutate(new_col = case_when(cond1 ~ expr1, cond2 ~ expr2, ...))` where `cond1`, `cond2`, ... are logical condition vectors checked one by one in the given order, and `expr1`, `expr2`, ... are R expressions that are activated when a condition matches.
@@ -251,15 +248,14 @@ For example, suppose we want to create some new column differently depending on 
 ```{r}
 # use case_when() inside a mutate() depending on some conditions
 # .default sets the "default" result, when no conditions match OR when we have NAs
-penguins2 %>%
-  mutate(
-    new_col = case_when(
-      sex == "male" & bill_depth_mm <= 19 ~ bill_length_mm * 100,
-      sex == "male" & bill_depth_mm > 19 ~ bill_length_mm * -1,
-      sex == "female" ~ round(log((bill_length_mm / bill_depth_mm)^2), 2),
-      .default = 0
-    )
+penguins2 %>% mutate(
+  new_col = case_when(
+    sex == "male" & bill_depth_mm <= 19 ~ bill_length_mm * 100,
+    sex == "male" & bill_depth_mm > 19 ~ bill_length_mm * -1,
+    sex == "female" ~ round(log((bill_length_mm / bill_depth_mm)^2), 2),
+    .default = 0
   )
+)
 ```
 
 It's worth restating that **ANY vectorized operation of the columns can be used inside `mutate()`**, as long as the result is a same-length vector (or single value to be recycled). This includes essentially every function from chapter \@ref(data-vectors)!
@@ -275,16 +271,15 @@ The basic syntax is `df %>% summarize(col1 = expr1, col2 = expr2, ...)` where ag
 
 ```{r}
 # let's compute several summary statistics of bill length
-penguins2 %>%
-  summarize(
-    mean_length   = mean(bill_length_mm),
-    median_length = median(bill_length_mm),
-    sd_length     = sd(bill_length_mm),
-    iqr_length    = IQR(bill_length_mm),
-    max_length    = max(bill_length_mm),
-    min_length    = min(bill_length_mm),
-    n             = n()
-  )
+penguins2 %>% summarize(
+  mean_length   = mean(bill_length_mm),
+  median_length = median(bill_length_mm),
+  sd_length     = sd(bill_length_mm),
+  iqr_length    = IQR(bill_length_mm),
+  max_length    = max(bill_length_mm),
+  min_length    = min(bill_length_mm),
+  n             = n()
+)
 ```
 
 The last function in the chunk above `n()` is a special function that **takes NO arguments and returns the number of rows**.^[This is an example of what's called a [nullary function](https://en.wikipedia.org/wiki/Arity)]
@@ -294,21 +289,19 @@ A few other common applications of `summarize()` in data exploration:
 ```{r, tidy=F}
 # compute a few other summaries to explore the data
 # note similar to mutate, we can immediately use a summarized column
-penguins2 %>%
-  summarize(
-    n            = n(),
-    n_male       = sum(sex == "male"),
-    pct_male     = 100 * n_male / n,
-    n_female     = sum(sex == "female"),
-    pct_female   = 100 * n_female / n,
-    pct_NA       = 100 * mean(
-      is.na(species) | is.na(sex) | is.na(bill_length_mm) | is.na(bill_depth_mm)
-    ), # get proportion of rows with NA (mean of logicals gives proportion of TRUEs)
-    q90_len      = quantile(bill_length_mm, 0.90),
-    q90_dep      = quantile(bill_depth_mm,  0.90),
-    pmed_len     = mean(bill_length_mm <= median(bill_length_mm)),
-    pmed_dep     = mean(bill_depth_mm  <= median(bill_depth_mm))
-  )
+penguins2 %>% summarize(
+  n            = n(),
+  n_male       = sum(sex == "male"),
+  pct_male     = 100 * n_male / n,
+  n_female     = sum(sex == "female"),
+  pct_female   = 100 * n_female / n,
+  pct_NA       = 100 * mean(
+    is.na(species) | is.na(sex) | is.na(bill_length_mm) | is.na(bill_depth_mm)
+  ), # get proportion of rows with NA (mean of logicals gives proportion of TRUEs)
+  q90_len      = quantile(bill_length_mm, 0.90),
+  pmed_len     = mean(bill_length_mm <= median(bill_length_mm)),
+  correlation  = cor(bill_length_mm, bill_depth_mm)
+)
 ```
 
 It's also common to use `summarize()` to compute statistical results. For example we can calculate the 95% confidence intervals for the mean bill length and depth (ignoring species/sex) which is something we will cover in more detail later in the course:
@@ -316,22 +309,21 @@ It's also common to use `summarize()` to compute statistical results. For exampl
 ```{r,tidy=F}
 # we first compute some intermediate statistics,
 # then use those to compute the intervals
-penguins2 %>%
-  summarize(
-    n            = n(),
-    mean_length  = mean(bill_length_mm),
-    sd_length    = sd(bill_length_mm),
-    mean_depth   = mean(bill_depth_mm),
-    sd_depth     = sd(bill_depth_mm),
-    length_95_ci = paste(
-      round(mean_length + c(-1, 1) * 1.96 * sd_length / sqrt(n), 2),
-      collapse = ","
-    ),
-    depth_95_ci  = paste(
-      round(mean_depth  + c(-1, 1) * 1.96 * sd_depth  / sqrt(n), 2),
-      collapse = ","
-    )
+penguins2 %>% summarize(
+  n            = n(),
+  mean_length  = mean(bill_length_mm),
+  sd_length    = sd(bill_length_mm),
+  mean_depth   = mean(bill_depth_mm),
+  sd_depth     = sd(bill_depth_mm),
+  length_95_ci = paste(
+    round(mean_length + c(-1, 1) * 1.96 * sd_length / sqrt(n), 2),
+    collapse = ","
+  ),
+  depth_95_ci  = paste(
+    round(mean_depth  + c(-1, 1) * 1.96 * sd_depth  / sqrt(n), 2),
+    collapse = ","
   )
+)
 ```
 
 Again, I think it's important to stress **ANY expression involving columns that results in a single value** can be used inside `summarize()`. The [dplyr cheat sheet](https://rstudio.github.io/cheatsheets/data-transformation.pdf) has on page 2 some more examples of useful summarizing functions if you wish to read more.
