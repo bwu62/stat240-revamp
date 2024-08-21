@@ -41,12 +41,19 @@ The first page of the [lubridate cheat sheet](https://rstudio.github.io/cheatshe
 
 ## ggplot2
 
-The [ggplot2](https://rstudio.github.io/cheatsheets/data-visualization.pdf) cheat sheet has a great summary of every plot type on the first page, organized by the type and number of variables it's designed to visualize. On the second page, there's a nice list of additional plot features, such as faceting (i.e. subplot) options, setting scales, adjusting positions of plot elements, changings themes, editing labels/legends, etc.
+The [ggplot2 cheat sheet](https://rstudio.github.io/cheatsheets/data-visualization.pdf) has a great summary of every plot type on the first page, organized by the type and number of variables it's designed to visualize. On the second page, there's a nice list of additional plot features, such as faceting (i.e. subplot) options, setting scales, adjusting positions of plot elements, changing themes, editing labels/legends, etc.
 
 
 ## dplyr
 
-The [dplyr](https://rstudio.github.io/cheatsheets/data-transformation.pdf) cheat sheet has ab basic rundown of all common data frame transformation operations, grouped by type, along with brief but helpful examples and diagrams. It includes everything from subsettting rows and columns, adding/editing columns, summarizing data frames, grouping operations, joining/binding multiple data frames, etc.
+The [dplyr cheat sheet](https://rstudio.github.io/cheatsheets/data-transformation.pdf) has a basic rundown of all common data frame transformation operations, grouped by type, along with brief but helpful examples and diagrams. It includes everything from subsetting rows and columns, adding/editing columns, summarizing data frames, grouping operations, joining/binding multiple data frames, etc.
+
+
+## tidyr
+
+The [tidyr cheat](https://rstudio.github.io/cheatsheets/tidyr.pdf) shows a summary of different data tidying operations, only some of which we cover in this class. Notably, we use some of the NA and reshaping operations. Feel free to read more on your own.
+
+
 
 <!--
 https://rstudio.github.io/cheatsheets/

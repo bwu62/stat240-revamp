@@ -125,7 +125,7 @@ Ok, now we're finally ready to learn some plots. We will start with simple one-v
 
 ### Histogram
 
-Histograms are plots where **numeric values are grouped into "bins" (i.e. intervals) and the count of each bin plotted as a bar**. They are extremely effective at visualizing the distribution of a single numeric column, allowing you to easily see the shape, spread, and even skewness of a datset. Histograms are one of the most common plots for numeric data.
+Histograms are plots where **numeric values are grouped into "bins" (i.e. intervals) and the count of each bin plotted as a bar**. They are extremely effective at visualizing the distribution of a single numeric column, allowing you to easily see the shape, spread, and even skewness of a dataset. Histograms are one of the most common plots for numeric data.
 
 The following code makes a basic histogram in R using ggplot.
 
@@ -286,7 +286,7 @@ We will NOT cover every option for every plot type, but occasionally, we may hig
 
  - You can set the `bins` argument to set that many total bins, which will be used to evenly divide up the range of the data. E.g. by default, `bins = 30` is used to draw 30 bins, which is generally agreed to be a sensible default, even though it can create bins with strange decimal bounds (like in this example, where the bins are (171.91,173.95], (173.95,175.98], ..., (230.91,232.95]).
    - If your data is integer-valued (like flipper length is here), this default method can actually cause problems, where some bins contain more whole numbers than others, creating strange artifacts in your data. For example, if we had two consecutive bins (1.8,3.2] and (3.2,4.6], even though they are both 1.4 units wide, the first covers 2 whole numbers (2 and 3) whereas the second only covers 1 whole number (just 4) which will distort the histogram shape.
- - Alternatively, you can also set the `binwidth` and `boundary` arguments which wil start at the given boundary and count up and down by the given binwidth to create all bins.
+ - Alternatively, you can also set the `binwidth` and `boundary` arguments which will start at the given boundary and count up and down by the given binwidth to create all bins.
    - For example, if you want to make bins of (170,175], (175,180], ..., (230,235], you can set `binwidth = 5` and `boundary = 170` (or any other whole number divisible by 5).
  - For maximum control, you can also set `breaks` equal to any numeric vector to use for the bin boundaries.
    - For example, the same breaks (170,175], (175,180], ..., (230,235] can be chosen by setting `breaks = seq(170, 235, by = 5)`.
@@ -741,7 +741,7 @@ The choppiness is because the data is only summarized monthly.
 
 ## Facet subplots
 
-Another way to incorporate additional aesthetics is to use facets, i.e. instead of having everything on one plot, **breaking off into multiple subplots** to visualize extra dimentions of your dataset.
+Another way to incorporate additional aesthetics is to use facets, i.e. instead of having everything on one plot, **breaking off into multiple subplots** to visualize extra dimensions of your dataset.
 
 There are two primary functions for this:
 
@@ -859,7 +859,7 @@ By default, both `facet_wrap()` and `facet_grid()` will match `x` and `y` axes a
 
 Generally, the default axes are fine, but if you need to you can modify them with scale layers. **Scales control how every aesthetic is displayed** on a plot, and there are scales for every aesthetic. Aesthetics added to a plot automatically come with a scale layer with default settings, but you can replace this with a custom-tuned scale with your own settings by adding another scale on.
 
-Every scale layer has the folowing name pattern: `scale_aes_type` where `aes` and `type` are the name of the aesthetic and type of scale used. For example, if you're making a density plot and set `x = flipper_length_mm` this is controlled by `scale_x_continuous()` because the `flipper_length_mm` column is a continuous, numeric type variable. However if you are making a bar plot and set `x = species` this is controlled by `scale_x_discrete()` since `species` is a discrete, categorical type variable.
+Every scale layer has the following name pattern: `scale_aes_type` where `aes` and `type` are the name of the aesthetic and type of scale used. For example, if you're making a density plot and set `x = flipper_length_mm` this is controlled by `scale_x_continuous()` because the `flipper_length_mm` column is a continuous, numeric type variable. However if you are making a bar plot and set `x = species` this is controlled by `scale_x_discrete()` since `species` is a discrete, categorical type variable.
 
 These also apply to other aesthetics. If you set `fill = species` and `color = sex` by default these are controlled by `scale_fill_discrete()` and `scale_color_discrete()` since these are both discrete. There are automatic color choosing functions like `scale_fill_brewer()` and `scale_color_brewer()` which use the excellent [Brewer color palettes](https://www.datanovia.com/en/blog/the-a-z-of-rcolorbrewer-palette), but you can also set your own with `scale_fill_manual()` and `scale_color_manual()`.
 
@@ -960,7 +960,7 @@ ggplot() + geom_function(
 
 <img src="06-data-visualization_files/figure-html/unnamed-chunk-47-1.svg" width="672" style="display: block; margin: auto;" />
 
-If the function exists, but you need to modify itthe arguments, you can use `args = list(...)` any arguments specified inside will be directly passed to the chose function, for example:
+If the function exists, but you need to modify the arguments, you can use `args = list(...)` any arguments specified inside will be directly passed to the chose function, for example:
 
 
 ``` r
@@ -980,7 +980,7 @@ ggplot() + geom_function(
 
 I didn't know where to put this so I'm inserting it at the end of the chapter here. Here's a bonus plot type for you called a pairs plot, where every variable in a data frame is plotted against every other variable. The primary purpose of this plot is to rapidly orient you to a new dataset you're just starting to explore. It's usually recommended to limit yourself to 5-6 variables max in a pairs plot, lest it become too chaotic.
 
-There are many different implementions of this, but one of the best is [`GGally::ggpairs()`{.R}](https://ggobi.github.io/ggally/reference/ggpairs.html). The plot type is automatically determined based on variable types and can be density, histogram, point, bar, box, or more, and additionally some summary statistics like correlations are given where appropriate.
+There are many different implementations of this, but one of the best is [`GGally::ggpairs()`{.R}](https://ggobi.github.io/ggally/reference/ggpairs.html). The plot type is automatically determined based on variable types and can be density, histogram, point, bar, box, or more, and additionally some summary statistics like correlations are given where appropriate.
 
 :::{.i95}
 

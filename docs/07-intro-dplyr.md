@@ -109,7 +109,7 @@ We begin with the column-wise dplyr functions, i.e. the functions that primarily
 
 `select()` is used to subset columns in a data frame and is often one of the first operations used after loading in a dataset (to remove columns unnecessary for your analysis).
 
-It has a very flexible syntax: you can use subset either by numeric position, by name, by ranges, by exlusion, or even using special [selector functions](https://tidyselect.r-lib.org/reference/starts_with.html). It can also be used to reorder columns. Here are a few examples:
+It has a very flexible syntax: you can use subset either by numeric position, by name, by ranges, by exclusion, or even using special [selector functions](https://tidyselect.r-lib.org/reference/starts_with.html). It can also be used to reorder columns. Here are a few examples:
 
 
 ``` r
@@ -593,11 +593,11 @@ penguins2 %>% mutate(
 # A tibble: 333 × 6
   species sex    bill_length_mm bill_depth_mm small_bill fake_dates
   <chr>   <chr>           <dbl>         <dbl> <lgl>      <date>    
-1 Adelie  male             39.1          18.7 FALSE      2024-08-20
-2 Adelie  female           39.5          17.4 TRUE       2024-08-21
-3 Adelie  female           40.3          18   FALSE      2024-08-22
-4 Adelie  female           36.7          19.3 TRUE       2024-08-23
-5 Adelie  male             39.3          20.6 FALSE      2024-08-24
+1 Adelie  male             39.1          18.7 FALSE      2024-08-21
+2 Adelie  female           39.5          17.4 TRUE       2024-08-22
+3 Adelie  female           40.3          18   FALSE      2024-08-23
+4 Adelie  female           36.7          19.3 TRUE       2024-08-24
+5 Adelie  male             39.3          20.6 FALSE      2024-08-25
 # ℹ 328 more rows
 ```
 
@@ -987,12 +987,12 @@ penguins %>% slice_max(bill_length_mm, prop = 0.01)
 
 ### `arrange()`
 
-`arrange()` is used to sort rows. Note that since it only sorts rows, it does NOT change the dataframe in any "meaningful" way (generally, order of rows/columns is not considered a "meaningful" change). It's primarily used for visual appeal, i.e. for neater presentation of a dataset.
+`arrange()` is used to sort rows. Note that since it only sorts rows, it does NOT change the data frame in any "meaningful" way (generally, order of rows/columns is not considered a "meaningful" change). It's primarily used for visual appeal, i.e. for neater presentation of a dataset.
 
 The syntax is `df %>% arrange(expr1, expr2, ...)` where `expr1`, `expr2`, ... can be simply **a column, or some vector expression using columns in the data frame** (similar to `mutate()` or `filter()`) whose resultant values are used for sorting the rows. A few important notes:
 
- 1. **Each next expression is ONLY used to break ties in the previous expressions**, otherwise it's ignored! E.g. if two rows can be sorted by `expr1`, only that is used. However if two rows are tied for `expr1`, then `expr2` (if it exists) will be used to try to break the tie, and so on. This is also a frequent point of confusiong for beginners.
- 2. Default order is always **ascending**, i.e. small to largex, A to Z, earlier to later, FALSE to TRUE. For descending order, wrap your expression in `desc()`.
+ 1. **Each next expression is ONLY used to break ties in the previous expressions**, otherwise it's ignored! E.g. if two rows can be sorted by `expr1`, only that is used. However if two rows are tied for `expr1`, then `expr2` (if it exists) will be used to try to break the tie, and so on. This is also a frequent point of confusion for beginners.
+ 2. Default order is always **ascending**, i.e. small to large, A to Z, earlier to later, FALSE to TRUE. For descending order, wrap your expression in `desc()`.
  3. Rows that are completely tied may be returned in any order.^[For the CS folks again, this means `arrange()` does not guarantee a [stable sort](https://en.wikipedia.org/wiki/Sorting_algorithm#Stability). It seems like this generally isn't a huge concern or priority for the Tidyverse developers, which is fair enough.]
 
 Examples of `arrange()`:
@@ -1115,7 +1115,7 @@ Without getting too out of scope, broadly speaking data can be missing either FO
 
 For example, suppose I'm setting up a weather station with several sensors, but I have a small budget, so I buy a cheap pressure sensor that isn't properly weather-proofed and is more prone to producing NAs when it rains. These NAs are missing for a relevant reason; there's a systematic pattern behind the missingness. Since rain and pressure are closely related, this means the pattern of missingness is meaningful, so removing NAs will add significant bias to the data.
 
-Now, suppose I replace it with a different cheap pressure sensor that is weather-proof but just slightly buggy overall, and every hour there's independently a 1% chance it will just randomly read NA. This data is NOT missing for a relevant reason, i.e. the pattern of missingnes is not meaningful, and you can simply remove the NAs.
+Now, suppose I replace it with a different cheap pressure sensor that is weather-proof but just slightly buggy overall, and every hour there's independently a 1% chance it will just randomly read NA. This data is NOT missing for a relevant reason, i.e. the pattern of missingness is not meaningful, and you can simply remove the NAs.
 
 When working with data you should ALWAYS **look for a pattern in the NAs** and ask yourself if there's evidence of a relevant reason for the missingness. You should **ONLY remove NAs with NO clear pattern**, otherwise you risk introducing further systematic biases in your analysis and results.
 
@@ -1127,9 +1127,10 @@ Again, this is *extremely* simplified, but sufficient for now. In general, for S
 Let's now briefly discuss R techniques for handling NAs. First it's important to review the difference between `NA` and `NaN` in R:
 
  - `NA` means the absence of an observation, i.e. a data point was not recorded.
- - `NaN` means an operation produced a result that is not considered valid in its type/context.
+ - `NaN` is usually the result of a mathematically invalid operation, like `0/0`, `0*Inf`, or `Inf-Inf`.
+    - Note that `sqrt(-1)` and `log(-1)` also return `NaN` since the input type is of real type. Replace `-1` with `0-1i` to trigger complex evaluation.
 
-These are not the same, though `NaN` is often converted to `NA` since they're both non-valid entries in a data frame ([convenient line of code for doing this](https://stackoverflow.com/a/54118486/25278020)).
+Even though they're not the exact same, both `NA` and `NaN` are considered missing in R and can be handled together using the operations covered below.
 
 It's also worth noting `NA` is NOT the same as `"NA"`, i.e. a string composed of the two letters `"N"` and `"A"`.
 
@@ -1164,12 +1165,12 @@ In general expressions involving an NA will result in an NA output (though there
 
 ### Identifying NAs
 
-NAs in a vector can be identified using `is.na()` which produces a TRUE/FALSE vector corresponding to if a value is NA or not:
+NAs (and also NaNs) in a vector can be identified using `is.na()` which produces a TRUE/FALSE vector corresponding to if a value is NA or not:
 
 
 ``` r
 # demo missing vector
-x <- c(3, 8, NA, 2, NA)
+x <- c(3, 8, NA, 2, NaN)
 # which values are NA?
 is.na(x)
 ```
@@ -1422,5 +1423,79 @@ This is another VERY common pitfall for students. In general you should be extre
 
 ### Replacing NAs
 
-In some *rare* circumstances, it may be necessary to replace NAs with other values.
+In some *rare* circumstances, you may want to replace NAs with other values. Of course you can do any kind of conditional replacement using `mutate()` and `case_when()`, but you can also use `mutate()` and the specialized tidyr function `replace_na()`. Examples of both:
+
+
+``` r
+# suppose we need to replace NAs in y column with 0
+# using mutate and case_when:
+df.demo %>% mutate(
+  y = case_when(
+    is.na(y) ~ 0,
+    .default = y
+  )
+)
+```
+
+```
+# A tibble: 5 × 4
+  date       x         y z    
+  <date>     <chr> <dbl> <lgl>
+1 2024-01-01 <NA>      0 NA   
+2 2024-01-02 A         1 TRUE 
+3 2024-01-03 B         2 FALSE
+4 2024-01-04 A         0 NA   
+5 2024-01-06 B         3 NA   
+```
+
+``` r
+# same thing but using replace_na instead of case_when:
+df.demo %>% mutate(y = replace_na(y, 0))
+```
+
+```
+# A tibble: 5 × 4
+  date       x         y z    
+  <date>     <chr> <dbl> <lgl>
+1 2024-01-01 <NA>      0 NA   
+2 2024-01-02 A         1 TRUE 
+3 2024-01-03 B         2 FALSE
+4 2024-01-04 A         0 NA   
+5 2024-01-06 B         3 NA   
+```
+
+In some datasets, NAs may be coded using certain obviously invalid values, e.g. -9999. These can of course also be mutated using `case_when()`, but there's a special function `na_if()` for just this purpose:
+
+
+``` r
+df.demo <- df.demo %>% mutate(w = c(-9999, -9999, 20, 30, -9999))
+df.demo
+```
+
+```
+# A tibble: 5 × 5
+  date       x         y z         w
+  <date>     <chr> <dbl> <lgl> <dbl>
+1 2024-01-01 <NA>     NA NA    -9999
+2 2024-01-02 A         1 TRUE  -9999
+3 2024-01-03 B         2 FALSE    20
+4 2024-01-04 A        NA NA       30
+5 2024-01-06 B         3 NA    -9999
+```
+
+``` r
+df.demo %>% mutate(w = na_if(w, -9999))
+```
+
+```
+# A tibble: 5 × 5
+  date       x         y z         w
+  <date>     <chr> <dbl> <lgl> <dbl>
+1 2024-01-01 <NA>     NA NA       NA
+2 2024-01-02 A         1 TRUE     NA
+3 2024-01-03 B         2 FALSE    20
+4 2024-01-04 A        NA NA       30
+5 2024-01-06 B         3 NA       NA
+```
+
 

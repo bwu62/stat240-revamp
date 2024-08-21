@@ -74,6 +74,7 @@
 <li><a class="active" href="data-visualization.html"><span class="header-section-number">6</span> Data visualization</a></li>
 <li><a class="" href="data-transformation.html">Data Transformation</a></li>
 <li><a class="" href="intro-to-dplyr.html"><span class="header-section-number">7</span> Intro to dplyr</a></li>
+<li><a class="" href="advanced-operations.html"><span class="header-section-number">8</span> Advanced operations</a></li>
 <li class="book-part">Appendix</li>
 <li><a class="" href="datasets.html"><span class="header-section-number">A</span> Datasets</a></li>
 <li><a class="" href="cheat-sheets.html"><span class="header-section-number">B</span> Cheat sheets</a></li>
@@ -185,7 +186,7 @@ $ year              &lt;dbl&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 
 <h3>
 <span class="header-section-number">6.3.1</span> Histogram<a class="anchor" aria-label="anchor" href="#histogram"><i class="fas fa-link"></i></a>
 </h3>
-<p>Histograms are plots where <strong>numeric values are grouped into “bins” (i.e. intervals) and the count of each bin plotted as a bar</strong>. They are extremely effective at visualizing the distribution of a single numeric column, allowing you to easily see the shape, spread, and even skewness of a datset. Histograms are one of the most common plots for numeric data.</p>
+<p>Histograms are plots where <strong>numeric values are grouped into “bins” (i.e. intervals) and the count of each bin plotted as a bar</strong>. They are extremely effective at visualizing the distribution of a single numeric column, allowing you to easily see the shape, spread, and even skewness of a dataset. Histograms are one of the most common plots for numeric data.</p>
 <p>The following code makes a basic histogram in R using ggplot.</p>
 <div class="sourceCode" id="cb533"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">penguins</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">flipper_length_mm</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -345,7 +346,7 @@ $ year              &lt;dbl&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 
 <li>If your data is integer-valued (like flipper length is here), this default method can actually cause problems, where some bins contain more whole numbers than others, creating strange artifacts in your data. For example, if we had two consecutive bins (1.8,3.2] and (3.2,4.6], even though they are both 1.4 units wide, the first covers 2 whole numbers (2 and 3) whereas the second only covers 1 whole number (just 4) which will distort the histogram shape.</li>
 </ul>
 </li>
-<li>Alternatively, you can also set the <code>binwidth</code> and <code>boundary</code> arguments which wil start at the given boundary and count up and down by the given binwidth to create all bins.
+<li>Alternatively, you can also set the <code>binwidth</code> and <code>boundary</code> arguments which will start at the given boundary and count up and down by the given binwidth to create all bins.
 <ul>
 <li>For example, if you want to make bins of (170,175], (175,180], …, (230,235], you can set <code>binwidth = 5</code> and <code>boundary = 170</code> (or any other whole number divisible by 5).</li>
 </ul>
@@ -678,7 +679,7 @@ $ UNRATE &lt;dbl&gt; 3.4, 3.8, 4.0, 3.9, 3.5, 3.6, 3.6, 3.9, 3.8, 3.7, 3.8, 4.0,
 <h2>
 <span class="header-section-number">6.5</span> Facet subplots<a class="anchor" aria-label="anchor" href="#facet-subplots"><i class="fas fa-link"></i></a>
 </h2>
-<p>Another way to incorporate additional aesthetics is to use facets, i.e. instead of having everything on one plot, <strong>breaking off into multiple subplots</strong> to visualize extra dimentions of your dataset.</p>
+<p>Another way to incorporate additional aesthetics is to use facets, i.e. instead of having everything on one plot, <strong>breaking off into multiple subplots</strong> to visualize extra dimensions of your dataset.</p>
 <p>There are two primary functions for this:</p>
 <ul>
 <li>
@@ -761,7 +762,7 @@ $ UNRATE &lt;dbl&gt; 3.4, 3.8, 4.0, 3.9, 3.5, 3.6, 3.6, 3.9, 3.8, 3.7, 3.8, 4.0,
 <span class="header-section-number">6.6</span> Scales<a class="anchor" aria-label="anchor" href="#scales"><i class="fas fa-link"></i></a>
 </h2>
 <p>Generally, the default axes are fine, but if you need to you can modify them with scale layers. <strong>Scales control how every aesthetic is displayed</strong> on a plot, and there are scales for every aesthetic. Aesthetics added to a plot automatically come with a scale layer with default settings, but you can replace this with a custom-tuned scale with your own settings by adding another scale on.</p>
-<p>Every scale layer has the folowing name pattern: <code>scale_aes_type</code> where <code>aes</code> and <code>type</code> are the name of the aesthetic and type of scale used. For example, if you’re making a density plot and set <code>x = flipper_length_mm</code> this is controlled by <code><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous()</a></code> because the <code>flipper_length_mm</code> column is a continuous, numeric type variable. However if you are making a bar plot and set <code>x = species</code> this is controlled by <code><a href="https://ggplot2.tidyverse.org/reference/scale_discrete.html">scale_x_discrete()</a></code> since <code>species</code> is a discrete, categorical type variable.</p>
+<p>Every scale layer has the following name pattern: <code>scale_aes_type</code> where <code>aes</code> and <code>type</code> are the name of the aesthetic and type of scale used. For example, if you’re making a density plot and set <code>x = flipper_length_mm</code> this is controlled by <code><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous()</a></code> because the <code>flipper_length_mm</code> column is a continuous, numeric type variable. However if you are making a bar plot and set <code>x = species</code> this is controlled by <code><a href="https://ggplot2.tidyverse.org/reference/scale_discrete.html">scale_x_discrete()</a></code> since <code>species</code> is a discrete, categorical type variable.</p>
 <p>These also apply to other aesthetics. If you set <code>fill = species</code> and <code>color = sex</code> by default these are controlled by <code><a href="https://ggplot2.tidyverse.org/reference/scale_colour_discrete.html">scale_fill_discrete()</a></code> and <code><a href="https://ggplot2.tidyverse.org/reference/scale_colour_discrete.html">scale_color_discrete()</a></code> since these are both discrete. There are automatic color choosing functions like <code><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_fill_brewer()</a></code> and <code><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_color_brewer()</a></code> which use the excellent <a href="https://www.datanovia.com/en/blog/the-a-z-of-rcolorbrewer-palette">Brewer color palettes</a>, but you can also set your own with <code><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual()</a></code> and <code><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual()</a></code>.</p>
 <div class="tip">
 <p>With tidyverse loaded, try typing <code>scale_</code> into the console and use the autocomplete popup (if it doesn’t appear automatically, use <span class="k">TAB</span> to trigger it) to explore the different scale layers available. Hover over each scale function and read the short summary as well as scan the available arguments. If you need more details, check the help page!</p>
@@ -845,7 +846,7 @@ ggplot(df,aes(x=x,y=y,fill=z)) + geom_col() +
 <span>  n <span class="op">=</span> <span class="fl">1001</span>                 <span class="co"># increase number of points used in drawing</span></span>
 <span><span class="op">)</span>                          <span class="co"># (improves smoothness of resulting curve)</span></span></code></pre></div>
 <div class="inline-figure"><img src="06-data-visualization_files/figure-html/unnamed-chunk-47-1.svg" width="672" style="display: block; margin: auto;"></div>
-<p>If the function exists, but you need to modify itthe arguments, you can use <code>args = list(...)</code> any arguments specified inside will be directly passed to the chose function, for example:</p>
+<p>If the function exists, but you need to modify the arguments, you can use <code>args = list(...)</code> any arguments specified inside will be directly passed to the chose function, for example:</p>
 <div class="sourceCode" id="cb580"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># plot the normal distribution with mean 10 sd 2</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_function.html">geom_function</a></span><span class="op">(</span></span>
@@ -862,7 +863,7 @@ ggplot(df,aes(x=x,y=y,fill=z)) + geom_col() +
 <span class="header-section-number">6.8</span> Bonus: pairs plot<a class="anchor" aria-label="anchor" href="#bonus-pairs-plot"><i class="fas fa-link"></i></a>
 </h2>
 <p>I didn’t know where to put this so I’m inserting it at the end of the chapter here. Here’s a bonus plot type for you called a pairs plot, where every variable in a data frame is plotted against every other variable. The primary purpose of this plot is to rapidly orient you to a new dataset you’re just starting to explore. It’s usually recommended to limit yourself to 5-6 variables max in a pairs plot, lest it become too chaotic.</p>
-<p>There are many different implementions of this, but one of the best is <a href="https://ggobi.github.io/ggally/reference/ggpairs.html"><code class="sourceCode r">GGally<span class="sc">::</span><span class="fu">ggpairs</span>()</code></a>. The plot type is automatically determined based on variable types and can be density, histogram, point, bar, box, or more, and additionally some summary statistics like correlations are given where appropriate.</p>
+<p>There are many different implementations of this, but one of the best is <a href="https://ggobi.github.io/ggally/reference/ggpairs.html"><code class="sourceCode r">GGally<span class="sc">::</span><span class="fu">ggpairs</span>()</code></a>. The plot type is automatically determined based on variable types and can be density, histogram, point, bar, box, or more, and additionally some summary statistics like correlations are given where appropriate.</p>
 <div class="i95">
 <div class="sourceCode" id="cb581"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># to run this chunk, you need to have the package GGally installed</span></span>
@@ -1044,7 +1045,7 @@ observer.observe(document.body, config);
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2024-08-20.</p>
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2024-08-21.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -136,6 +136,8 @@ nas-in-r
 identifying-nas
 dropping-nas
 replacing-nas
+advanced-operations
+grouping
 datasets
 datasets-list
 eruptions
@@ -159,3 +161,4 @@ readr
 lubridate
 ggplot2-1
 dplyr
+tidyr
