@@ -494,9 +494,10 @@ Again, this is *extremely* simplified, but sufficient for now. In general, for S
 Let's now briefly discuss R techniques for handling NAs. First it's important to review the difference between `NA` and `NaN` in R:
 
  - `NA` means the absence of an observation, i.e. a data point was not recorded.
- - `NaN` means an operation produced a result that is not considered valid in its type/context.
+ - `NaN` is usually the result of a mathematically invalid operation, like `0/0`, `0*Inf`, or `Inf-Inf`.
+    - Note that `sqrt(-1)` and `log(-1)` also return `NaN` since the input type is of real type. Replace `-1` with `0-1i` to trigger complex evaluation.
 
-These are not the same, though `NaN` is often converted to `NA` since they're both non-valid entries in a data frame ([convenient line of code for doing this](https://stackoverflow.com/a/54118486/25278020)).
+Even though they're not the exact same, both `NA` and `NaN` are considered missing in R and can be handled together using the operations covered below.
 
 It's also worth noting `NA` is NOT the same as `"NA"`, i.e. a string composed of the two letters `"N"` and `"A"`.
 
@@ -512,11 +513,11 @@ In general expressions involving an NA will result in an NA output (though there
 
 ### Identifying NAs
 
-NAs in a vector can be identified using `is.na()` which produces a TRUE/FALSE vector corresponding to if a value is NA or not:
+NAs (and also NaNs) in a vector can be identified using `is.na()` which produces a TRUE/FALSE vector corresponding to if a value is NA or not:
 
 ```{r}
 # demo missing vector
-x <- c(3, 8, NA, 2, NA)
+x <- c(3, 8, NA, 2, NaN)
 # which values are NA?
 is.na(x)
 # get only non-NA values
