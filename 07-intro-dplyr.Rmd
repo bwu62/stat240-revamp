@@ -331,12 +331,11 @@ Again, I think it's important to stress **ANY expression involving columns that 
 
 ## Row-wise functions
 
-Let's move on now to the row-wise functions, i.e. the functions that primarily focus on manipulating rows in certain ways. Again, there are many of these too, but here are 4 of the most important:
+Let's move on now to the row-wise functions, i.e. the functions that primarily focus on manipulating rows in certain ways. Again, there are many of these too, but here are 3 of the most important:
 
  - `filter()` for filtering which rows to keep,
  - `slice()` (plus some other sibling functions) for slicing out specific rows,
- - `arrange()` for sorting rows,
- - `drop_na()` for dropping missing values.
+ - `arrange()` for sorting rows.
 
 
 ### `filter()`
