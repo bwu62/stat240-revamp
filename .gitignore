@@ -6,4 +6,5 @@
 *.rds
 *_files
 *_cache
+temp/
 !doc/
