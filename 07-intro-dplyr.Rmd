@@ -621,5 +621,27 @@ This is another VERY common pitfall for students. In general you should be extre
 
 ### Replacing NAs
 
-In some *rare* circumstances, it may be necessary to replace NAs with other values.
+In some *rare* circumstances, you may want to replace NAs with other values. Of course you can do any kind of conditional replacement using `mutate()` and `case_when()`, but you can also use `mutate()` and the specialized tidyr function `replace_na()`. Examples of both:
+
+```{r}
+# suppose we need to replace NAs in y column with 0
+# using mutate and case_when:
+df.demo %>% mutate(
+  y = case_when(
+    is.na(y) ~ 0,
+    .default = y
+  )
+)
+# same thing but using replace_na instead of case_when:
+df.demo %>% mutate(y = replace_na(y, 0))
+```
+
+In some datasets, NAs may be coded using certain obviously invalid values, e.g. -9999. These can of course also be mutated using `case_when()`, but there's a special function `na_if()` for just this purpose:
+
+```{r}
+df.demo <- df.demo %>% mutate(w = c(-9999, -9999, 20, 30, -9999))
+df.demo
+df.demo %>% mutate(w = na_if(w, -9999))
+```
+
 
