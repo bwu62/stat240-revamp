@@ -98,7 +98,7 @@ We begin with the column-wise dplyr functions, i.e. the functions that primarily
 
 `select()` is used to subset columns in a data frame and is often one of the first operations used after loading in a dataset (to remove columns unnecessary for your analysis).
 
-It has a very flexible syntax: you can use subset either by numeric position, by name, by ranges, by exlusion, or even using special [selector functions](https://tidyselect.r-lib.org/reference/starts_with.html). It can also be used to reorder columns. Here are a few examples:
+It has a very flexible syntax: you can use subset either by numeric position, by name, by ranges, by exclusion, or even using special [selector functions](https://tidyselect.r-lib.org/reference/starts_with.html). It can also be used to reorder columns. Here are a few examples:
 
 ```{r}
 # select just species, sex, flipper length, and body mass
@@ -432,12 +432,12 @@ penguins %>% slice_max(bill_length_mm, prop = 0.01)
 
 ### `arrange()`
 
-`arrange()` is used to sort rows. Note that since it only sorts rows, it does NOT change the dataframe in any "meaningful" way (generally, order of rows/columns is not considered a "meaningful" change). It's primarily used for visual appeal, i.e. for neater presentation of a dataset.
+`arrange()` is used to sort rows. Note that since it only sorts rows, it does NOT change the data frame in any "meaningful" way (generally, order of rows/columns is not considered a "meaningful" change). It's primarily used for visual appeal, i.e. for neater presentation of a dataset.
 
 The syntax is `df %>% arrange(expr1, expr2, ...)` where `expr1`, `expr2`, ... can be simply **a column, or some vector expression using columns in the data frame** (similar to `mutate()` or `filter()`) whose resultant values are used for sorting the rows. A few important notes:
 
- 1. **Each next expression is ONLY used to break ties in the previous expressions**, otherwise it's ignored! E.g. if two rows can be sorted by `expr1`, only that is used. However if two rows are tied for `expr1`, then `expr2` (if it exists) will be used to try to break the tie, and so on. This is also a frequent point of confusiong for beginners.
- 2. Default order is always **ascending**, i.e. small to largex, A to Z, earlier to later, FALSE to TRUE. For descending order, wrap your expression in `desc()`.
+ 1. **Each next expression is ONLY used to break ties in the previous expressions**, otherwise it's ignored! E.g. if two rows can be sorted by `expr1`, only that is used. However if two rows are tied for `expr1`, then `expr2` (if it exists) will be used to try to break the tie, and so on. This is also a frequent point of confusion for beginners.
+ 2. Default order is always **ascending**, i.e. small to large, A to Z, earlier to later, FALSE to TRUE. For descending order, wrap your expression in `desc()`.
  3. Rows that are completely tied may be returned in any order.^[For the CS folks again, this means `arrange()` does not guarantee a [stable sort](https://en.wikipedia.org/wiki/Sorting_algorithm#Stability). It seems like this generally isn't a huge concern or priority for the Tidyverse developers, which is fair enough.]
 
 Examples of `arrange()`:
@@ -482,7 +482,7 @@ Without getting too out of scope, broadly speaking data can be missing either FO
 
 For example, suppose I'm setting up a weather station with several sensors, but I have a small budget, so I buy a cheap pressure sensor that isn't properly weather-proofed and is more prone to producing NAs when it rains. These NAs are missing for a relevant reason; there's a systematic pattern behind the missingness. Since rain and pressure are closely related, this means the pattern of missingness is meaningful, so removing NAs will add significant bias to the data.
 
-Now, suppose I replace it with a different cheap pressure sensor that is weather-proof but just slightly buggy overall, and every hour there's independently a 1% chance it will just randomly read NA. This data is NOT missing for a relevant reason, i.e. the pattern of missingnes is not meaningful, and you can simply remove the NAs.
+Now, suppose I replace it with a different cheap pressure sensor that is weather-proof but just slightly buggy overall, and every hour there's independently a 1% chance it will just randomly read NA. This data is NOT missing for a relevant reason, i.e. the pattern of missingness is not meaningful, and you can simply remove the NAs.
 
 When working with data you should ALWAYS **look for a pattern in the NAs** and ask yourself if there's evidence of a relevant reason for the missingness. You should **ONLY remove NAs with NO clear pattern**, otherwise you risk introducing further systematic biases in your analysis and results.
 
