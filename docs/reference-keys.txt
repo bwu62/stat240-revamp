@@ -69,7 +69,7 @@ xlsx-file
 extra-arguments
 paths-file-management
 working-with-data-frames
-basic-operations
+basic-df
 subsetting-data-frames
 descriptive-statistics
 measures-of-central-tendency
@@ -129,10 +129,13 @@ row-wise-functions
 filter
 slice
 arrange
+other-row-functions
 missing-values
-identifying
-dropping
-replacing
+why-missing
+nas-in-r
+identifying-nas
+dropping-nas
+replacing-nas
 datasets
 datasets-list
 eruptions

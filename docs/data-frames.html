@@ -106,7 +106,7 @@
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
 <span>  name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Alice"</span>, <span class="st">"Bob"</span>, <span class="st">"Charlie"</span><span class="op">)</span>,</span>
 <span>  sex <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"F"</span>, <span class="st">"M"</span>, <span class="st">"M"</span><span class="op">)</span>,</span>
-<span>  date_of_birth <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html">mdy</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"8/19/03"</span>, <span class="st">"7/4/99"</span>, <span class="st">"10/31/06"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  date_of_birth <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html">mdy</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"8/2/03"</span>, <span class="st">"7/4/99"</span>, <span class="st">"10/31/06"</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">floor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/now.html">today</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">birthday</span><span class="op">)</span><span class="op">/</span><span class="fl">365.24</span><span class="op">)</span>,</span>
 <span>  declared_major <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>,</span>
 <span>  school <span class="op">=</span> <span class="st">"UW-Madison"</span></span>
@@ -116,7 +116,7 @@
 <pre><code># A tibble: 3 × 6
   name    sex   date_of_birth   age declared_major school    
   &lt;chr&gt;   &lt;chr&gt; &lt;date&gt;        &lt;dbl&gt; &lt;lgl&gt;          &lt;chr&gt;     
-1 Alice   F     2003-08-19       21 TRUE           UW-Madison
+1 Alice   F     2003-08-20       21 TRUE           UW-Madison
 2 Bob     M     1999-07-04       25 TRUE           UW-Madison
 3 Charlie M     2006-10-31       17 FALSE          UW-Madison</code></pre>
 <p>Note the following:</p>
@@ -549,9 +549,9 @@ For example, suppose a data frame had in order from left to right a numeric colu
 4 Kanaga                2023-12-18 2023-12-18        0 TRUE          1
 5 Ruby                  2023-09-14 2023-09-15        1 TRUE          1
 # ℹ 68 more rows</code></pre>
-<div id="basic-operations" class="section level3" number="4.3.1">
+<div id="basic-df" class="section level3" number="4.3.1">
 <h3>
-<span class="header-section-number">4.3.1</span> Basic operations<a class="anchor" aria-label="anchor" href="#basic-operations"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.3.1</span> Basic operations<a class="anchor" aria-label="anchor" href="#basic-df"><i class="fas fa-link"></i></a>
 </h3>
 <p>Here are a few basic operations for working with data frames: <code><a href="https://rdrr.io/r/base/nrow.html">nrow()</a></code>, <code><a href="https://rdrr.io/r/base/nrow.html">ncol()</a></code>, and <code><a href="https://rdrr.io/r/base/dim.html">dim()</a></code> can show the number of rows and/or columns; <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> can show a quick summary of each column; <code><a href="https://rdrr.io/r/base/names.html">names()</a></code>/<code><a href="https://rdrr.io/r/base/colnames.html">colnames()</a></code> can both get and set column names; <code><a href="https://rdrr.io/r/base/colnames.html">rownames()</a></code> can both get and set row names.</p>
 <div class="sourceCode" id="cb454"><pre class="downlit sourceCode r">
@@ -878,7 +878,7 @@ observer.observe(document.body, config);
 </li>
 <li>
 <a class="nav-link" href="#working-with-data-frames"><span class="header-section-number">4.3</span> Working with data frames</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#basic-operations"><span class="header-section-number">4.3.1</span> Basic operations</a></li>
+<li><a class="nav-link" href="#basic-df"><span class="header-section-number">4.3.1</span> Basic operations</a></li>
 <li><a class="nav-link" href="#subsetting-data-frames"><span class="header-section-number">4.3.2</span> Subsetting data frames</a></li>
 </ul>
 </li>
@@ -899,7 +899,7 @@ observer.observe(document.body, config);
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2024-08-19.</p>
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2024-08-20.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

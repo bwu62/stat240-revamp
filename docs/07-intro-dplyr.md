@@ -593,11 +593,11 @@ penguins2 %>% mutate(
 # A tibble: 333 × 6
   species sex    bill_length_mm bill_depth_mm small_bill fake_dates
   <chr>   <chr>           <dbl>         <dbl> <lgl>      <date>    
-1 Adelie  male             39.1          18.7 FALSE      2024-08-19
-2 Adelie  female           39.5          17.4 TRUE       2024-08-20
-3 Adelie  female           40.3          18   FALSE      2024-08-21
-4 Adelie  female           36.7          19.3 TRUE       2024-08-22
-5 Adelie  male             39.3          20.6 FALSE      2024-08-23
+1 Adelie  male             39.1          18.7 FALSE      2024-08-20
+2 Adelie  female           39.5          17.4 TRUE       2024-08-21
+3 Adelie  female           40.3          18   FALSE      2024-08-22
+4 Adelie  female           36.7          19.3 TRUE       2024-08-23
+5 Adelie  male             39.3          20.6 FALSE      2024-08-24
 # ℹ 328 more rows
 ```
 
@@ -728,12 +728,11 @@ Again, I think it's important to stress **ANY expression involving columns that 
 
 ## Row-wise functions
 
-Let's move on now to the row-wise functions, i.e. the functions that primarily focus on manipulating rows in certain ways. Again, there are many of these too, but here are 4 of the most important:
+Let's move on now to the row-wise functions, i.e. the functions that primarily focus on manipulating rows in certain ways. Again, there are many of these too, but here are 3 of the most important:
 
  - `filter()` for filtering which rows to keep,
  - `slice()` (plus some other sibling functions) for slicing out specific rows,
- - `arrange()` for sorting rows,
- - `drop_na()` for dropping missing values.
+ - `arrange()` for sorting rows.
 
 
 ### `filter()`
@@ -1097,13 +1096,331 @@ penguins %>% arrange(
 ```
 
 
+### Other row functions
+
+Besides these, there's a few other row operations that you may sometimes need, such as `distinct()` for removing duplicates or `add_row()` for manually adding new observations. Feel free to explore these on your own.
+
+
+
 ## Missing values
 
-### Identifying
+Before ending this chapter, let's briefly discuss handling missing values, i.e. NAs in R. Missing values are unfortunately very common in data science and are usually tricky to handle well due to many associated pitfalls. We will *briefly* discuss missing values both from a theoretical perspective, and a practical R handling perspective.
 
-### Dropping
 
-### Replacing
+### Why missing?
 
-- briefly mention MAR?
-- note on imputing
+When working with missing values, it's important to ask yourself this: "**why is this data missing**?" Usually, this is impossible to answer definitively, and different observations may be missing for different reasons.
+
+Without getting too out of scope, broadly speaking data can be missing either FOR a relevant reason or NOT FOR a relevant reason.^[This is a **massive oversimplification** here but unfortunately, we don't have time to address the buried nuances. See [this summary](https://www.ncbi.nlm.nih.gov/books/NBK493614) or [this article](https://www.jstor.org/stable/2335739) for the nitty gritty.]
+
+For example, suppose I'm setting up a weather station with several sensors, but I have a small budget, so I buy a cheap pressure sensor that isn't properly weather-proofed and is more prone to producing NAs when it rains. These NAs are missing for a relevant reason; there's a systematic pattern behind the missingness. Since rain and pressure are closely related, this means the pattern of missingness is meaningful, so removing NAs will add significant bias to the data.
+
+Now, suppose I replace it with a different cheap pressure sensor that is weather-proof but just slightly buggy overall, and every hour there's independently a 1% chance it will just randomly read NA. This data is NOT missing for a relevant reason, i.e. the pattern of missingnes is not meaningful, and you can simply remove the NAs.
+
+When working with data you should ALWAYS **look for a pattern in the NAs** and ask yourself if there's evidence of a relevant reason for the missingness. You should **ONLY remove NAs with NO clear pattern**, otherwise you risk introducing further systematic biases in your analysis and results.
+
+Again, this is *extremely* simplified, but sufficient for now. In general, for STAT 240 we will only encounter datasets where it's probably ok to drop NA values, but do NOT assume this for all datasets in the real world.
+
+
+### NAs in R
+
+Let's now briefly discuss R techniques for handling NAs. First it's important to review the difference between `NA` and `NaN` in R:
+
+ - `NA` means the absence of an observation, i.e. a data point was not recorded.
+ - `NaN` means an operation produced a result that is not considered valid in its type/context.
+
+These are not the same, though `NaN` is often converted to `NA` since they're both non-valid entries in a data frame ([convenient line of code for doing this](https://stackoverflow.com/a/54118486/25278020)).
+
+It's also worth noting `NA` is NOT the same as `"NA"`, i.e. a string composed of the two letters `"N"` and `"A"`.
+
+
+``` r
+# check if two objects are the exact same
+identical(NA, NA)
+```
+
+```
+[1] TRUE
+```
+
+``` r
+identical(NA, NaN)
+```
+
+```
+[1] FALSE
+```
+
+``` r
+identical(NA, "NA")
+```
+
+```
+[1] FALSE
+```
+
+In general expressions involving an NA will result in an NA output (though there are some notable exceptions, particularly with character types).
+
+
+### Identifying NAs
+
+NAs in a vector can be identified using `is.na()` which produces a TRUE/FALSE vector corresponding to if a value is NA or not:
+
+
+``` r
+# demo missing vector
+x <- c(3, 8, NA, 2, NA)
+# which values are NA?
+is.na(x)
+```
+
+```
+[1] FALSE FALSE  TRUE FALSE  TRUE
+```
+
+``` r
+# get only non-NA values
+x[!is.na(x)]
+```
+
+```
+[1] 3 8 2
+```
+
+Since this is an ordinary vectorized function, it can be used inside any compatible dplyr function above, such as `mutate()`, `summarize()`, `filter()`, and `arrange()`. To demonstrate these, let's create a demo data frame with a mix of data types as well as some missing values.
+
+
+``` r
+# demo data frame with missing values
+df.demo <- tibble(
+  date = ymd("24.1.1") + c(0:3, 5),
+  x = c(NA, rep(c("A", "B"), 2)),
+  y = c(NA, 1, 2, NA, 3),
+  z = c(NA, TRUE, FALSE, NA, NA)
+)
+df.demo
+```
+
+```
+# A tibble: 5 × 4
+  date       x         y z    
+  <date>     <chr> <dbl> <lgl>
+1 2024-01-01 <NA>     NA NA   
+2 2024-01-02 A         1 TRUE 
+3 2024-01-03 B         2 FALSE
+4 2024-01-04 A        NA NA   
+5 2024-01-06 B         3 NA   
+```
+
+A common rudimentary of checking missingness is with the aforementioned `summary()` function from section \@ref(basic-df). Note this is the base R `summary()`, NOT the Tidyverse `summarize()` we just covered above. Note however it only reports NAs for some columns, depending on type.
+
+
+``` r
+summary(df.demo)
+```
+
+```
+      date                 x                   y           z          
+ Min.   :2024-01-01   Length:5           Min.   :1.0   Mode :logical  
+ 1st Qu.:2024-01-02   Class :character   1st Qu.:1.5   FALSE:1        
+ Median :2024-01-03   Mode  :character   Median :2.0   TRUE :1        
+ Mean   :2024-01-03                      Mean   :2.0   NA's :3        
+ 3rd Qu.:2024-01-04                      3rd Qu.:2.5                  
+ Max.   :2024-01-06                      Max.   :3.0                  
+                                         NA's   :2                    
+```
+
+A better way is to pipe into `summarize()` and use `is.na()` with either `sum()` for count or `mean()` for proportion of missing values. You can also add `!` in front of `is.na()` to get the count/proportion of non-missing values. All 4 combinations are shown below:
+
+
+``` r
+# get the count/proportion of missing/non-missing values
+df.demo %>% summarize(
+  num_date_na   = sum(is.na(date)),
+  prop_x_na     = mean(is.na(x)),
+  num_y_not_na  = sum(!is.na(y)),
+  prop_z_not_na = mean(!is.na(z)),
+  nrows         = n() # add number of rows for convenience
+)
+```
+
+```
+# A tibble: 1 × 5
+  num_date_na prop_x_na num_y_not_na prop_z_not_na nrows
+        <int>     <dbl>        <int>         <dbl> <int>
+1           0       0.2            3           0.4     5
+```
+
+If you just want to apply one function to all columns, you can use `summarize_all()` which is a shortcut for exactly this. For example, we can apply the function `\(x) mean(is.na(x))*100` to get the percent missing in each column:
+
+
+``` r
+# get percent missing in each column
+df.demo %>% summarize_all(\(x) mean(is.na(x)) * 100)
+```
+
+```
+# A tibble: 1 × 4
+   date     x     y     z
+  <dbl> <dbl> <dbl> <dbl>
+1     0    20    40    60
+```
+
+:::{.note}
+If you check the help page of `summarize_all()` you'll notice this function is tagged with ![](https://dplyr.tidyverse.org/reference/figures/lifecycle-superseded.svg){style="width:115px!important;margin:0!important"} which basically means you can keep using it, but there's a new recommended alternative syntax.^[See this [page on lifecycles](https://lifecycle.r-lib.org/articles/stages.html).] For this function, the new recommendation is to use `across()` instead, but this is a bit outside our scope, so read at your own discretion.
+:::
+
+Of course you can also use `filter()` to inspect rows with missing values in some (or all) columns. Examples:
+
+
+``` r
+# get rows with missing x
+df.demo %>% filter(is.na(x))
+```
+
+```
+# A tibble: 1 × 4
+  date       x         y z    
+  <date>     <chr> <dbl> <lgl>
+1 2024-01-01 <NA>     NA NA   
+```
+
+``` r
+# get rows with missing x or y
+df.demo %>% filter(is.na(x) | is.na(y))
+```
+
+```
+# A tibble: 2 × 4
+  date       x         y z    
+  <date>     <chr> <dbl> <lgl>
+1 2024-01-01 <NA>     NA NA   
+2 2024-01-04 A        NA NA   
+```
+
+``` r
+# get rows where y is missing but x is NOT missing
+df.demo %>% filter(is.na(y) & !is.na(x))
+```
+
+```
+# A tibble: 1 × 4
+  date       x         y z    
+  <date>     <chr> <dbl> <lgl>
+1 2024-01-04 A        NA NA   
+```
+
+``` r
+# get rows where ANY variable is missing
+# this uses if_any() which checks if any given cols satisfy a condition
+df.demo %>% filter(if_any(everything(), is.na))
+```
+
+```
+# A tibble: 3 × 4
+  date       x         y z    
+  <date>     <chr> <dbl> <lgl>
+1 2024-01-01 <NA>     NA NA   
+2 2024-01-04 A        NA NA   
+3 2024-01-06 B         3 NA   
+```
+
+One more thing, did you notice there's actually another form of missingness in `df.demo`? This data frame appears to contain daily observations, but `"2024-01-05"` appears to be missing completely from the data frame. This sneaky situation of data missing by not existing in the data frame completely is surprisingly common and can sometimes be hard to identify (since there's no NAs in the date column to detect).
+
+One easy way to fix this is to use `complete()` and `full_seq()` from [tidyr](https://tidyr.tidyverse.org), yet another core Tidyverse package. This combination can be used to generate a `complete()` data frame by generating a `full_seq()`--uence of values for some specified column. Other columns are filled with NAs by default. Example:
+
+
+``` r
+# this generates a full sequence of dates
+# the argument 1 indicates the sequence increases by 1 each observation
+df.demo %>% complete(date = full_seq(date, 1))
+```
+
+```
+# A tibble: 6 × 4
+  date       x         y z    
+  <date>     <chr> <dbl> <lgl>
+1 2024-01-01 <NA>     NA NA   
+2 2024-01-02 A         1 TRUE 
+3 2024-01-03 B         2 FALSE
+4 2024-01-04 A        NA NA   
+5 2024-01-05 <NA>     NA NA   
+6 2024-01-06 B         3 NA   
+```
+
+``` r
+# to show ONLY rows that were added using this operation,
+# we can first create a dummy column filled with some value,
+# complete the data frame, then filter to where the dummy column is NA
+df.demo %>%
+  mutate(preexisting = TRUE) %>%
+  complete(date = full_seq(date, 1)) %>%
+  filter(is.na(preexisting))
+```
+
+```
+# A tibble: 1 × 5
+  date       x         y z     preexisting
+  <date>     <chr> <dbl> <lgl> <lgl>      
+1 2024-01-05 <NA>     NA NA    NA         
+```
+
+
+### Dropping NAs
+
+As mentioned before, for the limited scope of this class, usually rows with NAs can just be dropped for simplicity. The easiest way is to use `drop_na(col1, col2, ...)` where `col1`, `col2`, ... are the columns we care about dropping NAs in. If left empty, `drop_na()` will drop rows where ANY column contains NA. Examples:
+
+
+``` r
+# drop only rows where x is missing
+df.demo %>% drop_na(x)
+```
+
+```
+# A tibble: 4 × 4
+  date       x         y z    
+  <date>     <chr> <dbl> <lgl>
+1 2024-01-02 A         1 TRUE 
+2 2024-01-03 B         2 FALSE
+3 2024-01-04 A        NA NA   
+4 2024-01-06 B         3 NA   
+```
+
+``` r
+# drop rows where x and y are missing
+df.demo %>% drop_na(x, y)
+```
+
+```
+# A tibble: 3 × 4
+  date       x         y z    
+  <date>     <chr> <dbl> <lgl>
+1 2024-01-02 A         1 TRUE 
+2 2024-01-03 B         2 FALSE
+3 2024-01-06 B         3 NA   
+```
+
+``` r
+# drop rows where ANY values are missing
+df.demo %>% drop_na()
+```
+
+```
+# A tibble: 2 × 4
+  date       x         y z    
+  <date>     <chr> <dbl> <lgl>
+1 2024-01-02 A         1 TRUE 
+2 2024-01-03 B         2 FALSE
+```
+
+:::{.note}
+Make sure to **only drop NAs where absolutely necessary**; avoid over-dropping! E.g. suppose you want to use only `x` and `y` for your analysis. You should not drop rows where `z` is missing since it probably won't impede your work.
+
+This is another VERY common pitfall for students. In general you should be extremely "lazy" about dropping, i.e. only use `drop_na()` when and where it is absolutely necessary to do so.
+:::
+
+
+### Replacing NAs
+
+In some *rare* circumstances, it may be necessary to replace NAs with other values.
+
