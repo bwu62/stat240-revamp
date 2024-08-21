@@ -49,6 +49,11 @@ The [ggplot2 cheat sheet](https://rstudio.github.io/cheatsheets/data-visualizati
 The [dplyr cheat sheet](https://rstudio.github.io/cheatsheets/data-transformation.pdf) has a basic rundown of all common data frame transformation operations, grouped by type, along with brief but helpful examples and diagrams. It includes everything from subsetting rows and columns, adding/editing columns, summarizing data frames, grouping operations, joining/binding multiple data frames, etc.
 
 
+## tidyr
+
+The [tidyr cheat](https://rstudio.github.io/cheatsheets/tidyr.pdf) shows a summary of different data tidying operations, only some of which we cover in this class. Notably, we use some of the NA and reshaping operations. Feel free to read more on your own.
+
+
 
 <!--
 https://rstudio.github.io/cheatsheets/
