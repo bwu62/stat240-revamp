@@ -142,3 +142,100 @@ penguins %>%
   mutate(pct_of_all = n / sum(n))
 ```
 
+
+### More practice!
+
+Let's give the penguins dataset a rest and practice dplyr and grouping a bit more with a different dataset. The following chunk imports [`fertility.csv`](data/fertility.csv), the cleaned global fertility data set from [World Bank](https://data.worldbank.org/indicator/SP.DYN.TFRT.IN), giving the average number of births per woman for each year and country from 1960 to present. For the past few decades, global fertility has been [sharply declining](https://ourworldindata.org/un-population-2024-revision) for most countries. Many countries are now below the [replacement rate of 2.1](https://en.wikipedia.org/wiki/Sub-replacement_fertility), leading to widespread concerns of a population collapse in the latter part of the 21^st^ century.
+
+```{r,eval=F}
+fertility <- read_csv(
+  "https://bwu62.github.io/stat240-revamp/data/fertility.csv",
+  show_col_types = FALSE
+)
+fertility
+```
+```{r,echo=F}
+fertility <- read_csv("data/fertility.csv", show_col_types = FALSE)
+fertility
+```
+
+Each country has over 60 years of data in this dataset. We can see an overview which countries are represented in the dataset and what their listed region and income group are by temporarily dropping years, removing duplicates, and printing the full output below in a collapsible box:
+
+:::{.fold .o}
+```{r}
+fertility %>%
+  select(country:income_group) %>%
+  distinct() %>%
+  print(n = Inf)
+```
+:::
+
+One additional small processing step we should do before continuing is convert `income.group` to an ordered factor (see section \@ref(ordered-data)), which will be important later.
+
+```{r,tidy=F}
+fertility <- fertility %>% mutate(
+  income_group = factor(income_group, ordered = TRUE, levels = c(
+    "Low", "Lower middle", "Upper middle", "High"))
+)
+```
+
+
+We can begin by running a few summaries to explore the dataset. To start, here's a chunk showing the number of countries and median income group for countries in each region:
+
+```{r}
+# strangely, base R median doesn't work on ordered categories,
+# but we can use Median from DescTools instead
+fertility %>%
+  select(country, region, income_group) %>%
+  distinct() %>%
+  group_by(region) %>%
+  summarize(n = n(), median = DescTools::Median(income_group)) %>%
+  arrange(desc(median))
+```
+
+Next, here's a chunk showing the median fertility rate in each region for the most recent year of `r fertility %>% select(year) %>% max`, as well as the countries with the highest and lowest `r fertility %>% select(year) %>% max` rates (and what the rates are) in each region:
+
+```{r}
+# first filter to get the right year, then
+# sort by region, rate (so min, max are the first, last in each group)
+# then summarize to get median, and min/max country/rate
+fertility %>%
+  filter(year == max(year)) %>%
+  arrange(region, rate) %>%
+  group_by(region) %>%
+  summarize(
+    n           = n(),
+    median      = median(rate),
+    min_country = first(country),
+    min         = first(rate),
+    max_country = last(country),
+    max         = last(rate)
+  ) %>%
+  arrange(median)
+```
+
+We can also show the latest rate for each country, as well as the change from 2000, just before the start of the 21^st^ century:
+
+:::{.fold .o}
+```{r}
+# first filter to get the right years, then
+# sort by country, year (so 2000, 2022 are first and last in each group)
+# then summarize to get 2000 and 2022 rates, mutate to get change,
+# then ungroup, distinct, and arrange to display a neat output
+# again, collapsing output due to lengthy print out
+fertility %>%
+  filter(year %in% c(2000, max(year))) %>%
+  arrange(country, year) %>%
+  group_by(country) %>%
+  mutate(
+    rate2000 = first(rate),
+    rate2022 = last(rate),
+    change = rate2022 - rate2000
+  ) %>% 
+  select(country, region, rate2000, change, rate2022) %>% 
+  ungroup() %>% 
+  distinct() %>% 
+  arrange(rate2022) %>% 
+  print(n = Inf)
+```
+:::
