@@ -223,7 +223,8 @@ We can also show the latest rate for each country, as well as the change from 20
 # then summarize to get 2000 and 2022 rates, mutate to get change,
 # then ungroup, distinct, and arrange to display a neat output
 # again, collapsing output due to lengthy print out
-fertility %>%
+# %T>% is used again to both save and print the results
+fertility_change = fertility %>%
   filter(year %in% c(2000, max(year))) %>%
   arrange(country, year) %>%
   group_by(country) %>%
@@ -235,7 +236,14 @@ fertility %>%
   select(country, region, rate2000, change, rate2022) %>% 
   ungroup() %>% 
   distinct() %>% 
-  arrange(rate2022) %>% 
+  arrange(rate2022) %T>% 
   print(n = Inf)
 ```
 :::
+
+Which countries had the biggest drop in fertility?
+
+```{r}
+fertility_change %>% slice_min(change, n = 10)
+```
+
