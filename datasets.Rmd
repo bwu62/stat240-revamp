@@ -286,7 +286,7 @@ penguins
 ## College enrollment
 
 ```{r,eval=T}
-last.yy = tryCatch({
+last.yy <- tryCatch({
   rvest::read_html("https://nces.ed.gov/programs/digest/current_tables.asp") %>%
   rvest::html_nodes(xpath="//select[@name='quickjump']/option[2]/text()") %>% 
   as.character %>% as.numeric
@@ -300,7 +300,7 @@ I also briefly needed a nice time series dataset with more than 1 groups to demo
 ### Process data
 
 ```{r}
-enrollment = "https://nces.ed.gov/programs/digest/d{last.yy}/tables/dt{last.yy}_303.10.asp" %>% 
+enrollment <- "https://nces.ed.gov/programs/digest/d{last.yy}/tables/dt{last.yy}_303.10.asp" %>% 
   str_glue %>% 
   read_html %>% 
   html_nodes(xpath="//div[@class='nces']/table[1]") %>% 
@@ -331,7 +331,7 @@ write_csv(enrollment, file="data/enrollment.csv")
 ### Inspect data
 
 ```{r,eval=T,include=F}
-enrollment = read_csv("data/enrollment.csv")
+enrollment <- read_csv("data/enrollment.csv")
 ```
 
 ```{r,eval=T}
