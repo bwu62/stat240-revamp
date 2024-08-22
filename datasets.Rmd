@@ -359,6 +359,13 @@ skip = str_subset(list.files("temp/",full=T),"^temp/API_SP.DYN.TFRT") %>% read_l
 fertility.raw <- str_subset(list.files("temp/",full=T),"^temp/API_SP.DYN.TFRT") %>% read_csv(skip=skip)
 ```
 
+```{r,include=F}
+fertility.meta <- fertility.meta %>% mutate(
+  TableName = TableName %>% 
+    str_replace(" SAR, China.*", "")
+)
+```
+
 ### Write out raw data
 
 ```{r}
