@@ -1,11 +1,9 @@
-*.Rproj
 .Rproj.user
 .Rhistory
 .RData
 .Ruserdata
+_bookdown_files
+./*_files
+./*_cache
 *.rds
-*_files
-*_cache
-temp/
-!doc/
-!doc/**
+temp
