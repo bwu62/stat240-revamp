@@ -1497,5 +1497,3 @@ df.demo %>% mutate(w = na_if(w, -9999))
 4 2024-01-04 A        NA NA       30
 5 2024-01-06 B         3 NA       NA
 ```
-
-

@@ -194,6 +194,8 @@ Due to the slightly unusual nature of this syntax, there are a number of common 
     ℹ Did you accidentally put `+` on a new line?
     ```
 
+Don't forget if you have an incomplete `(` somewhere, or didn't finish a `+` statement, R will patiently wait for you by replacing the normal `>` prompt with a `+` prompt. Finish your line or hit [ESC]{.k} to quit.
+
 :::
 
 

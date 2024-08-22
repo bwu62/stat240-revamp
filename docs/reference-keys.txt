@@ -138,6 +138,8 @@ dropping-nas
 replacing-nas
 advanced-operations
 grouping
+regrouping
+ungrouping
 datasets
 datasets-list
 eruptions
@@ -152,6 +154,12 @@ college-enrollment
 process-data-1
 write-out-data-2
 inspect-data-2
+fertility-rate
+process-data-2
+write-out-raw-data
+process-more-tidy-version
+write-out-tidy-data
+inspect-data-3
 cheat-sheets
 rstudio-ide
 base-r

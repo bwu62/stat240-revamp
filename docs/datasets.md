@@ -29,6 +29,9 @@ Here's a convenient list of all dataset files generated. Note that **not ALL fil
  - [`eruptions_recent.delim`](data/eruptions_recent.delim)
  - [`eruptions_recent.tsv`](data/eruptions_recent.tsv)
  - [`eruptions_recent.xlsx`](data/eruptions_recent.xlsx)
+ - [`fertility.csv`](data/fertility.csv)
+ - [`fertility_meta.csv`](data/fertility_meta.csv)
+ - [`fertility_raw.csv`](data/fertility_raw.csv)
  - [`penguins.csv`](data/penguins.csv)
  - [`penguins_complete.csv`](data/penguins_complete.csv)
 
@@ -308,7 +311,7 @@ penguins
 
 
 ``` r
-last.yy = tryCatch({
+last.yy <- tryCatch({
   rvest::read_html("https://nces.ed.gov/programs/digest/current_tables.asp") %>%
   rvest::html_nodes(xpath="//select[@name='quickjump']/option[2]/text()") %>% 
   as.character %>% as.numeric
@@ -323,7 +326,7 @@ I also briefly needed a nice time series dataset with more than 1 groups to demo
 
 
 ``` r
-enrollment = "https://nces.ed.gov/programs/digest/d{last.yy}/tables/dt{last.yy}_303.10.asp" %>% 
+enrollment <- "https://nces.ed.gov/programs/digest/d{last.yy}/tables/dt{last.yy}_303.10.asp" %>% 
   str_glue %>% 
   read_html %>% 
   html_nodes(xpath="//div[@class='nces']/table[1]") %>% 
@@ -377,4 +380,80 @@ enrollment
 10  1951 female             0.711
 # ℹ 136 more rows
 ```
+
+
+
+## Fertility rate
+
+For the advanced data operations section I needed something that is suitable for demonstrating grouping, joining, and pivoting, and again hopefully interesting. I found the [World Bank fertility rate](https://data.worldbank.org/indicator/SP.DYN.TFRT.IN) dataset to be quite suitable for this purpose. This dataset will be presented in 2 ways, first a fully cleaned version for grouping, then a partially cleaned version for joining and pivoting.
+
+
+### Process data
+
+
+``` r
+if(!dir.exists("temp")) dir.create("temp")
+f <- "temp/fertility.zip"
+download.file("https://api.worldbank.org/v2/en/indicator/SP.DYN.TFRT.IN?downloadformat=csv",f,mode="wb")
+files = unzip(f, list=T)$Name %>% str_subset("Indicator",negate=T)
+unzip(f,files,exdir="temp/")
+fertility.meta <- str_subset(list.files("temp/",full=T),"^temp/Meta.*API_SP.DYN.TFRT") %>% read_csv
+skip = str_subset(list.files("temp/",full=T),"^temp/API_SP.DYN.TFRT") %>% read_lines %>% 
+  str_detect("Country Name") %>% which %>% min %>% subtract(1)
+fertility.raw <- str_subset(list.files("temp/",full=T),"^temp/API_SP.DYN.TFRT") %>% read_csv(skip=skip)
+```
+
+### Write out raw data
+
+
+``` r
+write_csv(fertility.meta, file="data/fertility_meta.csv")
+write_csv(fertility.raw, file="data/fertility_raw.csv")
+```
+
+
+
+### Process more <small>(tidy version)</small>
+
+
+``` r
+fertility.meta <- fertility.meta %>% filter(!is.na(IncomeGroup)) %>% 
+  rename(code = "Country Code", country = "TableName", region = "Region", income.group = "IncomeGroup") %>% 
+  select(code, country, region, income.group)
+
+fertility <- fertility.raw %>% select(where(\(x)mean(is.na(x))<1),-matches("Indicator|Name|^\\.\\.")) %>% 
+  rename(code = "Country Code") %>% inner_join(fertility.meta) %>%
+  pivot_longer(matches("^\\d+"),names_to="year",values_to="rate") %>% 
+  mutate(income.group = factor(str_replace(income.group," income",""),ordered = T, levels=c(
+    "Low", "Lower middle", "Upper middle", "High"))) %>% select(-code) %>% arrange(country,year)
+```
+
+
+``` r
+# # show pct NA for each country with NAs
+# fertility %>% group_by(country) %>% summarize(pctna = round(100*mean(is.na(rate)))) %>% filter(pctna>0) %>% arrange(-pctna)
+# # show all years for these countries to see pattern of NAs
+# fertility %>% group_by(country) %>% mutate(pctna = 100*mean(is.na(rate))) %>% ungroup %>% 
+#   filter(pctna>0) %>% arrange(-pctna) %>% pivot_wider(names_from = year,values_from = rate) %>% View
+
+# based on exploration, let's just drop the small number of countries with any NAs for simplicity
+fertility <- fertility %>% drop_na()
+```
+
+### Write out tidy data
+
+
+``` r
+write_csv(fertility, "data/fertility.csv")
+```
+
+
+
+### Inspect data
+
+
+``` r
+fertility
+```
+
 
