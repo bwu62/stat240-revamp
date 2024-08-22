@@ -465,7 +465,7 @@ penguins %>% arrange(
 
 ### Other row functions
 
-Besides these, there's a few other row operations that you may sometimes need, such as `distinct()` for removing duplicates or `add_row()` for manually adding new observations. Feel free to explore these on your own.
+Besides these, there's a few other row operations that you may sometimes need, such as `distinct()` for removing duplicates or `add_row()` for manually adding new observations. These may occasionally show up in later contexts, but for now please feel free to explore these on your own.
 
 
 
