@@ -137,8 +137,8 @@ You can remove the grouping structure with `ungroup()`. This allows you to rever
 # get count of each species + sex combination,
 # but this time get its percentage out of ALL observations
 penguins %>%
-  count(species, sex) %>% 
-  ungroup() %>% 
+  count(species, sex) %>%
+  ungroup() %>%
   mutate(pct_of_all = n / sum(n))
 ```
 
