@@ -336,7 +336,7 @@ penguins2 %>% summarize(
 )
 ```
 
-Again, I think it's important to stress **ANY expression involving columns that results in a single value** can be used inside `summarize()`. The [dplyr cheat sheet](https://rstudio.github.io/cheatsheets/data-transformation.pdf) has on page 2 some more examples of useful summarizing functions if you wish to read more.
+Again, I think it's important to stress **ANY expression involving columns that results in a single value** can be used inside `summarize()`. The [dplyr cheat sheet](https://rstudio.github.io/cheatsheets/data-transformation.pdf) has on page 2 some more examples of useful summarizing functions such as `first()`, `last()`, and `nth()` for getting the first, last, and n-th observations in a group respectively. Feel free to read more on your own.
 
 
 ## Row-wise functions
