@@ -1220,6 +1220,34 @@ c(min(state.name), max(state.name))
 
 
 
+### Bonus: ordered data {#ordered-data}
+
+Ordered categorical data (also called ordinals) is extremely common, so it's worth briefly mentioning here, even if it's considered mostly outside the scope of this course. If you have characters where a natural ordering is present, it's recommended to use `factor()` to convert it, setting `ordered = TRUE` and using `levels = c(...)` to specify the ordering of the levels in ascending order (low to high).
+
+For example, suppose you have the following data vector of dosage level data for some subjects:
+
+
+``` r
+doses <- c("Low", "High", "Medium", "Low", "High")
+```
+
+Naturally, this should be ordered Low < Medium < High but it currently has no ordering structure. We can fix it like this:
+
+
+``` r
+doses <- factor(doses, levels = c("Low", "Medium", "High"), ordered = TRUE)
+doses
+```
+
+```
+[1] Low    High   Medium Low    High  
+Levels: Low < Medium < High
+```
+
+You can see now it has an ordering structure and R understands how the levels compare to each other. This ordering will also be automatically respected in later plots and analysis, as you'll soon see.
+
+
+
 
 ## Coercion (converting types) {#coercion}
 
@@ -1641,7 +1669,7 @@ How does this work? It adds the line `invisible(Sys.setlocale("LC_TIME","C"))` t
 :::
 
 
-The first line in each output above is the actual output name. The list of "levels" on each second line just shows the set of all possible values that could have been outputted. This return object is actually something called an ["ordered factor"](https://r4ds.hadley.nz/factors) and is used for ordered categorical variables, but for our purposes can be treated as similar to a character/string vector. (If you want to do any string operations on the output, make sure to convert fully to character first with `as.character()`!)
+The first line in each output above is the actual output names. The list of "levels" on each second line just shows the set of all possible values that could have been outputted. This return object is another example of an ["ordered factor"](https://r4ds.hadley.nz/factors). For our purposes this can mostly be treated as similar to a character/string vector. (If you want to do any string operations on the output, make sure to convert fully to character first with `as.character()`!)
 
 These getters are extremely useful for both data cleaning as well as data visualization, since it can be much more pleasant to, for example, see a monthly breakdown as Jan, Feb, ..., Dec instead of 1, 2, ..., 12.
 

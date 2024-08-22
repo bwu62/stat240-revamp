@@ -1,4 +1,4 @@
-country,region,income.group,year,rate
+country,region,income_group,year,rate
 Afghanistan,South Asia,Low,1960,7.282
 Afghanistan,South Asia,Low,1961,7.284
 Afghanistan,South Asia,Low,1962,7.292
@@ -5208,69 +5208,69 @@ Honduras,Latin America & Caribbean,Lower middle,2019,2.427
 Honduras,Latin America & Caribbean,Lower middle,2020,2.394
 Honduras,Latin America & Caribbean,Lower middle,2021,2.363
 Honduras,Latin America & Caribbean,Lower middle,2022,2.34
-"Hong Kong SAR, China",East Asia & Pacific,High,1960,5.067
-"Hong Kong SAR, China",East Asia & Pacific,High,1961,5.168
-"Hong Kong SAR, China",East Asia & Pacific,High,1962,5.145
-"Hong Kong SAR, China",East Asia & Pacific,High,1963,5.089
-"Hong Kong SAR, China",East Asia & Pacific,High,1964,5.012
-"Hong Kong SAR, China",East Asia & Pacific,High,1965,4.92
-"Hong Kong SAR, China",East Asia & Pacific,High,1966,4.459
-"Hong Kong SAR, China",East Asia & Pacific,High,1967,4.043
-"Hong Kong SAR, China",East Asia & Pacific,High,1968,3.76
-"Hong Kong SAR, China",East Asia & Pacific,High,1969,3.716
-"Hong Kong SAR, China",East Asia & Pacific,High,1970,3.485
-"Hong Kong SAR, China",East Asia & Pacific,High,1971,3.459
-"Hong Kong SAR, China",East Asia & Pacific,High,1972,3.315
-"Hong Kong SAR, China",East Asia & Pacific,High,1973,3.177
-"Hong Kong SAR, China",East Asia & Pacific,High,1974,2.967
-"Hong Kong SAR, China",East Asia & Pacific,High,1975,2.666
-"Hong Kong SAR, China",East Asia & Pacific,High,1976,2.48
-"Hong Kong SAR, China",East Asia & Pacific,High,1977,2.376
-"Hong Kong SAR, China",East Asia & Pacific,High,1978,2.272
-"Hong Kong SAR, China",East Asia & Pacific,High,1979,2.12
-"Hong Kong SAR, China",East Asia & Pacific,High,1980,2.047
-"Hong Kong SAR, China",East Asia & Pacific,High,1981,1.933
-"Hong Kong SAR, China",East Asia & Pacific,High,1982,1.86
-"Hong Kong SAR, China",East Asia & Pacific,High,1983,1.722
-"Hong Kong SAR, China",East Asia & Pacific,High,1984,1.559
-"Hong Kong SAR, China",East Asia & Pacific,High,1985,1.491
-"Hong Kong SAR, China",East Asia & Pacific,High,1986,1.367
-"Hong Kong SAR, China",East Asia & Pacific,High,1987,1.311
-"Hong Kong SAR, China",East Asia & Pacific,High,1988,1.4
-"Hong Kong SAR, China",East Asia & Pacific,High,1989,1.296
-"Hong Kong SAR, China",East Asia & Pacific,High,1990,1.272
-"Hong Kong SAR, China",East Asia & Pacific,High,1991,1.281
-"Hong Kong SAR, China",East Asia & Pacific,High,1992,1.347
-"Hong Kong SAR, China",East Asia & Pacific,High,1993,1.342
-"Hong Kong SAR, China",East Asia & Pacific,High,1994,1.355
-"Hong Kong SAR, China",East Asia & Pacific,High,1995,1.295
-"Hong Kong SAR, China",East Asia & Pacific,High,1996,1.191
-"Hong Kong SAR, China",East Asia & Pacific,High,1997,1.127
-"Hong Kong SAR, China",East Asia & Pacific,High,1998,1.016
-"Hong Kong SAR, China",East Asia & Pacific,High,1999,0.981
-"Hong Kong SAR, China",East Asia & Pacific,High,2000,1.032
-"Hong Kong SAR, China",East Asia & Pacific,High,2001,0.931
-"Hong Kong SAR, China",East Asia & Pacific,High,2002,0.941
-"Hong Kong SAR, China",East Asia & Pacific,High,2003,0.901
-"Hong Kong SAR, China",East Asia & Pacific,High,2004,0.922
-"Hong Kong SAR, China",East Asia & Pacific,High,2005,0.959
-"Hong Kong SAR, China",East Asia & Pacific,High,2006,0.984
-"Hong Kong SAR, China",East Asia & Pacific,High,2007,1.028
-"Hong Kong SAR, China",East Asia & Pacific,High,2008,1.064
-"Hong Kong SAR, China",East Asia & Pacific,High,2009,1.055
-"Hong Kong SAR, China",East Asia & Pacific,High,2010,1.127
-"Hong Kong SAR, China",East Asia & Pacific,High,2011,1.204
-"Hong Kong SAR, China",East Asia & Pacific,High,2012,1.285
-"Hong Kong SAR, China",East Asia & Pacific,High,2013,1.125
-"Hong Kong SAR, China",East Asia & Pacific,High,2014,1.235
-"Hong Kong SAR, China",East Asia & Pacific,High,2015,1.196
-"Hong Kong SAR, China",East Asia & Pacific,High,2016,1.205
-"Hong Kong SAR, China",East Asia & Pacific,High,2017,1.128
-"Hong Kong SAR, China",East Asia & Pacific,High,2018,1.08
-"Hong Kong SAR, China",East Asia & Pacific,High,2019,1.064
-"Hong Kong SAR, China",East Asia & Pacific,High,2020,0.883
-"Hong Kong SAR, China",East Asia & Pacific,High,2021,0.772
-"Hong Kong SAR, China",East Asia & Pacific,High,2022,0.701
+Hong Kong,East Asia & Pacific,High,1960,5.067
+Hong Kong,East Asia & Pacific,High,1961,5.168
+Hong Kong,East Asia & Pacific,High,1962,5.145
+Hong Kong,East Asia & Pacific,High,1963,5.089
+Hong Kong,East Asia & Pacific,High,1964,5.012
+Hong Kong,East Asia & Pacific,High,1965,4.92
+Hong Kong,East Asia & Pacific,High,1966,4.459
+Hong Kong,East Asia & Pacific,High,1967,4.043
+Hong Kong,East Asia & Pacific,High,1968,3.76
+Hong Kong,East Asia & Pacific,High,1969,3.716
+Hong Kong,East Asia & Pacific,High,1970,3.485
+Hong Kong,East Asia & Pacific,High,1971,3.459
+Hong Kong,East Asia & Pacific,High,1972,3.315
+Hong Kong,East Asia & Pacific,High,1973,3.177
+Hong Kong,East Asia & Pacific,High,1974,2.967
+Hong Kong,East Asia & Pacific,High,1975,2.666
+Hong Kong,East Asia & Pacific,High,1976,2.48
+Hong Kong,East Asia & Pacific,High,1977,2.376
+Hong Kong,East Asia & Pacific,High,1978,2.272
+Hong Kong,East Asia & Pacific,High,1979,2.12
+Hong Kong,East Asia & Pacific,High,1980,2.047
+Hong Kong,East Asia & Pacific,High,1981,1.933
+Hong Kong,East Asia & Pacific,High,1982,1.86
+Hong Kong,East Asia & Pacific,High,1983,1.722
+Hong Kong,East Asia & Pacific,High,1984,1.559
+Hong Kong,East Asia & Pacific,High,1985,1.491
+Hong Kong,East Asia & Pacific,High,1986,1.367
+Hong Kong,East Asia & Pacific,High,1987,1.311
+Hong Kong,East Asia & Pacific,High,1988,1.4
+Hong Kong,East Asia & Pacific,High,1989,1.296
+Hong Kong,East Asia & Pacific,High,1990,1.272
+Hong Kong,East Asia & Pacific,High,1991,1.281
+Hong Kong,East Asia & Pacific,High,1992,1.347
+Hong Kong,East Asia & Pacific,High,1993,1.342
+Hong Kong,East Asia & Pacific,High,1994,1.355
+Hong Kong,East Asia & Pacific,High,1995,1.295
+Hong Kong,East Asia & Pacific,High,1996,1.191
+Hong Kong,East Asia & Pacific,High,1997,1.127
+Hong Kong,East Asia & Pacific,High,1998,1.016
+Hong Kong,East Asia & Pacific,High,1999,0.981
+Hong Kong,East Asia & Pacific,High,2000,1.032
+Hong Kong,East Asia & Pacific,High,2001,0.931
+Hong Kong,East Asia & Pacific,High,2002,0.941
+Hong Kong,East Asia & Pacific,High,2003,0.901
+Hong Kong,East Asia & Pacific,High,2004,0.922
+Hong Kong,East Asia & Pacific,High,2005,0.959
+Hong Kong,East Asia & Pacific,High,2006,0.984
+Hong Kong,East Asia & Pacific,High,2007,1.028
+Hong Kong,East Asia & Pacific,High,2008,1.064
+Hong Kong,East Asia & Pacific,High,2009,1.055
+Hong Kong,East Asia & Pacific,High,2010,1.127
+Hong Kong,East Asia & Pacific,High,2011,1.204
+Hong Kong,East Asia & Pacific,High,2012,1.285
+Hong Kong,East Asia & Pacific,High,2013,1.125
+Hong Kong,East Asia & Pacific,High,2014,1.235
+Hong Kong,East Asia & Pacific,High,2015,1.196
+Hong Kong,East Asia & Pacific,High,2016,1.205
+Hong Kong,East Asia & Pacific,High,2017,1.128
+Hong Kong,East Asia & Pacific,High,2018,1.08
+Hong Kong,East Asia & Pacific,High,2019,1.064
+Hong Kong,East Asia & Pacific,High,2020,0.883
+Hong Kong,East Asia & Pacific,High,2021,0.772
+Hong Kong,East Asia & Pacific,High,2022,0.701
 Hungary,Europe & Central Asia,High,1960,2.02
 Hungary,Europe & Central Asia,High,1961,1.94
 Hungary,Europe & Central Asia,High,1962,1.79
@@ -7119,69 +7119,69 @@ Luxembourg,Europe & Central Asia,High,2019,1.34
 Luxembourg,Europe & Central Asia,High,2020,1.36
 Luxembourg,Europe & Central Asia,High,2021,1.38
 Luxembourg,Europe & Central Asia,High,2022,1.31
-"Macao SAR, China",East Asia & Pacific,High,1960,4.933
-"Macao SAR, China",East Asia & Pacific,High,1961,4.731
-"Macao SAR, China",East Asia & Pacific,High,1962,4.533
-"Macao SAR, China",East Asia & Pacific,High,1963,4.393
-"Macao SAR, China",East Asia & Pacific,High,1964,4.16
-"Macao SAR, China",East Asia & Pacific,High,1965,3.838
-"Macao SAR, China",East Asia & Pacific,High,1966,3.473
-"Macao SAR, China",East Asia & Pacific,High,1967,3.086
-"Macao SAR, China",East Asia & Pacific,High,1968,2.677
-"Macao SAR, China",East Asia & Pacific,High,1969,2.349
-"Macao SAR, China",East Asia & Pacific,High,1970,2.095
-"Macao SAR, China",East Asia & Pacific,High,1971,1.961
-"Macao SAR, China",East Asia & Pacific,High,1972,1.866
-"Macao SAR, China",East Asia & Pacific,High,1973,1.772
-"Macao SAR, China",East Asia & Pacific,High,1974,1.685
-"Macao SAR, China",East Asia & Pacific,High,1975,1.597
-"Macao SAR, China",East Asia & Pacific,High,1976,1.542
-"Macao SAR, China",East Asia & Pacific,High,1977,1.536
-"Macao SAR, China",East Asia & Pacific,High,1978,1.561
-"Macao SAR, China",East Asia & Pacific,High,1979,1.664
-"Macao SAR, China",East Asia & Pacific,High,1980,1.782
-"Macao SAR, China",East Asia & Pacific,High,1981,1.874
-"Macao SAR, China",East Asia & Pacific,High,1982,1.964
-"Macao SAR, China",East Asia & Pacific,High,1983,2.036
-"Macao SAR, China",East Asia & Pacific,High,1984,2.074
-"Macao SAR, China",East Asia & Pacific,High,1985,2.101
-"Macao SAR, China",East Asia & Pacific,High,1986,2.041
-"Macao SAR, China",East Asia & Pacific,High,1987,1.943
-"Macao SAR, China",East Asia & Pacific,High,1988,1.838
-"Macao SAR, China",East Asia & Pacific,High,1989,1.814
-"Macao SAR, China",East Asia & Pacific,High,1990,1.74
-"Macao SAR, China",East Asia & Pacific,High,1991,1.638
-"Macao SAR, China",East Asia & Pacific,High,1992,1.567
-"Macao SAR, China",East Asia & Pacific,High,1993,1.48
-"Macao SAR, China",East Asia & Pacific,High,1994,1.42
-"Macao SAR, China",East Asia & Pacific,High,1995,1.341
-"Macao SAR, China",East Asia & Pacific,High,1996,1.254
-"Macao SAR, China",East Asia & Pacific,High,1997,1.163
-"Macao SAR, China",East Asia & Pacific,High,1998,1.073
-"Macao SAR, China",East Asia & Pacific,High,1999,0.991
-"Macao SAR, China",East Asia & Pacific,High,2000,0.912
-"Macao SAR, China",East Asia & Pacific,High,2001,0.84
-"Macao SAR, China",East Asia & Pacific,High,2002,0.8
-"Macao SAR, China",East Asia & Pacific,High,2003,0.792
-"Macao SAR, China",East Asia & Pacific,High,2004,0.8
-"Macao SAR, China",East Asia & Pacific,High,2005,0.834
-"Macao SAR, China",East Asia & Pacific,High,2006,0.874
-"Macao SAR, China",East Asia & Pacific,High,2007,0.918
-"Macao SAR, China",East Asia & Pacific,High,2008,0.947
-"Macao SAR, China",East Asia & Pacific,High,2009,0.986
-"Macao SAR, China",East Asia & Pacific,High,2010,1.042
-"Macao SAR, China",East Asia & Pacific,High,2011,1.115
-"Macao SAR, China",East Asia & Pacific,High,2012,1.184
-"Macao SAR, China",East Asia & Pacific,High,2013,1.199
-"Macao SAR, China",East Asia & Pacific,High,2014,1.224
-"Macao SAR, China",East Asia & Pacific,High,2015,1.196
-"Macao SAR, China",East Asia & Pacific,High,2016,1.175
-"Macao SAR, China",East Asia & Pacific,High,2017,1.123
-"Macao SAR, China",East Asia & Pacific,High,2018,1.104
-"Macao SAR, China",East Asia & Pacific,High,2019,1.077
-"Macao SAR, China",East Asia & Pacific,High,2020,1.072
-"Macao SAR, China",East Asia & Pacific,High,2021,1.088
-"Macao SAR, China",East Asia & Pacific,High,2022,1.109
+Macao,East Asia & Pacific,High,1960,4.933
+Macao,East Asia & Pacific,High,1961,4.731
+Macao,East Asia & Pacific,High,1962,4.533
+Macao,East Asia & Pacific,High,1963,4.393
+Macao,East Asia & Pacific,High,1964,4.16
+Macao,East Asia & Pacific,High,1965,3.838
+Macao,East Asia & Pacific,High,1966,3.473
+Macao,East Asia & Pacific,High,1967,3.086
+Macao,East Asia & Pacific,High,1968,2.677
+Macao,East Asia & Pacific,High,1969,2.349
+Macao,East Asia & Pacific,High,1970,2.095
+Macao,East Asia & Pacific,High,1971,1.961
+Macao,East Asia & Pacific,High,1972,1.866
+Macao,East Asia & Pacific,High,1973,1.772
+Macao,East Asia & Pacific,High,1974,1.685
+Macao,East Asia & Pacific,High,1975,1.597
+Macao,East Asia & Pacific,High,1976,1.542
+Macao,East Asia & Pacific,High,1977,1.536
+Macao,East Asia & Pacific,High,1978,1.561
+Macao,East Asia & Pacific,High,1979,1.664
+Macao,East Asia & Pacific,High,1980,1.782
+Macao,East Asia & Pacific,High,1981,1.874
+Macao,East Asia & Pacific,High,1982,1.964
+Macao,East Asia & Pacific,High,1983,2.036
+Macao,East Asia & Pacific,High,1984,2.074
+Macao,East Asia & Pacific,High,1985,2.101
+Macao,East Asia & Pacific,High,1986,2.041
+Macao,East Asia & Pacific,High,1987,1.943
+Macao,East Asia & Pacific,High,1988,1.838
+Macao,East Asia & Pacific,High,1989,1.814
+Macao,East Asia & Pacific,High,1990,1.74
+Macao,East Asia & Pacific,High,1991,1.638
+Macao,East Asia & Pacific,High,1992,1.567
+Macao,East Asia & Pacific,High,1993,1.48
+Macao,East Asia & Pacific,High,1994,1.42
+Macao,East Asia & Pacific,High,1995,1.341
+Macao,East Asia & Pacific,High,1996,1.254
+Macao,East Asia & Pacific,High,1997,1.163
+Macao,East Asia & Pacific,High,1998,1.073
+Macao,East Asia & Pacific,High,1999,0.991
+Macao,East Asia & Pacific,High,2000,0.912
+Macao,East Asia & Pacific,High,2001,0.84
+Macao,East Asia & Pacific,High,2002,0.8
+Macao,East Asia & Pacific,High,2003,0.792
+Macao,East Asia & Pacific,High,2004,0.8
+Macao,East Asia & Pacific,High,2005,0.834
+Macao,East Asia & Pacific,High,2006,0.874
+Macao,East Asia & Pacific,High,2007,0.918
+Macao,East Asia & Pacific,High,2008,0.947
+Macao,East Asia & Pacific,High,2009,0.986
+Macao,East Asia & Pacific,High,2010,1.042
+Macao,East Asia & Pacific,High,2011,1.115
+Macao,East Asia & Pacific,High,2012,1.184
+Macao,East Asia & Pacific,High,2013,1.199
+Macao,East Asia & Pacific,High,2014,1.224
+Macao,East Asia & Pacific,High,2015,1.196
+Macao,East Asia & Pacific,High,2016,1.175
+Macao,East Asia & Pacific,High,2017,1.123
+Macao,East Asia & Pacific,High,2018,1.104
+Macao,East Asia & Pacific,High,2019,1.077
+Macao,East Asia & Pacific,High,2020,1.072
+Macao,East Asia & Pacific,High,2021,1.088
+Macao,East Asia & Pacific,High,2022,1.109
 Madagascar,Sub-Saharan Africa,Low,1960,7.3
 Madagascar,Sub-Saharan Africa,Low,1961,7.301
 Madagascar,Sub-Saharan Africa,Low,1962,7.303

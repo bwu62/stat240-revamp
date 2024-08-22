@@ -403,6 +403,8 @@ skip = str_subset(list.files("temp/",full=T),"^temp/API_SP.DYN.TFRT") %>% read_l
 fertility.raw <- str_subset(list.files("temp/",full=T),"^temp/API_SP.DYN.TFRT") %>% read_csv(skip=skip)
 ```
 
+
+
 ### Write out raw data
 
 
@@ -418,13 +420,13 @@ write_csv(fertility.raw, file="data/fertility_raw.csv")
 
 ``` r
 fertility.meta <- fertility.meta %>% filter(!is.na(IncomeGroup)) %>% 
-  rename(code = "Country Code", country = "TableName", region = "Region", income.group = "IncomeGroup") %>% 
-  select(code, country, region, income.group)
+  rename(code = "Country Code", country = "TableName", region = "Region", income_group = "IncomeGroup") %>% 
+  select(code, country, region, income_group)
 
 fertility <- fertility.raw %>% select(where(\(x)mean(is.na(x))<1),-matches("Indicator|Name|^\\.\\.")) %>% 
   rename(code = "Country Code") %>% inner_join(fertility.meta) %>%
   pivot_longer(matches("^\\d+"),names_to="year",values_to="rate") %>% 
-  mutate(income.group = factor(str_replace(income.group," income",""),ordered = T, levels=c(
+  mutate(income_group = factor(str_replace(income_group," income",""),ordered = T, levels=c(
     "Low", "Lower middle", "Upper middle", "High"))) %>% select(-code) %>% arrange(country,year)
 ```
 

@@ -11,7 +11,10 @@
 library(tidyverse)
 # optional: change default print to 5 rows to save vertical space
 options(pillar.print_min = 5)
+# optional: change default ggplot theme options (personal preference)
+source("https://bwu62.github.io/stat240-revamp/ggplot_theme_options.R")
 ```
+
 
 
 ## Syntax design
@@ -723,7 +726,7 @@ penguins2 %>% summarize(
 1   333        44.0      5.47       17.2     1.97 43.41,44.58  16.95,17.38
 ```
 
-Again, I think it's important to stress **ANY expression involving columns that results in a single value** can be used inside `summarize()`. The [dplyr cheat sheet](https://rstudio.github.io/cheatsheets/data-transformation.pdf) has on page 2 some more examples of useful summarizing functions if you wish to read more.
+Again, I think it's important to stress **ANY expression involving columns that results in a single value** can be used inside `summarize()`. The [dplyr cheat sheet](https://rstudio.github.io/cheatsheets/data-transformation.pdf) has on page 2 some more examples of useful summarizing functions such as `first()`, `last()`, and `nth()` for getting the first, last, and n-th observations in a group respectively. Feel free to read more on your own.
 
 
 ## Row-wise functions
@@ -825,7 +828,7 @@ penguins %>%
   coord_fixed(.0067) # make the plot window a square
 ```
 
-<img src="07-intro-dplyr_files/figure-html/unnamed-chunk-16-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="07-intro-dplyr_files/figure-html/unnamed-chunk-17-1.svg" width="672" style="display: block; margin: auto;" />
 
 
 ### `slice()`
@@ -1098,7 +1101,7 @@ penguins %>% arrange(
 
 ### Other row functions
 
-Besides these, there's a few other row operations that you may sometimes need, such as `distinct()` for removing duplicates or `add_row()` for manually adding new observations. Feel free to explore these on your own.
+Besides these, there's a few other row operations that you may sometimes need, such as `distinct()` for removing duplicates or `add_row()` for manually adding new observations. These may occasionally show up in later contexts, but for now please feel free to explore these on your own.
 
 
 

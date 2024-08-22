@@ -49,6 +49,7 @@ basic-string-functions
 pattern-string-functions
 additional-stringr-functions
 comparing-strings
+ordered-data
 coercion
 date-vectors
 parsing-dates
@@ -140,6 +141,7 @@ advanced-operations
 grouping
 regrouping
 ungrouping
+more-practice
 datasets
 datasets-list
 eruptions
