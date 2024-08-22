@@ -404,6 +404,37 @@ fertility.raw <- str_subset(list.files("temp/",full=T),"^temp/API_SP.DYN.TFRT") 
 ```
 
 
+``` r
+# simplify/shorten some names for convenience
+fertility.meta <- fertility.meta %>% mutate(
+  TableName = TableName %>% 
+    str_replace_all(c(
+      " and the " = " & ",
+      " and " = " & ",
+      ", The" = "",
+      "SAR, China" = "",
+      "Korea, Rep." = "South Korea",
+      "British Virgin Islands" = "Virgin Islands",
+      "Russian Federation" = "Russia",
+      " \\(.*" = "",
+      "Slovak Republic" = "Slovakia",
+      "Iran, Islamic Rep." = "Iran",
+      "Brunei Darussalam" = "Brunei",
+      "Korea, Dem. People's Rep." = "North Korea",
+      "Cabo Verde" = "Cape Verde",
+      "Türkiye" = "Turkey",
+      "Viet Nam" = "Vietnam",
+      "Lao PDR" = "Laos",
+      "Micronesia, Fed. Sts." = "Micronesia",
+      "Syrian Arab Republic" = "Syria",
+      "Kyrgyz Republic" = "Kyrgyzstan",
+      "Egypt, Arab Rep." = "Egypt",
+      "Timor-Leste" = "East Timor",
+      "Yemen, Rep." = "Yemen",
+      "Côte d'Ivoire" = "Ivory Coast"
+    ))
+)
+```
 
 ### Write out raw data
 
