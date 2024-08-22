@@ -11,5 +11,132 @@ Often, you will need to apply dplyr's various operations like `mutate()`, `summa
 
 By default, data frames are not grouped when created or imported. You can create a grouping structure with the `group_by()` function. The basic syntax is `df %>% group_by(col1, col2, ...)` where `col1`, `col2`, ... are variables whose values are used to determine groups. You can group by just 1 variable, 2 variables, or as many variables as needed. **Rows with the same values in the chosen columns will be grouped together**.
 
+After grouping, operations that normally run across all rows **now run across each group**. Here's a few simple examples using the familiar penguins dataset to start:
 
+```{r,eval=F}
+# import tidyverse and load dataset
+library(tidyverse)
+penguins <- read_csv(
+  "https://bwu62.github.io/stat240-revamp/data/penguins_complete.csv",
+  show_col_types = FALSE
+)
+```
+```{r,echo=F}
+library(tidyverse)
+penguins <- read_csv("data/penguins_complete.csv", show_col_types = FALSE)
+```
+
+```{r}
+# group by species and get mean/median/sd body mass + sample size of each group
+penguins %>%
+  group_by(species) %>%
+  summarize(
+    mean_mass   = mean(body_mass_g),
+    median_mass = median(body_mass_g),
+    sd_mass     = sd(body_mass_g),
+    n           = n()
+  )
+# we can also group by multiple, e.g. group by spcies + sex
+penguins %>%
+  group_by(species, sex) %>%
+  summarize(
+    mean_mass   = mean(body_mass_g),
+    median_mass = median(body_mass_g),
+    sd_mass     = sd(body_mass_g),
+    n           = n()
+  )
+```
+
+:::{.fold .o}
+```{r}
+# we can of course also mutate within groups
+# e.g. convert bill length in mm to number of SDs
+#      away from species group mean
+# to better show the result, I'm forcing it to print all rows in order
+# but hiding the output in a collapsible box for style
+penguins %>%
+  select(species, sex, bill_length_mm) %>%
+  group_by(species) %>%
+  mutate(
+    n = n(),
+    bill_length_std = (bill_length_mm - mean(bill_length_mm)) / sd(bill_length_mm)
+  ) %>%
+  arrange(species, bill_length_std) %>%
+  print(n = Inf)
+```
+:::
+
+```{r}
+# get the largest 3 penguins by bill depth from each species
+penguins %>%
+  group_by(species) %>%
+  slice_max(bill_depth_mm, n = 3)
+```
+
+
+### Regrouping
+
+Sometimes one `group_by()` may not be enough to get what you need; you may need to re-`group_by()` by something else to finish the job. For example, suppose you want to see what percent of each species came from different islands. This requires two uses of `group_by()`:
+
+```{r}
+# first group by species + island and summarize to get size of each group,
+# then regroup by species and MUTATE (not summarize) totals for each species,
+# then divide these to get proportion of each species from each island
+penguins %>%
+  group_by(species, island) %>%
+  summarize(n = n()) %>%
+  group_by(species) %>%
+  mutate(
+    species_total = sum(n),
+    pct_of_species_from_island = n / species_total * 100
+  )
+```
+
+This combination of `df %>% group_by(...) %>% summarize(n = n())` is so common, we have this shortcut for it: `df %>% count(...)`. We can demonstrate this in another example involving regrouping. Suppose we want to know what percent of each species were male/female:
+
+```{r}
+# again, first group by species + sex and get size using the shortcut count(),
+# then regroup by species and MUTATE totals for each species,
+# then divide to get proportions of each species that were male/female
+penguins %>%
+  count(species, sex) %>%
+  group_by(species) %>%
+  mutate(
+    species_total = sum(n),
+    pct_of_species_each_sex = n / species_total * 100
+  )
+```
+
+Groups are also useful for prepping data frames for plotting. For example, here's a chunk that produces a bar plot showing how mean body mass changes by species and sex:
+
+```{r,tidy=F}
+# get mean body mass by species + sex and plot
+# the %T>% is a special pipe called a Tee pipe
+# it's a shortcut for piping something into 2 different operations,
+# useful for example when you want to print a data frame, then also plot it
+# see https://magrittr.tidyverse.org/reference/tee.html for more
+penguins %>% 
+  group_by(species, sex) %>% 
+  summarize(mean_mass = mean(body_mass_g)) %T>% print %>% 
+  ggplot(aes(x = species, y = mean_mass, fill = sex)) +
+  geom_col(position = "dodge2") +
+  labs(x = "Species", y = "Mean body mass (g)",
+       title = "Mean body mass of Palmer penguins by species + sex")
+```
+
+
+### Ungrouping
+
+Many operations output grouped data frames. For example, look closely at the output of the previous chunks and you'll see `# Groups:   species [3]` in most of them. This means any further operations you run will continue to execute in a grouped way.
+
+You can remove the grouping structure with `ungroup()`. This allows you to revert to running operations on the entire data frame. Example:
+
+```{r}
+# get count of each species + sex combination,
+# but this time get its percentage out of ALL observations
+penguins %>%
+  count(species, sex) %>% 
+  ungroup() %>% 
+  mutate(pct_of_all = n / sum(n))
+```
 
