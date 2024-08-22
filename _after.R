@@ -17,7 +17,8 @@ copy.list = c(
   "demo.html",
   "data/",
   "data_list.txt",
-  "icons/"
+  "icons/",
+  "ggplot_theme_options.R"
 )
 
 # iterate over copy list
