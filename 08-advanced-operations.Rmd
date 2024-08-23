@@ -257,17 +257,17 @@ How many countries are now above vs below replacement rate? We can do this by gr
 
 ```{r}
 # group by a new column called at_replacement indicating rate>=2.1
-fertility %>% 
-  group_by(at_replacement = rate >= 2.1) %>% 
-  summarize(n = n()) %>% 
+fertility %>%
+  group_by(at_replacement = rate >= 2.1) %>%
+  summarize(n = n()) %>%
   mutate(pct = 100 * n / sum(n))
 # we can repeat this grouping by region, this time using count()
 # and just showing the percentage of countries at replacement
-fertility %>% 
-  count(region, at_replacement = rate >= 2.1) %>% 
-  mutate(pct_at_rep = 100 * n / sum(n)) %>% 
-  filter(at_replacement) %>% 
-  select(-n, -at_replacement) %>% 
+fertility %>%
+  count(region, at_replacement = rate >= 2.1) %>%
+  mutate(pct_at_rep = 100 * n / sum(n)) %>%
+  filter(at_replacement) %>%
+  select(-n, -at_replacement) %>%
   arrange(-pct_at_rep)
 ```
 
