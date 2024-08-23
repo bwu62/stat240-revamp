@@ -432,3 +432,22 @@ When joining, R will automatically look for columns with the same name to use as
 
 Let's see a real example of joins in action.
 
+
+### Example: cleaning `fertility`
+
+The World Bank fertility data set we used earlier obviously didn't start out perfectly clean and tidy. When you download the CSV file from the [data page](https://data.worldbank.org/indicator/SP.DYN.TFRT.IN) it comes as a zip of the following two (renamed) files: [`fertility_meta.csv`](data/fertility_meta.csv) and [`fertility_raw.csv`](data/fertility_raw.csv). One of them contains metadata on each country, while the other contains the actual annual rates.
+
+```{r,eval=F,tidy=F}
+fertility_meta <- read_csv(
+  "https://bwu62.github.io/stat240-revamp/data/fertility_meta.csv")
+fertility_raw <- read_csv(
+  "https://bwu62.github.io/stat240-revamp/data/fertility_raw.csv")
+```
+```{r,echo=F,tidy=F}
+fertility_meta <- read_csv(
+  "https://bwu62.github.io/stat240-revamp/data/fertility_meta.csv")
+fertility_raw <- read_csv(
+  "https://bwu62.github.io/stat240-revamp/data/fertility_raw.csv")
+```
+
+
