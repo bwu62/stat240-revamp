@@ -224,7 +224,7 @@ We can also show the latest rate for each country, as well as the change from 20
 # then ungroup, distinct, and arrange to display a neat output
 # again, collapsing output due to lengthy print out
 # %T>% is used again to both save and print the results
-fertility_change = fertility %>%
+fertility_change <- fertility %>%
   filter(year %in% c(2000, max(year))) %>%
   arrange(country, year) %>%
   group_by(country) %>%
@@ -232,11 +232,11 @@ fertility_change = fertility %>%
     rate2000 = first(rate),
     rate2022 = last(rate),
     change = rate2022 - rate2000
-  ) %>% 
-  select(country, region, rate2000, change, rate2022) %>% 
-  ungroup() %>% 
-  distinct() %>% 
-  arrange(rate2022) %T>% 
+  ) %>%
+  select(country, region, rate2000, change, rate2022) %>%
+  ungroup() %>%
+  distinct() %>%
+  arrange(rate2022) %T>%
   print(n = Inf)
 ```
 :::
