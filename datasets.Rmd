@@ -424,7 +424,7 @@ fertility <- fertility.raw %>% select(where(\(x)mean(is.na(x))<1),-matches("Indi
 # fertility %>% group_by(country) %>% mutate(pctna = 100*mean(is.na(rate))) %>% ungroup %>% 
 #   filter(pctna>0) %>% arrange(-pctna) %>% pivot_wider(names_from = year,values_from = rate) %>% View
 
-# based on exploration, let's just drop the small number of countries with any NAs for simplicity
+# based on exploration, let's just drop the small number of country/year combos with NAs for simplicity
 fertility <- fertility %>% drop_na()
 ```
 
