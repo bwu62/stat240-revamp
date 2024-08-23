@@ -25,6 +25,9 @@ Let's first import the necessary packages. We will need both `readr` and `ggplot
 # if you need to, reimport all core tidyverse packages
 library(tidyverse)
 
+# optional: disable showing col_types by default in readr import functions
+options(readr.show_col_types = FALSE)
+
 # optional: set a prettier theme and colorblind-friendly palette for plots
 #           (also looks better if printed with most printers, even in b/w)
 theme_set(theme_bw())
@@ -49,17 +52,14 @@ To properly demonstrate some of these plots, we need a slightly more feature-ric
 ```{r,eval=F}
 # load in the penguins dataset
 # (note: a few rows with NAs have been removed for simplicity)
-penguins <- read_csv(
-  "https://bwu62.github.io/stat240-revamp/data/penguins.csv",
-  show_col_types = FALSE
-)
+penguins <- read_csv("https://bwu62.github.io/stat240-revamp/data/penguins.csv")
 # print the first few rows of the data frame to check;
 # this data frame is now too wide for our screen,
 # you can see some columns are cut off
 print(penguins, n = 5)
 ```
 ```{r,echo=F}
-penguins <- read_csv("data/penguins.csv",show_col_types = FALSE)
+penguins <- read_csv("data/penguins.csv")
 print(penguins, n = 5)
 ```
 
@@ -511,15 +511,12 @@ For some specific datasets, especially chronological datasets where some variabl
 Unfortunately, the Palmer penguins dataset isn't the best example for this last plot type, so I'm temporarily borrowing another dataset for this example. The chunk below imports [`enrollment.csv`](https://bwu62.github.io/stat240-revamp/data/enrollment.csv) which contains historic U.S. college enrollment data by each sex.
 
 ```{r,eval=F}
-enrollment <- read_csv(
-  "https://bwu62.github.io/stat240-revamp/data/enrollment.csv",
-  show_col_types = FALSE
-)
+enrollment <- read_csv("https://bwu62.github.io/stat240-revamp/data/enrollment.csv")
 # show a glimpse of the dataset
 glimpse(enrollment)
 ```
 ```{r,echo=F}
-enrollment <- read_csv("data/enrollment.csv",show_col_types = FALSE)
+enrollment <- read_csv("data/enrollment.csv")
 glimpse(enrollment)
 ```
 
@@ -582,10 +579,7 @@ Compared to line plots with one line per category, the stacked area plot has the
 Note the previous example used just the year number on the horizontal axis (since the data was already summarized as annual totals) but you can of course also use dates on an axis. For a quick example, we can load the [FRED U.S. unemployment rate](https://fred.stlouisfed.org/series/UNRATE) dataset and plot it.
 
 ```{r,tidy=F}
-unemployment <- read_csv(
-  "https://fred.stlouisfed.org/graph/fredgraph.csv?id=UNRATE",
-  show_col_types = FALSE
-)
+unemployment <- read_csv("https://fred.stlouisfed.org/graph/fredgraph.csv?id=UNRATE")
 glimpse(unemployment)
 ggplot(unemployment, aes(x = DATE, y = UNRATE)) + geom_line() +
   labs(x = "Time", y = "Unemployment rate (%)",

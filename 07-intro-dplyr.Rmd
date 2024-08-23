@@ -8,8 +8,9 @@
 ```{r,eval=F}
 # import all core tidyverse packages
 library(tidyverse)
-# optional: change default print to 5 rows to save vertical space
-options(pillar.print_min = 5)
+# optional: change default print to 5 rows to save vertical space, and
+#           disable showing col_types by default in readr import functions
+options(pillar.print_min = 5, readr.show_col_types = FALSE)
 # optional: change default ggplot theme options (personal preference)
 source("https://bwu62.github.io/stat240-revamp/ggplot_theme_options.R")
 ```
@@ -79,16 +80,13 @@ For now, we're going to continue using the Palmer penguins dataset [`penguins.cs
 
 ```{r,eval=F}
 # load in the familiar penguins dataset
-penguins <- read_csv(
-  "https://bwu62.github.io/stat240-revamp/data/penguins.csv",
-  show_col_types = FALSE
-)
+penguins <- read_csv("https://bwu62.github.io/stat240-revamp/data/penguins.csv")
 # print the first few rows of the data frame to check
 # again this data frame is too wide, and some columns are cut off
 print(penguins, n = 5)
 ```
 ```{r,echo=F}
-penguins <- read_csv("data/penguins.csv", show_col_types = FALSE)
+penguins <- read_csv("data/penguins.csv")
 print(penguins, n = 5)
 ```
 
@@ -163,8 +161,14 @@ print(penguins_fewcols)
 # because it's destructive and often causes problems later
 penguins <- penguins %>% select(species, flipper_length_mm)
 print(penguins)
+```
+```{r,eval=F}
 # reload data frame since we need it for other examples
-penguins <- read_csv("data/penguins.csv", show_col_types = FALSE)
+penguins <- read_csv("https://bwu62.github.io/stat240-revamp/data/penguins.csv")
+```
+```{r,echo=F}
+# reload data frame since we need it for other examples
+penguins <- read_csv("data/penguins.csv")
 ```
 
 **This note applies to all functions on this page**, i.e. all of them do NOT modify the input, so desired **changes must always be manually saved**!
