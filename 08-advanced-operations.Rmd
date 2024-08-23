@@ -253,6 +253,23 @@ Did any countries have actually increased?
 fertility_change %>% slice_max(change, n = 10)
 ```
 
+How many countries are now above vs below replacement rate? We can do this by grouping by if the rate is at least 2.1---did I mention you can use transformations inside `group_by()` as well?
+
+```{r}
+# group by a new column called at_replacement indicating rate>=2.1
+fertility %>% 
+  count(at_replacement = rate >= 2.1) %>% 
+  mutate(pct = 100 * n / sum(n))
+# we can repeat this grouping by region, this time
+# just showing the percentage of countries at replacement
+fertility %>% 
+  count(region, at_replacement = rate >= 2.1) %>% 
+  mutate(pct_at_rep = 100 * n / sum(n)) %>% 
+  filter(at_replacement) %>% 
+  select(-n, -at_replacement) %>% 
+  arrange(-pct_at_rep)
+```
+
 Let's make a few plots of the data as well. Here are 2 plots showing median fertility rate over time grouping by either region or income level:
 
 :::{.i96}
