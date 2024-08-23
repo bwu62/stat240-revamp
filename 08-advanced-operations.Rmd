@@ -435,7 +435,7 @@ Let's see a real example of joins in action.
 
 ### Example: cleaning `fertility`
 
-The World Bank fertility data set we used earlier obviously didn't start out perfectly clean and tidy. When you download the CSV file from the [data page](https://data.worldbank.org/indicator/SP.DYN.TFRT.IN) it comes as a zip of the following two (renamed) files: [`fertility_meta.csv`](data/fertility_meta.csv) and [`fertility_raw.csv`](data/fertility_raw.csv). One of them contains metadata on each country, while the other contains the actual annual rates.
+The World Bank fertility data set we used earlier obviously didn't start out perfectly clean and tidy. When you download the CSV file from the [data page](https://data.worldbank.org/indicator/SP.DYN.TFRT.IN) it comes as a zip of the following two (renamed) files: [`fertility_meta.csv`](data/fertility_meta.csv) and [`fertility_raw.csv`](data/fertility_raw.csv). One of them contains metadata for each country, while the other contains the actual annual fertility rates.
 
 ```{r,eval=F,tidy=F}
 fertility_meta <- read_csv(
