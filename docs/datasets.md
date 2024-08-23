@@ -413,16 +413,16 @@ f <- "temp/fertility.zip"
 download.file("https://api.worldbank.org/v2/en/indicator/SP.DYN.TFRT.IN?downloadformat=csv",f,mode="wb")
 files = unzip(f, list=T)$Name %>% str_subset("Indicator",negate=T)
 unzip(f,files,exdir="temp/")
-fertility.meta <- str_subset(list.files("temp/",full=T),"^temp/Meta.*API_SP.DYN.TFRT") %>% read_csv
+fertility_meta <- str_subset(list.files("temp/",full=T),"^temp/Meta.*API_SP.DYN.TFRT") %>% read_csv
 skip = str_subset(list.files("temp/",full=T),"^temp/API_SP.DYN.TFRT") %>% read_lines %>% 
   str_detect("Country Name") %>% which %>% min %>% subtract(1)
-fertility.raw <- str_subset(list.files("temp/",full=T),"^temp/API_SP.DYN.TFRT") %>% read_csv(skip=skip)
+fertility_raw <- str_subset(list.files("temp/",full=T),"^temp/API_SP.DYN.TFRT") %>% read_csv(skip=skip)
 ```
 
 
 ``` r
 # simplify/shorten some names for convenience
-fertility.meta <- fertility.meta %>% mutate(
+fertility_meta <- fertility_meta %>% mutate(
   TableName = TableName %>% 
     str_replace_all(c(
       " and the " = " & ",
@@ -450,14 +450,19 @@ fertility.meta <- fertility.meta %>% mutate(
       "Côte d'Ivoire" = "Ivory Coast"
     ))
 )
+
+# remove some extra columns with only NAs?
+
+fertility_meta <- fertility_meta %>% select(where(\(x)mean(is.na(x))<1))
+fertility_raw <- fertility_raw %>% select(where(\(x)mean(is.na(x))<1))
 ```
 
 ### Write out raw data
 
 
 ``` r
-write_csv(fertility.meta, file="data/fertility_meta.csv")
-write_csv(fertility.raw, file="data/fertility_raw.csv")
+write_csv(fertility_meta, file="data/fertility_meta.csv")
+write_csv(fertility_raw, file="data/fertility_raw.csv")
 ```
 
 
@@ -466,15 +471,16 @@ write_csv(fertility.raw, file="data/fertility_raw.csv")
 
 
 ``` r
-fertility.meta <- fertility.meta %>% filter(!is.na(IncomeGroup)) %>% 
+fertility_meta <- fertility_meta %>% filter(!is.na(IncomeGroup)) %>% 
   rename(code = "Country Code", country = "TableName", region = "Region", income_group = "IncomeGroup") %>% 
   select(code, country, region, income_group)
 
-fertility <- fertility.raw %>% select(where(\(x)mean(is.na(x))<1),-matches("Indicator|Name|^\\.\\.")) %>% 
-  rename(code = "Country Code") %>% inner_join(fertility.meta) %>%
+fertility <- fertility_raw %>% select(-matches("Indicator|Name|^\\.\\.")) %>% 
+  rename(code = "Country Code") %>% inner_join(fertility_meta) %>%
   pivot_longer(matches("^\\d+"),names_to="year",values_to="rate") %>% 
-  mutate(income_group = factor(str_replace(income_group," income",""),ordered = T, levels=c(
-    "Low", "Lower middle", "Upper middle", "High"))) %>% arrange(country,year)
+  # mutate(income_group = factor(str_replace(income_group," income",""),ordered = T, levels=c(
+  #   "Low", "Lower middle", "Upper middle", "High"))) %>%
+  arrange(country,year)
 ```
 
 
@@ -485,7 +491,7 @@ fertility <- fertility.raw %>% select(where(\(x)mean(is.na(x))<1),-matches("Indi
 # fertility %>% group_by(country) %>% mutate(pctna = 100*mean(is.na(rate))) %>% ungroup %>% 
 #   filter(pctna>0) %>% arrange(-pctna) %>% pivot_wider(names_from = year,values_from = rate) %>% View
 
-# based on exploration, let's just drop the small number of countries with any NAs for simplicity
+# based on exploration, let's just drop the small number of country/year combos with NAs for simplicity
 fertility <- fertility %>% drop_na()
 ```
 

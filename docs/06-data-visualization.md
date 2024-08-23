@@ -26,6 +26,9 @@ Let's first import the necessary packages. We will need both `readr` and `ggplot
 # if you need to, reimport all core tidyverse packages
 library(tidyverse)
 
+# optional: disable showing col_types by default in readr import functions
+options(readr.show_col_types = FALSE)
+
 # optional: set a prettier theme and colorblind-friendly palette for plots
 #           (also looks better if printed with most printers, even in b/w)
 theme_set(theme_bw())
@@ -45,10 +48,7 @@ To properly demonstrate some of these plots, we need a slightly more feature-ric
 ``` r
 # load in the penguins dataset
 # (note: a few rows with NAs have been removed for simplicity)
-penguins <- read_csv(
-  "https://bwu62.github.io/stat240-revamp/data/penguins.csv",
-  show_col_types = FALSE
-)
+penguins <- read_csv("https://bwu62.github.io/stat240-revamp/data/penguins.csv")
 # print the first few rows of the data frame to check;
 # this data frame is now too wide for our screen,
 # you can see some columns are cut off
@@ -614,10 +614,7 @@ Unfortunately, the Palmer penguins dataset isn't the best example for this last 
 
 
 ``` r
-enrollment <- read_csv(
-  "https://bwu62.github.io/stat240-revamp/data/enrollment.csv",
-  show_col_types = FALSE
-)
+enrollment <- read_csv("https://bwu62.github.io/stat240-revamp/data/enrollment.csv")
 # show a glimpse of the dataset
 glimpse(enrollment)
 ```
@@ -702,10 +699,7 @@ Note the previous example used just the year number on the horizontal axis (sinc
 
 
 ``` r
-unemployment <- read_csv(
-  "https://fred.stlouisfed.org/graph/fredgraph.csv?id=UNRATE",
-  show_col_types = FALSE
-)
+unemployment <- read_csv("https://fred.stlouisfed.org/graph/fredgraph.csv?id=UNRATE")
 glimpse(unemployment)
 ```
 

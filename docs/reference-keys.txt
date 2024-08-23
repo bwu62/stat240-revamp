@@ -141,11 +141,13 @@ advanced-operations
 grouping
 regrouping
 ungrouping
-more-practice
+more-practice-fertility-data
 bonus-choropleth
 merging
 binding
 joining
+example-cleaning-fertility
+pivoting
 datasets
 datasets-list
 eruptions

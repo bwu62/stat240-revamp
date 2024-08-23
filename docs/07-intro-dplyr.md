@@ -9,8 +9,9 @@
 ``` r
 # import all core tidyverse packages
 library(tidyverse)
-# optional: change default print to 5 rows to save vertical space
-options(pillar.print_min = 5)
+# optional: change default print to 5 rows to save vertical space, and
+#           disable showing col_types by default in readr import functions
+options(pillar.print_min = 5, readr.show_col_types = FALSE)
 # optional: change default ggplot theme options (personal preference)
 source("https://bwu62.github.io/stat240-revamp/ggplot_theme_options.R")
 ```
@@ -74,10 +75,7 @@ For now, we're going to continue using the Palmer penguins dataset [`penguins.cs
 
 ``` r
 # load in the familiar penguins dataset
-penguins <- read_csv(
-  "https://bwu62.github.io/stat240-revamp/data/penguins.csv",
-  show_col_types = FALSE
-)
+penguins <- read_csv("https://bwu62.github.io/stat240-revamp/data/penguins.csv")
 # print the first few rows of the data frame to check
 # again this data frame is too wide, and some columns are cut off
 print(penguins, n = 5)
@@ -348,8 +346,9 @@ print(penguins)
 
 ``` r
 # reload data frame since we need it for other examples
-penguins <- read_csv("data/penguins.csv", show_col_types = FALSE)
+penguins <- read_csv("https://bwu62.github.io/stat240-revamp/data/penguins.csv")
 ```
+
 
 **This note applies to all functions on this page**, i.e. all of them do NOT modify the input, so desired **changes must always be manually saved**!
 :::
@@ -828,7 +827,7 @@ penguins %>%
   coord_fixed(.0067) # make the plot window a square
 ```
 
-<img src="07-intro-dplyr_files/figure-html/unnamed-chunk-17-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="07-intro-dplyr_files/figure-html/unnamed-chunk-19-1.svg" width="672" style="display: block; margin: auto;" />
 
 
 ### `slice()`
@@ -1135,7 +1134,7 @@ Let's now briefly discuss R techniques for handling NAs. First it's important to
 
 Even though they're not the exact same, both `NA` and `NaN` are considered missing in R and can be handled together using the operations covered below.
 
-It's also worth noting `NA` is NOT the same as `"NA"`, i.e. a string composed of the two letters `"N"` and `"A"`.
+It's also worth noting `NA` is NOT the same as `"NA"`, i.e. a string made of the letters `"N"` and `"A"`.
 
 
 ``` r
