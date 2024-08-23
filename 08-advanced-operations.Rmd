@@ -431,7 +431,7 @@ When joining, R will automatically look for columns with the same name to use as
 
  1. Key columns should have the same name and type.
  2. All other non-key columns should have different names.
- 3. When choosing a join, carefully consider which set of rows you will actually need later in your analysis.
+ 3. When picking a join, carefully consider which rows you will actually need later.
  4. Generally, key values should be unique for each row. If you need to have duplicate key values, watch the joins closely to ensure the join works the way you want.
 :::
 
