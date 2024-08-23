@@ -18,7 +18,8 @@ copy.list = c(
   "data/",
   "data_list.txt",
   "icons/",
-  "ggplot_theme_options.R"
+  "ggplot_theme_options.R",
+  "joins.svg"
 )
 
 # iterate over copy list
