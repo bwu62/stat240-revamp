@@ -268,7 +268,6 @@ Now, I want students to continue practicing reading datasets, so the following c
 
 ```{r}
 library(palmerpenguins)
-write_csv(penguins,"data/penguins.csv")
 write_csv(penguins %>% drop_na,"data/penguins_complete.csv")
 ```
 
@@ -278,7 +277,7 @@ penguins <- read_csv("data/penguins_complete.csv")
 
 ### Inspect data
 
-```{r}
+```{r,eval=T}
 penguins
 ```
 
