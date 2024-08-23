@@ -445,7 +445,7 @@ names(eruptions_recent) <- c(
 )
 # data frames may also have row names, though most don't
 # if there are no row names, they just show as numbers
-# (this is not generally a commonly used feature)
+# (in general, this is not a commonly used feature)
 rownames(eruptions_recent)
 ```
 
