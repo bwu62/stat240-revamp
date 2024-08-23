@@ -458,7 +458,7 @@ fertility <- fertility.raw %>% select(where(\(x)mean(is.na(x))<1),-matches("Indi
   rename(code = "Country Code") %>% inner_join(fertility.meta) %>%
   pivot_longer(matches("^\\d+"),names_to="year",values_to="rate") %>% 
   mutate(income_group = factor(str_replace(income_group," income",""),ordered = T, levels=c(
-    "Low", "Lower middle", "Upper middle", "High"))) %>% select(-code) %>% arrange(country,year)
+    "Low", "Lower middle", "Upper middle", "High"))) %>% arrange(country,year)
 ```
 
 

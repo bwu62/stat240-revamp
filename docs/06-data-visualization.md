@@ -984,7 +984,7 @@ I didn't know where to put this so I'm inserting it at the end of the chapter he
 
 There are many different implementations of this, but one of the best is [`GGally::ggpairs()`{.R}](https://ggobi.github.io/ggally/reference/ggpairs.html). The plot type is automatically determined based on variable types and can be density, histogram, point, bar, box, or more, and additionally some summary statistics like correlations are given where appropriate.
 
-:::{.i95}
+:::{.i96}
 
 ``` r
 # to run this chunk, you need to have the package GGally installed

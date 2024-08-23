@@ -865,7 +865,7 @@ ggplot(df,aes(x=x,y=y,fill=z)) + geom_col() +
 </h2>
 <p>I didn’t know where to put this so I’m inserting it at the end of the chapter here. Here’s a bonus plot type for you called a pairs plot, where every variable in a data frame is plotted against every other variable. The primary purpose of this plot is to rapidly orient you to a new dataset you’re just starting to explore. It’s usually recommended to limit yourself to 5-6 variables max in a pairs plot, lest it become too chaotic.</p>
 <p>There are many different implementations of this, but one of the best is <a href="https://ggobi.github.io/ggally/reference/ggpairs.html"><code class="sourceCode r">GGally<span class="sc">::</span><span class="fu">ggpairs</span>()</code></a>. The plot type is automatically determined based on variable types and can be density, histogram, point, bar, box, or more, and additionally some summary statistics like correlations are given where appropriate.</p>
-<div class="i95">
+<div class="i96">
 <div class="sourceCode" id="cb584"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># to run this chunk, you need to have the package GGally installed</span></span>
 <span><span class="co"># first, we subset out just a few columns (otherwise it gets too crazy)</span></span>

@@ -595,19 +595,19 @@ fertility
 ```
 
 ```
-# A tibble: 13,050 × 5
-   country     region     income_group  year  rate
-   <chr>       <chr>      <chr>        <dbl> <dbl>
- 1 Afghanistan South Asia Low           1960  7.28
- 2 Afghanistan South Asia Low           1961  7.28
- 3 Afghanistan South Asia Low           1962  7.29
- 4 Afghanistan South Asia Low           1963  7.30
- 5 Afghanistan South Asia Low           1964  7.30
- 6 Afghanistan South Asia Low           1965  7.30
- 7 Afghanistan South Asia Low           1966  7.32
- 8 Afghanistan South Asia Low           1967  7.34
- 9 Afghanistan South Asia Low           1968  7.36
-10 Afghanistan South Asia Low           1969  7.39
+# A tibble: 13,050 × 6
+   code  country     region     income_group  year  rate
+   <chr> <chr>       <chr>      <chr>        <dbl> <dbl>
+ 1 AFG   Afghanistan South Asia Low           1960  7.28
+ 2 AFG   Afghanistan South Asia Low           1961  7.28
+ 3 AFG   Afghanistan South Asia Low           1962  7.29
+ 4 AFG   Afghanistan South Asia Low           1963  7.30
+ 5 AFG   Afghanistan South Asia Low           1964  7.30
+ 6 AFG   Afghanistan South Asia Low           1965  7.30
+ 7 AFG   Afghanistan South Asia Low           1966  7.32
+ 8 AFG   Afghanistan South Asia Low           1967  7.34
+ 9 AFG   Afghanistan South Asia Low           1968  7.36
+10 AFG   Afghanistan South Asia Low           1969  7.39
 # ℹ 13,040 more rows
 ```
 
@@ -924,7 +924,7 @@ We can also show the latest rate for each country, as well as the change from 20
 # then ungroup, distinct, and arrange to display a neat output
 # again, collapsing output due to lengthy print out
 # %T>% is used again to both save and print the results
-fertility_change = fertility %>%
+fertility_change <- fertility %>%
   filter(year %in% c(2000, max(year))) %>%
   arrange(country, year) %>%
   group_by(country) %>%
@@ -932,11 +932,11 @@ fertility_change = fertility %>%
     rate2000 = first(rate),
     rate2022 = last(rate),
     change = rate2022 - rate2000
-  ) %>% 
-  select(country, region, rate2000, change, rate2022) %>% 
-  ungroup() %>% 
-  distinct() %>% 
-  arrange(rate2022) %T>% 
+  ) %>%
+  select(country, region, rate2000, change, rate2022) %>%
+  ungroup() %>%
+  distinct() %>%
+  arrange(rate2022) %T>%
   print(n = Inf)
 ```
 
@@ -1178,4 +1178,76 @@ fertility_change %>% slice_min(change, n = 10)
  9 Malawi       Sub-Saharan Africa             6.04  -2.19     3.85
 10 Rwanda       Sub-Saharan Africa             5.92  -2.18     3.75
 ```
+
+Did any countries have actually increased?
+
+
+``` r
+fertility_change %>% slice_max(change, n = 10)
+```
+
+```
+# A tibble: 10 × 5
+   country    region                rate2000 change rate2022
+   <chr>      <chr>                    <dbl>  <dbl>    <dbl>
+ 1 Kazakhstan Europe & Central Asia     1.8   1.25      3.05
+ 2 Uzbekistan Europe & Central Asia     2.58  0.728     3.31
+ 3 Bulgaria   Europe & Central Asia     1.26  0.52      1.78
+ 4 Mongolia   East Asia & Pacific       2.26  0.519     2.77
+ 5 Romania    Europe & Central Asia     1.31  0.5       1.81
+ 6 Czechia    Europe & Central Asia     1.15  0.468     1.62
+ 7 Georgia    Europe & Central Asia     1.60  0.462     2.06
+ 8 Kyrgyzstan Europe & Central Asia     2.4   0.4       2.8 
+ 9 Moldova    Europe & Central Asia     1.50  0.301     1.8 
+10 Slovenia   Europe & Central Asia     1.26  0.29      1.55
+```
+
+Let's make a few plots of the data as well. Here are 2 plots showing median fertility rate over time grouping by either region or income level:
+
+:::{.i96}
+
+``` r
+# first get mean rate in each region + year, then pipe into line plot
+# fct_reorder2() is used to reorder legend to be same order as end of lines
+# see https://forcats.tidyverse.org/reference/fct_reorder.html for more details
+fertility %>%
+  group_by(region, year) %>%
+  summarize(median_rate = median(rate)) %>%
+  ggplot(aes(x = year, y = median_rate,
+             linetype = fct_reorder2(region, year, median_rate),
+             color = fct_reorder2(region, year, median_rate))) +
+  geom_hline(yintercept = 2.1, linetype = "dashed") + geom_line(linewidth = 1) +
+  labs(x = "Year", y = "Median fertility rate", linetype = "Region", color = "Region",
+       title = "Median fertility by region from 1960-2022",
+       subtitle = "(black dashed line at replacement rate of 2.1)") +
+  scale_x_continuous(expand = c(0, 0), breaks = seq(1960, 2022, 10),
+                     minor_breaks = seq(1960, 2022, 2)) +
+  scale_y_continuous(expand = c(0, 0), limits = c(1.2, 7.2),
+                     breaks = 2:7, minor_breaks = seq(1.2, 7.2, .2))
+```
+
+<img src="08-advanced-operations_files/figure-html/unnamed-chunk-19-1.svg" width="691.2" style="display: block; margin: auto;" />
+
+``` r
+# first get mean rate in each income group + year, then pipe into line plot
+fertility %>%
+  group_by(income_group, year) %>%
+  summarize(median_rate = median(rate)) %>%
+  ggplot(aes(x = year, y = median_rate,
+             linetype = income_group,
+             color = income_group)) +
+  geom_hline(yintercept = 2.1, linetype = "dashed") + geom_line(linewidth = 1) +
+  labs(x = "Year", y = "Median fertility rate",
+       linetype = "Income group", color = "Income group",
+       title = "Median fertility by income group from 1960-2022",
+       subtitle = "(black dashed line at replacement rate of 2.1)") +
+  scale_x_continuous(expand = c(0, 0), breaks = seq(1960, 2022, 10),
+                     minor_breaks = seq(1960, 2022, 2)) +
+  scale_y_continuous(expand = c(0, 0), limits = c(1.4, 7.2),
+                     breaks = 2:7, minor_breaks = seq(1.6, 7.2, .2))
+```
+
+<img src="08-advanced-operations_files/figure-html/unnamed-chunk-19-2.svg" width="691.2" style="display: block; margin: auto;" />
+:::
+
 
