@@ -447,7 +447,45 @@ fertility_raw <- read_csv(
 fertility_meta <- read_csv("data/fertility_meta.csv")
 fertility_raw <- read_csv("data/fertility_raw.csv")
 ```
+
+```{r}
+fertility_meta
+fertility_raw
 ```
+
+First, there are several columns like `"SpecialNotes"`, `"Indicator Name"`, and `"Indicator Code"` that we don't need; we can remove those with `select()`. Country names are duplicated in both data frames, so we can pick one to use. Let's pick `"TableName"` since the names are slightly nicer (check this yourself). The rest of the columns should probably be renamed with `rename()`.
+
+Also, note the existence of several NAs in region and income. Again, verify this yourself, but these are all further subregion groupings of countries (e.g. AFE and AFW are for Eastern/Southern and Western/Central African countries), so we can simply drop these rows.
+
+```{r}
+# apply the processing steps above
+fertility_meta2 <- fertility_meta %>% 
+  rename(code = "Country Code", country = "TableName", region = "Region", income_group = "IncomeGroup") %>% 
+  select(code, country, region, income_group) %>%
+  filter(!is.na(income_group))
+fertility_raw2 <- fertility_raw %>% 
+  select(2, "1960":last_col()) %>% 
+  rename(code = "Country Code")
+print(fertility_meta2, n = 5)
+print(fertility_raw2, n = 5)
 ```
+
+Now comes the key step! We're going to use the `"code"` columns (which are the 3-letter [ISO 3166-1 country codes](https://en.wikipedia.org/wiki/ISO_3166-1)) as the key columns and join the two data frames together. Let's use `inner_join()` to keep only countries that appear in both, since we want to look at region and income group together with fertility rates.
+
+Note these data frames already satisfy the recommended conditions, i.e. the key columns have the same name and type and uniquely identify each country, and all other columns have different names, so there should be no issues.
+
+```{r}
+fertility <- inner_join(fertility_meta2, fertility_raw2)
+fertility
+```
+
+This already looks pretty good! Our data frames joined nicely along the key `"code"` column, and now our region, income, and fertility data is in 1 single data frame instead of spread across 2 data frames.
+
+However, you may have noticed we still have a problem: our annual fertility rates are spread out across `r length(str_subset(names(fertility),"^\\d+$"))` columns, with each year in its own column. This is not compatible with our tidyverse functions. How do we fix it?
+
+
+## Pivoting
+
+
 
 
