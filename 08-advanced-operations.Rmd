@@ -2,7 +2,7 @@
 
 # Advanced operations
 
-In this chapter, we will cover a few more advanced, yet incredibly useful data tidying operations like grouping, joining, and pivoting. Along the way, we will also make extensive use of dplyr functions learned in the previous chapter.
+In this chapter, we will cover a few more advanced, yet incredibly useful data tidying operations like grouping, joining, binding, and pivoting. Along the way, we will also make extensive use of dplyr functions learned in the previous chapter.
 
 
 ## Grouping
