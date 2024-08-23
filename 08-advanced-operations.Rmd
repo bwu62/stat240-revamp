@@ -247,3 +247,50 @@ Which countries had the biggest drop in fertility?
 fertility_change %>% slice_min(change, n = 10)
 ```
 
+Did any countries have actually increased?
+
+```{r}
+fertility_change %>% slice_max(change, n = 10)
+```
+
+Let's make a few plots of the data as well. Here are 2 plots showing median fertility rate over time grouping by either region or income level:
+
+:::{.i96}
+```{r,tidy=F,fig.width=7.2,fig.height=4.8}
+# first get mean rate in each region + year, then pipe into line plot
+# fct_reorder2() is used to reorder legend to be same order as end of lines
+# see https://forcats.tidyverse.org/reference/fct_reorder.html for more details
+fertility %>%
+  group_by(region, year) %>%
+  summarize(median_rate = median(rate)) %>%
+  ggplot(aes(x = year, y = median_rate,
+             linetype = fct_reorder2(region, year, median_rate),
+             color = fct_reorder2(region, year, median_rate))) +
+  geom_hline(yintercept = 2.1, linetype = "dashed") + geom_line(linewidth = 1) +
+  labs(x = "Year", y = "Median fertility rate", linetype = "Region", color = "Region",
+       title = "Median fertility by region from 1960-2022",
+       subtitle = "(black dashed line at replacement rate of 2.1)") +
+  scale_x_continuous(expand = c(0, 0), breaks = seq(1960, 2022, 10),
+                     minor_breaks = seq(1960, 2022, 2)) +
+  scale_y_continuous(expand = c(0, 0), limits = c(1.2, 7.2),
+                     breaks = 2:7, minor_breaks = seq(1.2, 7.2, .2))
+# first get mean rate in each income group + year, then pipe into line plot
+fertility %>%
+  group_by(income_group, year) %>%
+  summarize(median_rate = median(rate)) %>%
+  ggplot(aes(x = year, y = median_rate,
+             linetype = income_group,
+             color = income_group)) +
+  geom_hline(yintercept = 2.1, linetype = "dashed") + geom_line(linewidth = 1) +
+  labs(x = "Year", y = "Median fertility rate",
+       linetype = "Income group", color = "Income group",
+       title = "Median fertility by income group from 1960-2022",
+       subtitle = "(black dashed line at replacement rate of 2.1)") +
+  scale_x_continuous(expand = c(0, 0), breaks = seq(1960, 2022, 10),
+                     minor_breaks = seq(1960, 2022, 2)) +
+  scale_y_continuous(expand = c(0, 0), limits = c(1.4, 7.2),
+                     breaks = 2:7, minor_breaks = seq(1.6, 7.2, .2))
+```
+:::
+
+
