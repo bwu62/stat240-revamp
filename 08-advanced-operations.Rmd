@@ -443,9 +443,10 @@ fertility_meta <- read_csv(
 fertility_raw <- read_csv(
   "https://bwu62.github.io/stat240-revamp/data/fertility_raw.csv")
 ```
-```{r,echo=F,tidy=F}
-fertility_meta <- read_csv("https://bwu62.github.io/stat240-revamp/data/fertility_meta.csv")
-fertility_raw <- read_csv("https://bwu62.github.io/stat240-revamp/data/fertility_raw.csv")
+```{r,echo=F}
+fertility_meta <- read_csv("data/fertility_meta.csv")
+fertility_raw <- read_csv("data/fertility_raw.csv")
+```
 ```
 ```
 
