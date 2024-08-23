@@ -354,11 +354,11 @@ We can see our 3 data frames `penguins2007`, `penguins2008`, `penguins2009` shar
 The function `bind_rows(df1, df2, ...)` lets us do this. Just pass each data frame that needs binding in:
 
 ```{r}
-penguins.bound <- bind_rows(penguins2007, penguins2008, penguins2009)
-penguins.bound
+penguins_bound <- bind_rows(penguins2007, penguins2008, penguins2009)
+penguins_bound
 ```
 
-It may be hard to see, since only the first 10 rows are printed here, but if you look at the row numbers, you can see we now have `r nrow(penguins2007)`+`r nrow(penguins2008)`+`r nrow(penguins2009)`=`r nrow(penguins.bound)` rows after binding.
+It may be hard to see, since only the first 10 rows are printed here, but if you look at the row numbers, you can see we now have `r nrow(penguins2007)`+`r nrow(penguins2008)`+`r nrow(penguins2009)`=`r nrow(penguins_bound)` rows after binding.
 
 :::{.note}
 For best results, ensure input data frames have the exact same columns, with the same names and types!
