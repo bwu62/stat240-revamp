@@ -325,6 +325,115 @@ plot_ly(fertility, type = "choropleth", locations = ~code, z = ~rate,
   layout(margin = list(l = 0, r = 0, b = 10, t = 31)) %>% animation_opts(frame = 100)
 ```
 :::
+
+
+## Merging
+
+Let's move on to another topic: merging data frames. Often, the information you need may be spread across several data frames from different samples or different sources, in which case you may need to merge data frames together.
+
+There are generally 2 common ways data may need to be merged: binding rows, and joining columns.
+
+ - Binding rows is done when two data frames **share the same columns, but have different rows**, and you want to combine all the rows together.
+ - Joining columns is done when two data frames **share the same rows, but have different columns**, and you want to combine all the columns together.
+
+These two are NOT the same, so it's important to remember which is which.
+
+
+### Binding
+
+Binding is the simpler of the two, so let's start here. Returning briefly to the penguins data set, note there's a year column which indicates when each sample was collected. This means there were 3 different studies conducted. Suppose each of the years was originally in its own data frame (I suspect this is likely to be true).
+
+```{r}
+penguins2007 <- penguins %>% filter(year == 2007)
+penguins2008 <- penguins %>% filter(year == 2008)
+penguins2009 <- penguins %>% filter(year == 2009)
 ```
+```{r}
+print(penguins2007, n = 5)
+print(penguins2008, n = 5)
+print(penguins2009, n = 5)
+```
+
+We can see our 3 data frames `penguins2007`, `penguins2008`, `penguins2009` share the exact same columns (same number of columns, same column names, same column types) but have different rows. Each data frame can be thought of as containing a fraction of the overall samples or subjects. In this case, we must row-bind the 3 data frames together.
+
+The function `bind_rows(df1, df2, ...)` lets us do this. Just pass each data frame that needs binding in:
+
+```{r}
+penguins.bound <- bind_rows(penguins2007, penguins2008, penguins2009)
+penguins.bound
+```
+
+It may be hard to see, since only the first 10 rows are printed here, but if you look at the row numbers, you can see we now have `r nrow(penguins2007)`+`r nrow(penguins2008)`+`r nrow(penguins2009)`=`r nrow(penguins.bound)` rows after binding.
+
+:::{.note}
+For best results, ensure input data frames have the exact same columns, with the same names and types!
 :::
+
+
+### Joining
+
+Joining is slightly more complicated. This is for when all the rows are together, but the columns you need are spread out over several data frames. Often, this occurs when you obtain data from different sources and want to combine them to look for patterns, but it can also happen sometimes with multiple data frames gathered from the same source.
+
+Joining is performed by first **matching rows using a set of key variables** before adding in the additional columns. The **key variables should uniquely identify rows**. Here's a simple demo to start. Suppose you have the following data frames:
+
+```{r}
+x <- tibble(
+  A = c("a", "b", "c"),
+  B = c(1, 2, 3)
+)
+y <- tibble(
+  A = c("a", "b", "d"),
+  C = ymd("2024.1.1") + 0:2
+)
+x
+y
+```
+
+Suppose you want to join `x` and `y` using column A as the "key", i.e. "A" is the column that uniquely matches rows across data frames. There are 4 different joins you can use: `inner_join()`, `full_join()`, `left_join()`, `right_join()` , depending on which rows you want in the result:
+
+<center><div style="width:491px;height:258px;overflow:hidden">
+<a href="https://tavareshugo.github.io/r-intro-tidyverse-gapminder/08-joins/index.html"><img src="joins.svg"></a>
+</div></center>
+
+ - `inner_join(x, y)` matches rows using key variable(s), then **returns only rows in both `x` and `y`**,
+ - `full_join(x, y)` matches rows using key variable(s), then **returns all rows in either `x` or `y`**,
+ - `left_join(x, y)` matches rows using key variable(s), then **returns only rows in `x`**,
+ - `right_join(x, y)` matches rows using key variable(s), then **returns only rows in `y`**.
+
+Below are demos of each join. Note each join has the exact same columns; the only difference is which rows are included in the output. Also note `NAs` are automatically used to fill in any missing values that arise from the merge.
+
+```{r}
+# only return rows in both x and y
+inner_join(x, y)
+# return rows in either x or y
+full_join(x, y)
+# return only rows in x
+left_join(x, y)
+# return only rows in y
+right_join(x, y)
+```
+
+The above 4 are called the "mutating joins" since they mutate (i.e. change) the data frame by adding additional columns. There are 2 other less commonly used joins called the "filterting joins" called `semi_join()` and `anti_join()` that do not actually add columns; they are only used to filter rows that match or don't match another data frame. Examples:
+
+```{r}
+# semi_join(x, y) will FILTER rows in x that have matches in y
+# note there are NO new columns added to x
+semi_join(x, y)
+# conversely, anti_join() will FILTER rows in x with NO match in y
+# again, note NO new columns were added to x
+anti_join(x, y)
+```
+
+These examples only have 1 key column, but the same works if you have 2 or more key columns; rows are matched if they have ALL the same values in the key columns.
+
+:::{.note}
+When joining, R will automatically look for columns with the same name to use as key columns. Therefore, to run smoothly, it's **highly recommended** to ensure the following before joining:
+
+ 1. Key columns should have the same name and type.
+ 2. All other non-key columns should have different names.
+ 3. When choosing a join, carefully consider which set of rows you will actually need later in your analysis.
+ 4. Generally, key values should be unique for each row. If you need to have duplicate key values, watch the joins closely to ensure the join works the way you want.
+:::
+
+Let's see a real example of joins in action.
 
