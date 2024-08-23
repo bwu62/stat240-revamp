@@ -145,11 +145,11 @@
 <h2>
 <span class="header-section-number">7.3</span> Data example<a class="anchor" aria-label="anchor" href="#data-example"><i class="fas fa-link"></i></a>
 </h2>
-<p>For now, we’re going to continue using the Palmer penguins dataset <a href="https://bwu62.github.io/stat240-revamp/data/penguins_complete.csv"><code>penguins_complete.csv</code></a> as an example data frame. Let’s load the data in:</p>
+<p>For now, we’re going to continue using the Palmer penguins dataset <a href="https://bwu62.github.io/stat240-revamp/data/penguins.csv"><code>penguins.csv</code></a> as an example data frame. Let’s load the data in:</p>
 <div class="sourceCode" id="cb590"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># load in the familiar penguins dataset</span></span>
 <span><span class="va">penguins</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span></span>
-<span>  <span class="st">"https://bwu62.github.io/stat240-revamp/data/penguins_complete.csv"</span>,</span>
+<span>  <span class="st">"https://bwu62.github.io/stat240-revamp/data/penguins.csv"</span>,</span>
 <span>  show_col_types <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co"># print the first few rows of the data frame to check</span></span>
@@ -359,7 +359,7 @@
 # ℹ 328 more rows</code></pre>
 <div class="sourceCode" id="cb616"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># reload data frame since we need it for other examples</span></span>
-<span><span class="va">penguins</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/penguins_complete.csv"</span>, show_col_types <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">penguins</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/penguins.csv"</span>, show_col_types <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p><strong>This note applies to all functions on this page</strong>, i.e. all of them do NOT modify the input, so desired <strong>changes must always be manually saved</strong>!</p>
 </div>
 </div>

@@ -69,13 +69,13 @@ The [magrittr help page](https://magrittr.tidyverse.org/index.html#usage) has so
 
 ## Data example
 
-For now, we're going to continue using the Palmer penguins dataset [`penguins_complete.csv`](https://bwu62.github.io/stat240-revamp/data/penguins_complete.csv) as an example data frame. Let's load the data in:
+For now, we're going to continue using the Palmer penguins dataset [`penguins.csv`](https://bwu62.github.io/stat240-revamp/data/penguins.csv) as an example data frame. Let's load the data in:
 
 
 ``` r
 # load in the familiar penguins dataset
 penguins <- read_csv(
-  "https://bwu62.github.io/stat240-revamp/data/penguins_complete.csv",
+  "https://bwu62.github.io/stat240-revamp/data/penguins.csv",
   show_col_types = FALSE
 )
 # print the first few rows of the data frame to check
@@ -348,7 +348,7 @@ print(penguins)
 
 ``` r
 # reload data frame since we need it for other examples
-penguins <- read_csv("data/penguins_complete.csv", show_col_types = FALSE)
+penguins <- read_csv("data/penguins.csv", show_col_types = FALSE)
 ```
 
 **This note applies to all functions on this page**, i.e. all of them do NOT modify the input, so desired **changes must always be manually saved**!

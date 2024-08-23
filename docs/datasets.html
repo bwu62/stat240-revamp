@@ -114,7 +114,6 @@
 <li><a href="data/fertility_meta.csv"><code>fertility_meta.csv</code></a></li>
 <li><a href="data/fertility_raw.csv"><code>fertility_raw.csv</code></a></li>
 <li><a href="data/penguins.csv"><code>penguins.csv</code></a></li>
-<li><a href="data/penguins_complete.csv"><code>penguins_complete.csv</code></a></li>
 </ul>
 <p>Alternatively, you can also run the following line, which will <strong>download ALL files above to your current working directory</strong>. It’s recommended to first set your working directory to an appropriate place before running this, e.g. to the <code>data/</code> directory in your <code>STAT240/</code> course folder.</p>
 <div class="sourceCode" id="cb766"><pre class="downlit sourceCode r">
@@ -365,8 +364,7 @@ options(width=80)
 </h3>
 <div class="sourceCode" id="cb772"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://allisonhorst.github.io/palmerpenguins/">palmerpenguins</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html">write_csv</a></span><span class="op">(</span><span class="va">penguins</span>,<span class="st">"data/penguins.csv"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html">write_csv</a></span><span class="op">(</span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">drop_na</span>,<span class="st">"data/penguins_complete.csv"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html">write_csv</a></span><span class="op">(</span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">drop_na</span>,<span class="st">"data/penguins.csv"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div id="inspect-data-1" class="section level3" number="9.3.2">
 <h3>
@@ -374,13 +372,28 @@ options(width=80)
 </h3>
 <div class="sourceCode" id="cb773"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">penguins</span></span></code></pre></div>
+<pre><code># A tibble: 333 × 8
+   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex  
+   &lt;chr&gt;   &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;
+ 1 Adelie  Torgersen           39.1          18.7               181        3750 male 
+ 2 Adelie  Torgersen           39.5          17.4               186        3800 fema…
+ 3 Adelie  Torgersen           40.3          18                 195        3250 fema…
+ 4 Adelie  Torgersen           36.7          19.3               193        3450 fema…
+ 5 Adelie  Torgersen           39.3          20.6               190        3650 male 
+ 6 Adelie  Torgersen           38.9          17.8               181        3625 fema…
+ 7 Adelie  Torgersen           39.2          19.6               195        4675 male 
+ 8 Adelie  Torgersen           41.1          17.6               182        3200 fema…
+ 9 Adelie  Torgersen           38.6          21.2               191        3800 male 
+10 Adelie  Torgersen           34.6          21.1               198        4400 male 
+# ℹ 323 more rows
+# ℹ 1 more variable: year &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <div id="college-enrollment" class="section level2" number="9.4">
 <h2>
 <span class="header-section-number">A.4</span> College enrollment<a class="anchor" aria-label="anchor" href="#college-enrollment"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb774"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb775"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">last.yy</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/conditions.html">tryCatch</a></span><span class="op">(</span><span class="op">{</span></span>
 <span>  <span class="fu">rvest</span><span class="fu">::</span><span class="fu"><a href="http://xml2.r-lib.org/reference/read_xml.html">read_html</a></span><span class="op">(</span><span class="st">"https://nces.ed.gov/programs/digest/current_tables.asp"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">rvest</span><span class="fu">::</span><span class="fu"><a href="https://rvest.tidyverse.org/reference/rename.html">html_nodes</a></span><span class="op">(</span>xpath<span class="op">=</span><span class="st">"//select[@name='quickjump']/option[2]/text()"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -393,7 +406,7 @@ options(width=80)
 <h3>
 <span class="header-section-number">A.4.1</span> Process data<a class="anchor" aria-label="anchor" href="#process-data-1"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb775"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb776"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">enrollment</span> <span class="op">&lt;-</span> <span class="st">"https://nces.ed.gov/programs/digest/d{last.yy}/tables/dt{last.yy}_303.10.asp"</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="va">str_glue</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="va">read_html</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -419,14 +432,14 @@ options(width=80)
 <h3>
 <span class="header-section-number">A.4.2</span> Write out data<a class="anchor" aria-label="anchor" href="#write-out-data-2"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb776"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb777"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html">write_csv</a></span><span class="op">(</span><span class="va">enrollment</span>, file<span class="op">=</span><span class="st">"data/enrollment.csv"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div id="inspect-data-2" class="section level3" number="9.4.3">
 <h3>
 <span class="header-section-number">A.4.3</span> Inspect data<a class="anchor" aria-label="anchor" href="#inspect-data-2"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb777"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb778"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">enrollment</span></span></code></pre></div>
 <pre><code># A tibble: 146 × 3
     year sex    enrolled_millions
@@ -453,7 +466,7 @@ options(width=80)
 <h3>
 <span class="header-section-number">A.5.1</span> Process data<a class="anchor" aria-label="anchor" href="#process-data-2"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb779"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb780"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.exists</a></span><span class="op">(</span><span class="st">"temp"</span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span><span class="op">(</span><span class="st">"temp"</span><span class="op">)</span></span>
 <span><span class="va">f</span> <span class="op">&lt;-</span> <span class="st">"temp/fertility.zip"</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span><span class="op">(</span><span class="st">"https://api.worldbank.org/v2/en/indicator/SP.DYN.TFRT.IN?downloadformat=csv"</span>,<span class="va">f</span>,mode<span class="op">=</span><span class="st">"wb"</span><span class="op">)</span></span>
@@ -463,7 +476,7 @@ options(width=80)
 <span><span class="va">skip</span> <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_subset.html">str_subset</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="st">"temp/"</span>,full<span class="op">=</span><span class="cn">T</span><span class="op">)</span>,<span class="st">"^temp/API_SP.DYN.TFRT"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">read_lines</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html">str_detect</a></span><span class="op">(</span><span class="st">"Country Name"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">which</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">min</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">subtract</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">fertility.raw</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_subset.html">str_subset</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="st">"temp/"</span>,full<span class="op">=</span><span class="cn">T</span><span class="op">)</span>,<span class="st">"^temp/API_SP.DYN.TFRT"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span>skip<span class="op">=</span><span class="va">skip</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb780"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb781"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># simplify/shorten some names for convenience</span></span>
 <span><span class="va">fertility.meta</span> <span class="op">&lt;-</span> <span class="va">fertility.meta</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
 <span>  TableName <span class="op">=</span> <span class="va">TableName</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -498,7 +511,7 @@ options(width=80)
 <h3>
 <span class="header-section-number">A.5.2</span> Write out raw data<a class="anchor" aria-label="anchor" href="#write-out-raw-data"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb781"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb782"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html">write_csv</a></span><span class="op">(</span><span class="va">fertility.meta</span>, file<span class="op">=</span><span class="st">"data/fertility_meta.csv"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html">write_csv</a></span><span class="op">(</span><span class="va">fertility.raw</span>, file<span class="op">=</span><span class="st">"data/fertility_raw.csv"</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -506,7 +519,7 @@ options(width=80)
 <h3>
 <span class="header-section-number">A.5.3</span> Process more <small>(tidy version)</small><a class="anchor" aria-label="anchor" href="#process-more-tidy-version"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb782"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb783"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fertility.meta</span> <span class="op">&lt;-</span> <span class="va">fertility.meta</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">IncomeGroup</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>code <span class="op">=</span> <span class="st">"Country Code"</span>, country <span class="op">=</span> <span class="st">"TableName"</span>, region <span class="op">=</span> <span class="st">"Region"</span>, income_group <span class="op">=</span> <span class="st">"IncomeGroup"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">code</span>, <span class="va">country</span>, <span class="va">region</span>, <span class="va">income_group</span><span class="op">)</span></span>
@@ -516,7 +529,7 @@ options(width=80)
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">matches</a></span><span class="op">(</span><span class="st">"^\\d+"</span><span class="op">)</span>,names_to<span class="op">=</span><span class="st">"year"</span>,values_to<span class="op">=</span><span class="st">"rate"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>income_group <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_replace.html">str_replace</a></span><span class="op">(</span><span class="va">income_group</span>,<span class="st">" income"</span>,<span class="st">""</span><span class="op">)</span>,ordered <span class="op">=</span> <span class="cn">T</span>, levels<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
 <span>    <span class="st">"Low"</span>, <span class="st">"Lower middle"</span>, <span class="st">"Upper middle"</span>, <span class="st">"High"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">country</span>,<span class="va">year</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb783"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb784"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># # show pct NA for each country with NAs</span></span>
 <span><span class="co"># fertility %&gt;% group_by(country) %&gt;% summarize(pctna = round(100*mean(is.na(rate)))) %&gt;% filter(pctna&gt;0) %&gt;% arrange(-pctna)</span></span>
 <span><span class="co"># # show all years for these countries to see pattern of NAs</span></span>
@@ -530,14 +543,14 @@ options(width=80)
 <h3>
 <span class="header-section-number">A.5.4</span> Write out tidy data<a class="anchor" aria-label="anchor" href="#write-out-tidy-data"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb784"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb785"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html">write_csv</a></span><span class="op">(</span><span class="va">fertility</span>, <span class="st">"data/fertility.csv"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div id="inspect-data-3" class="section level3" number="9.5.5">
 <h3>
 <span class="header-section-number">A.5.5</span> Inspect data<a class="anchor" aria-label="anchor" href="#inspect-data-3"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb785"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb786"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fertility</span></span></code></pre></div>
 
 </div>

@@ -37,7 +37,7 @@ options(ggplot2.discrete.fill = \(...) scale_fill_brewer(..., palette = "Set2"),
 
 ## Palmer penguins
 
-To properly demonstrate some of these plots, we need a slightly more feature-rich dataset. Let's import the [Palmer penguins](https://allisonhorst.github.io/palmerpenguins) dataset which is readily usable and has a good set of variables.^[Thanks to Hadley Wickham's excellent [R4DS](https://r4ds.hadley.nz/data-visualize) for the inspiration!] You can either get it from the `palmerpenguins` package or import/download from here: [`penguins.csv`](data/penguins.csv).
+To properly demonstrate some of these plots, we need a slightly more feature-rich dataset. Let's import the [Palmer penguins](https://allisonhorst.github.io/palmerpenguins) dataset which is readily usable and has a good set of variables.^[Thanks to Hadley Wickham's excellent [R4DS](https://r4ds.hadley.nz/data-visualize) for the inspiration!] I've removed a few rows with NAs for our convenience, here's a link to the file: [`penguins.csv`](data/penguins.csv).
 
 [![](https://allisonhorst.github.io/palmerpenguins/reference/figures/lter_penguins.png){.i6}](https://allisonhorst.github.io/palmerpenguins/articles/art.html)
 
@@ -46,7 +46,7 @@ To properly demonstrate some of these plots, we need a slightly more feature-ric
 # load in the penguins dataset
 # (note: a few rows with NAs have been removed for simplicity)
 penguins <- read_csv(
-  "https://bwu62.github.io/stat240-revamp/data/penguins_complete.csv",
+  "https://bwu62.github.io/stat240-revamp/data/penguins.csv",
   show_col_types = FALSE
 )
 # print the first few rows of the data frame to check;

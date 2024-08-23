@@ -142,6 +142,7 @@ grouping
 regrouping
 ungrouping
 more-practice
+bonus-choropleth
 datasets
 datasets-list
 eruptions

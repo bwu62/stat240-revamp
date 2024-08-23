@@ -33,7 +33,6 @@ Here's a convenient list of all dataset files generated. Note that **not ALL fil
  - [`fertility_meta.csv`](data/fertility_meta.csv)
  - [`fertility_raw.csv`](data/fertility_raw.csv)
  - [`penguins.csv`](data/penguins.csv)
- - [`penguins_complete.csv`](data/penguins_complete.csv)
 
 Alternatively, you can also run the following line, which will **download ALL files above to your current working directory**. It's recommended to first set your working directory to an appropriate place before running this, e.g. to the `data/` directory in your `STAT240/` course folder.
 
@@ -293,8 +292,7 @@ Now, I want students to continue practicing reading datasets, so the following c
 
 ``` r
 library(palmerpenguins)
-write_csv(penguins,"data/penguins.csv")
-write_csv(penguins %>% drop_na,"data/penguins_complete.csv")
+write_csv(penguins %>% drop_na,"data/penguins.csv")
 ```
 
 
@@ -304,6 +302,24 @@ write_csv(penguins %>% drop_na,"data/penguins_complete.csv")
 
 ``` r
 penguins
+```
+
+```
+# A tibble: 333 × 8
+   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex  
+   <chr>   <chr>              <dbl>         <dbl>             <dbl>       <dbl> <chr>
+ 1 Adelie  Torgersen           39.1          18.7               181        3750 male 
+ 2 Adelie  Torgersen           39.5          17.4               186        3800 fema…
+ 3 Adelie  Torgersen           40.3          18                 195        3250 fema…
+ 4 Adelie  Torgersen           36.7          19.3               193        3450 fema…
+ 5 Adelie  Torgersen           39.3          20.6               190        3650 male 
+ 6 Adelie  Torgersen           38.9          17.8               181        3625 fema…
+ 7 Adelie  Torgersen           39.2          19.6               195        4675 male 
+ 8 Adelie  Torgersen           41.1          17.6               182        3200 fema…
+ 9 Adelie  Torgersen           38.6          21.2               191        3800 male 
+10 Adelie  Torgersen           34.6          21.1               198        4400 male 
+# ℹ 323 more rows
+# ℹ 1 more variable: year <dbl>
 ```
 
 

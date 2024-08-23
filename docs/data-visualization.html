@@ -120,13 +120,13 @@
 <h2>
 <span class="header-section-number">6.2</span> Palmer penguins<a class="anchor" aria-label="anchor" href="#palmer-penguins"><i class="fas fa-link"></i></a>
 </h2>
-<p>To properly demonstrate some of these plots, we need a slightly more feature-rich dataset. Let’s import the <a href="https://allisonhorst.github.io/palmerpenguins">Palmer penguins</a> dataset which is readily usable and has a good set of variables.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;Thanks to Hadley Wickham’s excellent &lt;a href="https://r4ds.hadley.nz/data-visualize"&gt;R4DS&lt;/a&gt; for the inspiration!&lt;/p&gt;'><sup>20</sup></a> You can either get it from the <code>palmerpenguins</code> package or import/download from here: <a href="data/penguins.csv"><code>penguins.csv</code></a>.</p>
+<p>To properly demonstrate some of these plots, we need a slightly more feature-rich dataset. Let’s import the <a href="https://allisonhorst.github.io/palmerpenguins">Palmer penguins</a> dataset which is readily usable and has a good set of variables.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;Thanks to Hadley Wickham’s excellent &lt;a href="https://r4ds.hadley.nz/data-visualize"&gt;R4DS&lt;/a&gt; for the inspiration!&lt;/p&gt;'><sup>20</sup></a> I’ve removed a few rows with NAs for our convenience, here’s a link to the file: <a href="data/penguins.csv"><code>penguins.csv</code></a>.</p>
 <p><a href="https://allisonhorst.github.io/palmerpenguins/articles/art.html"><img src="https://allisonhorst.github.io/palmerpenguins/reference/figures/lter_penguins.png" class="i6"></a></p>
 <div class="sourceCode" id="cb530"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># load in the penguins dataset</span></span>
 <span><span class="co"># (note: a few rows with NAs have been removed for simplicity)</span></span>
 <span><span class="va">penguins</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span></span>
-<span>  <span class="st">"https://bwu62.github.io/stat240-revamp/data/penguins_complete.csv"</span>,</span>
+<span>  <span class="st">"https://bwu62.github.io/stat240-revamp/data/penguins.csv"</span>,</span>
 <span>  show_col_types <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co"># print the first few rows of the data frame to check;</span></span>
