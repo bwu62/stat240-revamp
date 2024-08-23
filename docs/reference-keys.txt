@@ -143,6 +143,9 @@ regrouping
 ungrouping
 more-practice
 bonus-choropleth
+merging
+binding
+joining
 datasets
 datasets-list
 eruptions
