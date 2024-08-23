@@ -170,7 +170,7 @@ fertility %>%
 ```
 :::
 
-One additional small processing step we should do before continuing is convert `income.group` to an ordered factor (see section \@ref(ordered-data)), which will be important later.
+One additional small processing step we should do before continuing is convert `income_group` to an ordered factor (see section \@ref(ordered-data)), which will be important later.
 
 ```{r,tidy=F}
 fertility <- fertility %>% mutate(
