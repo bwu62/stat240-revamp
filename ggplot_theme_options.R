@@ -3,7 +3,8 @@ theme_set(theme_bw())
 
 # set better default colors for colorblind friendliness / better b/w printing
 options(ggplot2.discrete.fill = \(...) scale_fill_brewer(..., palette = "Set2"),
-        ggplot2.discrete.colour = \(...) scale_color_brewer(..., palette = "Dark2"))
+        ggplot2.discrete.colour = \(...) scale_color_brewer(..., palette = "Dark2"),
+        ggplot2.ordinal.colour = \(...) scale_color_brewer(..., palette = "Dark2"))
 
 # make background transparent, looks better in alert boxes
 theme_update(plot.background = element_rect(fill = "transparent", color = NA),
