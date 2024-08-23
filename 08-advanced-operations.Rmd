@@ -315,19 +315,16 @@ fertility %>%
 
 Here's a bonus [plotly choropleth](https://plotly.com/r/choropleth-maps) just for fun (you do NOT need to learn this). You can change the year and pan/zoom to see each specific country. Red color indicates countries below the replacement rate 2.1, white indicates at the replacement rate, and blue indicates above the replacement rate.
 
-<center>
+
 :::{.fold .s}
-```{r,fig.width=7.2,fig.height=4.45}
+```{r,tidy=F,fig.width=7.2,fig.height=4.45}
 library(plotly)
 plot_ly(fertility, type = "choropleth", locations = ~code, z = ~rate,
-        text = ~country, frame = ~year, zmin = 0.7, zmax = 8.9,
-        colorscale = list(
-          list(0, "rgb(255,0,0)"),
-          list(0.1707, "rgb(255,255,255)"),
-          list(1, "rgb(0,0,255)"))) %>% 
-  layout(margin = list(l = 0, r = 0, b = 10, t = 31)) %>% 
-  animation_opts(frame = 100)
+        text = ~country, frame = ~year, zmin = 0.7, zmax = 8.9, colorscale = list(
+        c(0, "rgb(255,0,0)"), c(0.1707, "rgb(255,255,255)"), c(1, "rgb(0,0,255)"))) %>%
+  layout(margin = list(l = 0, r = 0, b = 10, t = 31)) %>% animation_opts(frame = 100)
 ```
 :::
-</center>
+```
+:::
 
