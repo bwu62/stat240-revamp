@@ -455,13 +455,16 @@ fertility_raw
 
 First, there are several columns like `"SpecialNotes"`, `"Indicator Name"`, and `"Indicator Code"` that we don't need; we can remove those with `select()`. Country names are duplicated in both data frames, so we can pick one to use. Let's pick `"TableName"` since the names are slightly nicer (check this yourself). The rest of the columns should probably be renamed with `rename()`.
 
-Also, note the existence of several NAs in region and income. Again, verify this yourself, but these are all further subregion groupings of countries (e.g. AFE and AFW are for Eastern/Southern and Western/Central African countries), so we can simply drop these rows.
+We can also change the `"Low income"`, `"Lower middle income"`, ... values into just `"Low"`, `"Lower middle"`, ... to slightly simplify the column. Shorter labels will also be easier to work with in `filter()` or in plots.
+
+Note as well the existence of several NAs in region and income. Again, verify this yourself, but these are all further subregion groupings of countries (e.g. AFE and AFW are for Eastern/Southern and Western/Central African countries), so we can simply drop these rows.
 
 ```{r}
 # apply the processing steps above
 fertility_meta2 <- fertility_meta %>% 
   rename(code = "Country Code", country = "TableName", region = "Region", income_group = "IncomeGroup") %>% 
   select(code, country, region, income_group) %>%
+  mutate(income_group = sub(" income", "", income_group)) %>%
   filter(!is.na(income_group))
 fertility_raw2 <- fertility_raw %>% 
   select(2, "1960":last_col()) %>% 
