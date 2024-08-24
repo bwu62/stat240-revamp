@@ -478,13 +478,13 @@ Now comes the key step! We're going to use the `"code"` columns (which are the 3
 Note these data frames already satisfy the recommended conditions, i.e. the key columns have the same name and type and uniquely identify each country, and all other columns have different names, so there should be no issues.
 
 ```{r}
-fertility <- inner_join(fertility_meta2, fertility_raw2)
-fertility
+fertility_joined <- inner_join(fertility_meta2, fertility_raw2)
+fertility_joined
 ```
 
 This already looks pretty good! Our data frames joined nicely along the key `"code"` column, and now our region, income, and fertility data is in 1 single data frame instead of spread across 2 data frames.
 
-However, you may have noticed we still have a problem: our annual fertility rates are spread out across `r length(str_subset(names(fertility),"^\\d+$"))` columns, with each year in its own column. This is not compatible with our tidyverse functions. How do we fix it?
+However, you may have noticed we still have a problem: our annual fertility rates are spread out across `r length(str_subset(names(fertility_joined),"^\\d+$"))` columns, with each year in its own column. This is not compatible with our tidyverse functions. How do we fix it?
 
 
 ## Pivoting
