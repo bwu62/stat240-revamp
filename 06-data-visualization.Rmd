@@ -336,9 +336,9 @@ ggplot(penguins, aes(x = flipper_length_mm, y = species)) +
        title = "Flipper length box plots of species in Palmer penguins sample")
 ```
 
-This plot sacrifices the distributional complexity of the density plot, but in return we can very easily compare the summary statistics of each group, and overall arguably just "looks nicer" in my opinion.
+This plot sacrifices the distributional complexity of the density plot, but in return we can very easily compare the summary statistics of each group. In my opinion, this plot overall (arguably) just "looks nicer".
 
-Note 2 Adelie penguins were plotted as points instead, this is due to a common "rule of thumb" for box plots to label points more than 1.5&times;IQR away from each quartile as "outliers". Again, this is simply a default convention. See the help page for more details, as well as how to disable this.
+Notice that 2 Adelie penguins were plotted as points instead: this is due to a common "rule of thumb" for box plots to label points more than 1.5&times;IQR away from each quartile as "outliers". Again, this is simply a default convention. See the help page for more details, as well as how to disable this.
 
 
 ### Bar plots
