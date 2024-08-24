@@ -461,13 +461,13 @@ Note as well the existence of several NAs in region and income. Again, verify th
 
 ```{r}
 # apply the processing steps above
-fertility_meta2 <- fertility_meta %>% 
-  rename(code = "Country Code", country = "TableName", region = "Region", income_group = "IncomeGroup") %>% 
+fertility_meta2 <- fertility_meta %>%
+  rename(code = "Country Code", country = "TableName", region = "Region", income_group = "IncomeGroup") %>%
   select(code, country, region, income_group) %>%
   mutate(income_group = sub(" income", "", income_group)) %>%
   filter(!is.na(income_group))
-fertility_raw2 <- fertility_raw %>% 
-  select(2, "1960":last_col()) %>% 
+fertility_raw2 <- fertility_raw %>%
+  select(2, "1960":last_col()) %>%
   rename(code = "Country Code")
 print(fertility_meta2, n = 5)
 print(fertility_raw2, n = 5)
