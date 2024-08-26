@@ -504,7 +504,7 @@ ggplot(penguins, aes(y = flipper_length_mm, x = bill_depth_mm)) +
   geom_smooth(method = "lm", se = FALSE) +
   labs(x = "Bill depth (mm)", y = "Flipper length (mm)",
        color = "Species", shape = "Species",
-       title = "Flipper length vs bill depth by species for Palmer penguins")
+       title = "Flipper length vs bill depth by species for Palmer penguins sample")
 ```
 :::
 
@@ -566,7 +566,7 @@ For the purposes of this course, "line plot" or "trace plot" refer to `geom_line
 
 ### Bonus: area plots
 
-I wanted to throw in a bonus plot type here. This kind of composition-over-time data is also VERY commonly shown as a [stacked area plot](https://r-graph-gallery.com/136-stacked-area-chart.html) which can be made with `geom_area()`. I've also added a `scale_fill_manual()` configuration layer to manually specify a color palette to use more intuitive colors for each category.
+I wanted to throw in a bonus plot type here: area plots. This kind of composition-over-time data is also VERY commonly shown as a [stacked area plot](https://r-graph-gallery.com/136-stacked-area-chart.html) which can be made with `geom_area()`. I've also added a `scale_fill_manual()` configuration layer to manually specify a color palette to use more intuitive colors for each category.
 
 ```{r,tidy=F}
 ggplot(enrollment, aes(x = year, y = enrolled_millions, fill = sex)) +
@@ -575,12 +575,12 @@ ggplot(enrollment, aes(x = year, y = enrolled_millions, fill = sex)) +
        title = "U.S. College enrollment by sex")
 ```
 
-Compared to line plots with one line per category, the stacked area plot has the advantage of easily showing both relative proportions of categories as well as total sum of all categories, but this comes at a cost of being able to easily compare individual categories to each other. So a tradeoff, as usual.
+Compared to line plots with one line per category, the stacked area plot has the advantage of easily showing both relative proportions of categories as well as total sum of all categories, but this comes at a cost of being able to easily compare individual categories to each other...so a tradeoff, as usual.
 
 
 ### Aside: time axis
 
-Note the previous example used just the year number on the horizontal axis (since the data was already summarized as annual totals) but you can of course also use dates on an axis. For a quick example, we can load the [FRED U.S. unemployment rate](https://fred.stlouisfed.org/series/UNRATE) dataset and plot it.
+Note the previous example used just the year number on the horizontal axis (since the data was already summarized as annual totals), but you can certainly use dates on an axis, too. For a quick example, we can load the [FRED U.S. unemployment rate](https://fred.stlouisfed.org/series/UNRATE) dataset and plot it.
 
 ```{r,tidy=F}
 unemployment <- read_csv("https://fred.stlouisfed.org/graph/fredgraph.csv?id=UNRATE")
@@ -590,7 +590,7 @@ ggplot(unemployment, aes(x = DATE, y = UNRATE)) + geom_line() +
        title = "U.S. Unemployment rate")
 ```
 
-The  superficially look the same as the previous plot, however if we zoom in and plot just the last year of data, we can see the horizontal axis is in fact a special date type of axis:
+The horizontal axis here superficially looks the same as the previous plot of enrollment data, however if we zoom in and plot just the last year of data, we can see the horizontal axis is in fact a special date type of axis:
 
 ```{r,tidy=F}
 # plot just the last 12 months of data
