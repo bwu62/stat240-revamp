@@ -477,7 +477,7 @@ ggplot(penguins, aes(y = flipper_length_mm, x = bill_depth_mm,
        title = "Flipper length vs bill depth by species for Palmer penguins sample")
 ```
 
-This is clearly not right here; the data shows strong signs of linearity. We can force `geom_smooth()` to fit and plot linear regression models to each species by setting `method = "lm"`. We can also turn off the unnecessarily cluttering gray error margins with `se = FALSE` and get this much improved plot:
+The data shows strong signs of linearity^[Unsure of what linearity looks like? That's OK, we'll cover it later during the linear regression topic], so let's further refine the plot. We can force `geom_smooth()` to fit and plot linear regression models to each species by setting `method = "lm"`. We can also turn off the unnecessarily cluttering gray error margins with `se = FALSE` and get this much improved plot:
 
 ```{r,tidy=F}
 ggplot(penguins, aes(y = flipper_length_mm, x = bill_depth_mm,
