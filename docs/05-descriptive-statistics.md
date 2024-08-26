@@ -201,7 +201,6 @@ Most common distributions have only 1 mode, i.e. they are unimodal, but some dis
 <img src="05-descriptive-statistics_files/figure-html/unnamed-chunk-9-1.svg" width="672" style="display: block; margin: auto;" />
 
 
-
 ### Other measures
 
 The mean, median, and mode are by far the most common measures of central tendency, and they are the only ones you need to know for this course. However, I thought it might be worth briefly mentioning a few other averages with interesting applications just for fun:

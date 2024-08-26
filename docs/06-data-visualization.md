@@ -547,7 +547,7 @@ ggplot(penguins, aes(y = flipper_length_mm, x = bill_depth_mm,
 
 <img src="06-data-visualization_files/figure-html/unnamed-chunk-25-1.svg" width="672" style="display: block; margin: auto;" />
 
-Now we can clearly see bill depth and flipper length are in fact positively correlated within each species, as we might expect. This is an effect called [Simpson's paradox](https://en.wikipedia.org/wiki/Simpson%27s_paradox) and arises surprisingly often in datasets, most notably in 1973 when [UC Berkeley was accused of gender discrimination](www.brookings.edu/articles/when-average-isnt-good-enough-simpsons-paradox-in-education-and-earnings) and almost sued.^[Apparently [no lawsuit was actually ever filed](https://www.refsmmat.com/posts/2016-05-08-simpsons-paradox-berkeley.html), though many sources wrongly claim otherwise. This incident has become rather infamous in the annals of statistics.]
+Now we can clearly see bill depth and flipper length are in fact positively correlated within each species, as we might expect. This is an effect called [Simpson's paradox](https://en.wikipedia.org/wiki/Simpson%27s_paradox) and arises surprisingly often in datasets, most notably in 1973 when [UC Berkeley was accused of gender discrimination](https://www.brookings.edu/articles/when-average-isnt-good-enough-simpsons-paradox-in-education-and-earnings) and almost sued.^[Apparently [no lawsuit was actually ever filed](https://www.refsmmat.com/posts/2016-05-08-simpsons-paradox-berkeley.html), though many sources wrongly claim otherwise. This incident has become rather infamous in the annals of statistics.]
 
 When making scatter plots, it's important to remember that **correlation does NOT necessarily imply causation**. Do flippers grow longer BECAUSE they have long bills or vice versa? Obviously probably not, some penguins just grow bigger than others in their species by winning the genetic lottery and have bigger features overall.^[[Relevant XKCD](https://xkcd.com/552).]
 
@@ -647,8 +647,7 @@ However, the chronological nature of this data means **each data point has a spe
 ``` r
 ggplot(enrollment, aes(x = year, y = enrolled_millions, color = sex)) +
   geom_line() +
-  labs(x = "Time", y = "Enrolled (millions)",
-       color = "Sex", shape = "Sex",
+  labs(x = "Time", y = "Enrolled (millions)", color = "Sex",
        title = "U.S. College enrollment by sex")
 ```
 
@@ -662,7 +661,7 @@ ggplot(enrollment, aes(x = year, y = enrolled_millions,
                        color = sex, linetype = sex)) +
   geom_line(linewidth = 1.2) +
   labs(x = "Time", y = "Enrolled (millions)",
-       color = "Sex", shape = "Sex",
+       color = "Sex", linetype = "Sex",
        title = "U.S. College enrollment by sex")
 ```
 
@@ -953,8 +952,7 @@ ggplot() + geom_function(
   n = 1001                 # increase number of points used in drawing
 )                          # (improves smoothness of resulting curve)
 ```
-
-<img src="06-data-visualization_files/figure-html/unnamed-chunk-47-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="06-data-visualization_files/figure-html/unnamed-chunk-48-1.svg" width="672" style="display: block; margin: auto;" />
 
 If the function exists, but you need to modify the arguments, you can use `args = list(...)` any arguments specified inside will be directly passed to the chose function, for example:
 
@@ -969,7 +967,7 @@ ggplot() + geom_function(
 )
 ```
 
-<img src="06-data-visualization_files/figure-html/unnamed-chunk-48-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="06-data-visualization_files/figure-html/unnamed-chunk-49-1.svg" width="672" style="display: block; margin: auto;" />
 
 
 ## Bonus: pairs plot
@@ -990,7 +988,7 @@ penguins_subset = penguins[
 GGally::ggpairs(penguins_subset, aes(color = species))
 ```
 
-<img src="06-data-visualization_files/figure-html/unnamed-chunk-49-1.svg" width="768" style="display: block; margin: auto;" />
+<img src="06-data-visualization_files/figure-html/unnamed-chunk-50-1.svg" width="768" style="display: block; margin: auto;" />
 :::
 
 This plot is recommended ONLY as an initial exploratory plot; it should NOT be used in a more purposeful setting like a report since it lacks direction/focus.
