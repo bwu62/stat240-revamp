@@ -583,6 +583,11 @@ fertility
 
 Our `fertility` data set is now 100% fully cleaned and ready for exploration, visualization, and modeling!
 
+Before we move on, let's demonstrate one more usage for `pivot_wider()`. This function is also great for making human-friendly summary tables, especially when looking at how 3 variables interrelate. For example, suppose we want to look at, for each region, the proportion of countries in each income group.
 
-## cron build test!!
+```{r}
+# count how many countries in each region + income group
+fertility %>% 
+  count(region, income_group)
+```
 
