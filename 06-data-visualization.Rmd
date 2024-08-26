@@ -541,8 +541,7 @@ However, the chronological nature of this data means **each data point has a spe
 ```{r,tidy=F}
 ggplot(enrollment, aes(x = year, y = enrolled_millions, color = sex)) +
   geom_line() +
-  labs(x = "Time", y = "Enrolled (millions)",
-       color = "Sex", shape = "Sex",
+  labs(x = "Time", y = "Enrolled (millions)", color = "Sex",
        title = "U.S. College enrollment by sex")
 ```
 
@@ -552,8 +551,7 @@ By default the line appears very thin and may be hard to read for some people. W
 ggplot(enrollment, aes(x = year, y = enrolled_millions,
                        color = sex, linetype = sex)) +
   geom_line(linewidth = 1.2) +
-  labs(x = "Time", y = "Enrolled (millions)",
-       color = "Sex", shape = "Sex",
+  labs(x = "Time", y = "Enrolled (millions)", color = "Sex",
        title = "U.S. College enrollment by sex")
 ```
 
