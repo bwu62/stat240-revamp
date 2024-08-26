@@ -147,12 +147,11 @@ Most common distributions have only 1 mode, i.e. they are unimodal, but some dis
 ```{r,echo=F,fig.height=2,tidy=F}
 par(mar=c(0,0,0,0))
 L=6
-f = \(x) dnorm(x,-2.5)+dnorm(x,2,1.4)
+f = function(x) dnorm(x,-2.5)+dnorm(x,2,1.4)
 curve(f(x),-L,L,axes=F,xlab="",ylab="",asp=8,lwd=1.5)
 lines(c(-L,L),c(0,0),col="gray50",lwd=1.5)
 curve(f(x),-L,L,asp=8,lwd=1.5,add=T)
 ```
-
 
 
 ### Other measures
@@ -277,8 +276,8 @@ Below, we have 3 example (unimodal) distributions showing the kinds of skewness,
  3. A negative, or left skewed distribution, where [**mean**]{style="color:#009900"} $<$ [**median**]{style="color:#3333ff"} $<$ [**mode**]{style="color:#ff1919"}.
 
 ```{r,echo=F,fig.height=5,tidy=F}
-d = \(a) a/sqrt(1+a^2)
-spd = \(a) sqrt(2/pi)*d(a)
+d = function(a) a/sqrt(1+a^2)
+spd = function(a) sqrt(2/pi)*d(a)
 m = function(a){
   (s<-spd(a))-(1-pi/4)*(s)^3/(1-s^2)-sign(a)/2*exp(-2*pi/abs(a))
 }
@@ -314,7 +313,7 @@ curve(f(x),-L,L,n=1001,asp=4,add=T,lwd=wd1)
 text(-L*.98,f(0)*.9,"Unskewed (symmetric)",adj=c(0,1),cex=1.4)
 
 a = 4
-f = \(x) sn::dsn(x,xi=-w(a)*m(a),omega=w(a),alpha=a)
+f = function(x) sn::dsn(x,xi=-w(a)*m(a),omega=w(a),alpha=a)
 curve(f(x),-L,L,n=1001,axes=F,xlab="",ylab="",asp=4,lwd=wd1)
 lines(c(-L,L),c(0,0),col="gray50",lwd=wd1)
 lines(c(0,0),c(f(0)*.005,f(0)*.995),col=R,lwd=wd2)
@@ -327,7 +326,7 @@ curve(f(x),-L,L,n=1001,asp=4,add=T,lwd=wd1)
 text(-L*.98,f(0)*.9,"Positive (right) skew",adj=c(0,1),cex=1.4)
 
 a = -4
-f = \(x) sn::dsn(x,xi=-w(a)*m(a),omega=w(a),alpha=a)
+f = function(x) sn::dsn(x,xi=-w(a)*m(a),omega=w(a),alpha=a)
 curve(f(x),-L,L,n=1001,axes=F,xlab="",ylab="",asp=4,lwd=wd1)
 lines(c(-L,L),c(0,0),col="gray50",lwd=wd1)
 lines(c(0,0),c(f(0)*.005,f(0)*.995),col=R,lwd=wd2)
