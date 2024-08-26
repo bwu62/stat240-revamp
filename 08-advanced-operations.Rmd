@@ -14,14 +14,17 @@ By default, data frames are not grouped when created or imported. You can create
 After grouping, operations that normally run across all rows **now run across each group**. Here's a few simple examples using the familiar penguins dataset to start:
 
 ```{r,eval=F}
-# import tidyverse, tweak some options (optional), and load dataset
+# import tidyverse, import magrittr (for extra %T>% pipe),
+# tweak some readr/ggplot options (optional), and load dataset
 library(tidyverse)
+library(magrittr)
 options(readr.show_col_types = FALSE)
 source("https://bwu62.github.io/stat240-revamp/ggplot_theme_options.R")
 penguins <- read_csv("https://bwu62.github.io/stat240-revamp/data/penguins.csv")
 ```
 ```{r,echo=F}
 library(tidyverse)
+library(magrittr)
 source("ggplot_theme_options.R")
 penguins <- read_csv("data/penguins.csv")
 ```
