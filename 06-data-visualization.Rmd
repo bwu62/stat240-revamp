@@ -551,7 +551,8 @@ By default the line appears very thin and may be hard to read for some people. W
 ggplot(enrollment, aes(x = year, y = enrolled_millions,
                        color = sex, linetype = sex)) +
   geom_line(linewidth = 1.2) +
-  labs(x = "Time", y = "Enrolled (millions)", color = "Sex",
+  labs(x = "Time", y = "Enrolled (millions)",
+       color = "Sex", linetype = "Sex",
        title = "U.S. College enrollment by sex")
 ```
 
