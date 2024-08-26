@@ -515,7 +515,7 @@ scores_wide <- tibble(
 scores_wide
 ```
 
-Despite the difference in shape and dimensions, the data contained in these data frames is identical. These are often called the **long(er)** and **wide(er)** representations of data, so named because one tends to be longer (i.e. more rows) and the other wider (i.e. more columns). Generally, **long formats are easier to use with R/tidyverse**, whereas **wide formats are easier for humans to read**, but there are of course exceptions to everything.
+Despite the difference in shape and dimensions, the data contained in these data frames is identical. These are often called the **long** and **wide** representations of data, so named because one tends to be longer (i.e. more rows) and the other wider (i.e. more columns). Generally, **long formats are easier to use with R/tidyverse**, whereas **wide formats are easier for humans to read**, but there are of course exceptions to everything.
 
 Usually, for data to be considered "tidy" it needs to be in a longer format. [Tidy data](https://tidyr.tidyverse.org) is data that satisfies the following:
 
