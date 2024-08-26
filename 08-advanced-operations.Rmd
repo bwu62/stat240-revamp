@@ -390,9 +390,7 @@ y
 
 Suppose you want to join `x` and `y` using column A as the "key", i.e. "A" is the column that uniquely matches rows across data frames. There are 4 different joins you can use: `inner_join()`, `full_join()`, `left_join()`, `right_join()` , depending on which rows you want in the result:
 
-<center><div style="width:491px;height:258px;overflow:hidden">
-<a href="https://tavareshugo.github.io/r-intro-tidyverse-gapminder/08-joins/index.html"><img src="joins.svg"></a>
-</div></center>
+[![](joins.svg)](https://tavareshugo.github.io/r-intro-tidyverse-gapminder/08-joins/index.html)
 
  - `inner_join(x, y)` matches rows using key variable(s), then **returns only rows in both `x` and `y`**,
  - `full_join(x, y)` matches rows using key variable(s), then **returns all rows in either `x` or `y`**,
