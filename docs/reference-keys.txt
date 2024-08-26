@@ -149,6 +149,7 @@ joining
 example-cleaning-fertility
 pivoting
 example-finish-cleaning-fertility
+cron-build-test
 datasets
 datasets-list
 eruptions
