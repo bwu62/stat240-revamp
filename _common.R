@@ -2,9 +2,8 @@
 # ensure necessary packages are installed
 list.of.packages = c(
   "devtools", "rmarkdown", "tidyverse",
-  "downlit", "bookdown", "DescTools",
-  "sn", "palmerpenguins", 
-  "GGally", "plotly"
+  "downlit", "DescTools", "sn",
+  "palmerpenguins", "GGally", "plotly"
 )
 
 # make sure to use the github dev
