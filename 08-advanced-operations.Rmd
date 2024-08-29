@@ -321,7 +321,7 @@ library(plotly)
 plot_ly(fertility, type = "choropleth", locations = ~code, z = ~rate,
         text = ~country, frame = ~year, zmin = 0.7, zmax = 8.9, colorscale = list(
         c(0, "rgb(255,0,0)"), c(0.1707, "rgb(255,255,255)"), c(1, "rgb(0,0,255)"))) %>%
-  layout(margin = list(l = 0, r = 0, b = 10, t = 31)) %>% animation_opts(frame = 100)
+  layout(margin = list(l = 10, r = 10, b = 10, t = 35)) %>% animation_opts(frame = 100)
 ```
 :::
 
