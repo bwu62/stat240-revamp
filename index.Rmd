@@ -25,7 +25,7 @@ For these notes, no prior R or computer science knowledge is assumed; everything
 
 As you consult these notes, please keep in mind the aim is **NOT to teach you everything you need to know about each topic, but rather equip you with a foundational understanding and encourage you to learn and explore further** on your own. As such, we will typically only cover the basic usage of most operations and demonstrate a few key examples, leaving the details for you to practice.
 
-Also note occasionally some bonus/extra content considered advanced knowledge may be mentioned in passing for sake of completeness in discussing a topic, but these are considered **outside the scope of what you need to know**.
+Also note occasionally some bonus/extra/aside content considered advanced knowledge may be mentioned in passing for sake of completeness in discussing a topic, but these are considered **outside the scope of what you need to know**.
 
 
 ## How to use this book {-}
