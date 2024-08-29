@@ -572,13 +572,9 @@ df.demo %>% summarize(
 
 If you just want to apply one function to all columns, you can use `summarize_all()` which is a shortcut for exactly this. For example, we can apply the function `\(x) mean(is.na(x))*100` to get the percent missing in each column:
 
-```{r,eval=F}
+```{r}
 # get percent missing in each column
 df.demo %>% summarize_all(\(x) mean(is.na(x)) * 100)
-```
-```{r,echo=F}
-# get percent missing in each column
-df.demo %>% summarize_all(function(x) mean(is.na(x)) * 100)
 ```
 
 :::{.note}

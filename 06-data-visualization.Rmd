@@ -38,8 +38,8 @@ options(ggplot2.discrete.fill = \(...) scale_fill_brewer(..., palette = "Set2"),
 library(tidyverse)
 options(readr.show_col_types = FALSE)
 theme_set(theme_bw())
-options(ggplot2.discrete.fill = function(...) scale_fill_brewer(..., palette = "Set2"),
-        ggplot2.discrete.colour = function(...) scale_color_brewer(..., palette = "Dark2"))
+options(ggplot2.discrete.fill = \(...) scale_fill_brewer(..., palette = "Set2"),
+        ggplot2.discrete.colour = \(...) scale_color_brewer(..., palette = "Dark2"))
 # make background transparent, looks better in alert boxes
 theme_update(plot.background = element_rect(fill = "transparent", color = NA),
              panel.background = element_rect(fill = rgb(1, 1, 1, .75)),
@@ -779,16 +779,9 @@ Functions can be easily plotted with [`geom_function(fun = ...)`{.R}](https://gg
 
 If the function isn't predefined, you can easily define it with `\(x) ...` for example:
 
-```{r,eval=F}
+```{r}
 ggplot() + geom_function(
   fun = \(x) x^2 + 1,      # define x²+1
-  xlim = c(-2, 2),         # set limits
-  n = 1001                 # increase number of points used in drawing
-)                          # (improves smoothness of resulting curve)
-```
-```{r,echo=F}
-ggplot() + geom_function(
-  fun = function(x) x^2 + 1,      # define x²+1
   xlim = c(-2, 2),         # set limits
   n = 1001                 # increase number of points used in drawing
 )                          # (improves smoothness of resulting curve)
