@@ -530,7 +530,7 @@ In general expressions involving an NA will result in an NA output (though there
 NAs (and also NaNs) in a vector can be identified using `is.na()` which produces a TRUE/FALSE vector corresponding to if a value is NA or not:
 
 ```{r}
-# demo missing vector
+# demo missing vector, note both NA/NaN count as missing
 x <- c(3, 8, NA, 2, NaN)
 # which values are NA?
 is.na(x)
