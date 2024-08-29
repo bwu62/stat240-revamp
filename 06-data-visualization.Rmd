@@ -76,7 +76,7 @@ options(width = 92)
 penguins
 ```
 ```{r date-unclass1,echo=F,results='asis'}
-cat(glue::glue('``` r
+cat(glue::glue("``` r
 # reset width to its original value
 options(width = {full_width})
 # another option is the glimpse() function which prints sideways,
