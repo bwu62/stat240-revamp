@@ -243,14 +243,10 @@ This plot is now ready for use!
 We will NOT cover every option for every plot type, but occasionally, we may highlight a few important options for you to experiment with and explore further on your own. For `geom_histogram()`, besides unstacking bars with `position = "identity"` argument as we showed above, you may also want to control how and where the bins are set. There's several ways of doing this briefly outlined below---note you can only choose ONE method!
 
 ```{r,include=F}
-p <- ggplot(penguins, aes(x = flipper_length_mm)) +
-  geom_histogram()
+p <- ggplot(penguins, aes(x = flipper_length_mm)) + geom_histogram()
 bins <- ggplot_build(p)$data[[1]] %>%
-  {
-    paste0("(", round(.$xmin, 2), ",", round(.$xmax, 2), "]")
-  } %>%
-  suppressMessages() %>%
-  suppressWarnings()
+  {paste0("(", round(.$xmin, 2), ",", round(.$xmax, 2), "]")} %>%
+  suppressMessages %>% suppressWarnings
 ```
 
  - You can set the `bins` argument to set that many total bins, which will be used to evenly divide up the range of the data. E.g. by default, `bins = 30` is used to draw 30 bins, which is generally agreed to be a sensible default, even though it can create bins with strange decimal bounds (like in this example, where the bins are `r bins[1]`, `r bins[2]`, ..., `r bins[length(bins)]`).
