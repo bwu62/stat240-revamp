@@ -157,7 +157,7 @@ Unfortunately, base R does not have a convenient function for computing the mode
 #              sort(- ...) sorts by descending order, then
 #              names(...)[1] extracts the name of the first item
 # note this function doesn't return multiple modes if there are more than 1
-Mode <- function(x) names(sort(-table(x)))[1]
+Mode <- \(x) names(sort(-table(x)))[1]
 ```
 
 

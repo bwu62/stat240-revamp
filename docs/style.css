@@ -316,12 +316,6 @@ ul.book-toc > li:not(:has(span.header-section-number)) {
 }
 
 
-/* REMEMBER TO REMOVE LATER!! */
-main > div[class*="section level1"] {
-    padding-bottom: 500px;
-}
-
-
 /* https://stackoverflow.com/a/37839683/25278020 */
 
 .showopt {
@@ -360,4 +354,10 @@ div.html-widget{
   margin-right:auto!important;
   height:unset!important;
   width:100%!important;
+}
+
+
+/* add some bottom space */
+main > div[class*="section level1"] {
+    padding-bottom: 100px;
 }

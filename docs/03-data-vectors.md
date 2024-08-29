@@ -1063,7 +1063,7 @@ cat(
 # please pardon the uneven text-wrapping of the output below:
 ```
 <pre class="wrapCode">
- _-,;:!?.'"()[]{}@*/\&#%`^+<=>|~$0123456789aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ
+'- !"#$%&()*,./:;?@[\]^_`{|}~+<=>0123456789aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ
 </pre>
 
 Note the third character in the sequence is a space, which comes after single quote and hyphen, but before any other symbol, number, or letter.

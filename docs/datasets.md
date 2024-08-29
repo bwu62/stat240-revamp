@@ -29,9 +29,9 @@ Here's a convenient list of all dataset files generated. Note that **not ALL fil
  - [`eruptions_recent.delim`](data/eruptions_recent.delim)
  - [`eruptions_recent.tsv`](data/eruptions_recent.tsv)
  - [`eruptions_recent.xlsx`](data/eruptions_recent.xlsx)
+ - [`fertility.csv`](data/fertility.csv)
  - [`fertility_meta.csv`](data/fertility_meta.csv)
  - [`fertility_raw.csv`](data/fertility_raw.csv)
- - [`fertility.csv`](data/fertility.csv)
  - [`penguins.csv`](data/penguins.csv)
 
 Alternatively, you can also run the following line, which will **download ALL files above to your current working directory**. It's recommended to first set your working directory to an appropriate place before running this, e.g. to the `data/` directory in your `STAT240/` course folder.
@@ -331,7 +331,7 @@ last.yy <- tryCatch({
   rvest::read_html("https://nces.ed.gov/programs/digest/current_tables.asp") %>%
   rvest::html_nodes(xpath="//select[@name='quickjump']/option[2]/text()") %>% 
   as.character %>% as.numeric
-},error = function(e){
+},error = \(e){
   (lubridate::year(Sys.Date()-3*30)-1)
 }) %% 100
 ```

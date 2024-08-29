@@ -952,7 +952,8 @@ ggplot() + geom_function(
   n = 1001                 # increase number of points used in drawing
 )                          # (improves smoothness of resulting curve)
 ```
-<img src="06-data-visualization_files/figure-html/unnamed-chunk-48-1.svg" width="672" style="display: block; margin: auto;" />
+
+<img src="06-data-visualization_files/figure-html/unnamed-chunk-47-1.svg" width="672" style="display: block; margin: auto;" />
 
 If the function exists, but you need to modify the arguments, you can use `args = list(...)` any arguments specified inside will be directly passed to the chose function, for example:
 
@@ -967,7 +968,7 @@ ggplot() + geom_function(
 )
 ```
 
-<img src="06-data-visualization_files/figure-html/unnamed-chunk-49-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="06-data-visualization_files/figure-html/unnamed-chunk-48-1.svg" width="672" style="display: block; margin: auto;" />
 
 
 ## Bonus: pairs plot
@@ -988,7 +989,7 @@ penguins_subset = penguins[
 GGally::ggpairs(penguins_subset, aes(color = species))
 ```
 
-<img src="06-data-visualization_files/figure-html/unnamed-chunk-50-1.svg" width="768" style="display: block; margin: auto;" />
+<img src="06-data-visualization_files/figure-html/unnamed-chunk-49-1.svg" width="768" style="display: block; margin: auto;" />
 :::
 
 This plot is recommended ONLY as an initial exploratory plot; it should NOT be used in a more purposeful setting like a report since it lacks direction/focus.
