@@ -827,6 +827,7 @@ This includes `if`/`else` statements and `for`/`while` loops. If you're interest
 
 
 
+
 <!--
 <details><summary>Exercise solutions</summary>
 ```{r}
