@@ -230,7 +230,7 @@ fertility_change <- fertility %>%
   mutate(
     rate2000 = first(rate),
     rate2022 = last(rate),
-    change = rate2022 - rate2000
+    change   = rate2022 - rate2000
   ) %>%
   select(country, region, rate2000, change, rate2022) %>%
   ungroup() %>%
