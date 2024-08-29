@@ -61,7 +61,7 @@ The notes pages are mostly composed of paragraph of text (like this one), and co
 
 The block below is a code chunk. They are frequently annotated with comments. Note you can copy the contents of a chunk using the clipboard icon in the corner. Also note functions automatically link to their help pages with usage notes, argument explanations, and examples.
 
-```{r}
+```{r hello-world}
 # this is a code chunk; lines starting with # are comments
 # R code in here will be run and output shown below
 print("Hello world!")
@@ -149,7 +149,7 @@ other notes to self:
 
 -->
 
-```{r include=FALSE}
+```{r update-packages-bib,include=FALSE}
 # automatically create a bib database for R packages
 knitr::write_bib(c(
   .packages(), "bookdown", "knitr", "rmarkdown"

@@ -99,14 +99,14 @@ sd(data)
 
 These ["vectorized"](https://osu-codeclub.github.io/posts/basics_04) operations also work with logical comparisons, and these produce **logical vectors**. For example, we can ask R which observations are even:
 
-```{r basic-logic}
+```{r basic-logic1}
 # recall %% gives the division remainder
 data %% 2 == 0
 ```
 
 Or we can ask which of our values are within 1 standard deviation of the mean:
 
-```{r basic-logic-2}
+```{r basic-logic2}
 # recall & is the AND operator
 # note the inequality checks EACH value of data against the other side
 (mean(data) - sd(data) <= data) & (data <= mean(data) + sd(data))
@@ -467,7 +467,7 @@ In this class we will NOT cover regular expressions to any real detail again due
 
 However, there are a few useful stringr functions that do not have counterparts in base R (or at least whose counterparts require much more complex expressions). Here is a *small* curation of them.
 
-```{r import-stringr}
+```{r load-stringr}
 # since stringr is a "core" tidyverse package,
 # you can load it (+other core packages) with library(tidyverse)
 # you can also just load stringr by itself if that's all you need
@@ -567,13 +567,13 @@ Ordered categorical data (also called ordinals) is extremely common, so it's wor
 
 For example, suppose you have the following data vector of dosage level data for some subjects:
 
-```{r}
+```{r ordered-factors1}
 doses <- c("Low", "High", "Medium", "Low", "High")
 ```
 
 Naturally, this should be ordered Low < Medium < High but it currently has no ordering structure. We can fix it like this:
 
-```{r}
+```{r ordered-factors2}
 doses <- factor(doses, levels = c("Low", "Medium", "High"), ordered = TRUE)
 doses
 ```
@@ -611,7 +611,7 @@ In R, it's important to remember **not to reinvent the wheel**; most actions alr
 
 One set of readr functions useful here are the `parse_number()` and `parse_logical()` functions (converting to a string is trivial and can basically always be done using the `as.character()` function). These functions are quite smart and can ignore extra characters and just extract the relevant numerical info.
 
-```{r import-readr}
+```{r load-readr}
 # since readr is also a "core" tidyverse package,
 # you can use library(tidyverse) or library(readr)
 library(readr)
@@ -624,7 +624,7 @@ is.numeric(prices)
 
 This will also work with things like percent symbols, but note it simply ignores the symbol instead of treating it as dividing by 100.
 
-```{r }
+```{r parse-number}
 # demonstrate parsing percentages
 parse_number(c("30%", "100%", "1,500%"))
 ```
@@ -639,7 +639,7 @@ Finally, let's talk about date vectors (note we are not talking about date+time 
 
 Before we run some examples, we're going to load in the [lubridate](https://lubridate.tidyverse.org/) package, which is designed to make working with dates super easy and is also a part of Tidyverse. However, it's not actually a core package, which means **it MUST be loaded in separately** each time you wish to use it!
 
-```{r import lubridate}
+```{r load-lubridate}
 library(lubridate)
 ```
 
@@ -718,7 +718,7 @@ In some cases (specifically, if dates in a dataset are already represented in st
 
 In lubridate, the [parser functions](https://lubridate.tidyverse.org/reference/ymd.html) `mdy()`, `dmy()`, `ymd()` (as well as their rarer siblings `ydm()`, `myd()`, and `dym()`) are used to parse date data into proper date objects. The **only difference between these functions is the *order* they expect to see date components**, e.g. `mdy()` is used when the data is ordered month, day, then year (which is common in the US), and `dmy()` is used when the date data is data is ordered day, month, then year (which is generally preferred outside the US). These functions are **extremely robust and automagically recognize a wide range of formats**, and of course they're all vectorized! Here's a few examples:
 
-```{r .mdyDemos,include=F}
+```{r .mdyDemos1,include=F}
 # create some date strings to demo parsing
 .mdyDemos <- c(
   format(date, "%m/%d/%y") %>% str_replace_all("(^|/)0", "\\1"),
@@ -739,7 +739,7 @@ mdy(c(
 ```{r .mdyDemos3,echo=F}
 mdy(.mdyDemos)
 ```
-```{r .dmyDemos,include=F}
+```{r .dmyDemos1,include=F}
 # create some date strings to demo parsing
 .dmyDemos <- c(
   format(date, "%d/%m/%y") %>% str_replace_all("(^|/)0", "\\1"),
@@ -750,14 +750,14 @@ mdy(.mdyDemos)
     str_replace("( \\d+) of", paste0(" ", scales::label_ordinal()(as.numeric(format(date, "%d"))), " of"))
 )
 ```
-```{r .dmyDemos1,echo=F,results='asis'}
+```{r .dmyDemos2,echo=F,results='asis'}
 cat(glue::glue('``` r
 dmy(c(
   "{toString(.dmyDemos)}"
 ))
 ```'))
 ```
-```{r .dmyDemos2,echo=F}
+```{r .dmyDemos3,echo=F}
 dmy(.dmyDemos)
 ```
 
@@ -848,7 +848,7 @@ wday(dates2, label = TRUE, abbr = FALSE)
 :::{.note}
 If your system is in a different language, you may see the code above output non-English names for the months and days of the week. This is because R uses your [system's locale](https://en.wikipedia.org/wiki/Locale_(computer_software)) to determine how to output some values. This is extremely easy to fix; simply run the line of code below ONCE in your console, then close and restart Rstudio for the changes to permanently take effect.
 
-```{r,eval=F,tidy=F}
+```{r fix-locale,eval=F,tidy=F}
 write('\ninvisible(Sys.setlocale("LC_TIME","C"))\n',"~/.Rprofile",1,T)
 ```
 

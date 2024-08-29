@@ -5,7 +5,7 @@
 [dplyr](https://dplyr.tidyverse.org) is the core Tidyverse package for transforming and your raw datasets into a clean and usable format ([link to cheat sheet](https://rstudio.github.io/cheatsheets/data-transformation.pdf)). Its functions are versatile, performant, and have a consistent and user friendly syntax. These traits make it highly suitable for data science at all levels.
 
 
-```{r,eval=F}
+```{r setup-all1,eval=F}
 # import all core tidyverse packages
 library(tidyverse)
 # optional: change default print to 5 rows to save vertical space, and
@@ -14,7 +14,7 @@ options(pillar.print_min = 5, readr.show_col_types = FALSE)
 # optional: change default ggplot theme options (personal preference)
 source("https://bwu62.github.io/stat240-revamp/ggplot_theme_options.R")
 ```
-```{r,echo=F}
+```{r setup-all2,echo=F}
 # import all core tidyverse packages
 library(tidyverse)
 # optional: change default print to 5 rows to save vertical space
@@ -78,14 +78,14 @@ The [magrittr help page](https://magrittr.tidyverse.org/index.html#usage) has so
 
 For now, we're going to continue using the Palmer penguins dataset [`penguins.csv`](https://bwu62.github.io/stat240-revamp/data/penguins.csv) as an example data frame. Let's load the data in:
 
-```{r,eval=F}
+```{r import-penguins1,eval=F}
 # load in the familiar penguins dataset
 penguins <- read_csv("https://bwu62.github.io/stat240-revamp/data/penguins.csv")
 # print the first few rows of the data frame to check
 # again this data frame is too wide, and some columns are cut off
 print(penguins, n = 5)
 ```
-```{r,echo=F}
+```{r import-penguins2,echo=F}
 penguins <- read_csv("data/penguins.csv")
 print(penguins, n = 5)
 ```
@@ -108,7 +108,7 @@ We begin with the column-wise dplyr functions, i.e. the functions that primarily
 
 It has a very flexible syntax: you can use subset either by numeric position, by name, by ranges, by exclusion, or even using special [selector functions](https://tidyselect.r-lib.org/reference/starts_with.html). It can also be used to reorder columns. Here are a few examples:
 
-```{r}
+```{r select1}
 # select just species, sex, flipper length, and body mass
 penguins %>%
   select(species, sex, flipper_length_mm, body_mass_g)
@@ -144,7 +144,7 @@ penguins %>%
 
 :::{.note}
 Here it's worth reminding that `df %>% select(...)` **does NOT modify the original input `df`**, instead it effectively makes a copy of `df` and runs on that instead. Example:
-```{r}
+```{r reminder-to-save}
 # show starting data frame
 print(penguins)
 # select a subset of columns
@@ -153,7 +153,7 @@ penguins %>% select(species, flipper_length_mm)
 print(penguins)
 ```
 If you want to save the result of `df %>% select(...)` you must **manually save the output with `<-`**. In general, we always recommend saving to a NEW object instead of overwriting the original object because this is non-destructive (i.e. does not lose any data) and less likely to create code errors later on. It's also easier to debug.
-```{r}
+```{r select2}
 # saving to a new object with a descriptive name is ALWAYS recommended!
 penguins_fewcols <- penguins %>% select(species, flipper_length_mm)
 print(penguins_fewcols)
@@ -162,11 +162,11 @@ print(penguins_fewcols)
 penguins <- penguins %>% select(species, flipper_length_mm)
 print(penguins)
 ```
-```{r,eval=F}
+```{r reload-penguins1,eval=F}
 # reload data frame since we need it for other examples
 penguins <- read_csv("https://bwu62.github.io/stat240-revamp/data/penguins.csv")
 ```
-```{r,echo=F}
+```{r reload-penguins2,echo=F}
 # reload data frame since we need it for other examples
 penguins <- read_csv("data/penguins.csv")
 ```
@@ -179,7 +179,7 @@ penguins <- read_csv("data/penguins.csv")
 
 `rename()` is used to rename columns. This is another common operation right after loading a dataset. Examples:
 
-```{r}
+```{r rename}
 # rename species as species_name, and island as island_name
 penguins %>%
   rename(species_name = species, island_name = island)
@@ -201,7 +201,7 @@ df_badname %>%
 
 This is outside our scope, but you can also apply a function to many/all columns using `rename_with()`. For example:
 
-```{r}
+```{r rename-with}
 penguins %>%
   rename_with(toupper)
 ```
@@ -215,7 +215,7 @@ The key thing to remember is the expressions can be **any vector computation usi
 
 For convenience, let's select just a few columns to continue with the demonstration:
 
-```{r}
+```{r penguins-subset}
 penguins2 <- penguins %>%
   select(species, sex, bill_length_mm, bill_depth_mm)
 print(penguins2)
@@ -223,7 +223,7 @@ print(penguins2)
 
 Now, here's a few example applications of `mutate()` using `penguins2`
 
-```{r}
+```{r mutate}
 # we can easily add columns of constants
 penguins2 %>%
   mutate(study = "Palmer", century = 21, true = TRUE)
@@ -259,7 +259,7 @@ A notable function that is extremely useful inside `mutate()` is `case_when()` w
 
 For example, suppose we want to create some new column differently depending on sex and bill depth:
 
-```{r}
+```{r case-when}
 # use case_when() inside a mutate() depending on some conditions
 # .default sets the "default" result, when no conditions match OR when we have NAs
 penguins2 %>% mutate(
@@ -283,7 +283,7 @@ The [dplyr cheat sheet](https://rstudio.github.io/cheatsheets/data-transformatio
 
 The basic syntax is `df %>% summarize(col1 = expr1, col2 = expr2, ...)` where again `col1`, `col2`, ... are names of new summary columns, and `expr1`, `expr2`, ... are R expressions that reduce to a single value. Example:
 
-```{r}
+```{r summarize1}
 # let's compute several summary statistics of bill length
 penguins2 %>% summarize(
   mean_length   = mean(bill_length_mm),
@@ -300,7 +300,7 @@ The last function in the chunk above `n()` is a special function that **takes NO
 
 A few other common applications of `summarize()` in data exploration:
 
-```{r, tidy=F}
+```{r summarize2, tidy=F}
 # compute a few other summaries to explore the data
 # note similar to mutate, we can immediately use a summarized column
 penguins2 %>% summarize(
@@ -320,7 +320,7 @@ penguins2 %>% summarize(
 
 It's also common to use `summarize()` to compute statistical results. For example we can calculate the 95% confidence intervals for the mean bill length and depth (ignoring species/sex) which is something we will cover in more detail later in the course:
 
-```{r,tidy=F}
+```{r summarize3,tidy=F}
 # we first compute some intermediate statistics,
 # then use those to compute the intervals
 penguins2 %>% summarize(
@@ -360,7 +360,7 @@ Similar to `mutate()` and `summarize()`, you can filter by **constructing a logi
 
 Let's return to using our original `penguins` data frame. Here's a few filtering examples:
 
-```{r}
+```{r filter1}
 # filter to get penguins >=6kg
 penguins %>%
   filter(body_mass_g >= 6000)
@@ -380,7 +380,7 @@ penguins %>% filter(
 )
 ```
 
-```{r,tidy=F}
+```{r filter2,tidy=F}
 # an example of an even more complicated expression,
 # this line gets penguins with body mass and bill length
 # within a 1 SD circle centered around the mean of both,
@@ -402,7 +402,7 @@ penguins %>%
 
 There are several [`slice...()`{.R}](https://dplyr.tidyverse.org/reference/slice.html) functions in dplyr for slicing out specific rows, similar to `filter()` but more specialized. The main one `slice()` is used to select by position (i.e. by row number). Examples:
 
-```{r}
+```{r slice}
 # slice rows 11-15
 penguins %>% slice(11:15)
 # slice every 10th row
@@ -413,7 +413,7 @@ penguins %>% slice(-(1:200))
 
 `slice_head()` and `slice_tail()` specifically slice out rows at the top or bottom, by either number `n` or proportion `prop`. Examples:
 
-```{r}
+```{r slice-head-tail}
 # get the first 25 rows
 penguins %>% slice_head(n = 25)
 # get the last 10% of rows
@@ -422,14 +422,14 @@ penguins %>% slice_tail(prop = 0.1)
 
 `slice_min()` and `slice_max()` are used to slice rows which contain the min/max values for a specific variable. For example, suppose we want to get the penguin with the smallest body mass:
 
-```{r}
+```{r slice-min-max1}
 # get smallest penguin by mass
 penguins %>% slice_min(body_mass_g, n = 1)
 ```
 
 If there are ties, by default **all tied rows are printed**, e.g. suppose we want the 3 penguins with the longest flipper lengths:
 
-```{r}
+```{r slice-min-max2}
 # get 3 penguins with longest flippers
 penguins %>% slice_max(flipper_length_mm, n = 3)
 ```
@@ -438,7 +438,7 @@ It looks like 7 different Gentoo penguins are all tied for 2nd place, so they ar
 
 You can also set `prop` instead of `n` to return by percent. E.g. let's get the top 1% of penguins by bill length:
 
-```{r}
+```{r slice-min-max3}
 # get top 1% of penguins by bill length
 penguins %>% slice_max(bill_length_mm, prop = 0.01)
 ```
@@ -456,7 +456,7 @@ The syntax is `df %>% arrange(expr1, expr2, ...)` where `expr1`, `expr2`, ... ca
 
 Examples of `arrange()`:
 
-```{r}
+```{r arrange}
 # sort penguins by ascending flipper length
 penguins %>% arrange(flipper_length_mm)
 # sort penguins by descending flipper length
@@ -513,7 +513,7 @@ Let's now briefly discuss R techniques for handling NAs. First it's important to
 
 Even though they're not the exact same, both `NA` and `NaN` are considered missing in R and can be handled together using the operations covered below. It's also worth noting `NA` is NOT the same as `"NA"`, i.e. a string made of the letters `"N"` and `"A"`
 
-```{r}
+```{r na-vs-nan-vs-string-na}
 # check if two objects are the exact same
 identical(NA, NA)
 identical(NA, NaN)
@@ -527,7 +527,7 @@ In general expressions involving an NA will result in an NA output (though there
 
 NAs (and also NaNs) in a vector can be identified using `is.na()` which produces a TRUE/FALSE vector corresponding to if a value is NA or not:
 
-```{r}
+```{r is.na}
 # demo missing vector, note both NA/NaN count as missing
 x <- c(3, 8, NA, 2, NaN)
 # which values are NA?
@@ -538,7 +538,7 @@ x[!is.na(x)]
 
 Since this is an ordinary vectorized function, it can be used inside any compatible dplyr function above, such as `mutate()`, `summarize()`, `filter()`, and `arrange()`. To demonstrate these, let's create a demo data frame with a mix of data types as well as some missing values.
 
-```{r}
+```{r na-demo-df}
 # demo data frame with missing values
 df.demo <- tibble(
   date = ymd("24.1.1") + c(0:3, 5),
@@ -551,13 +551,13 @@ df.demo
 
 A common rudimentary of checking missingness is with the aforementioned `summary()` function from section \@ref(basic-df). Note this is the base R `summary()`, NOT the Tidyverse `summarize()` we just covered above. Note however it only reports NAs for some columns, depending on type.
 
-```{r}
+```{r summary-df}
 summary(df.demo)
 ```
 
 A better way is to pipe into `summarize()` and use `is.na()` with either `sum()` for count or `mean()` for proportion of missing values. You can also add `!` in front of `is.na()` to get the count/proportion of non-missing values. All 4 combinations are shown below:
 
-```{r}
+```{r summarize-is.na}
 # get the count/proportion of missing/non-missing values
 df.demo %>% summarize(
   num_date_na   = sum(is.na(date)),
@@ -570,7 +570,7 @@ df.demo %>% summarize(
 
 If you just want to apply one function to all columns, you can use `summarize_all()` which is a shortcut for exactly this. For example, we can apply the function `\(x) mean(is.na(x))*100` to get the percent missing in each column:
 
-```{r}
+```{r summarize-all}
 # get percent missing in each column
 df.demo %>% summarize_all(\(x) mean(is.na(x)) * 100)
 ```
@@ -581,7 +581,7 @@ If you check the help page of `summarize_all()` you'll notice this function is t
 
 Of course you can also use `filter()` to inspect rows with missing values in some (or all) columns. Examples:
 
-```{r}
+```{r filter-is.na}
 # get rows with missing x
 df.demo %>% filter(is.na(x))
 # get rows with missing x or y
@@ -597,7 +597,7 @@ One more thing, did you notice there's actually another form of missingness in `
 
 One easy way to fix this is to use `complete()` and `full_seq()` from [tidyr](https://tidyr.tidyverse.org), yet another core Tidyverse package. This combination can be used to generate a `complete()` data frame by generating a `full_seq()`--uence of values for some specified column. Other columns are filled with NAs by default. Example:
 
-```{r}
+```{r tidyr-complete-na}
 # this generates a full sequence of dates
 # the argument 1 indicates the sequence increases by 1 each observation
 df.demo %>% complete(date = full_seq(date, 1))
@@ -615,7 +615,7 @@ df.demo %>%
 
 As mentioned before, for the limited scope of this class, usually rows with NAs can just be dropped for simplicity. The easiest way is to use `drop_na(col1, col2, ...)` where `col1`, `col2`, ... are the columns we care about dropping NAs in. If left empty, `drop_na()` will drop rows where ANY column contains NA. Examples:
 
-```{r}
+```{r drop-na}
 # drop only rows where x is missing
 df.demo %>% drop_na(x)
 # drop rows where x and y are missing
@@ -635,7 +635,7 @@ This is another VERY common pitfall for students. In general you should be extre
 
 In some *rare* circumstances, you may want to replace NAs with other values. Of course you can do any kind of conditional replacement using `mutate()` and `case_when()`, but you can also use `mutate()` and the specialized tidyr function `replace_na()`. Examples of both:
 
-```{r}
+```{r replace-na}
 # suppose we need to replace NAs in y column with 0
 # using mutate and case_when:
 df.demo %>% mutate(
@@ -650,7 +650,7 @@ df.demo %>% mutate(y = replace_na(y, 0))
 
 In some datasets, NAs may be coded using certain obviously invalid values, e.g. -9999. These can of course also be mutated using `case_when()`, but there's a special function `na_if()` for just this purpose:
 
-```{r}
+```{r na-if}
 df.demo <- df.demo %>% mutate(w = c(-9999, -9999, 20, 30, -9999))
 df.demo
 df.demo %>% mutate(w = na_if(w, -9999))

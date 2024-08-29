@@ -35,7 +35,7 @@ The mean may seem the most natural and intuitive central tendency measure, but i
 
 Continuing with our previous 21^st^ century US volcanic eruptions dataset, you can use `mean()` to, for example, find the mean length of eruptions in days:
 
-```{r,eval=F}
+```{r import-eruptions1,eval=F}
 # import all core tidyverse packages, since we will need several
 # (again, this imports readr, tibble, and stringr, as well as several others)
 library(tidyverse)
@@ -45,12 +45,12 @@ eruptions_recent <- read_csv(
   show_col_types = FALSE
 )
 ```
-```{r,echo=F}
+```{r import-eruptions2,echo=F}
 library(tidyverse)
 eruptions_recent <- read_csv("data/eruptions_recent.csv", show_col_types = FALSE)
 ```
 
-```{r}
+```{r mean}
 # compute mean duration of eruptions
 mean(eruptions_recent$duration)
 # we can check this agrees with our mathematical definition
@@ -59,7 +59,7 @@ sum(eruptions_recent$duration) / length(eruptions_recent$duration)
 
 :::{.note}
 If a vector has missing values, i.e. `NA`, `mean()` and most other statistical functions will return `NA`. This is a safety measure, to help remind you to handle missing values appropriately before attempting further analysis. You can tell R to ignore `NA`s and proceed by setting `na.rm = TRUE` in the function.
-```{r}
+```{r rm-na}
 # example of NAs causing mean to fail
 mean(c(1, 6, NA, 2))
 # setting na.rm = TRUE tells R to safely ignore NAs
@@ -80,7 +80,7 @@ The median is generally recommended over the mean in the following situations:
 
 We can use `median()` to find the median length of eruptions in days:
 
-```{r}
+```{r median}
 # compute median duration of eruptions
 median(eruptions_recent$duration)
 # check to see if it satisfies the formal definition
@@ -116,7 +116,7 @@ The mode is of course also a form of "average". For example, statistics show rou
 
 Unfortunately, base R does not have a convenient function for computing the mode (the function `mode()` is [completely unrelated](https://ds-pl-r-book.netlify.app/modes-types-classes-of-objects.html)), but you can easily either define it yourself or import `Mode()` from the `DescTools` package
 
-```{r}
+```{r define-simple-mode-function}
 # this defines a simple Mode function using mostly commands we already know
 # explanation: table tabulates observations, then
 #              sort(- ...) sorts by descending order, then
@@ -125,14 +125,14 @@ Unfortunately, base R does not have a convenient function for computing the mode
 Mode <- \(x) names(sort(-table(x)))[1]
 ```
 
-```{r}
+```{r demo-mode}
 # find the volcano with the most number of eruptions
 Mode(eruptions_recent$volcano)
 # how many eruptions has Cleveland had since 2001?
 sum(eruptions_recent$volcano == "Cleveland")
 ```
 
-```{r}
+```{r DescTools-Mode}
 # the DescTools package also has a Mode function,
 # which correctly handles ties and also gives the frequency
 # make sure to install it before using: install.packages("DescTools")
@@ -144,7 +144,7 @@ DescTools::Mode(eruptions_recent$volcano)
 
 Most common distributions have only 1 mode, i.e. they are unimodal, but some distributions may have 2 or more modes, in which case they're called bimodal (for 2 modes) or multimodal (for ≥2 modes). Here's an example of a bimodal distribution:
 
-```{r,echo=F,fig.height=2,tidy=F}
+```{r modality,echo=F,fig.height=2,tidy=F}
 par(mar=c(0,0,0,0))
 L=6
 f = \(x) dnorm(x,-2.5)+dnorm(x,2,1.4)
@@ -184,7 +184,7 @@ $$s^2=\frac1{n-1}\sum_{i=1}^n(x_i-\bar{x})^2=\frac{(x_1-\bar{x})^2+\cdots+(x_n-\
 
 Basically, it's the **mean squared-distance from the mean**, $\bar{x}$, except we use $n-1$ instead of $n$ to correct for a [small bias](https://en.wikipedia.org/wiki/Bessel%27s_correction). For example, we can compute the variance of the duration of eruptions, in **days squared**:
 
-```{r}
+```{r variance}
 # compute variance of duration
 var(eruptions_recent$duration)
 ```
@@ -197,7 +197,7 @@ $$s=\sqrt{\frac1{n-1}\sum_{i=1}^n(x_i-\bar{x})^2}$$
 
 which can be thought of as the **"average" distance from the mean** for a given observation. This can be computed using `sd()`:
 
-```{r}
+```{r standard-deviation}
 # compute the standard deviation of duration
 sd(eruptions_recent$duration)
 # you can check this is equal to sqrt(var(...))
@@ -222,7 +222,7 @@ The interquartile range, also called the IQR, is the **distance between the 1^st
 
 Percentiles are a generalization of the median. Recall the median is the data point that is just barely greater than or equal to 50% of the data. Similarly, a **$p$^th^ percentile is the data point just barely greater than or equal to $p$% of the data**. Percentiles are computed using the [`quantile(x, probs = p)`{.R}](https://rdrr.io/r/stats/quantile.html) function, where `x` is the data vector, and `p` is a desired percentile (or vector thereof). For example, we can compute the 0^th^, 25^th^, 50^th^, 75^th^, and 100^th^ percentiles of eruption duration with:
 
-```{r}
+```{r quantile}
 quantile(eruptions_recent$duration, probs = c(0, 0.25, 0.5, 0.75, 1))
 ```
 
@@ -230,7 +230,7 @@ These 5 numbers correspond to the **min**, **1^st^ quartile ($Q_1$)**, **median*
 
 The **difference $Q_3-Q_1$ is called the interquartile range**, and is often used instead of the variance/standard deviation when outliers/skewness is a significant concern in a dataset due to its increased robustness. The IQR can be computed with the `IQR()` function:
 
-```{r}
+```{r IQR}
 # compute the interquartile range of eruption durations
 IQR(eruptions_recent$duration)
 ```
@@ -243,7 +243,7 @@ The range is the crudest of the measures of spread, defined as the **difference 
 
 In R, the `range()` function gives the minimum and maximum in a vector; to get the actual range, you can use `diff()` to take the difference of the two:
 
-```{r}
+```{r range-diff}
 # range() gives the min/max vector
 range(eruptions_recent$duration)
 # diff() of range() gives the true statistical range
@@ -275,7 +275,7 @@ Below, we have 3 example (unimodal) distributions showing the kinds of skewness,
  2. A positive, or right skewed distribution, where [**mode**]{style="color:#ff1919"} $<$ [**median**]{style="color:#3333ff"} $<$ [**mean**]{style="color:#009900"}.
  3. A negative, or left skewed distribution, where [**mean**]{style="color:#009900"} $<$ [**median**]{style="color:#3333ff"} $<$ [**mode**]{style="color:#ff1919"}.
 
-```{r,echo=F,fig.height=5,tidy=F}
+```{r skew-diagram,echo=F,fig.height=5,tidy=F}
 d = \(a) a/sqrt(1+a^2)
 spd = \(a) sqrt(2/pi)*d(a)
 m = \(a) (s<-spd(a))-(1-pi/4)*(s)^3/(1-s^2)-sign(a)/2*exp(-2*pi/abs(a))

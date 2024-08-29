@@ -21,7 +21,7 @@ When making a ggplot2 plot, it's important to remember **everything is a layer**
 
 Let's first import the necessary packages. We will need both `readr` and `ggplot2` for reading and plotting data. For convenience, I'll just load all core Tidyverse packages.
 
-```{r,eval=F}
+```{r setup-all1,eval=F,tidy=F}
 # if you need to, reimport all core tidyverse packages
 library(tidyverse)
 
@@ -34,7 +34,7 @@ theme_set(theme_bw())
 options(ggplot2.discrete.fill = \(...) scale_fill_brewer(..., palette = "Set2"),
         ggplot2.discrete.colour = \(...) scale_color_brewer(..., palette = "Dark2"))
 ```
-```{r,echo=F,tidy=F}
+```{r setup-all2,echo=F,tidy=F}
 library(tidyverse)
 options(readr.show_col_types = FALSE)
 theme_set(theme_bw())
@@ -54,7 +54,7 @@ To properly demonstrate some of these plots, we need a slightly more feature-ric
 
 [![](https://allisonhorst.github.io/palmerpenguins/reference/figures/lter_penguins.png){.i6}](https://allisonhorst.github.io/palmerpenguins/articles/art.html)
 
-```{r,eval=F}
+```{r import-penguins1,eval=F}
 # load in the penguins dataset
 # (note: a few rows with NAs have been removed for simplicity)
 penguins <- read_csv("https://bwu62.github.io/stat240-revamp/data/penguins.csv")
@@ -63,28 +63,28 @@ penguins <- read_csv("https://bwu62.github.io/stat240-revamp/data/penguins.csv")
 # you can see some columns are cut off
 print(penguins, n = 5)
 ```
-```{r,echo=F}
+```{r import-penguins2,echo=F}
 penguins <- read_csv("data/penguins.csv")
 print(penguins, n = 5)
 ```
 
 
-```{r}
+```{r increase-width}
 # let's temporarily increase the width and reprint,
 # so you can see all columns in the data frame
 options(width = 92)
 penguins
 ```
-```{r date-unclass1,echo=F,results='asis'}
+```{r reset-width-glimpse1,echo=F,results='asis'}
 cat(glue::glue("``` r
 # reset width to its original value
 options(width = {full_width})
 # another option is the glimpse() function which prints sideways,
 # avoiding the hidden columns due to insufficient width issue
 glimpse(penguins)
-```'))
+```"))
 ```
-```{r date-unclass2,echo=F}
+```{r reset-width-glimpse2,echo=F}
 options(width = full_width)
 glimpse(penguins)
 ```
@@ -104,7 +104,7 @@ Histograms are plots where **numeric values are grouped into "bins" (i.e. interv
 
 The following code makes a basic histogram in R using ggplot.
 
-```{r,tidy=F}
+```{r histogram,tidy=F}
 ggplot(penguins, aes(x = flipper_length_mm)) + geom_histogram()
 ```
 
@@ -145,19 +145,19 @@ Due to the slightly unusual nature of this syntax, there are a number of common 
  1. Plot layers are ALWAYS added with `+` like numbers. This is just the design of the syntax. Attempting to use anything else will give errors!
  2. You also MUST execute each layer like a function with `()`. If you try to just add `+ geom_histogram` without the `()`, the layer will not generate correctly and give errors!
  3. If you have many layers, it's recommended to break them into multiple lines, but each incomplete line MUST have either an unclosed parenthetical `(` OR end in an unfinished addition `+`, for example:
-    ```{r,eval=F,tidy=F}
+    ```{r aesthetic-placement1,eval=F,tidy=F}
     # this is ok; R sees the incomplete lines
     # and continues reading the next line
     ggplot(penguins,                       # unclosed ( parenthetical
            aes(x = flipper_length_mm)) +   # unfinished + addition
       geom_histogram()
     ```
-    ```{r,eval=F,tidy=F}
+    ```{r aesthetic-placement2,eval=F,tidy=F}
     # but this will error, since the first line is NOT incomplete!!
     ggplot(penguins, aes(x = flipper_length_mm))
       + geom_histogram()
     ```
-    ```{r,echo=F,message=T,tidy=F}
+    ```{r aesthetic-placement3,echo=F,message=T,tidy=F}
     message("Error in `+.gg`:\n! Cannot use `+` with a single argument.\nℹ Did you accidentally put `+` on a new line?")
     ```
 
@@ -170,14 +170,14 @@ Don't forget if you have an incomplete `(` somewhere, or didn't finish a `+` sta
 
 With ggplot2, you can easily **add additional aesthetics to a plot, turning one-variable plots into two-variable plots**, allowing you to visualize how they vary together. Remember how the histogram shows bimodality? It turns out these represent different species of penguins. Let's use the `fill` aesthetic to differentiate between species.
 
-```{r}
+```{r adding-aesthetics}
 ggplot(penguins, aes(x = flipper_length_mm, fill = species)) +
   geom_histogram()
 ```
 
 By default, ggplot will stack bars with the same position along the horizontal axis. Let's unstack them by setting [`position = "identity"`](https://ggplot2.tidyverse.org/reference/layer_positions.html) and make the bars only 50% opaque by setting `alpha = 0.5` so we can better see each group. Both these are set in the plot layer `geom_histogram()`.
 
-```{r}
+```{r position-identity-unstack}
 ggplot(penguins, aes(x = flipper_length_mm, fill = species)) +
   geom_histogram(position = "identity", alpha = 0.5)
 ```
@@ -226,7 +226,7 @@ You can add titles/labels by adding the `labs()` layer. Inside `labs()`, you can
 
 For example:
 
-```{r}
+```{r title-labels,tidy=F}
 ggplot(penguins, aes(x = flipper_length_mm, fill = species)) +
   geom_histogram(position = "identity", alpha = 0.5) +
   labs(x = "Flipper length (mm)", y = "Count", fill = "Species",
@@ -242,7 +242,7 @@ This plot is now ready for use!
 
 We will NOT cover every option for every plot type, but occasionally, we may highlight a few important options for you to experiment with and explore further on your own. For `geom_histogram()`, besides unstacking bars with `position = "identity"` argument as we showed above, you may also want to control how and where the bins are set. There's several ways of doing this briefly outlined below---note you can only choose ONE method!
 
-```{r,include=F}
+```{r get-generated-bins,include=F,tidy=F}
 p <- ggplot(penguins, aes(x = flipper_length_mm)) + geom_histogram()
 bins <- ggplot_build(p)$data[[1]] %>%
   {paste0("(", round(.$xmin, 2), ",", round(.$xmax, 2), "]")} %>%
@@ -260,7 +260,7 @@ Generally, you want to choose bins that are easy to visually interpret, so try u
 
 Let's improve the plot one final time by setting these more sensible bin widths:
 
-```{r,tidy=F}
+```{r histogram-better-bins,tidy=F}
 ggplot(penguins, aes(x = flipper_length_mm, fill = species)) +
   geom_histogram(position = "identity", alpha = 0.5,
                  binwidth = 5, boundary = 170) +
@@ -275,13 +275,13 @@ This is now even easier to interpret, and the artifacts from the previous plots 
 
 A common variation on the histogram is the density plot, which can be thought of as like a **smoothed-curve version of a histogram, but with the area under the curve normalized to 1**. It represents a guess of what the entire population distribution looks like based on a sample drawn. It can be created by adding `geom_density()` as a plot layer.
 
-```{r,tidy=F}
+```{r density,tidy=F}
 ggplot(penguins, aes(x = flipper_length_mm)) + geom_density()
 ```
 
 Similar to the histogram, we can also add additional aesthetics to differentiate by species:
 
-```{r,tidy=F}
+```{r density-more-aesthetics,tidy=F}
 ggplot(penguins, aes(x = flipper_length_mm, fill = species)) +
   geom_density(alpha = 0.5) +
   labs(x = "Flipper length (mm)", y = "Density", fill = "Species",
@@ -319,7 +319,7 @@ Compared to the histogram and density plot, there are a few key advantages and d
 
 Let's show both the five number summary with `fivenum()` as well as the corresponding box plot for the flipper length variable:
 
-```{r,tidy=F}
+```{r fivenum-boxplot,tidy=F}
 # get the min, q1, median, q3, and max:
 fivenum(penguins$flipper_length_mm)
 # turn these into a box plot
@@ -330,7 +330,7 @@ Note that even though we can easily identify the median, quartiles, and min/max,
 
 The boxplot can also be easily adapted to highlight the difference between species, this time by adding a `y` aesthetic:
 
-```{r,tidy=F}
+```{r boxploy-by-group,tidy=F}
 ggplot(penguins, aes(x = flipper_length_mm, y = species)) +
   geom_boxplot() +
   labs(x = "Flipper length (mm)", y = "Species",
@@ -355,7 +355,7 @@ Confusingly, ggplot2 offers 2 different functions for making bar plots `geom_bar
 
 For example, we can use `geom_bar()` to compute AND plot the total count of each species in the sample:
 
-```{r,tidy=F}
+```{r geom-bar,tidy=F}
 ggplot(penguins, aes(x = species)) + geom_bar() +
   labs(x = "Species", y = "Count",
        title = "Count of each species in Palmer penguins sample")
@@ -363,7 +363,7 @@ ggplot(penguins, aes(x = species)) + geom_bar() +
 
 If we wanted to make the same plot using `geom_col()`, we must FIRST summarize the dataset by computing the counts manually, then passing both the species and computed values in as `x` and `y` aesthetics, like this:
 
-```{r,tidy=F}
+```{r geom-col,tidy=F}
 # we will learn later how to do this more efficiently with tidyverse,
 # but for now we can summarize the counts using base R syntax
 penguins_species_counts <- tibble(
@@ -391,7 +391,7 @@ In the next chapter, we will learn how to more efficiently summarize datasets in
 
 For example, supposed we want to use a bar plot to compare the median flipper length for each species. We can set `stat = "summary"`, `fun = "median"`, and map `y = flipper_length_mm` to make the following plot:
 
-```{r,tidy=F}
+```{r geom-bar-median,tidy=F}
 ggplot(penguins, aes(x = species, y = flipper_length_mm)) +
   geom_bar(stat = "summary", fun = "median") +
   labs(x = "Species", y = "Median flipper length (mm)",
@@ -405,7 +405,7 @@ Bar plots are also often good candidates for adding additional aesthetics like `
 
 By default, adding `fill` creates a stacked bar plot, which is good for showing proportions of each bar with respect to a second categorical variable. For example, suppose we want to show which island each species came from. We can do this by adding `fill = island` to the aesthetic mapping:
 
-```{r,tidy=F}
+```{r geom-bar-more-aesthetics,tidy=F}
 ggplot(penguins, aes(x = species, fill = island)) + geom_bar() +
   labs(x = "Species", y = "Count", fill = "Island",
        title = "Count of each species (by island) in Palmer penguins sample")
@@ -413,7 +413,7 @@ ggplot(penguins, aes(x = species, fill = island)) + geom_bar() +
 
 We can also unstack the bars by setting `position = "dodge"` inside `geom_bar()`, making the bars appear side by side. For example, suppose we want to compare median flipper length not only by species but also by sex. We can easily do this by adding `fill = sex` to our aesthetic mapping, as well as setting `position` as mentioned above:
 
-```{r,tidy=F}
+```{r geom-bar-more-aesthetics-unstacked,tidy=F}
 ggplot(penguins, aes(x = species, y = flipper_length_mm, fill = sex)) +
   geom_bar(stat = "summary", fun = "median", position = "dodge") +
   labs(x = "Species", y = "Median flipper length (mm)", fill = "Sex",
@@ -433,7 +433,7 @@ Scatter plots are perhaps the most famous plot type, and one most people are wel
 
 For example, suppose we want to make a scatter plot of flipper length vs bill depth to see if there is any correlation between the two. Note we always say **y vs x**, never x vs y. This would be the code:
 
-```{r,tidy=F}
+```{r scatter-plot,tidy=F}
 ggplot(penguins, aes(y = flipper_length_mm, x = bill_depth_mm)) + geom_point() +
   labs(x = "Bill depth (mm)", y = "Flipper length (mm)",
        title = "Flipper length vs bill depth for Palmer penguins sample")
@@ -446,7 +446,7 @@ It may surprise you to see that these two are negatively correlated, i.e. that a
 
 To improve readability, we can set both the `color` and `shape` aesthetics to be controlled by the species column, as well as slightly increase the size of the points by setting `size = 2` inside `geom_point()`, like this:
 
-```{r,tidy=F}
+```{r scatter-plot-more-aesthetics,tidy=F}
 ggplot(penguins, aes(y = flipper_length_mm, x = bill_depth_mm,
                      color = species, shape = species)) +
   geom_point(size = 2) +
@@ -464,7 +464,7 @@ When making scatter plots, it's important to remember that **correlation does NO
 
 We can also add a smoothed trend curve/line (depending on context) to this plot to highlight the direction of correlation within each species group. We do this by adding an additional `geom_smooth()` layer to the plot. By default, this will plot a smoothed trend curve (using [LOESS smoothing](https://towardsdatascience.com/loess-373d43b03564)) through each group:
 
-```{r,tidy=F}
+```{r smoothed-curve,tidy=F}
 ggplot(penguins, aes(y = flipper_length_mm, x = bill_depth_mm,
                      color = species, shape = species)) +
   geom_point(size = 2) + geom_smooth() +
@@ -475,7 +475,7 @@ ggplot(penguins, aes(y = flipper_length_mm, x = bill_depth_mm,
 
 This is clearly not right here; the data shows strong signs of linearity. We can force `geom_smooth()` to fit and plot linear regression models to each species by setting `method = "lm"`. We can also turn off the unnecessarily cluttering gray error margins with `se = FALSE` and get this much improved plot:
 
-```{r,tidy=F}
+```{r smoothed-line,tidy=F}
 ggplot(penguins, aes(y = flipper_length_mm, x = bill_depth_mm,
                      color = species, shape = species)) +
   geom_point(size = 2) + geom_smooth(method = "lm", se = FALSE) +
@@ -494,7 +494,7 @@ In the last example code chunk above, note we set the `x`, `y`, `color`, and `sh
 
 For example, suppose we each species to have points of differing color and shape, but we don't want a different trend line for each species, but rather 1 single trend line across all points. We can easily achieve this by setting `color` and `shape` inside `geom_point()` instead of `ggplot()`. This will cause `geom_smooth()` to inherit only `x` and `y` from `ggplot()` and a single trend line will be made for all species:
 
-```{r,tidy=F}
+```{r smoothed-line-overall-aesthetic-disinheritance,tidy=F}
 ggplot(penguins, aes(y = flipper_length_mm, x = bill_depth_mm)) +
   geom_point(aes(color = species, shape = species), size = 2) +
   geom_smooth(method = "lm", se = FALSE) +
@@ -511,19 +511,19 @@ For some specific datasets, especially chronological datasets where some variabl
 
 Unfortunately, the Palmer penguins dataset isn't the best example for this last plot type, so I'm temporarily borrowing another dataset for this example. The chunk below imports [`enrollment.csv`](https://bwu62.github.io/stat240-revamp/data/enrollment.csv) which contains historic U.S. college enrollment data by each sex.
 
-```{r,eval=F}
+```{r import-enrollment1,eval=F}
 enrollment <- read_csv("https://bwu62.github.io/stat240-revamp/data/enrollment.csv")
 # show a glimpse of the dataset
 glimpse(enrollment)
 ```
-```{r,echo=F}
+```{r import-enrollment2,echo=F}
 enrollment <- read_csv("data/enrollment.csv")
 glimpse(enrollment)
 ```
 
 Here, each row is a pair of male and female college enrollment counts (in millions) for a specific year. We can obviously just make a scatter plot of enrollment vs year, with additional aesthetics differentiating between male and female data points, like this:
 
-```{r,tidy=F}
+```{r line-plot1,tidy=F}
 ggplot(enrollment, aes(x = year, y = enrolled_millions,
                        color = sex, shape = sex)) +
   geom_point(size = 2) +
@@ -534,7 +534,7 @@ ggplot(enrollment, aes(x = year, y = enrolled_millions,
 
 However, the chronological nature of this data means **each data point has a specific predecessor and successor**, i.e. for each point (except the end points) there are specific points that comes before and after it in chronological order. Thus, it makes more sense to connect these points with a single continuous line for each sex. This can be done by using `geom_line()` instead. We can also drop the `shape` aesthetic since it doesn't apply to lines:
 
-```{r,tidy=F}
+```{r line-plot2,tidy=F}
 ggplot(enrollment, aes(x = year, y = enrolled_millions, color = sex)) +
   geom_line() +
   labs(x = "Time", y = "Enrolled (millions)", color = "Sex",
@@ -543,7 +543,7 @@ ggplot(enrollment, aes(x = year, y = enrolled_millions, color = sex)) +
 
 By default the line appears very thin and may be hard to read for some people. We can add `linewidth = 1.2` to `geom_line()` to increase the thickness. We can also add another aesthetic `linetype = sex` for additional disambiguation so it's extremely clear which line corresponds to which sex:
 
-```{r,tidy=F}
+```{r line-plot3,tidy=F}
 ggplot(enrollment, aes(x = year, y = enrolled_millions,
                        color = sex, linetype = sex)) +
   geom_line(linewidth = 1.2) +
@@ -564,7 +564,7 @@ For the purposes of this course, "line plot" or "trace plot" refer to `geom_line
 
 I wanted to throw in a bonus plot type here. This kind of composition-over-time data is also VERY commonly shown as a [stacked area plot](https://r-graph-gallery.com/136-stacked-area-chart.html) which can be made with `geom_area()`. I've also added a `scale_fill_manual()` configuration layer to manually specify a color palette to use more intuitive colors for each category.
 
-```{r,tidy=F}
+```{r area-plot,tidy=F}
 ggplot(enrollment, aes(x = year, y = enrolled_millions, fill = sex)) +
   geom_area() + scale_fill_manual(values = c("#fb9a99", "#a6cee3")) +
   labs(x = "Time", y = "Enrolled (millions)", fill = "Sex",
@@ -578,7 +578,7 @@ Compared to line plots with one line per category, the stacked area plot has the
 
 Note the previous example used just the year number on the horizontal axis (since the data was already summarized as annual totals) but you can of course also use dates on an axis. For a quick example, we can load the [FRED U.S. unemployment rate](https://fred.stlouisfed.org/series/UNRATE) dataset and plot it.
 
-```{r,tidy=F}
+```{r time-axis1,tidy=F}
 unemployment <- read_csv("https://fred.stlouisfed.org/graph/fredgraph.csv?id=UNRATE")
 glimpse(unemployment)
 ggplot(unemployment, aes(x = DATE, y = UNRATE)) + geom_line() +
@@ -588,7 +588,7 @@ ggplot(unemployment, aes(x = DATE, y = UNRATE)) + geom_line() +
 
 The  superficially look the same as the previous plot, however if we zoom in and plot just the last year of data, we can see the horizontal axis is in fact a special date type of axis:
 
-```{r,tidy=F}
+```{r time-axis2,tidy=F}
 # plot just the last 12 months of data
 n = nrow(unemployment)
 ggplot(unemployment[(n-11):n,], aes(x = DATE, y = UNRATE)) + geom_line() +
@@ -616,13 +616,13 @@ Let's demonstrate each of these briefly.
 
 Going back to the penguins dataset, suppose you wanted to look at the relationship between body mass and flipper length. You start by making this plot:
 
-```{r,tidy=F}
+```{r facet-wrap-progression1,tidy=F}
 ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm)) + geom_point()
 ```
 
 Maybe you decide to also incorporate species as a variable, so you can see if there are differences between the different species:
 
-```{r,tidy=F}
+```{r facet-wrap-progression2,tidy=F}
 ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm,
                      color = species, shape = species)) +
   geom_point(size = 2)
@@ -630,7 +630,7 @@ ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm,
 
 Some interesting patterns start to emerge. Suppose you want to take this a step further and also incorporate sex, to see if that adds anything interesting to the picture. You could change for example the mapping to set `shape = sex`, but I think this results in a plot that's a little too complicated and hard to read:
 
-```{r,tidy=F}
+```{r facet-wrap-progression3,tidy=F}
 ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm,
                      color = species, shape = sex)) +
   geom_point(size = 2) +
@@ -640,7 +640,7 @@ ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm,
 
 A better way may be to `facet_wrap()` the species variable, and switch to using both `color` and `shape` to differentiate sex. The syntax for this is to add the faceting layer `facet_wrap()` with the argument `~species` which will automagically split each species into its own facet subplot. You can also set `ncol = 2` to control how/when to wrap the plots:
 
-```{r}
+```{r facet-wrap-progression4,tidy=F}
 ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm,
                      color = sex, shape = sex)) +
   geom_point(size = 2) + facet_wrap(~species, ncol = 2) +
@@ -653,7 +653,7 @@ ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm,
 
 Suppose we wanted to look more closely again at the distribution of flipper lengths by both species and sex. We can start with the plot we made previously in section \@ref(density-plots):
 
-```{r,tidy=F}
+```{r facet-grid-progression1,tidy=F}
 ggplot(penguins, aes(x = flipper_length_mm, fill = species)) +
   geom_density(alpha = 0.5) +
   labs(x = "Flipper length (mm)", y = "Density", fill = "Species",
@@ -662,7 +662,7 @@ ggplot(penguins, aes(x = flipper_length_mm, fill = species)) +
 
 Suppose we want to also add sex in as a variable of interest, but we also want to more closely scrutinize the distributions. One way this can be done is to add the faceting layer `facet_grid()` with the argument `sex ~ species` which will construct a matrix of plots with one row for each sex and one column for each species:
 
-```{r,tidy=F}
+```{r facet-grid-progression2,tidy=F}
 ggplot(penguins, aes(x = flipper_length_mm)) + geom_density() +
   facet_grid(sex ~ species) +
   labs(x = "Flipper length (mm)", y = "Density",
@@ -673,7 +673,7 @@ You can also replace one side of the `a ~ b` syntax with a period `.` which will
 
 We can demonstrate both of these. Each time we can reassign the variable not faceted on (i.e. the one replaced with `.`) back to the `fill` aesthetic. For the second plot, we also flipped `x` and `y` to make better use of the tall-orientation of the available plot space.
 
-```{r,tidy=F}
+```{r facet-grid-progression3,tidy=F}
 ggplot(penguins, aes(x = flipper_length_mm, fill = species)) +
   geom_density(alpha = 0.5) + facet_grid(sex ~ .) +
   labs(x = "Flipper length (mm)", y = "Density", fill = "Species",
@@ -703,7 +703,7 @@ With tidyverse loaded, try typing `scale_` into the console and use the autocomp
 
 We don't have time to go into detail about every possible scale function; see [this page on scales](https://ggplot2-book.org/scales-guides) or read the help pages for a particular function for more info! Here's an example of some of these scale layers being used to modify the last plot we made just above where we faceted by species:
 
-```{r,tidy=F}
+```{r scales,tidy=F}
 ggplot(penguins, aes(y = flipper_length_mm, fill = sex)) +
   geom_density(alpha = 0.5) + facet_grid(. ~ species) +
   ggtitle("Flipper length densities (by species & sex) in Palmer penguins sample") +
@@ -761,7 +761,7 @@ Many other geoms exist (see the [ggplot2 cheat sheet](https://rstudio.github.io/
 
 Sometimes you may want to draw specific lines to annotate your plot. You can use [`geom_hline(yintercept = ...)`{.R}](https://ggplot2.tidyverse.org/reference/geom_abline.html), [`geom_vline(xintercept = ...)`{.R}](https://ggplot2.tidyverse.org/reference/geom_abline.html), and [`geom_abline(slope = ..., intercept = ...)`{.R}](https://ggplot2.tidyverse.org/reference/geom_abline.html) to manually draw horizontal, vertical, and arbitrary lines on top of another plot. You can also directly set things like `color`, `alpha`, `linetype`, or `linewidth` inside each function to control the style. If you need multiple lines, you can use a vector of inputs, or add multiple layers. For example:
 
-```{r, tidy=F}
+```{r geom-straight-lines, tidy=F}
 ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm,
                      color = species, shape = species)) +
   geom_point(size = 2) +
@@ -777,7 +777,7 @@ Functions can be easily plotted with [`geom_function(fun = ...)`{.R}](https://gg
 
 If the function isn't predefined, you can easily define it with `\(x) ...` for example:
 
-```{r}
+```{r geom-function1,tidy=F}
 ggplot() + geom_function(
   fun = \(x) x^2 + 1,      # define x²+1
   xlim = c(-2, 2),         # set limits
@@ -787,7 +787,7 @@ ggplot() + geom_function(
 
 If the function exists, but you need to modify the arguments, you can use `args = list(...)` any arguments specified inside will be directly passed to the chose function, for example:
 
-```{r}
+```{r geom-function2,tidy=F}
 # plot the normal distribution with mean 10 sd 2
 ggplot() + geom_function(
   fun = dnorm,                     # dnorm() is the normal distribution function
@@ -805,7 +805,7 @@ I didn't know where to put this so I'm inserting it at the end of the chapter he
 There are many different implementations of this, but one of the best is [`GGally::ggpairs()`{.R}](https://ggobi.github.io/ggally/reference/ggpairs.html). The plot type is automatically determined based on variable types and can be density, histogram, point, bar, box, or more, and additionally some summary statistics like correlations are given where appropriate.
 
 :::{.i96}
-```{r,fig.width=8,fig.height=8}
+```{r pairs-plot,fig.width=8,fig.height=8}
 # to run this chunk, you need to have the package GGally installed
 # first, we subset out just a few columns (otherwise it gets too crazy)
 # aes(color = species) is optional but improves the plot greatly

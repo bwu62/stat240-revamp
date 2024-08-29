@@ -217,10 +217,10 @@ We already mentioned [`pi`{.R}](https://rdrr.io/r/base/Constants.html) is predef
 ```{r true}
 T
 ```
-```{r true-error,eval=F}
+```{r true-error1,eval=F}
 true
 ```
-```{r true-error-2,echo=F,message=T}
+```{r true-error2,echo=F,message=T}
 message("Error: object 'true' not found")
 ```
 
@@ -294,12 +294,12 @@ var1 + Var1 + .OtherVariable + another.variable_42
 . + .. + ._ + ._..__
 ```
 
-```{r invalid-names,tidy=F,eval=F}
+```{r invalid-names1,tidy=F,eval=F}
 # these variable names will raise errors:
 #   1var, _var, bad-var,   e.g.:
 1var <- 1
 ```
-```{r invalid-names-2,echo=F,eval=T,message=T}
+```{r invalid-names2,echo=F,eval=T,message=T}
 message('Error: unexpected symbol in "1var"')
 ```
 
@@ -434,14 +434,14 @@ x^2 %% 2 == 0 | mean(data) + 2 * sd(data) > max(data)
 
 :::{.note}
 Since computers don't have infinite precision, some arithmetic operations can introduce small errors, especially those producing repeating-decimal or irrational numbers:
-```{r,tidy=F}
+```{r floating-point-errors,tidy=F}
 1/2 + 1/3 == 5/6
 1/2 + 1/3 - 5/6
 sqrt(2)^2 == 2
 sqrt(2)^2 - 2
 ```
 These imprecisions usually result in errors of 10^-15^ or less. Generally values around this magnitude in R should be treated as indistinguishable from 0. When comparing inexact values like these, it's recommended to use `all.equal()` instead of `==`, which allows for a small tolerance.
-```{r,tidy=F}
+```{r floating-point-equality-functions,tidy=F}
 all.equal(1/2 + 1/3, 5/6)
 all.equal(sqrt(2)^2, 2)
 ```
@@ -491,13 +491,13 @@ It's important to check the output messages to see if the install was successful
 
 You can load a package with either `library()` or `require()`, which are basically the same.^[The only difference is `require()` can be used to check if a package exists and will return `FALSE` if it doesn't, whereas `library()` will just error out, see <https://www.geeksforgeeks.org/the-difference-between-require-and-library-in-r/> for more details.] Some package names actually load a group of other packages, e.g. `library(tidyverse)` will load all the ["core" Tidyverse](https://www.tidyverse.org/packages/#core-tidyverse) packages, which include [ggplot2](https://ggplot2.tidyverse.org), [dplyr](https://dplyr.tidyverse.org), [tidyr](https://tidyr.tidyverse.org), [readr](https://readr.tidyverse.org), [purrr](https://purrr.tidyverse.org), [tibble](https://tibble.tidyverse.org), [stringr](https://stringr.tidyverse.org), and [forcats](https://forcats.tidyverse.org).
 
-```{r,include=F}
+```{r increase-width,include=F}
 options(width = 70)
 ```
-```{r library,message=T,class.message="wrapcode"}
+```{r load-tidyverse,message=T,class.message="wrapcode"}
 library(tidyverse)
 ```
-```{r,include=F}
+```{r reset-width,include=F}
 options(width = full_width)
 ```
 
@@ -553,9 +553,9 @@ In this next section, we will introduce you to R Markdown, which is a document f
 
 Let's start with an example! Below is a basic R Markdown demo file called [`demo.Rmd`](demo.Rmd), which produces [`demo.html`](demo.html) as output. We will use this example below to learn how to work with Rmd files.
 
-```{embed embed.demo, file="demo.Rmd", class.source="wrapCode"}
+```{embed embed-demo, file="demo.Rmd", class.source="wrapCode"}
 ```
-```{r reknit demo.Rmd,include=F,cache=T}
+```{r reknit-demo,include=F,cache=T}
 # rmarkdown::render("demo.Rmd", "html_document")
 ```
 

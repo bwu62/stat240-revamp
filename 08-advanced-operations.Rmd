@@ -13,7 +13,7 @@ By default, data frames are not grouped when created or imported. You can create
 
 After grouping, operations that normally run across all rows **now run across each group**. Here's a few simple examples using the familiar penguins dataset to start:
 
-```{r,eval=F}
+```{r setup-all1,eval=F}
 # import tidyverse, import magrittr (for extra %T>% pipe),
 # tweak some readr/ggplot options (optional), and load dataset
 library(tidyverse)
@@ -22,7 +22,7 @@ options(readr.show_col_types = FALSE)
 source("https://bwu62.github.io/stat240-revamp/ggplot_theme_options.R")
 penguins <- read_csv("https://bwu62.github.io/stat240-revamp/data/penguins.csv")
 ```
-```{r,echo=F}
+```{r setup-all2,echo=F}
 library(tidyverse)
 library(magrittr)
 `%T>%` <- magrittr:::`%T>%`
@@ -30,7 +30,7 @@ source("ggplot_theme_options.R")
 penguins <- read_csv("data/penguins.csv")
 ```
 
-```{r}
+```{r group1}
 # group by species and get mean/median/sd body mass + sample size of each group
 penguins %>%
   group_by(species) %>%
@@ -52,7 +52,7 @@ penguins %>%
 ```
 
 :::{.fold .o}
-```{r}
+```{r group2}
 # we can of course also mutate within groups
 # e.g. convert bill length in mm to number of SDs
 #      away from species group mean
@@ -70,7 +70,7 @@ penguins %>%
 ```
 :::
 
-```{r}
+```{r group3}
 # get the largest 3 penguins by bill depth from each species
 penguins %>%
   group_by(species) %>%
@@ -82,7 +82,7 @@ penguins %>%
 
 Sometimes one `group_by()` may not be enough to get what you need; you may need to re-`group_by()` by something else to finish the job. For example, suppose you want to see what percent of each species came from different islands. This requires two uses of `group_by()`:
 
-```{r}
+```{r regroup1}
 # first group by species + island and summarize to get size of each group,
 # then regroup by species and MUTATE (not summarize) totals for each species,
 # then divide these to get proportion of each species from each island
@@ -98,7 +98,7 @@ penguins %>%
 
 This combination of `df %>% group_by(...) %>% summarize(n = n())` is so common, we have this shortcut for it: `df %>% count(...)`. We can demonstrate this in another example involving regrouping. Suppose we want to know what percent of each species were male/female:
 
-```{r}
+```{r regroup2}
 # again, first group by species + sex and get size using the shortcut count(),
 # then regroup by species and MUTATE totals for each species,
 # then divide to get proportions of each species that were male/female
@@ -113,7 +113,7 @@ penguins %>%
 
 Groups are also useful for prepping data frames for plotting. For example, here's a chunk that produces a bar plot showing how mean body mass changes by species and sex:
 
-```{r,tidy=F}
+```{r group4,tidy=F}
 # get mean body mass by species + sex and plot
 # the %T>% is a special pipe called a Tee pipe
 # it's a shortcut for piping something into 2 different operations,
@@ -135,7 +135,7 @@ Many operations output grouped data frames. For example, look closely at the out
 
 You can remove the grouping structure with `ungroup()`. This allows you to revert to running operations on the entire data frame. Example:
 
-```{r}
+```{r ungroup}
 # get count of each species + sex combination,
 # but this time get its percentage out of ALL observations
 penguins %>%
@@ -149,11 +149,11 @@ penguins %>%
 
 Let's give the penguins dataset a rest and practice dplyr and grouping a bit more with a different dataset. The following chunk imports [`fertility.csv`](data/fertility.csv), the cleaned global fertility data set from [World Bank](https://data.worldbank.org/indicator/SP.DYN.TFRT.IN), giving the average number of births per woman for each year and country from 1960 to present. For the past few decades, global fertility has been [sharply declining](https://ourworldindata.org/un-population-2024-revision) for most countries. Many countries are now below the [replacement rate of 2.1](https://en.wikipedia.org/wiki/Sub-replacement_fertility), leading to widespread concerns of a population collapse in the latter part of the 21^st^ century.
 
-```{r,eval=F}
+```{r import-fertility1,eval=F}
 fertility <- read_csv("https://bwu62.github.io/stat240-revamp/data/fertility.csv")
 fertility
 ```
-```{r,echo=F}
+```{r import-fertility2,echo=F}
 fertility <- read_csv("data/fertility.csv")
 fertility
 ```
@@ -161,7 +161,7 @@ fertility
 Each country has over 60 years of data in this dataset. We can see an overview which countries are represented in the dataset and what their listed region and income group are by temporarily dropping years, removing duplicates, and printing the full output below in a collapsible box:
 
 :::{.fold .o}
-```{r}
+```{r fertility-all-countries}
 fertility %>%
   select(country:income_group) %>%
   distinct() %>%
@@ -171,7 +171,7 @@ fertility %>%
 
 One additional small processing step we should do before continuing is convert `income_group` to an ordered factor (see section \@ref(ordered-data)), which will be important later.
 
-```{r,tidy=F}
+```{r fertility-income-order,tidy=F}
 fertility <- fertility %>% mutate(
   income_group = factor(income_group, ordered = TRUE, levels = c(
     "Low", "Lower middle", "Upper middle", "High"))
@@ -181,7 +181,7 @@ fertility <- fertility %>% mutate(
 
 We can begin by running a few summaries to explore the dataset. To start, here's a chunk showing the number of countries and median income group for countries in each region:
 
-```{r}
+```{r fertility-median-income-by-region}
 # strangely, base R median doesn't work on ordered categories,
 # but we can use Median from DescTools instead
 fertility %>%
@@ -194,7 +194,7 @@ fertility %>%
 
 Next, here's a chunk showing the median fertility rate in each region for the most recent year of `r fertility %>% select(year) %>% max`, as well as the countries with the highest and lowest `r fertility %>% select(year) %>% max` rates (and what the rates are) in each region:
 
-```{r}
+```{r fertility-median-latest-rate-by-region}
 # first filter to get the right year, then
 # sort by region, rate (so min, max are the first, last in each group)
 # then summarize to get median, and min/max country/rate
@@ -216,7 +216,7 @@ fertility %>%
 We can also show the latest rate for each country, as well as the change from 2000, just before the start of the 21^st^ century:
 
 :::{.fold .o}
-```{r}
+```{r fertility-all-countries-latest-rate-change}
 # first filter to get the right years, then
 # sort by country, year (so 2000, 2022 are first and last in each group)
 # then summarize to get 2000 and 2022 rates, mutate to get change,
@@ -242,19 +242,19 @@ fertility_change <- fertility %>%
 
 Which countries had the biggest drop in fertility?
 
-```{r}
+```{r fertility-slice-min-change}
 fertility_change %>% slice_min(change, n = 10)
 ```
 
 Did any countries have actually increased?
 
-```{r}
+```{r fertility-slice-max-change}
 fertility_change %>% slice_max(change, n = 10)
 ```
 
 How many countries are now above vs below replacement rate? We can do this by grouping by if the rate is at least 2.1---did I mention you can use transformations inside `group_by()` as well?
 
-```{r}
+```{r fertility-at-replacement}
 # group by a new column called at_replacement indicating rate>=2.1
 fertility %>%
   group_by(at_replacement = rate >= 2.1) %>%
@@ -273,7 +273,7 @@ fertility %>%
 Let's make a few plots of the data as well. Here are 2 plots showing median fertility rate over time grouping by either region or income level:
 
 :::{.i96}
-```{r,tidy=F,fig.width=7.2,fig.height=4.8}
+```{r fertility-rate-over-time-by-region-income,tidy=F,fig.width=7.2,fig.height=4.8}
 # first get mean rate in each region + year, then pipe into line plot
 # fct_reorder2() is used to reorder legend to be same order as end of lines
 # see https://forcats.tidyverse.org/reference/fct_reorder.html for more details
@@ -316,7 +316,7 @@ Here's a bonus [plotly choropleth](https://plotly.com/r/choropleth-maps) just fo
 
 
 :::{.fold .s}
-```{r,tidy=F,fig.width=7.2,fig.height=4.45}
+```{r choropleth,tidy=F,fig.width=7.2,fig.height=4.45}
 library(plotly)
 plot_ly(fertility, type = "choropleth", locations = ~code, z = ~rate,
         text = ~country, frame = ~year, zmin = 0.7, zmax = 8.9, colorscale = list(
@@ -342,12 +342,12 @@ These two are NOT the same, so it's important to remember which is which.
 
 Binding is the simpler of the two, so let's start here. Returning briefly to the penguins data set, note there's a year column which indicates when each sample was collected. This means there were 3 different studies conducted. Suppose each of the years was originally in its own data frame (I suspect this is likely to be true).
 
-```{r}
+```{r penguins-split-year}
 penguins2007 <- penguins %>% filter(year == 2007)
 penguins2008 <- penguins %>% filter(year == 2008)
 penguins2009 <- penguins %>% filter(year == 2009)
 ```
-```{r}
+```{r penguins-split-print}
 print(penguins2007, n = 5)
 print(penguins2008, n = 5)
 print(penguins2009, n = 5)
@@ -357,7 +357,7 @@ We can see our 3 data frames `penguins2007`, `penguins2008`, `penguins2009` shar
 
 The function `bind_rows(df1, df2, ...)` lets us do this. Just pass each data frame that needs binding in:
 
-```{r}
+```{r bind-rows}
 penguins_bound <- bind_rows(penguins2007, penguins2008, penguins2009)
 penguins_bound
 ```
@@ -375,7 +375,7 @@ Joining is slightly more complicated. This is for when all the rows are together
 
 Joining is performed by first **matching rows using a set of key variables** before adding in the additional columns. The **key variables should uniquely identify rows**. Here's a simple demo to start. Suppose you have the following data frames:
 
-```{r}
+```{r join-demo}
 x <- tibble(
   A = c("a", "b", "c"),
   B = c(1, 2, 3)
@@ -399,7 +399,7 @@ Suppose you want to join `x` and `y` using column A as the "key", i.e. "A" is th
 
 Below are demos of each join. Note each join has the exact same columns; the only difference is which rows are included in the output. Also note `NAs` are automatically used to fill in any missing values that arise from the merge.
 
-```{r}
+```{r mutate-joins}
 # only return rows in both x and y
 inner_join(x, y)
 # return rows in either x or y
@@ -412,7 +412,7 @@ right_join(x, y)
 
 The above 4 are called the "mutating joins" since they mutate (i.e. change) the data frame by adding additional columns. There are 2 other less commonly used joins called the "filterting joins" called `semi_join()` and `anti_join()` that do not actually add columns; they are only used to filter rows that match or don't match another data frame. Examples:
 
-```{r}
+```{r filter-joins}
 # semi_join(x, y) will FILTER rows in x that have matches in y
 # note there are NO new columns added to x
 semi_join(x, y)
@@ -439,18 +439,18 @@ Let's see a real example of joins in action.
 
 The World Bank fertility data set we used earlier obviously didn't start out perfectly clean and tidy. When you download the CSV file from the [data page](https://data.worldbank.org/indicator/SP.DYN.TFRT.IN) it comes as a zip of the following two (renamed) files: [`fertility_meta.csv`](data/fertility_meta.csv) and [`fertility_raw.csv`](data/fertility_raw.csv). One of them contains metadata for each country, while the other contains the actual annual fertility rates.
 
-```{r,eval=F,tidy=F}
+```{r fertility2-import1,eval=F,tidy=F}
 fertility_meta <- read_csv(
   "https://bwu62.github.io/stat240-revamp/data/fertility_meta.csv")
 fertility_raw <- read_csv(
   "https://bwu62.github.io/stat240-revamp/data/fertility_raw.csv")
 ```
-```{r,echo=F}
+```{r fertility2-import2,echo=F}
 fertility_meta <- read_csv("data/fertility_meta.csv")
 fertility_raw <- read_csv("data/fertility_raw.csv")
 ```
 
-```{r}
+```{r fertility2-print}
 fertility_meta
 fertility_raw
 ```
@@ -461,7 +461,7 @@ We can also change the `"Low income"`, `"Lower middle income"`, ... values into 
 
 Note as well the existence of several NAs in region and income. Again, verify this yourself, but these are all further subregion groupings of countries (e.g. AFE and AFW are for Eastern/Southern and Western/Central African countries), so we can simply drop these rows.
 
-```{r}
+```{r fertility2-processing}
 # apply the processing steps above
 fertility_meta2 <- fertility_meta %>%
   rename(code = "Country Code", country = "TableName", region = "Region", income_group = "IncomeGroup") %>%
@@ -479,7 +479,7 @@ Now comes the key step! We're going to use the `"code"` columns (which are the 3
 
 Note these data frames already satisfy the recommended conditions, i.e. the key columns have the same name and type and uniquely identify each country, and all other columns have different names, so there should be no issues.
 
-```{r}
+```{r fertility2-joining}
 fertility_joined <- inner_join(fertility_meta2, fertility_raw2)
 fertility_joined
 ```
@@ -495,7 +495,7 @@ This is where pivoting becomes relevant. Pivoting (also sometimes called reshapi
 
 Suppose two people Alice and Bob are playing a game. They agree to play 3 rounds. Each round, each person tries to score points up to a maximum of 10. The person that wins the most rounds wins overall. Suppose these are the final scores:
 
-```{r}
+```{r pivot-demo-long}
 # create demo scores data frame
 # sample() is used here to randomly generate points
 scores_long <- tibble(
@@ -508,7 +508,7 @@ scores_long
 
 However, the same data can also be represented in this alternative format:
 
-```{r}
+```{r pivot-demo-wide}
 scores_wide <- tibble(
   round = 1:3,
   Alice = c(9, 7, 2),
@@ -535,7 +535,7 @@ Tidyr's `pivot_longer()` and `pivot_wider()` functions let you easily convert be
    - `cols` is a set of columns where the actual observations are "spread out over". You can set this using numbers, names, ranges, or selector functions (just like for `select()`). In the `scores_wide` data frame, this would be the two columns `Alice` and `Bob` since this is where the points for each round are stored.
    - `names_to` sets the name for the new column containing the names of the `cols`. In the `scores_wide` data frame, it will be filled with repetitions of `"Alice"` and `"Bob"` corresponding to each round's points.
    - `values_to` sets the name for the new column containing the values inside `cols`. In the `scores_wide` data frame, it will be filled with the actual points scored in each round.
-   ```{r}
+   ```{r pivot-longer}
 # example:
 scores_wide %>%
   pivot_longer(Alice:Bob, names_to = "player", values_to = "points")
@@ -544,7 +544,7 @@ scores_wide %>%
  - `df %>% pivot_wider(names_from = "..", values_from = "..")` turns a "longer" represetation into a "wider" representation.
    - `names_from` sets the column of names that will each become their own column in the wider data frame. In the `scores_long` data frame, this would be the `player` column.
    - `values_from` sets the column of actual observations that will fill each of the newly created wider set of columns. In the `scores_long` data frame, this would be the `points` column.
-   ```{r}
+   ```{r pivot-wider}
 # example:
 scores_long %>%
   pivot_wider(names_from = "player", values_from = "points")
@@ -557,13 +557,13 @@ Note in the above examples, passing `scores_wide` to `pivot_longer()` gives us `
 
 Let's turn back to the `fertility_joined` example. After joining, we were left with the following data frame:
 
-```{r}
+```{r fertility3-print}
 fertility_joined
 ```
 
 Now it should be clear all we need to do is apply `pivot_longer()`:
 
-```{r,tidy=F}
+```{r fertility3-pivot,tidy=F}
 # let's pivot_longer(), then drop any rows with missing values
 # after our careful processing, it should be safe to just do drop_na()
 # we can also again convert income_group to ordered categories if needed,
@@ -576,7 +576,7 @@ fertility <- fertility_joined %>%
   arrange(country, year)
 ```
 
-```{r}
+```{r fertility3-done}
 # print our final, clean & tidy data frame!
 fertility
 ```

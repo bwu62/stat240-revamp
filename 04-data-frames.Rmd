@@ -140,31 +140,31 @@ To demonstrate the basic functionality of these different functions, I've prepar
 
 For example, here's the first few lines of the [`eruptions_recent.csv`](data/eruptions_recent.csv) CSV file (for each eruption, we have the volcano name, start and stop dates, duration in days, if its certainty is confirmed, and the VEI or volcano explosivity index).
 
-```{embed,echo=1:6,file="data/eruptions_recent.csv"}
+```{embed embed-eruptions-csv,echo=1:6,file="data/eruptions_recent.csv"}
 ```
 
 If you have a link to a dataset, you can directly pass it into `read_csv()` and it will automagically download the file to your system's temp directory and read it in. Make sure to save it into a data frame with a sensible name. It's also usually a good idea to print out the first few lines to check the result and see if everything worked without error.
 
-```{r}
+```{r import-readr}
 # import readr
 library(readr)
 ```
-```{r,include=F}
+```{r increase-width,include=F}
 options(width = 70)
 ```
-```{r,eval=F}
+```{r import-eruptions-csv1,eval=F}
 # read in CSV file from link
 eruptions_recent <- read_csv(
   "https://bwu62.github.io/stat240-revamp/data/eruptions_recent.csv"
 )
 ```
-```{r,echo=F,message=T,class.message="message"}
+```{r import-eruptions-csv2,echo=F,message=T,class.message="message"}
 eruptions_recent <- read_csv("data/eruptions_recent.csv")
 ```
-```{r,include=F}
+```{r reset-width,include=F}
 options(width = full_width)
 ```
-```{r,message=T,class.message="message"}
+```{r print-eruptions,message=T,class.message="message"}
 # print first few lines of result to check
 eruptions_recent
 ```
@@ -186,12 +186,12 @@ Several things to note here:
 
 The other functions are all similar. Here's the first few lines of the TSV-version of the same dataset, [`eruptions_recent.tsv`](data/eruptions_recent.tsv) (the way these notes are built doesn't display tabs properly, but if you view the TSV file directly, you can see them).
 
-```{embed,echo=1:6,file="data/eruptions_recent.tsv"}
+```{embed embed-eruptions-tsv,echo=1:6,file="data/eruptions_recent.tsv"}
 ```
 
 Here it is read in with the `read_tsv()` function. This time, to save space, I've disabled the diagnostic messages by setting `show_col_types = FALSE` and reduced the final print checking to 5 lines. Otherwise, you can see we have the exact same result.
 
-```{r,eval=F}
+```{r import-eruptions-tsv1,eval=F}
 # read in TSV file from link
 eruptions_recent <- read_tsv(
   "https://bwu62.github.io/stat240-revamp/data/eruptions_recent.tsv",
@@ -200,7 +200,7 @@ eruptions_recent <- read_tsv(
 # print first 5 lines instead of 10 to still check, but save space
 print(eruptions_recent, n = 5)
 ```
-```{r,echo=F}
+```{r import-eruptions-tsv2,echo=F}
 eruptions_recent <- read_tsv("data/eruptions_recent.tsv", show_col_types = FALSE)
 print(eruptions_recent, n = 5)
 ```
@@ -211,9 +211,9 @@ print(eruptions_recent, n = 5)
 
 If your data file has columns delimited (i.e. separated) by other characters, you can use the `read_delim()` function, which is a generalization of the previous two to read it in. Just set the `delim` argument to whatever the delimiter is, and you're good to go. Here's the first few lines of [`eruptions_recent.delim`](data/eruptions_recent.delim) where the columns are separated by vertical bar `|` characters, followed by the line of code to import it and check the result.
 
-```{embed,echo=1:6,file="data/eruptions_recent.delim"}
+```{embed embed-eruptions-delim,echo=1:6,file="data/eruptions_recent.delim"}
 ```
-```{r,eval=F}
+```{r import-eruptions-delim1,eval=F}
 # read in | delimited file from link
 eruptions_recent <- read_delim(
   "https://bwu62.github.io/stat240-revamp/data/eruptions_recent.delim",
@@ -223,7 +223,7 @@ eruptions_recent <- read_delim(
 # print first 5 lines
 print(eruptions_recent, n = 5)
 ```
-```{r,echo=F}
+```{r import-eruptions-delim2,echo=F}
 eruptions_recent <- read_delim("data/eruptions_recent.delim", delim = "|", show_col_types = FALSE)
 print(eruptions_recent, n = 5)
 ```
@@ -238,11 +238,11 @@ Data is also commonly encountered as an XLS/XLSX spreadsheet file, which can be 
 
 Unfortunately, [readxl does not support URLs](https://github.com/tidyverse/readxl/issues/278) so the data must be downloaded before loading.
 
-```{r}
+```{r import-readxl}
 # load readxl, which is NOT core tidyverse, so must be imported explicitly
 library(readxl)
 ```
-```{r}
+```{r import-eruptions-xlsx}
 # I already have the file downloaded to data/
 # inside my current working directory
 dir.exists("data/")
@@ -400,7 +400,7 @@ Paths in R **always use forward [/]{.k} slashes**, NEVER back [\\]{.k} slashes, 
 
 We will be using data frames extensively throughout this class. Let's start by learning some basic manipulations with them. First, I'm going to reload the `eruptions_recent` dataset using the CSV file, so that we have the correct `start`/`stop` columns.
 
-```{r,eval=F}
+```{r reload-eruptions1,eval=F}
 # set R to print fewer rows by default, to save space in demos below
 options(pillar.print_min = 5)
 
@@ -412,7 +412,7 @@ eruptions_recent <- read_csv(
 # print first few rows
 eruptions_recent
 ```
-```{r,echo=F}
+```{r reload-eruptions2,echo=F}
 options(pillar.print_min = 5)
 eruptions_recent <- read_csv("data/eruptions_recent.csv", show_col_types = FALSE)
 eruptions_recent
@@ -424,7 +424,7 @@ eruptions_recent
 
 Here are a few basic operations for working with data frames: `nrow()`, `ncol()`, and `dim()` can show the number of rows and/or columns; `summary()` can show a quick summary of each column; `names()`/`colnames()` can both get and set column names; `rownames()` can both get and set row names.
 
-```{r}
+```{r basid-df-operations}
 # get number of rows and columns
 nrow(eruptions_recent)
 ncol(eruptions_recent)
@@ -455,7 +455,7 @@ rownames(eruptions_recent)
 
 You can extract and manipulate subsets of a data frame along either dimension. Most commonly, you may want to use `$` to either pull out a single column as a vector, modify an existing column in-place, or even create a new column.
 
-```{r}
+```{r subsetting-df1}
 # extract the vei column
 eruptions_recent$duration
 # change the confirmed column to 1s and 0s in-place
@@ -468,7 +468,7 @@ eruptions_recent
 
 You can also use `[]` and `[[]]` to subset columns by name or position, the difference being `[]` returns a data frame and `[[]]` returns the vector directly.
 
-```{r}
+```{r subsetting-df2}
 # extract the vei column, keeping the result as a data frame
 eruptions_recent["vei"]
 # extract the same column but by position and directly as a vector
@@ -477,7 +477,7 @@ eruptions_recent[[6]]
 
 The `[]` operator has an additional usage of `[rows,cols]` where `rows`, `cols` can both be vectors specifying subsets by name or by position. Leaving one of them empty means return all of them.
 
-```{r}
+```{r subsetting-df3}
 # extract just the first 5 start/stop times
 eruptions_recent[1:5, c("start", "stop")]
 # extract the entire 10th row
@@ -489,7 +489,7 @@ eruptions_recent[-(1:10), -7]
 
 This is commonly used in data science to split up a dataset. For example, suppose you wanted to randomly partition your data into an 80% training and 20% testing set. You can first use [`sample(n,x)`{.R}](https://rdrr.io/r/base/sample.html) to randomly select `x` rows out of `n`, then use both positive and negative row subsetting syntax to get both partitions:
 
-```{r,tidy=F}
+```{r subsetting-df4,tidy=F}
 # define total number of rows and 20% for testing data
 n <- nrow(eruptions_recent)
 x <- round(n * 0.2)
@@ -505,7 +505,7 @@ eruptions_recent_train
 
 If you ever need to recombine them, just use `rbind()` which will bind rows together from multiple data frames, as long as they have the exact same columns (both name and type).
 
-```{r}
+```{r rbind}
 # note the resulting rows will be in a different order,
 # but it's the same data frame we started out with
 eruptions_recent_recombined <- rbind(eruptions_recent_test, eruptions_recent_train)
