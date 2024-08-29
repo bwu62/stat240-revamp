@@ -106,17 +106,18 @@
 <p>We will be making all plots using the <a href="https://ggplot2.tidyverse.org">ggplot2</a> package which is also a core Tidyverse package. It offers a robust syntax for easily creating and modifying plots (<a href="https://rstudio.github.io/cheatsheets/data-visualization.pdf">link to cheat sheet</a>).</p>
 <p>When making a ggplot2 plot, it’s important to remember <strong>everything is a layer</strong> that you <strong>add onto the base object using <code>+</code></strong> just like adding numbers. Whether you’re adding a plot, a faceting structure, changing the axes, adding annotations (e.g. title/labels), etc. they’re all layers that are added. This may seem strange at first, but you’ll quickly grasp it in the examples that follow.</p>
 <p>Let’s first import the necessary packages. We will need both <code>readr</code> and <code>ggplot2</code> for reading and plotting data. For convenience, I’ll just load all core Tidyverse packages.</p>
-<div class="sourceCode" id="cb529"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb529-1"><a href="data-visualization.html#cb529-1" aria-hidden="true"></a><span class="co"># if you need to, reimport all core tidyverse packages</span></span>
-<span id="cb529-2"><a href="data-visualization.html#cb529-2" aria-hidden="true"></a><span class="kw">library</span>(tidyverse)</span>
-<span id="cb529-3"><a href="data-visualization.html#cb529-3" aria-hidden="true"></a></span>
-<span id="cb529-4"><a href="data-visualization.html#cb529-4" aria-hidden="true"></a><span class="co"># optional: disable showing col_types by default in readr import functions</span></span>
-<span id="cb529-5"><a href="data-visualization.html#cb529-5" aria-hidden="true"></a><span class="kw">options</span>(<span class="dt">readr.show_col_types =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb529-6"><a href="data-visualization.html#cb529-6" aria-hidden="true"></a></span>
-<span id="cb529-7"><a href="data-visualization.html#cb529-7" aria-hidden="true"></a><span class="co"># optional: set a prettier theme and colorblind-friendly palette for plots</span></span>
-<span id="cb529-8"><a href="data-visualization.html#cb529-8" aria-hidden="true"></a><span class="co">#           (also looks better if printed with most printers, even in b/w)</span></span>
-<span id="cb529-9"><a href="data-visualization.html#cb529-9" aria-hidden="true"></a><span class="kw">theme_set</span>(<span class="kw">theme_bw</span>())</span>
-<span id="cb529-10"><a href="data-visualization.html#cb529-10" aria-hidden="true"></a><span class="kw">options</span>(<span class="dt">ggplot2.discrete.fill =</span> \(...) <span class="kw">scale_fill_brewer</span>(..., <span class="dt">palette =</span> <span class="st">"Set2"</span>),</span>
-<span id="cb529-11"><a href="data-visualization.html#cb529-11" aria-hidden="true"></a>        <span class="dt">ggplot2.discrete.colour =</span> \(...) <span class="kw">scale_color_brewer</span>(..., <span class="dt">palette =</span> <span class="st">"Dark2"</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb529"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># if you need to, reimport all core tidyverse packages</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># optional: disable showing col_types by default in readr import functions</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>readr.show_col_types <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># optional: set a prettier theme and colorblind-friendly palette for plots</span></span>
+<span><span class="co">#           (also looks better if printed with most printers, even in b/w)</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html">theme_set</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>ggplot2.discrete.fill <span class="op">=</span> \<span class="op">(</span><span class="va">...</span><span class="op">)</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_fill_brewer</a></span><span class="op">(</span><span class="va">...</span>, palette <span class="op">=</span> <span class="st">"Set2"</span><span class="op">)</span>,</span>
+<span>        ggplot2.discrete.colour <span class="op">=</span> \<span class="op">(</span><span class="va">...</span><span class="op">)</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_color_brewer</a></span><span class="op">(</span><span class="va">...</span>, palette <span class="op">=</span> <span class="st">"Dark2"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div id="palmer-penguins" class="section level2" number="6.2">
 <h2>
@@ -835,11 +836,12 @@ ggplot(df,aes(x=x,y=y,fill=z)) + geom_col() +
 </h3>
 <p>Functions can be easily plotted with <a href="https://ggplot2.tidyverse.org/reference/geom_function.html"><code class="sourceCode r"><span class="kw">geom_function</span>(<span class="dt">fun =</span> ...)</code></a> where <code>...</code> is the target function. This can be added either on top of an existing plot as another layer, or plotted by itself as a new plot, in which case the base object <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code> requires no additional arguments.</p>
 <p>If the function isn’t predefined, you can easily define it with <code>\(x) ...</code> for example:</p>
-<div class="sourceCode" id="cb582"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb582-1"><a href="data-visualization.html#cb582-1" aria-hidden="true"></a><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_function</span>(</span>
-<span id="cb582-2"><a href="data-visualization.html#cb582-2" aria-hidden="true"></a>  <span class="dt">fun =</span> \(x) x<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span>,      <span class="co"># define x²+1</span></span>
-<span id="cb582-3"><a href="data-visualization.html#cb582-3" aria-hidden="true"></a>  <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>),         <span class="co"># set limits</span></span>
-<span id="cb582-4"><a href="data-visualization.html#cb582-4" aria-hidden="true"></a>  <span class="dt">n =</span> <span class="dv">1001</span>                 <span class="co"># increase number of points used in drawing</span></span>
-<span id="cb582-5"><a href="data-visualization.html#cb582-5" aria-hidden="true"></a>)                          <span class="co"># (improves smoothness of resulting curve)</span></span></code></pre></div>
+<div class="sourceCode" id="cb582"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_function.html">geom_function</a></span><span class="op">(</span></span>
+<span>  fun <span class="op">=</span> \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="va">x</span><span class="op">^</span><span class="fl">2</span> <span class="op">+</span> <span class="fl">1</span>,      <span class="co"># define x²+1</span></span>
+<span>  xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>,         <span class="co"># set limits</span></span>
+<span>  n <span class="op">=</span> <span class="fl">1001</span>                 <span class="co"># increase number of points used in drawing</span></span>
+<span><span class="op">)</span>                          <span class="co"># (improves smoothness of resulting curve)</span></span></code></pre></div>
 <div class="inline-figure"><img src="06-data-visualization_files/figure-html/unnamed-chunk-48-1.svg" width="672" style="display: block; margin: auto;"></div>
 <p>If the function exists, but you need to modify the arguments, you can use <code>args = list(...)</code> any arguments specified inside will be directly passed to the chose function, for example:</p>
 <div class="sourceCode" id="cb583"><pre class="downlit sourceCode r">

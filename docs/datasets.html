@@ -116,8 +116,9 @@
 <li><a href="data/penguins.csv"><code>penguins.csv</code></a></li>
 </ul>
 <p>Alternatively, you can also run the following line, which will <strong>download ALL files above to your current working directory</strong>. It’s recommended to first set your working directory to an appropriate place before running this, e.g. to the <code>data/</code> directory in your <code>STAT240/</code> course folder.</p>
-<div class="sourceCode" id="cb817"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb817-1"><a href="datasets.html#cb817-1" aria-hidden="true"></a><span class="kw">lapply</span>(<span class="kw">readLines</span>(<span class="st">"https://bwu62.github.io/stat240-revamp/data_list.txt"</span>),</span>
-<span id="cb817-2"><a href="datasets.html#cb817-2" aria-hidden="true"></a>       \(.)<span class="kw">download.file</span>(.,<span class="kw">basename</span>(.)))</span></code></pre></div>
+<div class="sourceCode" id="cb817"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span><span class="op">(</span><span class="st">"https://bwu62.github.io/stat240-revamp/data_list.txt"</span><span class="op">)</span>,</span>
+<span>       \<span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span><span class="op">(</span><span class="va">.</span>,<span class="fu"><a href="https://rdrr.io/r/base/basename.html">basename</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div id="eruptions" class="section level2" number="9.2">
 <h2>
@@ -475,40 +476,41 @@ options(width=80)
 <span><span class="va">skip</span> <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_subset.html">str_subset</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="st">"temp/"</span>,full<span class="op">=</span><span class="cn">T</span><span class="op">)</span>,<span class="st">"^temp/API_SP.DYN.TFRT"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">read_lines</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html">str_detect</a></span><span class="op">(</span><span class="st">"Country Name"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">which</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">min</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://magrittr.tidyverse.org/reference/aliases.html">subtract</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">fertility_raw</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_subset.html">str_subset</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="st">"temp/"</span>,full<span class="op">=</span><span class="cn">T</span><span class="op">)</span>,<span class="st">"^temp/API_SP.DYN.TFRT"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span>skip<span class="op">=</span><span class="va">skip</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb832"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb832-1"><a href="datasets.html#cb832-1" aria-hidden="true"></a><span class="co"># simplify/shorten some names for convenience</span></span>
-<span id="cb832-2"><a href="datasets.html#cb832-2" aria-hidden="true"></a>fertility_meta &lt;-<span class="st"> </span>fertility_meta <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(</span>
-<span id="cb832-3"><a href="datasets.html#cb832-3" aria-hidden="true"></a>  <span class="dt">TableName =</span> TableName <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb832-4"><a href="datasets.html#cb832-4" aria-hidden="true"></a><span class="st">    </span><span class="kw">str_replace_all</span>(<span class="kw">c</span>(</span>
-<span id="cb832-5"><a href="datasets.html#cb832-5" aria-hidden="true"></a>      <span class="st">" and the "</span> =<span class="st"> " &amp; "</span>,</span>
-<span id="cb832-6"><a href="datasets.html#cb832-6" aria-hidden="true"></a>      <span class="st">" and "</span> =<span class="st"> " &amp; "</span>,</span>
-<span id="cb832-7"><a href="datasets.html#cb832-7" aria-hidden="true"></a>      <span class="st">", The"</span> =<span class="st"> ""</span>,</span>
-<span id="cb832-8"><a href="datasets.html#cb832-8" aria-hidden="true"></a>      <span class="st">"SAR, China"</span> =<span class="st"> ""</span>,</span>
-<span id="cb832-9"><a href="datasets.html#cb832-9" aria-hidden="true"></a>      <span class="st">"Korea, Rep."</span> =<span class="st"> "South Korea"</span>,</span>
-<span id="cb832-10"><a href="datasets.html#cb832-10" aria-hidden="true"></a>      <span class="st">"British Virgin Islands"</span> =<span class="st"> "Virgin Islands"</span>,</span>
-<span id="cb832-11"><a href="datasets.html#cb832-11" aria-hidden="true"></a>      <span class="st">"Russian Federation"</span> =<span class="st"> "Russia"</span>,</span>
-<span id="cb832-12"><a href="datasets.html#cb832-12" aria-hidden="true"></a>      <span class="st">" </span><span class="ch">\\</span><span class="st">(.*"</span> =<span class="st"> ""</span>,</span>
-<span id="cb832-13"><a href="datasets.html#cb832-13" aria-hidden="true"></a>      <span class="st">"Slovak Republic"</span> =<span class="st"> "Slovakia"</span>,</span>
-<span id="cb832-14"><a href="datasets.html#cb832-14" aria-hidden="true"></a>      <span class="st">"Iran, Islamic Rep."</span> =<span class="st"> "Iran"</span>,</span>
-<span id="cb832-15"><a href="datasets.html#cb832-15" aria-hidden="true"></a>      <span class="st">"Brunei Darussalam"</span> =<span class="st"> "Brunei"</span>,</span>
-<span id="cb832-16"><a href="datasets.html#cb832-16" aria-hidden="true"></a>      <span class="st">"Korea, Dem. People's Rep."</span> =<span class="st"> "North Korea"</span>,</span>
-<span id="cb832-17"><a href="datasets.html#cb832-17" aria-hidden="true"></a>      <span class="st">"Cabo Verde"</span> =<span class="st"> "Cape Verde"</span>,</span>
-<span id="cb832-18"><a href="datasets.html#cb832-18" aria-hidden="true"></a>      <span class="st">"Türkiye"</span> =<span class="st"> "Turkey"</span>,</span>
-<span id="cb832-19"><a href="datasets.html#cb832-19" aria-hidden="true"></a>      <span class="st">"Viet Nam"</span> =<span class="st"> "Vietnam"</span>,</span>
-<span id="cb832-20"><a href="datasets.html#cb832-20" aria-hidden="true"></a>      <span class="st">"Lao PDR"</span> =<span class="st"> "Laos"</span>,</span>
-<span id="cb832-21"><a href="datasets.html#cb832-21" aria-hidden="true"></a>      <span class="st">"Micronesia, Fed. Sts."</span> =<span class="st"> "Micronesia"</span>,</span>
-<span id="cb832-22"><a href="datasets.html#cb832-22" aria-hidden="true"></a>      <span class="st">"Syrian Arab Republic"</span> =<span class="st"> "Syria"</span>,</span>
-<span id="cb832-23"><a href="datasets.html#cb832-23" aria-hidden="true"></a>      <span class="st">"Kyrgyz Republic"</span> =<span class="st"> "Kyrgyzstan"</span>,</span>
-<span id="cb832-24"><a href="datasets.html#cb832-24" aria-hidden="true"></a>      <span class="st">"Egypt, Arab Rep."</span> =<span class="st"> "Egypt"</span>,</span>
-<span id="cb832-25"><a href="datasets.html#cb832-25" aria-hidden="true"></a>      <span class="st">"Timor-Leste"</span> =<span class="st"> "East Timor"</span>,</span>
-<span id="cb832-26"><a href="datasets.html#cb832-26" aria-hidden="true"></a>      <span class="st">"Yemen, Rep."</span> =<span class="st"> "Yemen"</span>,</span>
-<span id="cb832-27"><a href="datasets.html#cb832-27" aria-hidden="true"></a>      <span class="st">"Côte d'Ivoire"</span> =<span class="st"> "Ivory Coast"</span></span>
-<span id="cb832-28"><a href="datasets.html#cb832-28" aria-hidden="true"></a>    ))</span>
-<span id="cb832-29"><a href="datasets.html#cb832-29" aria-hidden="true"></a>)</span>
-<span id="cb832-30"><a href="datasets.html#cb832-30" aria-hidden="true"></a></span>
-<span id="cb832-31"><a href="datasets.html#cb832-31" aria-hidden="true"></a><span class="co"># remove some extra columns with only NAs?</span></span>
-<span id="cb832-32"><a href="datasets.html#cb832-32" aria-hidden="true"></a></span>
-<span id="cb832-33"><a href="datasets.html#cb832-33" aria-hidden="true"></a>fertility_meta &lt;-<span class="st"> </span>fertility_meta <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="kw">where</span>(\(x)<span class="kw">mean</span>(<span class="kw">is.na</span>(x))<span class="op">&lt;</span><span class="dv">1</span>))</span>
-<span id="cb832-34"><a href="datasets.html#cb832-34" aria-hidden="true"></a>fertility_raw &lt;-<span class="st"> </span>fertility_raw <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="kw">where</span>(\(x)<span class="kw">mean</span>(<span class="kw">is.na</span>(x))<span class="op">&lt;</span><span class="dv">1</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb832"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># simplify/shorten some names for convenience</span></span>
+<span><span class="va">fertility_meta</span> <span class="op">&lt;-</span> <span class="va">fertility_meta</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>  TableName <span class="op">=</span> <span class="va">TableName</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_replace.html">str_replace_all</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
+<span>      <span class="st">" and the "</span> <span class="op">=</span> <span class="st">" &amp; "</span>,</span>
+<span>      <span class="st">" and "</span> <span class="op">=</span> <span class="st">" &amp; "</span>,</span>
+<span>      <span class="st">", The"</span> <span class="op">=</span> <span class="st">""</span>,</span>
+<span>      <span class="st">"SAR, China"</span> <span class="op">=</span> <span class="st">""</span>,</span>
+<span>      <span class="st">"Korea, Rep."</span> <span class="op">=</span> <span class="st">"South Korea"</span>,</span>
+<span>      <span class="st">"British Virgin Islands"</span> <span class="op">=</span> <span class="st">"Virgin Islands"</span>,</span>
+<span>      <span class="st">"Russian Federation"</span> <span class="op">=</span> <span class="st">"Russia"</span>,</span>
+<span>      <span class="st">" \\(.*"</span> <span class="op">=</span> <span class="st">""</span>,</span>
+<span>      <span class="st">"Slovak Republic"</span> <span class="op">=</span> <span class="st">"Slovakia"</span>,</span>
+<span>      <span class="st">"Iran, Islamic Rep."</span> <span class="op">=</span> <span class="st">"Iran"</span>,</span>
+<span>      <span class="st">"Brunei Darussalam"</span> <span class="op">=</span> <span class="st">"Brunei"</span>,</span>
+<span>      <span class="st">"Korea, Dem. People's Rep."</span> <span class="op">=</span> <span class="st">"North Korea"</span>,</span>
+<span>      <span class="st">"Cabo Verde"</span> <span class="op">=</span> <span class="st">"Cape Verde"</span>,</span>
+<span>      <span class="st">"Türkiye"</span> <span class="op">=</span> <span class="st">"Turkey"</span>,</span>
+<span>      <span class="st">"Viet Nam"</span> <span class="op">=</span> <span class="st">"Vietnam"</span>,</span>
+<span>      <span class="st">"Lao PDR"</span> <span class="op">=</span> <span class="st">"Laos"</span>,</span>
+<span>      <span class="st">"Micronesia, Fed. Sts."</span> <span class="op">=</span> <span class="st">"Micronesia"</span>,</span>
+<span>      <span class="st">"Syrian Arab Republic"</span> <span class="op">=</span> <span class="st">"Syria"</span>,</span>
+<span>      <span class="st">"Kyrgyz Republic"</span> <span class="op">=</span> <span class="st">"Kyrgyzstan"</span>,</span>
+<span>      <span class="st">"Egypt, Arab Rep."</span> <span class="op">=</span> <span class="st">"Egypt"</span>,</span>
+<span>      <span class="st">"Timor-Leste"</span> <span class="op">=</span> <span class="st">"East Timor"</span>,</span>
+<span>      <span class="st">"Yemen, Rep."</span> <span class="op">=</span> <span class="st">"Yemen"</span>,</span>
+<span>      <span class="st">"Côte d'Ivoire"</span> <span class="op">=</span> <span class="st">"Ivory Coast"</span></span>
+<span>    <span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># remove some extra columns with only NAs?</span></span>
+<span></span>
+<span><span class="va">fertility_meta</span> <span class="op">&lt;-</span> <span class="va">fertility_meta</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/where.html">where</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">&lt;</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">fertility_raw</span> <span class="op">&lt;-</span> <span class="va">fertility_raw</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/where.html">where</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">&lt;</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div id="write-out-raw-data" class="section level3" number="9.5.2">
 <h3>
