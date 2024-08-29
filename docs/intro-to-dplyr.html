@@ -1029,8 +1029,9 @@
         &lt;int&gt;     &lt;dbl&gt;        &lt;int&gt;         &lt;dbl&gt; &lt;int&gt;
 1           0       0.2            3           0.4     5</code></pre>
 <p>If you just want to apply one function to all columns, you can use <code><a href="https://dplyr.tidyverse.org/reference/summarise_all.html">summarize_all()</a></code> which is a shortcut for exactly this. For example, we can apply the function <code>\(x) mean(is.na(x))*100</code> to get the percent missing in each column:</p>
-<div class="sourceCode" id="cb698"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb698-1"><a href="intro-to-dplyr.html#cb698-1" aria-hidden="true"></a><span class="co"># get percent missing in each column</span></span>
-<span id="cb698-2"><a href="intro-to-dplyr.html#cb698-2" aria-hidden="true"></a>df.demo <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarize_all</span>(\(x) <span class="kw">mean</span>(<span class="kw">is.na</span>(x)) <span class="op">*</span><span class="st"> </span><span class="dv">100</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb698"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># get percent missing in each column</span></span>
+<span><span class="va">df.demo</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise_all.html">summarize_all</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">*</span> <span class="fl">100</span><span class="op">)</span></span></code></pre></div>
 <pre><code># A tibble: 1 × 4
    date     x     y     z
   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;

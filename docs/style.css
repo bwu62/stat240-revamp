@@ -355,7 +355,9 @@ a.anchorjs-link{
 .showopt{
   margin-right:17px!important;
 }
-.html-widget{
+div.html-widget{
   margin-left:auto!important;
   margin-right:auto!important;
+  height:unset!important;
+  width:100%!important;
 }
