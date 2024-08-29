@@ -25,7 +25,6 @@ penguins <- read_csv("https://bwu62.github.io/stat240-revamp/data/penguins.csv")
 ```{r setup-all2,echo=F}
 library(tidyverse)
 library(magrittr)
-`%T>%` <- magrittr:::`%T>%`
 source("ggplot_theme_options.R")
 penguins <- read_csv("data/penguins.csv")
 ```

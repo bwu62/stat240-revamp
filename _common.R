@@ -44,7 +44,7 @@ knitr::opts_chunk$set(
 # library(downlit)
 
 # import just the pipe
-library(magrittr, include.only = c("%>%"))
+`%>%` = magrittr::`%>%`
 
 # detect which semester we're headed into
 # and fix an R-version to use
