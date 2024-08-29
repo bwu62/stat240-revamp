@@ -511,7 +511,7 @@ Let's now briefly discuss R techniques for handling NAs. First it's important to
  - `NaN` is usually the result of a mathematically invalid operation, like `0/0`, `0*Inf`, or `Inf-Inf`.
     - Note that `sqrt(-1)` and `log(-1)` also return `NaN` since the input type is of real type. Replace `-1` with `0-1i` to trigger complex evaluation.
 
-Even though they're not the exact same, both `NA` and `NaN` are considered missing in R and can be handled together using the operations covered below.
+Even though they're not the exact same, both `NA` and `NaN` are considered missing in R and can be handled together using the operations covered below. It's also worth noting `NA` is NOT the same as `"NA"`, i.e. a string made of the letters `"N"` and `"A"`
 
 It's also worth noting `NA` is NOT the same as `"NA"`, i.e. a string made of the letters `"N"` and `"A"`.
 
