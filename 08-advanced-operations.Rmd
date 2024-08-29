@@ -590,4 +590,3 @@ Before we move on, let's demonstrate one more usage for `pivot_wider()`. This fu
 fertility %>% 
   count(region, income_group)
 ```
-

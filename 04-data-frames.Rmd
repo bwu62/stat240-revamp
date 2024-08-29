@@ -224,7 +224,7 @@ eruptions_recent <- read_delim(
 print(eruptions_recent, n = 5)
 ```
 ```{r,echo=F}
-eruptions_recent <- read_delim("data/eruptions_recent.delim",delim = "|",show_col_types = FALSE)
+eruptions_recent <- read_delim("data/eruptions_recent.delim", delim = "|", show_col_types = FALSE)
 print(eruptions_recent, n = 5)
 ```
 
@@ -414,7 +414,7 @@ eruptions_recent
 ```
 ```{r,echo=F}
 options(pillar.print_min = 5)
-eruptions_recent <- read_csv("data/eruptions_recent.csv",show_col_types = FALSE)
+eruptions_recent <- read_csv("data/eruptions_recent.csv", show_col_types = FALSE)
 eruptions_recent
 ```
 

@@ -644,8 +644,7 @@ A better way may be to `facet_wrap()` the species variable, and switch to using 
 ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm,
                      color = sex, shape = sex)) +
   geom_point(size = 2) + facet_wrap(~species, ncol = 2) +
-  labs(x = "Body mass (g)", y = "Flipper length (mm)",
-       color = "Sex", shape = "Sex",
+  labs(x = "Body mass (g)", y = "Flipper length (mm)", color = "Sex", shape = "Sex",
        title = "Flipper length vs body mass (by species & sex) for Palmer penguins")
 ```
 
@@ -733,14 +732,17 @@ What do you think the following code will produce?
 :::{.fold .o}
 ```{r,fig.width=5.5}
 df <- tibble(
-  x = c("a","a","a","b","b","b","c","c","c","d","d","e","e"),
-  y = c(20,20,25,40,20,40,15,15,18,28,15,18,11),
-  z = c("a","b","c","d","c","e","f","g","c","h","c","i","c")
+  x = c("a", "a", "a", "b", "b", "b", "c", "c", "c", "d", "d", "e", "e"),
+  y = c(20, 20, 25, 40, 20, 40, 15, 15, 18, 28, 15, 18, 11),
+  z = c("a", "b", "c", "d", "c", "e", "f", "g", "c", "h", "c", "i", "c")
 )
-ggplot(df,aes(x=x,y=y,fill=z)) + geom_col() +   
+ggplot(df, aes(x = x, y = y, fill = z)) +
+  geom_col() +
   scale_fill_manual(
-    values=c("#4F76DF","#FFFFFF","#FFD90F","#83C33F","#2359F1",
-             "#6686C7","#E65120","#DA6901","#72C7E7")
+    values = c(
+      "#4F76DF", "#FFFFFF", "#FFD90F", "#83C33F", "#2359F1",
+      "#6686C7", "#E65120", "#DA6901", "#72C7E7"
+    )
   )
 ```
 ([*credit*](https://www.r-bloggers.com/2016/03/the-simpsons-as-a-chart-2/))
@@ -807,7 +809,7 @@ There are many different implementations of this, but one of the best is [`GGall
 # to run this chunk, you need to have the package GGally installed
 # first, we subset out just a few columns (otherwise it gets too crazy)
 # aes(color = species) is optional but improves the plot greatly
-penguins_subset = penguins[
+penguins_subset <- penguins[
   c("species", "body_mass_g", "bill_length_mm", "bill_depth_mm", "flipper_length_mm")
 ]
 GGally::ggpairs(penguins_subset, aes(color = species))
@@ -828,4 +830,3 @@ These are beyond the scope of this course, but here's a few other links if you w
  - You can also [modify the coordinate systems](https://ggplot2-book.org/coord), for example to make polar plots which are especially effective for cyclical or directional data.
  - There are also other [plot themes](https://ggplot2.tidyverse.org/reference/ggtheme.html) you can try out.
  - Here's a [gallery of R plots](https://r-graph-gallery.com) if you want to learn more advanced types of plots and see examples of how to make them.
-
