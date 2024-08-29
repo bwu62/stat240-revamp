@@ -784,10 +784,8 @@ library(tidyverse)
 ✔ lubridate 1.9.3     ✔ tidyr     1.3.1
 ✔ purrr     1.0.2     
 ── Conflicts ──────────────────────────────── tidyverse_conflicts() ──
-✖ tidyr::extract()   masks magrittr::extract()
-✖ dplyr::filter()    masks stats::filter()
-✖ dplyr::lag()       masks stats::lag()
-✖ purrr::set_names() masks magrittr::set_names()
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
 ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
 ```
 
@@ -1112,10 +1110,10 @@ getwd()
 ```
 
 ```
-[1] "C:/Users/bi/Desktop/stat240-revamp"
+[1] "/home/admin/stat240-revamp"
 ```
 
-You can see my current Rstudio session (while writing these notes) is running from the `` stat240-revamp `` directory which is itself located in `` C:/Users/bi/Desktop ``.
+You can see my current Rstudio session (while writing these notes) is running from the `` stat240-revamp `` directory which is itself located in `` /home/admin ``.
 
 Generally, when you start a new Rstudio session, the working directory will default to `C:/Users/username/` for Windows and `/Users/username/` for Mac, where `username` is your account name (my working directory is different because I have it intentionally set to my notes project folder).
 
