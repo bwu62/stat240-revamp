@@ -331,7 +331,7 @@ last.yy <- tryCatch({
   rvest::read_html("https://nces.ed.gov/programs/digest/current_tables.asp") %>%
   rvest::html_nodes(xpath="//select[@name='quickjump']/option[2]/text()") %>% 
   as.character %>% as.numeric
-},error = function(e){
+},error = \(e){
   (lubridate::year(Sys.Date()-3*30)-1)
 }) %% 100
 ```
