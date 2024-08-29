@@ -513,8 +513,6 @@ Let's now briefly discuss R techniques for handling NAs. First it's important to
 
 Even though they're not the exact same, both `NA` and `NaN` are considered missing in R and can be handled together using the operations covered below. It's also worth noting `NA` is NOT the same as `"NA"`, i.e. a string made of the letters `"N"` and `"A"`
 
-It's also worth noting `NA` is NOT the same as `"NA"`, i.e. a string made of the letters `"N"` and `"A"`.
-
 ```{r}
 # check if two objects are the exact same
 identical(NA, NA)
@@ -657,5 +655,3 @@ df.demo <- df.demo %>% mutate(w = c(-9999, -9999, 20, 30, -9999))
 df.demo
 df.demo %>% mutate(w = na_if(w, -9999))
 ```
-
-
