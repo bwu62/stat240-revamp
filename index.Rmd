@@ -76,7 +76,7 @@ Tips on improving your R understanding or optimizing your workflow will sppear i
 :::
 
 
-### Source {-}
+### Source code {-}
 
 These notes are [open-sourced on GitHub](https://github.com/bwu62/stat240-revamp) and built using [bookdown](https://github.com/rstudio/bookdown) and served by [GitHub pages](https://pages.github.com), which provides a convenient, easily editable, and reproducible workflow. Each page has a link to "View source" of the page in the right-side navbar, if you want to see what's under the hood.
 
@@ -102,7 +102,7 @@ We work hard to avoid errors, but alas nothing is perfect! If you notice any err
 
 ### Acknowledgements {-}
 
-```{r get-contributors}
+```{r get-contributors,include=F}
 contributors <-
   "https://api.github.com/repos/bwu62/stat240-revamp/contributors?anon=1" %>%
   httr::GET() %>%
