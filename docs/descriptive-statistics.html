@@ -19,7 +19,7 @@
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Roboto_Mono-0.4.9/font.css" rel="stylesheet">
 <script src="libs/bs3compat-0.8.0/transition.js"></script><script src="libs/bs3compat-0.8.0/tabs.js"></script><script src="libs/bs3compat-0.8.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
 <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="libs/plotly-binding-4.10.4/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
 <script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
 <script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-E0YDB40HWY"></script><script>
@@ -121,7 +121,7 @@
 </li>
 </ol>
 <p>Continuing with our previous 21<sup>st</sup> century US volcanic eruptions dataset, you can use <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code> to, for example, find the mean length of eruptions in days:</p>
-<div class="sourceCode" id="cb498"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb497"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># import all core tidyverse packages, since we will need several</span></span>
 <span><span class="co"># (again, this imports readr, tibble, and stringr, as well as several others)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
@@ -130,21 +130,21 @@
 <span>  <span class="st">"https://bwu62.github.io/stat240-revamp/data/eruptions_recent.csv"</span>,</span>
 <span>  show_col_types <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb499"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb498"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># compute mean duration of eruptions</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">eruptions_recent</span><span class="op">$</span><span class="va">duration</span><span class="op">)</span></span></code></pre></div>
 <pre><code>[1] 192.1233</code></pre>
-<div class="sourceCode" id="cb501"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb500"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># we can check this agrees with our mathematical definition</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">eruptions_recent</span><span class="op">$</span><span class="va">duration</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">eruptions_recent</span><span class="op">$</span><span class="va">duration</span><span class="op">)</span></span></code></pre></div>
 <pre><code>[1] 192.1233</code></pre>
 <div class="note">
 <p>If a vector has missing values, i.e. <code>NA</code>, <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code> and most other statistical functions will return <code>NA</code>. This is a safety measure, to help remind you to handle missing values appropriately before attempting further analysis. You can tell R to ignore <code>NA</code>s and proceed by setting <code>na.rm = TRUE</code> in the function.</p>
-<div class="sourceCode" id="cb503"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb502"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># example of NAs causing mean to fail</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">6</span>, <span class="cn">NA</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>[1] NA</code></pre>
-<div class="sourceCode" id="cb505"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb504"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># setting na.rm = TRUE tells R to safely ignore NAs</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">6</span>, <span class="cn">NA</span>, <span class="fl">2</span><span class="op">)</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <pre><code>[1] 3</code></pre>
@@ -161,11 +161,11 @@
 <li>The data is not truly numeric, e.g. if you have ordinal data.</li>
 </ol>
 <p>We can use <code><a href="https://rdrr.io/r/stats/median.html">median()</a></code> to find the median length of eruptions in days:</p>
-<div class="sourceCode" id="cb507"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb506"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># compute median duration of eruptions</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">eruptions_recent</span><span class="op">$</span><span class="va">duration</span><span class="op">)</span></span></code></pre></div>
 <pre><code>[1] 71</code></pre>
-<div class="sourceCode" id="cb509"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb508"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># check to see if it satisfies the formal definition</span></span>
 <span><span class="co"># recall from the logical vectors section from Chapter 3 that</span></span>
 <span><span class="co"># mean() of a logical vector gives the proportion of TRUEs</span></span>
@@ -193,22 +193,22 @@
 <p>The mode is the oft-maligned black sheep of the central tendency family. It is defined as <strong>the most common observation</strong>, i.e. the observation that occurs the most number of times in a sample. It’s primarily intended for categorical data (e.g. male vs female) though it also has some relevance to distributions (more on this much later).</p>
 <p>The mode is of course also a form of “average”. For example, statistics show roughly <a href="https://www.zippia.com/lumberjack-jobs/demographics">95% of lumberjacks in the US are male</a>. It would therefore be accurate to say “the average American lumberjack is male”. In fact, for categorical data—which is ubiquitous—this is the only possible measure of central tendency.</p>
 <p>Unfortunately, base R does not have a convenient function for computing the mode (the function <code><a href="https://rdrr.io/r/base/mode.html">mode()</a></code> is <a href="https://ds-pl-r-book.netlify.app/modes-types-classes-of-objects.html">completely unrelated</a>), but you can easily either define it yourself or import <code>Mode()</code> from the <code>DescTools</code> package</p>
-<div class="sourceCode" id="cb511"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb510"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># this defines a simple Mode function using mostly commands we already know</span></span>
 <span><span class="co"># explanation: table tabulates observations, then</span></span>
 <span><span class="co">#              sort(- ...) sorts by descending order, then</span></span>
 <span><span class="co">#              names(...)[1] extracts the name of the first item</span></span>
 <span><span class="co"># note this function doesn't return multiple modes if there are more than 1</span></span>
 <span><span class="va">Mode</span> <span class="op">&lt;-</span> \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span></code></pre></div>
-<div class="sourceCode" id="cb512"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb511"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># find the volcano with the most number of eruptions</span></span>
 <span><span class="fu">Mode</span><span class="op">(</span><span class="va">eruptions_recent</span><span class="op">$</span><span class="va">volcano</span><span class="op">)</span></span></code></pre></div>
 <pre><code>[1] "Cleveland"</code></pre>
-<div class="sourceCode" id="cb514"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb513"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># how many eruptions has Cleveland had since 2001?</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">eruptions_recent</span><span class="op">$</span><span class="va">volcano</span> <span class="op">==</span> <span class="st">"Cleveland"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>[1] 13</code></pre>
-<div class="sourceCode" id="cb516"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb515"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># the DescTools package also has a Mode function,</span></span>
 <span><span class="co"># which correctly handles ties and also gives the frequency</span></span>
 <span><span class="co"># make sure to install it before using: install.packages("DescTools")</span></span>
@@ -255,7 +255,7 @@ attr(,"freq")
 <p>Let’s get the easy one out of the way first. <strong>Standard deviation is always defined as the (positive) square root of variance</strong>. So what’s the variance then? The <strong>variance of a sample is defined as</strong>:</p>
 <p><span class="math display">\[s^2=\frac1{n-1}\sum_{i=1}^n(x_i-\bar{x})^2=\frac{(x_1-\bar{x})^2+\cdots+(x_n-\bar{x})^2}{n-1}\]</span></p>
 <p>Basically, it’s the <strong>mean squared-distance from the mean</strong>, <span class="math inline">\(\bar{x}\)</span>, except we use <span class="math inline">\(n-1\)</span> instead of <span class="math inline">\(n\)</span> to correct for a <a href="https://en.wikipedia.org/wiki/Bessel%27s_correction">small bias</a>. For example, we can compute the variance of the duration of eruptions, in <strong>days squared</strong>:</p>
-<div class="sourceCode" id="cb518"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb517"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># compute variance of duration</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="va">eruptions_recent</span><span class="op">$</span><span class="va">duration</span><span class="op">)</span></span></code></pre></div>
 <pre><code>[1] 101204.7</code></pre>
@@ -263,11 +263,11 @@ attr(,"freq")
 <p>Note the units of the variance are squared of the data units. This makes it inconvenient to work with, since it means it cannot be directly compared with the data. This is why instead we often work with <strong>its square root, i.e. the standard deviation</strong>:</p>
 <p><span class="math display">\[s=\sqrt{\frac1{n-1}\sum_{i=1}^n(x_i-\bar{x})^2}\]</span></p>
 <p>which can be thought of as the <strong>“average” distance from the mean</strong> for a given observation. This can be computed using <code><a href="https://rdrr.io/r/stats/sd.html">sd()</a></code>:</p>
-<div class="sourceCode" id="cb520"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb519"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># compute the standard deviation of duration</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">eruptions_recent</span><span class="op">$</span><span class="va">duration</span><span class="op">)</span></span></code></pre></div>
 <pre><code>[1] 318.1269</code></pre>
-<div class="sourceCode" id="cb522"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb521"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># you can check this is equal to sqrt(var(...))</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="va">eruptions_recent</span><span class="op">$</span><span class="va">duration</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>[1] 318.1269</code></pre>
@@ -287,14 +287,14 @@ attr(,"freq")
 <h3>
 <span class="header-section-number">5.2.3</span> Percentiles<a class="anchor" aria-label="anchor" href="#percentiles"><i class="fas fa-link"></i></a>
 </h3>
-<p>Percentiles are a generalization of the median. Recall the median is the data point that is just barely greater than or equal to 50% of the data. Similarly, a <strong><span class="math inline">\(p\)</span><sup>th</sup> percentile is the data point just barely greater than or equal to <span class="math inline">\(p\)</span>% of the data</strong>. Percentiles are computed using the <a href="https://rdrr.io/r/stats/quantile.html"><code class="sourceCode r"><span class="fu">quantile</span>(x, <span class="at">probs =</span> p)</code></a> function, where <code>x</code> is the data vector, and <code>p</code> is a desired percentile (or vector thereof). For example, we can compute the 0<sup>th</sup>, 25<sup>th</sup>, 50<sup>th</sup>, 75<sup>th</sup>, and 100<sup>th</sup> percentiles of eruption duration with:</p>
-<div class="sourceCode" id="cb524"><pre class="downlit sourceCode r">
+<p>Percentiles are a generalization of the median. Recall the median is the data point that is just barely greater than or equal to 50% of the data. Similarly, a <strong><span class="math inline">\(p\)</span><sup>th</sup> percentile is the data point just barely greater than or equal to <span class="math inline">\(p\)</span>% of the data</strong>. Percentiles are computed using the <a href="https://rdrr.io/r/stats/quantile.html"><code class="sourceCode r"><span class="kw">quantile</span>(x, <span class="dt">probs =</span> p)</code></a> function, where <code>x</code> is the data vector, and <code>p</code> is a desired percentile (or vector thereof). For example, we can compute the 0<sup>th</sup>, 25<sup>th</sup>, 50<sup>th</sup>, 75<sup>th</sup>, and 100<sup>th</sup> percentiles of eruption duration with:</p>
+<div class="sourceCode" id="cb523"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">eruptions_recent</span><span class="op">$</span><span class="va">duration</span>, probs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>  0%  25%  50%  75% 100% 
    0    6   71  195 1491 </code></pre>
 <p>These 5 numbers correspond to the <strong>min</strong>, <strong>1<sup>st</sup> quartile (<span class="math inline">\(Q_1\)</span>)</strong>, <strong>median</strong>, <strong>3<sup>rd</sup> quartile (<span class="math inline">\(Q_3\)</span>)</strong>, and max respectively, which are often collectively known as the <a href="https://en.wikipedia.org/wiki/Five-number_summary">five-number summary</a>. <span class="math inline">\(Q_1\)</span> and <span class="math inline">\(Q_3\)</span> are also frequently called the upper and lower <strong>hinges</strong> of a dataset.</p>
 <p>The <strong>difference <span class="math inline">\(Q_3-Q_1\)</span> is called the interquartile range</strong>, and is often used instead of the variance/standard deviation when outliers/skewness is a significant concern in a dataset due to its increased robustness. The IQR can be computed with the <code><a href="https://rdrr.io/r/stats/IQR.html">IQR()</a></code> function:</p>
-<div class="sourceCode" id="cb526"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb525"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># compute the interquartile range of eruption durations</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/IQR.html">IQR</a></span><span class="op">(</span><span class="va">eruptions_recent</span><span class="op">$</span><span class="va">duration</span><span class="op">)</span></span></code></pre></div>
 <pre><code>[1] 189</code></pre>
@@ -305,11 +305,11 @@ attr(,"freq")
 </h3>
 <p>The range is the crudest of the measures of spread, defined as the <strong>difference between the minimum and maximum</strong> of a sample. It is even more sensitive to outliers than the variance/standard deviation, and thus less commonly used in formal statistical settings. It is sometimes the only practical measures for extremely small datasets.</p>
 <p>In R, the <code><a href="https://rdrr.io/r/base/range.html">range()</a></code> function gives the minimum and maximum in a vector; to get the actual range, you can use <code><a href="https://rdrr.io/r/base/diff.html">diff()</a></code> to take the difference of the two:</p>
-<div class="sourceCode" id="cb528"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb527"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># range() gives the min/max vector</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">eruptions_recent</span><span class="op">$</span><span class="va">duration</span><span class="op">)</span></span></code></pre></div>
 <pre><code>[1]    0 1491</code></pre>
-<div class="sourceCode" id="cb530"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb529"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># diff() of range() gives the true statistical range</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">eruptions_recent</span><span class="op">$</span><span class="va">duration</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>[1] 1491</code></pre>

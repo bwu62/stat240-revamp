@@ -19,7 +19,7 @@
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Roboto_Mono-0.4.9/font.css" rel="stylesheet">
 <script src="libs/bs3compat-0.8.0/transition.js"></script><script src="libs/bs3compat-0.8.0/tabs.js"></script><script src="libs/bs3compat-0.8.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
 <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="libs/plotly-binding-4.10.4/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
 <script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
 <script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-E0YDB40HWY"></script><script>
@@ -93,7 +93,7 @@
 <span class="header-section-number">7</span> Intro to dplyr<a class="anchor" aria-label="anchor" href="#intro-to-dplyr"><i class="fas fa-link"></i></a>
 </h1>
 <p><a href="https://dplyr.tidyverse.org">dplyr</a> is the core Tidyverse package for transforming and your raw datasets into a clean and usable format (<a href="https://rstudio.github.io/cheatsheets/data-transformation.pdf">link to cheat sheet</a>). Its functions are versatile, performant, and have a consistent and user friendly syntax. These traits make it highly suitable for data science at all levels.</p>
-<div class="sourceCode" id="cb588"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb587"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># import all core tidyverse packages</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="co"># optional: change default print to 5 rows to save vertical space, and</span></span>
@@ -127,7 +127,7 @@
 <code>x %&gt;% f</code> is equivalent to <code>f(x)</code>
 </li>
 <li>
-<code>x %&gt;% f(y)</code> is equivalent to <code>f(x, y)</code> <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;These examples come from the &lt;a href="https://magrittr.tidyverse.org/index.html#usage"&gt;magrittr help page&lt;/a&gt;.&lt;/p&gt;'><sup>26</sup></a>
+<code>x %&gt;% f(y)</code> is equivalent to <code>f(x, y)</code><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;These examples come from the &lt;a href="https://magrittr.tidyverse.org/index.html#usage"&gt;magrittr help page&lt;/a&gt;.&lt;/p&gt;'><sup>26</sup></a>
 </li>
 </ul>
 <p>Why is this useful? Suppose you start with a data frame <code>df</code> and want to run the functions <code>f</code>, <code>g</code>, and <code>h</code> on it in order. You can of course do the following:</p>
@@ -147,7 +147,7 @@
 <span class="header-section-number">7.3</span> Data example<a class="anchor" aria-label="anchor" href="#data-example"><i class="fas fa-link"></i></a>
 </h2>
 <p>For now, we’re going to continue using the Palmer penguins dataset <a href="https://bwu62.github.io/stat240-revamp/data/penguins.csv"><code>penguins.csv</code></a> as an example data frame. Let’s load the data in:</p>
-<div class="sourceCode" id="cb593"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb592"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># load in the familiar penguins dataset</span></span>
 <span><span class="va">penguins</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"https://bwu62.github.io/stat240-revamp/data/penguins.csv"</span><span class="op">)</span></span>
 <span><span class="co"># print the first few rows of the data frame to check</span></span>
@@ -185,7 +185,7 @@
 </h3>
 <p><code><a href="https://dplyr.tidyverse.org/reference/select.html">select()</a></code> is used to subset columns in a data frame and is often one of the first operations used after loading in a dataset (to remove columns unnecessary for your analysis).</p>
 <p>It has a very flexible syntax: you can use subset either by numeric position, by name, by ranges, by exclusion, or even using special <a href="https://tidyselect.r-lib.org/reference/starts_with.html">selector functions</a>. It can also be used to reorder columns. Here are a few examples:</p>
-<div class="sourceCode" id="cb595"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb594"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># select just species, sex, flipper length, and body mass</span></span>
 <span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">species</span>, <span class="va">sex</span>, <span class="va">flipper_length_mm</span>, <span class="va">body_mass_g</span><span class="op">)</span></span></code></pre></div>
@@ -198,7 +198,7 @@
 4 Adelie  female               193        3450
 5 Adelie  male                 190        3650
 # ℹ 328 more rows</code></pre>
-<div class="sourceCode" id="cb597"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb596"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># note this is syntactically equivalent to the following:</span></span>
 <span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">penguins</span>, <span class="va">species</span>, <span class="va">sex</span>, <span class="va">flipper_length_mm</span>, <span class="va">body_mass_g</span><span class="op">)</span></span></code></pre></div>
 <pre><code># A tibble: 333 × 4
@@ -210,7 +210,7 @@
 4 Adelie  female               193        3450
 5 Adelie  male                 190        3650
 # ℹ 328 more rows</code></pre>
-<div class="sourceCode" id="cb599"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb598"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># you can also select by position, or with a range, or both</span></span>
 <span><span class="co"># e.g. we can select the 1st, 3rd to 5th, and year columns:</span></span>
 <span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
@@ -224,7 +224,7 @@
 4 Adelie            36.7          19.3               193  2007
 5 Adelie            39.3          20.6               190  2007
 # ℹ 328 more rows</code></pre>
-<div class="sourceCode" id="cb601"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb600"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># you can also use ranges with names</span></span>
 <span><span class="co"># e.g. select from 1st to island, then body mass to last col</span></span>
 <span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
@@ -238,7 +238,7 @@
 4 Adelie  Torgersen        3450 female  2007
 5 Adelie  Torgersen        3650 male    2007
 # ℹ 328 more rows</code></pre>
-<div class="sourceCode" id="cb603"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb602"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># you can also select by excluding specific columns with !</span></span>
 <span><span class="co"># e.g. select everything except island and everything after body mass</span></span>
 <span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
@@ -252,7 +252,7 @@
 4 Adelie            36.7          19.3               193        3450
 5 Adelie            39.3          20.6               190        3650
 # ℹ 328 more rows</code></pre>
-<div class="sourceCode" id="cb605"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb604"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># select with selector functions, see ?starts_with help page for details,</span></span>
 <span><span class="co"># you can also use &amp; as AND, | as OR, ! as NOT during selection</span></span>
 <span><span class="co"># e.g. get cols that start with "s", or end with "mm" or "g",</span></span>
@@ -270,7 +270,7 @@
 4 Adelie  female          19.3        3450
 5 Adelie  male            20.6        3650
 # ℹ 328 more rows</code></pre>
-<div class="sourceCode" id="cb607"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb606"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># notice in all examples above, columns are always returned in order</span></span>
 <span><span class="co"># select() can therefore also be used to reorder columns</span></span>
 <span><span class="co"># e.g. move year, island, species, sex cols in front of everything else</span></span>
@@ -289,7 +289,7 @@
 # ℹ 1 more variable: body_mass_g &lt;dbl&gt;</code></pre>
 <div class="note">
 <p>Here it’s worth reminding that <code>df %&gt;% select(...)</code> <strong>does NOT modify the original input <code>df</code></strong>, instead it effectively makes a copy of <code>df</code> and runs on that instead. Example:</p>
-<div class="sourceCode" id="cb609"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb608"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># show starting data frame</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">)</span></span></code></pre></div>
 <pre><code># A tibble: 333 × 8
@@ -302,7 +302,7 @@
 5 Adelie  Torgersen           39.3          20.6               190        3650 male  
 # ℹ 328 more rows
 # ℹ 1 more variable: year &lt;dbl&gt;</code></pre>
-<div class="sourceCode" id="cb611"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb610"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># select a subset of columns</span></span>
 <span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">species</span>, <span class="va">flipper_length_mm</span><span class="op">)</span></span></code></pre></div>
 <pre><code># A tibble: 333 × 2
@@ -314,7 +314,7 @@
 4 Adelie                193
 5 Adelie                190
 # ℹ 328 more rows</code></pre>
-<div class="sourceCode" id="cb613"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb612"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># check original input is unchanged</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">)</span></span></code></pre></div>
 <pre><code># A tibble: 333 × 8
@@ -328,7 +328,7 @@
 # ℹ 328 more rows
 # ℹ 1 more variable: year &lt;dbl&gt;</code></pre>
 <p>If you want to save the result of <code>df %&gt;% select(...)</code> you must <strong>manually save the output with <code>&lt;-</code></strong>. In general, we always recommend saving to a NEW object instead of overwriting the original object because this is non-destructive (i.e. does not lose any data) and less likely to create code errors later on. It’s also easier to debug.</p>
-<div class="sourceCode" id="cb615"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb614"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># saving to a new object with a descriptive name is ALWAYS recommended!</span></span>
 <span><span class="va">penguins_fewcols</span> <span class="op">&lt;-</span> <span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">species</span>, <span class="va">flipper_length_mm</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">penguins_fewcols</span><span class="op">)</span></span></code></pre></div>
@@ -341,7 +341,7 @@
 4 Adelie                193
 5 Adelie                190
 # ℹ 328 more rows</code></pre>
-<div class="sourceCode" id="cb617"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb616"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># overwriting the original input is STRONGLY discouraged</span></span>
 <span><span class="co"># because it's destructive and often causes problems later</span></span>
 <span><span class="va">penguins</span> <span class="op">&lt;-</span> <span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">species</span>, <span class="va">flipper_length_mm</span><span class="op">)</span></span>
@@ -355,7 +355,7 @@
 4 Adelie                193
 5 Adelie                190
 # ℹ 328 more rows</code></pre>
-<div class="sourceCode" id="cb619"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb618"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># reload data frame since we need it for other examples</span></span>
 <span><span class="va">penguins</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"https://bwu62.github.io/stat240-revamp/data/penguins.csv"</span><span class="op">)</span></span></code></pre></div>
 <p><strong>This note applies to all functions on this page</strong>, i.e. all of them do NOT modify the input, so desired <strong>changes must always be manually saved</strong>!</p>
@@ -366,7 +366,7 @@
 <span class="header-section-number">7.4.2</span> <code>rename()</code><a class="anchor" aria-label="anchor" href="#rename"><i class="fas fa-link"></i></a>
 </h3>
 <p><code><a href="https://dplyr.tidyverse.org/reference/rename.html">rename()</a></code> is used to rename columns. This is another common operation right after loading a dataset. Examples:</p>
-<div class="sourceCode" id="cb620"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb619"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># rename species as species_name, and island as island_name</span></span>
 <span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>species_name <span class="op">=</span> <span class="va">species</span>, island_name <span class="op">=</span> <span class="va">island</span><span class="op">)</span></span></code></pre></div>
@@ -380,7 +380,7 @@
 5 Adelie       Torgersen             39.3          20.6               190        3650
 # ℹ 328 more rows
 # ℹ 2 more variables: sex &lt;chr&gt;, year &lt;dbl&gt;</code></pre>
-<div class="sourceCode" id="cb622"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb621"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># if you want to use irregular names, i.e. names with spaces or symbols,</span></span>
 <span><span class="co"># you must surround them with " " quotes</span></span>
 <span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
@@ -395,7 +395,7 @@
 5 Adelie  Torge…               39.3          20.6               190        3650 male 
 # ℹ 328 more rows
 # ℹ 1 more variable: year &lt;dbl&gt;</code></pre>
-<div class="sourceCode" id="cb624"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb623"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># if you have a data frame with an extremely long and awkward name,</span></span>
 <span><span class="co"># you can also use selector functions to help you rename it</span></span>
 <span><span class="co"># (see ?starts_with help page for more details/examples)</span></span>
@@ -410,7 +410,7 @@
 1     1                                                   4
 2     2                                                   5
 3     3                                                   6</code></pre>
-<div class="sourceCode" id="cb626"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb625"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df_badname</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">"Really"</span><span class="op">)</span> <span class="op">&amp;</span> <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">ends_with</a></span><span class="op">(</span><span class="st">"symbols"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code># A tibble: 3 × 2
@@ -420,7 +420,7 @@
 2     2     5
 3     3     6</code></pre>
 <p>This is outside our scope, but you can also apply a function to many/all columns using <code><a href="https://dplyr.tidyverse.org/reference/rename.html">rename_with()</a></code>. For example:</p>
-<div class="sourceCode" id="cb628"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb627"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename_with</a></span><span class="op">(</span><span class="va">toupper</span><span class="op">)</span></span></code></pre></div>
 <pre><code># A tibble: 333 × 8
@@ -441,7 +441,7 @@
 <p><code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> is used to either change an existing column, or add new columns. It’s an easy function to introduce but a tough one to master. The basic syntax is <code>df %&gt;% mutate(col1 = expr1, col2 = expr2, ...)</code> where <code>col1</code>, <code>col2</code>, … are the columns being changed/added (depending on if it already exists) and <code>expr1</code>, <code>expr2</code>, … are some R expressions.</p>
 <p>The key thing to remember is the expressions can be <strong>any vector computation using one or more columns in the data frame that produces a vector of the same length OR a single value</strong> (which gets recycled).</p>
 <p>For convenience, let’s select just a few columns to continue with the demonstration:</p>
-<div class="sourceCode" id="cb630"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb629"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">penguins2</span> <span class="op">&lt;-</span> <span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">species</span>, <span class="va">sex</span>, <span class="va">bill_length_mm</span>, <span class="va">bill_depth_mm</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">penguins2</span><span class="op">)</span></span></code></pre></div>
@@ -455,7 +455,7 @@
 5 Adelie  male             39.3          20.6
 # ℹ 328 more rows</code></pre>
 <p>Now, here’s a few example applications of <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> using <code>penguins2</code></p>
-<div class="sourceCode" id="cb632"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb631"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># we can easily add columns of constants</span></span>
 <span><span class="va">penguins2</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>study <span class="op">=</span> <span class="st">"Palmer"</span>, century <span class="op">=</span> <span class="fl">21</span>, true <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
@@ -468,7 +468,7 @@
 4 Adelie  female           36.7          19.3 Palmer      21 TRUE 
 5 Adelie  male             39.3          20.6 Palmer      21 TRUE 
 # ℹ 328 more rows</code></pre>
-<div class="sourceCode" id="cb634"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb633"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># we can also change existing columns using the same syntax,</span></span>
 <span><span class="co"># e.g. we can capitalize and abbreviate sex to M and F</span></span>
 <span><span class="va">penguins2</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
@@ -482,7 +482,7 @@
 4 Adelie  F               36.7          19.3
 5 Adelie  M               39.3          20.6
 # ℹ 328 more rows</code></pre>
-<div class="sourceCode" id="cb636"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb635"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># we can also use multiple columns in expressions</span></span>
 <span><span class="co"># e.g. we can roughly estimate the volume of each bill,</span></span>
 <span><span class="co"># see: https://allisonhorst.github.io/palmerpenguins/#bill-dimensions</span></span>
@@ -497,7 +497,7 @@
 4 Adelie  female           36.7          19.3       10737.
 5 Adelie  male             39.3          20.6       13098.
 # ℹ 328 more rows</code></pre>
-<div class="sourceCode" id="cb638"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb637"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># you can also break this into steps, using intermediate variables</span></span>
 <span><span class="co"># note intermediate variables can be used immediately in the same mutate() call</span></span>
 <span><span class="va">penguins2</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
@@ -513,7 +513,7 @@
 4 Adelie  female           36.7          19.3                   293.       10737.
 5 Adelie  male             39.3          20.6                   333.       13098.
 # ℹ 328 more rows</code></pre>
-<div class="sourceCode" id="cb640"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb639"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># you can even mix summary functions into your expression</span></span>
 <span><span class="co"># e.g. standardize bill length and depth by subtracting mean and dividing by sd</span></span>
 <span><span class="va">penguins2</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
@@ -529,7 +529,7 @@
 4 Adelie  female           36.7          19.3          -1.33           1.08 
 5 Adelie  male             39.3          20.6          -0.858          1.74 
 # ℹ 328 more rows</code></pre>
-<div class="sourceCode" id="cb642"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb641"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># you can of course create columns of other data types</span></span>
 <span><span class="va">penguins2</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
 <span>  small_bill <span class="op">=</span> <span class="va">bill_length_mm</span> <span class="op">&lt;</span> <span class="fl">39</span> <span class="op">|</span> <span class="va">bill_depth_mm</span> <span class="op">&lt;</span> <span class="fl">18</span>,</span>
@@ -546,7 +546,7 @@
 # ℹ 328 more rows</code></pre>
 <p>A notable function that is extremely useful inside <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> is <code><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when()</a></code> which can calculate different values depending on certain conditions.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;It’s similar to a switch function in other languages.&lt;/p&gt;"><sup>27</sup></a> The basic syntax is <code>df %&gt;% mutate(new_col = case_when(cond1 ~ expr1, cond2 ~ expr2, ...))</code> where <code>cond1</code>, <code>cond2</code>, … are logical condition vectors checked one by one in the given order, and <code>expr1</code>, <code>expr2</code>, … are R expressions that are activated when a condition matches.</p>
 <p>For example, suppose we want to create some new column differently depending on sex and bill depth:</p>
-<div class="sourceCode" id="cb644"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb643"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># use case_when() inside a mutate() depending on some conditions</span></span>
 <span><span class="co"># .default sets the "default" result, when no conditions match OR when we have NAs</span></span>
 <span><span class="va">penguins2</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
@@ -575,7 +575,7 @@
 </h3>
 <p><code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code> is similar to <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> except you <strong>MUST use summary functions</strong>, i.e. function that always <strong>reduce a vector down to a single value</strong>. Again, you can again use any arbitrary function or combination of functions of any columns in the data frame, and the result can be any type (e.g. numeric, character, logical, date, etc.), as long as the result is singular.</p>
 <p>The basic syntax is <code>df %&gt;% summarize(col1 = expr1, col2 = expr2, ...)</code> where again <code>col1</code>, <code>col2</code>, … are names of new summary columns, and <code>expr1</code>, <code>expr2</code>, … are R expressions that reduce to a single value. Example:</p>
-<div class="sourceCode" id="cb646"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb645"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># let's compute several summary statistics of bill length</span></span>
 <span><span class="va">penguins2</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span></span>
 <span>  mean_length   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">bill_length_mm</span><span class="op">)</span>,</span>
@@ -592,7 +592,7 @@
 1        44.0          44.5      5.47        9.1       59.6       32.1   333</code></pre>
 <p>The last function in the chunk above <code><a href="https://dplyr.tidyverse.org/reference/context.html">n()</a></code> is a special function that <strong>takes NO arguments and returns the number of rows</strong>.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;This is an example of what’s called a &lt;a href="https://en.wikipedia.org/wiki/Arity"&gt;nullary function&lt;/a&gt;&lt;/p&gt;'><sup>28</sup></a></p>
 <p>A few other common applications of <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code> in data exploration:</p>
-<div class="sourceCode" id="cb648"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb647"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># compute a few other summaries to explore the data</span></span>
 <span><span class="co"># note similar to mutate, we can immediately use a summarized column</span></span>
 <span><span class="va">penguins2</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span></span>
@@ -613,7 +613,7 @@
   &lt;int&gt;  &lt;int&gt;    &lt;dbl&gt;    &lt;int&gt;      &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;
 1   333    168     50.5      165       49.5      0    50.8    0.502      -0.229</code></pre>
 <p>It’s also common to use <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code> to compute statistical results. For example we can calculate the 95% confidence intervals for the mean bill length and depth (ignoring species/sex) which is something we will cover in more detail later in the course:</p>
-<div class="sourceCode" id="cb650"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb649"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># we first compute some intermediate statistics,</span></span>
 <span><span class="co"># then use those to compute the intervals</span></span>
 <span><span class="va">penguins2</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span></span>
@@ -658,7 +658,7 @@
 <p><code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code> is used to filter which rows to keep. Note the wording here; <strong>rows that meet the conditions are KEPT, not dropped</strong>. This is a frequent point of confusion for beginners.</p>
 <p>Similar to <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> and <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code>, you can filter by <strong>constructing a logical expression using ANY combination of columns</strong>, as long as the result is a vector of TRUE/FALSE values, one for each row. In the end, only rows with TRUE will be returned as output.</p>
 <p>Let’s return to using our original <code>penguins</code> data frame. Here’s a few filtering examples:</p>
-<div class="sourceCode" id="cb652"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb651"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># filter to get penguins &gt;=6kg</span></span>
 <span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">body_mass_g</span> <span class="op">&gt;=</span> <span class="fl">6000</span><span class="op">)</span></span></code></pre></div>
@@ -670,7 +670,7 @@
 3 Gentoo  Biscoe           51.1          16.3               220        6000 male 
 4 Gentoo  Biscoe           48.8          16.2               222        6000 male 
 # ℹ 1 more variable: year &lt;dbl&gt;</code></pre>
-<div class="sourceCode" id="cb654"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb653"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># combining multiple filtering conditions using &amp; and |</span></span>
 <span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span></span>
 <span>  <span class="op">(</span><span class="va">species</span> <span class="op">==</span> <span class="st">"Adelie"</span> <span class="op">|</span> <span class="va">species</span> <span class="op">==</span> <span class="st">"Gentoo"</span><span class="op">)</span> <span class="op">&amp;</span></span>
@@ -686,7 +686,7 @@
 5 Adelie  Biscoe           38.8          17.2               180        3800 male  
 # ℹ 57 more rows
 # ℹ 1 more variable: year &lt;dbl&gt;</code></pre>
-<div class="sourceCode" id="cb656"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb655"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># you can of course use more complex functions and expressions,</span></span>
 <span><span class="co"># you can also use , to separate multiple conditions in filter() instead of &amp;</span></span>
 <span><span class="co"># e.g. this code gets rows with no "e" in the species name, and also</span></span>
@@ -706,7 +706,7 @@
 5 Chinstrap Dream            46.1          18.2               178        3250 female
 # ℹ 19 more rows
 # ℹ 1 more variable: year &lt;dbl&gt;</code></pre>
-<div class="sourceCode" id="cb658"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb657"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># an example of an even more complicated expression,</span></span>
 <span><span class="co"># this line gets penguins with body mass and bill length</span></span>
 <span><span class="co"># within a 1 SD circle centered around the mean of both,</span></span>
@@ -727,8 +727,8 @@
 <h3>
 <span class="header-section-number">7.5.2</span> <code>slice()</code><a class="anchor" aria-label="anchor" href="#slice"><i class="fas fa-link"></i></a>
 </h3>
-<p>There are several <a href="https://dplyr.tidyverse.org/reference/slice.html"><code class="sourceCode r"><span class="fu">slice...</span>()</code></a> functions in dplyr for slicing out specific rows, similar to <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code> but more specialized. The main one <code><a href="https://dplyr.tidyverse.org/reference/slice.html">slice()</a></code> is used to select by position (i.e. by row number). Examples:</p>
-<div class="sourceCode" id="cb659"><pre class="downlit sourceCode r">
+<p>There are several <a href="https://dplyr.tidyverse.org/reference/slice.html"><code class="sourceCode r"><span class="kw">slice...</span>()</code></a> functions in dplyr for slicing out specific rows, similar to <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code> but more specialized. The main one <code><a href="https://dplyr.tidyverse.org/reference/slice.html">slice()</a></code> is used to select by position (i.e. by row number). Examples:</p>
+<div class="sourceCode" id="cb658"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># slice rows 11-15</span></span>
 <span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice</a></span><span class="op">(</span><span class="fl">11</span><span class="op">:</span><span class="fl">15</span><span class="op">)</span></span></code></pre></div>
 <pre><code># A tibble: 5 × 8
@@ -740,7 +740,7 @@
 4 Adelie  Torgersen           34.4          18.4               184        3325 female
 5 Adelie  Torgersen           46            21.5               194        4200 male  
 # ℹ 1 more variable: year &lt;dbl&gt;</code></pre>
-<div class="sourceCode" id="cb661"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb660"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># slice every 10th row</span></span>
 <span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">)</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code># A tibble: 33 × 8
@@ -753,7 +753,7 @@
 5 Adelie  Biscoe              41.4          18.6               191        3700 male  
 # ℹ 28 more rows
 # ℹ 1 more variable: year &lt;dbl&gt;</code></pre>
-<div class="sourceCode" id="cb663"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb662"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># remove the first 200 rows</span></span>
 <span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice</a></span><span class="op">(</span><span class="op">-</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">200</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code># A tibble: 133 × 8
@@ -767,7 +767,7 @@
 # ℹ 128 more rows
 # ℹ 1 more variable: year &lt;dbl&gt;</code></pre>
 <p><code><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_head()</a></code> and <code><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_tail()</a></code> specifically slice out rows at the top or bottom, by either number <code>n</code> or proportion <code>prop</code>. Examples:</p>
-<div class="sourceCode" id="cb665"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb664"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># get the first 25 rows</span></span>
 <span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_head</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">25</span><span class="op">)</span></span></code></pre></div>
 <pre><code># A tibble: 25 × 8
@@ -780,7 +780,7 @@
 5 Adelie  Torgersen           39.3          20.6               190        3650 male  
 # ℹ 20 more rows
 # ℹ 1 more variable: year &lt;dbl&gt;</code></pre>
-<div class="sourceCode" id="cb667"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb666"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># get the last 10% of rows</span></span>
 <span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_tail</a></span><span class="op">(</span>prop <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></span></code></pre></div>
 <pre><code># A tibble: 33 × 8
@@ -794,7 +794,7 @@
 # ℹ 28 more rows
 # ℹ 1 more variable: year &lt;dbl&gt;</code></pre>
 <p><code><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_min()</a></code> and <code><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_max()</a></code> are used to slice rows which contain the min/max values for a specific variable. For example, suppose we want to get the penguin with the smallest body mass:</p>
-<div class="sourceCode" id="cb669"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb668"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># get smallest penguin by mass</span></span>
 <span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_min</a></span><span class="op">(</span><span class="va">body_mass_g</span>, n <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <pre><code># A tibble: 1 × 8
@@ -803,7 +803,7 @@
 1 Chinstrap Dream            46.9          16.6               192        2700 female
 # ℹ 1 more variable: year &lt;dbl&gt;</code></pre>
 <p>If there are ties, by default <strong>all tied rows are printed</strong>, e.g. suppose we want the 3 penguins with the longest flipper lengths:</p>
-<div class="sourceCode" id="cb671"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb670"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># get 3 penguins with longest flippers</span></span>
 <span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_max</a></span><span class="op">(</span><span class="va">flipper_length_mm</span>, n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <pre><code># A tibble: 8 × 8
@@ -820,7 +820,7 @@
 # ℹ 1 more variable: year &lt;dbl&gt;</code></pre>
 <p>It looks like 7 different Gentoo penguins are all tied for 2nd place, so they are ALL returned! You can disable this with an argument, but it’s recommended to keep the default behavior here.</p>
 <p>You can also set <code>prop</code> instead of <code>n</code> to return by percent. E.g. let’s get the top 1% of penguins by bill length:</p>
-<div class="sourceCode" id="cb673"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb672"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># get top 1% of penguins by bill length</span></span>
 <span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_max</a></span><span class="op">(</span><span class="va">bill_length_mm</span>, prop <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></span></code></pre></div>
 <pre><code># A tibble: 3 × 8
@@ -845,7 +845,7 @@
 </li>
 </ol>
 <p>Examples of <code><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange()</a></code>:</p>
-<div class="sourceCode" id="cb675"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb674"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># sort penguins by ascending flipper length</span></span>
 <span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">flipper_length_mm</span><span class="op">)</span></span></code></pre></div>
 <pre><code># A tibble: 333 × 8
@@ -858,7 +858,7 @@
 5 Adelie  Dream               37.2          18.1               178        3900 male  
 # ℹ 328 more rows
 # ℹ 1 more variable: year &lt;dbl&gt;</code></pre>
-<div class="sourceCode" id="cb677"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb676"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># sort penguins by descending flipper length</span></span>
 <span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">flipper_length_mm</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code># A tibble: 333 × 8
@@ -871,7 +871,7 @@
 5 Gentoo  Biscoe           48.6          16                 230        5800 male 
 # ℹ 328 more rows
 # ℹ 1 more variable: year &lt;dbl&gt;</code></pre>
-<div class="sourceCode" id="cb679"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb678"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># since mathematical expressions are allowed, this is also equivalent</span></span>
 <span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="op">-</span><span class="va">flipper_length_mm</span><span class="op">)</span></span></code></pre></div>
 <pre><code># A tibble: 333 × 8
@@ -884,7 +884,7 @@
 5 Gentoo  Biscoe           48.6          16                 230        5800 male 
 # ℹ 328 more rows
 # ℹ 1 more variable: year &lt;dbl&gt;</code></pre>
-<div class="sourceCode" id="cb681"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb680"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># sort first by island, then by descending species (if there are ties)</span></span>
 <span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">island</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code># A tibble: 333 × 8
@@ -897,7 +897,7 @@
 5 Gentoo  Biscoe           47.6          14.5               215        5400 male  
 # ℹ 328 more rows
 # ℹ 1 more variable: year &lt;dbl&gt;</code></pre>
-<div class="sourceCode" id="cb683"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb682"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># again, any expression is possible,</span></span>
 <span><span class="co"># let's sort first by number of SDs away from mean body mass,</span></span>
 <span><span class="co"># then by descending last letter of species name for ties,</span></span>
@@ -957,14 +957,14 @@
 </li>
 </ul>
 <p>Even though they’re not the exact same, both <code>NA</code> and <code>NaN</code> are considered missing in R and can be handled together using the operations covered below. It’s also worth noting <code>NA</code> is NOT the same as <code>"NA"</code>, i.e. a string made of the letters <code>"N"</code> and <code>"A"</code></p>
-<div class="sourceCode" id="cb685"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb684"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># check if two objects are the exact same</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/identical.html">identical</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="cn">NA</span><span class="op">)</span></span></code></pre></div>
 <pre><code>[1] TRUE</code></pre>
-<div class="sourceCode" id="cb687"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb686"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/identical.html">identical</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="cn">NaN</span><span class="op">)</span></span></code></pre></div>
 <pre><code>[1] FALSE</code></pre>
-<div class="sourceCode" id="cb689"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb688"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/identical.html">identical</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="st">"NA"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>[1] FALSE</code></pre>
 <p>In general expressions involving an NA will result in an NA output (though there are some notable exceptions, particularly with character types).</p>
@@ -974,18 +974,18 @@
 <span class="header-section-number">7.6.3</span> Identifying NAs<a class="anchor" aria-label="anchor" href="#identifying-nas"><i class="fas fa-link"></i></a>
 </h3>
 <p>NAs (and also NaNs) in a vector can be identified using <code><a href="https://rdrr.io/r/base/NA.html">is.na()</a></code> which produces a TRUE/FALSE vector corresponding to if a value is NA or not:</p>
-<div class="sourceCode" id="cb691"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb690"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># demo missing vector, note both NA/NaN count as missing</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">8</span>, <span class="cn">NA</span>, <span class="fl">2</span>, <span class="cn">NaN</span><span class="op">)</span></span>
 <span><span class="co"># which values are NA?</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
 <pre><code>[1] FALSE FALSE  TRUE FALSE  TRUE</code></pre>
-<div class="sourceCode" id="cb693"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb692"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># get only non-NA values</span></span>
 <span><span class="va">x</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
 <pre><code>[1] 3 8 2</code></pre>
 <p>Since this is an ordinary vectorized function, it can be used inside any compatible dplyr function above, such as <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code>, <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code>, <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code>, and <code><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange()</a></code>. To demonstrate these, let’s create a demo data frame with a mix of data types as well as some missing values.</p>
-<div class="sourceCode" id="cb695"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb694"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># demo data frame with missing values</span></span>
 <span><span class="va">df.demo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
 <span>  date <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html">ymd</a></span><span class="op">(</span><span class="st">"24.1.1"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">5</span><span class="op">)</span>,</span>
@@ -1003,7 +1003,7 @@
 4 2024-01-04 A        NA NA   
 5 2024-01-06 B         3 NA   </code></pre>
 <p>A common rudimentary of checking missingness is with the aforementioned <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function from section <a href="data-frames.html#basic-df">4.3.1</a>. Note this is the base R <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code>, NOT the Tidyverse <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code> we just covered above. Note however it only reports NAs for some columns, depending on type.</p>
-<div class="sourceCode" id="cb697"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb696"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">df.demo</span><span class="op">)</span></span></code></pre></div>
 <pre><code>      date                 x                   y           z          
  Min.   :2024-01-01   Length:5           Min.   :1.0   Mode :logical  
@@ -1014,7 +1014,7 @@
  Max.   :2024-01-06                      Max.   :3.0                  
                                          NA's   :2                    </code></pre>
 <p>A better way is to pipe into <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code> and use <code><a href="https://rdrr.io/r/base/NA.html">is.na()</a></code> with either <code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code> for count or <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code> for proportion of missing values. You can also add <code>!</code> in front of <code><a href="https://rdrr.io/r/base/NA.html">is.na()</a></code> to get the count/proportion of non-missing values. All 4 combinations are shown below:</p>
-<div class="sourceCode" id="cb699"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb698"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># get the count/proportion of missing/non-missing values</span></span>
 <span><span class="va">df.demo</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span></span>
 <span>  num_date_na   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">date</span><span class="op">)</span><span class="op">)</span>,</span>
@@ -1028,7 +1028,7 @@
         &lt;int&gt;     &lt;dbl&gt;        &lt;int&gt;         &lt;dbl&gt; &lt;int&gt;
 1           0       0.2            3           0.4     5</code></pre>
 <p>If you just want to apply one function to all columns, you can use <code><a href="https://dplyr.tidyverse.org/reference/summarise_all.html">summarize_all()</a></code> which is a shortcut for exactly this. For example, we can apply the function <code>\(x) mean(is.na(x))*100</code> to get the percent missing in each column:</p>
-<div class="sourceCode" id="cb701"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb700"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># get percent missing in each column</span></span>
 <span><span class="va">df.demo</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise_all.html">summarize_all</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">*</span> <span class="fl">100</span><span class="op">)</span></span></code></pre></div>
 <pre><code># A tibble: 1 × 4
@@ -1039,14 +1039,14 @@
 <p>If you check the help page of <code><a href="https://dplyr.tidyverse.org/reference/summarise_all.html">summarize_all()</a></code> you’ll notice this function is tagged with <img src="https://dplyr.tidyverse.org/reference/figures/lifecycle-superseded.svg" style="width:115px!important;margin:0!important"> which basically means you can keep using it, but there’s a new recommended alternative syntax.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;See this &lt;a href="https://lifecycle.r-lib.org/articles/stages.html"&gt;page on lifecycles&lt;/a&gt;.&lt;/p&gt;'><sup>31</sup></a> For this function, the new recommendation is to use <code><a href="https://dplyr.tidyverse.org/reference/across.html">across()</a></code> instead, but this is a bit outside our scope, so read at your own discretion.</p>
 </div>
 <p>Of course you can also use <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code> to inspect rows with missing values in some (or all) columns. Examples:</p>
-<div class="sourceCode" id="cb703"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb702"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># get rows with missing x</span></span>
 <span><span class="va">df.demo</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code># A tibble: 1 × 4
   date       x         y z    
   &lt;date&gt;     &lt;chr&gt; &lt;dbl&gt; &lt;lgl&gt;
 1 2024-01-01 &lt;NA&gt;     NA NA   </code></pre>
-<div class="sourceCode" id="cb705"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb704"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># get rows with missing x or y</span></span>
 <span><span class="va">df.demo</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">|</span> <span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code># A tibble: 2 × 4
@@ -1054,14 +1054,14 @@
   &lt;date&gt;     &lt;chr&gt; &lt;dbl&gt; &lt;lgl&gt;
 1 2024-01-01 &lt;NA&gt;     NA NA   
 2 2024-01-04 A        NA NA   </code></pre>
-<div class="sourceCode" id="cb707"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb706"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># get rows where y is missing but x is NOT missing</span></span>
 <span><span class="va">df.demo</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span> <span class="op">&amp;</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code># A tibble: 1 × 4
   date       x         y z    
   &lt;date&gt;     &lt;chr&gt; &lt;dbl&gt; &lt;lgl&gt;
 1 2024-01-04 A        NA NA   </code></pre>
-<div class="sourceCode" id="cb709"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb708"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># get rows where ANY variable is missing</span></span>
 <span><span class="co"># this uses if_any() which checks if any given cols satisfy a condition</span></span>
 <span><span class="va">df.demo</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">if_any</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">is.na</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -1073,7 +1073,7 @@
 3 2024-01-06 B         3 NA   </code></pre>
 <p>One more thing, did you notice there’s actually another form of missingness in <code>df.demo</code>? This data frame appears to contain daily observations, but <code>"2024-01-05"</code> appears to be missing completely from the data frame. This sneaky situation of data missing by not existing in the data frame completely is surprisingly common and can sometimes be hard to identify (since there’s no NAs in the date column to detect).</p>
 <p>One easy way to fix this is to use <code><a href="https://tidyr.tidyverse.org/reference/complete.html">complete()</a></code> and <code><a href="https://tidyr.tidyverse.org/reference/full_seq.html">full_seq()</a></code> from <a href="https://tidyr.tidyverse.org">tidyr</a>, yet another core Tidyverse package. This combination can be used to generate a <code><a href="https://tidyr.tidyverse.org/reference/complete.html">complete()</a></code> data frame by generating a <code><a href="https://tidyr.tidyverse.org/reference/full_seq.html">full_seq()</a></code>–uence of values for some specified column. Other columns are filled with NAs by default. Example:</p>
-<div class="sourceCode" id="cb711"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb710"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># this generates a full sequence of dates</span></span>
 <span><span class="co"># the argument 1 indicates the sequence increases by 1 each observation</span></span>
 <span><span class="va">df.demo</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/complete.html">complete</a></span><span class="op">(</span>date <span class="op">=</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/full_seq.html">full_seq</a></span><span class="op">(</span><span class="va">date</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -1086,7 +1086,7 @@
 4 2024-01-04 A        NA NA   
 5 2024-01-05 &lt;NA&gt;     NA NA   
 6 2024-01-06 B         3 NA   </code></pre>
-<div class="sourceCode" id="cb713"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb712"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># to show ONLY rows that were added using this operation,</span></span>
 <span><span class="co"># we can first create a dummy column filled with some value,</span></span>
 <span><span class="co"># complete the data frame, then filter to where the dummy column is NA</span></span>
@@ -1104,7 +1104,7 @@
 <span class="header-section-number">7.6.4</span> Dropping NAs<a class="anchor" aria-label="anchor" href="#dropping-nas"><i class="fas fa-link"></i></a>
 </h3>
 <p>As mentioned before, for the limited scope of this class, usually rows with NAs can just be dropped for simplicity. The easiest way is to use <code>drop_na(col1, col2, ...)</code> where <code>col1</code>, <code>col2</code>, … are the columns we care about dropping NAs in. If left empty, <code><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na()</a></code> will drop rows where ANY column contains NA. Examples:</p>
-<div class="sourceCode" id="cb715"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb714"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># drop only rows where x is missing</span></span>
 <span><span class="va">df.demo</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
 <pre><code># A tibble: 4 × 4
@@ -1114,7 +1114,7 @@
 2 2024-01-03 B         2 FALSE
 3 2024-01-04 A        NA NA   
 4 2024-01-06 B         3 NA   </code></pre>
-<div class="sourceCode" id="cb717"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb716"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># drop rows where x and y are missing</span></span>
 <span><span class="va">df.demo</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span></span></code></pre></div>
 <pre><code># A tibble: 3 × 4
@@ -1123,7 +1123,7 @@
 1 2024-01-02 A         1 TRUE 
 2 2024-01-03 B         2 FALSE
 3 2024-01-06 B         3 NA   </code></pre>
-<div class="sourceCode" id="cb719"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb718"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># drop rows where ANY values are missing</span></span>
 <span><span class="va">df.demo</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code># A tibble: 2 × 4
@@ -1141,7 +1141,7 @@
 <span class="header-section-number">7.6.5</span> Replacing NAs<a class="anchor" aria-label="anchor" href="#replacing-nas"><i class="fas fa-link"></i></a>
 </h3>
 <p>In some <em>rare</em> circumstances, you may want to replace NAs with other values. Of course you can do any kind of conditional replacement using <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> and <code><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when()</a></code>, but you can also use <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> and the specialized tidyr function <code><a href="https://tidyr.tidyverse.org/reference/replace_na.html">replace_na()</a></code>. Examples of both:</p>
-<div class="sourceCode" id="cb721"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb720"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># suppose we need to replace NAs in y column with 0</span></span>
 <span><span class="co"># using mutate and case_when:</span></span>
 <span><span class="va">df.demo</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
@@ -1158,7 +1158,7 @@
 3 2024-01-03 B         2 FALSE
 4 2024-01-04 A         0 NA   
 5 2024-01-06 B         3 NA   </code></pre>
-<div class="sourceCode" id="cb723"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb722"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># same thing but using replace_na instead of case_when:</span></span>
 <span><span class="va">df.demo</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/replace_na.html">replace_na</a></span><span class="op">(</span><span class="va">y</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code># A tibble: 5 × 4
@@ -1170,7 +1170,7 @@
 4 2024-01-04 A         0 NA   
 5 2024-01-06 B         3 NA   </code></pre>
 <p>In some datasets, NAs may be coded using certain obviously invalid values, e.g. -9999. These can of course also be mutated using <code><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when()</a></code>, but there’s a special function <code><a href="https://dplyr.tidyverse.org/reference/na_if.html">na_if()</a></code> for just this purpose:</p>
-<div class="sourceCode" id="cb725"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb724"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df.demo</span> <span class="op">&lt;-</span> <span class="va">df.demo</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>w <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">9999</span>, <span class="op">-</span><span class="fl">9999</span>, <span class="fl">20</span>, <span class="fl">30</span>, <span class="op">-</span><span class="fl">9999</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">df.demo</span></span></code></pre></div>
 <pre><code># A tibble: 5 × 5
@@ -1181,7 +1181,7 @@
 3 2024-01-03 B         2 FALSE    20
 4 2024-01-04 A        NA NA       30
 5 2024-01-06 B         3 NA    -9999</code></pre>
-<div class="sourceCode" id="cb727"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb726"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df.demo</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>w <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/na_if.html">na_if</a></span><span class="op">(</span><span class="va">w</span>, <span class="op">-</span><span class="fl">9999</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code># A tibble: 5 × 5
   date       x         y z         w

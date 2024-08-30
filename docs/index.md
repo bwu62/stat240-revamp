@@ -81,7 +81,7 @@ Tips on improving your R understanding or optimizing your workflow will sppear i
 :::
 
 
-### Source {-}
+### Source code {-}
 
 These notes are [open-sourced on GitHub](https://github.com/bwu62/stat240-revamp) and built using [bookdown](https://github.com/rstudio/bookdown) and served by [GitHub pages](https://pages.github.com), which provides a convenient, easily editable, and reproducible workflow. Each page has a link to "View source" of the page in the right-side navbar, if you want to see what's under the hood.
 
@@ -108,19 +108,6 @@ We work hard to avoid errors, but alas nothing is perfect! If you notice any err
 ### Acknowledgements {-}
 
 
-``` r
-contributors <-
-  "https://api.github.com/repos/bwu62/stat240-revamp/contributors?anon=1" %>%
-  httr::GET() %>%
-  httr::content() %>%
-  purrr::map_dfr(`[`, c("login", "html_url", "contributions")) %>%
-  dplyr::filter(login != "bwu62") %>%
-  dplyr::arrange(-contributions) %>%
-  purrr::pmap_chr(
-    \(login, html_url, contributions) glue::glue("[\\@{login}]({html_url})")
-  ) %>%
-  paste(collapse = ", ")
-```
 
 This is a good time to acknowledge people that have made contributions. Bret Larget is the original creator of STAT 240 and author of the first set of STAT 240 notes, which is a primary source of inspiration for many aspects of these notes. Cameron Jones has also agreed to help write some practice materials as these notes evolve. Beyond that, thanks also to [\@jennamotto1](https://github.com/jennamotto1) for also contributing to the repo (make a successful PR to get your name on this list!).
 

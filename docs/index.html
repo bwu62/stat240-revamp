@@ -19,7 +19,7 @@
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Roboto_Mono-0.4.9/font.css" rel="stylesheet">
 <script src="libs/bs3compat-0.8.0/transition.js"></script><script src="libs/bs3compat-0.8.0/tabs.js"></script><script src="libs/bs3compat-0.8.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
 <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="libs/plotly-binding-4.10.4/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
 <script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
 <script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-E0YDB40HWY"></script><script>
@@ -88,22 +88,22 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><!--bookdown:title:end--><!--bookdown:title:start--><div id="welcome" class="section level1 unnumbered">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><!--bookdown:title:end--><!--bookdown:title:start--><div id="welcome" class="section level1 unnumbered" number="">
 <h1>Welcome!<a class="anchor" aria-label="anchor" href="#welcome"><i class="fas fa-link"></i></a>
 </h1>
 <p>This is the in-progress working draft of a revamp of the STAT 240 course notes. Significant changes have been made to the order of topics, degree of coverage, and examples employed. Currently, this is intended to supplement rather than replace the existing body of STAT 240 notes.</p>
-<div id="prerequisitesscope" class="section level2 unnumbered">
+<div id="prerequisitesscope" class="section level2 unnumbered" number="">
 <h2>Prerequisites/scope<a class="anchor" aria-label="anchor" href="#prerequisitesscope"><i class="fas fa-link"></i></a>
 </h2>
 <p>For these notes, no prior R or computer science knowledge is assumed; everything is taught from scratch.</p>
 <p>As you consult these notes, please keep in mind the aim is <strong>NOT to teach you everything you need to know about each topic, but rather equip you with a foundational understanding and encourage you to learn and explore further</strong> on your own. As such, we will typically only cover the basic usage of most operations and demonstrate a few key examples, leaving the details for you to practice.</p>
 <p>Also note occasionally some bonus/extra/aside content considered advanced knowledge may be mentioned in passing for sake of completeness in discussing a topic, but these are considered <strong>outside the scope of what you need to know</strong>.</p>
 </div>
-<div id="how-to-use-this-book" class="section level2 unnumbered">
+<div id="how-to-use-this-book" class="section level2 unnumbered" number="">
 <h2>How to use this book<a class="anchor" aria-label="anchor" href="#how-to-use-this-book"><i class="fas fa-link"></i></a>
 </h2>
 <p>Here’s a few tips on how to get the most out of this book.</p>
-<div id="organization" class="section level3 unnumbered">
+<div id="organization" class="section level3 unnumbered" number="">
 <h3>Organization<a class="anchor" aria-label="anchor" href="#organization"><i class="fas fa-link"></i></a>
 </h3>
 <p>These notes are loosely organized into the following order of topics:</p>
@@ -127,7 +127,7 @@
 <li>Cheat sheets: list of cheat sheets for various packages/programs used in the notes.</li>
 </ol>
 </div>
-<div id="notes-layout" class="section level3 unnumbered">
+<div id="notes-layout" class="section level3 unnumbered" number="">
 <h3>Notes layout<a class="anchor" aria-label="anchor" href="#notes-layout"><i class="fas fa-link"></i></a>
 </h3>
 <p>First, note the table of contents on the left and chapter navigation bar on the right of each page. Use these to quickly navigate around the notes. Also note the search bar in the top corner; use this to search and highlight keywords across the entire site. On smaller phone screens these elements may collapse, but they should be fully visible on wider laptop/tablet screens.</p>
@@ -145,13 +145,13 @@
 <p>Tips on improving your R understanding or optimizing your workflow will sppear in green alert boxes.</p>
 </div>
 </div>
-<div id="source" class="section level3 unnumbered">
-<h3>Source<a class="anchor" aria-label="anchor" href="#source"><i class="fas fa-link"></i></a>
+<div id="source-code" class="section level3 unnumbered" number="">
+<h3>Source code<a class="anchor" aria-label="anchor" href="#source-code"><i class="fas fa-link"></i></a>
 </h3>
 <p>These notes are <a href="https://github.com/bwu62/stat240-revamp">open-sourced on GitHub</a> and built using <a href="https://github.com/rstudio/bookdown">bookdown</a> and served by <a href="https://pages.github.com">GitHub pages</a>, which provides a convenient, easily editable, and reproducible workflow. Each page has a link to “View source” of the page in the right-side navbar, if you want to see what’s under the hood.</p>
 <p>Note the code base is primarily written in <a href="https://rmarkdown.rstudio.com/lesson-1.html">R Markdown</a> syntax, which may include ordinary text, <a href="https://www.markdownguide.org/basic-syntax">markdown</a> code, <a href="https://yaml.org">YAML</a> headers, R chunks, <a href="https://yihui.org/knitr/options">knitr</a> tweaks, <a href="https://www.overleaf.com/learn/latex/Mathematical_expressions"><span class="math inline">\(\LaTeX\)</span></a> formulae, and pandoc elements (especially <a href="https://pandoc.org/MANUAL.html#divs-and-spans">fenced divs</a> and <a href="https://pandoc.org/MANUAL.html#extension-bracketed_spans">braced attributes</a>). In some auxiliary files, you may even find HTML/CSS/jQuery snippets. These are obviously not made for you to read/understand, so browse at your own curiosity.</p>
 </div>
-<div id="contributing" class="section level3 unnumbered">
+<div id="contributing" class="section level3 unnumbered" number="">
 <h3>Contributing<a class="anchor" aria-label="anchor" href="#contributing"><i class="fas fa-link"></i></a>
 </h3>
 <p>We work hard to avoid errors, but alas nothing is perfect! If you notice any errors, <strong>please consider contributing a suggestion!</strong> You can do this in 2 ways. (Note: both ways require a <a href="https://github.com">GitHub</a> account, so make sure to <a href="https://github.com/login">sign in</a> or <a href="https://github.com/signup?source=login">register</a> first!<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;Use your wisc.edu email for some nice &lt;a href="https://github.com/edu/students"&gt;student perks&lt;/a&gt; like free Pro status.&lt;/p&gt;'><sup>1</sup></a>)</p>
@@ -174,25 +174,13 @@
 <li>If that seems like too much work, you can also simply <a href="https://github.com/bwu62/stat240-revamp/issues/new/choose">raise an issue</a> and point me to the error. Note since this is more work for me, it will usually have lower priority than a well-written PR, which can be easily merged with a single click.</li>
 </ol>
 </div>
-<div id="acknowledgements" class="section level3 unnumbered">
+<div id="acknowledgements" class="section level3 unnumbered" number="">
 <h3>Acknowledgements<a class="anchor" aria-label="anchor" href="#acknowledgements"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">contributors</span> <span class="op">&lt;-</span></span>
-<span>  <span class="st">"https://api.github.com/repos/bwu62/stat240-revamp/contributors?anon=1"</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">httr</span><span class="fu">::</span><span class="fu"><a href="https://httr.r-lib.org/reference/GET.html">GET</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">httr</span><span class="fu">::</span><span class="fu"><a href="https://httr.r-lib.org/reference/content.html">content</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html">map_dfr</a></span><span class="op">(</span><span class="va">`[`</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"login"</span>, <span class="st">"html_url"</span>, <span class="st">"contributions"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">login</span> <span class="op">!=</span> <span class="st">"bwu62"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="op">-</span><span class="va">contributions</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/pmap.html">pmap_chr</a></span><span class="op">(</span></span>
-<span>    \<span class="op">(</span><span class="va">login</span>, <span class="va">html_url</span>, <span class="va">contributions</span><span class="op">)</span> <span class="fu">glue</span><span class="fu">::</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"[\\@{login}]({html_url})"</span><span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span>collapse <span class="op">=</span> <span class="st">", "</span><span class="op">)</span></span></code></pre></div>
 <p>This is a good time to acknowledge people that have made contributions. Bret Larget is the original creator of STAT 240 and author of the first set of STAT 240 notes, which is a primary source of inspiration for many aspects of these notes. Cameron Jones has also agreed to help write some practice materials as these notes evolve. Beyond that, thanks also to <a href="https://github.com/jennamotto1">@jennamotto1</a> for also contributing to the repo (make a successful PR to get your name on this list!).</p>
 </div>
 </div>
-<div id="future-ideas" class="section level2 unnumbered">
+<div id="future-ideas" class="section level2 unnumbered" number="">
 <h2>Future ideas<a class="anchor" aria-label="anchor" href="#future-ideas"><i class="fas fa-link"></i></a>
 </h2>
 <p>Below is a list of additional ideas for future improvements to these notes, to be considered for implementation at an unspecified future time (not to be prioritized over finishing the first-pass writeup).</p>
@@ -343,7 +331,7 @@ observer.observe(document.body, config);
 <a class="nav-link" href="#how-to-use-this-book">How to use this book</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#organization">Organization</a></li>
 <li><a class="nav-link" href="#notes-layout">Notes layout</a></li>
-<li><a class="nav-link" href="#source">Source</a></li>
+<li><a class="nav-link" href="#source-code">Source code</a></li>
 <li><a class="nav-link" href="#contributing">Contributing</a></li>
 <li><a class="nav-link" href="#acknowledgements">Acknowledgements</a></li>
 </ul>
