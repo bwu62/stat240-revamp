@@ -827,7 +827,7 @@ penguins %>%
   coord_fixed(.0067) # make the plot window a square
 ```
 
-<img src="07-intro-dplyr_files/figure-html/unnamed-chunk-19-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="07-intro-dplyr_files/figure-html/filter2-1.svg" width="672" style="display: block; margin: auto;" />
 
 
 ### `slice()`
@@ -1132,9 +1132,7 @@ Let's now briefly discuss R techniques for handling NAs. First it's important to
  - `NaN` is usually the result of a mathematically invalid operation, like `0/0`, `0*Inf`, or `Inf-Inf`.
     - Note that `sqrt(-1)` and `log(-1)` also return `NaN` since the input type is of real type. Replace `-1` with `0-1i` to trigger complex evaluation.
 
-Even though they're not the exact same, both `NA` and `NaN` are considered missing in R and can be handled together using the operations covered below.
-
-It's also worth noting `NA` is NOT the same as `"NA"`, i.e. a string made of the letters `"N"` and `"A"`.
+Even though they're not the exact same, both `NA` and `NaN` are considered missing in R and can be handled together using the operations covered below. It's also worth noting `NA` is NOT the same as `"NA"`, i.e. a string made of the letters `"N"` and `"A"`
 
 
 ``` r
@@ -1171,7 +1169,7 @@ NAs (and also NaNs) in a vector can be identified using `is.na()` which produces
 
 
 ``` r
-# demo missing vector
+# demo missing vector, note both NA/NaN count as missing
 x <- c(3, 8, NA, 2, NaN)
 # which values are NA?
 is.na(x)
@@ -1499,5 +1497,3 @@ df.demo %>% mutate(w = na_if(w, -9999))
 4 2024-01-04 A        NA NA       30
 5 2024-01-06 B         3 NA       NA
 ```
-
-

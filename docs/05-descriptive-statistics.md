@@ -198,7 +198,7 @@ attr(,"freq")
 
 Most common distributions have only 1 mode, i.e. they are unimodal, but some distributions may have 2 or more modes, in which case they're called bimodal (for 2 modes) or multimodal (for ≥2 modes). Here's an example of a bimodal distribution:
 
-<img src="05-descriptive-statistics_files/figure-html/unnamed-chunk-9-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="05-descriptive-statistics_files/figure-html/modality-1.svg" width="672" style="display: block; margin: auto;" />
 
 
 ### Other measures
@@ -362,11 +362,10 @@ Below, we have 3 example (unimodal) distributions showing the kinds of skewness,
  2. A positive, or right skewed distribution, where [**mode**]{style="color:#ff1919"} $<$ [**median**]{style="color:#3333ff"} $<$ [**mean**]{style="color:#009900"}.
  3. A negative, or left skewed distribution, where [**mean**]{style="color:#009900"} $<$ [**median**]{style="color:#3333ff"} $<$ [**mode**]{style="color:#ff1919"}.
 
-<img src="05-descriptive-statistics_files/figure-html/unnamed-chunk-15-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="05-descriptive-statistics_files/figure-html/skew-diagram-1.svg" width="672" style="display: block; margin: auto;" />
 
 This shows again, as we already learned, that the median is more robust vs the mean to "outliers"/skew, or in other words, the mean is more affected by "outliers"/skew and gets "dragged away" further by the skewness. 
 
 :::{.note}
 Visually, the mode is always the "peak", the median splits the distribution into 2 equal areas, and the mean is the center of mass of the shape along the horizontal axis (i.e. its "balancing point").
 :::
-

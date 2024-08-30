@@ -25,7 +25,7 @@ For these notes, no prior R or computer science knowledge is assumed; everything
 
 As you consult these notes, please keep in mind the aim is **NOT to teach you everything you need to know about each topic, but rather equip you with a foundational understanding and encourage you to learn and explore further** on your own. As such, we will typically only cover the basic usage of most operations and demonstrate a few key examples, leaving the details for you to practice.
 
-Also note occasionally some bonus/extra content considered advanced knowledge may be mentioned in passing for sake of completeness in discussing a topic, but these are considered **outside the scope of what you need to know**.
+Also note occasionally some bonus/extra/aside content considered advanced knowledge may be mentioned in passing for sake of completeness in discussing a topic, but these are considered **outside the scope of what you need to know**.
 
 
 ## How to use this book {-}
@@ -107,7 +107,22 @@ We work hard to avoid errors, but alas nothing is perfect! If you notice any err
 
 ### Acknowledgements {-}
 
-This is a good time to acknowledge people that have made contributions. Bret Larget is the original creator of STAT 240 and author of the first set of STAT 240 notes, which is a primary source of inspiration for many aspects of these notes. Cameron Jones has also agreed to help write some practice materials as these notes evolve. Beyond that, thanks also to @jennamotto1 for also contributing to the repo (make a successful PR to get your name on this list!).
+
+``` r
+contributors <-
+  "https://api.github.com/repos/bwu62/stat240-revamp/contributors?anon=1" %>%
+  httr::GET() %>%
+  httr::content() %>%
+  purrr::map_dfr(`[`, c("login", "html_url", "contributions")) %>%
+  dplyr::filter(login != "bwu62") %>%
+  dplyr::arrange(-contributions) %>%
+  purrr::pmap_chr(
+    \(login, html_url, contributions) glue::glue("[\\@{login}]({html_url})")
+  ) %>%
+  paste(collapse = ", ")
+```
+
+This is a good time to acknowledge people that have made contributions. Bret Larget is the original creator of STAT 240 and author of the first set of STAT 240 notes, which is a primary source of inspiration for many aspects of these notes. Cameron Jones has also agreed to help write some practice materials as these notes evolve. Beyond that, thanks also to [\@jennamotto1](https://github.com/jennamotto1) for also contributing to the repo (make a successful PR to get your name on this list!).
 
 
 ## Future ideas {-}
