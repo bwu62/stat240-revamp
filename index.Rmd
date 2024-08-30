@@ -102,7 +102,21 @@ We work hard to avoid errors, but alas nothing is perfect! If you notice any err
 
 ### Acknowledgements {-}
 
-This is a good time to acknowledge people that have made contributions. Bret Larget is the original creator of STAT 240 and author of the first set of STAT 240 notes, which is a primary source of inspiration for many aspects of these notes. Cameron Jones has also agreed to help write some practice materials as these notes evolve. Beyond that, thanks also to `r "https://api.github.com/repos/bwu62/stat240-revamp/contributors?anon=1" |> httr::GET() |> httr::content() |> purrr::map_chr(1,1) |> (\(.)paste(paste0("@",base::setdiff(.,"bwu62")),collapse=", "))()` for also contributing to the repo (make a successful PR to get your name on this list!).
+```{r get-contributors}
+contributors <-
+  "https://api.github.com/repos/bwu62/stat240-revamp/contributors?anon=1" %>%
+  httr::GET() %>%
+  httr::content() %>%
+  purrr::map_dfr(`[`, c("login", "html_url", "contributions")) %>%
+  dplyr::filter(login != "bwu62") %>%
+  dplyr::arrange(-contributions) %>%
+  purrr::pmap_chr(
+    \(login, html_url, contributions) glue::glue("[\\@{login}]({html_url})")
+  ) %>%
+  paste(collapse = ", ")
+```
+
+This is a good time to acknowledge people that have made contributions. Bret Larget is the original creator of STAT 240 and author of the first set of STAT 240 notes, which is a primary source of inspiration for many aspects of these notes. Cameron Jones has also agreed to help write some practice materials as these notes evolve. Beyond that, thanks also to `r contributors` for also contributing to the repo (make a successful PR to get your name on this list!).
 
 
 ## Future ideas {-}
