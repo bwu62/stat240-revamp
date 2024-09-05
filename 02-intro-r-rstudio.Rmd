@@ -740,7 +740,7 @@ getwd()
 
 You can see my current Rstudio session (while writing these notes) is running from the `` `r basename(getwd())` `` directory which is itself located in `` `r dirname(getwd())` ``.
 
-Generally, when you start a new Rstudio session, the working directory will default to `C:/Users/username/` for Windows and `/Users/username/` for Mac, where `username` is your account name (my working directory is different because I have it intentionally set to my notes project folder).
+Generally, when you start a new Rstudio session, the working directory will default to `C:/Users/username/` for Windows and `/Users/username/` for Mac (or `/home/username/` for Linux, which the server building these notes each day runs), where `username` is your account name (my working directory is different because I have it intentionally set to my notes project folder).
 
 This default working directory actually presents a problem, because it is usually different from where your current Rmd file is. For example, suppose you're working on homework 1. If you organized your files properly---which you should!---your Rmd file is probably located at `.../STAT240/homework/hw01/hw01.Rmd`. For reasons explained in the next section, your working directory should **always match the location of your current Rmd file**.
 
