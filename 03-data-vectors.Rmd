@@ -651,7 +651,7 @@ library(lubridate)
 .dnum <- format(unclass(today()), format = "%d")
 ```
 
-Ok, let's start the demo by creating a date object. Let's use today's date (which is `r .date` as of [last compile](https://github.com/bwu62/stat240-revamp/commits/maste)) as an example. The `today()` function is handy here.
+Ok, let's start the demo by creating a date object. Let's use today's date (which is `r .date` as of [last compile](https://github.com/bwu62/stat240-revamp/commits/master)) as an example. The `today()` function is handy here.
 
 ```{r today}
 # create today as an example date object
