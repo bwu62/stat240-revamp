@@ -581,10 +581,43 @@ fertility
 
 Our `fertility` data set is now 100% fully cleaned and ready for exploration, visualization, and modeling!
 
-Before we move on, let's demonstrate one more usage for `pivot_wider()`. This function is also great for making human-friendly summary tables, especially when looking at how 3 variables interrelate. For example, suppose we want to look at, for each region, the proportion of countries in each income group.
+Before we move on, let's demonstrate one more usage for `pivot_wider()`. This function is also great for making human-friendly summary tables, especially when looking at how 3 variables interrelate. For example, suppose we want to look at, for each region, the percentage of countries in each income group. If we just compute the percentages and print, we get something like this:
 
 ```{r}
-# count how many countries in each region + income group
-fertility %>% 
-  count(region, income_group)
+# count how many countries in each region + income group,
+# regroup by region to compute percentages,
+# remove the n count column, and print
+region_income_pct <- fertility %>%
+  count(region, income_group) %>%
+  group_by(region) %>%
+  mutate(pct = round(100 * n / sum(n), 1)) %>%
+  select(-n) %>%
+  print()
+```
+
+This would be great for plotting if that's what we wanted to do, e.g:
+
+```{r,fig.width=7,tidy=F}
+# plot income group percentages by region
+# str_wrap used to line-break long region names
+region_income_pct %>% 
+  ggplot(aes(x = str_wrap(region, 12), y = pct, fill = income_group)) +
+  geom_col() + labs(x = NULL, y = "Percent", fill = "Income level",
+                    title = "% countries in each income level by region")
+```
+
+However, we can also see the numeric values laid out as a table by using `pivot_wider()` to put each `income_group` in its own column:
+
+```{r}
+# pivot region/income percentages to wider table format
+region_income_pct %>%
+  pivot_wider(names_from = income_group, values_from = pct)
+```
+
+The NAs are due to a lack of countries in that region/income combination. In this case, we can fill in missing values by setting the `values_fill` argument:
+
+```{r}
+# fill in missing values with 0 in region/income table
+region_income_pct %>%
+  pivot_wider(names_from = income_group, values_from = pct, values_fill = 0)
 ```
