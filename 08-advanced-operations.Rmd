@@ -282,10 +282,10 @@ fertility %>%
   ggplot(aes(x = year, y = median_rate,
              linetype = fct_reorder2(region, year, median_rate),
              color = fct_reorder2(region, year, median_rate))) +
-  geom_hline(yintercept = 2.1, linetype = "dashed") + geom_line(linewidth = 1) +
+  geom_hline(yintercept = 2.1, linetype = "dotted") + geom_line(linewidth = 1) +
   labs(x = "Year", y = "Median fertility rate", linetype = "Region", color = "Region",
        title = "Median fertility by region from 1960-2022",
-       subtitle = "(black dashed line at replacement rate of 2.1)") +
+       subtitle = "(black dotted line at replacement rate of 2.1)") +
   scale_x_continuous(expand = c(0, 0), breaks = seq(1960, 2022, 10),
                      minor_breaks = seq(1960, 2022, 2)) +
   scale_y_continuous(expand = c(0, 0), limits = c(1.2, 7.2),
@@ -295,13 +295,12 @@ fertility %>%
   group_by(income_group, year) %>%
   summarize(median_rate = median(rate)) %>%
   ggplot(aes(x = year, y = median_rate,
-             linetype = income_group,
-             color = income_group)) +
-  geom_hline(yintercept = 2.1, linetype = "dashed") + geom_line(linewidth = 1) +
+             linetype = income_group, color = income_group)) +
+  geom_hline(yintercept = 2.1, linetype = "dotted") + geom_line(linewidth = 1) +
   labs(x = "Year", y = "Median fertility rate",
        linetype = "Income group", color = "Income group",
        title = "Median fertility by income group from 1960-2022",
-       subtitle = "(black dashed line at replacement rate of 2.1)") +
+       subtitle = "(black dotted line at replacement rate of 2.1)") +
   scale_x_continuous(expand = c(0, 0), breaks = seq(1960, 2022, 10),
                      minor_breaks = seq(1960, 2022, 2)) +
   scale_y_continuous(expand = c(0, 0), limits = c(1.4, 7.2),
