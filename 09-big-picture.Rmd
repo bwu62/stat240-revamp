@@ -1,0 +1,54 @@
+
+
+# Big picture
+
+I want to start the data modeling section with the following big picture view of what modeling & data science aim to do.
+
+:::{.i96}
+```{r,echo=F,fig.width=8,fig.height=4}
+# import diagram library
+library(diagram)
+# set margin and create empty diagram
+par(mar=c(0,0,1.5,0),cex.main=1.5)
+openplotmat(main = "Data science life cycle")
+# set number of elements in each row
+nodes = coordinates(c(3,3,5))
+# reverse second row boxes order
+nodes = nodes[c(1:3,6:4,7:nrow(nodes)),]
+# nudge experiment, exploration, modeling boxes to right
+nodes[2,1] = nodes[2,1] + .02
+nodes[5,1] = nodes[5,1] + .02
+nodes[6,1] = nodes[6,1] + .01
+# shift rows around
+nodes[1:3,2] = nodes[1:3,2] + .01
+nodes[4:6,2] = nodes[4:6,2] + .04
+nodes[7:11,2] = nodes[7:11,2] - .02
+# tighen last row boxes
+nodes[7:11,1] = mean(nodes[7:11,1]) + (nodes[7:11,1]-mean(nodes[7:11,1]))*.89
+fromto <- matrix(ncol=2,byrow=T,data=c(1,2,2,3,3,4,4,5,5,6,6,7,6,8,6,9,6,10,6,11))
+nr <- nrow(fromto)
+arrpos <- matrix(ncol=2,nrow=nr)
+for (i in 1:nr)
+  arrpos[i, ] <- straightarrow(to=nodes[fromto[i,2],],from=nodes[fromto[i,1],],lwd=2,arr.pos=0.55,arr.length=0.5)
+curvedarrow(nodes[6,],nodes[1,],curve=-.42,lty=2)
+text(sum(nodes[1:2,1]*c(.45,.55)),nodes[1,2]+.04,"expand",cex=.9)
+text(sum(nodes[2:3,1]*c(.45,.55)),nodes[2,2]+.04,"sample",cex=.9)
+text(nodes[6,1]-.087,nodes[6,2]+.15,"iterate",cex=.9)
+textrect(nodes[1,],.115,.08,lab="question of interest\n(testable hypothesis)",shadow.size = 0.005)
+textrect(nodes[2,],.08,.08,lab="experiment/\nstudy design",shadow.size = 0.005)
+textrect(nodes[3,],.06,.06,lab="dataset",shadow.size = 0.005)
+textrect(nodes[4,],.09,.06,lab="cleaning/tidying",shadow.size = 0.005)
+textrect(nodes[5,],.1,.08,lab="data exploration/\nvisualization",shadow.size = 0.005)
+textrect(nodes[6,],.07,.065,lab="modeling",shadow.size = 0.005)
+textrect(nodes[7,],.07,.07,lab="parameter\nestimates",shadow.size = 0.005)
+textrect(nodes[8,],.07,.07,lab="hypothesis\ntesting",shadow.size = 0.005)
+textrect(nodes[9,],.07,.07,lab="confidence\nintervals",shadow.size = 0.005)
+textrect(nodes[10,],.07,.06,lab="predictions",shadow.size = 0.005)
+textrect(nodes[11,],.07,.07,lab="etc...(further\ninference)",shadow.size = 0.005)
+```
+:::
+
+
+
+
+
