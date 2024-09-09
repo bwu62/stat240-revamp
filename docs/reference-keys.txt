@@ -149,6 +149,7 @@ joining
 example-cleaning-fertility
 pivoting
 example-finish-cleaning-fertility
+big-picture
 datasets
 datasets-list
 eruptions
