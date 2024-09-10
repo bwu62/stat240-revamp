@@ -15,7 +15,7 @@ rmd_files:
   - "07-intro-dplyr.Rmd"
   - "08-advanced-operations.Rmd"
   - "data-modeling.Rmd"
-  - "09-big-picture.Rmd"
+  - "09-overview.Rmd"
   - "datasets.Rmd"
   - "cheat-sheets.Rmd"
 delete_merged_file: true

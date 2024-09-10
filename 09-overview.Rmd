@@ -1,8 +1,8 @@
 
 
-# Big picture
+# Overview
 
-I want to start the data modeling section with the following big picture view of what modeling & data science aim to do.
+I want to start the modeling section with the following overview of what role modeling plays in the "life cycle" of a data science project.
 
 :::{.i96}
 ```{r,echo=F,fig.width=8,fig.height=4}
@@ -10,7 +10,7 @@ I want to start the data modeling section with the following big picture view of
 library(diagram)
 # set margin and create empty diagram
 par(mar=c(0,0,1.5,0),cex.main=1.5)
-openplotmat(main = "Data science life cycle")
+openplotmat(main = "Data science project life cycle")
 # set number of elements in each row
 nodes = coordinates(c(3,3,5))
 # reverse second row boxes order
