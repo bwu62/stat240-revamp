@@ -28,7 +28,7 @@ fromto <- matrix(ncol=2,byrow=T,data=c(1,2,2,3,3,4,4,5,5,6,6,7,6,8,6,9,6,10,6,11
 nr <- nrow(fromto)
 arrpos <- matrix(ncol=2,nrow=nr)
 for (i in 1:nr)
-  arrpos[i, ] <- straightarrow(to=nodes[fromto[i,2],],from=nodes[fromto[i,1],],lwd=2,arr.pos=0.55,arr.length=0.5)
+  arrpos[i, ] <- straightarrow(to=nodes[fromto[i,2],],from=nodes[fromto[i,1],],lwd=2,arr.pos=0.57,arr.length=0.5)
 curvedarrow(nodes[6,],nodes[1,],curve=-.42,lty=2)
 text(sum(nodes[1:2,1]*c(.45,.55)),nodes[1,2]+.04,"expand",cex=.9)
 text(sum(nodes[2:3,1]*c(.45,.55)),nodes[2,2]+.04,"sample",cex=.9)
