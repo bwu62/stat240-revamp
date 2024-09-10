@@ -1,11 +1,11 @@
 
 
-# Big picture
+# Overview
 
-I want to start the data modeling section with the following big picture view of what modeling & data science aim to do.
+I want to start the modeling section with the following overview of what role modeling plays in the "life cycle" of a data science project.
 
 :::{.i96}
-<img src="09-big-picture_files/figure-html/unnamed-chunk-1-1.svg" width="768" style="display: block; margin: auto;" />
+<img src="09-overview_files/figure-html/unnamed-chunk-1-1.svg" width="768" style="display: block; margin: auto;" />
 :::
 
 Roughly speaking, data science can be divided into 3 phases:
