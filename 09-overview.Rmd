@@ -64,3 +64,29 @@ For most of the remainder of the class, we will focus on Phase III: identifying 
 First, we need to briefly summarize a few key concepts relating to experiment design that will greatly enrich our later exploration of models.
 
 
+
+## Population vs sample
+
+Statistics is primarily the science of studying **samples** to understand **populations**. Generally, it's impractical to observe every member of a population, but luckily this is usually not necessary and a well-drawn sample is sufficient to answer most questions.
+
+:::{.def}
+A **population** can be any large group we want to learn about, e.g. all US mothers (~85 million), all arctic terns (~3 million), all gen-5 Toyota Priuses (~15000), etc..
+
+A **sample** is a smaller set drawn from (and intended to represent) a population.
+:::
+
+There are [MANY ways](https://www.scribbr.com/methodology/sampling-methods) to draw a sample, each with their own pros, cons, and potential [biases](https://www.scribbr.com/research-bias/sampling-bias). A detailed discussion of these is reserved for more advanced courses.
+
+
+
+## Model vs data
+
+Using only mathematical logic, we can derive different theoretical probability **models** with certain **parameters** that aim to represent real world phenomena, then compare these with real data, i.e. **fitting**, to evaluate their performance and make further **inferences** and/or **predictions**.
+
+:::{.def}
+A **model** is an idealized mathematical representation of a process, e.g. a normal distribution may be used to model the distribution of human heights.
+
+Models often have **parameters** which are values that can be adjusted (or "tuned") to **fit** a model so that it matches real data.
+:::
+
+
