@@ -1,6 +1,6 @@
 
 
-# Cheat sheets
+# Cheat Sheets
 
 Below is a consolidation of all "cheat sheets" mentioned in the notes, as well as a few extra that are not mentioned. This page is intended for you to use as a quick reference for basically the entire course without needing to dig through the notes. They're *loosely* organized by order of appearance.
 

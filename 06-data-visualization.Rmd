@@ -1,6 +1,6 @@
 
 
-# Data visualization
+# Data Visualization
 
 
 Descriptive statistics are a good place to start, but usually plotting your data visually is the best way to fully understand your dataset down to its core. In this next chapter, we will cover a variety of common plot types that are most useful for exploratory analysis.
