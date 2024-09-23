@@ -5,7 +5,7 @@
 I want to start the modeling section with the following overview of what role modeling plays in the "life cycle" of a data science project.
 
 :::{.i96}
-```{r,echo=F,fig.width=8,fig.height=4}
+```{r,echo=F,fig.width=8,fig.height=4,tidy=F}
 # import diagram library
 library(diagram)
 # set margin and create empty diagram
