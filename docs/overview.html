@@ -73,16 +73,17 @@
 <li><a class="" href="data-vectors.html"><span class="header-section-number">3</span> Data Vectors</a></li>
 <li><a class="" href="data-frames.html"><span class="header-section-number">4</span> Data Frames</a></li>
 <li><a class="" href="data-exploration.html">Data Exploration</a></li>
-<li><a class="" href="descriptive-statistics.html"><span class="header-section-number">5</span> Descriptive statistics</a></li>
-<li><a class="" href="data-visualization.html"><span class="header-section-number">6</span> Data visualization</a></li>
+<li><a class="" href="descriptive.html"><span class="header-section-number">5</span> Descriptive Statistics</a></li>
+<li><a class="" href="data-visualization.html"><span class="header-section-number">6</span> Data Visualization</a></li>
 <li><a class="" href="data-transformation.html">Data Transformation</a></li>
 <li><a class="" href="intro-to-dplyr.html"><span class="header-section-number">7</span> Intro to dplyr</a></li>
-<li><a class="" href="advanced-operations.html"><span class="header-section-number">8</span> Advanced operations</a></li>
+<li><a class="" href="advanced-operations.html"><span class="header-section-number">8</span> Advanced Operations</a></li>
 <li><a class="" href="data-modeling.html">Data Modeling</a></li>
 <li><a class="active" href="overview.html"><span class="header-section-number">9</span> Overview</a></li>
+<li><a class="" href="intro-to.html"><span class="header-section-number">10</span> Intro to</a></li>
 <li class="book-part">Appendix</li>
 <li><a class="" href="datasets.html"><span class="header-section-number">A</span> Datasets</a></li>
-<li><a class="" href="cheat-sheets.html"><span class="header-section-number">B</span> Cheat sheets</a></li>
+<li><a class="" href="cheat-sheets.html"><span class="header-section-number">B</span> Cheat Sheets</a></li>
 </ul>
 
         <div class="book-extra">
@@ -129,12 +130,14 @@
 <p>A <strong>model</strong> is an idealized mathematical representation of a process, e.g. a normal distribution may be used to model the distribution of human heights.</p>
 <p>Models often have <strong>parameters</strong> which are values that can be adjusted (or “tuned”) to <strong>fit</strong> a model so that it matches real data.</p>
 </div>
+<p>The distinction between model vs data may seem obvious, but they often have analogous features that are often easily confused for one another. For example, a model can have <strong>theoretical statistics</strong> values for the mean, median, variance, skew, etc. These are related to but different from the <strong>sample statistics</strong> of mean, median, variance, and skew.</p>
+<div class="def">
+<p>Recall a <strong>statistic</strong> can be any computed numeric summary from a dataset (or from a hypothethical model). All values discussed in chapter <a href="descriptive.html#descriptive">5</a> are examples of statistics.</p>
+</div>
+<p>If the sample is suffciently large and of high quality, and the model is well chosen, these values should match, i.e. the model’s predicted statistics should agree with the sample statistics, but any problems along this process can result in discrepancies.</p>
 
 </div>
 </div>
-
-
-
 <script src="https://cdn.jsdelivr.net/npm/@xiee/utils/js/external-link.min.js" defer></script><script>
   $(function(){
     $(".note").addClass("alert alert-warning");
@@ -230,7 +233,7 @@ var config = {
 observer.observe(document.body, config);
 </script><div class="chapter-nav">
 <div class="prev"><a href="data-modeling.html">Data Modeling</a></div>
-<div class="next"><a href="datasets.html"><span class="header-section-number">A</span> Datasets</a></div>
+<div class="next"><a href="intro-to.html"><span class="header-section-number">10</span> Intro to</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
@@ -254,7 +257,7 @@ observer.observe(document.body, config);
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2024-09-22.</p>
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2024-09-23.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

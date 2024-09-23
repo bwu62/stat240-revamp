@@ -4,16 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 6 Data visualization | STAT 240 Revamp</title>
+<title>Chapter 6 Data Visualization | STAT 240 Revamp</title>
 <meta name="author" content="Bi Cheng Wu, with help from Bret Larget and Cameron Jones">
 <meta name="description" content="Descriptive statistics are a good place to start, but usually plotting your data visually is the best way to fully understand your dataset down to its core. In this next chapter, we will cover a...">
 <meta name="generator" content="bookdown 0.40.1 with bs4_book()">
-<meta property="og:title" content="Chapter 6 Data visualization | STAT 240 Revamp">
+<meta property="og:title" content="Chapter 6 Data Visualization | STAT 240 Revamp">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://bwu62.github.io/stat240-revamp/data-visualization.html">
 <meta property="og:description" content="Descriptive statistics are a good place to start, but usually plotting your data visually is the best way to fully understand your dataset down to its core. In this next chapter, we will cover a...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 6 Data visualization | STAT 240 Revamp">
+<meta name="twitter:title" content="Chapter 6 Data Visualization | STAT 240 Revamp">
 <meta name="twitter:description" content="Descriptive statistics are a good place to start, but usually plotting your data visually is the best way to fully understand your dataset down to its core. In this next chapter, we will cover a...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -73,16 +73,17 @@
 <li><a class="" href="data-vectors.html"><span class="header-section-number">3</span> Data Vectors</a></li>
 <li><a class="" href="data-frames.html"><span class="header-section-number">4</span> Data Frames</a></li>
 <li><a class="" href="data-exploration.html">Data Exploration</a></li>
-<li><a class="" href="descriptive-statistics.html"><span class="header-section-number">5</span> Descriptive statistics</a></li>
-<li><a class="active" href="data-visualization.html"><span class="header-section-number">6</span> Data visualization</a></li>
+<li><a class="" href="descriptive.html"><span class="header-section-number">5</span> Descriptive Statistics</a></li>
+<li><a class="active" href="data-visualization.html"><span class="header-section-number">6</span> Data Visualization</a></li>
 <li><a class="" href="data-transformation.html">Data Transformation</a></li>
 <li><a class="" href="intro-to-dplyr.html"><span class="header-section-number">7</span> Intro to dplyr</a></li>
-<li><a class="" href="advanced-operations.html"><span class="header-section-number">8</span> Advanced operations</a></li>
+<li><a class="" href="advanced-operations.html"><span class="header-section-number">8</span> Advanced Operations</a></li>
 <li><a class="" href="data-modeling.html">Data Modeling</a></li>
 <li><a class="" href="overview.html"><span class="header-section-number">9</span> Overview</a></li>
+<li><a class="" href="intro-to.html"><span class="header-section-number">10</span> Intro to</a></li>
 <li class="book-part">Appendix</li>
 <li><a class="" href="datasets.html"><span class="header-section-number">A</span> Datasets</a></li>
-<li><a class="" href="cheat-sheets.html"><span class="header-section-number">B</span> Cheat sheets</a></li>
+<li><a class="" href="cheat-sheets.html"><span class="header-section-number">B</span> Cheat Sheets</a></li>
 </ul>
 
         <div class="book-extra">
@@ -92,7 +93,7 @@
 </div>
   </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="data-visualization" class="section level1" number="6">
 <h1>
-<span class="header-section-number">6</span> Data visualization<a class="anchor" aria-label="anchor" href="#data-visualization"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6</span> Data Visualization<a class="anchor" aria-label="anchor" href="#data-visualization"><i class="fas fa-link"></i></a>
 </h1>
 <p>Descriptive statistics are a good place to start, but usually plotting your data visually is the best way to fully understand your dataset down to its core. In this next chapter, we will cover a variety of common plot types that are most useful for exploratory analysis.</p>
 <p>When studying each plot type, it’s important to keep the following questions in mind:</p>
@@ -202,7 +203,7 @@ $ year              &lt;dbl&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 
 </h4>
 <p>Looking at this plot, we can make a few key observations:</p>
 <ul>
-<li>The distribution of flipper length is <a href="descriptive-statistics.html#modality">bimodal</a>, i.e. there are 2 peaks: around 190mm and 215mm.</li>
+<li>The distribution of flipper length is <a href="descriptive.html#modality">bimodal</a>, i.e. there are 2 peaks: around 190mm and 215mm.</li>
 <li>The peak around 190mm is higher (i.e. more numerous) than the peak around 215mm, but they have comparable spreads.
 <ul>
 <li>This can mean either this group of observations is more prominent in the population studied, or was perhaps the result of some kind of selection or sampling bias.</li>
@@ -408,7 +409,7 @@ $ year              &lt;dbl&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 
 <li>The <strong>third quartile</strong> <span class="math inline">\(Q_3\)</span>, i.e. the 75<sup>th</sup> percentile, and</li>
 <li>The <strong>maximum</strong> of the sample.</li>
 </ol>
-<p><span class="math inline">\(Q_1\)</span> and <span class="math inline">\(Q_3\)</span> form the ends of the “box”, with the median shown as a line in between, while the min and max form the “whiskers” that stretch out on either end. Note the width of the box (i.e. <span class="math inline">\(Q_3-Q_1\)</span>) is the <a href="descriptive-statistics.html#iqr">IQR</a>.</p>
+<p><span class="math inline">\(Q_1\)</span> and <span class="math inline">\(Q_3\)</span> form the ends of the “box”, with the median shown as a line in between, while the min and max form the “whiskers” that stretch out on either end. Note the width of the box (i.e. <span class="math inline">\(Q_3-Q_1\)</span>) is the <a href="descriptive.html#iqr">IQR</a>.</p>
 <p>Compared to the histogram and density plot, there are a few key advantages and drawbacks:</p>
 <ol style="list-style-type: decimal">
 <li>It’s easier to compare specific summary statistics like the median and quartiles using box plots,</li>
@@ -987,12 +988,12 @@ var config = {
 
 observer.observe(document.body, config);
 </script><div class="chapter-nav">
-<div class="prev"><a href="descriptive-statistics.html"><span class="header-section-number">5</span> Descriptive statistics</a></div>
+<div class="prev"><a href="descriptive.html"><span class="header-section-number">5</span> Descriptive Statistics</a></div>
 <div class="next"><a href="data-transformation.html">Data Transformation</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#data-visualization"><span class="header-section-number">6</span> Data visualization</a></li>
+<li><a class="nav-link" href="#data-visualization"><span class="header-section-number">6</span> Data Visualization</a></li>
 <li><a class="nav-link" href="#ggplot2"><span class="header-section-number">6.1</span> ggplot2</a></li>
 <li><a class="nav-link" href="#palmer-penguins"><span class="header-section-number">6.2</span> Palmer penguins</a></li>
 <li>
@@ -1044,7 +1045,7 @@ observer.observe(document.body, config);
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2024-09-22.</p>
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2024-09-23.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

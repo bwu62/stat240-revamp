@@ -4,17 +4,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Data Modeling | STAT 240 Revamp</title>
+<title>Chapter 10 Intro to | STAT 240 Revamp</title>
 <meta name="author" content="Bi Cheng Wu, with help from Bret Larget and Cameron Jones">
-<meta name="description" content="In this next section, we will discuss how to start modeling your cleaned data. This is again loosely broken into several sections. We will start by discussing the big picture view of how modeling...">
+<meta name="description" content='In this section, we’ll introduce you to the basics of     $(function(){   $(".note").addClass("alert alert-warning");  });  $(function(){   $(".tip").addClass("alert alert-success");  }); ...'>
 <meta name="generator" content="bookdown 0.40.1 with bs4_book()">
-<meta property="og:title" content="Data Modeling | STAT 240 Revamp">
+<meta property="og:title" content="Chapter 10 Intro to | STAT 240 Revamp">
 <meta property="og:type" content="book">
-<meta property="og:url" content="https://bwu62.github.io/stat240-revamp/data-modeling.html">
-<meta property="og:description" content="In this next section, we will discuss how to start modeling your cleaned data. This is again loosely broken into several sections. We will start by discussing the big picture view of how modeling...">
+<meta property="og:url" content="https://bwu62.github.io/stat240-revamp/intro-to.html">
+<meta property="og:description" content='In this section, we’ll introduce you to the basics of     $(function(){   $(".note").addClass("alert alert-warning");  });  $(function(){   $(".tip").addClass("alert alert-success");  }); ...'>
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Data Modeling | STAT 240 Revamp">
-<meta name="twitter:description" content="In this next section, we will discuss how to start modeling your cleaned data. This is again loosely broken into several sections. We will start by discussing the big picture view of how modeling...">
+<meta name="twitter:title" content="Chapter 10 Intro to | STAT 240 Revamp">
+<meta name="twitter:description" content='In this section, we’ll introduce you to the basics of     $(function(){   $(".note").addClass("alert alert-warning");  });  $(function(){   $(".tip").addClass("alert alert-success");  }); ...'>
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Roboto_Mono-0.4.9/font.css" rel="stylesheet">
@@ -78,9 +78,9 @@
 <li><a class="" href="data-transformation.html">Data Transformation</a></li>
 <li><a class="" href="intro-to-dplyr.html"><span class="header-section-number">7</span> Intro to dplyr</a></li>
 <li><a class="" href="advanced-operations.html"><span class="header-section-number">8</span> Advanced Operations</a></li>
-<li><a class="active" href="data-modeling.html">Data Modeling</a></li>
+<li><a class="" href="data-modeling.html">Data Modeling</a></li>
 <li><a class="" href="overview.html"><span class="header-section-number">9</span> Overview</a></li>
-<li><a class="" href="intro-to.html"><span class="header-section-number">10</span> Intro to</a></li>
+<li><a class="active" href="intro-to.html"><span class="header-section-number">10</span> Intro to</a></li>
 <li class="book-part">Appendix</li>
 <li><a class="" href="datasets.html"><span class="header-section-number">A</span> Datasets</a></li>
 <li><a class="" href="cheat-sheets.html"><span class="header-section-number">B</span> Cheat Sheets</a></li>
@@ -91,16 +91,16 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="data-modeling" class="section level1 unnumbered" number="">
-<h1>Data Modeling<a class="anchor" aria-label="anchor" href="#data-modeling"><i class="fas fa-link"></i></a>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="intro-to" class="section level1" number="10">
+<h1>
+<span class="header-section-number">10</span> Intro to<a class="anchor" aria-label="anchor" href="#intro-to"><i class="fas fa-link"></i></a>
 </h1>
-<p>In this next section, we will discuss how to start modeling your cleaned data. This is again loosely broken into several sections.</p>
-<p>We will start by discussing the big picture view of how modeling works and learn key conceptual topics like populations vs samples, probability vs statistics, parameters vs estimates, etc.</p>
-<p>The, we will cover some foundational probability principles that are necessary to understanding later modeling steps, such as discrete and continuous random variables, distributions, PDF/PMFs vs CDFs, expectation and variance, and so on.</p>
-<p>Next, we will learn about arguably the two most important and versatile random variables: normal &amp; binomial, which form the basis of two general categories of models we will discuss later (means vs proportions infereence).</p>
-<p>Finally, we will conclude by introducing the basic framework of hypothesis tests &amp; confidence intervals, which we will explore and apply further in the following section.</p>
+<p>In this section, we’ll introduce you to the basics of</p>
 
 </div>
+
+
+
 <script src="https://cdn.jsdelivr.net/npm/@xiee/utils/js/external-link.min.js" defer></script><script>
   $(function(){
     $(".note").addClass("alert alert-warning");
@@ -195,16 +195,16 @@ var config = {
 
 observer.observe(document.body, config);
 </script><div class="chapter-nav">
-<div class="prev"><a href="advanced-operations.html"><span class="header-section-number">8</span> Advanced Operations</a></div>
-<div class="next"><a href="overview.html"><span class="header-section-number">9</span> Overview</a></div>
+<div class="prev"><a href="overview.html"><span class="header-section-number">9</span> Overview</a></div>
+<div class="next"><a href="datasets.html"><span class="header-section-number">A</span> Datasets</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#data-modeling">Data Modeling</a></li></ul>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#intro-to"><span class="header-section-number">10</span> Intro to</a></li></ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/bwu62/stat240-revamp/blob/master/data-modeling.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/bwu62/stat240-revamp/edit/master/data-modeling.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+<li><a id="book-source" href="https://github.com/bwu62/stat240-revamp/blob/master/10-probability.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/bwu62/stat240-revamp/edit/master/10-probability.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
 </div>
     </nav>

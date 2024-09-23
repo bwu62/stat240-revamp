@@ -72,7 +72,7 @@ paths-file-management
 working-with-data-frames
 basic-df
 subsetting-data-frames
-descriptive-statistics
+descriptive
 measures-of-central-tendency
 mean
 median
@@ -152,6 +152,7 @@ example-finish-cleaning-fertility
 overview
 population-vs-sample
 model-vs-data
+intro-to
 datasets
 datasets-list
 eruptions
