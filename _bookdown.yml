@@ -16,6 +16,7 @@ rmd_files:
   - "08-advanced-operations.Rmd"
   - "data-modeling.Rmd"
   - "09-overview.Rmd"
+  - "10-probability.Rmd"
   - "datasets.Rmd"
   - "cheat-sheets.Rmd"
 delete_merged_file: true
