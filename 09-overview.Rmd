@@ -89,4 +89,10 @@ A **model** is an idealized mathematical representation of a process, e.g. a nor
 Models often have **parameters** which are values that can be adjusted (or "tuned") to **fit** a model so that it matches real data.
 :::
 
+The distinction between model vs data may seem obvious, but they often have analogous features that are often easily confused for one another. For example, a model can have **theoretical statistics** values for the mean, median, variance, skew, etc. These are related to but different from the **sample statistics** of mean, median, variance, and skew.
 
+:::{.def}
+Recall a **statistic** can be any computed numeric summary from a dataset (or from a hypothethical model). All values discussed in chapter \@ref(descriptive) are examples of statistics.
+:::
+
+If the sample is suffciently large and of high quality, and the model is well chosen, these values should match, i.e. the model's predicted statistics should agree with the sample statistics, but any problems along this process can result in discrepancies.
