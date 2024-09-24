@@ -1,7 +1,7 @@
 
 
 
-# Descriptive statistics
+# Descriptive Statistics {#descriptive}
 
 
 Descriptive statistics is what most people think of when they hear the word "statistics", i.e. a collection of numbers that summarize some data. This is often a good starting point for exploring a newly encountered dataset.
