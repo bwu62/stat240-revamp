@@ -124,6 +124,11 @@ a.footnote-ref{
   font-weight: bold;
   padding-right: .2em;
 }
+.eg>:first-child::before {
+  content:"Example: ";
+  font-weight: bold;
+  padding-right: .2em;
+}
 .alert>:last-child {
   margin-bottom:0rem;
 }

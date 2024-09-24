@@ -152,7 +152,9 @@ example-finish-cleaning-fertility
 overview
 population-vs-sample
 model-vs-data
-intro-to
+intro-to-probability
+random-variables
+axioms-of-probability
 datasets
 datasets-list
 eruptions

@@ -4,17 +4,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 10 Intro to | STAT 240 Revamp</title>
+<title>Chapter 10 Intro to Probability | STAT 240 Revamp</title>
 <meta name="author" content="Bi Cheng Wu, with help from Bret Larget and Cameron Jones">
-<meta name="description" content='In this section, we’ll introduce you to the basics of     $(function(){   $(".note").addClass("alert alert-warning");  });  $(function(){   $(".tip").addClass("alert alert-success");  }); ...'>
+<meta name="description" content="In this section, we’ll introduce you to some foundational probability theory that will be necessary for later models. We will do this in a way that is only semi-rigorous, with an emphasis on...">
 <meta name="generator" content="bookdown 0.40.1 with bs4_book()">
-<meta property="og:title" content="Chapter 10 Intro to | STAT 240 Revamp">
+<meta property="og:title" content="Chapter 10 Intro to Probability | STAT 240 Revamp">
 <meta property="og:type" content="book">
-<meta property="og:url" content="https://bwu62.github.io/stat240-revamp/intro-to.html">
-<meta property="og:description" content='In this section, we’ll introduce you to the basics of     $(function(){   $(".note").addClass("alert alert-warning");  });  $(function(){   $(".tip").addClass("alert alert-success");  }); ...'>
+<meta property="og:url" content="https://bwu62.github.io/stat240-revamp/intro-to-probability.html">
+<meta property="og:description" content="In this section, we’ll introduce you to some foundational probability theory that will be necessary for later models. We will do this in a way that is only semi-rigorous, with an emphasis on...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 10 Intro to | STAT 240 Revamp">
-<meta name="twitter:description" content='In this section, we’ll introduce you to the basics of     $(function(){   $(".note").addClass("alert alert-warning");  });  $(function(){   $(".tip").addClass("alert alert-success");  }); ...'>
+<meta name="twitter:title" content="Chapter 10 Intro to Probability | STAT 240 Revamp">
+<meta name="twitter:description" content="In this section, we’ll introduce you to some foundational probability theory that will be necessary for later models. We will do this in a way that is only semi-rigorous, with an emphasis on...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Roboto_Mono-0.4.9/font.css" rel="stylesheet">
@@ -80,7 +80,7 @@
 <li><a class="" href="advanced-operations.html"><span class="header-section-number">8</span> Advanced Operations</a></li>
 <li><a class="" href="data-modeling.html">Data Modeling</a></li>
 <li><a class="" href="overview.html"><span class="header-section-number">9</span> Overview</a></li>
-<li><a class="active" href="intro-to.html"><span class="header-section-number">10</span> Intro to</a></li>
+<li><a class="active" href="intro-to-probability.html"><span class="header-section-number">10</span> Intro to Probability</a></li>
 <li class="book-part">Appendix</li>
 <li><a class="" href="datasets.html"><span class="header-section-number">A</span> Datasets</a></li>
 <li><a class="" href="cheat-sheets.html"><span class="header-section-number">B</span> Cheat Sheets</a></li>
@@ -91,12 +91,67 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="intro-to" class="section level1" number="10">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="intro-to-probability" class="section level1" number="10">
 <h1>
-<span class="header-section-number">10</span> Intro to<a class="anchor" aria-label="anchor" href="#intro-to"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10</span> Intro to Probability<a class="anchor" aria-label="anchor" href="#intro-to-probability"><i class="fas fa-link"></i></a>
 </h1>
-<p>In this section, we’ll introduce you to the basics of</p>
+<p>In this section, we’ll introduce you to some foundational probability theory that will be necessary for later models. We will do this in a way that is only semi-rigorous, with an emphasis on teaching the materials in an intuitive fashion.</p>
+<div id="random-variables" class="section level2" number="10.1">
+<h2>
+<span class="header-section-number">10.1</span> Random variables<a class="anchor" aria-label="anchor" href="#random-variables"><i class="fas fa-link"></i></a>
+</h2>
+<p>Suppose we have an <strong>experiment</strong> that produces an <strong>outcome</strong> each time it’s observed. This is modeled by a <strong>random variable</strong>, often denoted with a capital letter, e.g. <span class="math inline">\(X\)</span> or <span class="math inline">\(Y\)</span>. The set of all possible outcomes is called the <strong>sample space</strong> and often denoted <span class="math inline">\(\Omega\)</span>.</p>
+<p>Sets of possible outcomes are called <strong>events</strong>. Each event has some <strong>probability</strong> associated with it. The probability of some event is often denoted <span class="math inline">\(P(\text{event})\)</span>.</p>
+<div class="eg">
+<p>Let <span class="math inline">\(X\)</span> be the result of rolling a 6-sided die that is <strong>fair</strong>, i.e. the outcomes 1, 2, 3, 4, 5, and 6 all have equal probability. Here are few examples of events and their corresponding probabilities:</p>
+<ul>
+<li>Probability of getting a 1: <span class="math inline">\(P(X=1)=\frac16\)</span>
+</li>
+<li>Probability of getting more than 4: <span class="math inline">\(P(X&gt;4)=\frac13\)</span>
+</li>
+<li>Probability of getting an even number: <span class="math inline">\(P(X=2,4,\text{or }6)=\frac12\)</span>
+</li>
+<li>Probability of getting a 7: <span class="math inline">\(P(X=7)=0\)</span>
+</li>
+</ul>
+</div>
+</div>
+<div id="axioms-of-probability" class="section level2" number="10.2">
+<h2>
+<span class="header-section-number">10.2</span> Axioms of probability<a class="anchor" aria-label="anchor" href="#axioms-of-probability"><i class="fas fa-link"></i></a>
+</h2>
+<p>In math, <strong>axioms</strong> are basic rules which formally define an object and which are inviolably true. Below are the axioms of probability, <strong>which can never be broken</strong>:</p>
+<ol style="list-style-type: decimal">
+<li>The probability of an event is always non-negative.
+<ul>
+<li>Mathematically, <span class="math inline">\(P(E)\ge0\)</span> for any event <span class="math inline">\(E\)</span> of some random variable.</li>
+</ul>
+</li>
+<li>The probability of the entire sample space is always 1.
+<ul>
+<li>Mathematically, <span class="math inline">\(P(\Omega)=1\)</span> for any random variable. Note 1 is equivalent to 100%.</li>
+</ul>
+</li>
+<li>The probability of the <strong>union</strong> of <strong>mutually exclusive</strong> events is equal to the sum of the probabilities of each event.
+<ul>
+<li>Mathematically, if <span class="math inline">\(A\cap B\)</span> is empty, then <span class="math inline">\(P(A\cup B)=P(A)+P(B)\)</span>
+</li>
+</ul>
+</li>
+</ol>
+<div class="def">
+<p>Let <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> be two events for some random variable.</p>
+<p>The <strong>union</strong> of <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, denoted <span class="math inline">\(A\cup B\)</span>, is the event of observing <span class="math inline">\(A\)</span> OR <span class="math inline">\(B\)</span>.</p>
+<p>The <strong>intersection</strong> of <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, denoted <span class="math inline">\(A\cap B\)</span>, is the event of observing <span class="math inline">\(A\)</span> AND <span class="math inline">\(B\)</span>.</p>
+<p>If <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span> are <strong>mutually exclusive</strong>, then they have no intersection, i.e. there are no outcomes that are in both <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>.</p>
+</div>
+<div class="eg">
+<p>Let’s see these in an example. Let <span class="math inline">\(X\)</span> again be the result of rolling a fair, 6-sided die with outcomes 1,2,…,6.</p>
+<p>Let <span class="math inline">\(A\)</span> be the event of observing <span class="math inline">\(X\)</span> to be more than 4, and let <span class="math inline">\(B\)</span> be the event of observing <span class="math inline">\(X\)</span> to be an even number. Then, <span class="math inline">\(A\cap B=\{6\}\)</span> and <span class="math inline">\(A\cup B=\{2,4,5,6\}\)</span>. Note that <span class="math inline">\(1,3\)</span> are in neither <span class="math inline">\(A\)</span> nor <span class="math inline">\(B\)</span>.</p>
+<p>Since <span class="math inline">\(A\cap B=\{6\}\)</span> which is NOT empty, <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are NOT mutually exclusive. Suppose we define a third event <span class="math inline">\(C\)</span> as observing <span class="math inline">\(X\)</span> to be either 1 or 3. Then, <span class="math inline">\(C\)</span> is mutually exclusive with both <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, since both <span class="math inline">\(A\cap C\)</span> and <span class="math inline">\(B\cap C\)</span> are empty.</p>
+</div>
 
+</div>
 </div>
 
 
@@ -112,7 +167,7 @@
     $(".def").addClass("alert alert-info");
   });
   $(function(){
-    $(".def").addClass("alert alert-info");
+    $(".eg").addClass("alert alert-secondary");
   });
   $(function(){
     $(".col-lg-3").addClass("col-lg-2").removeClass("col-lg-3");
@@ -199,7 +254,11 @@ observer.observe(document.body, config);
 <div class="next"><a href="datasets.html"><span class="header-section-number">A</span> Datasets</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#intro-to"><span class="header-section-number">10</span> Intro to</a></li></ul>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#intro-to-probability"><span class="header-section-number">10</span> Intro to Probability</a></li>
+<li><a class="nav-link" href="#random-variables"><span class="header-section-number">10.1</span> Random variables</a></li>
+<li><a class="nav-link" href="#axioms-of-probability"><span class="header-section-number">10.2</span> Axioms of probability</a></li>
+</ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
@@ -216,7 +275,7 @@ observer.observe(document.body, config);
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2024-09-23.</p>
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2024-09-24.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
