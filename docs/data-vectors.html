@@ -788,13 +788,13 @@ Levels: Low &lt; Medium &lt; High</code></pre>
 <p>Before we run some examples, we’re going to load in the <a href="https://lubridate.tidyverse.org/">lubridate</a> package, which is designed to make working with dates super easy and is also a part of Tidyverse. However, it’s not actually a core package, which means <strong>it MUST be loaded in separately</strong> each time you wish to use it!</p>
 <div class="sourceCode" id="cb339"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://lubridate.tidyverse.org">lubridate</a></span><span class="op">)</span></span></code></pre></div>
-<p>Ok, let’s start the demo by creating a date object. Let’s use today’s date (which is Sep 26, 2024 as of <a href="https://github.com/bwu62/stat240-revamp/commits/master">last compile</a>) as an example. The <code><a href="https://lubridate.tidyverse.org/reference/now.html">today()</a></code> function is handy here.</p>
+<p>Ok, let’s start the demo by creating a date object. Let’s use today’s date (which is Sep 27, 2024 as of <a href="https://github.com/bwu62/stat240-revamp/commits/master">last compile</a>) as an example. The <code><a href="https://lubridate.tidyverse.org/reference/now.html">today()</a></code> function is handy here.</p>
 <div class="sourceCode" id="cb340"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># create today as an example date object</span></span>
 <span><span class="va">date</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/now.html">today</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">date</span></span></code></pre></div>
-<pre><code>[1] "2024-09-26"</code></pre>
-<p>We can see that even though our date object has <code>"Date"</code> class, it actually has <code>"double"</code> type, which means behind the scenes, it’s secretly stored as a number.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;The distinction between class, type, and mode (which we haven’t even mentioned and won’t ever discuss) is highly technical to the mechanics of R and not worth concerning yourself over. If you’re dying of curiosity, I recommend this excellent video on the matter: &lt;a href="https://youtu.be/RwEzWZA9uTw" class="uri"&gt;https://youtu.be/RwEzWZA9uTw&lt;/a&gt;.&lt;/p&gt;'><sup>18</sup></a> If you <code><a href="https://rdrr.io/r/base/class.html">unclass()</a></code> the object, i.e. strip away the <code>"Date"</code> property, you can see it’s just the number 19992 underneath, and you can check that in fact Sep 26, 2024 is indeed <a href="https://www.wolframalpha.com/input?i=19992+days+after+Jan+1+1970">19992 days after Jan 1 1970</a>.</p>
+<pre><code>[1] "2024-09-27"</code></pre>
+<p>We can see that even though our date object has <code>"Date"</code> class, it actually has <code>"double"</code> type, which means behind the scenes, it’s secretly stored as a number.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;The distinction between class, type, and mode (which we haven’t even mentioned and won’t ever discuss) is highly technical to the mechanics of R and not worth concerning yourself over. If you’re dying of curiosity, I recommend this excellent video on the matter: &lt;a href="https://youtu.be/RwEzWZA9uTw" class="uri"&gt;https://youtu.be/RwEzWZA9uTw&lt;/a&gt;.&lt;/p&gt;'><sup>18</sup></a> If you <code><a href="https://rdrr.io/r/base/class.html">unclass()</a></code> the object, i.e. strip away the <code>"Date"</code> property, you can see it’s just the number 19993 underneath, and you can check that in fact Sep 27, 2024 is indeed <a href="https://www.wolframalpha.com/input?i=19993+days+after+Jan+1+1970">19993 days after Jan 1 1970</a>.</p>
 <div class="sourceCode" id="cb342"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># looks like a date</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">date</span><span class="op">)</span></span></code></pre></div>
@@ -805,30 +805,30 @@ Levels: Low &lt; Medium &lt; High</code></pre>
 <div class="sourceCode" id="cb346"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># but it's secretly a number underneath!</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/class.html">unclass</a></span><span class="op">(</span><span class="va">date</span><span class="op">)</span></span></code></pre></div>
-<pre><code>[1] 19992</code></pre>
+<pre><code>[1] 19993</code></pre>
 <div class="sourceCode" id="cb348"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># we can reverse this too, start with a number,</span></span>
 <span><span class="co"># then change the class to "Date", and voila!</span></span>
-<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">19992</span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">19993</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"Date"</span></span>
 <span><span class="va">x</span></span></code></pre></div>
-<pre><code>[1] "2024-09-26"</code></pre>
+<pre><code>[1] "2024-09-27"</code></pre>
 <div class="note">
 <p>R conforms to <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO-8601</a> standards, i.e. <strong>dates ALWAYS show as <code>"YYYY-MM-DD"</code></strong> (even though they’re stored numerically). This is arguably the best format for dates, because it’s the unique format where <a href="https://en.wikipedia.org/wiki/ISO_8601#General_principles">chronological order and lexicographical order are identical</a>, which is an extremely useful property.</p>
-<p>Also note despite <code>date</code> appearing to be a character, it is NOT a character. Using <code><a href="https://rdrr.io/r/base/identical.html">identical()</a></code> (which compares if two objects are the same) will show this to be false. Furthermore, <code><a href="https://rdrr.io/r/base/numeric.html">as.numeric()</a></code> confirms <code>date</code> converts to 19992 as expected, whereas the string <code>"2024-09-26"</code> cannot be converted and returns <code>NA</code>.</p>
+<p>Also note despite <code>date</code> appearing to be a character, it is NOT a character. Using <code><a href="https://rdrr.io/r/base/identical.html">identical()</a></code> (which compares if two objects are the same) will show this to be false. Furthermore, <code><a href="https://rdrr.io/r/base/numeric.html">as.numeric()</a></code> confirms <code>date</code> converts to 19993 as expected, whereas the string <code>"2024-09-27"</code> cannot be converted and returns <code>NA</code>.</p>
 <div class="sourceCode" id="cb350"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">date</span></span></code></pre></div>
-<pre><code>[1] "2024-09-26"</code></pre>
+<pre><code>[1] "2024-09-27"</code></pre>
 <div class="sourceCode" id="cb352"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/character.html">is.character</a></span><span class="op">(</span><span class="va">date</span><span class="op">)</span></span></code></pre></div>
 <pre><code>[1] FALSE</code></pre>
 <div class="sourceCode" id="cb354"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/identical.html">identical</a></span><span class="op">(</span><span class="va">date</span>, <span class="st">"2024-09-26"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/identical.html">identical</a></span><span class="op">(</span><span class="va">date</span>, <span class="st">"2024-09-27"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>[1] FALSE</code></pre>
 <div class="sourceCode" id="cb356"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">date</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="st">"2024-09-26"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">date</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="st">"2024-09-27"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre class="warning"><code>Warning: NAs introduced by coercion</code></pre>
-<pre><code>[1] 19992    NA</code></pre>
+<pre><code>[1] 19993    NA</code></pre>
 <p>This is just to warn you that <strong>even though they may print similarly, date objects and date-like strings are <em>NOT</em> the same</strong>, so to avoid errors and unexpected behavior, make sure you properly convert all date data to be true date objects.</p>
 </div>
 <div id="parsing-dates" class="section level3" number="3.11.1">
@@ -839,23 +839,23 @@ Levels: Low &lt; Medium &lt; High</code></pre>
 <p>In lubridate, the <a href="https://lubridate.tidyverse.org/reference/ymd.html">parser functions</a> <code><a href="https://lubridate.tidyverse.org/reference/ymd.html">mdy()</a></code>, <code><a href="https://lubridate.tidyverse.org/reference/ymd.html">dmy()</a></code>, <code><a href="https://lubridate.tidyverse.org/reference/ymd.html">ymd()</a></code> (as well as their rarer siblings <code><a href="https://lubridate.tidyverse.org/reference/ymd.html">ydm()</a></code>, <code><a href="https://lubridate.tidyverse.org/reference/ymd.html">myd()</a></code>, and <code><a href="https://lubridate.tidyverse.org/reference/ymd.html">dym()</a></code>) are used to parse date data into proper date objects. The <strong>only difference between these functions is the <em>order</em> they expect to see date components</strong>, e.g. <code><a href="https://lubridate.tidyverse.org/reference/ymd.html">mdy()</a></code> is used when the data is ordered month, day, then year (which is common in the US), and <code><a href="https://lubridate.tidyverse.org/reference/ymd.html">dmy()</a></code> is used when the date data is data is ordered day, month, then year (which is generally preferred outside the US). These functions are <strong>extremely robust and automagically recognize a wide range of formats</strong>, and of course they’re all vectorized! Here’s a few examples:</p>
 <div class="sourceCode" id="cb359"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html">mdy</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
-<span>  <span class="st">"9/26/24, 09-26-2024, 092624, Sep 26 '24, Thursday, September 26th, 2024"</span></span>
+<span>  <span class="st">"9/27/24, 09-27-2024, 092724, Sep 27 '24, Friday, September 27th, 2024"</span></span>
 <span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>[1] "2024-09-26" "2024-09-26" "2024-09-26" "2024-09-26" "2024-09-26"</code></pre>
+<pre><code>[1] "2024-09-27" "2024-09-27" "2024-09-27" "2024-09-27" "2024-09-27"</code></pre>
 <div class="sourceCode" id="cb361"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html">dmy</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
-<span>  <span class="st">"26/9/24, 26-09-2024, 260924, 26 Sep '24, Thursday, 26th of September, 2024"</span></span>
+<span>  <span class="st">"27/9/24, 27-09-2024, 270924, 27 Sep '24, Friday, 27th of September, 2024"</span></span>
 <span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>[1] "2024-09-26" "2024-09-26" "2024-09-26" "2024-09-26" "2024-09-26"</code></pre>
+<pre><code>[1] "2024-09-27" "2024-09-27" "2024-09-27" "2024-09-27" "2024-09-27"</code></pre>
 <p>As you can see, you just need to tell R which order to expect the date components and it will handle the rest! We only demonstrated the <code><a href="https://lubridate.tidyverse.org/reference/ymd.html">mdy()</a></code> and <code><a href="https://lubridate.tidyverse.org/reference/ymd.html">dmy()</a></code> functions here since they are by far the most common formats, but the other functions all behave the same.</p>
-<p>One last parser. Sometimes data gives dates as a decimal, e.g. <code>2024-09-26</code> would be <code>2024.735</code> since it’s the 270th day of the year which means it’s <code>(270-1)/366*100%=73.5%</code> of the way into the year.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;The -1 in the numerator is due to the date being treated as 12am midnight, hence the 270th day, &lt;code&gt;2024-09-26&lt;/code&gt; is just about to start, so only 270 days have passed so far.&lt;/p&gt;"><sup>19</sup></a> R also has a dedicated function for this. <code><a href="https://lubridate.tidyverse.org/reference/date_decimal.html">date_decimal()</a></code> converts the decimal to a date+time object, which we can then round to the nearest date with <a href="https://lubridate.tidyverse.org/reference/round_date.html"><code class="sourceCode r"><span class="kw">round_date</span>(...,<span class="dt">unit=</span><span class="st">"day"</span>)</code></a> and drop the time component with <code><a href="https://lubridate.tidyverse.org/reference/date.html">date()</a></code> which converts date+time objects to pure date objects (again, we are not covering date+time objects due to complexity &amp; limited time).</p>
+<p>One last parser. Sometimes data gives dates as a decimal, e.g. <code>2024-09-27</code> would be <code>2024.738</code> since it’s the 271st day of the year which means it’s <code>(271-1)/366*100%=73.8%</code> of the way into the year.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;The -1 in the numerator is due to the date being treated as 12am midnight, hence the 271st day, &lt;code&gt;2024-09-27&lt;/code&gt; is just about to start, so only 271 days have passed so far.&lt;/p&gt;"><sup>19</sup></a> R also has a dedicated function for this. <code><a href="https://lubridate.tidyverse.org/reference/date_decimal.html">date_decimal()</a></code> converts the decimal to a date+time object, which we can then round to the nearest date with <a href="https://lubridate.tidyverse.org/reference/round_date.html"><code class="sourceCode r"><span class="kw">round_date</span>(...,<span class="dt">unit=</span><span class="st">"day"</span>)</code></a> and drop the time component with <code><a href="https://lubridate.tidyverse.org/reference/date.html">date()</a></code> which converts date+time objects to pure date objects (again, we are not covering date+time objects due to complexity &amp; limited time).</p>
 <div class="sourceCode" id="cb363"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># generate a vector of elapsed 21st century dates</span></span>
 <span><span class="co"># in decimal format for demo purposes</span></span>
-<span><span class="co"># (here, runif uniformly samples 4 numbers from 2000 to 2024.735)</span></span>
-<span><span class="va">dates2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">2000</span>, <span class="fl">2024.735</span><span class="op">)</span></span>
+<span><span class="co"># (here, runif uniformly samples 4 numbers from 2000 to 2024.738)</span></span>
+<span><span class="va">dates2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">2000</span>, <span class="fl">2024.738</span><span class="op">)</span></span>
 <span><span class="va">dates2</span></span></code></pre></div>
-<pre><code>[1] 2006.567 2009.204 2014.170 2022.464</code></pre>
+<pre><code>[1] 2006.568 2009.205 2014.171 2022.467</code></pre>
 <div class="sourceCode" id="cb365"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># convert decimals to dates</span></span>
 <span><span class="va">dates2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/date.html">date</a></span><span class="op">(</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/round_date.html">round_date</a></span><span class="op">(</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/date_decimal.html">date_decimal</a></span><span class="op">(</span><span class="va">dates2</span><span class="op">)</span>, unit <span class="op">=</span> <span class="st">"day"</span><span class="op">)</span><span class="op">)</span></span>
@@ -901,12 +901,12 @@ Levels: Low &lt; Medium &lt; High</code></pre>
 <span class="header-section-number">3.11.3</span> Get/set components<a class="anchor" aria-label="anchor" href="#getset-components"><i class="fas fa-link"></i></a>
 </h3>
 <p>Lubridate provides many get/set functions (often called getters and setters) for getting and setting different components (i.e. properties) associated with a date. Some common ones include <code><a href="https://lubridate.tidyverse.org/reference/year.html">year()</a></code>, <code><a href="https://lubridate.tidyverse.org/reference/month.html">month()</a></code>, <code><a href="https://lubridate.tidyverse.org/reference/day.html">day()</a></code>, <code><a href="https://lubridate.tidyverse.org/reference/day.html">wday()</a></code> (for day of the week), and <code><a href="https://lubridate.tidyverse.org/reference/quarter.html">quarter()</a></code>.</p>
-<p>Let’s continue using the generated <code>dates2</code> object above, except I will add today <code>2024-09-26</code> into the vector as the first element.</p>
+<p>Let’s continue using the generated <code>dates2</code> object above, except I will add today <code>2024-09-27</code> into the vector as the first element.</p>
 <div class="sourceCode" id="cb380"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># add in today, then print (to remind us what it contains)</span></span>
 <span><span class="va">dates2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">date</span>, <span class="va">dates2</span><span class="op">)</span></span>
 <span><span class="va">dates2</span></span></code></pre></div>
-<pre><code>[1] "2024-09-26" "2006-07-27" "2009-03-17" "2014-03-04" "2022-06-20"</code></pre>
+<pre><code>[1] "2024-09-27" "2006-07-27" "2009-03-17" "2014-03-04" "2022-06-20"</code></pre>
 <div class="sourceCode" id="cb382"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># extract the year, month, day, wday, quarter</span></span>
 <span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/year.html">year</a></span><span class="op">(</span><span class="va">dates2</span><span class="op">)</span></span></code></pre></div>
@@ -916,11 +916,11 @@ Levels: Low &lt; Medium &lt; High</code></pre>
 <pre><code>[1] 9 7 3 3 6</code></pre>
 <div class="sourceCode" id="cb386"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/day.html">day</a></span><span class="op">(</span><span class="va">dates2</span><span class="op">)</span></span></code></pre></div>
-<pre><code>[1] 26 27 17  4 20</code></pre>
+<pre><code>[1] 27 27 17  4 20</code></pre>
 <div class="sourceCode" id="cb388"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># wday starts counting from Sunday, i.e. 1=Sunday, 2=Monday, etc.</span></span>
 <span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/day.html">wday</a></span><span class="op">(</span><span class="va">dates2</span><span class="op">)</span></span></code></pre></div>
-<pre><code>[1] 5 5 3 3 2</code></pre>
+<pre><code>[1] 6 5 3 3 2</code></pre>
 <div class="sourceCode" id="cb390"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/quarter.html">quarter</a></span><span class="op">(</span><span class="va">dates2</span><span class="op">)</span></span></code></pre></div>
 <pre><code>[1] 3 3 1 1 2</code></pre>
@@ -933,7 +933,7 @@ Levels: Low &lt; Medium &lt; High</code></pre>
 <div class="sourceCode" id="cb394"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># output day of week as full, unabridged names</span></span>
 <span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/day.html">wday</a></span><span class="op">(</span><span class="va">dates2</span>, label <span class="op">=</span> <span class="cn">TRUE</span>, abbr <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<pre><code>[1] Thursday Thursday Tuesday  Tuesday  Monday  
+<pre><code>[1] Friday   Thursday Tuesday  Tuesday  Monday  
 7 Levels: Sunday &lt; Monday &lt; Tuesday &lt; Wednesday &lt; Thursday &lt; ... &lt; Saturday</code></pre>
 <div class="note">
 <p>If your system is in a different language, you may see the code above output non-English names for the months and days of the week. This is because R uses your <a href="https://en.wikipedia.org/wiki/Locale_(computer_software)">system’s locale</a> to determine how to output some values. This is extremely easy to fix; simply run the line of code below ONCE in your console, then close and restart Rstudio for the changes to permanently take effect.</p>
@@ -950,12 +950,12 @@ Levels: Low &lt; Medium &lt; High</code></pre>
 <span><span class="co"># change year of all dates to 2000</span></span>
 <span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/year.html">year</a></span><span class="op">(</span><span class="va">new_dates2</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fl">2000</span></span>
 <span><span class="va">new_dates2</span></span></code></pre></div>
-<pre><code>[1] "2000-09-26" "2000-07-27" "2000-03-17" "2000-03-04" "2000-06-20"</code></pre>
+<pre><code>[1] "2000-09-27" "2000-07-27" "2000-03-17" "2000-03-04" "2000-06-20"</code></pre>
 <div class="sourceCode" id="cb399"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># of course this is also vectorized!</span></span>
 <span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/year.html">year</a></span><span class="op">(</span><span class="va">new_dates2</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fl">2000</span><span class="op">:</span><span class="fl">2004</span></span>
 <span><span class="va">new_dates2</span></span></code></pre></div>
-<pre><code>[1] "2000-09-26" "2001-07-27" "2002-03-17" "2003-03-04" "2004-06-20"</code></pre>
+<pre><code>[1] "2000-09-27" "2001-07-27" "2002-03-17" "2003-03-04" "2004-06-20"</code></pre>
 <p>This works with all the getters above, feel free to experiment more with this on your own. There are also several other getter/setter functions such as <code><a href="https://lubridate.tidyverse.org/reference/day.html">qday()</a></code> for day of the quarter, <code><a href="https://lubridate.tidyverse.org/reference/week.html">week()</a></code> for week number, and <code><a href="https://lubridate.tidyverse.org/reference/quarter.html">semester()</a></code> for 1<sup>st</sup> or 2<sup>nd</sup> semester of the year.</p>
 </div>
 <div id="date-math" class="section level3" number="3.11.4">
@@ -966,27 +966,27 @@ Levels: Low &lt; Medium &lt; High</code></pre>
 <div class="sourceCode" id="cb401"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># get tomorrow by adding +1 to today</span></span>
 <span><span class="va">date</span> <span class="op">+</span> <span class="fl">1</span></span></code></pre></div>
-<pre><code>[1] "2024-09-27"</code></pre>
+<pre><code>[1] "2024-09-28"</code></pre>
 <div class="sourceCode" id="cb403"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># what date was 1000 days ago?</span></span>
 <span><span class="va">date</span> <span class="op">-</span> <span class="fl">1000</span></span></code></pre></div>
-<pre><code>[1] "2021-12-31"</code></pre>
+<pre><code>[1] "2022-01-01"</code></pre>
 <div class="sourceCode" id="cb405"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># how many days has it been since y2k?</span></span>
 <span><span class="co"># note that subtracting dates gives a "difftime" class object</span></span>
 <span><span class="co"># you can convert this to a number using the familiar as.numeric()</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">date</span> <span class="op">-</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html">mdy</a></span><span class="op">(</span><span class="st">"1/1/00"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>[1] 9035</code></pre>
+<pre><code>[1] 9036</code></pre>
 <div class="sourceCode" id="cb407"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># make a sequence of dates from today to the end of the month</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="va">date</span>, <span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html">mdy</a></span><span class="op">(</span><span class="st">"9/30/24"</span><span class="op">)</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<pre><code>[1] "2024-09-26" "2024-09-27" "2024-09-28" "2024-09-29" "2024-09-30"</code></pre>
+<pre><code>[1] "2024-09-27" "2024-09-28" "2024-09-29" "2024-09-30"</code></pre>
 <div class="sourceCode" id="cb409"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># make a sequence of every Thursday from today to the end of the year</span></span>
+<code class="sourceCode R"><span><span class="co"># make a sequence of every Friday from today to the end of the year</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="va">date</span>, <span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html">mdy</a></span><span class="op">(</span><span class="st">"12/31/24"</span><span class="op">)</span>, by <span class="op">=</span> <span class="fl">7</span><span class="op">)</span></span></code></pre></div>
-<pre><code> [1] "2024-09-26" "2024-10-03" "2024-10-10" "2024-10-17" "2024-10-24" "2024-10-31"
- [7] "2024-11-07" "2024-11-14" "2024-11-21" "2024-11-28" "2024-12-05" "2024-12-12"
-[13] "2024-12-19" "2024-12-26"</code></pre>
+<pre><code> [1] "2024-09-27" "2024-10-04" "2024-10-11" "2024-10-18" "2024-10-25" "2024-11-01"
+ [7] "2024-11-08" "2024-11-15" "2024-11-22" "2024-11-29" "2024-12-06" "2024-12-13"
+[13] "2024-12-20" "2024-12-27"</code></pre>
 <div class="sourceCode" id="cb411"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># has independence day already happened this year?</span></span>
 <span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html">mdy</a></span><span class="op">(</span><span class="st">"7/4/24"</span><span class="op">)</span> <span class="op">&lt;=</span> <span class="va">date</span></span></code></pre></div>
@@ -998,7 +998,7 @@ Levels: Low &lt; Medium &lt; High</code></pre>
 <div class="sourceCode" id="cb415"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># organize dates2 in chronological order</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">dates2</span><span class="op">)</span></span></code></pre></div>
-<pre><code>[1] "2006-07-27" "2009-03-17" "2014-03-04" "2022-06-20" "2024-09-26"</code></pre>
+<pre><code>[1] "2006-07-27" "2009-03-17" "2014-03-04" "2022-06-20" "2024-09-27"</code></pre>
 <div class="sourceCode" id="cb417"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># is today in dates2?</span></span>
 <span><span class="va">date</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">dates2</span></span></code></pre></div>
@@ -1007,7 +1007,7 @@ Levels: Low &lt; Medium &lt; High</code></pre>
 <code class="sourceCode R"><span><span class="co"># some statistical functions can also be run on dates</span></span>
 <span><span class="co"># e.g. we can find the mean and median date of dates2</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">dates2</span><span class="op">)</span></span></code></pre></div>
-<pre><code>[1] "2015-06-06"</code></pre>
+<pre><code>[1] "2015-06-07"</code></pre>
 <div class="sourceCode" id="cb421"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">dates2</span><span class="op">)</span></span></code></pre></div>
 <pre><code>[1] "2014-03-04"</code></pre>
@@ -1015,7 +1015,7 @@ Levels: Low &lt; Medium &lt; High</code></pre>
 <code class="sourceCode R"><span><span class="co"># we can even find the standard deviation of dates,</span></span>
 <span><span class="co"># though this does NOT return a date itself but rather a number of days</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">dates2</span><span class="op">)</span></span></code></pre></div>
-<pre><code>[1] 2916.093</code></pre>
+<pre><code>[1] 2916.385</code></pre>
 </div>
 <div id="printing-dates" class="section level3" number="3.11.5">
 <h3>
@@ -1025,15 +1025,15 @@ Levels: Low &lt; Medium &lt; High</code></pre>
 <div class="sourceCode" id="cb425"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># print today as mm/dd/yy which is common in the US</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">date</span>, <span class="st">"%m/%d/%y"</span><span class="op">)</span></span></code></pre></div>
-<pre><code>[1] "09/26/24"</code></pre>
+<pre><code>[1] "09/27/24"</code></pre>
 <div class="sourceCode" id="cb427"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># another way, slightly more written out</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">date</span>, <span class="st">"%b %d, %Y"</span><span class="op">)</span></span></code></pre></div>
-<pre><code>[1] "Sep 26, 2024"</code></pre>
+<pre><code>[1] "Sep 27, 2024"</code></pre>
 <div class="sourceCode" id="cb429"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># fully written out, including weekday</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">date</span>, <span class="st">"%A, %B %e, %Y"</span><span class="op">)</span></span></code></pre></div>
-<pre><code>[1] "Thursday, September 26, 2024"</code></pre>
+<pre><code>[1] "Friday, September 27, 2024"</code></pre>
 <p>A full list of these percent codes can be found in the help page of <code><a href="https://rdrr.io/r/base/strptime.html">strptime()</a></code>, a base R function for parsing date/time objects.</p>
 
 </div>
@@ -1184,7 +1184,7 @@ observer.observe(document.body, config);
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2024-09-26.</p>
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2024-09-27.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
