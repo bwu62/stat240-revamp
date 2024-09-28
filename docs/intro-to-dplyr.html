@@ -541,11 +541,11 @@
 <pre><code># A tibble: 333 × 6
   species sex    bill_length_mm bill_depth_mm small_bill fake_dates
   &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt; &lt;lgl&gt;      &lt;date&gt;    
-1 Adelie  male             39.1          18.7 FALSE      2024-09-27
-2 Adelie  female           39.5          17.4 TRUE       2024-09-28
-3 Adelie  female           40.3          18   FALSE      2024-09-29
-4 Adelie  female           36.7          19.3 TRUE       2024-09-30
-5 Adelie  male             39.3          20.6 FALSE      2024-10-01
+1 Adelie  male             39.1          18.7 FALSE      2024-09-28
+2 Adelie  female           39.5          17.4 TRUE       2024-09-29
+3 Adelie  female           40.3          18   FALSE      2024-09-30
+4 Adelie  female           36.7          19.3 TRUE       2024-10-01
+5 Adelie  male             39.3          20.6 FALSE      2024-10-02
 # ℹ 328 more rows</code></pre>
 <p>A notable function that is extremely useful inside <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> is <code><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when()</a></code> which can calculate different values depending on certain conditions.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;It’s similar to a switch function in other languages.&lt;/p&gt;"><sup>27</sup></a> The basic syntax is <code>df %&gt;% mutate(new_col = case_when(cond1 ~ expr1, cond2 ~ expr2, ...))</code> where <code>cond1</code>, <code>cond2</code>, … are logical condition vectors checked one by one in the given order, and <code>expr1</code>, <code>expr2</code>, … are R expressions that are activated when a condition matches.</p>
 <p>For example, suppose we want to create some new column differently depending on sex and bill depth:</p>
@@ -1344,7 +1344,7 @@ observer.observe(document.body, config);
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2024-09-27.</p>
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2024-09-28.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
