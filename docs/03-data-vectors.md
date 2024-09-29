@@ -1351,7 +1351,7 @@ library(lubridate)
 
 
 
-Ok, let's start the demo by creating a date object. Let's use today's date (which is Sep 28, 2024 as of [last compile](https://github.com/bwu62/stat240-revamp/commits/master)) as an example. The `today()` function is handy here.
+Ok, let's start the demo by creating a date object. Let's use today's date (which is Sep 29, 2024 as of [last compile](https://github.com/bwu62/stat240-revamp/commits/master)) as an example. The `today()` function is handy here.
 
 
 ``` r
@@ -1361,10 +1361,10 @@ date
 ```
 
 ```
-[1] "2024-09-28"
+[1] "2024-09-29"
 ```
 
-We can see that even though our date object has `"Date"` class, it actually has `"double"` type, which means behind the scenes, it's secretly stored as a number.^[The distinction between class, type, and mode (which we haven't even mentioned and won't ever discuss) is highly technical to the mechanics of R and not worth concerning yourself over. If you're dying of curiosity, I recommend this excellent video on the matter: <https://youtu.be/RwEzWZA9uTw>.] If you `unclass()` the object, i.e. strip away the `"Date"` property, you can see it's just the number 19994 underneath, and you can check that in fact Sep 28, 2024 is indeed [19994 days after Jan 1 1970](https://www.wolframalpha.com/input?i=19994+days+after+Jan+1+1970).
+We can see that even though our date object has `"Date"` class, it actually has `"double"` type, which means behind the scenes, it's secretly stored as a number.^[The distinction between class, type, and mode (which we haven't even mentioned and won't ever discuss) is highly technical to the mechanics of R and not worth concerning yourself over. If you're dying of curiosity, I recommend this excellent video on the matter: <https://youtu.be/RwEzWZA9uTw>.] If you `unclass()` the object, i.e. strip away the `"Date"` property, you can see it's just the number 19995 underneath, and you can check that in fact Sep 29, 2024 is indeed [19995 days after Jan 1 1970](https://www.wolframalpha.com/input?i=19995+days+after+Jan+1+1970).
 
 
 ``` r
@@ -1390,24 +1390,24 @@ unclass(date)
 ```
 
 ```
-[1] 19994
+[1] 19995
 ```
 ``` r
 # we can reverse this too, start with a number,
 # then change the class to "Date", and voila!
-x <- 19994
+x <- 19995
 class(x) <- "Date"
 x
 ```
 
 ```
-[1] "2024-09-28"
+[1] "2024-09-29"
 ```
 
 :::{.note}
 R conforms to [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) standards, i.e. **dates ALWAYS show as `"YYYY-MM-DD"`** (even though they're stored numerically). This is arguably the best format for dates, because it's the unique format where [chronological order and lexicographical order are identical](https://en.wikipedia.org/wiki/ISO_8601#General_principles), which is an extremely useful property.
 
-Also note despite `date` appearing to be a character, it is NOT a character. Using `identical()` (which compares if two objects are the same) will show this to be false. Furthermore, `as.numeric()` confirms `date` converts to 19994 as expected, whereas the string ``"2024-09-28"`` cannot be converted and returns `NA`.
+Also note despite `date` appearing to be a character, it is NOT a character. Using `identical()` (which compares if two objects are the same) will show this to be false. Furthermore, `as.numeric()` confirms `date` converts to 19995 as expected, whereas the string ``"2024-09-29"`` cannot be converted and returns `NA`.
 
 
 ``` r
@@ -1415,7 +1415,7 @@ date
 ```
 
 ```
-[1] "2024-09-28"
+[1] "2024-09-29"
 ```
 
 ``` r
@@ -1426,14 +1426,14 @@ is.character(date)
 [1] FALSE
 ```
 ``` r
-identical(date, "2024-09-28")
+identical(date, "2024-09-29")
 ```
 
 ```
 [1] FALSE
 ```
 ``` r
-c(as.numeric(date), as.numeric("2024-09-28"))
+c(as.numeric(date), as.numeric("2024-09-29"))
 ```
 
 ``` warning
@@ -1441,7 +1441,7 @@ Warning: NAs introduced by coercion
 ```
 
 ```
-[1] 19994    NA
+[1] 19995    NA
 ```
 
 This is just to warn you that **even though they may print similarly, date objects and date-like strings are *NOT* the same**, so to avoid errors and unexpected behavior, make sure you properly convert all date data to be true date objects.
@@ -1458,38 +1458,38 @@ In lubridate, the [parser functions](https://lubridate.tidyverse.org/reference/y
 
 ``` r
 mdy(c(
-  "9/28/24, 09-28-2024, 092824, Sep 28 '24, Saturday, September 28th, 2024"
+  "9/29/24, 09-29-2024, 092924, Sep 29 '24, Sunday, September 29th, 2024"
 ))
 ```
 
 ```
-[1] "2024-09-28" "2024-09-28" "2024-09-28" "2024-09-28" "2024-09-28"
+[1] "2024-09-29" "2024-09-29" "2024-09-29" "2024-09-29" "2024-09-29"
 ```
 
 ``` r
 dmy(c(
-  "28/9/24, 28-09-2024, 280924, 28 Sep '24, Saturday, 28th of September, 2024"
+  "29/9/24, 29-09-2024, 290924, 29 Sep '24, Sunday, 29th of September, 2024"
 ))
 ```
 
 ```
-[1] "2024-09-28" "2024-09-28" "2024-09-28" "2024-09-28" "2024-09-28"
+[1] "2024-09-29" "2024-09-29" "2024-09-29" "2024-09-29" "2024-09-29"
 ```
 
 As you can see, you just need to tell R which order to expect the date components and it will handle the rest! We only demonstrated the `mdy()` and `dmy()` functions here since they are by far the most common formats, but the other functions all behave the same.
 
-One last parser. Sometimes data gives dates as a decimal, e.g. `` 2024-09-28 `` would be `` 2024.74 `` since it's the 272nd day of the year which means it's `` (272-1)/366*100%=74% `` of the way into the year.^[The -1 in the numerator is due to the date being treated as 12am midnight, hence the 272nd day, `` 2024-09-28 `` is just about to start, so only 272 days have passed so far.] R also has a dedicated function for this. `date_decimal()` converts the decimal to a date+time object, which we can then round to the nearest date with [`round_date(...,unit="day")`{.R}](https://lubridate.tidyverse.org/reference/round_date.html) and drop the time component with `date()` which converts date+time objects to pure date objects (again, we are not covering date+time objects due to complexity & limited time).
+One last parser. Sometimes data gives dates as a decimal, e.g. `` 2024-09-29 `` would be `` 2024.743 `` since it's the 273rd day of the year which means it's `` (273-1)/366*100%=74.3% `` of the way into the year.^[The -1 in the numerator is due to the date being treated as 12am midnight, hence the 273rd day, `` 2024-09-29 `` is just about to start, so only 273 days have passed so far.] R also has a dedicated function for this. `date_decimal()` converts the decimal to a date+time object, which we can then round to the nearest date with [`round_date(...,unit="day")`{.R}](https://lubridate.tidyverse.org/reference/round_date.html) and drop the time component with `date()` which converts date+time objects to pure date objects (again, we are not covering date+time objects due to complexity & limited time).
 
 ``` r
 # generate a vector of elapsed 21st century dates
 # in decimal format for demo purposes
-# (here, runif uniformly samples 4 numbers from 2000 to 2024.74)
-dates2 <- runif(4, 2000, 2024.74)
+# (here, runif uniformly samples 4 numbers from 2000 to 2024.743)
+dates2 <- runif(4, 2000, 2024.743)
 dates2
 ```
 
 ```
-[1] 2006.569 2009.207 2014.173 2022.469
+[1] 2006.570 2009.208 2014.174 2022.472
 ```
 
 ``` r
@@ -1499,7 +1499,7 @@ dates2
 ```
 
 ```
-[1] "2006-07-28" "2009-03-17" "2014-03-05" "2022-06-21"
+[1] "2006-07-28" "2009-03-18" "2014-03-06" "2022-06-22"
 ```
 
 There is also a reverse function `decimal_date()` that converts a date back into a decimal.
@@ -1510,7 +1510,7 @@ decimal_date(dates2)
 ```
 
 ```
-[1] 2006.570 2009.205 2014.173 2022.468
+[1] 2006.570 2009.208 2014.175 2022.471
 ```
 
 
@@ -1580,7 +1580,7 @@ Fun fact: R's calendar is more rigorous than Excel's calendar, since it correctl
 
 Lubridate provides many get/set functions (often called getters and setters) for getting and setting different components (i.e. properties) associated with a date. Some common ones include `year()`, `month()`, `day()`, `wday()` (for day of the week), and `quarter()`.
 
-Let's continue using the generated `dates2` object above, except I will add today `` 2024-09-28 `` into the vector as the first element.
+Let's continue using the generated `dates2` object above, except I will add today `` 2024-09-29 `` into the vector as the first element.
 
 
 ``` r
@@ -1590,7 +1590,7 @@ dates2
 ```
 
 ```
-[1] "2024-09-28" "2006-07-28" "2009-03-17" "2014-03-05" "2022-06-21"
+[1] "2024-09-29" "2006-07-28" "2009-03-18" "2014-03-06" "2022-06-22"
 ```
 
 ``` r
@@ -1615,7 +1615,7 @@ day(dates2)
 ```
 
 ```
-[1] 28 28 17  5 21
+[1] 29 28 18  6 22
 ```
 
 ``` r
@@ -1624,7 +1624,7 @@ wday(dates2)
 ```
 
 ```
-[1] 7 6 3 4 3
+[1] 1 6 4 5 4
 ```
 
 ``` r
@@ -1654,7 +1654,7 @@ wday(dates2, label = TRUE, abbr = FALSE)
 ```
 
 ```
-[1] Saturday  Friday    Tuesday   Wednesday Tuesday  
+[1] Sunday    Friday    Wednesday Thursday  Wednesday
 7 Levels: Sunday < Monday < Tuesday < Wednesday < Thursday < ... < Saturday
 ```
 
@@ -1687,7 +1687,7 @@ new_dates2
 ```
 
 ```
-[1] "2000-09-28" "2000-07-28" "2000-03-17" "2000-03-05" "2000-06-21"
+[1] "2000-09-29" "2000-07-28" "2000-03-18" "2000-03-06" "2000-06-22"
 ```
 
 ``` r
@@ -1697,7 +1697,7 @@ new_dates2
 ```
 
 ```
-[1] "2000-09-28" "2001-07-28" "2002-03-17" "2003-03-05" "2004-06-21"
+[1] "2000-09-29" "2001-07-28" "2002-03-18" "2003-03-06" "2004-06-22"
 ```
 
 This works with all the getters above, feel free to experiment more with this on your own. There are also several other getter/setter functions such as `qday()` for day of the quarter, `week()` for week number, and `semester()` for 1^st^ or 2^nd^ semester of the year.
@@ -1715,7 +1715,7 @@ date + 1
 ```
 
 ```
-[1] "2024-09-29"
+[1] "2024-09-30"
 ```
 
 ``` r
@@ -1724,7 +1724,7 @@ date - 1000
 ```
 
 ```
-[1] "2022-01-02"
+[1] "2022-01-03"
 ```
 
 ``` r
@@ -1735,7 +1735,7 @@ as.numeric(date - mdy("1/1/00"))
 ```
 
 ```
-[1] 9037
+[1] 9038
 ```
 ``` r
 # make a sequence of dates from today to the end of the month
@@ -1743,17 +1743,17 @@ seq(date, mdy("9/30/24"), by = 1)
 ```
 
 ```
-[1] "2024-09-28" "2024-09-29" "2024-09-30"
+[1] "2024-09-29" "2024-09-30"
 ```
 ``` r
-# make a sequence of every Saturday from today to the end of the year
+# make a sequence of every Sunday from today to the end of the year
 seq(date, mdy("12/31/24"), by = 7)
 ```
 
 ```
- [1] "2024-09-28" "2024-10-05" "2024-10-12" "2024-10-19" "2024-10-26" "2024-11-02"
- [7] "2024-11-09" "2024-11-16" "2024-11-23" "2024-11-30" "2024-12-07" "2024-12-14"
-[13] "2024-12-21" "2024-12-28"
+ [1] "2024-09-29" "2024-10-06" "2024-10-13" "2024-10-20" "2024-10-27" "2024-11-03"
+ [7] "2024-11-10" "2024-11-17" "2024-11-24" "2024-12-01" "2024-12-08" "2024-12-15"
+[13] "2024-12-22" "2024-12-29"
 ```
 ``` r
 # has independence day already happened this year?
@@ -1779,7 +1779,7 @@ sort(dates2)
 ```
 
 ```
-[1] "2006-07-28" "2009-03-17" "2014-03-05" "2022-06-21" "2024-09-28"
+[1] "2006-07-28" "2009-03-18" "2014-03-06" "2022-06-22" "2024-09-29"
 ```
 
 ``` r
@@ -1798,7 +1798,7 @@ mean(dates2)
 ```
 
 ```
-[1] "2015-06-07"
+[1] "2015-06-08"
 ```
 
 ``` r
@@ -1806,7 +1806,7 @@ median(dates2)
 ```
 
 ```
-[1] "2014-03-05"
+[1] "2014-03-06"
 ```
 
 ``` r
@@ -1816,7 +1816,7 @@ sd(dates2)
 ```
 
 ```
-[1] 2916.58
+[1] 2916.857
 ```
 
 
@@ -1832,7 +1832,7 @@ format(date, "%m/%d/%y")
 ```
 
 ```
-[1] "09/28/24"
+[1] "09/29/24"
 ```
 
 ``` r
@@ -1841,7 +1841,7 @@ format(date, "%b %d, %Y")
 ```
 
 ```
-[1] "Sep 28, 2024"
+[1] "Sep 29, 2024"
 ```
 
 ``` r
@@ -1850,7 +1850,7 @@ format(date, "%A, %B %e, %Y")
 ```
 
 ```
-[1] "Saturday, September 28, 2024"
+[1] "Sunday, September 29, 2024"
 ```
 
 A full list of these percent codes can be found in the help page of `strptime()`, a base R function for parsing date/time objects.
