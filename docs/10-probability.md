@@ -5,14 +5,16 @@
 In this section, we'll introduce you to some foundational probability theory that will be necessary for later models. We will do this in a way that is only semi-rigorous, with an emphasis on teaching the materials in an intuitive fashion.
 
 
-## Random variables
+## Random variables (RVs)
 
 Suppose we have an **experiment** that produces an **outcome** each time it's observed. This is modeled by a **random variable**, often denoted with a capital letter, e.g. $X$ or $Y$. The set of all possible outcomes is called the **sample space** and often denoted $\Omega$.
 
 Sets of possible outcomes are called **events**. Each event has some **probability** associated with it. The probability of some event is often denoted $P(\text{event})$.
 
+A **distribution** is any specification of both the outcomes and the associated probabilities of a random variable.
+
 :::{.eg}
-Let $X$ be the result of rolling a 6-sided die that is **fair**, i.e. the outcomes 1, 2, 3, 4, 5, and 6 all have equal probability. Here are few examples of events and their corresponding probabilities:
+Let $X$ be the result of rolling a standard 6-sided die that is **fair**, i.e. the outcomes 1, 2, 3, 4, 5, and 6 all have equal probability. Here are few examples of events and their corresponding probabilities:
 
  - Probability of getting a 1: $P(X=1)=\frac16$
  - Probability of getting more than 4: $P(X>4)=\frac13$
@@ -23,7 +25,7 @@ Let $X$ be the result of rolling a 6-sided die that is **fair**, i.e. the outcom
 
 ## Axioms of probability
 
-In math, **axioms** are basic rules which formally define an object and which are inviolably true. Below are the axioms of probability, **which can never be broken**:
+In math, **axioms** are basic rules which formally define an object and which are assumed to be true without proof. These form the basis on which everything else rests. These are the axioms of probability:
 
  1. The probability of an event is always non-negative.
     - Mathematically, $P(E)\ge0$ for any event $E$ of some random variable.
@@ -39,13 +41,99 @@ The **union** of $A$ and $B$, denoted $A\cup B$, is the event of observing $A$ O
 
 The **intersection** of $A$ and $B$, denoted $A\cap B$, is the event of observing $A$ AND $B$.
 
-If $A$, $B$ are **mutually exclusive**, then they have no intersection, i.e. there are no outcomes that are in both $A$ and $B$.
+$A$, $B$ are called **mutually exclusive** if they don't intersect, i.e. they have no outcomes in common.
 :::
 
 :::{.eg}
-Let's see these in an example. Let $X$ again be the result of rolling a fair, 6-sided die with outcomes 1,2,…,6.
+Let's see these in an example. Let $X$ again be the result of rolling a fair, 6-sided die with outcomes $1,2,\ldots,6$.
 
 Let $A$ be the event of observing $X$ to be more than 4, and let $B$ be the event of observing $X$ to be an even number. Then, $A\cap B=\{6\}$ and $A\cup B=\{2,4,5,6\}$. Note that $1,3$ are in neither $A$ nor $B$.
 
-Since $A\cap B=\{6\}$ which is NOT empty, $A$ and $B$ are NOT mutually exclusive. Suppose we define a third event $C$ as observing $X$ to be either 1 or 3. Then, $C$ is mutually exclusive with both $A$ and $B$, since both $A\cap C$ and $B\cap C$ are empty.
+Since $A\cap B=\{6\}$ which is NOT empty, $A$ and $B$ are NOT mutually exclusive. Suppose we define a third event $C$ as observing $X$ to be either $1$ or $3$. Then, $C$ is mutually exclusive with both $A$ and $B$, since both $A\cap C$ and $B\cap C$ are empty.
 :::
+
+
+### Corollaries
+
+From these axioms, we have a few important corollaries (i.e. derived statements) that are also true:
+
+ 1. Probabilities are always between 0 and 1.
+    - Mathematically, for any event $E$, we have $0\le P(E)\le1$
+ 2. To get the probability of the "opposite" event, subtract from 1.
+    - Mathematically, for any event $E$, we have $P(\text{not }E)=1-P(E)$.
+ 3. In general, for any $A,B$, the probability of $A$ or $B$ is the probability of $A$ plus $B$ minus the intersection of $A$ and $B$. This is the generalized form of the 3^rd^ axiom.
+    - Mathematically, $P(A\cup B)=P(A)+P(B)-P(A\cap B)$.
+
+These are not difficult to derive from the axioms, but we omit the proofs for brevity.^[See [here](https://en.wikipedia.org/wiki/Probability_axioms#Consequences) for details.] 
+
+
+:::{.eg}
+Here's an example of how to use these axioms. Suppose in Nice Town, on an average day, there's a 70% chance it's sunny, and a 40% chance of a light breeze. Suppose there's a 20% chance of being neither sunny nor breezy. What's the probability it's both sunny and breezy?
+
+Let $S$ represent sunny, and $B$ represent breezy. Then, from the information given, we know $P(S)=0.7$, $P(B)=0.4$, and $P(\text{neither \(S\) nor \(B\)})=0.2$.
+
+By corollary 2, $P(\text{neither \(S\) nor \(B\)})=1-P(S\cup B)$, so we have $P(S\cup B)=0.8$.
+
+By corollary 3, $P(S\cup B)=P(S)+P(B)-P(S\cap B)$, so we have $P(S\cap B)=P(S)+P(B)-P(S\cup B)=0.7+0.4-0.8=0.3$. Thus, there's a 30% chance of it being both sunny and breezy.
+:::
+
+
+## Discrete vs Continuous RVs
+
+Generally, random variables are either **discrete** or **continuous**.
+
+:::{.def}
+A **discrete** RV is one whose **outcomes can be listed out one-by-one**. The list is allowed to be infinite.^[Formally, $\Omega$ must be [countable](https://en.wikipedia.org/wiki/Countable_set).]
+
+A **continuous** RV is the opposite, where **outcomes are in a continuous range** and not listable.
+:::
+
+In practice, we usually use **discrete RVs to model integer valued outcomes**, e.g. counts of something; and **continuous RVs to model real number valued outcomes**, e.g. lengths/weights/durations. These require slightly different mathematical notations/treatments.
+
+
+### Discrete RVs
+
+For discrete RVs, the distribution of outcomes and probabilities is specified with a **probability mass function** (PMF). Note the PMF must satisfy all rules of probability. In particular, all probabilities must be in $[0,1]$, and $P(\Omega)=\sum_\text{k}P(k)=1$ where $k$ represents each possible outcome.
+
+PMFs can be specified using either a table, function, or plot.
+
+:::{.eg}
+Let $X$ be the number of dollars you win from a new casino game where there's only 4 possible outcomes: you either win nothing with 40% chance, or you win \$1 with 30% chance, or you win \$2 with 20% chance, or you win \$3 with 10% chance.
+
+First, it's easy to see the axioms are satisfied, since all probabilities are in $[0,1]$ and $0.1+0.2+0.3+0.4=1$. Thus, this is a valid PMF. We can specify the PMF in any of the following equivalent ways:
+
+#### Table: {-}
+
+<center>
+
+     k | P(k)
+    ---+-----
+     0 | 0.4 
+     1 | 0.3 
+     2 | 0.2 
+     3 | 0.1 
+
+</center>
+
+#### Function: {-}
+
+$$P(k)=\begin{cases}\frac{4-k}{10} & k=0,1,2,3 \\ 0 & \text{otherwise}\end{cases}$$
+
+#### Plot: {-}
+
+
+
+
+``` r
+# remember to import tidyverse (and optionally, update theme options)
+tibble(k = 0:3, p = (4:1)/10) %>%
+  ggplot(aes(x = k, y = p)) + geom_col() +
+  labs(title = "Distribution of X")
+```
+
+<img src="10-probability_files/figure-html/unnamed-chunk-1-1.svg" width="672" style="display: block; margin: auto;" />
+
+:::
+
+### Continuous RVs
+

@@ -96,14 +96,15 @@
 <span class="header-section-number">10</span> Intro to Probability<a class="anchor" aria-label="anchor" href="#intro-to-probability"><i class="fas fa-link"></i></a>
 </h1>
 <p>In this section, we’ll introduce you to some foundational probability theory that will be necessary for later models. We will do this in a way that is only semi-rigorous, with an emphasis on teaching the materials in an intuitive fashion.</p>
-<div id="random-variables" class="section level2" number="10.1">
+<div id="random-variables-rvs" class="section level2" number="10.1">
 <h2>
-<span class="header-section-number">10.1</span> Random variables<a class="anchor" aria-label="anchor" href="#random-variables"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.1</span> Random variables (RVs)<a class="anchor" aria-label="anchor" href="#random-variables-rvs"><i class="fas fa-link"></i></a>
 </h2>
 <p>Suppose we have an <strong>experiment</strong> that produces an <strong>outcome</strong> each time it’s observed. This is modeled by a <strong>random variable</strong>, often denoted with a capital letter, e.g. <span class="math inline">\(X\)</span> or <span class="math inline">\(Y\)</span>. The set of all possible outcomes is called the <strong>sample space</strong> and often denoted <span class="math inline">\(\Omega\)</span>.</p>
 <p>Sets of possible outcomes are called <strong>events</strong>. Each event has some <strong>probability</strong> associated with it. The probability of some event is often denoted <span class="math inline">\(P(\text{event})\)</span>.</p>
+<p>A <strong>distribution</strong> is any specification of both the outcomes and the associated probabilities of a random variable.</p>
 <div class="eg">
-<p>Let <span class="math inline">\(X\)</span> be the result of rolling a 6-sided die that is <strong>fair</strong>, i.e. the outcomes 1, 2, 3, 4, 5, and 6 all have equal probability. Here are few examples of events and their corresponding probabilities:</p>
+<p>Let <span class="math inline">\(X\)</span> be the result of rolling a standard 6-sided die that is <strong>fair</strong>, i.e. the outcomes 1, 2, 3, 4, 5, and 6 all have equal probability. Here are few examples of events and their corresponding probabilities:</p>
 <ul>
 <li>Probability of getting a 1: <span class="math inline">\(P(X=1)=\frac16\)</span>
 </li>
@@ -120,7 +121,7 @@
 <h2>
 <span class="header-section-number">10.2</span> Axioms of probability<a class="anchor" aria-label="anchor" href="#axioms-of-probability"><i class="fas fa-link"></i></a>
 </h2>
-<p>In math, <strong>axioms</strong> are basic rules which formally define an object and which are inviolably true. Below are the axioms of probability, <strong>which can never be broken</strong>:</p>
+<p>In math, <strong>axioms</strong> are basic rules which formally define an object and which are assumed to be true without proof. These form the basis on which everything else rests. These are the axioms of probability:</p>
 <ol style="list-style-type: decimal">
 <li>The probability of an event is always non-negative.
 <ul>
@@ -143,16 +144,102 @@
 <p>Let <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> be two events for some random variable.</p>
 <p>The <strong>union</strong> of <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, denoted <span class="math inline">\(A\cup B\)</span>, is the event of observing <span class="math inline">\(A\)</span> OR <span class="math inline">\(B\)</span>.</p>
 <p>The <strong>intersection</strong> of <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, denoted <span class="math inline">\(A\cap B\)</span>, is the event of observing <span class="math inline">\(A\)</span> AND <span class="math inline">\(B\)</span>.</p>
-<p>If <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span> are <strong>mutually exclusive</strong>, then they have no intersection, i.e. there are no outcomes that are in both <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>.</p>
+<p><span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span> are called <strong>mutually exclusive</strong> if they don’t intersect, i.e. they have no outcomes in common.</p>
 </div>
 <div class="eg">
-<p>Let’s see these in an example. Let <span class="math inline">\(X\)</span> again be the result of rolling a fair, 6-sided die with outcomes 1,2,…,6.</p>
+<p>Let’s see these in an example. Let <span class="math inline">\(X\)</span> again be the result of rolling a fair, 6-sided die with outcomes <span class="math inline">\(1,2,\ldots,6\)</span>.</p>
 <p>Let <span class="math inline">\(A\)</span> be the event of observing <span class="math inline">\(X\)</span> to be more than 4, and let <span class="math inline">\(B\)</span> be the event of observing <span class="math inline">\(X\)</span> to be an even number. Then, <span class="math inline">\(A\cap B=\{6\}\)</span> and <span class="math inline">\(A\cup B=\{2,4,5,6\}\)</span>. Note that <span class="math inline">\(1,3\)</span> are in neither <span class="math inline">\(A\)</span> nor <span class="math inline">\(B\)</span>.</p>
-<p>Since <span class="math inline">\(A\cap B=\{6\}\)</span> which is NOT empty, <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are NOT mutually exclusive. Suppose we define a third event <span class="math inline">\(C\)</span> as observing <span class="math inline">\(X\)</span> to be either 1 or 3. Then, <span class="math inline">\(C\)</span> is mutually exclusive with both <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, since both <span class="math inline">\(A\cap C\)</span> and <span class="math inline">\(B\cap C\)</span> are empty.</p>
+<p>Since <span class="math inline">\(A\cap B=\{6\}\)</span> which is NOT empty, <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are NOT mutually exclusive. Suppose we define a third event <span class="math inline">\(C\)</span> as observing <span class="math inline">\(X\)</span> to be either <span class="math inline">\(1\)</span> or <span class="math inline">\(3\)</span>. Then, <span class="math inline">\(C\)</span> is mutually exclusive with both <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, since both <span class="math inline">\(A\cap C\)</span> and <span class="math inline">\(B\cap C\)</span> are empty.</p>
 </div>
+<div id="corollaries" class="section level3" number="10.2.1">
+<h3>
+<span class="header-section-number">10.2.1</span> Corollaries<a class="anchor" aria-label="anchor" href="#corollaries"><i class="fas fa-link"></i></a>
+</h3>
+<p>From these axioms, we have a few important corollaries (i.e. derived statements) that are also true:</p>
+<ol style="list-style-type: decimal">
+<li>Probabilities are always between 0 and 1.
+<ul>
+<li>Mathematically, for any event <span class="math inline">\(E\)</span>, we have <span class="math inline">\(0\le P(E)\le1\)</span>
+</li>
+</ul>
+</li>
+<li>To get the probability of the “opposite” event, subtract from 1.
+<ul>
+<li>Mathematically, for any event <span class="math inline">\(E\)</span>, we have <span class="math inline">\(P(\text{not }E)=1-P(E)\)</span>.</li>
+</ul>
+</li>
+<li>In general, for any <span class="math inline">\(A,B\)</span>, the probability of <span class="math inline">\(A\)</span> or <span class="math inline">\(B\)</span> is the probability of <span class="math inline">\(A\)</span> plus <span class="math inline">\(B\)</span> minus the intersection of <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>. This is the generalized form of the 3<sup>rd</sup> axiom.
+<ul>
+<li>Mathematically, <span class="math inline">\(P(A\cup B)=P(A)+P(B)-P(A\cap B)\)</span>.</li>
+</ul>
+</li>
+</ol>
+<p>These are not difficult to derive from the axioms, but we omit the proofs for brevity.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;See &lt;a href="https://en.wikipedia.org/wiki/Probability_axioms#Consequences"&gt;here&lt;/a&gt; for details.&lt;/p&gt;'><sup>33</sup></a></p>
+<div class="eg">
+<p>Here’s an example of how to use these axioms. Suppose in Nice Town, on an average day, there’s a 70% chance it’s sunny, and a 40% chance of a light breeze. Suppose there’s a 20% chance of being neither sunny nor breezy. What’s the probability it’s both sunny and breezy?</p>
+<p>Let <span class="math inline">\(S\)</span> represent sunny, and <span class="math inline">\(B\)</span> represent breezy. Then, from the information given, we know <span class="math inline">\(P(S)=0.7\)</span>, <span class="math inline">\(P(B)=0.4\)</span>, and <span class="math inline">\(P(\text{neither \(S\) nor \(B\)})=0.2\)</span>.</p>
+<p>By corollary 2, <span class="math inline">\(P(\text{neither \(S\) nor \(B\)})=1-P(S\cup B)\)</span>, so we have <span class="math inline">\(P(S\cup B)=0.8\)</span>.</p>
+<p>By corollary 3, <span class="math inline">\(P(S\cup B)=P(S)+P(B)-P(S\cap B)\)</span>, so we have <span class="math inline">\(P(S\cap B)=P(S)+P(B)-P(S\cup B)=0.7+0.4-0.8=0.3\)</span>. Thus, there’s a 30% chance of it being both sunny and breezy.</p>
+</div>
+</div>
+</div>
+<div id="discrete-vs-continuous-rvs" class="section level2" number="10.3">
+<h2>
+<span class="header-section-number">10.3</span> Discrete vs Continuous RVs<a class="anchor" aria-label="anchor" href="#discrete-vs-continuous-rvs"><i class="fas fa-link"></i></a>
+</h2>
+<p>Generally, random variables are either <strong>discrete</strong> or <strong>continuous</strong>.</p>
+<div class="def">
+<p>A <strong>discrete</strong> RV is one whose <strong>outcomes can be listed out one-by-one</strong>. The list is allowed to be infinite.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;Formally, &lt;span class="math inline"&gt;\(\Omega\)&lt;/span&gt; must be &lt;a href="https://en.wikipedia.org/wiki/Countable_set"&gt;countable&lt;/a&gt;.&lt;/p&gt;'><sup>34</sup></a></p>
+<p>A <strong>continuous</strong> RV is the opposite, where <strong>outcomes are in a continuous range</strong> and not listable.</p>
+</div>
+<p>In practice, we usually use <strong>discrete RVs to model integer valued outcomes</strong>, e.g. counts of something; and <strong>continuous RVs to model real number valued outcomes</strong>, e.g. lengths/weights/durations. These require slightly different mathematical notations/treatments.</p>
+<div id="discrete-rvs" class="section level3" number="10.3.1">
+<h3>
+<span class="header-section-number">10.3.1</span> Discrete RVs<a class="anchor" aria-label="anchor" href="#discrete-rvs"><i class="fas fa-link"></i></a>
+</h3>
+<p>For discrete RVs, the distribution of outcomes and probabilities is specified with a <strong>probability mass function</strong> (PMF). Note the PMF must satisfy all rules of probability. In particular, all probabilities must be in <span class="math inline">\([0,1]\)</span>, and <span class="math inline">\(P(\Omega)=\sum_\text{k}P(k)=1\)</span> where <span class="math inline">\(k\)</span> represents each possible outcome.</p>
+<p>PMFs can be specified using either a table, function, or plot.</p>
+<div class="eg">
+<p>Let <span class="math inline">\(X\)</span> be the number of dollars you win from a new casino game where there’s only 4 possible outcomes: you either win nothing with 40% chance, or you win $1 with 30% chance, or you win $2 with 20% chance, or you win $3 with 10% chance.</p>
+<p>First, it’s easy to see the axioms are satisfied, since all probabilities are in <span class="math inline">\([0,1]\)</span> and <span class="math inline">\(0.1+0.2+0.3+0.4=1\)</span>. Thus, this is a valid PMF. We can specify the PMF in any of the following equivalent ways:</p>
+<div id="table" class="section level4 unnumbered" number="">
+<h4>Table:<a class="anchor" aria-label="anchor" href="#table"><i class="fas fa-link"></i></a>
+</h4>
+<center>
+<pre><code> k | P(k)
+---+-----
+ 0 | 0.4 
+ 1 | 0.3 
+ 2 | 0.2 
+ 3 | 0.1 </code></pre>
+</center>
+</div>
+<div id="function" class="section level4 unnumbered" number="">
+<h4>Function:<a class="anchor" aria-label="anchor" href="#function"><i class="fas fa-link"></i></a>
+</h4>
+<p><span class="math display">\[P(k)=\begin{cases}\frac{4-k}{10} &amp; k=0,1,2,3 \\ 0 &amp; \text{otherwise}\end{cases}\]</span></p>
+</div>
+<div id="plot" class="section level4 unnumbered" number="">
+<h4>Plot:<a class="anchor" aria-label="anchor" href="#plot"><i class="fas fa-link"></i></a>
+</h4>
+<div class="sourceCode" id="cb824"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># remember to import tidyverse (and optionally, update theme options)</span></span>
+<span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>k <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="fl">3</span>, p <span class="op">=</span> <span class="op">(</span><span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span><span class="op">/</span><span class="fl">10</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">k</span>, y <span class="op">=</span> <span class="va">p</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Distribution of X"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="10-probability_files/figure-html/unnamed-chunk-1-1.svg" width="672" style="display: block; margin: auto;"></div>
+</div>
+</div>
+</div>
+<div id="continuous-rvs" class="section level3" number="10.3.2">
+<h3>
+<span class="header-section-number">10.3.2</span> Continuous RVs<a class="anchor" aria-label="anchor" href="#continuous-rvs"><i class="fas fa-link"></i></a>
+</h3>
 
 </div>
 </div>
+</div>
+
 
 
 
@@ -256,8 +343,16 @@ observer.observe(document.body, config);
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#intro-to-probability"><span class="header-section-number">10</span> Intro to Probability</a></li>
-<li><a class="nav-link" href="#random-variables"><span class="header-section-number">10.1</span> Random variables</a></li>
-<li><a class="nav-link" href="#axioms-of-probability"><span class="header-section-number">10.2</span> Axioms of probability</a></li>
+<li><a class="nav-link" href="#random-variables-rvs"><span class="header-section-number">10.1</span> Random variables (RVs)</a></li>
+<li>
+<a class="nav-link" href="#axioms-of-probability"><span class="header-section-number">10.2</span> Axioms of probability</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#corollaries"><span class="header-section-number">10.2.1</span> Corollaries</a></li></ul>
+</li>
+<li>
+<a class="nav-link" href="#discrete-vs-continuous-rvs"><span class="header-section-number">10.3</span> Discrete vs Continuous RVs</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#discrete-rvs"><span class="header-section-number">10.3.1</span> Discrete RVs</a></li>
+<li><a class="nav-link" href="#continuous-rvs"><span class="header-section-number">10.3.2</span> Continuous RVs</a></li>
+</ul>
+</li>
 </ul>
 
       <div class="book-extra">
@@ -275,7 +370,7 @@ observer.observe(document.body, config);
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2024-09-30.</p>
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2024-10-01.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -153,8 +153,12 @@ overview
 population-vs-sample
 model-vs-data
 intro-to-probability
-random-variables
+random-variables-rvs
 axioms-of-probability
+corollaries
+discrete-vs-continuous-rvs
+discrete-rvs
+continuous-rvs
 datasets
 datasets-list
 eruptions
