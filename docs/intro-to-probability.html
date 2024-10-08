@@ -198,6 +198,10 @@
 <span class="header-section-number">10.3.1</span> Discrete RVs<a class="anchor" aria-label="anchor" href="#discrete-rvs"><i class="fas fa-link"></i></a>
 </h3>
 <p>For discrete RVs, the distribution of outcomes and probabilities is specified with a <strong>probability mass function</strong> (PMF). Note the PMF must satisfy all rules of probability. In particular, all probabilities must be in <span class="math inline">\([0,1]\)</span>, and <span class="math inline">\(P(\Omega)=\sum_\text{k}P(k)=1\)</span> where <span class="math inline">\(k\)</span> represents each possible outcome.</p>
+<div class="def">
+<p>Let <span class="math inline">\(X\)</span> be a discrete RV. The <strong>probability mass function</strong> (PMF) of <span class="math inline">\(X\)</span> is a function <span class="math inline">\(P\)</span> which, for each possible outcome <span class="math inline">\(k\)</span> in the sample space, specifies the probability that <span class="math inline">\(X\)</span> is observed to be <span class="math inline">\(k\)</span>, denoted <span class="math inline">\(P(X\! =\!k)\)</span>, or sometimes <span class="math inline">\(P(k)\)</span> for short.</p>
+<p>To be a valid PMF, <span class="math inline">\(P\)</span> must satisfy the probability axioms, namely it always be <strong>non-negative</strong> and <strong>sum to 1</strong> across all possible outcomes in the sample space.</p>
+</div>
 <p>PMFs can be specified using either a table, function, or plot.</p>
 <div class="eg">
 <p>Let <span class="math inline">\(X\)</span> be the number of dollars you win from a new casino game where there’s only 4 possible outcomes: you either win nothing with 40% chance, or you win $1 with 30% chance, or you win $2 with 20% chance, or you win $3 with 10% chance.</p>
@@ -217,7 +221,7 @@
 <div id="function" class="section level4 unnumbered" number="">
 <h4>Function:<a class="anchor" aria-label="anchor" href="#function"><i class="fas fa-link"></i></a>
 </h4>
-<p><span class="math display">\[P(k)=\begin{cases}\frac{4-k}{10} &amp; k=0,1,2,3 \\ 0 &amp; \text{otherwise}\end{cases}\]</span></p>
+<p><span class="math display">\[P(X\! =\!k)=\begin{cases}\frac1{10}\big(4-k\big) &amp; k=0,1,2,3 \\ 0 &amp; \text{otherwise}\end{cases}\]</span></p>
 </div>
 <div id="plot" class="section level4 unnumbered" number="">
 <h4>Plot:<a class="anchor" aria-label="anchor" href="#plot"><i class="fas fa-link"></i></a>
@@ -226,15 +230,30 @@
 <code class="sourceCode R"><span><span class="co"># remember to import tidyverse (and optionally, update theme options)</span></span>
 <span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>k <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="fl">3</span>, p <span class="op">=</span> <span class="op">(</span><span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span><span class="op">/</span><span class="fl">10</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">k</span>, y <span class="op">=</span> <span class="va">p</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Distribution of X"</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Distribution of X (winnings from made-up casino game)"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="10-probability_files/figure-html/unnamed-chunk-1-1.svg" width="672" style="display: block; margin: auto;"></div>
 </div>
+</div>
+<div class="eg">
+<p>For another example, let <span class="math inline">\(X\)</span> be the sum of independently rolling 2 fair, standard 6-sided dice. What is the PMF of <span class="math inline">\(X\)</span>?</p>
+<p>First, note the possible outcomes <span class="math inline">\(k\)</span> in the sample space are the integers <span class="math inline">\(k=2,3,\ldots,12\)</span>. Next, since the dice are fair, we can find the probability of each outcome <span class="math inline">\(k\)</span> by counting the number of combinations that add to <span class="math inline">\(k\)</span>. For example, for <span class="math inline">\(k=5\)</span> the outcomes are 14, 23, 32, and 41. Each outcome has probability 1/36 so summing them we get <span class="math inline">\(P(X=5)=4\cdot\frac1{36}=\frac19\)</span></p>
+<p>From this, you can show the probability for each <span class="math inline">\(k=2,3,\ldots,12\)</span> is <span class="math inline">\(P(X=k)=(6-|k-7|)/36\)</span>. Thus we can write the PMF as:</p>
+<p><span class="math display">\[P(X\! =\!k)=\begin{cases}\frac1{36}\big(6-|k-7|\big)&amp;k=2,3,\ldots,12\\0&amp;\text{otherwise}\end{cases}\]</span></p>
+<p>You can easily check this PMF satisfies the probability axioms. Here’s a plot of this PMF:</p>
+<div class="sourceCode" id="cb825"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>k <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="fl">12</span>, p <span class="op">=</span> <span class="op">(</span><span class="fl">6</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">k</span><span class="op">-</span><span class="fl">7</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="fl">36</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">k</span>, y <span class="op">=</span> <span class="va">p</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Distribution of X (sum of 2 independent, fair standard 6-sided dice)"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">.2</span>,<span class="fl">.02</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="10-probability_files/figure-html/unnamed-chunk-2-1.svg" width="672" style="display: block; margin: auto;"></div>
 </div>
 </div>
 <div id="continuous-rvs" class="section level3" number="10.3.2">
 <h3>
 <span class="header-section-number">10.3.2</span> Continuous RVs<a class="anchor" aria-label="anchor" href="#continuous-rvs"><i class="fas fa-link"></i></a>
 </h3>
+<p>For continuous RVs, distributions are specified with a <strong>probability density function</strong> (PDF).</p>
 
 </div>
 </div>
@@ -370,7 +389,7 @@ observer.observe(document.body, config);
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2024-10-07.</p>
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2024-10-08.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
