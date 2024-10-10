@@ -139,15 +139,25 @@ img{
   margin-left:10%!important;
   margin-right:10%!important;
 }
+img.i96,div.i96 img{
+  width:96%!important;
+  margin-left:2%!important;
+  margin-right:2%!important;
+}
 img.i6,div.i6 img{
   width:60%!important;
   margin-left:20%!important;
   margin-right:20%!important;
 }
-img.i96,div.i96 img{
-  width:96%!important;
-  margin-left:2%!important;
-  margin-right:2%!important;
+img.i4,div.i4 img{
+  width:40%!important;
+  margin-left:30%!important;
+  margin-right:30%!important;
+}
+img.i3,div.i3 img{
+  width:30%!important;
+  margin-left:35%!important;
+  margin-right:35%!important;
 }
 
 

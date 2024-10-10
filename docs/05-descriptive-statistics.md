@@ -201,6 +201,17 @@ Most common distributions have only 1 mode, i.e. they are unimodal, but some dis
 <img src="05-descriptive-statistics_files/figure-html/modality-1.svg" width="672" style="display: block; margin: auto;" />
 
 
+### Aside 2: Visualizing mean/median/mode
+
+Here's a good diagram showing visual interpretations of the mean, median, and mode on a skewed unimodal distribution.^[Courtesy of [Wikimedia Commons](https://upload.wikimedia.org/wikipedia/commons/3/33/Visualisation_mode_median_mean.svg).]
+
+ - Mode: point where the "peak" of the distribution is.
+ - Median: point which splits the distribution into two equal areas.
+ - Mean: the point where the distribution would balance on, if cut out.
+
+![](mode-median-mean-visual.svg){.i3}
+
+
 ### Other measures
 
 The mean, median, and mode are by far the most common measures of central tendency, and they are the only ones you need to know for this course. However, I thought it might be worth briefly mentioning a few other averages with interesting applications just for fun:

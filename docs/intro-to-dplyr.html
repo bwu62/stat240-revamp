@@ -130,7 +130,7 @@
 <code>x %&gt;% f</code> is equivalent to <code>f(x)</code>
 </li>
 <li>
-<code>x %&gt;% f(y)</code> is equivalent to <code>f(x, y)</code><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;These examples come from the &lt;a href="https://magrittr.tidyverse.org/index.html#usage"&gt;magrittr help page&lt;/a&gt;.&lt;/p&gt;'><sup>26</sup></a>
+<code>x %&gt;% f(y)</code> is equivalent to <code>f(x, y)</code><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;These examples come from the &lt;a href="https://magrittr.tidyverse.org/index.html#usage"&gt;magrittr help page&lt;/a&gt;.&lt;/p&gt;'><sup>27</sup></a>
 </li>
 </ul>
 <p>Why is this useful? Suppose you start with a data frame <code>df</code> and want to run the functions <code>f</code>, <code>g</code>, and <code>h</code> on it in order. You can of course do the following:</p>
@@ -541,13 +541,13 @@
 <pre><code># A tibble: 333 × 6
   species sex    bill_length_mm bill_depth_mm small_bill fake_dates
   &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt; &lt;lgl&gt;      &lt;date&gt;    
-1 Adelie  male             39.1          18.7 FALSE      2024-10-09
-2 Adelie  female           39.5          17.4 TRUE       2024-10-10
-3 Adelie  female           40.3          18   FALSE      2024-10-11
-4 Adelie  female           36.7          19.3 TRUE       2024-10-12
-5 Adelie  male             39.3          20.6 FALSE      2024-10-13
+1 Adelie  male             39.1          18.7 FALSE      2024-10-10
+2 Adelie  female           39.5          17.4 TRUE       2024-10-11
+3 Adelie  female           40.3          18   FALSE      2024-10-12
+4 Adelie  female           36.7          19.3 TRUE       2024-10-13
+5 Adelie  male             39.3          20.6 FALSE      2024-10-14
 # ℹ 328 more rows</code></pre>
-<p>A notable function that is extremely useful inside <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> is <code><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when()</a></code> which can calculate different values depending on certain conditions.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;It’s similar to a switch function in other languages.&lt;/p&gt;"><sup>27</sup></a> The basic syntax is <code>df %&gt;% mutate(new_col = case_when(cond1 ~ expr1, cond2 ~ expr2, ...))</code> where <code>cond1</code>, <code>cond2</code>, … are logical condition vectors checked one by one in the given order, and <code>expr1</code>, <code>expr2</code>, … are R expressions that are activated when a condition matches.</p>
+<p>A notable function that is extremely useful inside <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> is <code><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when()</a></code> which can calculate different values depending on certain conditions.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;It’s similar to a switch function in other languages.&lt;/p&gt;"><sup>28</sup></a> The basic syntax is <code>df %&gt;% mutate(new_col = case_when(cond1 ~ expr1, cond2 ~ expr2, ...))</code> where <code>cond1</code>, <code>cond2</code>, … are logical condition vectors checked one by one in the given order, and <code>expr1</code>, <code>expr2</code>, … are R expressions that are activated when a condition matches.</p>
 <p>For example, suppose we want to create some new column differently depending on sex and bill depth:</p>
 <div class="sourceCode" id="cb643"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># use case_when() inside a mutate() depending on some conditions</span></span>
@@ -593,7 +593,7 @@
   mean_length median_length sd_length iqr_length max_length min_length     n
         &lt;dbl&gt;         &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt; &lt;int&gt;
 1        44.0          44.5      5.47        9.1       59.6       32.1   333</code></pre>
-<p>The last function in the chunk above <code><a href="https://dplyr.tidyverse.org/reference/context.html">n()</a></code> is a special function that <strong>takes NO arguments and returns the number of rows</strong>.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;This is an example of what’s called a &lt;a href="https://en.wikipedia.org/wiki/Arity"&gt;nullary function&lt;/a&gt;&lt;/p&gt;'><sup>28</sup></a></p>
+<p>The last function in the chunk above <code><a href="https://dplyr.tidyverse.org/reference/context.html">n()</a></code> is a special function that <strong>takes NO arguments and returns the number of rows</strong>.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;This is an example of what’s called a &lt;a href="https://en.wikipedia.org/wiki/Arity"&gt;nullary function&lt;/a&gt;&lt;/p&gt;'><sup>29</sup></a></p>
 <p>A few other common applications of <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code> in data exploration:</p>
 <div class="sourceCode" id="cb647"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># compute a few other summaries to explore the data</span></span>
@@ -844,7 +844,7 @@
 <li>
 <strong>Each next expression is ONLY used to break ties in the previous expressions</strong>, otherwise it’s ignored! E.g. if two rows can be sorted by <code>expr1</code>, only that is used. However if two rows are tied for <code>expr1</code>, then <code>expr2</code> (if it exists) will be used to try to break the tie, and so on. This is also a frequent point of confusion for beginners.</li>
 <li>Default order is always <strong>ascending</strong>, i.e. small to large, A to Z, earlier to later, FALSE to TRUE. For descending order, wrap your expression in <code><a href="https://dplyr.tidyverse.org/reference/desc.html">desc()</a></code>.</li>
-<li>Rows that are completely tied may be returned in any order.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;For the CS folks again, this means &lt;code&gt;arrange()&lt;/code&gt; does not guarantee a &lt;a href="https://en.wikipedia.org/wiki/Sorting_algorithm#Stability"&gt;stable sort&lt;/a&gt;. It seems like this generally isn’t a huge concern or priority for the Tidyverse developers, which is fair enough.&lt;/p&gt;'><sup>29</sup></a>
+<li>Rows that are completely tied may be returned in any order.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;For the CS folks again, this means &lt;code&gt;arrange()&lt;/code&gt; does not guarantee a &lt;a href="https://en.wikipedia.org/wiki/Sorting_algorithm#Stability"&gt;stable sort&lt;/a&gt;. It seems like this generally isn’t a huge concern or priority for the Tidyverse developers, which is fair enough.&lt;/p&gt;'><sup>30</sup></a>
 </li>
 </ol>
 <p>Examples of <code><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange()</a></code>:</p>
@@ -938,7 +938,7 @@
 <span class="header-section-number">7.6.1</span> Why missing?<a class="anchor" aria-label="anchor" href="#why-missing"><i class="fas fa-link"></i></a>
 </h3>
 <p>When working with missing values, it’s important to ask yourself this: “<strong>why is this data missing</strong>?” Usually, this is impossible to answer definitively, and different observations may be missing for different reasons.</p>
-<p>Without getting too out of scope, broadly speaking data can be missing either FOR a relevant reason or NOT FOR a relevant reason.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;This is a &lt;strong&gt;massive oversimplification&lt;/strong&gt; here but unfortunately, we don’t have time to address the buried nuances. See &lt;a href="https://www.ncbi.nlm.nih.gov/books/NBK493614"&gt;this summary&lt;/a&gt; or &lt;a href="https://www.jstor.org/stable/2335739"&gt;this article&lt;/a&gt; for the nitty gritty.&lt;/p&gt;'><sup>30</sup></a></p>
+<p>Without getting too out of scope, broadly speaking data can be missing either FOR a relevant reason or NOT FOR a relevant reason.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;This is a &lt;strong&gt;massive oversimplification&lt;/strong&gt; here but unfortunately, we don’t have time to address the buried nuances. See &lt;a href="https://www.ncbi.nlm.nih.gov/books/NBK493614"&gt;this summary&lt;/a&gt; or &lt;a href="https://www.jstor.org/stable/2335739"&gt;this article&lt;/a&gt; for the nitty gritty.&lt;/p&gt;'><sup>31</sup></a></p>
 <p>For example, suppose I’m setting up a weather station with several sensors, but I have a small budget, so I buy a cheap pressure sensor that isn’t properly weather-proofed and is more prone to producing NAs when it rains. These NAs are missing for a relevant reason; there’s a systematic pattern behind the missingness. Since rain and pressure are closely related, this means the pattern of missingness is meaningful, so removing NAs will add significant bias to the data.</p>
 <p>Now, suppose I replace it with a different cheap pressure sensor that is weather-proof but just slightly buggy overall, and every hour there’s independently a 1% chance it will just randomly read NA. This data is NOT missing for a relevant reason, i.e. the pattern of missingness is not meaningful, and you can simply remove the NAs.</p>
 <p>When working with data you should ALWAYS <strong>look for a pattern in the NAs</strong> and ask yourself if there’s evidence of a relevant reason for the missingness. You should <strong>ONLY remove NAs with NO clear pattern</strong>, otherwise you risk introducing further systematic biases in your analysis and results.</p>
@@ -1039,7 +1039,7 @@
   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 1     0    20    40    60</code></pre>
 <div class="note">
-<p>If you check the help page of <code><a href="https://dplyr.tidyverse.org/reference/summarise_all.html">summarize_all()</a></code> you’ll notice this function is tagged with <img src="https://dplyr.tidyverse.org/reference/figures/lifecycle-superseded.svg" style="width:115px!important;margin:0!important"> which basically means you can keep using it, but there’s a new recommended alternative syntax.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;See this &lt;a href="https://lifecycle.r-lib.org/articles/stages.html"&gt;page on lifecycles&lt;/a&gt;.&lt;/p&gt;'><sup>31</sup></a> For this function, the new recommendation is to use <code><a href="https://dplyr.tidyverse.org/reference/across.html">across()</a></code> instead, but this is a bit outside our scope, so read at your own discretion.</p>
+<p>If you check the help page of <code><a href="https://dplyr.tidyverse.org/reference/summarise_all.html">summarize_all()</a></code> you’ll notice this function is tagged with <img src="https://dplyr.tidyverse.org/reference/figures/lifecycle-superseded.svg" style="width:115px!important;margin:0!important"> which basically means you can keep using it, but there’s a new recommended alternative syntax.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;See this &lt;a href="https://lifecycle.r-lib.org/articles/stages.html"&gt;page on lifecycles&lt;/a&gt;.&lt;/p&gt;'><sup>32</sup></a> For this function, the new recommendation is to use <code><a href="https://dplyr.tidyverse.org/reference/across.html">across()</a></code> instead, but this is a bit outside our scope, so read at your own discretion.</p>
 </div>
 <p>Of course you can also use <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code> to inspect rows with missing values in some (or all) columns. Examples:</p>
 <div class="sourceCode" id="cb702"><pre class="downlit sourceCode r">
@@ -1344,7 +1344,7 @@ observer.observe(document.body, config);
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2024-10-09.</p>
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2024-10-10.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

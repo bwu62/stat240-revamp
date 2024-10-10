@@ -78,6 +78,7 @@ mean
 median
 mode
 modality
+aside-2-visualizing-meanmedianmode
 other-measures
 measures-of-spread
 variance-and-standard-deviation

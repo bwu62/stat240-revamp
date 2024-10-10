@@ -595,11 +595,11 @@ penguins2 %>% mutate(
 # A tibble: 333 × 6
   species sex    bill_length_mm bill_depth_mm small_bill fake_dates
   <chr>   <chr>           <dbl>         <dbl> <lgl>      <date>    
-1 Adelie  male             39.1          18.7 FALSE      2024-10-09
-2 Adelie  female           39.5          17.4 TRUE       2024-10-10
-3 Adelie  female           40.3          18   FALSE      2024-10-11
-4 Adelie  female           36.7          19.3 TRUE       2024-10-12
-5 Adelie  male             39.3          20.6 FALSE      2024-10-13
+1 Adelie  male             39.1          18.7 FALSE      2024-10-10
+2 Adelie  female           39.5          17.4 TRUE       2024-10-11
+3 Adelie  female           40.3          18   FALSE      2024-10-12
+4 Adelie  female           36.7          19.3 TRUE       2024-10-13
+5 Adelie  male             39.3          20.6 FALSE      2024-10-14
 # ℹ 328 more rows
 ```
 

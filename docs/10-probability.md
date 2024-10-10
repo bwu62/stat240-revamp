@@ -97,7 +97,7 @@ For discrete RVs, the distribution of outcomes and probabilities is specified wi
 
 
 :::{.def}
-Let $X$ be a discrete RV. The **probability mass function** (PMF) of $X$ is a function $P$ which, for each possible outcome $k$ in the sample space, specifies the probability that $X$ is observed to be $k$, denoted $P(X\! =\!k)$, or sometimes $P(k)$ for short.
+Let $X$ be a discrete RV. The **probability mass function (PMF)** of $X$ is a function $P$ which, for each possible outcome $k$ in the sample space, specifies the probability that $X$ is observed to be $k$, denoted $P(X\! =\!k)$, or sometimes $P(k)$ for short.
 
 To be a valid PMF, $P$ must satisfy the probability axioms, namely it always be **non-negative** and **sum to 1** across all possible outcomes in the sample space.
 :::
@@ -145,7 +145,7 @@ tibble(k = 0:3, p = (4:1)/10) %>%
 
 
 :::{.eg}
-For another example, let $X$ be the sum of independently rolling 2 fair, standard 6-sided dice. What is the PMF of $X$?
+For another example, let $X$ be the sum of rolling 2 ordinary, fair 6-sided dice (independently)^[[Independence](https://www.probabilitycourse.com/chapter1/1_4_1_independence.php) has a formal probabilistic definition that's beyond the scope of 240. You can simply think of it as rolling the dice in a way that doesn't affect each other.]. What is the PMF of $X$?
 
 First, note the possible outcomes $k$ in the sample space are the integers $k=2,3,\ldots,12$. Next, since the dice are fair, we can find the probability of each outcome $k$ by counting the number of combinations that add to $k$. For example, for $k=5$ the outcomes are 14, 23, 32, and 41. Each outcome has probability 1/36 so summing them we get $P(X=5)=4\cdot\frac1{36}=\frac19$
 
@@ -159,7 +159,7 @@ You can easily check this PMF satisfies the probability axioms. Here's a plot of
 ``` r
 tibble(k = 2:12, p = (6-abs(k-7))/36) %>%
   ggplot(aes(x = k, y = p)) + geom_col() +
-  labs(title = "Distribution of X (sum of 2 independent, fair standard 6-sided dice)") +
+  labs(title = "Distribution of X (sum of 2 independent & fair ordinary 6-sided dice)") +
   scale_x_continuous(breaks = 2:12) +
   scale_y_continuous(breaks = seq(0,.2,.02))
 ```
@@ -171,5 +171,24 @@ tibble(k = 2:12, p = (6-abs(k-7))/36) %>%
 
 ### Continuous RVs
 
-For continuous RVs, distributions are specified with a **probability density function** (PDF).
+For continuous RVs, distributions are specified with a **probability density function** (PDF). They are similar to PMFs but with a key distinction: a **PDF's value is NOT the probability of an outcome**, rather it denotes "density" which can be thought of as the rate of change of probability.
+
+:::{.def}
+Let $X$ be a continuous RV. The **probability density function (PDF)** of $X$ is a function $P$ which, for each outcome $x$ in the sample space, specifies the density of probability around $x$.
+
+To be a valid PDF, $P$ must also satisfy the probability axioms, i.e. $P$ must always be **non-negative** and **integrate to 1** across the sample space.
+:::
+
+:::{.note}
+Unlike discrete PMFs, continuous **PDFs do NOT give the probability at an outcome**! For continuous PDFs, **probabilities of events are instead ALWAYS areas under PDF function**.
+
+Also note it's customary to use $k$ to represent possible outcomes of discrete PMFs, and $x$ to represent possible outcomes of continuous PDFs.
+:::
+
+PDFs are the continuous analog of PMFs, so whenever you might use PMFs in a summation $\sum$ expression, you would switch to a definite integral $\int$ for a PDF. In STAT 240, **we will NOT require you to evaluate these integrals** but we may occasionally show them to familiarize you with the notation. Computations with simple PMFs may be asked however.
+
+:::{.eg}
+PDFs can be hard to understand at first, so here's an easy example to start. Let $X$ be a normal
+:::
+
 
