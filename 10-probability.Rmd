@@ -129,17 +129,18 @@ $$P(X\! =\!k)=\begin{cases}\frac1{10}\big(4-k\big) & k=0,1,2,3 \\ 0 & \text{othe
 
 #### Plot: {-}
 
-
+:::{.fold .s}
 ```{r setup-all2,echo=F}
 library(tidyverse)
 source("ggplot_theme_options.R")
 ```
-```{r}
+```{r,tidy=F}
 # remember to import tidyverse (and optionally, update theme options)
 tibble(k = 0:3, p = (4:1)/10) %>%
   ggplot(aes(x = k, y = p)) + geom_col() +
   labs(title = "Distribution of X (winnings from made-up casino game)")
 ```
+:::
 
 :::
 
@@ -155,13 +156,15 @@ $$P(X\! =\!k)=\begin{cases}\frac1{36}\big(6-|k-7|\big)&k=2,3,\ldots,12\\0&\text{
 
 You can easily check this PMF satisfies the probability axioms. Here's a plot of this PMF:
 
-```{r}
+:::{.fold .s}
+```{r,tidy=F}
 tibble(k = 2:12, p = (6-abs(k-7))/36) %>%
   ggplot(aes(x = k, y = p)) + geom_col() +
   labs(title = "Distribution of X (sum of rolling two fair 6-sided dice)") +
   scale_x_continuous(breaks = 2:12) +
   scale_y_continuous(breaks = seq(0,.2,.02))
 ```
+:::
 
 :::
 
