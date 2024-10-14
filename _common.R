@@ -6,12 +6,10 @@ list.of.packages = c(
   "palmerpenguins", "GGally", "plotly"
 )
 
-# make sure to use the github dev
-# version of bookdown until v0.41
-# officially adds support for
-# changing the mathjax renderer
-# see bookdown PR #1472
-# devtools::install_github("rstudio/bookdown")
+# make sure to use my fork of
+# bookdown from github
+# due to additional js hacks
+# devtools::install_github("bwu62/bookdown")
 
 new.packages <- list.of.packages[!(
   list.of.packages %in% 
