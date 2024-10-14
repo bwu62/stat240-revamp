@@ -160,6 +160,9 @@ corollaries
 discrete-vs-continuous-rvs
 discrete-rvs
 continuous-rvs
+expectation-variance
+expected-value
+variance
 datasets
 datasets-list
 eruptions

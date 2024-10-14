@@ -74,7 +74,7 @@ Let $S$ represent sunny, and $B$ represent breezy. Then, from the information gi
 
 By corollary 2, $P(\text{neither \(S\) nor \(B\)})=1-P(S\cup B)$, so we have $P(S\cup B)=0.8$.
 
-By corollary 3, $P(S\cup B)=P(S)+P(B)-P(S\cap B)$, so we have $P(S\cap B)=P(S)+P(B)-P(S\cup B)=0.7+0.4-0.8=0.3$. Thus, there's a 30% chance of it being both sunny and breezy.
+By corollary 3, $P(S\cup B)=P(S)+P(B)-P(S\cap B)$. Rearranging the terms, we get $P(S\cap B)=P(S)+P(B)-P(S\cup B)=0.7+0.4-0.8=0.3$. Thus, there's a 30% chance of it being both sunny and breezy.
 :::
 
 
@@ -99,13 +99,13 @@ For discrete RVs, the distribution of outcomes and probabilities is specified wi
 :::{.def}
 Let $X$ be a discrete RV. The **probability mass function (PMF)** of $X$ is a function $P$ which, for each possible outcome $k$ in the sample space, specifies the probability that $X$ is observed to be $k$, denoted $P(X\! =\!k)$, or sometimes $P(k)$ for short.
 
-To be a valid PMF, $P$ must satisfy the probability axioms, namely it always be **non-negative** and **sum to 1** across all possible outcomes in the sample space.
+To be a valid PMF, $P$ must satisfy the probability axioms, namely it must always be **non-negative** and **sum to 1** across all possible outcomes in the sample space.
 :::
 
 
 PMFs can be specified using either a table, function, or plot.
 
-:::{.eg}
+:::{#casino-example .eg}
 Let $X$ be the number of dollars you win from a new casino game where there's only 4 possible outcomes: you either win nothing with 40% chance, or you win \$1 with 30% chance, or you win \$2 with 20% chance, or you win \$3 with 10% chance.
 
 First, it's easy to see the axioms are satisfied, since all probabilities are in $[0,1]$ and $0.1+0.2+0.3+0.4=1$. Thus, this is a valid PMF. We can specify the PMF in any of the following equivalent ways:
@@ -129,7 +129,7 @@ $$P(X\! =\!k)=\begin{cases}\frac1{10}\big(4-k\big) & k=0,1,2,3 \\ 0 & \text{othe
 
 #### Plot: {-}
 
-
+:::{.fold .s}
 
 
 ``` r
@@ -140,6 +140,7 @@ tibble(k = 0:3, p = (4:1)/10) %>%
 ```
 
 <img src="10-probability_files/figure-html/unnamed-chunk-1-1.svg" width="672" style="display: block; margin: auto;" />
+:::
 
 :::
 
@@ -155,23 +156,25 @@ $$P(X\! =\!k)=\begin{cases}\frac1{36}\big(6-|k-7|\big)&k=2,3,\ldots,12\\0&\text{
 
 You can easily check this PMF satisfies the probability axioms. Here's a plot of this PMF:
 
+:::{.fold .s}
 
 ``` r
 tibble(k = 2:12, p = (6-abs(k-7))/36) %>%
   ggplot(aes(x = k, y = p)) + geom_col() +
-  labs(title = "Distribution of X (sum of 2 independent & fair ordinary 6-sided dice)") +
+  labs(title = "Distribution of X (sum of rolling two fair 6-sided dice)") +
   scale_x_continuous(breaks = 2:12) +
   scale_y_continuous(breaks = seq(0,.2,.02))
 ```
 
 <img src="10-probability_files/figure-html/unnamed-chunk-2-1.svg" width="672" style="display: block; margin: auto;" />
+:::
 
 :::
 
 
 ### Continuous RVs
 
-For continuous RVs, distributions are specified with a **probability density function** (PDF). They are similar to PMFs but with a key distinction: a **PDF's value is NOT the probability of an outcome**, rather it denotes "density" which can be thought of as the rate of change of probability.
+For continuous RVs, distributions are specified with a **probability density function** (PDF). They are similar to PMFs but with a key distinction: **PDFs do NOT output probability of an outcome**, rather it denotes "density" which can be thought of as the rate of change of probability.
 
 :::{.def}
 Let $X$ be a continuous RV. The **probability density function (PDF)** of $X$ is a function $P$ which, for each outcome $x$ in the sample space, specifies the density of probability around $x$.
@@ -180,15 +183,135 @@ To be a valid PDF, $P$ must also satisfy the probability axioms, i.e. $P$ must a
 :::
 
 :::{.note}
-Unlike discrete PMFs, continuous **PDFs do NOT give the probability at an outcome**! For continuous PDFs, **probabilities of events are instead ALWAYS areas under PDF function**.
+This is important enough to warrant repeating: a continuous **PDF does NOT output a probability**! For continuous PDFs, **probabilities ALWAYS correspond to areas under the PDF**.
 
 Also note it's customary to use $k$ to represent possible outcomes of discrete PMFs, and $x$ to represent possible outcomes of continuous PDFs.
 :::
 
 PDFs are the continuous analog of PMFs, so whenever you might use PMFs in a summation $\sum$ expression, you would switch to a definite integral $\int$ for a PDF. In STAT 240, **we will NOT require you to evaluate these integrals** but we may occasionally show them to familiarize you with the notation. Computations with simple PMFs may be asked however.
 
+
 :::{.eg}
-PDFs can be hard to understand at first, so here's an easy example to start. Let $X$ be a normal
+PDFs can feel strange at first, so here's an easy example to start. According to the [2011-12 National Health and Nutrition Examination Survey](https://wwwn.cdc.gov/Nchs/Nhanes/2011-2012/BMX_G.htm) (NHANES) by the CDC, US adult human height has an approximately normal distribution with mean 65.8 inches and standard deviation 3.98 inches. Below is a plot of the distribution:
+
+:::{.fold .s}
+
+``` r
+# use geom_function to plot dnorm (the normal PDF function)
+# also plot the mean ± up to 3 standard deviations
+ggplot(tibble(SDs = 65.8 + (-3:3)*3.98)) +
+  geom_function(fun = \(x) dnorm(x, 65.8, 3.98), xlim = c(52, 80), n = 1001) +
+  geom_segment(aes(x = SDs, xend = SDs, y = 0, yend = dnorm(SDs, 65.8, 3.98)),
+               color = "red", linetype = "dashed", linewidth = 0.7) +
+  scale_x_continuous(breaks = seq(52, 80, 2), expand = c(0, 0)) +
+  scale_y_continuous(breaks = seq(0, 0.10, 0.01), expand = c(0, 0.001)) +
+  labs(title = "US adult human height distribution",
+       subtitle = '(approx normal w/ mean 65.8", SD 3.98"; SDs shown in dashed)',
+       x = "height (inches)", y = "probability density")
+```
+
+<img src="10-probability_files/figure-html/unnamed-chunk-3-1.svg" width="672" style="display: block; margin: auto;" />
 :::
 
+You can easily see the density is non-negative, and with some careful math the area can be shown to be 1. Thus it satisfies the probability axioms.
+
+Remember the density at $x$ is NOT the probability of $x$. Again, probabilities of events correspond to areas under the curve. For example, one can show that for a normal distribution:
+
+ - Approx. 68% of outcomes are between ±1 standard deviation,
+ - Approx. 95% of outcomes are between ±2 standard deviations,
+ - Approx. 99.7% of outcomes are between ±3 standard deviations.
+
+This rule is called the **empirical rule**. For our distribution of heights, this means about 68% of people are between 62 and 70 inches, about 95% are between 58 and 74 inches, etc.
+:::
+
+:::{.eg}
+For another example, consider the **uniform distribution** on $(0,1)$. This distribution generalizes rolling a fair die to drawing a number from an interval, where every value inside the interval is equally likely to be selected. Below is a plot of the distribution:
+
+:::{.fold .s}
+
+``` r
+# use geom_function to plot dunif (the uniform PDF function)
+ggplot() + geom_function(fun = dunif, xlim = c(-.5, 1.5), n = 10001) +
+  labs(title = "Uniform distribution between 0 and 1",
+       x = "x", y = "probability density")
+```
+
+<img src="10-probability_files/figure-html/unnamed-chunk-4-1.svg" width="672" style="display: block; margin: auto;" />
+:::
+
+One can also show percentiles are always uniformly distributed, so this is actually a very useful distribution (more on this in STAT 340).
+:::
+
+
+## Expectation & Variance
+
+### Expected value
+
+**Expected value** refers to the **average value** of some random variable (or function thereof). For a discrete random variable $X$, the expected value of $X$---also called $E(X)$, $\mu$, or simply the mean of $X$---is defined:
+
+$$\mu=E(X)=\sum_k\,k\cdot P(X\! =\!k)$$
+
+The summation is performed over all possible outcomes $k$ in the sample space. In plain words, the mean is the sum of the product of each outcome with its probability (i.e. a weighted sum using the probabilities as weights). The formula for a continuous variable is similar but with an integral instead of a summation.
+
+The expected value of a function of a random variable $f(X)$ can also be defined, which represents the average value of $f(X)$ :
+
+$$E\big(f(X)\big)=\sum_k\,f(k)\cdot P(X\! =\!k)$$
+
+
+:::{#single-die .eg}
+Again, as a simple example, consider $X$ being rolling a single fair, 6-sided die. Find $E(X)$.
+
+If the die is fair, then $P(X\! =\!k)=1/6$ for all $k=1,2,\ldots,6$. Then, we get
+
+$$E(X)=\sum_{k=1}^6\,k\cdot(1/6)=\frac16(1+2+\cdots+6)=\frac{21}6=3.5$$
+
+This means the average value of a die roll is 3.5. Note that **the average does NOT need to be a possible observation**! Even though it's impossible to roll a 3.5, the average of each roll over many rolls is in fact 3.5.
+
+Now consider $f(x)=x^2$. What is $E\big(f(X)\big)$, i.e. the average value of $X^2$?
+
+$$E(X^2)=\sum_{k=1}^6\,k^2\cdot(1/6)=\frac16(1+4+\cdots+36)=\frac{91}6\approx15.17$$
+
+Thus, the average of the square of a 6-sided die is about 15.17.
+:::
+
+:::{#casino-game2 .eg}
+Let's reconsider the [casino game example](#casino-example) above, where $X$ is the average winnings per game. Find the expected value of $X$.
+
+Recall the outcomes $0,1,2,3$ have corresponding probabilities $0.4,0.3,0.2,0.1$. Using the formula, we get
+
+$$E(X)=0\!\cdot\!(0.4)+1\!\cdot\!(0.3)+2\!\cdot\!(0.2)+3\!\cdot\!(0.1)=0.3+0.4+0.3=1$$
+
+Thus, each play on average wins \$1. This means if a casino wants to not lose money, they need to charge at least \$1 per play.
+:::
+
+
+### Variance
+
+The **variance** of a random variable---also called $Var(X)$ or $\sigma^2$---can be thought of as the **average squared distance from the mean** and is defined as:
+
+$$\sigma^2=Var(X)=E\big((X-\mu)^2\big)=\sum_k\,(k\!-\!\mu)^2\cdot P(X\! =\!k)$$
+
+where $\mu$ represents $E(X)$. The variance is used as a measure of spread. The higher the variance, the more "spread out" a RV is.
+
+The **standard deviation** of $X$, often denoted $\sigma$, is then defined as the **square root of the variance**. This is often more convenient to use in calculations instead of the variance since it has the same units as the data. It can be thought of as the average distance of an observation from the mean.
+
+:::{.eg}
+Consider again the previous [single, fair 6-sided die example](#single-die). Find the variance and standard deviation of $X$.
+
+We found earlier that $\mu=E(X)=3.5$. Applying the variance formula gives:
+
+$$Var(X)=\sum_{k=1}^6(k\!-\!3.5)^2\cdot(1/6)=\frac16\big((1\!-\!3.5)^2+\cdots+(6\!-\!3.5)^2\big)=\frac{35}{12}\approx2.92$$
+
+So, we found the variance $\sigma^2\approx2.92$, and thus the standard deviation $\sigma\approx1.71$.
+:::
+
+:::{.eg}
+Let's consider the [casino game example](#casino-game2) a final time. Find the variance and standard deviation of $X$.
+
+We found earlier $\mu=\E(X)=1$. Applying the variance formula gives:
+
+$$Var(X)=(0\!-\!1)^2\!\cdot\!(0.4)+(1\!-\!1)^2\!\cdot\!(0.3)+(2\!-\!1)^2\!\cdot\!(0.2)+(3\!-\!1)^2\!\cdot\!(0.1)=1$$
+
+Thus, the variance is also $\sigma^2=1$, and so is the standard deviation $\sigma=1$.
+:::
 

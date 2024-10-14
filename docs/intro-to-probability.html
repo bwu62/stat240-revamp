@@ -179,7 +179,7 @@
 <p>Here’s an example of how to use these axioms. Suppose in Nice Town, on an average day, there’s a 70% chance it’s sunny, and a 40% chance of a light breeze. Suppose there’s a 20% chance of being neither sunny nor breezy. What’s the probability it’s both sunny and breezy?</p>
 <p>Let <span class="math inline">\(S\)</span> represent sunny, and <span class="math inline">\(B\)</span> represent breezy. Then, from the information given, we know <span class="math inline">\(P(S)=0.7\)</span>, <span class="math inline">\(P(B)=0.4\)</span>, and <span class="math inline">\(P(\text{neither \(S\) nor \(B\)})=0.2\)</span>.</p>
 <p>By corollary 2, <span class="math inline">\(P(\text{neither \(S\) nor \(B\)})=1-P(S\cup B)\)</span>, so we have <span class="math inline">\(P(S\cup B)=0.8\)</span>.</p>
-<p>By corollary 3, <span class="math inline">\(P(S\cup B)=P(S)+P(B)-P(S\cap B)\)</span>, so we have <span class="math inline">\(P(S\cap B)=P(S)+P(B)-P(S\cup B)=0.7+0.4-0.8=0.3\)</span>. Thus, there’s a 30% chance of it being both sunny and breezy.</p>
+<p>By corollary 3, <span class="math inline">\(P(S\cup B)=P(S)+P(B)-P(S\cap B)\)</span>. Rearranging the terms, we get <span class="math inline">\(P(S\cap B)=P(S)+P(B)-P(S\cup B)=0.7+0.4-0.8=0.3\)</span>. Thus, there’s a 30% chance of it being both sunny and breezy.</p>
 </div>
 </div>
 </div>
@@ -200,10 +200,10 @@
 <p>For discrete RVs, the distribution of outcomes and probabilities is specified with a <strong>probability mass function</strong> (PMF). Note the PMF must satisfy all rules of probability. In particular, all probabilities must be in <span class="math inline">\([0,1]\)</span>, and <span class="math inline">\(P(\Omega)=\sum_\text{k}P(k)=1\)</span> where <span class="math inline">\(k\)</span> represents each possible outcome.</p>
 <div class="def">
 <p>Let <span class="math inline">\(X\)</span> be a discrete RV. The <strong>probability mass function (PMF)</strong> of <span class="math inline">\(X\)</span> is a function <span class="math inline">\(P\)</span> which, for each possible outcome <span class="math inline">\(k\)</span> in the sample space, specifies the probability that <span class="math inline">\(X\)</span> is observed to be <span class="math inline">\(k\)</span>, denoted <span class="math inline">\(P(X\! =\!k)\)</span>, or sometimes <span class="math inline">\(P(k)\)</span> for short.</p>
-<p>To be a valid PMF, <span class="math inline">\(P\)</span> must satisfy the probability axioms, namely it always be <strong>non-negative</strong> and <strong>sum to 1</strong> across all possible outcomes in the sample space.</p>
+<p>To be a valid PMF, <span class="math inline">\(P\)</span> must satisfy the probability axioms, namely it must always be <strong>non-negative</strong> and <strong>sum to 1</strong> across all possible outcomes in the sample space.</p>
 </div>
 <p>PMFs can be specified using either a table, function, or plot.</p>
-<div class="eg">
+<div id="casino-example" class="eg">
 <p>Let <span class="math inline">\(X\)</span> be the number of dollars you win from a new casino game where there’s only 4 possible outcomes: you either win nothing with 40% chance, or you win $1 with 30% chance, or you win $2 with 20% chance, or you win $3 with 10% chance.</p>
 <p>First, it’s easy to see the axioms are satisfied, since all probabilities are in <span class="math inline">\([0,1]\)</span> and <span class="math inline">\(0.1+0.2+0.3+0.4=1\)</span>. Thus, this is a valid PMF. We can specify the PMF in any of the following equivalent ways:</p>
 <div id="table" class="section level4 unnumbered" number="">
@@ -226,6 +226,7 @@
 <div id="plot" class="section level4 unnumbered" number="">
 <h4>Plot:<a class="anchor" aria-label="anchor" href="#plot"><i class="fas fa-link"></i></a>
 </h4>
+<div class="fold s">
 <div class="sourceCode" id="cb824"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># remember to import tidyverse (and optionally, update theme options)</span></span>
 <span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>k <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="fl">3</span>, p <span class="op">=</span> <span class="op">(</span><span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span><span class="op">/</span><span class="fl">10</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
@@ -234,37 +235,126 @@
 <div class="inline-figure"><img src="10-probability_files/figure-html/unnamed-chunk-1-1.svg" width="672" style="display: block; margin: auto;"></div>
 </div>
 </div>
+</div>
 <div class="eg">
 <p>For another example, let <span class="math inline">\(X\)</span> be the sum of rolling 2 ordinary, fair 6-sided dice (independently)<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="https://www.probabilitycourse.com/chapter1/1_4_1_independence.php"&gt;Independence&lt;/a&gt; has a formal probabilistic definition that’s beyond the scope of 240. You can simply think of it as rolling the dice in a way that doesn’t affect each other.&lt;/p&gt;'><sup>36</sup></a>. What is the PMF of <span class="math inline">\(X\)</span>?</p>
 <p>First, note the possible outcomes <span class="math inline">\(k\)</span> in the sample space are the integers <span class="math inline">\(k=2,3,\ldots,12\)</span>. Next, since the dice are fair, we can find the probability of each outcome <span class="math inline">\(k\)</span> by counting the number of combinations that add to <span class="math inline">\(k\)</span>. For example, for <span class="math inline">\(k=5\)</span> the outcomes are 14, 23, 32, and 41. Each outcome has probability 1/36 so summing them we get <span class="math inline">\(P(X=5)=4\cdot\frac1{36}=\frac19\)</span></p>
 <p>From this, you can show the probability for each <span class="math inline">\(k=2,3,\ldots,12\)</span> is <span class="math inline">\(P(X=k)=(6-|k-7|)/36\)</span>. Thus we can write the PMF as:</p>
 <p><span class="math display">\[P(X\! =\!k)=\begin{cases}\frac1{36}\big(6-|k-7|\big)&amp;k=2,3,\ldots,12\\0&amp;\text{otherwise}\end{cases}\]</span></p>
 <p>You can easily check this PMF satisfies the probability axioms. Here’s a plot of this PMF:</p>
+<div class="fold s">
 <div class="sourceCode" id="cb825"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>k <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="fl">12</span>, p <span class="op">=</span> <span class="op">(</span><span class="fl">6</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">k</span><span class="op">-</span><span class="fl">7</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="fl">36</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">k</span>, y <span class="op">=</span> <span class="va">p</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Distribution of X (sum of 2 independent &amp; fair ordinary 6-sided dice)"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Distribution of X (sum of rolling two fair 6-sided dice)"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">.2</span>,<span class="fl">.02</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="10-probability_files/figure-html/unnamed-chunk-2-1.svg" width="672" style="display: block; margin: auto;"></div>
+</div>
 </div>
 </div>
 <div id="continuous-rvs" class="section level3" number="10.3.2">
 <h3>
 <span class="header-section-number">10.3.2</span> Continuous RVs<a class="anchor" aria-label="anchor" href="#continuous-rvs"><i class="fas fa-link"></i></a>
 </h3>
-<p>For continuous RVs, distributions are specified with a <strong>probability density function</strong> (PDF). They are similar to PMFs but with a key distinction: a <strong>PDF’s value is NOT the probability of an outcome</strong>, rather it denotes “density” which can be thought of as the rate of change of probability.</p>
+<p>For continuous RVs, distributions are specified with a <strong>probability density function</strong> (PDF). They are similar to PMFs but with a key distinction: <strong>PDFs do NOT output probability of an outcome</strong>, rather it denotes “density” which can be thought of as the rate of change of probability.</p>
 <div class="def">
 <p>Let <span class="math inline">\(X\)</span> be a continuous RV. The <strong>probability density function (PDF)</strong> of <span class="math inline">\(X\)</span> is a function <span class="math inline">\(P\)</span> which, for each outcome <span class="math inline">\(x\)</span> in the sample space, specifies the density of probability around <span class="math inline">\(x\)</span>.</p>
 <p>To be a valid PDF, <span class="math inline">\(P\)</span> must also satisfy the probability axioms, i.e. <span class="math inline">\(P\)</span> must always be <strong>non-negative</strong> and <strong>integrate to 1</strong> across the sample space.</p>
 </div>
 <div class="note">
-<p>Unlike discrete PMFs, continuous <strong>PDFs do NOT give the probability at an outcome</strong>! For continuous PDFs, <strong>probabilities of events are instead ALWAYS areas under PDF function</strong>.</p>
+<p>This is important enough to warrant repeating: a continuous <strong>PDF does NOT output a probability</strong>! For continuous PDFs, <strong>probabilities ALWAYS correspond to areas under the PDF</strong>.</p>
 <p>Also note it’s customary to use <span class="math inline">\(k\)</span> to represent possible outcomes of discrete PMFs, and <span class="math inline">\(x\)</span> to represent possible outcomes of continuous PDFs.</p>
 </div>
 <p>PDFs are the continuous analog of PMFs, so whenever you might use PMFs in a summation <span class="math inline">\(\sum\)</span> expression, you would switch to a definite integral <span class="math inline">\(\int\)</span> for a PDF. In STAT 240, <strong>we will NOT require you to evaluate these integrals</strong> but we may occasionally show them to familiarize you with the notation. Computations with simple PMFs may be asked however.</p>
 <div class="eg">
-<p>PDFs can be hard to understand at first, so here’s an easy example to start. Let <span class="math inline">\(X\)</span> be a normal</p>
+<p>PDFs can feel strange at first, so here’s an easy example to start. According to the <a href="https://wwwn.cdc.gov/Nchs/Nhanes/2011-2012/BMX_G.htm">2011-12 National Health and Nutrition Examination Survey</a> (NHANES) by the CDC, US adult human height has an approximately normal distribution with mean 65.8 inches and standard deviation 3.98 inches. Below is a plot of the distribution:</p>
+<div class="fold s">
+<div class="sourceCode" id="cb826"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># use geom_function to plot dnorm (the normal PDF function)</span></span>
+<span><span class="co"># also plot the mean ± up to 3 standard deviations</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>SDs <span class="op">=</span> <span class="fl">65.8</span> <span class="op">+</span> <span class="op">(</span><span class="op">-</span><span class="fl">3</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span><span class="op">*</span><span class="fl">3.98</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_function.html">geom_function</a></span><span class="op">(</span>fun <span class="op">=</span> \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">65.8</span>, <span class="fl">3.98</span><span class="op">)</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">52</span>, <span class="fl">80</span><span class="op">)</span>, n <span class="op">=</span> <span class="fl">1001</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_segment.html">geom_segment</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">SDs</span>, xend <span class="op">=</span> <span class="va">SDs</span>, y <span class="op">=</span> <span class="fl">0</span>, yend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">SDs</span>, <span class="fl">65.8</span>, <span class="fl">3.98</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>               color <span class="op">=</span> <span class="st">"red"</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span>, linewidth <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">52</span>, <span class="fl">80</span>, <span class="fl">2</span><span class="op">)</span>, expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.10</span>, <span class="fl">0.01</span><span class="op">)</span>, expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.001</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"US adult human height distribution"</span>,</span>
+<span>       subtitle <span class="op">=</span> <span class="st">'(approx normal w/ mean 65.8", SD 3.98"; SDs shown in dashed)'</span>,</span>
+<span>       x <span class="op">=</span> <span class="st">"height (inches)"</span>, y <span class="op">=</span> <span class="st">"probability density"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="10-probability_files/figure-html/unnamed-chunk-3-1.svg" width="672" style="display: block; margin: auto;"></div>
+</div>
+<p>You can easily see the density is non-negative, and with some careful math the area can be shown to be 1. Thus it satisfies the probability axioms.</p>
+<p>Remember the density at <span class="math inline">\(x\)</span> is NOT the probability of <span class="math inline">\(x\)</span>. Again, probabilities of events correspond to areas under the curve. For example, one can show that for a normal distribution:</p>
+<ul>
+<li>Approx. 68% of outcomes are between ±1 standard deviation,</li>
+<li>Approx. 95% of outcomes are between ±2 standard deviations,</li>
+<li>Approx. 99.7% of outcomes are between ±3 standard deviations.</li>
+</ul>
+<p>This rule is called the <strong>empirical rule</strong>. For our distribution of heights, this means about 68% of people are between 62 and 70 inches, about 95% are between 58 and 74 inches, etc.</p>
+</div>
+<div class="eg">
+<p>For another example, consider the <strong>uniform distribution</strong> on <span class="math inline">\((0,1)\)</span>. This distribution generalizes rolling a fair die to drawing a number from an interval, where every value inside the interval is equally likely to be selected. Below is a plot of the distribution:</p>
+<div class="fold s">
+<div class="sourceCode" id="cb827"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># use geom_function to plot dunif (the uniform PDF function)</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_function.html">geom_function</a></span><span class="op">(</span>fun <span class="op">=</span> <span class="va">dunif</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">.5</span>, <span class="fl">1.5</span><span class="op">)</span>, n <span class="op">=</span> <span class="fl">10001</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Uniform distribution between 0 and 1"</span>,</span>
+<span>       x <span class="op">=</span> <span class="st">"x"</span>, y <span class="op">=</span> <span class="st">"probability density"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="10-probability_files/figure-html/unnamed-chunk-4-1.svg" width="672" style="display: block; margin: auto;"></div>
+</div>
+<p>One can also show percentiles are always uniformly distributed, so this is actually a very useful distribution (more on this in STAT 340).</p>
+</div>
+</div>
+</div>
+<div id="expectation-variance" class="section level2" number="10.4">
+<h2>
+<span class="header-section-number">10.4</span> Expectation &amp; Variance<a class="anchor" aria-label="anchor" href="#expectation-variance"><i class="fas fa-link"></i></a>
+</h2>
+<div id="expected-value" class="section level3" number="10.4.1">
+<h3>
+<span class="header-section-number">10.4.1</span> Expected value<a class="anchor" aria-label="anchor" href="#expected-value"><i class="fas fa-link"></i></a>
+</h3>
+<p><strong>Expected value</strong> refers to the <strong>average value</strong> of some random variable (or function thereof). For a discrete random variable <span class="math inline">\(X\)</span>, the expected value of <span class="math inline">\(X\)</span>—also called <span class="math inline">\(E(X)\)</span>, <span class="math inline">\(\mu\)</span>, or simply the mean of <span class="math inline">\(X\)</span>—is defined:</p>
+<p><span class="math display">\[\mu=E(X)=\sum_k\,k\cdot P(X\! =\!k)\]</span></p>
+<p>The summation is performed over all possible outcomes <span class="math inline">\(k\)</span> in the sample space. In plain words, the mean is the sum of the product of each outcome with its probability (i.e. a weighted sum using the probabilities as weights). The formula for a continuous variable is similar but with an integral instead of a summation.</p>
+<p>The expected value of a function of a random variable <span class="math inline">\(f(X)\)</span> can also be defined, which represents the average value of <span class="math inline">\(f(X)\)</span> :</p>
+<p><span class="math display">\[E\big(f(X)\big)=\sum_k\,f(k)\cdot P(X\! =\!k)\]</span></p>
+<div id="single-die" class="eg">
+<p>Again, as a simple example, consider <span class="math inline">\(X\)</span> being rolling a single fair, 6-sided die. Find <span class="math inline">\(E(X)\)</span>.</p>
+<p>If the die is fair, then <span class="math inline">\(P(X\! =\!k)=1/6\)</span> for all <span class="math inline">\(k=1,2,\ldots,6\)</span>. Then, we get</p>
+<p><span class="math display">\[E(X)=\sum_{k=1}^6\,k\cdot(1/6)=\frac16(1+2+\cdots+6)=\frac{21}6=3.5\]</span></p>
+<p>This means the average value of a die roll is 3.5. Note that <strong>the average does NOT need to be a possible observation</strong>! Even though it’s impossible to roll a 3.5, the average of each roll over many rolls is in fact 3.5.</p>
+<p>Now consider <span class="math inline">\(f(x)=x^2\)</span>. What is <span class="math inline">\(E\big(f(X)\big)\)</span>, i.e. the average value of <span class="math inline">\(X^2\)</span>?</p>
+<p><span class="math display">\[E(X^2)=\sum_{k=1}^6\,k^2\cdot(1/6)=\frac16(1+4+\cdots+36)=\frac{91}6\approx15.17\]</span></p>
+<p>Thus, the average of the square of a 6-sided die is about 15.17.</p>
+</div>
+<div id="casino-game2" class="eg">
+<p>Let’s reconsider the <a href="intro-to-probability.html#casino-example">casino game example</a> above, where <span class="math inline">\(X\)</span> is the average winnings per game. Find the expected value of <span class="math inline">\(X\)</span>.</p>
+<p>Recall the outcomes <span class="math inline">\(0,1,2,3\)</span> have corresponding probabilities <span class="math inline">\(0.4,0.3,0.2,0.1\)</span>. Using the formula, we get</p>
+<p><span class="math display">\[E(X)=0\!\cdot\!(0.4)+1\!\cdot\!(0.3)+2\!\cdot\!(0.2)+3\!\cdot\!(0.1)=0.3+0.4+0.3=1\]</span></p>
+<p>Thus, each play on average wins $1. This means if a casino wants to not lose money, they need to charge at least $1 per play.</p>
+</div>
+</div>
+<div id="variance" class="section level3" number="10.4.2">
+<h3>
+<span class="header-section-number">10.4.2</span> Variance<a class="anchor" aria-label="anchor" href="#variance"><i class="fas fa-link"></i></a>
+</h3>
+<p>The <strong>variance</strong> of a random variable—also called <span class="math inline">\(Var(X)\)</span> or <span class="math inline">\(\sigma^2\)</span>—can be thought of as the <strong>average squared distance from the mean</strong> and is defined as:</p>
+<p><span class="math display">\[\sigma^2=Var(X)=E\big((X-\mu)^2\big)=\sum_k\,(k\!-\!\mu)^2\cdot P(X\! =\!k)\]</span></p>
+<p>where <span class="math inline">\(\mu\)</span> represents <span class="math inline">\(E(X)\)</span>. The variance is used as a measure of spread. The higher the variance, the more “spread out” a RV is.</p>
+<p>The <strong>standard deviation</strong> of <span class="math inline">\(X\)</span>, often denoted <span class="math inline">\(\sigma\)</span>, is then defined as the <strong>square root of the variance</strong>. This is often more convenient to use in calculations instead of the variance since it has the same units as the data. It can be thought of as the average distance of an observation from the mean.</p>
+<div class="eg">
+<p>Consider again the previous <a href="intro-to-probability.html#single-die">single, fair 6-sided die example</a>. Find the variance and standard deviation of <span class="math inline">\(X\)</span>.</p>
+<p>We found earlier that <span class="math inline">\(\mu=E(X)=3.5\)</span>. Applying the variance formula gives:</p>
+<p><span class="math display">\[Var(X)=\sum_{k=1}^6(k\!-\!3.5)^2\cdot(1/6)=\frac16\big((1\!-\!3.5)^2+\cdots+(6\!-\!3.5)^2\big)=\frac{35}{12}\approx2.92\]</span></p>
+<p>So, we found the variance <span class="math inline">\(\sigma^2\approx2.92\)</span>, and thus the standard deviation <span class="math inline">\(\sigma\approx1.71\)</span>.</p>
+</div>
+<div class="eg">
+<p>Let’s consider the <a href="intro-to-probability.html#casino-game2">casino game example</a> a final time. Find the variance and standard deviation of <span class="math inline">\(X\)</span>.</p>
+<p>We found earlier <span class="math inline">\(\mu=\E(X)=1\)</span>. Applying the variance formula gives:</p>
+<p><span class="math display">\[Var(X)=(0\!-\!1)^2\!\cdot\!(0.4)+(1\!-\!1)^2\!\cdot\!(0.3)+(2\!-\!1)^2\!\cdot\!(0.2)+(3\!-\!1)^2\!\cdot\!(0.1)=1\]</span></p>
+<p>Thus, the variance is also <span class="math inline">\(\sigma^2=1\)</span>, and so is the standard deviation <span class="math inline">\(\sigma=1\)</span>.</p>
 </div>
 
 </div>
@@ -384,6 +474,12 @@ observer.observe(document.body, config);
 <li><a class="nav-link" href="#continuous-rvs"><span class="header-section-number">10.3.2</span> Continuous RVs</a></li>
 </ul>
 </li>
+<li>
+<a class="nav-link" href="#expectation-variance"><span class="header-section-number">10.4</span> Expectation &amp; Variance</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#expected-value"><span class="header-section-number">10.4.1</span> Expected value</a></li>
+<li><a class="nav-link" href="#variance"><span class="header-section-number">10.4.2</span> Variance</a></li>
+</ul>
+</li>
 </ul>
 
       <div class="book-extra">
@@ -401,7 +497,7 @@ observer.observe(document.body, config);
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2024-10-13.</p>
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2024-10-14.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
