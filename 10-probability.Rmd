@@ -188,7 +188,45 @@ Also note it's customary to use $k$ to represent possible outcomes of discrete P
 PDFs are the continuous analog of PMFs, so whenever you might use PMFs in a summation $\sum$ expression, you would switch to a definite integral $\int$ for a PDF. In STAT 240, **we will NOT require you to evaluate these integrals** but we may occasionally show them to familiarize you with the notation. Computations with simple PMFs may be asked however.
 
 :::{.eg}
-PDFs can be hard to understand at first, so here's an easy example to start. Let $X$ be a normal
+PDFs can be hard to understand at first, so here's an easy example to start. According to the [2011-12 CDC NHANES study](https://wwwn.cdc.gov/Nchs/Nhanes/2011-2012/BMX_G.htm), US adult human height has an approximately normal distribution with mean 65.8 inches and standard deviation 3.98 inches. Below is a plot of the distribution:
+
+:::{.fold .s}
+```{r,tidy=F}
+# use geom_function to plot dnorm (the normal PDF function)
+# also plot the mean ± up to 3 standard deviations
+ggplot(tibble(SDs = 65.8 + (-3:3)*3.98)) +
+  geom_function(fun = \(x) dnorm(x, 65.8, 3.98), xlim = c(52, 80), n = 1001) +
+  geom_segment(aes(x = SDs, xend = SDs, y = 0, yend = dnorm(SDs, 65.8, 3.98)),
+               color = "red", linetype = "dashed", linewidth = 0.7) +
+  scale_x_continuous(breaks = seq(52, 80, 2), expand = c(0, 0)) +
+  scale_y_continuous(breaks = seq(0, 0.10, 0.01), expand = c(0, 0.001)) +
+  labs(title = "US adult human height distribution",
+       subtitle = '(approx normal w/ mean 65.8", SD 3.98"; SDs shown in dashed)',
+       x = "height (inches)", y = "probability density")
+```
 :::
 
+You can easily see the density is non-negative, and with some careful math the area can be shown to be 1. Thus it satisfies the probability axioms.
 
+Remember the **density is NOT the probability**, for example the PDF is approximately $0.1$ around $x=66$. This does NOT mean there's a 10% chance of observing exactly of events correspond to areas under the curve. For example, one can show that for a normal distribution:
+
+ - Approx. 68% of outcomes are between ±1 standard deviation,
+ - Approx. 95% of outcomes are between ±2 standard deviations,
+ - Approx. 99.7% of outcomes are between ±3 standard deviations.
+
+This rule is called the **empirical rule**. For our distribution of heights, this means about 68% of people are between 62 and 70 inches, about 95% are between 58 and 74 inches, etc.
+:::
+
+:::{.eg}
+For another example, consider the **uniform distribution** on $(0,1)$. This distribution generalizes rolling a fair die to drawing a number from an interval, where every value inside the interval is equally likely to be selected. Below is a plot of the distribution:
+
+:::{.fold .s}
+```{r,fig.height=3.8,tidy=F}
+# use geom_function to plot dunif (the uniform PDF function)
+ggplot() + geom_function(fun = dunif, xlim = c(-.5, 1.5), n = 1001) +
+  labs(title = "Uniform distribution between 0 and 1",
+       x = "x", y = "probability density")
+```
+:::
+
+:::
