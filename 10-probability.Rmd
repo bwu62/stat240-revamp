@@ -74,7 +74,7 @@ Let $S$ represent sunny, and $B$ represent breezy. Then, from the information gi
 
 By corollary 2, $P(\text{neither \(S\) nor \(B\)})=1-P(S\cup B)$, so we have $P(S\cup B)=0.8$.
 
-By corollary 3, $P(S\cup B)=P(S)+P(B)-P(S\cap B)$, so we have $P(S\cap B)=P(S)+P(B)-P(S\cup B)=0.7+0.4-0.8=0.3$. Thus, there's a 30% chance of it being both sunny and breezy.
+By corollary 3, $P(S\cup B)=P(S)+P(B)-P(S\cap B)$. Rearranging the terms, we get $P(S\cap B)=P(S)+P(B)-P(S\cup B)=0.7+0.4-0.8=0.3$. Thus, there's a 30% chance of it being both sunny and breezy.
 :::
 
 
@@ -99,7 +99,7 @@ For discrete RVs, the distribution of outcomes and probabilities is specified wi
 :::{.def}
 Let $X$ be a discrete RV. The **probability mass function (PMF)** of $X$ is a function $P$ which, for each possible outcome $k$ in the sample space, specifies the probability that $X$ is observed to be $k$, denoted $P(X\! =\!k)$, or sometimes $P(k)$ for short.
 
-To be a valid PMF, $P$ must satisfy the probability axioms, namely it always be **non-negative** and **sum to 1** across all possible outcomes in the sample space.
+To be a valid PMF, $P$ must satisfy the probability axioms, namely it must always be **non-negative** and **sum to 1** across all possible outcomes in the sample space.
 :::
 
 
@@ -158,7 +158,7 @@ You can easily check this PMF satisfies the probability axioms. Here's a plot of
 ```{r}
 tibble(k = 2:12, p = (6-abs(k-7))/36) %>%
   ggplot(aes(x = k, y = p)) + geom_col() +
-  labs(title = "Distribution of X (sum of 2 independent & fair ordinary 6-sided dice)") +
+  labs(title = "Distribution of X (sum of rolling two fair 6-sided dice)") +
   scale_x_continuous(breaks = 2:12) +
   scale_y_continuous(breaks = seq(0,.2,.02))
 ```
@@ -168,7 +168,7 @@ tibble(k = 2:12, p = (6-abs(k-7))/36) %>%
 
 ### Continuous RVs
 
-For continuous RVs, distributions are specified with a **probability density function** (PDF). They are similar to PMFs but with a key distinction: a **PDF's value is NOT the probability of an outcome**, rather it denotes "density" which can be thought of as the rate of change of probability.
+For continuous RVs, distributions are specified with a **probability density function** (PDF). They are similar to PMFs but with a key distinction: **PDFs do NOT output probability of an outcome**, rather it denotes "density" which can be thought of as the rate of change of probability.
 
 :::{.def}
 Let $X$ be a continuous RV. The **probability density function (PDF)** of $X$ is a function $P$ which, for each outcome $x$ in the sample space, specifies the density of probability around $x$.
@@ -177,7 +177,7 @@ To be a valid PDF, $P$ must also satisfy the probability axioms, i.e. $P$ must a
 :::
 
 :::{.note}
-Unlike discrete PMFs, continuous **PDFs do NOT give the probability at an outcome**! For continuous PDFs, **probabilities of events are instead ALWAYS areas under PDF function**.
+This is important enough to warrant repeating: a continuous **PDF does NOT output a probability**! For continuous PDFs, **probabilities ALWAYS correspond to areas under the PDF**.
 
 Also note it's customary to use $k$ to represent possible outcomes of discrete PMFs, and $x$ to represent possible outcomes of continuous PDFs.
 :::
