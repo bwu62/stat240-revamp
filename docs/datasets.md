@@ -336,7 +336,7 @@ last.yy <- tryCatch({
 }) %% 100
 ```
 
-I also briefly needed a nice time series dataset with more than 1 groups to demonstrate line plots. Eventually I settled on [table 303.10](https://nces.ed.gov/programs/digest/d23/tables/dt23_303.10.asp) of the National Center for Education Statistics (NCES) which contains historic college enrollment data, stratified by sex.
+I also briefly needed a nice time series dataset with more than 1 groups to demonstrate line plots. Eventually I settled on [table 303.10](https://nces.ed.gov/programs/digest/d24/tables/dt24_303.10.asp) of the National Center for Education Statistics (NCES) which contains historic college enrollment data, stratified by sex.
 
 ### Process data
 
