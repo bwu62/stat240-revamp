@@ -47,6 +47,8 @@ knitr::opts_chunk$set(
 # detect which semester we're headed into
 # and fix an R-version to use
 
+today = lubridate::today()
+
 season = dplyr::case_when(
   lubridate::month(today)<5~"Spring",
   lubridate::month(today)<8~"Summer",
