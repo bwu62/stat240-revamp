@@ -648,17 +648,26 @@ Before we run some examples, we're going to load in the [lubridate](https://lubr
 library(lubridate)
 ```
 
-```{r today-dynamic-definitions,include=F}
+```{r date-definitions,include=F}
 # hidden chunk for updating date references in text
-.date <- sub("  ", " ", format(today(), "%b %e, %Y"))
-.dnum <- format(unclass(today()), format = "%d")
+.y <- year(today())
+.d <- ymd(paste(.y,"0704"))
+.date <- sub("  ", " ", format(.d, "%b %e, %Y"))
+.dnum <- format(unclass(.d), format = "%d")
+.md <- sub("  ", " ", format(.d, "%b %e"))
 ```
 
-Ok, let's start the demo by creating a date object. Let's use today's date (which is `r .date` as of [last compile](https://github.com/bwu62/stat240-revamp/commits/master)) as an example. The `today()` function is handy here.
+Ok, let's start the demo by creating a date object. Let's use this year's 4^th^ of July as an example.
 
-```{r today}
-# create today as an example date object
-date <- today()
+```{r date-example1,echo=F,results='asis'}
+cat(glue::glue('``` r
+# create example date object (more on this later)
+date <- ymd("{.y}-07-04")
+date
+```'))
+```
+```{r date-example2,echo=F}
+date <- ymd(paste(.y,"0704"))
 date
 ```
 
@@ -681,7 +690,7 @@ x
 ```'))
 ```
 ```{r date-unclass2,echo=F}
-x <- unclass(today())
+x <- .dnum
 class(x) <- "Date"
 x
 ```
@@ -825,12 +834,20 @@ Fun fact: R's calendar is more rigorous than Excel's calendar, since it correctl
 
 Lubridate provides many get/set functions (often called getters and setters) for getting and setting different components (i.e. properties) associated with a date. Some common ones include `year()`, `month()`, `day()`, `wday()` (for day of the week), and `quarter()`.
 
-Let's continue using the generated `dates2` object above, except I will add today `` `r date` `` into the vector as the first element.
+Let's continue using the generated `dates2` object above, except I will add our example date earlier `` `r date` `` into the vector as the first element.
 
-```{r getters}
-# add in today, then print (to remind us what it contains)
+```{r getters1,echo=F,results='asis'}
+cat(glue::glue('``` r
+# add in {.md}, then print (to remind us what it contains)
 dates2 <- c(date, dates2)
 dates2
+```'))
+```
+```{r getters2,echo=F}
+dates2 <- c(date, dates2)
+dates2
+```
+```{r getters-cont}
 # extract the year, month, day, wday, quarter
 year(dates2)
 month(dates2)
@@ -887,7 +904,7 @@ This works with all the getters above, feel free to experiment more with this on
 Since dates are represented internally as number of days since a reference point, doing math with dates turns out to be extremely easy. You can add/subtract days, make sequences, run logical comparisons, and even use some statistical summary functions.
 
 ```{r date-math}
-# get tomorrow by adding +1 to today
+# get day after by adding +1 to {.md}
 date + 1
 # what date was 1000 days ago?
 date - 1000
@@ -898,7 +915,7 @@ as.numeric(date - mdy("1/1/00"))
 ```
 ```{r dates-in-month1,echo=F,results='asis'}
 cat(glue::glue('``` r
-# make a sequence of dates from today to the end of the month
+# make a sequence of dates from {.md} to the end of the month
 seq(date, mdy("{str_replace(format(update(date,day=days_in_month(date)),"%m/%d/%y"),"^0","")}"), by = 1)
 ```'))
 ```
@@ -907,21 +924,17 @@ seq(date, update(date, day = days_in_month(date)), 1)
 ```
 ```{r date-in-year1,echo=F,results='asis'}
 cat(glue::glue('``` r
-# make a sequence of every {as.character(wday(date,label=T,abbr=F))} from today to the end of the year
+# make a sequence of every {as.character(wday(date,label=T,abbr=F))} from {.md} to the end of the year
 seq(date, mdy("12/31/{format(date,"%y")}"), by = 7)
 ```'))
 ```
 ```{r date-in-year2,echo=F}
 seq(date, update(date, month = 12, day = 31), 7)
 ```
-```{r date-inequality1,echo=F,results='asis'}
-cat(glue::glue('``` r
-# has independence day already happened this year?
-mdy("7/4/{format(date,"%y")}") <= date
-```'))
-```
-```{r date-inequality2,echo=F}
-update(date, month = 7, day = 4) <= date
+```{r date-inequality,echo=F}
+# has {.md} passed yet? use today() to get today\'s date
+#   (or technically, the last time these notes were compiled)
+date <= today()
 ```
 ```{r date-min-sort-in}
 # what is the earliest date in the dates2 vector?
