@@ -29,9 +29,9 @@ Here's a convenient list of all dataset files generated. Note that **not ALL fil
  - [`eruptions_recent.delim`](data/eruptions_recent.delim)
  - [`eruptions_recent.tsv`](data/eruptions_recent.tsv)
  - [`eruptions_recent.xlsx`](data/eruptions_recent.xlsx)
+ - [`fertility.csv`](data/fertility.csv)
  - [`fertility_meta.csv`](data/fertility_meta.csv)
  - [`fertility_raw.csv`](data/fertility_raw.csv)
- - [`fertility.csv`](data/fertility.csv)
  - [`penguins.csv`](data/penguins.csv)
 
 Alternatively, you can also run the following line, which will **download ALL files above to your current working directory**. It's recommended to first set your working directory to an appropriate place before running this, e.g. to the `data/` directory in your `STAT240/` course folder.
@@ -77,7 +77,7 @@ eruptions <- eruptions_raw %>%
     # convert confirmed? column to logical
     confirmed = if_else(replace_na(confirmed,"NA")=="Confirmed",T,F),
     # replace continuing eruptions with today's date
-    # (continuation last validated 7/23/24)
+    # (continuation last validated 6/15/25)
     stop = if_else(str_detect(stop,"continu"),format(today(),"%Y %b %e"),stop,missing=stop)
   ) %>% 
   # extract date error to new column

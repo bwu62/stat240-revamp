@@ -2,7 +2,11 @@
 
 # Intro to dplyr
 
-[dplyr](https://dplyr.tidyverse.org) is the core Tidyverse package for transforming and your raw datasets into a clean and usable format ([link to cheat sheet](https://rstudio.github.io/cheatsheets/data-transformation.pdf)). Its functions are versatile, performant, and have a consistent and user friendly syntax. These traits make it highly suitable for data science at all levels.
+[dplyr](https://dplyr.tidyverse.org) is the core Tidyverse package for transforming and your raw datasets into a clean and usable format ([link to cheat sheet](misc/data-transformation.pdf)). Its functions are versatile, performant, and have a consistent and user friendly syntax. These traits make it highly suitable for data science at all levels.
+
+<!--original:
+https://rstudio.github.io/cheatsheets/data-transformation.pdf
+-->
 
 
 
@@ -595,11 +599,11 @@ penguins2 %>% mutate(
 # A tibble: 333 × 6
   species sex    bill_length_mm bill_depth_mm small_bill fake_dates
   <chr>   <chr>           <dbl>         <dbl> <lgl>      <date>    
-1 Adelie  male             39.1          18.7 FALSE      2024-12-11
-2 Adelie  female           39.5          17.4 TRUE       2024-12-12
-3 Adelie  female           40.3          18   FALSE      2024-12-13
-4 Adelie  female           36.7          19.3 TRUE       2024-12-14
-5 Adelie  male             39.3          20.6 FALSE      2024-12-15
+1 Adelie  male             39.1          18.7 FALSE      2025-06-15
+2 Adelie  female           39.5          17.4 TRUE       2025-06-16
+3 Adelie  female           40.3          18   FALSE      2025-06-17
+4 Adelie  female           36.7          19.3 TRUE       2025-06-18
+5 Adelie  male             39.3          20.6 FALSE      2025-06-19
 # ℹ 328 more rows
 ```
 
@@ -635,7 +639,7 @@ penguins2 %>% mutate(
 
 It's worth restating that **ANY vectorized operation of the columns can be used inside `mutate()`**, as long as the result is a same-length vector (or single value to be recycled). This includes essentially every function from chapter \@ref(data-vectors)!
 
-The [dplyr cheat sheet](https://rstudio.github.io/cheatsheets/data-transformation.pdf) has on page 2 a small list of some other functions that may be useful inside `mutate()` for more advanced situations, such as `cumsum()` for finding cumulative sums of columns (i.e. "running" sum), `lag()` and `lead()` for creating a lagged or leading vector useful for computing changes in time series data, `na_if()` for selectively replacing specific values with NA, several ranking functions like `dense_rank()` or `min_rank()`, and many more.
+The [dplyr cheat sheet](misc/data-transformation.pdf) has on page 2 a small list of some other functions that may be useful inside `mutate()` for more advanced situations, such as `cumsum()` for finding cumulative sums of columns (i.e. "running" sum), `lag()` and `lead()` for creating a lagged or leading vector useful for computing changes in time series data, `na_if()` for selectively replacing specific values with NA, several ranking functions like `dense_rank()` or `min_rank()`, and many more.
 
 
 ### `summarize()`
@@ -725,7 +729,7 @@ penguins2 %>% summarize(
 1   333        44.0      5.47       17.2     1.97 43.41,44.58  16.95,17.38
 ```
 
-Again, I think it's important to stress **ANY expression involving columns that results in a single value** can be used inside `summarize()`. The [dplyr cheat sheet](https://rstudio.github.io/cheatsheets/data-transformation.pdf) has on page 2 some more examples of useful summarizing functions such as `first()`, `last()`, and `nth()` for getting the first, last, and n-th observations in a group respectively. Feel free to read more on your own.
+Again, I think it's important to stress **ANY expression involving columns that results in a single value** can be used inside `summarize()`. The [dplyr cheat sheet](misc/data-transformation.pdf) has on page 2 some more examples of useful summarizing functions such as `first()`, `last()`, and `nth()` for getting the first, last, and n-th observations in a group respectively. Feel free to read more on your own.
 
 
 ## Row-wise functions

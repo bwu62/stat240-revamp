@@ -731,7 +731,7 @@ all.equal(sqrt(2)^2, 2)
 ### Packages
 
 
-Now, let's briefly discuss packages. One of the best features of R is the ability for anyone to easily write and distribute packages on [CRAN](https://cran.r-project.org) (**C**omprehensive **R** **A**rchive **N**etwork). Currently, there are 21788 packages available on CRAN. There are also a further 2289 packages on the bioinformatics-specific package archive [Bioconductor](https://www.bioconductor.org), as well as countless more on [GitHub](https://github.com/topics/r-package).
+Now, let's briefly discuss packages. One of the best features of R is the ability for anyone to easily write and distribute packages on [CRAN](https://cran.r-project.org) (**C**omprehensive **R** **A**rchive **N**etwork). Currently, there are 22354 packages available on CRAN. There are also a further 2341 packages on the bioinformatics-specific package archive [Bioconductor](https://www.bioconductor.org), as well as countless more on [GitHub](https://github.com/topics/r-package).
 
 In this course, we will primarily make use of the [Tidyverse](https://www.tidyverse.org) suite of packages, which contains several important packages for data science: `readr` for reading in data, `ggplot2` for plotting data, `dplyr` and `tidyr` for cleaning data, and `lubridate` and `stringr` for working with dates and strings. We will learn each of these as the course progresses.
 
@@ -780,9 +780,9 @@ library(tidyverse)
 ── Attaching core tidyverse packages ────────────── tidyverse 2.0.0 ──
 ✔ dplyr     1.1.4     ✔ readr     2.1.5
 ✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.5.1     ✔ tibble    3.2.1
-✔ lubridate 1.9.3     ✔ tidyr     1.3.1
-✔ purrr     1.0.2     
+✔ ggplot2   3.5.2     ✔ tibble    3.3.0
+✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+✔ purrr     1.0.4     
 ── Conflicts ──────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()
@@ -844,12 +844,21 @@ However, make sure if you break a line up to finish the line eventually, otherwi
 
 Those are probably the most important R commands you need to know for now. Below I have curated a short selection of R "cheat sheets" for your reference should you need it, in rough order of how useful I think it will be for a first time R learner.
 
- - Matt Baggott's [R Reference Card v2.0](https://cran.r-project.org/doc/contrib/Baggott-refcard-v2.pdf) is a nice complete one-stop-shop for all of R's built-in functions.
- - IQSS's [Base R Cheat Sheet](https://iqss.github.io/dss-workshops/R/Rintro/base-r-cheat-sheet.pdf) and Alexey Shipunov's [One Page R Reference Card](https://herba.msu.ru/shipunov/school/biol_240/en/supp/refcard/rrefc_en.pdf) are both slightly shorter and more curated, but offer a nice, tighter set of the most critical R commands, along with useful examples of their syntax.
- - For a slightly longer but more complete reference manual on R, especially with more details of how R works and different object types and data structures, Emmanuel Paradis's [R for Beginners](https://cran.r-project.org/doc/contrib/Paradis-rdebuts_en.pdf) may be helpful.
+ - Matt Baggott's [R Reference Card v2.0](misc/Baggott-refcard-v2.pdf) is a nice complete one-stop-shop for all of R's built-in functions.
+ - IQSS's [Base R Cheat Sheet](misc/base-r-cheat-sheet.pdf) and Alexey Shipunov's [One Page R Reference Card](misc/rrefc_en.pdf) are both slightly shorter and more curated, but offer a nice, tighter set of the most critical R commands, along with useful examples of their syntax.
+ - For a slightly longer but more complete reference manual on R, especially with more details of how R works and different object types and data structures, Emmanuel Paradis's [R for Beginners](misc/paradis.pdf) may be helpful.
 
-<!--https://cran.r-project.org/doc/contrib/Short-refcard.pdf-->
-<!--https://www.maths.usyd.edu.au/u/jchan/Rcommands.pdf-->
+<!--originals:
+https://cran.r-project.org/doc/contrib/Baggott-refcard-v2.pdf
+https://iqss.github.io/dss-workshops/R/Rintro/base-r-cheat-sheet.pdf
+https://herba.msu.ru/shipunov/school/biol_240/en/supp/refcard/rrefc_en.pdf
+https://cran.r-project.org/doc/contrib/Paradis-rdebuts_en.pdf
+-->
+
+<!--additional sources not used:
+https://cran.r-project.org/doc/contrib/Short-refcard.pdf
+https://www.maths.usyd.edu.au/u/jchan/Rcommands.pdf
+-->
 
 
 
@@ -1078,14 +1087,21 @@ $$x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$$
 
 You will see lots of $\LaTeX$ later in the notes when I need to write more math, so I just wanted to mention it here. You can right click on any equations you see in the notes and change the MathJax display options, or see its source code (you can of course also see the source code of the entire page using the link in the sidebar as mentioned previously).
 
-If you wish to read more on $\LaTeX$, start with Rong Zhuang's [MathJax cheat sheet](https://jojozhuang.github.io/tutorial/mathjax-cheat-sheet-for-mathematical-notation) or David Richeson's [quick guide](https://users.dickinson.edu/~richesod/latex/latexcheatsheet.pdf) which both have lots of great beginner-friendly examples. For a slightly more complete list of symbols, Eric Torrence's [cheat sheet](https://pages.uoregon.edu/torrence/391/labs/LaTeX-cheat-sheet.pdf) may also be useful. 
+If you wish to read more on $\LaTeX$, start with Rong Zhuang's [MathJax cheat sheet](https://jojozhuang.github.io/tutorial/mathjax-cheat-sheet-for-mathematical-notation) or David Richeson's [quick guide](misc/latexcheatsheet.pdf) which both have lots of great beginner-friendly examples. For a slightly more complete list of symbols, Eric Torrence's [cheat sheet](misc/LaTeX-cheat-sheet.pdf) may also be useful. 
 
-
+<!--originals:
+https://divisbyzero.github.io/latex-cheatsheet/latexcheatsheet.pdf
+https://pages.uoregon.edu/torrence/391/labs/LaTeX-cheat-sheet.pdf
+-->
 
 
 ### Cheat sheet
 
-If you need a good R Markdown cheat sheet, I recommend [this reference guide](https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf) published by the same developers as Rstudio. Page 1 has a Markdown syntax guide, pages 2-3 highlight some more useful chunk options, and pages 4-5 have some additional info on different output formats as well as some additional YAML header options.
+If you need a good R Markdown cheat sheet, I recommend [this reference guide](misc/rmarkdown-reference.pdf) published by the same developers as Rstudio. Page 1 has a Markdown syntax guide, pages 2-3 highlight some more useful chunk options, and pages 4-5 have some additional info on different output formats as well as some additional YAML header options.
+
+<!--original:
+https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf
+-->
 
 
 
@@ -1110,12 +1126,12 @@ getwd()
 ```
 
 ```
-[1] "/home/admin/stat240-revamp"
+[1] "C:/Users/bi/Documents/stat240-revamp"
 ```
 
-You can see my current Rstudio session (while writing these notes) is running from the `` stat240-revamp `` directory which is itself located in `` /home/admin ``.
+You can see my current Rstudio session (while writing these notes) is running from the `` stat240-revamp `` directory which is itself located in `` C:/Users/bi/Documents ``.
 
-Generally, when you start a new Rstudio session, the working directory will default to `C:/Users/username/` for Windows and `/Users/username/` for Mac (or `/home/username/` for Linux, which the server building these notes each day runs), where `username` is your account name (my working directory is different because I have it intentionally set to my notes project folder).
+Generally, when you start a new Rstudio session, the working directory will default to `C:/Users/username/` for Windows and `/Users/username/` for Mac (or `/home/username/` for Linux), where `username` is your account name.
 
 This default working directory actually presents a problem, because it is usually different from where your current Rmd file is. For example, suppose you're working on homework 1. If you organized your files properly---which you should!---your Rmd file is probably located at `.../STAT240/homework/hw01/hw01.Rmd`. For reasons explained in the next section, your working directory should **always match the location of your current Rmd file**.
 

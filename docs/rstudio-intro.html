@@ -7,7 +7,7 @@
 <title>Chapter 2 Intro to R/Rstudio | STAT 240 Revamp</title>
 <meta name="author" content="Bi Cheng Wu, with help from Bret Larget and Cameron Jones">
 <meta name="description" content="This chapter will introduce to you the basics of Rstudio and help you develop a workflow for testing R code and producing beautiful R Markdown documents, which we will be using throughout the...">
-<meta name="generator" content="bookdown 0.40.1 with bs4_book()">
+<meta name="generator" content="bookdown 0.43.2 with bs4_book()">
 <meta property="og:title" content="Chapter 2 Intro to R/Rstudio | STAT 240 Revamp">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://bwu62.github.io/stat240-revamp/rstudio-intro.html">
@@ -17,9 +17,9 @@
 <meta name="twitter:description" content="This chapter will introduce to you the basics of Rstudio and help you develop a workflow for testing R code and producing beautiful R Markdown documents, which we will be using throughout the...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Roboto_Mono-0.4.9/font.css" rel="stylesheet">
-<script src="libs/bs3compat-0.8.0/transition.js"></script><script src="libs/bs3compat-0.8.0/tabs.js"></script><script src="libs/bs3compat-0.8.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Roboto_Mono-0.4.10/font.css" rel="stylesheet">
+<script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
 <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="libs/plotly-binding-4.10.4/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
 <script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
 <script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-E0YDB40HWY"></script><script>
@@ -246,7 +246,7 @@
 <pre><code>[1] 1.1259e+15</code></pre>
 <p>Also note due to limitations of <a href="https://en.wikipedia.org/wiki/IEEE_754">how computers represent numbers</a>, R often cannot distinguish between numbers that differ by less than about 10<sup>-15</sup>, i.e. 0.000000000000001.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;This is a MASSIVE oversimplification, but it’ll have to suffice because the rabbit hole on &lt;a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/.Machine"&gt;“machine precision”&lt;/a&gt; and &lt;a href="https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html"&gt;floating-point arithmetic errors&lt;/a&gt; is—like the nights in ASOIAF—dark and full of terrors.&lt;/p&gt;'><sup>3</sup></a></p>
 </div>
-<p>You can also perform integer division in R, i.e. dividing to get the quotient and remainder, by using <a href="https://rdrr.io/r/base/Arithmetic.html"><code class="sourceCode r"><span class="op">%/%</span></code></a> for the quotient and <a href="https://rdrr.io/r/base/Arithmetic.html"><code class="sourceCode r"><span class="op">%%</span></code></a> for the remainder. This allows you to check, for example, if a number is even or odd.</p>
+<p>You can also perform integer division in R, i.e. dividing to get the quotient and remainder, by using <a href="https://rdrr.io/r/base/Arithmetic.html"><code class="sourceCode r"><span class="sc">%/%</span></code></a> for the quotient and <a href="https://rdrr.io/r/base/Arithmetic.html"><code class="sourceCode r"><span class="sc">%%</span></code></a> for the remainder. This allows you to check, for example, if a number is even or odd.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fl">13</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html">%/%</a></span> <span class="fl">2</span></span></code></pre></div>
 <pre><code>[1] 6</code></pre>
@@ -254,7 +254,7 @@
 <code class="sourceCode R"><span><span class="fl">13</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html">%%</a></span> <span class="fl">2</span></span></code></pre></div>
 <pre><code>[1] 1</code></pre>
 <div class="note">
-<p>Operators like <a href="https://rdrr.io/r/base/Arithmetic.html"><code class="sourceCode r"><span class="op">%/%</span></code></a> or <a href="https://rdrr.io/r/base/Arithmetic.html"><code class="sourceCode r"><span class="op">%%</span></code></a> may seem strange at first, but they work just like any other <a href="https://www.datacamp.com/tutorial/operators-in-r">binary operators</a> in R such as <code>+</code> or <code>^</code> . There are other examples of such operators like <a href="https://rdrr.io/r/base/match.html"><code class="sourceCode r"><span class="op">%in%</span></code></a> and <a href="https://magrittr.tidyverse.org/reference/pipe.html"><code class="sourceCode r"><span class="op">%&gt;%</span></code></a> which we will learn about later.</p>
+<p>Operators like <a href="https://rdrr.io/r/base/Arithmetic.html"><code class="sourceCode r"><span class="sc">%/%</span></code></a> or <a href="https://rdrr.io/r/base/Arithmetic.html"><code class="sourceCode r"><span class="sc">%%</span></code></a> may seem strange at first, but they work just like any other <a href="https://www.datacamp.com/tutorial/operators-in-r">binary operators</a> in R such as <code>+</code> or <code>^</code> . There are other examples of such operators like <a href="https://rdrr.io/r/base/match.html"><code class="sourceCode r"><span class="sc">%in%</span></code></a> and <a href="https://magrittr.tidyverse.org/reference/pipe.html"><code class="sourceCode r"><span class="sc">%&gt;%</span></code></a> which we will learn about later.</p>
 </div>
 <p>Trigonometric functions <code><a href="https://rdrr.io/r/base/Trig.html">sin()</a></code>, <code><a href="https://rdrr.io/r/base/Trig.html">cos()</a></code>, <code><a href="https://rdrr.io/r/base/Trig.html">tan()</a></code>, (and their inverses <code><a href="https://rdrr.io/r/base/Trig.html">asin()</a></code>, <code><a href="https://rdrr.io/r/base/Trig.html">acos()</a></code>, <code><a href="https://rdrr.io/r/base/Trig.html">atan()</a></code> where the a– prefix means arc–), also work as you’d expect and use radian units. Note <a href="https://rdrr.io/r/base/Constants.html"><code class="sourceCode r">pi</code></a> is conveniently predefined as <span class="math inline">\(\pi\)</span>. <a href="https://rdrr.io/r/base/Hyperbolic.html">Hyperbolic trig functions</a> also exist if you need them.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
@@ -287,7 +287,7 @@
 <h3>
 <span class="header-section-number">2.3.4</span> Special values<a class="anchor" aria-label="anchor" href="#r-specials"><i class="fas fa-link"></i></a>
 </h3>
-<p>We already mentioned <a href="https://rdrr.io/r/base/Constants.html"><code class="sourceCode r">pi</code></a> is predefined. There are a few other important special values in R. <a href="https://rdrr.io/r/base/logical.html"><code class="sourceCode r"><span class="ot">TRUE</span></code></a> and <a href="https://rdrr.io/r/base/logical.html"><code class="sourceCode r"><span class="ot">FALSE</span></code></a>, along with their abbreviations <code>T</code> and <code>F</code> are also predefined. Note the capitalization; <strong>R is a case-sensitive language</strong> so <code>true</code>, <code>True</code>, and <code>t</code> are NOT the same as <code>TRUE</code> (the first two are not defined, while <code><a href="https://rdrr.io/r/base/t.html">t()</a></code> is the matrix transpose function).</p>
+<p>We already mentioned <a href="https://rdrr.io/r/base/Constants.html"><code class="sourceCode r">pi</code></a> is predefined. There are a few other important special values in R. <a href="https://rdrr.io/r/base/logical.html"><code class="sourceCode r"><span class="cn">TRUE</span></code></a> and <a href="https://rdrr.io/r/base/logical.html"><code class="sourceCode r"><span class="cn">FALSE</span></code></a>, along with their abbreviations <code>T</code> and <code>F</code> are also predefined. Note the capitalization; <strong>R is a case-sensitive language</strong> so <code>true</code>, <code>True</code>, and <code>t</code> are NOT the same as <code>TRUE</code> (the first two are not defined, while <code><a href="https://rdrr.io/r/base/t.html">t()</a></code> is the matrix transpose function).</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="cn">T</span></span></code></pre></div>
 <pre><code>[1] TRUE</code></pre>
@@ -298,7 +298,7 @@
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">*</span> <span class="op">(</span><span class="cn">TRUE</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>[1] 2</code></pre>
-<p>Mathematical expressions may also return <a href="https://rdrr.io/r/base/is.finite.html"><code class="sourceCode r"><span class="ot">NaN</span></code></a> for <strong>N</strong>ot <strong>a</strong> <strong>N</strong>umber, i.e. undefined; or <a href="https://rdrr.io/r/base/is.finite.html"><code class="sourceCode r"><span class="ot">Inf</span></code></a> for infinite. Note R differentiates between positive infinity <a href="https://rdrr.io/r/base/is.finite.html"><code class="sourceCode r"><span class="ot">Inf</span></code></a> and negative infinity <a href="https://rdrr.io/r/base/is.finite.html"><code class="sourceCode r"><span class="op">-</span><span class="ot">Inf</span></code></a>.</p>
+<p>Mathematical expressions may also return <a href="https://rdrr.io/r/base/is.finite.html"><code class="sourceCode r"><span class="cn">NaN</span></code></a> for <strong>N</strong>ot <strong>a</strong> <strong>N</strong>umber, i.e. undefined; or <a href="https://rdrr.io/r/base/is.finite.html"><code class="sourceCode r"><span class="cn">Inf</span></code></a> for infinite. Note R differentiates between positive infinity <a href="https://rdrr.io/r/base/is.finite.html"><code class="sourceCode r"><span class="cn">Inf</span></code></a> and negative infinity <a href="https://rdrr.io/r/base/is.finite.html"><code class="sourceCode r"><span class="sc">-</span><span class="cn">Inf</span></code></a>.</p>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="op">-</span><span class="fl">4</span><span class="op">)</span></span></code></pre></div>
 <pre><code>[1] NaN</code></pre>
@@ -308,7 +308,7 @@
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span></span></code></pre></div>
 <pre><code>[1] -Inf</code></pre>
-<p>Additionally, <a href="https://rdrr.io/r/base/NA.html"><code class="sourceCode r"><span class="ot">NA</span></code></a> is used to represent missing values, i.e. when data is not available. <strong>Note <code>NA</code> and <code>NaN</code> are NOT the same</strong>. We will learn later about how to handle <a href="https://rdrr.io/r/base/NA.html"><code class="sourceCode r"><span class="ot">NA</span></code></a> missing values.</p>
+<p>Additionally, <a href="https://rdrr.io/r/base/NA.html"><code class="sourceCode r"><span class="cn">NA</span></code></a> is used to represent missing values, i.e. when data is not available. <strong>Note <code>NA</code> and <code>NaN</code> are NOT the same</strong>. We will learn later about how to handle <a href="https://rdrr.io/r/base/NA.html"><code class="sourceCode r"><span class="cn">NA</span></code></a> missing values.</p>
 </div>
 <div id="assignment" class="section level3" number="2.3.5">
 <h3>
@@ -353,9 +353,9 @@
 <span></span>
 <span><span class="va">.</span> <span class="op">+</span> <span class="va">..</span> <span class="op">+</span> <span class="va">._</span> <span class="op">+</span> <span class="va">._..__</span></span></code></pre></div>
 <pre><code>[1] 10</code></pre>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="rstudio-intro.html#cb47-1" aria-hidden="true"></a><span class="co"># these variable names will raise errors:</span></span>
-<span id="cb47-2"><a href="rstudio-intro.html#cb47-2" aria-hidden="true"></a><span class="co">#   1var, _var, bad-var,   e.g.:</span></span>
-<span id="cb47-3"><a href="rstudio-intro.html#cb47-3" aria-hidden="true"></a>1var &lt;-<span class="st"> </span><span class="dv">1</span></span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="rstudio-intro.html#cb47-1" tabindex="-1"></a><span class="co"># these variable names will raise errors:</span></span>
+<span id="cb47-2"><a href="rstudio-intro.html#cb47-2" tabindex="-1"></a><span class="co">#   1var, _var, bad-var,   e.g.:</span></span>
+<span id="cb47-3"><a href="rstudio-intro.html#cb47-3" tabindex="-1"></a><span class="dv">1</span>var <span class="ot">&lt;-</span> <span class="dv">1</span></span></code></pre></div>
 <pre><code>Error: unexpected symbol in "1var"</code></pre>
 <div class="note">
 <p>Observe that if the results of an expression are saved to a variable, R will NOT print it by default. This is often confusing to first time R users, since it may seem like nothing happened. For example, running the following:</p>
@@ -495,7 +495,7 @@
 <h3>
 <span class="header-section-number">2.3.8</span> Packages<a class="anchor" aria-label="anchor" href="#packages"><i class="fas fa-link"></i></a>
 </h3>
-<p>Now, let’s briefly discuss packages. One of the best features of R is the ability for anyone to easily write and distribute packages on <a href="https://cran.r-project.org">CRAN</a> (<strong>C</strong>omprehensive <strong>R</strong> <strong>A</strong>rchive <strong>N</strong>etwork). Currently, there are 21788 packages available on CRAN. There are also a further 2289 packages on the bioinformatics-specific package archive <a href="https://www.bioconductor.org">Bioconductor</a>, as well as countless more on <a href="https://github.com/topics/r-package">GitHub</a>.</p>
+<p>Now, let’s briefly discuss packages. One of the best features of R is the ability for anyone to easily write and distribute packages on <a href="https://cran.r-project.org">CRAN</a> (<strong>C</strong>omprehensive <strong>R</strong> <strong>A</strong>rchive <strong>N</strong>etwork). Currently, there are 22354 packages available on CRAN. There are also a further 2341 packages on the bioinformatics-specific package archive <a href="https://www.bioconductor.org">Bioconductor</a>, as well as countless more on <a href="https://github.com/topics/r-package">GitHub</a>.</p>
 <p>In this course, we will primarily make use of the <a href="https://www.tidyverse.org">Tidyverse</a> suite of packages, which contains several important packages for data science: <code>readr</code> for reading in data, <code>ggplot2</code> for plotting data, <code>dplyr</code> and <code>tidyr</code> for cleaning data, and <code>lubridate</code> and <code>stringr</code> for working with dates and strings. We will learn each of these as the course progresses.</p>
 <p>The most important thing you need to remember about packages is this:</p>
 <blockquote>
@@ -532,14 +532,14 @@
 <pre class="wrapcode"><code>── Attaching core tidyverse packages ────────────── tidyverse 2.0.0 ──
 ✔ dplyr     1.1.4     ✔ readr     2.1.5
 ✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.5.1     ✔ tibble    3.2.1
-✔ lubridate 1.9.3     ✔ tidyr     1.3.1
-✔ purrr     1.0.2     
+✔ ggplot2   3.5.2     ✔ tibble    3.3.0
+✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+✔ purrr     1.0.4     
 ── Conflicts ──────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()
 ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-<p>Upon loading, many packages will print various diagnostic messages to the console. These are generally completely ignorable. Sometimes these will warn about “Conflicts”, this is standard and just means it has overridden other default functions. E.g. You can see above the <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code> function from the package <code>dplyr</code> has overwritten the pre-loaded <a href="https://rdrr.io/r/stats/filter.html"><code class="sourceCode r"><span class="kw">filter</span>()</code></a> function from the <code>stats</code> package.</p>
+<p>Upon loading, many packages will print various diagnostic messages to the console. These are generally completely ignorable. Sometimes these will warn about “Conflicts”, this is standard and just means it has overridden other default functions. E.g. You can see above the <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code> function from the package <code>dplyr</code> has overwritten the pre-loaded <a href="https://rdrr.io/r/stats/filter.html"><code class="sourceCode r"><span class="fu">filter</span>()</code></a> function from the <code>stats</code> package.</p>
 <div class="tip">
 <p>You may have already guessed from the message in the output above, but you can also access a function from another package without loading the entire package by using the syntax <code>package::function()</code>. This is often done to either avoid name conflicts or to clarify to the reader which functions come from which packages.</p>
 </div>
@@ -572,11 +572,19 @@
 </h3>
 <p>Those are probably the most important R commands you need to know for now. Below I have curated a short selection of R “cheat sheets” for your reference should you need it, in rough order of how useful I think it will be for a first time R learner.</p>
 <ul>
-<li>Matt Baggott’s <a href="https://cran.r-project.org/doc/contrib/Baggott-refcard-v2.pdf">R Reference Card v2.0</a> is a nice complete one-stop-shop for all of R’s built-in functions.</li>
-<li>IQSS’s <a href="https://iqss.github.io/dss-workshops/R/Rintro/base-r-cheat-sheet.pdf">Base R Cheat Sheet</a> and Alexey Shipunov’s <a href="https://herba.msu.ru/shipunov/school/biol_240/en/supp/refcard/rrefc_en.pdf">One Page R Reference Card</a> are both slightly shorter and more curated, but offer a nice, tighter set of the most critical R commands, along with useful examples of their syntax.</li>
-<li>For a slightly longer but more complete reference manual on R, especially with more details of how R works and different object types and data structures, Emmanuel Paradis’s <a href="https://cran.r-project.org/doc/contrib/Paradis-rdebuts_en.pdf">R for Beginners</a> may be helpful.</li>
+<li>Matt Baggott’s <a href="misc/Baggott-refcard-v2.pdf">R Reference Card v2.0</a> is a nice complete one-stop-shop for all of R’s built-in functions.</li>
+<li>IQSS’s <a href="misc/base-r-cheat-sheet.pdf">Base R Cheat Sheet</a> and Alexey Shipunov’s <a href="misc/rrefc_en.pdf">One Page R Reference Card</a> are both slightly shorter and more curated, but offer a nice, tighter set of the most critical R commands, along with useful examples of their syntax.</li>
+<li>For a slightly longer but more complete reference manual on R, especially with more details of how R works and different object types and data structures, Emmanuel Paradis’s <a href="misc/paradis.pdf">R for Beginners</a> may be helpful.</li>
 </ul>
-<!--https://cran.r-project.org/doc/contrib/Short-refcard.pdf--><!--https://www.maths.usyd.edu.au/u/jchan/Rcommands.pdf-->
+<!--originals:
+https://cran.r-project.org/doc/contrib/Baggott-refcard-v2.pdf
+https://iqss.github.io/dss-workshops/R/Rintro/base-r-cheat-sheet.pdf
+https://herba.msu.ru/shipunov/school/biol_240/en/supp/refcard/rrefc_en.pdf
+https://cran.r-project.org/doc/contrib/Paradis-rdebuts_en.pdf
+--><!--additional sources not used:
+https://cran.r-project.org/doc/contrib/Short-refcard.pdf
+https://www.maths.usyd.edu.au/u/jchan/Rcommands.pdf
+-->
 </div>
 </div>
 <div id="r-markdown" class="section level2" number="2.4">
@@ -585,49 +593,49 @@
 </h2>
 <p>In this next section, we will introduce you to R Markdown, which is a document format that allows you to seamlessly organize and integrate text and R code/output in an easily readable and editable way. It supports many <a href="https://rmarkdown.rstudio.com/lesson-9.html">output file types</a> including HTML, PDF, and DOCX, and can be used to write reports, articles, presentations, ebooks, and even websites (in fact, this entire website is written in R Markdown, and the GitHub repo even maintained using Rstudio; you can view the source code of any page using the “View source” button in the right sidebar).</p>
 <p>Let’s start with an example! Below is a basic R Markdown demo file called <a href="demo.Rmd"><code>demo.Rmd</code></a>, which produces <a href="demo.html"><code>demo.html</code></a> as output. We will use this example below to learn how to work with Rmd files.</p>
-<div class="sourceCode" id="cb115"><pre class="sourceCode md wrapCode"><code class="sourceCode markdown"><span id="cb115-1"><a href="rstudio-intro.html#cb115-1" aria-hidden="true"></a><span class="co">---</span></span>
-<span id="cb115-2"><a href="rstudio-intro.html#cb115-2" aria-hidden="true"></a><span class="an">title:</span><span class="co"> "Demo Rmd file"</span></span>
-<span id="cb115-3"><a href="rstudio-intro.html#cb115-3" aria-hidden="true"></a><span class="an">author:</span><span class="co"> "Jane Doe"</span></span>
-<span id="cb115-4"><a href="rstudio-intro.html#cb115-4" aria-hidden="true"></a><span class="an">date:</span><span class="co"> "2024-06-20"</span></span>
-<span id="cb115-5"><a href="rstudio-intro.html#cb115-5" aria-hidden="true"></a><span class="an">output:</span><span class="co"> html_document</span></span>
-<span id="cb115-6"><a href="rstudio-intro.html#cb115-6" aria-hidden="true"></a><span class="co">---</span></span>
-<span id="cb115-7"><a href="rstudio-intro.html#cb115-7" aria-hidden="true"></a></span>
-<span id="cb115-8"><a href="rstudio-intro.html#cb115-8" aria-hidden="true"></a><span class="in">```{r setup, include=FALSE}</span></span>
-<span id="cb115-9"><a href="rstudio-intro.html#cb115-9" aria-hidden="true"></a><span class="in"># this is a standard "setup" chunk usually found at the top of Rmd files,</span></span>
-<span id="cb115-10"><a href="rstudio-intro.html#cb115-10" aria-hidden="true"></a><span class="in"># often used for setting options, loading files, and importing libraries</span></span>
-<span id="cb115-11"><a href="rstudio-intro.html#cb115-11" aria-hidden="true"></a><span class="in">knitr::opts_chunk$set(echo = TRUE)</span></span>
-<span id="cb115-12"><a href="rstudio-intro.html#cb115-12" aria-hidden="true"></a><span class="in">library(tidyverse)</span></span>
-<span id="cb115-13"><a href="rstudio-intro.html#cb115-13" aria-hidden="true"></a><span class="in">```</span></span>
-<span id="cb115-14"><a href="rstudio-intro.html#cb115-14" aria-hidden="true"></a></span>
-<span id="cb115-15"><a href="rstudio-intro.html#cb115-15" aria-hidden="true"></a><span class="fu"># Section 1</span></span>
-<span id="cb115-16"><a href="rstudio-intro.html#cb115-16" aria-hidden="true"></a></span>
-<span id="cb115-17"><a href="rstudio-intro.html#cb115-17" aria-hidden="true"></a><span class="fu">## Subsection A</span></span>
-<span id="cb115-18"><a href="rstudio-intro.html#cb115-18" aria-hidden="true"></a></span>
-<span id="cb115-19"><a href="rstudio-intro.html#cb115-19" aria-hidden="true"></a>Here's some ordinary text. You can use Markdown syntax to add more features, e.g. here's a <span class="co">[</span><span class="ot">link</span><span class="co">](https://markdownguide.org/cheat-sheet)</span>, here's some **bold text**, and here's some <span class="in">`inline code`</span>. You can also add images, footnotes, blockquotes, and more. See linked cheat sheet above for more.</span>
-<span id="cb115-20"><a href="rstudio-intro.html#cb115-20" aria-hidden="true"></a></span>
-<span id="cb115-21"><a href="rstudio-intro.html#cb115-21" aria-hidden="true"></a><span class="ss"> 1. </span>Lists are also east to add!</span>
-<span id="cb115-22"><a href="rstudio-intro.html#cb115-22" aria-hidden="true"></a><span class="ss"> 2. </span>Here's a second item.</span>
-<span id="cb115-23"><a href="rstudio-intro.html#cb115-23" aria-hidden="true"></a><span class="ss"> 3. </span>You can even add sublists:</span>
-<span id="cb115-24"><a href="rstudio-intro.html#cb115-24" aria-hidden="true"></a><span class="ss">    - </span>Here's a sublist with bullets.</span>
-<span id="cb115-25"><a href="rstudio-intro.html#cb115-25" aria-hidden="true"></a><span class="ss">    - </span>Another bullet?</span>
-<span id="cb115-26"><a href="rstudio-intro.html#cb115-26" aria-hidden="true"></a></span>
-<span id="cb115-27"><a href="rstudio-intro.html#cb115-27" aria-hidden="true"></a><span class="fu">## Subsection B</span></span>
-<span id="cb115-28"><a href="rstudio-intro.html#cb115-28" aria-hidden="true"></a></span>
-<span id="cb115-29"><a href="rstudio-intro.html#cb115-29" aria-hidden="true"></a>You can easily incorporate R code into an Rmd file, with outputs and plots that auto-update. Here's an example code chunk named "chunk1".</span>
-<span id="cb115-30"><a href="rstudio-intro.html#cb115-30" aria-hidden="true"></a></span>
-<span id="cb115-31"><a href="rstudio-intro.html#cb115-31" aria-hidden="true"></a><span class="in">```{r example-chunk, fig.height=5, fig.align="center"}</span></span>
-<span id="cb115-32"><a href="rstudio-intro.html#cb115-32" aria-hidden="true"></a><span class="in">data &lt;- c(3, 6, 6, 2, 4, 1, 5)</span></span>
-<span id="cb115-33"><a href="rstudio-intro.html#cb115-33" aria-hidden="true"></a><span class="in">mean(data)</span></span>
-<span id="cb115-34"><a href="rstudio-intro.html#cb115-34" aria-hidden="true"></a><span class="in">hist(data)</span></span>
-<span id="cb115-35"><a href="rstudio-intro.html#cb115-35" aria-hidden="true"></a><span class="in">```</span></span>
-<span id="cb115-36"><a href="rstudio-intro.html#cb115-36" aria-hidden="true"></a></span>
-<span id="cb115-37"><a href="rstudio-intro.html#cb115-37" aria-hidden="true"></a>You can even refer to R objects inside text, e.g. the sample mean and standard deviation are <span class="in">`r mean(data)`</span> and <span class="in">`r sd(data)`</span>.</span>
-<span id="cb115-38"><a href="rstudio-intro.html#cb115-38" aria-hidden="true"></a></span>
-<span id="cb115-39"><a href="rstudio-intro.html#cb115-39" aria-hidden="true"></a><span class="fu"># Section 2</span></span>
-<span id="cb115-40"><a href="rstudio-intro.html#cb115-40" aria-hidden="true"></a></span>
-<span id="cb115-41"><a href="rstudio-intro.html#cb115-41" aria-hidden="true"></a>Here's a second section.</span>
-<span id="cb115-42"><a href="rstudio-intro.html#cb115-42" aria-hidden="true"></a></span>
-<span id="cb115-43"><a href="rstudio-intro.html#cb115-43" aria-hidden="true"></a><span class="co">&lt;!-- comments in an Rmd file must use HTML-style syntax --&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb115"><pre class="sourceCode md wrapCode"><code class="sourceCode markdown"><span id="cb115-1"><a href="rstudio-intro.html#cb115-1" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb115-2"><a href="rstudio-intro.html#cb115-2" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Demo Rmd file"</span></span>
+<span id="cb115-3"><a href="rstudio-intro.html#cb115-3" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Jane Doe"</span></span>
+<span id="cb115-4"><a href="rstudio-intro.html#cb115-4" tabindex="-1"></a><span class="an">date:</span><span class="co"> "2024-06-20"</span></span>
+<span id="cb115-5"><a href="rstudio-intro.html#cb115-5" tabindex="-1"></a><span class="an">output:</span><span class="co"> html_document</span></span>
+<span id="cb115-6"><a href="rstudio-intro.html#cb115-6" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb115-7"><a href="rstudio-intro.html#cb115-7" tabindex="-1"></a></span>
+<span id="cb115-8"><a href="rstudio-intro.html#cb115-8" tabindex="-1"></a><span class="in">```{r setup, include=FALSE}</span></span>
+<span id="cb115-9"><a href="rstudio-intro.html#cb115-9" tabindex="-1"></a><span class="in"># this is a standard "setup" chunk usually found at the top of Rmd files,</span></span>
+<span id="cb115-10"><a href="rstudio-intro.html#cb115-10" tabindex="-1"></a><span class="in"># often used for setting options, loading files, and importing libraries</span></span>
+<span id="cb115-11"><a href="rstudio-intro.html#cb115-11" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(echo = TRUE)</span></span>
+<span id="cb115-12"><a href="rstudio-intro.html#cb115-12" tabindex="-1"></a><span class="in">library(tidyverse)</span></span>
+<span id="cb115-13"><a href="rstudio-intro.html#cb115-13" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb115-14"><a href="rstudio-intro.html#cb115-14" tabindex="-1"></a></span>
+<span id="cb115-15"><a href="rstudio-intro.html#cb115-15" tabindex="-1"></a><span class="fu"># Section 1</span></span>
+<span id="cb115-16"><a href="rstudio-intro.html#cb115-16" tabindex="-1"></a></span>
+<span id="cb115-17"><a href="rstudio-intro.html#cb115-17" tabindex="-1"></a><span class="fu">## Subsection A</span></span>
+<span id="cb115-18"><a href="rstudio-intro.html#cb115-18" tabindex="-1"></a></span>
+<span id="cb115-19"><a href="rstudio-intro.html#cb115-19" tabindex="-1"></a>Here's some ordinary text. You can use Markdown syntax to add more features, e.g. here's a <span class="co">[</span><span class="ot">link</span><span class="co">](https://markdownguide.org/cheat-sheet)</span>, here's some **bold text**, and here's some <span class="in">`inline code`</span>. You can also add images, footnotes, blockquotes, and more. See linked cheat sheet above for more.</span>
+<span id="cb115-20"><a href="rstudio-intro.html#cb115-20" tabindex="-1"></a></span>
+<span id="cb115-21"><a href="rstudio-intro.html#cb115-21" tabindex="-1"></a><span class="ss"> 1. </span>Lists are also east to add!</span>
+<span id="cb115-22"><a href="rstudio-intro.html#cb115-22" tabindex="-1"></a><span class="ss"> 2. </span>Here's a second item.</span>
+<span id="cb115-23"><a href="rstudio-intro.html#cb115-23" tabindex="-1"></a><span class="ss"> 3. </span>You can even add sublists:</span>
+<span id="cb115-24"><a href="rstudio-intro.html#cb115-24" tabindex="-1"></a><span class="ss">    - </span>Here's a sublist with bullets.</span>
+<span id="cb115-25"><a href="rstudio-intro.html#cb115-25" tabindex="-1"></a><span class="ss">    - </span>Another bullet?</span>
+<span id="cb115-26"><a href="rstudio-intro.html#cb115-26" tabindex="-1"></a></span>
+<span id="cb115-27"><a href="rstudio-intro.html#cb115-27" tabindex="-1"></a><span class="fu">## Subsection B</span></span>
+<span id="cb115-28"><a href="rstudio-intro.html#cb115-28" tabindex="-1"></a></span>
+<span id="cb115-29"><a href="rstudio-intro.html#cb115-29" tabindex="-1"></a>You can easily incorporate R code into an Rmd file, with outputs and plots that auto-update. Here's an example code chunk named "chunk1".</span>
+<span id="cb115-30"><a href="rstudio-intro.html#cb115-30" tabindex="-1"></a></span>
+<span id="cb115-31"><a href="rstudio-intro.html#cb115-31" tabindex="-1"></a><span class="in">```{r example-chunk, fig.height=5, fig.align="center"}</span></span>
+<span id="cb115-32"><a href="rstudio-intro.html#cb115-32" tabindex="-1"></a><span class="in">data &lt;- c(3, 6, 6, 2, 4, 1, 5)</span></span>
+<span id="cb115-33"><a href="rstudio-intro.html#cb115-33" tabindex="-1"></a><span class="in">mean(data)</span></span>
+<span id="cb115-34"><a href="rstudio-intro.html#cb115-34" tabindex="-1"></a><span class="in">hist(data)</span></span>
+<span id="cb115-35"><a href="rstudio-intro.html#cb115-35" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb115-36"><a href="rstudio-intro.html#cb115-36" tabindex="-1"></a></span>
+<span id="cb115-37"><a href="rstudio-intro.html#cb115-37" tabindex="-1"></a>You can even refer to R objects inside text, e.g. the sample mean and standard deviation are <span class="in">`r mean(data)`</span> and <span class="in">`r sd(data)`</span>.</span>
+<span id="cb115-38"><a href="rstudio-intro.html#cb115-38" tabindex="-1"></a></span>
+<span id="cb115-39"><a href="rstudio-intro.html#cb115-39" tabindex="-1"></a><span class="fu"># Section 2</span></span>
+<span id="cb115-40"><a href="rstudio-intro.html#cb115-40" tabindex="-1"></a></span>
+<span id="cb115-41"><a href="rstudio-intro.html#cb115-41" tabindex="-1"></a>Here's a second section.</span>
+<span id="cb115-42"><a href="rstudio-intro.html#cb115-42" tabindex="-1"></a></span>
+<span id="cb115-43"><a href="rstudio-intro.html#cb115-43" tabindex="-1"></a><span class="co">&lt;!-- comments in an Rmd file must use HTML-style syntax --&gt;</span></span></code></pre></div>
 <div id="source-window" class="section level3" number="2.4.1">
 <h3>
 <span class="header-section-number">2.4.1</span> Source window<a class="anchor" aria-label="anchor" href="#source-window"><i class="fas fa-link"></i></a>
@@ -653,12 +661,12 @@
 </h3>
 <p>Rmd files usually start with a <a href="https://yaml.org">YAML</a> header with some important metadata about the file:</p>
 <blockquote>
-<div class="sourceCode" id="cb116"><pre class="sourceCode md wrapCode"><code class="sourceCode markdown"><span id="cb116-1"><a href="rstudio-intro.html#cb116-1" aria-hidden="true"></a><span class="co">---</span></span>
-<span id="cb116-2"><a href="rstudio-intro.html#cb116-2" aria-hidden="true"></a><span class="an">title:</span><span class="co"> "Demo Rmd file"</span></span>
-<span id="cb116-3"><a href="rstudio-intro.html#cb116-3" aria-hidden="true"></a><span class="an">author:</span><span class="co"> "Jane Doe"</span></span>
-<span id="cb116-4"><a href="rstudio-intro.html#cb116-4" aria-hidden="true"></a><span class="an">date:</span><span class="co"> "2024-06-20"</span></span>
-<span id="cb116-5"><a href="rstudio-intro.html#cb116-5" aria-hidden="true"></a><span class="an">output:</span><span class="co"> html_document</span></span>
-<span id="cb116-6"><a href="rstudio-intro.html#cb116-6" aria-hidden="true"></a><span class="co">---</span></span></code></pre></div>
+<div class="sourceCode" id="cb116"><pre class="sourceCode md wrapCode"><code class="sourceCode markdown"><span id="cb116-1"><a href="rstudio-intro.html#cb116-1" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb116-2"><a href="rstudio-intro.html#cb116-2" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Demo Rmd file"</span></span>
+<span id="cb116-3"><a href="rstudio-intro.html#cb116-3" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Jane Doe"</span></span>
+<span id="cb116-4"><a href="rstudio-intro.html#cb116-4" tabindex="-1"></a><span class="an">date:</span><span class="co"> "2024-06-20"</span></span>
+<span id="cb116-5"><a href="rstudio-intro.html#cb116-5" tabindex="-1"></a><span class="an">output:</span><span class="co"> html_document</span></span>
+<span id="cb116-6"><a href="rstudio-intro.html#cb116-6" tabindex="-1"></a><span class="co">---</span></span></code></pre></div>
 </blockquote>
 <p>Title, author, and date are self explanatory. The <code>output:</code> option sets the output format R uses when knitting. We <strong>highly recommend</strong> using the default <code>html_document</code> output format since it is lightweight, portable, and easy for us to view in Canvas when grading.</p>
 <p>There are lots of other <a href="https://github.com/hao203/rmarkdown-YAML">YAML options</a> you can explore, but <strong>minimally, you should always have these 4: title, author, date, and <code>output: html_document</code></strong> set at the beginning of each Rmd document.</p>
@@ -680,7 +688,7 @@ which is a simple syntax for “marking up” text with additional formatting. Y
 <h4>
 <span class="header-section-number">2.4.5.1</span> Inline code<a class="anchor" aria-label="anchor" href="#inline-code"><i class="fas fa-link"></i></a>
 </h4>
-<p>If you want to quote R code inside a paragraph of text, surround it with the backtick character <span class="k">`</span>, which can be found on most keyboards in the top left next to the <span class="k">1</span> key. Note this character is NOT the same as a single quote character <span class="k">’</span>. For example, this: <code>`mean(data)`</code> will render as: <code class="sourceCode r"><span class="kw">mean</span>(data)</code>.</p>
+<p>If you want to quote R code inside a paragraph of text, surround it with the backtick character <span class="k">`</span>, which can be found on most keyboards in the top left next to the <span class="k">1</span> key. Note this character is NOT the same as a single quote character <span class="k">’</span>. For example, this: <code>`mean(data)`</code> will render as: <code class="sourceCode r"><span class="fu">mean</span>(data)</code>.</p>
 <p>You can also easily refer to R variables and substitute their values, or apply other functions to them and display the output inside text. For example, remember how the <code>data</code> vector was defined above in section <a href="rstudio-intro.html#summary-functions">2.3.6</a>? This: <code>`r median(data)`</code>
 will render as: 4. Note the <code>`r</code> prefix here, which triggers evaluation and substitute of the code. This helps avoid “hard-coding”, letting values and references update to always stay in sync.</p>
 <div class="tip">
@@ -697,11 +705,11 @@ which becomes 3.86 is much better.</p>
 </h4>
 <p>The other prominent way to include R code inside an R Markdown document is by using so-called code “chunks” or “blocks”. The basic structure is this:</p>
 <blockquote>
-<div class="sourceCode" id="cb117"><pre class="sourceCode md wrapCode"><code class="sourceCode markdown"><span id="cb117-1"><a href="rstudio-intro.html#cb117-1" aria-hidden="true"></a><span class="in">```{r example-chunk, fig.height=5, fig.align="center"}</span></span>
-<span id="cb117-2"><a href="rstudio-intro.html#cb117-2" aria-hidden="true"></a><span class="in">data &lt;- c(3, 6, 6, 2, 4, 1, 5)</span></span>
-<span id="cb117-3"><a href="rstudio-intro.html#cb117-3" aria-hidden="true"></a><span class="in">mean(data)</span></span>
-<span id="cb117-4"><a href="rstudio-intro.html#cb117-4" aria-hidden="true"></a><span class="in">hist(data)</span></span>
-<span id="cb117-5"><a href="rstudio-intro.html#cb117-5" aria-hidden="true"></a><span class="in">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb117"><pre class="sourceCode md wrapCode"><code class="sourceCode markdown"><span id="cb117-1"><a href="rstudio-intro.html#cb117-1" tabindex="-1"></a><span class="in">```{r example-chunk, fig.height=5, fig.align="center"}</span></span>
+<span id="cb117-2"><a href="rstudio-intro.html#cb117-2" tabindex="-1"></a><span class="in">data &lt;- c(3, 6, 6, 2, 4, 1, 5)</span></span>
+<span id="cb117-3"><a href="rstudio-intro.html#cb117-3" tabindex="-1"></a><span class="in">mean(data)</span></span>
+<span id="cb117-4"><a href="rstudio-intro.html#cb117-4" tabindex="-1"></a><span class="in">hist(data)</span></span>
+<span id="cb117-5"><a href="rstudio-intro.html#cb117-5" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 </blockquote>
 <div class="tip">
 <p>You can quickly insert a chunk by using <span class="k">CTRL</span>+<span class="k">ALT</span>+<span class="k">I</span> on Windows, and either <span class="k">CTRL</span>+<span class="k">⌥</span>+<span class="k">I</span>, or <span class="k">⌘</span>+<span class="k">⌥</span>+<span class="k">I</span> on Mac.</p>
@@ -782,12 +790,12 @@ which becomes 3.86 is much better.</p>
 </div>
 <p>One last note: remember the “setup” chunk at the top of the demo file? Here it is again:</p>
 <blockquote>
-<div class="sourceCode" id="cb118"><pre class="sourceCode md wrapCode"><code class="sourceCode markdown"><span id="cb118-1"><a href="rstudio-intro.html#cb118-1" aria-hidden="true"></a><span class="in">```{r setup, include=FALSE}</span></span>
-<span id="cb118-2"><a href="rstudio-intro.html#cb118-2" aria-hidden="true"></a><span class="in"># this is a standard "setup" chunk usually found at the top of Rmd files,</span></span>
-<span id="cb118-3"><a href="rstudio-intro.html#cb118-3" aria-hidden="true"></a><span class="in"># often used for setting options, loading files, and importing libraries</span></span>
-<span id="cb118-4"><a href="rstudio-intro.html#cb118-4" aria-hidden="true"></a><span class="in">knitr::opts_chunk$set(echo = TRUE)</span></span>
-<span id="cb118-5"><a href="rstudio-intro.html#cb118-5" aria-hidden="true"></a><span class="in">library(tidyverse)</span></span>
-<span id="cb118-6"><a href="rstudio-intro.html#cb118-6" aria-hidden="true"></a><span class="in">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb118"><pre class="sourceCode md wrapCode"><code class="sourceCode markdown"><span id="cb118-1"><a href="rstudio-intro.html#cb118-1" tabindex="-1"></a><span class="in">```{r setup, include=FALSE}</span></span>
+<span id="cb118-2"><a href="rstudio-intro.html#cb118-2" tabindex="-1"></a><span class="in"># this is a standard "setup" chunk usually found at the top of Rmd files,</span></span>
+<span id="cb118-3"><a href="rstudio-intro.html#cb118-3" tabindex="-1"></a><span class="in"># often used for setting options, loading files, and importing libraries</span></span>
+<span id="cb118-4"><a href="rstudio-intro.html#cb118-4" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(echo = TRUE)</span></span>
+<span id="cb118-5"><a href="rstudio-intro.html#cb118-5" tabindex="-1"></a><span class="in">library(tidyverse)</span></span>
+<span id="cb118-6"><a href="rstudio-intro.html#cb118-6" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 </blockquote>
 <p>The function <a href="https://rdrr.io/cran/knitr/man/opts_chunk.html"><code>knitr::opts_chunk$set()</code></a> here can be used to set default chunk options for ALL chunks in that document, e.g. you can center all figures by adding <code>fig.align = "center"</code> here instead of copying it to every chunk header.</p>
 </li>
@@ -807,13 +815,20 @@ which becomes 3.86 is much better.</p>
 <p>This is also outside the scope of this course, so you <strong>do NOT need to learn it</strong>, but R Markdown natively supports <span class="math inline">\(\LaTeX\)</span> code as well. It’s rendered using <a href="https://www.mathjax.org">MathJax</a>, an open-source Javascript engine for rendering equations online. For example, <code class="sourceCode latex"><span class="ss">$$x=</span><span class="sc">\frac</span><span class="ss">{-b</span><span class="sc">\pm\sqrt</span><span class="ss">{b^2-4ac}}{2a}$$</span></code> becomes:</p>
 <p><span class="math display">\[x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}\]</span></p>
 <p>You will see lots of <span class="math inline">\(\LaTeX\)</span> later in the notes when I need to write more math, so I just wanted to mention it here. You can right click on any equations you see in the notes and change the MathJax display options, or see its source code (you can of course also see the source code of the entire page using the link in the sidebar as mentioned previously).</p>
-<p>If you wish to read more on <span class="math inline">\(\LaTeX\)</span>, start with Rong Zhuang’s <a href="https://jojozhuang.github.io/tutorial/mathjax-cheat-sheet-for-mathematical-notation">MathJax cheat sheet</a> or David Richeson’s <a href="https://users.dickinson.edu/~richesod/latex/latexcheatsheet.pdf">quick guide</a> which both have lots of great beginner-friendly examples. For a slightly more complete list of symbols, Eric Torrence’s <a href="https://pages.uoregon.edu/torrence/391/labs/LaTeX-cheat-sheet.pdf">cheat sheet</a> may also be useful.</p>
+<p>If you wish to read more on <span class="math inline">\(\LaTeX\)</span>, start with Rong Zhuang’s <a href="https://jojozhuang.github.io/tutorial/mathjax-cheat-sheet-for-mathematical-notation">MathJax cheat sheet</a> or David Richeson’s <a href="misc/latexcheatsheet.pdf">quick guide</a> which both have lots of great beginner-friendly examples. For a slightly more complete list of symbols, Eric Torrence’s <a href="misc/LaTeX-cheat-sheet.pdf">cheat sheet</a> may also be useful.</p>
+<!--originals:
+https://divisbyzero.github.io/latex-cheatsheet/latexcheatsheet.pdf
+https://pages.uoregon.edu/torrence/391/labs/LaTeX-cheat-sheet.pdf
+-->
 </div>
 <div id="cheat-sheet" class="section level3" number="2.4.7">
 <h3>
 <span class="header-section-number">2.4.7</span> Cheat sheet<a class="anchor" aria-label="anchor" href="#cheat-sheet"><i class="fas fa-link"></i></a>
 </h3>
-<p>If you need a good R Markdown cheat sheet, I recommend <a href="https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf">this reference guide</a> published by the same developers as Rstudio. Page 1 has a Markdown syntax guide, pages 2-3 highlight some more useful chunk options, and pages 4-5 have some additional info on different output formats as well as some additional YAML header options.</p>
+<p>If you need a good R Markdown cheat sheet, I recommend <a href="misc/rmarkdown-reference.pdf">this reference guide</a> published by the same developers as Rstudio. Page 1 has a Markdown syntax guide, pages 2-3 highlight some more useful chunk options, and pages 4-5 have some additional info on different output formats as well as some additional YAML header options.</p>
+<!--original:
+https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf
+-->
 </div>
 </div>
 <div id="workflow" class="section level2" number="2.5">
@@ -829,9 +844,9 @@ which becomes 3.86 is much better.</p>
 <div class="sourceCode" id="cb119"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># check current working directory</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code>[1] "/home/admin/stat240-revamp"</code></pre>
-<p>You can see my current Rstudio session (while writing these notes) is running from the <code>stat240-revamp</code> directory which is itself located in <code>/home/admin</code>.</p>
-<p>Generally, when you start a new Rstudio session, the working directory will default to <code>C:/Users/username/</code> for Windows and <code>/Users/username/</code> for Mac (or <code>/home/username/</code> for Linux, which the server building these notes each day runs), where <code>username</code> is your account name (my working directory is different because I have it intentionally set to my notes project folder).</p>
+<pre><code>[1] "C:/Users/bi/Documents/stat240-revamp"</code></pre>
+<p>You can see my current Rstudio session (while writing these notes) is running from the <code>stat240-revamp</code> directory which is itself located in <code>C:/Users/bi/Documents</code>.</p>
+<p>Generally, when you start a new Rstudio session, the working directory will default to <code>C:/Users/username/</code> for Windows and <code>/Users/username/</code> for Mac (or <code>/home/username/</code> for Linux), where <code>username</code> is your account name.</p>
 <p>This default working directory actually presents a problem, because it is usually different from where your current Rmd file is. For example, suppose you’re working on homework 1. If you organized your files properly—which you should!—your Rmd file is probably located at <code>.../STAT240/homework/hw01/hw01.Rmd</code>. For reasons explained in the next section, your working directory should <strong>always match the location of your current Rmd file</strong>.</p>
 <p>You can do this by either of these methods:</p>
 <ul>
@@ -905,7 +920,7 @@ which becomes 3.86 is much better.</p>
 <p>Phew, that was a lot, but that wraps up the introduction to working with R/Rstudio! Below, I have linked a few bonus readings if you want to learn a bit more about control and looping in R, which we will not need in this class but may be good to know if you plan to take further data science classes or build a career in data science.</p>
 <p>In the next chapter, we will explore data types and structures in R, as well as learn to read in and write out datasets.</p>
 <p><br><br></p>
-<div id="optional-bonus-topic-controllooping" class="section level4 unnumbered" number="">
+<div id="optional-bonus-topic-controllooping" class="section level4 unnumbered">
 <h4>Optional bonus topic: control/looping<a class="anchor" aria-label="anchor" href="#optional-bonus-topic-controllooping"><i class="fas fa-link"></i></a>
 </h4>
 <p>This includes <code>if</code>/<code>else</code> statements and <code>for</code>/<code>while</code> loops. If you’re interested, see these suggested readings:</p>
@@ -1088,7 +1103,7 @@ observer.observe(document.body, config);
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2024-12-11.</p>
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2025-06-15.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

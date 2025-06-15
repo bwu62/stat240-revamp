@@ -703,14 +703,14 @@ glimpse(unemployment)
 ```
 
 ```
-Rows: 923
+Rows: 929
 Columns: 2
-$ DATE   <date> 1948-01-01, 1948-02-01, 1948-03-01, 1948-04-01, 1948-05-01, 1948-06…
-$ UNRATE <dbl> 3.4, 3.8, 4.0, 3.9, 3.5, 3.6, 3.6, 3.9, 3.8, 3.7, 3.8, 4.0, 4.3, 4.7…
+$ observation_date <date> 1948-01-01, 1948-02-01, 1948-03-01, 1948-04-01, 1948-05-0…
+$ UNRATE           <dbl> 3.4, 3.8, 4.0, 3.9, 3.5, 3.6, 3.6, 3.9, 3.8, 3.7, 3.8, 4.0…
 ```
 
 ``` r
-ggplot(unemployment, aes(x = DATE, y = UNRATE)) + geom_line() +
+ggplot(unemployment, aes(x = observation_date, y = UNRATE)) + geom_line() +
   labs(x = "Time", y = "Unemployment rate (%)",
        title = "U.S. Unemployment rate")
 ```
@@ -723,7 +723,7 @@ The  superficially look the same as the previous plot, however if we zoom in and
 ``` r
 # plot just the last 12 months of data
 n = nrow(unemployment)
-ggplot(unemployment[(n-11):n,], aes(x = DATE, y = UNRATE)) + geom_line() +
+ggplot(unemployment[(n-11):n,], aes(x = observation_date, y = UNRATE)) + geom_line() +
   labs(x = "Time", y = "Unemployment rate (%)",
        title = "U.S. Unemployment rate")
 ```
@@ -920,7 +920,11 @@ ggplot(df, aes(x = x, y = y, fill = z)) +
 
 ## Other geoms
 
-Many other geoms exist (see the [ggplot2 cheat sheet](https://rstudio.github.io/cheatsheets/data-visualization.pdf) for a full list). Here are just a *few* other extremely useful ones you should know about.
+Many other geoms exist (see the [ggplot2 cheat sheet](misc/data-visualization.pdf) for a full list). Here are just a *few* other extremely useful ones you should know about.
+
+<!--original:
+https://rstudio.github.io/cheatsheets/data-visualization.pdf
+-->
 
 
 ### Straight lines
@@ -1001,7 +1005,7 @@ This plot is recommended ONLY as an initial exploratory plot; it should NOT be u
 
 These are beyond the scope of this course, but here's a few other links if you want to learn more:
 
- - If you haven't already, make sure to check out the [ggplot2 cheat sheet](https://rstudio.github.io/cheatsheets/data-visualization.pdf).
+ - If you haven't already, make sure to check out the [ggplot2 cheat sheet](misc/data-visualization.pdf).
  - If you need help picking a plot, [Data to Viz](https://www.data-to-viz.com) has a nice flow chart with links to example R code.
  - I also recommend scanning the Data to Viz [page on caveats](https://www.data-to-viz.com/caveats.html), i.e. common pitfalls in data science.
  - You can add additional [text annotations](https://ggplot2.tidyverse.org/reference/geom_text.html) to your plots if necessary.

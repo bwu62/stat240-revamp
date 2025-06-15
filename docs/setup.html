@@ -7,7 +7,7 @@
 <title>Chapter 1 Setup | STAT 240 Revamp</title>
 <meta name="author" content="Bi Cheng Wu, with help from Bret Larget and Cameron Jones">
 <meta name="description" content="This chapter will take you through all steps necessary to fully setup your computer. There are several things we need to do: First, in section 1.1 we will install both R and Rstudio. Next, in...">
-<meta name="generator" content="bookdown 0.40.1 with bs4_book()">
+<meta name="generator" content="bookdown 0.43.2 with bs4_book()">
 <meta property="og:title" content="Chapter 1 Setup | STAT 240 Revamp">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://bwu62.github.io/stat240-revamp/setup.html">
@@ -17,9 +17,9 @@
 <meta name="twitter:description" content="This chapter will take you through all steps necessary to fully setup your computer. There are several things we need to do: First, in section 1.1 we will install both R and Rstudio. Next, in...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Roboto_Mono-0.4.9/font.css" rel="stylesheet">
-<script src="libs/bs3compat-0.8.0/transition.js"></script><script src="libs/bs3compat-0.8.0/tabs.js"></script><script src="libs/bs3compat-0.8.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Roboto_Mono-0.4.10/font.css" rel="stylesheet">
+<script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
 <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="libs/plotly-binding-4.10.4/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
 <script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
 <script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-E0YDB40HWY"></script><script>
@@ -119,7 +119,7 @@
 <div class="note">
 <p>R and Rstudio are two different programs that both need to be installed! Also, if you have previously installed R or Rstudio, it is highly recommended to first completely uninstall it before reinstalling the latest version to avoid conflicts (instructions for <a href="https://www.pcmag.com/how-to/how-to-uninstall-programs-in-windows-10">Windows</a> and <a href="https://support.apple.com/en-us/102610">Mac</a>).</p>
 </div>
-<p>First, we will install the latest R release, <strong>version 4.4.1 released on Jun 14, 2024</strong>; then we will install Rstudio. The instructions below are separated by operating system, depending on if you have a <a href="setup.html#setup-win">Windows</a> or <a href="setup.html#setup-mac">Mac</a> machine.</p>
+<p>First, we will install the latest R release, <strong>version 4.5.1 released on Jun 13, 2025</strong>; then we will install Rstudio. The instructions below are separated by operating system, depending on if you have a <a href="setup.html#setup-win">Windows</a> or <a href="setup.html#setup-mac">Mac</a> machine.</p>
 <ul>
 <li>If you have a Linux system, follow one of the linked instructions <a href="https://cloud.r-project.org/bin/linux">here</a>.</li>
 <li>If you have a Chromebook, try <a href="https://levente.littvay.hu/chromebook">these steps</a>.</li>
@@ -129,13 +129,13 @@
 <span class="header-section-number">1.1.1</span> Windows instructions<a class="anchor" aria-label="anchor" href="#setup-win"><i class="fas fa-link"></i></a>
 </h3>
 <ol style="list-style-type: decimal">
-<li><p>Download <a href="https://cloud.r-project.org/bin/windows/base/old/4.4.1/R-4.4.1-win.exe">R-4.4.1-win.exe</a> and run it, accepting all default settings.</p></li>
+<li><p>Download <a href="https://cloud.r-project.org/bin/windows/base/old/4.5.1/R-4.5.1-win.exe">R-4.5.1-win.exe</a> and run it, accepting all default settings.</p></li>
 <li><p>Download <a href="https://rstudio.org/download/latest/stable/desktop/windows/RStudio-latest.exe">Rstudio-latest.exe</a> and run it, again accepting all default settings.</p></li>
 <li>
 <p>Sometimes, R may need to recompile a package during installation, which will require the Rtools utility. To download the right version, check your system’s <a href="ms-settings:about">about page</a> and look at the “System type” line.</p>
 <ul>
-<li>If it shows “… x64-based processor”, download this <a href="https://cran.r-project.org/bin/windows/Rtools/rtools44/files/rtools44-6335-6327.exe">Rtools installer</a> and run it, accepting all default settings.</li>
-<li>If it shows “… ARM-based processor”, download this <a href="https://cran.r-project.org/bin/windows/Rtools/rtools44/files/rtools44-aarch64-6335-6327.exe">Rtools installer</a> and run it, accepting all default settings.</li>
+<li>If it shows “… x64-based processor”, download this <a href="https://cran.r-project.org/bin/windows/Rtools/rtools44/files/rtools44-6459-6401.exe">Rtools installer</a> and run it, accepting all default settings.</li>
+<li>If it shows “… ARM-based processor”, download this <a href="https://cran.r-project.org/bin/windows/Rtools/rtools44/files/rtools44-aarch64-6459-6401.exe">Rtools installer</a> and run it, accepting all default settings.</li>
 </ul>
 </li>
 </ol>
@@ -149,8 +149,8 @@
 <ol style="list-style-type: decimal">
 <li>First, we need to determine the right R installer file for your specific machine. Open the Apple menu in the top left corner of your screen and open <a href="https://upload.wikimedia.org/wikipedia/en/a/a6/Apple_menu_screenshot.png">“About this mac”</a>.
 <ul>
-<li>If it shows “Chip: Apple M1/M2/M3”, download <a href="https://cloud.r-project.org/bin/macosx/big-sur-arm64/base/R-4.4.1-arm64.pkg">R-4.4.1-arm64.pkg</a> and run it, accepting all default settings.</li>
-<li>If it shows “Processor: …Intel Core”, download <a href="https://cloud.r-project.org/bin/macosx/big-sur-x86_64/base/R-4.4.1-x86_64.pkg">R-4.4.1-x86_64.pkg</a> and run it, accepting all default settings.</li>
+<li>If it shows “Chip: Apple M1/M2/M3”, download <a href="https://cloud.r-project.org/bin/macosx/big-sur-arm64/base/R-4.5.1-arm64.pkg">R-4.5.1-arm64.pkg</a> and run it, accepting all default settings.</li>
+<li>If it shows “Processor: …Intel Core”, download <a href="https://cloud.r-project.org/bin/macosx/big-sur-x86_64/base/R-4.5.1-x86_64.pkg">R-4.5.1-x86_64.pkg</a> and run it, accepting all default settings.</li>
 <li>If you get an error, check your OS version in the About window. If it’s older (i.e. &lt;11) you may need to either upgrade your OS or download an older version <a href="https://cloud.r-project.org/bin/macosx">here</a>.</li>
 </ul>
 </li>
@@ -167,7 +167,7 @@
 <li>On many (but not all) systems, two additional programs need to be installed for everything to run smoothly. It is recommended for everyone to install these just in case (there’s no harm if you didn’t actually need them).
 <ol style="list-style-type: lower-alpha">
 <li>Download <a href="https://github.com/XQuartz/XQuartz/releases/download/XQuartz-2.8.5/XQuartz-2.8.5.pkg">XQuartz-2.8.5.pkg</a> and run it, accepting all default settings. This installs a tool that Rstudio uses to display certain outputs.</li>
-<li>Using either Spotlight, Launchpad, or the Applications directory, open “Terminal” and type in or copy this line <code class="sourceCode zsh">xcode-select --install</code> and hit enter, then follow on-screen instructions. You may be asked for your fingerprint or password (note your password will not show as you type, this is normal and done for security purposes).</li>
+<li>Using either Spotlight, Launchpad, or the Applications directory, open “Terminal” and type in or copy this line <code class="sourceCode zsh"><span class="ex">xcode-select</span> <span class="at">--install</span></code> and hit enter, then follow on-screen instructions. You may be asked for your fingerprint or password (note your password will not show as you type, this is normal and done for security purposes).</li>
 </ol>
 </li>
 </ol>
@@ -181,12 +181,12 @@
 <span class="header-section-number">1.2</span> Packages/config<a class="anchor" aria-label="anchor" href="#setup-packs-config"><i class="fas fa-link"></i></a>
 </h2>
 <div class="note">
-<p>Before continuing, make sure that you can <a href="https://i.imgur.com/qmt5IHj.png">open Rstudio</a> and have the correct version (R-4.4.1) installed!</p>
+<p>Before continuing, make sure that you can <a href="https://i.imgur.com/qmt5IHj.png">open Rstudio</a> and have the correct version (R-4.5.1) installed!</p>
 </div>
 <p>Next, we will install some necessary packages and configure some recommended options to improve workflow.</p>
 <ol style="list-style-type: decimal">
 <li>
-<p>Open Rstudio. In the Console window, type in or copy this line <code class="sourceCode r"><span class="kw">install.packages</span>(<span class="kw">c</span>(<span class="st">"tidyverse"</span>,<span class="st">"rmarkdown"</span>))</code> and hit enter.</p>
+<p>Open Rstudio. In the Console window, type in or copy this line <code class="sourceCode r"><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">"tidyverse"</span>,<span class="st">"rmarkdown"</span>))</code> and hit enter.</p>
 <ul>
 <li>If Rstudio asks you whether to “use a personal library”, choose yes.</li>
 <li>If Rstudio asks you whether to “install from source”, first try choosing no which should work for most people. If that fails, try repeating step 1, but this time choose yes.</li>
@@ -411,7 +411,7 @@ observer.observe(document.body, config);
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2024-12-11.</p>
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2025-06-15.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

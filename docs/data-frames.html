@@ -7,7 +7,7 @@
 <title>Chapter 4 Data Frames | STAT 240 Revamp</title>
 <meta name="author" content="Bi Cheng Wu, with help from Bret Larget and Cameron Jones">
 <meta name="description" content="Moving on from vectors, the next most important data structure in R is the data frame. Think of a data frame as similar to a matrix, but (ideally) each column is a vector of a single type...">
-<meta name="generator" content="bookdown 0.40.1 with bs4_book()">
+<meta name="generator" content="bookdown 0.43.2 with bs4_book()">
 <meta property="og:title" content="Chapter 4 Data Frames | STAT 240 Revamp">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://bwu62.github.io/stat240-revamp/data-frames.html">
@@ -17,9 +17,9 @@
 <meta name="twitter:description" content="Moving on from vectors, the next most important data structure in R is the data frame. Think of a data frame as similar to a matrix, but (ideally) each column is a vector of a single type...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Roboto_Mono-0.4.9/font.css" rel="stylesheet">
-<script src="libs/bs3compat-0.8.0/transition.js"></script><script src="libs/bs3compat-0.8.0/tabs.js"></script><script src="libs/bs3compat-0.8.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Roboto_Mono-0.4.10/font.css" rel="stylesheet">
+<script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
 <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="libs/plotly-binding-4.10.4/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
 <script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
 <script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-E0YDB40HWY"></script><script>
@@ -102,18 +102,18 @@
 <span class="header-section-number">4.1</span> Creating data frames<a class="anchor" aria-label="anchor" href="#creating-dfs"><i class="fas fa-link"></i></a>
 </h2>
 <p>There are 2 common ways of creating a new data frame manually: <code><a href="https://rdrr.io/r/base/data.frame.html">data.frame()</a></code> from base R, or <code><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble()</a></code> from the <a href="https://tibble.tidyverse.org">tibble</a> package, another of the core Tidyverse packages. They are extremely similar, but we recommend <code><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble()</a></code> due to some nice extra features such as better printing, referencing other columns during creation, and stricter subsetting rules. Example:</p>
-<div class="sourceCode" id="cb431"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb430"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># import the tibble and lubridate libraries</span></span>
 <span><span class="co"># again, tibble is core tidyverse, so library(tidyverse) will also work</span></span>
 <span><span class="co"># but lubridate is not core so needs to be imported manually</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/">tibble</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://lubridate.tidyverse.org">lubridate</a></span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb432"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb431"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># manually create an example data frame</span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
 <span>  name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Alice"</span>, <span class="st">"Bob"</span>, <span class="st">"Charlie"</span><span class="op">)</span>,</span>
 <span>  sex <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"F"</span>, <span class="st">"M"</span>, <span class="st">"M"</span><span class="op">)</span>,</span>
-<span>  date_of_birth <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html">mdy</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"12/11/03"</span>, <span class="st">"7/4/99"</span>, <span class="st">"10/31/06"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  date_of_birth <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html">mdy</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"6/15/04"</span>, <span class="st">"7/4/99"</span>, <span class="st">"10/31/06"</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">floor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/now.html">today</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">birthday</span><span class="op">)</span><span class="op">/</span><span class="fl">365.24</span><span class="op">)</span>,</span>
 <span>  declared_major <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>,</span>
 <span>  school <span class="op">=</span> <span class="st">"UW-Madison"</span></span>
@@ -123,7 +123,7 @@
 <pre><code># A tibble: 3 × 6
   name    sex   date_of_birth   age declared_major school    
   &lt;chr&gt;   &lt;chr&gt; &lt;date&gt;        &lt;dbl&gt; &lt;lgl&gt;          &lt;chr&gt;     
-1 Alice   F     2003-12-11       21 TRUE           UW-Madison
+1 Alice   F     2004-06-15       20 TRUE           UW-Madison
 2 Bob     M     1999-07-04       25 TRUE           UW-Madison
 3 Charlie M     2006-10-31       18 FALSE          UW-Madison</code></pre>
 <p>Note the following:</p>
@@ -190,7 +190,7 @@
 <p>One additional non-text format will be covered in this course: XLS(X) spreadsheet data, commonly generated by Excel or similar spreadsheet software. For these, we have a different function from Tidyverse’s non-core <a href="https://readxl.tidyverse.org">readxl</a> package:</p>
 <ul>
 <li>
-<a href="https://rdrr.io/cran/readxl/man/read_excel.html"><code class="sourceCode r"><span class="kw">read_excel</span>()</code></a> can be used to read in both XLS and XLSX spreadsheet data</li>
+<a href="https://rdrr.io/cran/readxl/man/read_excel.html"><code class="sourceCode r"><span class="fu">read_excel</span>()</code></a> can be used to read in both XLS and XLSX spreadsheet data</li>
 </ul>
 <div class="note">
 <p>Note the underscores in the function names. E.g. <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a></code> which is from readr is NOT the same as <code><a href="https://rdrr.io/r/utils/read.table.html">read.csv()</a></code> which is a base R function. They are similar, but readr’s <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a></code> has some minor improvements in speed and consistency so is recommended by this class.</p>
@@ -222,10 +222,10 @@ Ahyi,2024-01-01,2024-03-27,86,TRUE,NA
 Kanaga,2023-12-18,2023-12-18,0,TRUE,1
 Ruby,2023-09-14,2023-09-15,1,TRUE,1</code></pre>
 <p>If you have a link to a dataset, you can directly pass it into <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a></code> and it will automagically download the file to your system’s temp directory and read it in. Make sure to save it into a data frame with a sensible name. It’s also usually a good idea to print out the first few lines to check the result and see if everything worked without error.</p>
-<div class="sourceCode" id="cb435"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb434"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># import readr</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readr.tidyverse.org">readr</a></span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb436"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb435"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># read in CSV file from link</span></span>
 <span><span class="va">eruptions_recent</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span></span>
 <span>  <span class="st">"https://bwu62.github.io/stat240-revamp/data/eruptions_recent.csv"</span></span>
@@ -240,7 +240,7 @@ date (2): start, stop
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<div class="sourceCode" id="cb438"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb437"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># print first few lines of result to check</span></span>
 <span><span class="va">eruptions_recent</span></span></code></pre></div>
 <pre><code># A tibble: 73 × 6
@@ -290,7 +290,7 @@ Ahyi    2024-01-01  2024-03-27  86  TRUE    NA
 Kanaga  2023-12-18  2023-12-18  0   TRUE    1
 Ruby    2023-09-14  2023-09-15  1   TRUE    1</code></pre>
 <p>Here it is read in with the <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_tsv()</a></code> function. This time, to save space, I’ve disabled the diagnostic messages by setting <code>show_col_types = FALSE</code> and reduced the final print checking to 5 lines. Otherwise, you can see we have the exact same result.</p>
-<div class="sourceCode" id="cb441"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb440"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># read in TSV file from link</span></span>
 <span><span class="va">eruptions_recent</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_tsv</a></span><span class="op">(</span></span>
 <span>  <span class="st">"https://bwu62.github.io/stat240-revamp/data/eruptions_recent.tsv"</span>,</span>
@@ -319,7 +319,7 @@ Atka Volcanic Complex|2024-03-27|2024-03-27|0|TRUE|
 Ahyi|2024-01-01|2024-03-27|86|TRUE|
 Kanaga|2023-12-18|2023-12-18|0|TRUE|1
 Ruby|2023-09-14|2023-09-15|1|TRUE|1</code></pre>
-<div class="sourceCode" id="cb444"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb443"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># read in | delimited file from link</span></span>
 <span><span class="va">eruptions_recent</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_delim</a></span><span class="op">(</span></span>
 <span>  <span class="st">"https://bwu62.github.io/stat240-revamp/data/eruptions_recent.delim"</span>,</span>
@@ -342,21 +342,21 @@ Ruby|2023-09-14|2023-09-15|1|TRUE|1</code></pre>
 <h3>
 <span class="header-section-number">4.2.7</span> XLS(X) file<a class="anchor" aria-label="anchor" href="#xlsx-file"><i class="fas fa-link"></i></a>
 </h3>
-<p>Data is also commonly encountered as an XLS/XLSX spreadsheet file, which can be read with readxl’s <a href="https://rdrr.io/cran/readxl/man/read_excel.html"><code class="sourceCode r"><span class="kw">read_excel</span>()</code></a> function. The <a href="data/eruptions_recent.xlsx"><code>eruptions_recent.xlsx</code></a> file again has the same dataset but exported to XLSX. Since XLSX is not a text format, it can’t be embedded here, but here’s what the first few rows look like when opened in Excel:</p>
+<p>Data is also commonly encountered as an XLS/XLSX spreadsheet file, which can be read with readxl’s <a href="https://rdrr.io/cran/readxl/man/read_excel.html"><code class="sourceCode r"><span class="fu">read_excel</span>()</code></a> function. The <a href="data/eruptions_recent.xlsx"><code>eruptions_recent.xlsx</code></a> file again has the same dataset but exported to XLSX. Since XLSX is not a text format, it can’t be embedded here, but here’s what the first few rows look like when opened in Excel:</p>
 <div class="inline-figure"><img src="https://i.imgur.com/lZbyh6Y.png" class="i6"></div>
 <p>Unfortunately, <a href="https://github.com/tidyverse/readxl/issues/278">readxl does not support URLs</a> so the data must be downloaded before loading.</p>
-<div class="sourceCode" id="cb446"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb445"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># load readxl, which is NOT core tidyverse, so must be imported explicitly</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readxl.tidyverse.org">readxl</a></span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb447"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb446"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># I already have the file downloaded to data/</span></span>
 <span><span class="co"># inside my current working directory</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.exists</a></span><span class="op">(</span><span class="st">"data/"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>[1] TRUE</code></pre>
-<div class="sourceCode" id="cb449"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb448"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/files.html">file.exists</a></span><span class="op">(</span><span class="st">"data/eruptions_recent.xlsx"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>[1] TRUE</code></pre>
-<div class="sourceCode" id="cb451"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb450"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">eruptions_recent</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_xlsx</a></span><span class="op">(</span><span class="st">"data/eruptions_recent.xlsx"</span><span class="op">)</span></span>
 <span><span class="co"># print first 5 lines</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">eruptions_recent</span>, n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
@@ -536,7 +536,7 @@ For example, suppose a data frame had in order from left to right a numeric colu
 <span class="header-section-number">4.3</span> Working with data frames<a class="anchor" aria-label="anchor" href="#working-with-data-frames"><i class="fas fa-link"></i></a>
 </h2>
 <p>We will be using data frames extensively throughout this class. Let’s start by learning some basic manipulations with them. First, I’m going to reload the <code>eruptions_recent</code> dataset using the CSV file, so that we have the correct <code>start</code>/<code>stop</code> columns.</p>
-<div class="sourceCode" id="cb457"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb456"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># set R to print fewer rows by default, to save space in demos below</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>pillar.print_min <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span></span>
@@ -561,18 +561,18 @@ For example, suppose a data frame had in order from left to right a numeric colu
 <span class="header-section-number">4.3.1</span> Basic operations<a class="anchor" aria-label="anchor" href="#basic-df"><i class="fas fa-link"></i></a>
 </h3>
 <p>Here are a few basic operations for working with data frames: <code><a href="https://rdrr.io/r/base/nrow.html">nrow()</a></code>, <code><a href="https://rdrr.io/r/base/nrow.html">ncol()</a></code>, and <code><a href="https://rdrr.io/r/base/dim.html">dim()</a></code> can show the number of rows and/or columns; <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> can show a quick summary of each column; <code><a href="https://rdrr.io/r/base/names.html">names()</a></code>/<code><a href="https://rdrr.io/r/base/colnames.html">colnames()</a></code> can both get and set column names; <code><a href="https://rdrr.io/r/base/colnames.html">rownames()</a></code> can both get and set row names.</p>
-<div class="sourceCode" id="cb459"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb458"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># get number of rows and columns</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">eruptions_recent</span><span class="op">)</span></span></code></pre></div>
 <pre><code>[1] 73</code></pre>
-<div class="sourceCode" id="cb461"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb460"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">eruptions_recent</span><span class="op">)</span></span></code></pre></div>
 <pre><code>[1] 6</code></pre>
-<div class="sourceCode" id="cb463"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb462"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># get both together using dim()</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">eruptions_recent</span><span class="op">)</span></span></code></pre></div>
 <pre><code>[1] 73  6</code></pre>
-<div class="sourceCode" id="cb465"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb464"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># show different summary of each column, depending on the column type</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">eruptions_recent</span><span class="op">)</span></span></code></pre></div>
 <pre><code>   volcano              start                 stop               duration     
@@ -591,18 +591,18 @@ For example, suppose a data frame had in order from left to right a numeric colu
                  3rd Qu.:3.000  
                  Max.   :4.000  
                  NA's   :7      </code></pre>
-<div class="sourceCode" id="cb467"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb466"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># show names of the variable columns</span></span>
 <span><span class="co"># note names() and colnames() are completely identical for data frames</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">eruptions_recent</span><span class="op">)</span></span></code></pre></div>
 <pre><code>[1] "volcano"   "start"     "stop"      "duration"  "confirmed" "vei"      </code></pre>
-<div class="sourceCode" id="cb469"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb468"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># you can also set individual, specific, or even all names</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">eruptions_recent</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"START"</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">eruptions_recent</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">4</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"VOLCANO"</span>, <span class="st">"DURATION"</span>, <span class="st">"CONFIRMED"</span>, <span class="st">"VEI"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">eruptions_recent</span><span class="op">)</span></span></code></pre></div>
 <pre><code>[1] "VOLCANO"   "START"     "stop"      "DURATION"  "CONFIRMED" "VEI"      </code></pre>
-<div class="sourceCode" id="cb471"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb470"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># let's reset the names back to their original values</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">eruptions_recent</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
 <span>  <span class="st">"volcano"</span>, <span class="st">"start"</span>, <span class="st">"stop"</span>, <span class="st">"duration"</span>, <span class="st">"confirmed"</span>, <span class="st">"vei"</span></span>
@@ -622,7 +622,7 @@ For example, suppose a data frame had in order from left to right a numeric colu
 <span class="header-section-number">4.3.2</span> Subsetting data frames<a class="anchor" aria-label="anchor" href="#subsetting-data-frames"><i class="fas fa-link"></i></a>
 </h3>
 <p>You can extract and manipulate subsets of a data frame along either dimension. Most commonly, you may want to use <code>$</code> to either pull out a single column as a vector, modify an existing column in-place, or even create a new column.</p>
-<div class="sourceCode" id="cb473"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb472"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># extract the vei column</span></span>
 <span><span class="va">eruptions_recent</span><span class="op">$</span><span class="va">duration</span></span></code></pre></div>
 <pre><code> [1]    0    0   86    0    1  115   13  205  717  489   39 1155   36  822  154    0
@@ -630,7 +630,7 @@ For example, suppose a data frame had in order from left to right a numeric colu
 [33]   44 1021    0    0 1491  131    1    3    2  100   71    0  108   19    2   38
 [49]    8    0  256   29  422    4   98    0   98  188  264  139   58  259   71   41
 [65] 1213  509  150  202   63  180    1    1   72</code></pre>
-<div class="sourceCode" id="cb475"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb474"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># change the confirmed column to 1s and 0s in-place</span></span>
 <span><span class="va">eruptions_recent</span><span class="op">$</span><span class="va">confirmed</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">eruptions_recent</span><span class="op">$</span><span class="va">confirmed</span><span class="op">)</span></span>
 <span><span class="va">eruptions_recent</span></span></code></pre></div>
@@ -643,7 +643,7 @@ For example, suppose a data frame had in order from left to right a numeric colu
 4 Kanaga                2023-12-18 2023-12-18        0         1     1
 5 Ruby                  2023-09-14 2023-09-15        1         1     1
 # ℹ 68 more rows</code></pre>
-<div class="sourceCode" id="cb477"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb476"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># add a new column giving just the year the eruption started in</span></span>
 <span><span class="va">eruptions_recent</span><span class="op">$</span><span class="va">start_year</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/year.html">year</a></span><span class="op">(</span><span class="va">eruptions_recent</span><span class="op">$</span><span class="va">start</span><span class="op">)</span></span>
 <span><span class="va">eruptions_recent</span></span></code></pre></div>
@@ -657,7 +657,7 @@ For example, suppose a data frame had in order from left to right a numeric colu
 5 Ruby                  2023-09-14 2023-09-15        1         1     1       2023
 # ℹ 68 more rows</code></pre>
 <p>You can also use <code>[]</code> and <code>[[]]</code> to subset columns by name or position, the difference being <code>[]</code> returns a data frame and <code>[[]]</code> returns the vector directly.</p>
-<div class="sourceCode" id="cb479"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb478"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># extract the vei column, keeping the result as a data frame</span></span>
 <span><span class="va">eruptions_recent</span><span class="op">[</span><span class="st">"vei"</span><span class="op">]</span></span></code></pre></div>
 <pre><code># A tibble: 73 × 1
@@ -669,14 +669,14 @@ For example, suppose a data frame had in order from left to right a numeric colu
 4     1
 5     1
 # ℹ 68 more rows</code></pre>
-<div class="sourceCode" id="cb481"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb480"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># extract the same column but by position and directly as a vector</span></span>
 <span><span class="va">eruptions_recent</span><span class="op">[[</span><span class="fl">6</span><span class="op">]</span><span class="op">]</span></span></code></pre></div>
 <pre><code> [1] NA NA NA  1  1  3  0  1  0  2  2  2  1  2  0  3  1 NA  3  1  1  1  1  1  3  2  3
 [28]  3  3  2  1  3  3  0  2  2  2  2 NA  2  3  1  2  2  3  2  4  4  1 NA  2  2  2  1
 [55]  1  2  2  1  3  3  1  2  1  2  2  3  2  2  3  1 NA  0  3</code></pre>
 <p>The <code>[]</code> operator has an additional usage of <code>[rows,cols]</code> where <code>rows</code>, <code>cols</code> can both be vectors specifying subsets by name or by position. Leaving one of them empty means return all of them.</p>
-<div class="sourceCode" id="cb483"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb482"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># extract just the first 5 start/stop times</span></span>
 <span><span class="va">eruptions_recent</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"start"</span>, <span class="st">"stop"</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
 <pre><code># A tibble: 5 × 2
@@ -687,14 +687,14 @@ For example, suppose a data frame had in order from left to right a numeric colu
 3 2024-01-01 2024-03-27
 4 2023-12-18 2023-12-18
 5 2023-09-14 2023-09-15</code></pre>
-<div class="sourceCode" id="cb485"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb484"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># extract the entire 10th row</span></span>
 <span><span class="va">eruptions_recent</span><span class="op">[</span><span class="fl">10</span>, <span class="op">]</span></span></code></pre></div>
 <pre><code># A tibble: 1 × 7
   volcano start      stop       duration confirmed   vei start_year
   &lt;chr&gt;   &lt;date&gt;     &lt;date&gt;        &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
 1 Pavlof  2021-08-05 2022-12-07      489         1     2       2021</code></pre>
-<div class="sourceCode" id="cb487"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb486"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># you can also use negative indices to remove specific items</span></span>
 <span><span class="co"># e.g. this removes rows 1-10 and also removes the 7th column (start_year)</span></span>
 <span><span class="va">eruptions_recent</span><span class="op">[</span><span class="op">-</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>, <span class="op">-</span><span class="fl">7</span><span class="op">]</span></span></code></pre></div>
@@ -707,8 +707,8 @@ For example, suppose a data frame had in order from left to right a numeric colu
 4 Semisopochnoi 2021-02-02 2023-05-05      822         1     2
 5 Kīlauea       2020-12-20 2021-05-23      154         1     0
 # ℹ 58 more rows</code></pre>
-<p>This is commonly used in data science to split up a dataset. For example, suppose you wanted to randomly partition your data into an 80% training and 20% testing set. You can first use <a href="https://rdrr.io/r/base/sample.html"><code class="sourceCode r"><span class="kw">sample</span>(n,x)</code></a> to randomly select <code>x</code> rows out of <code>n</code>, then use both positive and negative row subsetting syntax to get both partitions:</p>
-<div class="sourceCode" id="cb489"><pre class="downlit sourceCode r">
+<p>This is commonly used in data science to split up a dataset. For example, suppose you wanted to randomly partition your data into an 80% training and 20% testing set. You can first use <a href="https://rdrr.io/r/base/sample.html"><code class="sourceCode r"><span class="fu">sample</span>(n,x)</code></a> to randomly select <code>x</code> rows out of <code>n</code>, then use both positive and negative row subsetting syntax to get both partitions:</p>
+<div class="sourceCode" id="cb488"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># define total number of rows and 20% for testing data</span></span>
 <span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">eruptions_recent</span><span class="op">)</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">n</span> <span class="op">*</span> <span class="fl">0.2</span><span class="op">)</span></span>
@@ -716,7 +716,7 @@ For example, suppose a data frame had in order from left to right a numeric colu
 <span><span class="va">test_rows</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">n</span>, <span class="va">x</span><span class="op">)</span></span>
 <span><span class="va">test_rows</span></span></code></pre></div>
 <pre><code> [1] 68 39  1 34 43 14 59 51 21 42 54 46 10  7  9</code></pre>
-<div class="sourceCode" id="cb491"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb490"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># split dataset using the subsetting syntax we just learned</span></span>
 <span><span class="va">eruptions_recent_test</span>  <span class="op">&lt;-</span> <span class="va">eruptions_recent</span><span class="op">[</span> <span class="va">test_rows</span>, <span class="op">]</span></span>
 <span><span class="va">eruptions_recent_train</span> <span class="op">&lt;-</span> <span class="va">eruptions_recent</span><span class="op">[</span><span class="op">-</span><span class="va">test_rows</span>, <span class="op">]</span></span>
@@ -739,7 +739,7 @@ For example, suppose a data frame had in order from left to right a numeric colu
 13 Pavlof                   2021-08-05 2022-12-07      489         1     2       2021
 14 Mauna Loa                2022-11-27 2022-12-10       13         1     0       2022
 15 Kīlauea                  2021-09-29 2023-09-16      717         1     0       2021</code></pre>
-<div class="sourceCode" id="cb493"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb492"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">eruptions_recent_train</span></span></code></pre></div>
 <pre><code># A tibble: 58 × 7
   volcano               start      stop       duration confirmed   vei start_year
@@ -751,7 +751,7 @@ For example, suppose a data frame had in order from left to right a numeric colu
 5 Shishaldin            2023-07-11 2023-11-03      115         1     3       2023
 # ℹ 53 more rows</code></pre>
 <p>If you ever need to recombine them, just use <code><a href="https://rdrr.io/r/base/cbind.html">rbind()</a></code> which will bind rows together from multiple data frames, as long as they have the exact same columns (both name and type).</p>
-<div class="sourceCode" id="cb495"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb494"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># note the resulting rows will be in a different order,</span></span>
 <span><span class="co"># but it's the same data frame we started out with</span></span>
 <span><span class="va">eruptions_recent_recombined</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">eruptions_recent_test</span>, <span class="va">eruptions_recent_train</span><span class="op">)</span></span>
@@ -906,7 +906,7 @@ observer.observe(document.body, config);
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2024-12-11.</p>
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2025-06-15.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

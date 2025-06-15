@@ -7,7 +7,7 @@
 <title>B Cheat Sheets | STAT 240 Revamp</title>
 <meta name="author" content="Bi Cheng Wu, with help from Bret Larget and Cameron Jones">
 <meta name="description" content="Below is a consolidation of all “cheat sheets” mentioned in the notes, as well as a few extra that are not mentioned. This page is intended for you to use as a quick reference for basically the...">
-<meta name="generator" content="bookdown 0.40.1 with bs4_book()">
+<meta name="generator" content="bookdown 0.43.2 with bs4_book()">
 <meta property="og:title" content="B Cheat Sheets | STAT 240 Revamp">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://bwu62.github.io/stat240-revamp/cheat-sheets.html">
@@ -17,9 +17,9 @@
 <meta name="twitter:description" content="Below is a consolidation of all “cheat sheets” mentioned in the notes, as well as a few extra that are not mentioned. This page is intended for you to use as a quick reference for basically the...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Roboto_Mono-0.4.9/font.css" rel="stylesheet">
-<script src="libs/bs3compat-0.8.0/transition.js"></script><script src="libs/bs3compat-0.8.0/tabs.js"></script><script src="libs/bs3compat-0.8.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Roboto_Mono-0.4.10/font.css" rel="stylesheet">
+<script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
 <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="libs/plotly-binding-4.10.4/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
 <script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
 <script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-E0YDB40HWY"></script><script>
@@ -100,16 +100,19 @@
 <h2>
 <span class="header-section-number">B.1</span> Rstudio IDE<a class="anchor" aria-label="anchor" href="#rstudio-ide"><i class="fas fa-link"></i></a>
 </h2>
-<p>The <a href="https://rstudio.github.io/cheatsheets/rstudio-ide.pdf">Rstudio cheat sheet</a> has a VERY detailed description of what every button in Rstudio does, as well as some additional tips like common keyboard shortcuts and workflow suggestions.</p>
+<p>The <a href="misc/rstudio-ide.pdf">Rstudio cheat sheet</a> has a VERY detailed description of what every button in Rstudio does, as well as some additional tips like common keyboard shortcuts and workflow suggestions.</p>
+<!--original:
+https://rstudio.github.io/cheatsheets/rstudio-ide.pdf
+-->
 </div>
 <div id="base-r" class="section level2" number="12.2">
 <h2>
 <span class="header-section-number">B.2</span> Base R<a class="anchor" aria-label="anchor" href="#base-r"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
-<li>Matt Baggott’s <a href="https://cran.r-project.org/doc/contrib/Baggott-refcard-v2.pdf">R Reference Card v2.0</a> is a nice complete one-stop-shop for all of R’s built-in functions.</li>
-<li>IQSS’s <a href="https://iqss.github.io/dss-workshops/R/Rintro/base-r-cheat-sheet.pdf">Base R Cheat Sheet</a> and Alexey Shipunov’s <a href="https://herba.msu.ru/shipunov/school/biol_240/en/supp/refcard/rrefc_en.pdf">One Page R Reference Card</a> are both slightly shorter and more curated, but offer a nice, tighter set of the most critical R commands, along with useful examples of their syntax.</li>
-<li>For a slightly longer but more complete reference manual on R, especially with more details of how R works and different object types and data structures, Emmanuel Paradis’s <a href="https://cran.r-project.org/doc/contrib/Paradis-rdebuts_en.pdf">R for Beginners</a> may be helpful.</li>
+<li>Matt Baggott’s <a href="misc/Baggott-refcard-v2.pdf">R Reference Card v2.0</a> is a nice complete one-stop-shop for all of R’s built-in functions.</li>
+<li>IQSS’s <a href="misc/base-r-cheat-sheet.pdf">Base R Cheat Sheet</a> and Alexey Shipunov’s <a href="misc/rrefc_en.pdf">One Page R Reference Card</a> are both slightly shorter and more curated, but offer a nice, tighter set of the most critical R commands, along with useful examples of their syntax.</li>
+<li>For a slightly longer but more complete reference manual on R, especially with more details of how R works and different object types and data structures, Emmanuel Paradis’s <a href="misc/Paradis-rdebuts_en.pdf">R for Beginners</a> may be helpful.</li>
 </ul>
 </div>
 <div id="r-markdown-1" class="section level2" number="12.3">
@@ -117,46 +120,69 @@
 <span class="header-section-number">B.3</span> R Markdown<a class="anchor" aria-label="anchor" href="#r-markdown-1"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
-<li>The <a href="https://rstudio.github.io/cheatsheets/rmarkdown.pdf">R Markdown cheat sheet</a> has a convenient summary of everything you need to know and more to effectively use R Markdown, including basic markdown syntax, common chunk/YAML options, additional styling settings, and more.</li>
-<li>There’s also a slightly longer <a href="https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf">R Markdown reference guide</a> with a longer list of chunk and YAML options.</li>
+<li>The <a href="misc/rmarkdown.pdf">R Markdown cheat sheet</a> has a convenient summary of everything you need to know and more to effectively use R Markdown, including basic markdown syntax, common chunk/YAML options, additional styling settings, and more.</li>
+<li>There’s also a slightly longer <a href="misc/rmarkdown-reference.pdf">R Markdown reference guide</a> with a longer list of chunk and YAML options.</li>
 <li>There’s also a separate <a href="https://markdownguide.offshoot.io/cheat-sheet">Markdown</a> cheat sheet; note the basic syntax is completely supported, but some of the extended syntax is not supported. Feel free to experiment more on your own.</li>
 </ul>
+<!--originals:
+https://rstudio.github.io/cheatsheets/rmarkdown.pdf
+https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf
+-->
 </div>
 <div id="latex" class="section level2" number="12.4">
 <h2>
 <span class="header-section-number">B.4</span> <span class="math inline">\(\LaTeX\)</span><a class="anchor" aria-label="anchor" href="#latex"><i class="fas fa-link"></i></a>
 </h2>
-<p>If you wish to read more on <span class="math inline">\(\LaTeX\)</span>, start with Rong Zhuang’s <a href="https://jojozhuang.github.io/tutorial/mathjax-cheat-sheet-for-mathematical-notation">MathJax cheat sheet</a> or David Richeson’s <a href="https://users.dickinson.edu/~richesod/latex/latexcheatsheet.pdf">quick guide</a> which both have lots of great beginner-friendly examples. For a slightly more complete list of symbols, Eric Torrence’s <a href="https://pages.uoregon.edu/torrence/391/labs/LaTeX-cheat-sheet.pdf">cheat sheet</a> may also be useful.</p>
+<p>If you wish to read more on <span class="math inline">\(\LaTeX\)</span>, start with Rong Zhuang’s <a href="https://jojozhuang.github.io/tutorial/mathjax-cheat-sheet-for-mathematical-notation">MathJax cheat sheet</a> or David Richeson’s <a href="misc/latexcheatsheet.pdf">quick guide</a> which both have lots of great beginner-friendly examples. For a slightly more complete list of symbols, Eric Torrence’s <a href="misc/LaTeX-cheat-sheet.pdf">cheat sheet</a> may also be useful.</p>
+<!--originals:
+https://users.dickinson.edu/~richesod/latex/latexcheatsheet.pdf
+https://pages.uoregon.edu/torrence/391/labs/LaTeX-cheat-sheet.pdf
+-->
 </div>
 <div id="readr" class="section level2" number="12.5">
 <h2>
 <span class="header-section-number">B.5</span> readr<a class="anchor" aria-label="anchor" href="#readr"><i class="fas fa-link"></i></a>
 </h2>
-<p>The <a href="https://rstudio.github.io/cheatsheets/data-import.pdf">readr cheat sheet</a> has a good overview of all <code>read_*</code> functions as well as example code and some common arguments.</p>
+<p>The <a href="misc/data-import.pdf">readr cheat sheet</a> has a good overview of all <code>read_*</code> functions as well as example code and some common arguments.</p>
+<!--original:
+https://rstudio.github.io/cheatsheets/data-import.pdf
+-->
 </div>
 <div id="lubridate" class="section level2" number="12.6">
 <h2>
 <span class="header-section-number">B.6</span> lubridate<a class="anchor" aria-label="anchor" href="#lubridate"><i class="fas fa-link"></i></a>
 </h2>
-<p>The first page of the <a href="https://rstudio.github.io/cheatsheets/lubridate.pdf">lubridate cheat sheet</a> is useful for quickly checking if you’re using the right date-related operation.</p>
+<p>The first page of the <a href="misc/lubridate.pdf">lubridate cheat sheet</a> is useful for quickly checking if you’re using the right date-related operation.</p>
+<!--original:
+https://rstudio.github.io/cheatsheets/lubridate.pdf
+-->
 </div>
 <div id="ggplot2-1" class="section level2" number="12.7">
 <h2>
 <span class="header-section-number">B.7</span> ggplot2<a class="anchor" aria-label="anchor" href="#ggplot2-1"><i class="fas fa-link"></i></a>
 </h2>
-<p>The <a href="https://rstudio.github.io/cheatsheets/data-visualization.pdf">ggplot2 cheat sheet</a> has a great summary of every plot type on the first page, organized by the type and number of variables it’s designed to visualize. On the second page, there’s a nice list of additional plot features, such as faceting (i.e. subplot) options, setting scales, adjusting positions of plot elements, changing themes, editing labels/legends, etc.</p>
+<p>The <a href="misc/data-visualization.pdf">ggplot2 cheat sheet</a> has a great summary of every plot type on the first page, organized by the type and number of variables it’s designed to visualize. On the second page, there’s a nice list of additional plot features, such as faceting (i.e. subplot) options, setting scales, adjusting positions of plot elements, changing themes, editing labels/legends, etc.</p>
+<!--original:
+https://rstudio.github.io/cheatsheets/data-visualization.pdf
+-->
 </div>
 <div id="dplyr" class="section level2" number="12.8">
 <h2>
 <span class="header-section-number">B.8</span> dplyr<a class="anchor" aria-label="anchor" href="#dplyr"><i class="fas fa-link"></i></a>
 </h2>
-<p>The <a href="https://rstudio.github.io/cheatsheets/data-transformation.pdf">dplyr cheat sheet</a> has a basic rundown of all common data frame transformation operations, grouped by type, along with brief but helpful examples and diagrams. It includes everything from subsetting rows and columns, adding/editing columns, summarizing data frames, grouping operations, joining/binding multiple data frames, etc.</p>
+<p>The <a href="misc/data-transformation.pdf">dplyr cheat sheet</a> has a basic rundown of all common data frame transformation operations, grouped by type, along with brief but helpful examples and diagrams. It includes everything from subsetting rows and columns, adding/editing columns, summarizing data frames, grouping operations, joining/binding multiple data frames, etc.</p>
+<!--original:
+https://rstudio.github.io/cheatsheets/data-transformation.pdf
+-->
 </div>
 <div id="tidyr" class="section level2" number="12.9">
 <h2>
 <span class="header-section-number">B.9</span> tidyr<a class="anchor" aria-label="anchor" href="#tidyr"><i class="fas fa-link"></i></a>
 </h2>
-<p>The <a href="https://rstudio.github.io/cheatsheets/tidyr.pdf">tidyr cheat</a> shows a summary of different data tidying operations, only some of which we cover in this class. Notably, we use some of the NA and reshaping operations. Feel free to read more on your own.</p>
+<p>The <a href="misc/tidyr.pdf">tidyr cheat</a> shows a summary of different data tidying operations, only some of which we cover in this class. Notably, we use some of the NA and reshaping operations. Feel free to read more on your own.</p>
+<!--original:
+https://rstudio.github.io/cheatsheets/tidyr.pdf
+-->
 <!--
 https://rstudio.github.io/cheatsheets/
 -->
@@ -330,7 +356,7 @@ observer.observe(document.body, config);
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2024-12-11.</p>
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2025-06-15.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
