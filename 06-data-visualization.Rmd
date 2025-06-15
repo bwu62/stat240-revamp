@@ -754,7 +754,11 @@ ggplot(df, aes(x = x, y = y, fill = z)) +
 
 ## Other geoms
 
-Many other geoms exist (see the [ggplot2 cheat sheet](https://rstudio.github.io/cheatsheets/data-visualization.pdf) for a full list). Here are just a *few* other extremely useful ones you should know about.
+Many other geoms exist (see the [ggplot2 cheat sheet](misc/data-visualization.pdf) for a full list). Here are just a *few* other extremely useful ones you should know about.
+
+<!--original:
+https://rstudio.github.io/cheatsheets/data-visualization.pdf
+-->
 
 
 ### Straight lines
@@ -823,7 +827,7 @@ This plot is recommended ONLY as an initial exploratory plot; it should NOT be u
 
 These are beyond the scope of this course, but here's a few other links if you want to learn more:
 
- - If you haven't already, make sure to check out the [ggplot2 cheat sheet](https://rstudio.github.io/cheatsheets/data-visualization.pdf).
+ - If you haven't already, make sure to check out the [ggplot2 cheat sheet](misc/data-visualization.pdf).
  - If you need help picking a plot, [Data to Viz](https://www.data-to-viz.com) has a nice flow chart with links to example R code.
  - I also recommend scanning the Data to Viz [page on caveats](https://www.data-to-viz.com/caveats.html), i.e. common pitfalls in data science.
  - You can add additional [text annotations](https://ggplot2.tidyverse.org/reference/geom_text.html) to your plots if necessary.

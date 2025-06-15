@@ -536,12 +536,21 @@ However, make sure if you break a line up to finish the line eventually, otherwi
 
 Those are probably the most important R commands you need to know for now. Below I have curated a short selection of R "cheat sheets" for your reference should you need it, in rough order of how useful I think it will be for a first time R learner.
 
- - Matt Baggott's [R Reference Card v2.0](https://cran.r-project.org/doc/contrib/Baggott-refcard-v2.pdf) is a nice complete one-stop-shop for all of R's built-in functions.
- - IQSS's [Base R Cheat Sheet](https://iqss.github.io/dss-workshops/R/Rintro/base-r-cheat-sheet.pdf) and Alexey Shipunov's [One Page R Reference Card](https://herba.msu.ru/shipunov/school/biol_240/en/supp/refcard/rrefc_en.pdf) are both slightly shorter and more curated, but offer a nice, tighter set of the most critical R commands, along with useful examples of their syntax.
- - For a slightly longer but more complete reference manual on R, especially with more details of how R works and different object types and data structures, Emmanuel Paradis's [R for Beginners](https://cran.r-project.org/doc/contrib/Paradis-rdebuts_en.pdf) may be helpful.
+ - Matt Baggott's [R Reference Card v2.0](misc/Baggott-refcard-v2.pdf) is a nice complete one-stop-shop for all of R's built-in functions.
+ - IQSS's [Base R Cheat Sheet](misc/base-r-cheat-sheet.pdf) and Alexey Shipunov's [One Page R Reference Card](misc/rrefc_en.pdf) are both slightly shorter and more curated, but offer a nice, tighter set of the most critical R commands, along with useful examples of their syntax.
+ - For a slightly longer but more complete reference manual on R, especially with more details of how R works and different object types and data structures, Emmanuel Paradis's [R for Beginners](misc/paradis.pdf) may be helpful.
 
-<!--https://cran.r-project.org/doc/contrib/Short-refcard.pdf-->
-<!--https://www.maths.usyd.edu.au/u/jchan/Rcommands.pdf-->
+<!--originals:
+https://cran.r-project.org/doc/contrib/Baggott-refcard-v2.pdf
+https://iqss.github.io/dss-workshops/R/Rintro/base-r-cheat-sheet.pdf
+https://herba.msu.ru/shipunov/school/biol_240/en/supp/refcard/rrefc_en.pdf
+https://cran.r-project.org/doc/contrib/Paradis-rdebuts_en.pdf
+-->
+
+<!--additional sources not used:
+https://cran.r-project.org/doc/contrib/Short-refcard.pdf
+https://www.maths.usyd.edu.au/u/jchan/Rcommands.pdf
+-->
 
 
 
@@ -708,14 +717,21 @@ $$x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$$
 
 You will see lots of $\LaTeX$ later in the notes when I need to write more math, so I just wanted to mention it here. You can right click on any equations you see in the notes and change the MathJax display options, or see its source code (you can of course also see the source code of the entire page using the link in the sidebar as mentioned previously).
 
-If you wish to read more on $\LaTeX$, start with Rong Zhuang's [MathJax cheat sheet](https://jojozhuang.github.io/tutorial/mathjax-cheat-sheet-for-mathematical-notation) or David Richeson's [quick guide](https://divisbyzero.github.io/latex-cheatsheet/latexcheatsheet.pdf) which both have lots of great beginner-friendly examples. For a slightly more complete list of symbols, Eric Torrence's [cheat sheet](https://pages.uoregon.edu/torrence/391/labs/LaTeX-cheat-sheet.pdf) may also be useful. 
+If you wish to read more on $\LaTeX$, start with Rong Zhuang's [MathJax cheat sheet](https://jojozhuang.github.io/tutorial/mathjax-cheat-sheet-for-mathematical-notation) or David Richeson's [quick guide](misc/latexcheatsheet.pdf) which both have lots of great beginner-friendly examples. For a slightly more complete list of symbols, Eric Torrence's [cheat sheet](misc/LaTeX-cheat-sheet.pdf) may also be useful. 
 
-
+<!--originals:
+https://divisbyzero.github.io/latex-cheatsheet/latexcheatsheet.pdf
+https://pages.uoregon.edu/torrence/391/labs/LaTeX-cheat-sheet.pdf
+-->
 
 
 ### Cheat sheet
 
-If you need a good R Markdown cheat sheet, I recommend [this reference guide](https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf) published by the same developers as Rstudio. Page 1 has a Markdown syntax guide, pages 2-3 highlight some more useful chunk options, and pages 4-5 have some additional info on different output formats as well as some additional YAML header options.
+If you need a good R Markdown cheat sheet, I recommend [this reference guide](misc/rmarkdown-reference.pdf) published by the same developers as Rstudio. Page 1 has a Markdown syntax guide, pages 2-3 highlight some more useful chunk options, and pages 4-5 have some additional info on different output formats as well as some additional YAML header options.
+
+<!--original:
+https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf
+-->
 
 
 

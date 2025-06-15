@@ -16,6 +16,7 @@ copy.file = function(file,dest=NULL){
 copy.list = c(
   "demo.html",
   "data/",
+  "misc/",
   "data_list.txt",
   "icons/",
   "ggplot_theme_options.R",
