@@ -17,6 +17,11 @@ rmd_files:
   - "data-modeling.Rmd"
   - "09-overview.Rmd"
   - "10-probability.Rmd"
+  - "11-inference.Rmd"
+  - "inference-types.Rmd"
+  - "12-proportions.Rmd"
+  - "13-means.Rmd"
+  - "14-regression.Rmd"
   - "datasets.Rmd"
   - "cheat-sheets.Rmd"
 delete_merged_file: true
