@@ -163,6 +163,10 @@ continuous-rvs
 expectation-variance
 expected-value
 variance
+inference
+proportions
+means
+regression
 datasets
 datasets-list
 eruptions

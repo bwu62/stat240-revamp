@@ -308,7 +308,7 @@ So, we found the variance $\sigma^2\approx2.92$, and thus the standard deviation
 :::{.eg}
 Let's consider the [casino game example](#casino-game2) a final time. Find the variance and standard deviation of $X$.
 
-We found earlier $\mu=\E(X)=1$. Applying the variance formula gives:
+We found earlier $\mu=E(X)=1$. Applying the variance formula gives:
 
 $$Var(X)=(0\!-\!1)^2\!\cdot\!(0.4)+(1\!-\!1)^2\!\cdot\!(0.3)+(2\!-\!1)^2\!\cdot\!(0.2)+(3\!-\!1)^2\!\cdot\!(0.1)=1$$
 
