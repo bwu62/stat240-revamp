@@ -27,8 +27,8 @@ cat(glue::glue('``` r
 df <- tibble(
   name = c("Alice", "Bob", "Charlie"),
   sex = c("F", "M", "M"),
-  date_of_birth = mdy(c("{format(today()-years(21),"%m/%d")%>%stringr::str_replace_all("(^|)0","\\\\1")}/{format(today()-years(21),"%y")}", "7/4/99", "10/31/06")),
-  age = floor(as.numeric(today() - birthday)/365.24),
+  date_of_birth = mdy(c("{format(today()-years(21)-1,"%m/%d")%>%stringr::str_replace_all("(^|)0","\\\\1")}/{format(today()-years(21),"%y")}", "7/4/99", "10/31/06")),
+  age = floor(as.numeric(today() - date_of_birth) / 365.24),
   declared_major = c(TRUE, TRUE, FALSE),
   school = "UW-Madison"
 )
@@ -40,7 +40,7 @@ df
 df <- tibble(
   name = c("Alice", "Bob", "Charlie"),
   sex = c("F", "M", "M"),
-  date_of_birth = c(today() - years(21), mdy(c("7/4/99", "10/31/06"))),
+  date_of_birth = c(today() - years(21)-1, mdy(c("7/4/99", "10/31/06"))),
   age = floor(as.numeric(today() - date_of_birth) / 365.24),
   declared_major = c(TRUE, TRUE, FALSE),
   school = "UW-Madison"
