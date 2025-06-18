@@ -620,7 +620,7 @@ glimpse(enrollment)
 ```
 
 ```
-Rows: 146
+Rows: 148
 Columns: 3
 $ year              <dbl> 1947, 1947, 1948, 1948, 1949, 1949, 1950, 1950, 1951, 195…
 $ sex               <chr> "male", "female", "male", "female", "male", "female", "ma…

@@ -17,6 +17,7 @@ library(tidyverse)
 library(rvest)
 library(lubridate)
 library(xlsx)
+library(magrittr)
 ```
 
 
@@ -125,8 +126,8 @@ eruptions_recent <- eruptions %>%
 
 
 ``` r
-# save complete file too
-write_csv(eruptions,file="data/eruptions.csv")
+# # save complete file too
+# write_csv(eruptions,file="data/eruptions.csv")
 
 # write out to different formats for reading
 write_csv(eruptions_recent,file="data/eruptions_recent.csv")
@@ -156,20 +157,20 @@ eruptions_recent
 ```
 
 ```
-# A tibble: 73 × 6
+# A tibble: 79 × 6
    volcano               start      stop       duration confirmed   vei
    <chr>                 <date>     <date>        <dbl> <lgl>     <dbl>
- 1 Kīlauea               2024-06-03 2024-06-03        0 TRUE         NA
- 2 Atka Volcanic Complex 2024-03-27 2024-03-27        0 TRUE         NA
- 3 Ahyi                  2024-01-01 2024-03-27       86 TRUE         NA
- 4 Kanaga                2023-12-18 2023-12-18        0 TRUE          1
- 5 Ruby                  2023-09-14 2023-09-15        1 TRUE          1
- 6 Shishaldin            2023-07-11 2023-11-03      115 TRUE          3
- 7 Mauna Loa             2022-11-27 2022-12-10       13 TRUE          0
- 8 Ahyi                  2022-11-18 2023-06-11      205 TRUE          1
- 9 Kīlauea               2021-09-29 2023-09-16      717 TRUE          0
-10 Pavlof                2021-08-05 2022-12-07      489 TRUE          2
-# ℹ 63 more rows
+ 1 Atka Volcanic Complex 2025-02-20 2025-06-17      117 TRUE         NA
+ 2 Kīlauea               2024-12-23 2025-06-17      176 TRUE         NA
+ 3 Kīlauea               2024-09-15 2024-09-20        5 TRUE         NA
+ 4 Ahyi                  2024-08-05 2025-06-17      316 TRUE         NA
+ 5 Kīlauea               2024-06-03 2024-06-03        0 TRUE         NA
+ 6 Atka Volcanic Complex 2024-03-27 2024-03-27        0 TRUE         NA
+ 7 Ahyi                  2024-01-01 2024-03-27       86 TRUE         NA
+ 8 Kanaga                2023-12-18 2023-12-18        0 TRUE          1
+ 9 Ruby                  2023-09-14 2023-09-15        1 TRUE          1
+10 Shishaldin            2023-07-11 2023-11-03      115 TRUE          3
+# ℹ 69 more rows
 ```
 
 <!--
@@ -381,7 +382,7 @@ enrollment
 ```
 
 ```
-# A tibble: 146 × 3
+# A tibble: 148 × 3
     year sex    enrolled_millions
    <dbl> <chr>              <dbl>
  1  1947 male               1.66 
@@ -394,7 +395,7 @@ enrollment
  8  1950 female             0.721
  9  1951 male               1.39 
 10  1951 female             0.711
-# ℹ 136 more rows
+# ℹ 138 more rows
 ```
 
 

@@ -55,7 +55,7 @@ mean(eruptions_recent$duration)
 ```
 
 ```
-[1] 192.1233
+[1] 189.7975
 ```
 
 ``` r
@@ -64,7 +64,7 @@ sum(eruptions_recent$duration) / length(eruptions_recent$duration)
 ```
 
 ```
-[1] 192.1233
+[1] 189.7975
 ```
 
 :::{.note}
@@ -127,10 +127,10 @@ c(
 ```
 
 ```
-[1] 0.5068493 0.5205479
+[1] 0.5063291 0.5189873
 ```
 
-Note the median length of eruptions, 71, is significantly smaller than the mean, 192.1232877, because the data is extremely skewed, i.e. there are a few extremely long eruptions, which pull the mean up to be much higher (since it's more sensitive to extreme values).
+Note the median length of eruptions, 71, is significantly smaller than the mean, 189.7974684, because the data is extremely skewed, i.e. there are a few extremely long eruptions, which pull the mean up to be much higher (since it's more sensitive to extreme values).
 
 :::{.note}
 It's worth mentioning here the word "outliers" isn't well defined formally and is actually a surprisingly tricky subject in statistics. Here, an "outlier" just loosely refers to observations that differ dramatically compared to the rest of your data. It's important to remember that **not all "outliers" are errors**; some may in fact point to new information you're not aware of.
@@ -249,10 +249,10 @@ var(eruptions_recent$duration)
 ```
 
 ```
-[1] 101204.7
+[1] 104570.8
 ```
 
-In other words, the "average" squared difference of an eruption's duration and the mean duration is about 101.2k days^2^.
+In other words, the "average" squared difference of an eruption's duration and the mean duration is about 104.6k days^2^.
 
 Note the units of the variance are squared of the data units. This makes it inconvenient to work with, since it means it cannot be directly compared with the data. This is why instead we often work with **its square root, i.e. the standard deviation**:
 
@@ -267,7 +267,7 @@ sd(eruptions_recent$duration)
 ```
 
 ```
-[1] 318.1269
+[1] 323.374
 ```
 
 ``` r
@@ -276,10 +276,10 @@ sqrt(var(eruptions_recent$duration))
 ```
 
 ```
-[1] 318.1269
+[1] 323.374
 ```
 
-In other words, the "average" distance in days between the duration of eruptions and the mean is about 318.1 days.
+In other words, the "average" distance in days between the duration of eruptions and the mean is about 323.4 days.
 
 :::{.note}
 Since the standard deviation is defined as the square root of the variance (and thus the variance is always the square of the standard deviation), knowing one of these quantities enables you to also easily compute the other.
@@ -303,8 +303,8 @@ quantile(eruptions_recent$duration, probs = c(0, 0.25, 0.5, 0.75, 1))
 ```
 
 ```
-  0%  25%  50%  75% 100% 
-   0    6   71  195 1491 
+    0%    25%    50%    75%   100% 
+   0.0    6.0   71.0  191.5 1491.0 
 ```
 
 These 5 numbers correspond to the **min**, **1^st^ quartile ($Q_1$)**, **median**, **3^rd^ quartile ($Q_3$)**, and max respectively, which are often collectively known as the [five-number summary](https://en.wikipedia.org/wiki/Five-number_summary). $Q_1$ and $Q_3$ are also frequently called the upper and lower **hinges** of a dataset.
@@ -318,7 +318,7 @@ IQR(eruptions_recent$duration)
 ```
 
 ```
-[1] 189
+[1] 185.5
 ```
 
 

@@ -106,7 +106,8 @@
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rvest.tidyverse.org/">rvest</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://lubridate.tidyverse.org">lubridate</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/colearendt/xlsx">xlsx</a></span><span class="op">)</span></span></code></pre></div>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/colearendt/xlsx">xlsx</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org">magrittr</a></span><span class="op">)</span></span></code></pre></div>
 <div id="datasets-list" class="section level2" number="15.1">
 <h2>
 <span class="header-section-number">A.1</span> List of datasets<a class="anchor" aria-label="anchor" href="#datasets-list"><i class="fas fa-link"></i></a>
@@ -149,7 +150,7 @@
 <span>  <span class="co"># remove unnecessary evidence column</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">Evidence</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="co"># make names nice</span></span>
-<span>  <span class="fu"><a href="https://rlang.r-lib.org/reference/set_names.html">set_names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"volcano"</span>,<span class="st">"start"</span>,<span class="st">"stop"</span>,<span class="st">"confirmed"</span>,<span class="st">"vei"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://magrittr.tidyverse.org/reference/aliases.html">set_names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"volcano"</span>,<span class="st">"start"</span>,<span class="st">"stop"</span>,<span class="st">"confirmed"</span>,<span class="st">"vei"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div id="process-data" class="section level3" number="15.2.2">
 <h3>
@@ -210,8 +211,8 @@
 <span class="header-section-number">A.2.3</span> Write out data<a class="anchor" aria-label="anchor" href="#write-out-data"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb831"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># save complete file too</span></span>
-<span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html">write_csv</a></span><span class="op">(</span><span class="va">eruptions</span>,file<span class="op">=</span><span class="st">"data/eruptions.csv"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="co"># # save complete file too</span></span>
+<span><span class="co"># write_csv(eruptions,file="data/eruptions.csv")</span></span>
 <span></span>
 <span><span class="co"># write out to different formats for reading</span></span>
 <span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html">write_csv</a></span><span class="op">(</span><span class="va">eruptions_recent</span>,file<span class="op">=</span><span class="st">"data/eruptions_recent.csv"</span><span class="op">)</span></span>
@@ -236,20 +237,20 @@
 </h3>
 <div class="sourceCode" id="cb832"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">eruptions_recent</span></span></code></pre></div>
-<pre><code># A tibble: 73 × 6
+<pre><code># A tibble: 79 × 6
    volcano               start      stop       duration confirmed   vei
    &lt;chr&gt;                 &lt;date&gt;     &lt;date&gt;        &lt;dbl&gt; &lt;lgl&gt;     &lt;dbl&gt;
- 1 Kīlauea               2024-06-03 2024-06-03        0 TRUE         NA
- 2 Atka Volcanic Complex 2024-03-27 2024-03-27        0 TRUE         NA
- 3 Ahyi                  2024-01-01 2024-03-27       86 TRUE         NA
- 4 Kanaga                2023-12-18 2023-12-18        0 TRUE          1
- 5 Ruby                  2023-09-14 2023-09-15        1 TRUE          1
- 6 Shishaldin            2023-07-11 2023-11-03      115 TRUE          3
- 7 Mauna Loa             2022-11-27 2022-12-10       13 TRUE          0
- 8 Ahyi                  2022-11-18 2023-06-11      205 TRUE          1
- 9 Kīlauea               2021-09-29 2023-09-16      717 TRUE          0
-10 Pavlof                2021-08-05 2022-12-07      489 TRUE          2
-# ℹ 63 more rows</code></pre>
+ 1 Atka Volcanic Complex 2025-02-20 2025-06-17      117 TRUE         NA
+ 2 Kīlauea               2024-12-23 2025-06-17      176 TRUE         NA
+ 3 Kīlauea               2024-09-15 2024-09-20        5 TRUE         NA
+ 4 Ahyi                  2024-08-05 2025-06-17      316 TRUE         NA
+ 5 Kīlauea               2024-06-03 2024-06-03        0 TRUE         NA
+ 6 Atka Volcanic Complex 2024-03-27 2024-03-27        0 TRUE         NA
+ 7 Ahyi                  2024-01-01 2024-03-27       86 TRUE         NA
+ 8 Kanaga                2023-12-18 2023-12-18        0 TRUE          1
+ 9 Ruby                  2023-09-14 2023-09-15        1 TRUE          1
+10 Shishaldin            2023-07-11 2023-11-03      115 TRUE          3
+# ℹ 69 more rows</code></pre>
 <!--
 
 ### Scrape volcanoes info
@@ -427,7 +428,7 @@ options(width=80)
 <span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">column_to_rownames</a></span><span class="op">(</span><span class="st">"name"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="va">t</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">as.data.frame</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">matches</a></span><span class="op">(</span><span class="st">"Year|(Sex.*(Male|Female))|Nonprofit"</span>,ignore.case<span class="op">=</span><span class="cn">F</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://rlang.r-lib.org/reference/set_names.html">set_names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"year"</span>,<span class="st">"male"</span>,<span class="st">"female"</span>,<span class="st">"nonprofit"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://magrittr.tidyverse.org/reference/aliases.html">set_names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"year"</span>,<span class="st">"male"</span>,<span class="st">"female"</span>,<span class="st">"nonprofit"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_sub.html">str_sub</a></span><span class="op">(</span><span class="va">year</span>,<span class="fl">1</span>,<span class="fl">4</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_all</a></span><span class="op">(</span><span class="va">parse_number</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span><span class="op">&amp;</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">male</span><span class="op">)</span><span class="op">&amp;</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">female</span><span class="op">)</span><span class="op">)</span><span class="op">&amp;</span><span class="va">year</span><span class="op">&gt;</span><span class="fl">20</span>,</span>
@@ -449,7 +450,7 @@ options(width=80)
 </h3>
 <div class="sourceCode" id="cb840"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">enrollment</span></span></code></pre></div>
-<pre><code># A tibble: 146 × 3
+<pre><code># A tibble: 148 × 3
     year sex    enrolled_millions
    &lt;dbl&gt; &lt;chr&gt;              &lt;dbl&gt;
  1  1947 male               1.66 
@@ -462,7 +463,7 @@ options(width=80)
  8  1950 female             0.721
  9  1951 male               1.39 
 10  1951 female             0.711
-# ℹ 136 more rows</code></pre>
+# ℹ 138 more rows</code></pre>
 </div>
 </div>
 <div id="fertility-rate" class="section level2" number="15.5">
@@ -718,7 +719,7 @@ observer.observe(document.body, config);
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2025-06-15.</p>
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2025-06-18.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
