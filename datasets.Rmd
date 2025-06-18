@@ -18,6 +18,7 @@ library(tidyverse)
 library(rvest)
 library(lubridate)
 library(xlsx)
+library(magrittr)
 ```
 
 
@@ -119,8 +120,8 @@ eruptions_recent <- eruptions %>%
 ### Write out data
 
 ```{r}
-# save complete file too
-write_csv(eruptions,file="data/eruptions.csv")
+# # save complete file too
+# write_csv(eruptions,file="data/eruptions.csv")
 
 # write out to different formats for reading
 write_csv(eruptions_recent,file="data/eruptions_recent.csv")
