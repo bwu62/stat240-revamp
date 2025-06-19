@@ -664,7 +664,7 @@ https://paulvanderlaken.com/wp-content/uploads/2017/08/r-regular-expression-chee
 '- !"#$%&amp;()*,./:;?@[\]^_`{|}~+&lt;=&gt;0123456789aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ
 </pre>
 <div class="note">
-<p>This ordering depends on the platform; the above order should be for *nix systems (i.e. Mac/Linux). Windows orders by <code>'- !"#$%&amp;()*,./:;?@[\]^_`{|}~+&lt;=&gt;0123...yYzZ</code> instead.</p>
+<p>This ordering depends on the platform; the above order should be for Windows systems. *nix systems (i.e. Mac/Linux) order by <code> _-,;:!?.’"()[]{}@*/\&amp;#%`^+&lt;=&gt;|~$0123…yYzZ</code> instead.</p>
 </div>
 <p>Characters are sorted by their order in this sequence of characters, with characters earlier in the sequence being “less than” later characters. Strings with the same first character will be sorted by the second character; if the second character is also the same, they will be sorted by the third, and so on (just like normal dictionaries)</p>
 <p>Note however that nothingness, i.e. the absence of a character (such as when a string ends), comes before any character, which makes sense because otherwise “app” would appear after “apple”. Below is a series of examples demonstrating string sorting.</p>

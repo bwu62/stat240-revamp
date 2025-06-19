@@ -520,7 +520,7 @@ cat(
 </pre>
 
 :::{.note}
-This ordering depends on the platform; the above order should be for *nix systems (i.e. Mac/Linux). Windows orders by `` '- !"#$%&()*,./:;?@[\]^_`{|}~+<=>0123...yYzZ`` instead.
+This ordering depends on the platform; the above order should be for Windows systems. *nix systems (i.e. Mac/Linux) order by <code>&nbsp;_-,;:!?.'&quot;()\[\]\{\}\@\*/\\&amp;#%`^+&lt;=&gt;|~$0123...yYzZ</code> instead.
 :::
 
 Characters are sorted by their order in this sequence of characters, with characters earlier in the sequence being "less than" later characters. Strings with the same first character will be sorted by the second character; if the second character is also the same, they will be sorted by the third, and so on (just like normal dictionaries)
