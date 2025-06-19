@@ -967,6 +967,8 @@ format(date, "%m/%d/%y")
 format(date, "%b %e, %Y")
 # fully written out, including weekday
 format(date, "%A, %B %e, %Y")
+# some shorthands also exist and may depend on your computer's locale
+format(date, "ISO prefers %F, but the US uses %D or %x")
 ```
 
 A full list of these percent codes can be found in the help page of `strptime()`, a base R function for parsing date/time objects.
