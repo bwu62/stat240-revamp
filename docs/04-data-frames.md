@@ -145,6 +145,7 @@ Kīlauea,2024-06-03,2024-06-03,0,TRUE,NA
 Atka Volcanic Complex,2024-03-27,2024-03-27,0,TRUE,NA
 Ahyi,2024-01-01,2024-03-27,86,TRUE,NA
 Kanaga,2023-12-18,2023-12-18,0,TRUE,1
+Ruby,2023-09-14,2023-09-15,1,TRUE,1
 ```
 
 If you have a link to a dataset, you can directly pass it into `read_csv()` and it will automagically download the file to your system's temp directory and read it in. Make sure to save it into a data frame with a sensible name. It's also usually a good idea to print out the first few lines to check the result and see if everything worked without error.
@@ -224,9 +225,10 @@ Kīlauea	2024-06-03	2024-06-03	0	TRUE	NA
 Atka Volcanic Complex	2024-03-27	2024-03-27	0	TRUE	NA
 Ahyi	2024-01-01	2024-03-27	86	TRUE	NA
 Kanaga	2023-12-18	2023-12-18	0	TRUE	1
+Ruby	2023-09-14	2023-09-15	1	TRUE	1
 ```
 
-Here it is read in with the `read_tsv()` function. This time, to save space, I've disabled the diagnostic messages by setting `show_col_types = FALSE` and reduced the final print checking to 5 lines. Otherwise, you can see we have the exact same result.
+Here it is read in with the `read_tsv()` function. This time, to save space, I've disabled the diagnostic messages by setting `show_col_types = FALSE` and reduced the final print checking to 6 lines. Otherwise, you can see we have the exact same result.
 
 
 ``` r
@@ -235,8 +237,8 @@ eruptions_recent <- read_tsv(
   "https://bwu62.github.io/stat240-revamp/data/eruptions_recent.tsv",
   show_col_types = FALSE
 )
-# print first 5 lines instead of 10 to still check, but save space
-print(eruptions_recent, n = 5)
+# print first 6 lines instead of 10 to still check, but save space
+print(eruptions_recent, n = 6)
 ```
 
 ```
@@ -248,7 +250,8 @@ print(eruptions_recent, n = 5)
 3 Atka Volcanic Complex 2024-03-27 2024-03-27        0 TRUE         NA
 4 Ahyi                  2024-01-01 2024-03-27       86 TRUE         NA
 5 Kanaga                2023-12-18 2023-12-18        0 TRUE          1
-# ℹ 70 more rows
+6 Ruby                  2023-09-14 2023-09-15        1 TRUE          1
+# ℹ 69 more rows
 ```
 
 
@@ -265,6 +268,7 @@ Kīlauea|2024-06-03|2024-06-03|0|TRUE|
 Atka Volcanic Complex|2024-03-27|2024-03-27|0|TRUE|
 Ahyi|2024-01-01|2024-03-27|86|TRUE|
 Kanaga|2023-12-18|2023-12-18|0|TRUE|1
+Ruby|2023-09-14|2023-09-15|1|TRUE|1
 ```
 
 ``` r
@@ -274,8 +278,8 @@ eruptions_recent <- read_delim(
   delim = "|",
   show_col_types = FALSE
 )
-# print first 5 lines
-print(eruptions_recent, n = 5)
+# print first 6 lines
+print(eruptions_recent, n = 6)
 ```
 
 ```
@@ -287,7 +291,8 @@ print(eruptions_recent, n = 5)
 3 Atka Volcanic Complex 2024-03-27 2024-03-27        0 TRUE         NA
 4 Ahyi                  2024-01-01 2024-03-27       86 TRUE         NA
 5 Kanaga                2023-12-18 2023-12-18        0 TRUE          1
-# ℹ 70 more rows
+6 Ruby                  2023-09-14 2023-09-15        1 TRUE          1
+# ℹ 69 more rows
 ```
 
 
@@ -326,8 +331,8 @@ file.exists("data/eruptions_recent.xlsx")
 
 ``` r
 eruptions_recent <- read_xlsx("data/eruptions_recent.xlsx")
-# print first 5 lines
-print(eruptions_recent, n = 5)
+# print first 6 lines
+print(eruptions_recent, n = 6)
 ```
 
 ```
@@ -339,7 +344,8 @@ print(eruptions_recent, n = 5)
 3 Atka Volcanic Com… 2024-03-27 00:00:00 2024-03-27 00:00:00        0 TRUE         NA
 4 Ahyi               2024-01-01 00:00:00 2024-03-27 00:00:00       86 TRUE         NA
 5 Kanaga             2023-12-18 00:00:00 2023-12-18 00:00:00        0 TRUE          1
-# ℹ 70 more rows
+6 Ruby               2023-09-14 00:00:00 2023-09-15 00:00:00        1 TRUE          1
+# ℹ 69 more rows
 ```
 
 Oops, looks like start/stop was read as a datetime instead of a date. We'll learn later how to fix this, but for now we're moving on.
@@ -493,7 +499,7 @@ We will be using data frames extensively throughout this class. Let's start by l
 
 ``` r
 # set R to print fewer rows by default, to save space in demos below
-options(pillar.print_min = 5)
+options(pillar.print_min = 6)
 
 # reload dataset
 eruptions_recent <- read_csv(
@@ -513,7 +519,8 @@ eruptions_recent
 3 Atka Volcanic Complex 2024-03-27 2024-03-27        0 TRUE         NA
 4 Ahyi                  2024-01-01 2024-03-27       86 TRUE         NA
 5 Kanaga                2023-12-18 2023-12-18        0 TRUE          1
-# ℹ 70 more rows
+6 Ruby                  2023-09-14 2023-09-15        1 TRUE          1
+# ℹ 69 more rows
 ```
 
 
@@ -648,7 +655,8 @@ eruptions_recent
 3 Atka Volcanic Complex 2024-03-27 2024-03-27        0         1    NA
 4 Ahyi                  2024-01-01 2024-03-27       86         1    NA
 5 Kanaga                2023-12-18 2023-12-18        0         1     1
-# ℹ 70 more rows
+6 Ruby                  2023-09-14 2023-09-15        1         1     1
+# ℹ 69 more rows
 ```
 
 ``` r
@@ -666,7 +674,8 @@ eruptions_recent
 3 Atka Volcanic Complex 2024-03-27 2024-03-27        0         1    NA       2024
 4 Ahyi                  2024-01-01 2024-03-27       86         1    NA       2024
 5 Kanaga                2023-12-18 2023-12-18        0         1     1       2023
-# ℹ 70 more rows
+6 Ruby                  2023-09-14 2023-09-15        1         1     1       2023
+# ℹ 69 more rows
 ```
 
 You can also use `[]` and `[[]]` to subset columns by name or position, the difference being `[]` returns a data frame and `[[]]` returns the vector directly.
@@ -686,7 +695,8 @@ eruptions_recent["vei"]
 3    NA
 4    NA
 5     1
-# ℹ 70 more rows
+6     1
+# ℹ 69 more rows
 ```
 
 ``` r
@@ -746,7 +756,8 @@ eruptions_recent[-(1:10), -7]
 3 Veniaminof    2021-02-28 2021-04-05       36         1     1
 4 Semisopochnoi 2021-02-02 2023-05-05      822         1     2
 5 Kīlauea       2020-12-20 2021-05-23      154         1     0
-# ℹ 60 more rows
+6 Cleveland     2020-06-01 2020-06-01        0         1     3
+# ℹ 59 more rows
 ```
 
 This is commonly used in data science to split up a dataset. For example, suppose you wanted to randomly partition your data into an 80% training and 20% testing set. You can first use [`sample(n,x)`{.R}](https://rdrr.io/r/base/sample.html) to randomly select `x` rows out of `n`, then use both positive and negative row subsetting syntax to get both partitions:
@@ -806,7 +817,8 @@ eruptions_recent_train
 3 Ahyi                  2024-01-01 2024-03-27       86         1    NA       2024
 4 Kanaga                2023-12-18 2023-12-18        0         1     1       2023
 5 Ruby                  2023-09-14 2023-09-15        1         1     1       2023
-# ℹ 55 more rows
+6 Mauna Loa             2022-11-27 2022-12-10       13         1     0       2022
+# ℹ 54 more rows
 ```
 
 If you ever need to recombine them, just use `rbind()` which will bind rows together from multiple data frames, as long as they have the exact same columns (both name and type).
@@ -828,5 +840,6 @@ eruptions_recent_recombined
 3 Kīlauea                   2024-09-15 2024-09-20        5         1    NA       2024
 4 Mariana Back-Arc Segment… 2013-02-13 2015-12-01     1021         1     0       2013
 5 Cleveland                 2009-10-02 2009-12-12       71         1     2       2009
-# ℹ 70 more rows
+6 Semisopochnoi             2021-02-02 2023-05-05      822         1     2       2021
+# ℹ 69 more rows
 ```
