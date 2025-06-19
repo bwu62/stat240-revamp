@@ -1045,6 +1045,10 @@ Levels: Low &lt; Medium &lt; High</code></pre>
 <code class="sourceCode R"><span><span class="co"># fully written out, including weekday</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">date</span>, <span class="st">"%A, %B %e, %Y"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>[1] "Friday, July  4, 2025"</code></pre>
+<div class="sourceCode" id="cb430"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># some shorthands also exist and may depend on your computer's locale</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">date</span>, <span class="st">"ISO prefers %F, but the US uses %D or %x"</span><span class="op">)</span></span></code></pre></div>
+<pre><code>[1] "ISO prefers 2025-07-04, but the US uses 07/04/25 or 7/4/2025"</code></pre>
 <p>A full list of these percent codes can be found in the help page of <code><a href="https://rdrr.io/r/base/strptime.html">strptime()</a></code>, a base R function for parsing date/time objects.</p>
 
 </div>
@@ -1195,7 +1199,7 @@ observer.observe(document.body, config);
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2025-06-18.</p>
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2025-06-19.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

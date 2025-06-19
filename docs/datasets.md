@@ -77,10 +77,11 @@ eruptions <- eruptions_raw %>%
     volcano = str_replace(volcano,"°","°"),
     # convert confirmed? column to logical
     confirmed = if_else(replace_na(confirmed,"NA")=="Confirmed",T,F),
-    # replace continuing eruptions with today's date
-    # (continuation last validated 6/15/25)
+    # OLD PLAN: replace continuing eruptions with today's date (continuation last validated 6/15/25)
+    # NEW PLAN: to avoid problems with unvalidated stop dates, as well as too many NAs at the top of the file
+    #           which interferes with introduction of data frames chapter, remove unstopped and into-2025 eruptions below
     stop = if_else(str_detect(stop,"continu"),format(today(),"%Y %b %e"),stop,missing=stop)
-  ) %>% 
+  ) %>%
   # extract date error to new column
   separate(start,c("start","start_error"),"±") %>% 
   separate(stop,c("stop","stop_error"),"±") %>% 
@@ -118,7 +119,7 @@ eruptions <- eruptions_raw %>%
 
 # get just subset for demo
 eruptions_recent <- eruptions %>% 
-  filter(start_error <= 30, start_year > 2000, !is.na(stop)) %>% 
+  filter(start_error <= 30, start_year > 2000, stop_year < 2025, !is.na(stop)) %>% 
   select(-contains("_"))
 ```
 
@@ -157,20 +158,20 @@ eruptions_recent
 ```
 
 ```
-# A tibble: 79 × 6
+# A tibble: 75 × 6
    volcano               start      stop       duration confirmed   vei
    <chr>                 <date>     <date>        <dbl> <lgl>     <dbl>
- 1 Atka Volcanic Complex 2025-02-20 2025-06-17      117 TRUE         NA
- 2 Kīlauea               2024-12-23 2025-06-17      176 TRUE         NA
- 3 Kīlauea               2024-09-15 2024-09-20        5 TRUE         NA
- 4 Ahyi                  2024-08-05 2025-06-17      316 TRUE         NA
- 5 Kīlauea               2024-06-03 2024-06-03        0 TRUE         NA
- 6 Atka Volcanic Complex 2024-03-27 2024-03-27        0 TRUE         NA
- 7 Ahyi                  2024-01-01 2024-03-27       86 TRUE         NA
- 8 Kanaga                2023-12-18 2023-12-18        0 TRUE          1
- 9 Ruby                  2023-09-14 2023-09-15        1 TRUE          1
-10 Shishaldin            2023-07-11 2023-11-03      115 TRUE          3
-# ℹ 69 more rows
+ 1 Kīlauea               2024-09-15 2024-09-20        5 TRUE         NA
+ 2 Kīlauea               2024-06-03 2024-06-03        0 TRUE         NA
+ 3 Atka Volcanic Complex 2024-03-27 2024-03-27        0 TRUE         NA
+ 4 Ahyi                  2024-01-01 2024-03-27       86 TRUE         NA
+ 5 Kanaga                2023-12-18 2023-12-18        0 TRUE          1
+ 6 Ruby                  2023-09-14 2023-09-15        1 TRUE          1
+ 7 Shishaldin            2023-07-11 2023-11-03      115 TRUE          3
+ 8 Mauna Loa             2022-11-27 2022-12-10       13 TRUE          0
+ 9 Ahyi                  2022-11-18 2023-06-11      205 TRUE          1
+10 Kīlauea               2021-09-29 2023-09-16      717 TRUE          0
+# ℹ 65 more rows
 ```
 
 <!--

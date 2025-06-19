@@ -1856,4 +1856,13 @@ format(date, "%A, %B %e, %Y")
 [1] "Friday, July  4, 2025"
 ```
 
+``` r
+# some shorthands also exist and may depend on your computer's locale
+format(date, "ISO prefers %F, but the US uses %D or %x")
+```
+
+```
+[1] "ISO prefers 2025-07-04, but the US uses 07/04/25 or 7/4/2025"
+```
+
 A full list of these percent codes can be found in the help page of `strptime()`, a base R function for parsing date/time objects.
