@@ -126,7 +126,7 @@ Also note that if you do not have readr (or tidyverse) loaded, attempting to [TA
 ### Example: US Eruptions {#eruptions-example}
 
 
-To demonstrate the basic functionality of these different functions, I've prepared and exported a dataset on 21^st^ century volcanic eruptions (with a recorded start and end date) in the United States from the [Smithsonian](https://volcano.si.edu/volcanolist_countries.cfm?country=United%20States) to all the formats listed above so we can practice reading them in from any initial format:
+To demonstrate the basic functionality of these different functions, I've prepared and exported a dataset on 21^st^ century volcanic eruptions (with a recorded start and end date prior to 2025) in the United States from the [Smithsonian](https://volcano.si.edu/volcanolist_countries.cfm?country=United%20States) to all the formats listed above so we can practice reading them in from any initial format:
 
  - [`eruptions_recent.csv`](data/eruptions_recent.csv)
  - [`eruptions_recent.tsv`](data/eruptions_recent.tsv)
