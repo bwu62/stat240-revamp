@@ -862,7 +862,7 @@ Some functions (where it makes sense) like `month()` and `wday()` have additiona
 ```{r getters-more}
 # output month as abbreviated names instead (abbr = TRUE by default)
 month(dates2, label = TRUE)
-# output day of week as full, unabridged names
+# output day of week as full, unabbreviated names
 wday(dates2, label = TRUE, abbr = FALSE)
 ```
 
@@ -904,7 +904,7 @@ This works with all the getters above, feel free to experiment more with this on
 Since dates are represented internally as number of days since a reference point, doing math with dates turns out to be extremely easy. You can add/subtract days, make sequences, run logical comparisons, and even use some statistical summary functions.
 
 ```{r date-math}
-# get day after by adding +1 to {.md}
+# get day after by adding +1 to our example date
 date + 1
 # what date was 1000 days ago?
 date - 1000
@@ -942,7 +942,7 @@ min(dates2)
 # organize dates2 in chronological order
 sort(dates2)
 # is today in dates2?
-date %in% dates2
+today() %in% dates2
 ```
 ```{r date-more-math}
 # some statistical functions can also be run on dates
@@ -963,8 +963,8 @@ As a final note, let's briefly discuss printing dates. You can use `format()` to
 ```{r printing-dates}
 # print today as mm/dd/yy which is common in the US
 format(date, "%m/%d/%y")
-# another way, slightly more written out
-format(date, "%b %d, %Y")
+# another way, slightly more "natural" feeling
+format(date, "%b %e, %Y")
 # fully written out, including weekday
 format(date, "%A, %B %e, %Y")
 ```
