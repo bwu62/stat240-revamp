@@ -939,7 +939,7 @@ Levels: Low &lt; Medium &lt; High</code></pre>
 <pre><code>[1] Jul Oct Jun Aug Mar
 12 Levels: Jan &lt; Feb &lt; Mar &lt; Apr &lt; May &lt; Jun &lt; Jul &lt; Aug &lt; Sep &lt; Oct &lt; ... &lt; Dec</code></pre>
 <div class="sourceCode" id="cb394"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># output day of week as full, unabridged names</span></span>
+<code class="sourceCode R"><span><span class="co"># output day of week as full, unabbreviated names</span></span>
 <span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/day.html">wday</a></span><span class="op">(</span><span class="va">dates2</span>, label <span class="op">=</span> <span class="cn">TRUE</span>, abbr <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <pre><code>[1] Friday   Tuesday  Monday   Tuesday  Thursday
 7 Levels: Sunday &lt; Monday &lt; Tuesday &lt; Wednesday &lt; Thursday &lt; ... &lt; Saturday</code></pre>
@@ -972,7 +972,7 @@ Levels: Low &lt; Medium &lt; High</code></pre>
 </h3>
 <p>Since dates are represented internally as number of days since a reference point, doing math with dates turns out to be extremely easy. You can add/subtract days, make sequences, run logical comparisons, and even use some statistical summary functions.</p>
 <div class="sourceCode" id="cb401"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># get day after by adding +1 to {.md}</span></span>
+<code class="sourceCode R"><span><span class="co"># get day after by adding +1 to our example date</span></span>
 <span><span class="va">date</span> <span class="op">+</span> <span class="fl">1</span></span></code></pre></div>
 <pre><code>[1] "2025-07-05"</code></pre>
 <div class="sourceCode" id="cb403"><pre class="downlit sourceCode r">
@@ -1012,8 +1012,8 @@ Levels: Low &lt; Medium &lt; High</code></pre>
 <pre><code>[1] "2006-10-10" "2009-06-29" "2014-08-12" "2023-03-02" "2025-07-04"</code></pre>
 <div class="sourceCode" id="cb416"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># is today in dates2?</span></span>
-<span><span class="va">date</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">dates2</span></span></code></pre></div>
-<pre><code>[1] TRUE</code></pre>
+<span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/now.html">today</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">dates2</span></span></code></pre></div>
+<pre><code>[1] FALSE</code></pre>
 <div class="sourceCode" id="cb418"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># some statistical functions can also be run on dates</span></span>
 <span><span class="co"># e.g. we can find the mean and median date of dates2</span></span>
@@ -1038,9 +1038,9 @@ Levels: Low &lt; Medium &lt; High</code></pre>
 <span><span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">date</span>, <span class="st">"%m/%d/%y"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>[1] "07/04/25"</code></pre>
 <div class="sourceCode" id="cb426"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># another way, slightly more written out</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">date</span>, <span class="st">"%b %d, %Y"</span><span class="op">)</span></span></code></pre></div>
-<pre><code>[1] "Jul 04, 2025"</code></pre>
+<code class="sourceCode R"><span><span class="co"># another way, slightly more "natural" feeling</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">date</span>, <span class="st">"%b %e, %Y"</span><span class="op">)</span></span></code></pre></div>
+<pre><code>[1] "Jul  4, 2025"</code></pre>
 <div class="sourceCode" id="cb428"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># fully written out, including weekday</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">date</span>, <span class="st">"%A, %B %e, %Y"</span><span class="op">)</span></span></code></pre></div>

@@ -1650,7 +1650,7 @@ month(dates2, label = TRUE)
 ```
 
 ``` r
-# output day of week as full, unabridged names
+# output day of week as full, unabbreviated names
 wday(dates2, label = TRUE, abbr = FALSE)
 ```
 
@@ -1711,7 +1711,7 @@ Since dates are represented internally as number of days since a reference point
 
 
 ``` r
-# get day after by adding +1 to {.md}
+# get day after by adding +1 to our example date
 date + 1
 ```
 
@@ -1787,11 +1787,11 @@ sort(dates2)
 
 ``` r
 # is today in dates2?
-date %in% dates2
+today() %in% dates2
 ```
 
 ```
-[1] TRUE
+[1] FALSE
 ```
 
 ``` r
@@ -1839,12 +1839,12 @@ format(date, "%m/%d/%y")
 ```
 
 ``` r
-# another way, slightly more written out
-format(date, "%b %d, %Y")
+# another way, slightly more "natural" feeling
+format(date, "%b %e, %Y")
 ```
 
 ```
-[1] "Jul 04, 2025"
+[1] "Jul  4, 2025"
 ```
 
 ``` r
