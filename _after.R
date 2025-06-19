@@ -5,9 +5,7 @@ copy.file = function(file,dest=NULL){
   }
   if(
     file.exists(file) && (
-      !file.exists(paste0("docs/",file)) || 
-      file.info(file)$mtime >=
-      file.info(paste0("docs/",file))$mtime
+      !file.exists(dest) || (file.info(file)$mtime >= file.info(dest)$mtime)
     )
   ) file.copy(file,dest,overwrite=T)
 }
