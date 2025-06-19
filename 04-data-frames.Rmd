@@ -490,11 +490,11 @@ eruptions_recent[-(1:10), -7]
 This is commonly used in data science to split up a dataset. For example, suppose you wanted to randomly partition your data into an 80% training and 20% testing set. You can first use [`sample(n,x)`{.R}](https://rdrr.io/r/base/sample.html) to randomly select `x` rows out of `n`, then use both positive and negative row subsetting syntax to get both partitions:
 
 ```{r subsetting-df4,tidy=F}
-# define total number of rows and 20% for testing data
+# define n as total number of rows
 n <- nrow(eruptions_recent)
-x <- round(n * 0.2)
-# randomly draw 20% of the row numbers
-test_rows <- sample(n, x)
+# randomly sample 20% of numbers from 1 to n as test rows
+# (sample auto-rounds inputs down to integers if they're not whole)
+test_rows <- sample(n, 0.2*n)
 test_rows
 # split dataset using the subsetting syntax we just learned
 eruptions_recent_test  <- eruptions_recent[ test_rows, ]
