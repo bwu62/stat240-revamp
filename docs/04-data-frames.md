@@ -764,11 +764,11 @@ This is commonly used in data science to split up a dataset. For example, suppos
 
 
 ``` r
-# define total number of rows and 20% for testing data
+# define n as total number of rows
 n <- nrow(eruptions_recent)
-x <- round(n * 0.2)
-# randomly draw 20% of the row numbers
-test_rows <- sample(n, x)
+# randomly sample 20% of numbers from 1 to n as test rows
+# (sample auto-rounds inputs down to integers if they're not whole)
+test_rows <- sample(n, 0.2*n)
 test_rows
 ```
 

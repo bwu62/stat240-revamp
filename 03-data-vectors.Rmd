@@ -642,7 +642,7 @@ See the help page for `parse_number()` for more examples and usage notes.
 
 Finally, let's talk about date vectors (note we are not talking about date+time values, just dates). In R, dates are actually stored as a number, representing the [number of days after January 1^st^ 1970](https://rdrr.io/r/base/Dates.html), which is used as a reference date called the [Epoch](https://en.wikipedia.org/wiki/Epoch_(computing)).
 
-Before we run some examples, we're going to load in the [lubridate](https://lubridate.tidyverse.org/) package, which is designed to make working with dates super easy and is also a part of Tidyverse. However, it's not actually a core package, which means **it MUST be loaded in separately** each time you wish to use it!
+Before we run some examples, we're going to load in the [lubridate](https://lubridate.tidyverse.org/) package, which is designed to make working with dates super easy and is also a core Tidyverse package.
 
 ```{r load-lubridate}
 library(lubridate)

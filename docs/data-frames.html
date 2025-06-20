@@ -725,11 +725,11 @@ For example, suppose a data frame had in order from left to right a numeric colu
 # ℹ 59 more rows</code></pre>
 <p>This is commonly used in data science to split up a dataset. For example, suppose you wanted to randomly partition your data into an 80% training and 20% testing set. You can first use <a href="https://rdrr.io/r/base/sample.html"><code class="sourceCode r"><span class="fu">sample</span>(n,x)</code></a> to randomly select <code>x</code> rows out of <code>n</code>, then use both positive and negative row subsetting syntax to get both partitions:</p>
 <div class="sourceCode" id="cb490"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># define total number of rows and 20% for testing data</span></span>
+<code class="sourceCode R"><span><span class="co"># define n as total number of rows</span></span>
 <span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">eruptions_recent</span><span class="op">)</span></span>
-<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">n</span> <span class="op">*</span> <span class="fl">0.2</span><span class="op">)</span></span>
-<span><span class="co"># randomly draw 20% of the row numbers</span></span>
-<span><span class="va">test_rows</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">n</span>, <span class="va">x</span><span class="op">)</span></span>
+<span><span class="co"># randomly sample 20% of numbers from 1 to n as test rows</span></span>
+<span><span class="co"># (sample auto-rounds inputs down to integers if they're not whole)</span></span>
+<span><span class="va">test_rows</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">n</span>, <span class="fl">0.2</span><span class="op">*</span><span class="va">n</span><span class="op">)</span></span>
 <span><span class="va">test_rows</span></span></code></pre></div>
 <pre><code> [1] 68 39  1 34 43 14 59 51 21 54  7  9 15 67 37</code></pre>
 <div class="sourceCode" id="cb492"><pre class="downlit sourceCode r">

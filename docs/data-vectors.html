@@ -793,7 +793,7 @@ Levels: Low &lt; Medium &lt; High</code></pre>
 <span class="header-section-number">3.11</span> Date vectors<a class="anchor" aria-label="anchor" href="#date-vectors"><i class="fas fa-link"></i></a>
 </h2>
 <p>Finally, let’s talk about date vectors (note we are not talking about date+time values, just dates). In R, dates are actually stored as a number, representing the <a href="https://rdrr.io/r/base/Dates.html">number of days after January 1<sup>st</sup> 1970</a>, which is used as a reference date called the <a href="https://en.wikipedia.org/wiki/Epoch_(computing)">Epoch</a>.</p>
-<p>Before we run some examples, we’re going to load in the <a href="https://lubridate.tidyverse.org/">lubridate</a> package, which is designed to make working with dates super easy and is also a part of Tidyverse. However, it’s not actually a core package, which means <strong>it MUST be loaded in separately</strong> each time you wish to use it!</p>
+<p>Before we run some examples, we’re going to load in the <a href="https://lubridate.tidyverse.org/">lubridate</a> package, which is designed to make working with dates super easy and is also a core Tidyverse package.</p>
 <div class="sourceCode" id="cb339"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://lubridate.tidyverse.org">lubridate</a></span><span class="op">)</span></span></code></pre></div>
 <p>Ok, let’s start the demo by creating a date object. Let’s use this year’s 4<sup>th</sup> of July as an example.</p>
