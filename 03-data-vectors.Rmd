@@ -744,9 +744,9 @@ In lubridate, the [parser functions](https://lubridate.tidyverse.org/reference/y
 )
 ```
 ```{r .mdyDemos2,echo=F,results='asis'}
-cat(glue::glue('``` r
+cat(paste0('``` r
 mdy(c(
-  "{toString(.mdyDemos)}"
+  ',"\"",paste(.mdyDemos,collapse="\", \""),"\"",'
 ))
 ```'))
 ```
@@ -765,9 +765,9 @@ mdy(.mdyDemos)
 )
 ```
 ```{r .dmyDemos2,echo=F,results='asis'}
-cat(glue::glue('``` r
+cat(paste0('``` r
 dmy(c(
-  "{toString(.dmyDemos)}"
+  ',"\"",paste(.dmyDemos,collapse="\", \""),"\"",'
 ))
 ```'))
 ```

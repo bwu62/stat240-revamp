@@ -1460,7 +1460,7 @@ In lubridate, the [parser functions](https://lubridate.tidyverse.org/reference/y
 
 ``` r
 mdy(c(
-  "7/4/25, 07-04-2025, 070425, Jul 4 '25, Friday, July 4th, 2025"
+  "7/4/25", "07-04-2025", "070425", "Jul 4 '25", "Friday, July 4th, 2025"
 ))
 ```
 
@@ -1470,7 +1470,7 @@ mdy(c(
 
 ``` r
 dmy(c(
-  "4/7/25, 04-07-2025, 040725, 4 Jul '25, Friday, 4th of July, 2025"
+  "4/7/25", "04-07-2025", "040725", "4 Jul '25", "Friday, 4th of July, 2025"
 ))
 ```
 
