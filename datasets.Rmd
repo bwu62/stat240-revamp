@@ -419,7 +419,8 @@ fertility_meta <- fertility_meta %>% filter(!is.na(IncomeGroup)) %>%
 fertility <- fertility_raw %>% select(-matches("Indicator|Name|^\\.\\.")) %>% 
   rename(code = "Country Code") %>% inner_join(fertility_meta) %>%
   pivot_longer(matches("^\\d+"),names_to="year",values_to="rate") %>% 
-  # mutate(income_group = factor(str_replace(income_group," income",""),ordered = T, levels=c(
+  mutate(income_group = str_replace(income_group," income","")) %>%
+  # mutate(income_group = factor(income_group,ordered = T, levels=c(
   #   "Low", "Lower middle", "Upper middle", "High"))) %>%
   arrange(country,year)
 ```
