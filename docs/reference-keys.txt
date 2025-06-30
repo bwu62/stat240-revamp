@@ -197,3 +197,4 @@ lubridate
 ggplot2-1
 dplyr
 tidyr
+additional-resources

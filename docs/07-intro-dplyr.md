@@ -591,7 +591,7 @@ penguins2 %>% mutate(
 # you can of course create columns of other data types
 penguins2 %>% mutate(
   small_bill = bill_length_mm < 39 | bill_depth_mm < 18,
-  fake_dates = seq(today(), today() + nrow(penguins) - 1, by = 1)
+  fake_dates = seq(mdy("1/1/25"), mdy("1/1/25") + nrow(penguins) - 1, by = 1)
 )
 ```
 
@@ -599,11 +599,11 @@ penguins2 %>% mutate(
 # A tibble: 333 × 6
   species sex    bill_length_mm bill_depth_mm small_bill fake_dates
   <chr>   <chr>           <dbl>         <dbl> <lgl>      <date>    
-1 Adelie  male             39.1          18.7 FALSE      2025-06-19
-2 Adelie  female           39.5          17.4 TRUE       2025-06-20
-3 Adelie  female           40.3          18   FALSE      2025-06-21
-4 Adelie  female           36.7          19.3 TRUE       2025-06-22
-5 Adelie  male             39.3          20.6 FALSE      2025-06-23
+1 Adelie  male             39.1          18.7 FALSE      2025-01-01
+2 Adelie  female           39.5          17.4 TRUE       2025-01-02
+3 Adelie  female           40.3          18   FALSE      2025-01-03
+4 Adelie  female           36.7          19.3 TRUE       2025-01-04
+5 Adelie  male             39.3          20.6 FALSE      2025-01-05
 # ℹ 328 more rows
 ```
 
