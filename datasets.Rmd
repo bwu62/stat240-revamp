@@ -354,10 +354,10 @@ f <- "temp/fertility.zip"
 download.file("https://api.worldbank.org/v2/en/indicator/SP.DYN.TFRT.IN?downloadformat=csv",f,mode="wb")
 files = unzip(f, list=T)$Name %>% str_subset("Indicator",negate=T)
 unzip(f,files,exdir="temp/")
-fertility_meta <- str_subset(list.files("temp/",full=T),"^temp/Meta.*API_SP.DYN.TFRT") %>% read_csv
+fertility_meta <- str_subset(list.files("temp/",full=T),"^temp/Meta.*API_SP.DYN.TFRT") %>% read_csv %>% distinct
 skip = str_subset(list.files("temp/",full=T),"^temp/API_SP.DYN.TFRT") %>% read_lines %>% 
   str_detect("Country Name") %>% which %>% min %>% subtract(1)
-fertility_raw <- str_subset(list.files("temp/",full=T),"^temp/API_SP.DYN.TFRT") %>% read_csv(skip=skip)
+fertility_raw <- str_subset(list.files("temp/",full=T),"^temp/API_SP.DYN.TFRT") %>% read_csv(skip=skip) %>% distinct
 ```
 
 ```{r}
@@ -414,6 +414,7 @@ fertility_raw <- read_csv("data/fertility_raw.csv")
 ```{r}
 fertility_meta <- fertility_meta %>% filter(!is.na(IncomeGroup)) %>% 
   rename(code = "Country Code", country = "TableName", region = "Region", income_group = "IncomeGroup") %>% 
+  mutate(income_group = str_replace(income_group," income","")) %>% 
   select(code, country, region, income_group)
 
 fertility <- fertility_raw %>% select(-matches("Indicator|Name|^\\.\\.")) %>% 
