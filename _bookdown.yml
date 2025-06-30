@@ -24,6 +24,7 @@ rmd_files:
   - "14-regression.Rmd"
   - "datasets.Rmd"
   - "cheat-sheets.Rmd"
+  - "additional-resources.Rmd"
 delete_merged_file: true
 language:
   ui:
