@@ -213,8 +213,8 @@ We can also show the latest rate for each country, as well as the change from 20
 :::{.fold .o}
 ```{r fertility-all-countries-latest-rate-change}
 # first filter to get the right years, then
-# sort by country, year (so 2000, 2022 are first and last in each group)
-# then summarize to get 2000 and 2022 rates, mutate to get change,
+# sort by country, year (so 2000, 2023 are first and last in each group)
+# then summarize to get 2000 and 2023 rates, mutate to get change,
 # then ungroup, distinct, and arrange to display a neat output
 # again, collapsing output due to lengthy print out
 fertility_change <- fertility %>%
@@ -223,13 +223,13 @@ fertility_change <- fertility %>%
   group_by(country) %>%
   mutate(
     rate2000 = first(rate),
-    rate2022 = last(rate),
-    change   = rate2022 - rate2000
+    rate2023 = last(rate),
+    change   = rate2023 - rate2000
   ) %>%
-  select(country, region, rate2000, change, rate2022) %>%
+  select(country, region, rate2000, change, rate2023) %>%
   ungroup() %>%
   distinct() %>%
-  arrange(rate2022) %>%
+  arrange(rate2023) %>%
   print(n = Inf)
 ```
 :::
@@ -268,7 +268,7 @@ Let's make a few plots of the data as well. Here are 2 plots showing median fert
 
 :::{.i96}
 ```{r fertility-rate-over-time-by-region-income,tidy=F,fig.width=7.2,fig.height=4.8}
-# first get mean rate in each region + year, then pipe into line plot
+# first get median rate in each region + year, then pipe into line plot
 # fct_reorder2() is used to reorder legend to be same order as end of lines
 # see https://forcats.tidyverse.org/reference/fct_reorder.html for more details
 fertility %>%
@@ -285,7 +285,7 @@ fertility %>%
                      minor_breaks = seq(1960, 2022, 2)) +
   scale_y_continuous(expand = c(0, 0), limits = c(1.2, 7.2),
                      breaks = 2:7, minor_breaks = seq(1.2, 7.2, .2))
-# first get mean rate in each income group + year, then pipe into line plot
+# first get median rate in each income group + year, then pipe into line plot
 fertility %>%
   group_by(income_group, year) %>%
   summarize(median_rate = median(rate)) %>%
