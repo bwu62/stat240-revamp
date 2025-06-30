@@ -148,7 +148,7 @@ https://rstudio.github.io/cheatsheets/data-transformation.pdf
 <pre><code>df %&gt;% f %&gt;% g %&gt;% h</code></pre>
 <p>This is not only much neater but also significantly easier to modify and debug. You can also easily specify additional arguments. For example, suppose <code>f</code>, <code>g</code>, and <code>h</code> need the additional arguments <code>a = 1</code>, <code>b = 2</code>, and <code>c = 3</code> in order. Compare these two equivalent syntax options:</p>
 <pre><code>h(g(f(df, a = 1), b = 2), c = 3)</code></pre>
-<pre><code>df %&gt;% f(a = 1) %&gt;% g(b = 2) %&gt;% g(c = 3)</code></pre>
+<pre><code>df %&gt;% f(a = 1) %&gt;% g(b = 2) %&gt;% h(c = 3)</code></pre>
 <p>As long as each function in the chain accepts a data frame as the first argument AND outputs a data frame as the result, you can string together as many functions as you need to perform several data operations in a single step.</p>
 <div class="tip">
 <p>The <a href="https://magrittr.tidyverse.org/index.html#usage">magrittr help page</a> has some additional usage tips for <code>%&gt;%</code>, such as how to pass the left side to a different argument position, using <code>%&gt;%</code> to create simple functions, and other <a href="https://magrittr.tidyverse.org/articles/magrittr.html#additional-pipe-operators">advanced pipes</a>. These are outside the scope of this course, so read at your own discretion!</p>
@@ -251,7 +251,7 @@ https://rstudio.github.io/cheatsheets/data-transformation.pdf
 5 Adelie  Torgersen        3650 male    2007
 # ℹ 328 more rows</code></pre>
 <div class="sourceCode" id="cb603"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># you can also select by excluding specific columns with !</span></span>
+<code class="sourceCode R"><span><span class="co"># you can also select by excluding specific columns with -</span></span>
 <span><span class="co"># e.g. select everything except island and everything after body mass</span></span>
 <span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">island</span>, <span class="op">-</span><span class="op">(</span><span class="va">body_mass_g</span><span class="op">:</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">last_col</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>, <span class="va">body_mass_g</span><span class="op">)</span></span></code></pre></div>
@@ -964,7 +964,7 @@ https://rstudio.github.io/cheatsheets/data-transformation.pdf
 <li>
 <code>NaN</code> is usually the result of a mathematically invalid operation, like <code>0/0</code>, <code>0*Inf</code>, or <code>Inf-Inf</code>.
 <ul>
-<li>Note that <code>sqrt(-1)</code> and <code>log(-1)</code> also return <code>NaN</code> since the input type is of real type. Replace <code>-1</code> with <code>0-1i</code> to trigger complex evaluation.</li>
+<li>Note that <code>sqrt(-1)</code> and <code>log(-1)</code> also return <code>NaN</code> since the input type is of real type. Replace <code>-1</code> with <code>-1+0i</code> to trigger complex evaluation.</li>
 </ul>
 </li>
 </ul>

@@ -61,7 +61,7 @@ h(g(f(df, a = 1), b = 2), c = 3)
 ```
 
 ```
-df %>% f(a = 1) %>% g(b = 2) %>% g(c = 3)
+df %>% f(a = 1) %>% g(b = 2) %>% h(c = 3)
 ```
 
 As long as each function in the chain accepts a data frame as the first argument AND outputs a data frame as the result, you can string together as many functions as you need to perform several data operations in a single step.
@@ -191,7 +191,7 @@ penguins %>%
 ```
 
 ``` r
-# you can also select by excluding specific columns with !
+# you can also select by excluding specific columns with -
 # e.g. select everything except island and everything after body mass
 penguins %>%
   select(-island, -(body_mass_g:last_col()), body_mass_g)
@@ -1134,7 +1134,7 @@ Let's now briefly discuss R techniques for handling NAs. First it's important to
 
  - `NA` means the absence of an observation, i.e. a data point was not recorded.
  - `NaN` is usually the result of a mathematically invalid operation, like `0/0`, `0*Inf`, or `Inf-Inf`.
-    - Note that `sqrt(-1)` and `log(-1)` also return `NaN` since the input type is of real type. Replace `-1` with `0-1i` to trigger complex evaluation.
+    - Note that `sqrt(-1)` and `log(-1)` also return `NaN` since the input type is of real type. Replace `-1` with `-1+0i` to trigger complex evaluation.
 
 Even though they're not the exact same, both `NA` and `NaN` are considered missing in R and can be handled together using the operations covered below. It's also worth noting `NA` is NOT the same as `"NA"`, i.e. a string made of the letters `"N"` and `"A"`
 
