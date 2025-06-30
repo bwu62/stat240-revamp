@@ -14,10 +14,8 @@ By default, data frames are not grouped when created or imported. You can create
 After grouping, operations that normally run across all rows **now run across each group**. Here's a few simple examples using the familiar penguins dataset to start:
 
 ```{r setup-all1,eval=F}
-# import tidyverse, import magrittr (for extra %T>% pipe),
-# tweak some readr/ggplot options (optional), and load dataset
+# import tidyverse,tweak some options (optional), and load dataset
 library(tidyverse)
-library(magrittr)
 options(readr.show_col_types = FALSE)
 source("https://bwu62.github.io/stat240-revamp/ggplot_theme_options.R")
 penguins <- read_csv("https://bwu62.github.io/stat240-revamp/data/penguins.csv")
@@ -114,13 +112,11 @@ Groups are also useful for prepping data frames for plotting. For example, here'
 
 ```{r group4,tidy=F}
 # get mean body mass by species + sex and plot
-# the %T>% is a special pipe called a Tee pipe
-# it's a shortcut for piping something into 2 different operations,
-# useful for example when you want to print a data frame, then also plot it
-# see https://magrittr.tidyverse.org/reference/tee.html for more
+# note print will print the input, then pass it on
+# to the next operation (as if it's not even there)
 penguins %>% 
   group_by(species, sex) %>% 
-  summarize(mean_mass = mean(body_mass_g)) %T>% print %>% 
+  summarize(mean_mass = mean(body_mass_g)) %>% print %>% 
   ggplot(aes(x = species, y = mean_mass, fill = sex)) +
   geom_col(position = "dodge2") +
   labs(x = "Species", y = "Mean body mass (g)",
@@ -221,7 +217,6 @@ We can also show the latest rate for each country, as well as the change from 20
 # then summarize to get 2000 and 2022 rates, mutate to get change,
 # then ungroup, distinct, and arrange to display a neat output
 # again, collapsing output due to lengthy print out
-# %T>% is used again to both save and print the results
 fertility_change <- fertility %>%
   filter(year %in% c(2000, max(year))) %>%
   arrange(country, year) %>%
@@ -234,7 +229,7 @@ fertility_change <- fertility %>%
   select(country, region, rate2000, change, rate2022) %>%
   ungroup() %>%
   distinct() %>%
-  arrange(rate2022) %T>%
+  arrange(rate2022) %>%
   print(n = Inf)
 ```
 :::
