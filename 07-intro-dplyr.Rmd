@@ -255,7 +255,7 @@ penguins2 %>% mutate(
 # you can of course create columns of other data types
 penguins2 %>% mutate(
   small_bill = bill_length_mm < 39 | bill_depth_mm < 18,
-  fake_dates = seq(today(), today() + nrow(penguins) - 1, by = 1)
+  fake_dates = seq(mdy("1/1/25"), mdy("1/1/25") + nrow(penguins) - 1, by = 1)
 )
 ```
 
