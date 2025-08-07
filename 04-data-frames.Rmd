@@ -456,7 +456,7 @@ rownames(eruptions_recent)
 You can extract and manipulate subsets of a data frame along either dimension. Most commonly, you may want to use `$` to either pull out a single column as a vector, modify an existing column in-place, or even create a new column.
 
 ```{r subsetting-df1}
-# extract the vei column
+# extract the duration column
 eruptions_recent$duration
 # change the confirmed column to 1s and 0s in-place
 eruptions_recent$confirmed <- as.numeric(eruptions_recent$confirmed)
