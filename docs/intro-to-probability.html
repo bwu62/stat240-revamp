@@ -7,7 +7,7 @@
 <title>Chapter 10 Intro to Probability | STAT 240 Revamp</title>
 <meta name="author" content="Bi Cheng Wu, with help from Bret Larget and Cameron Jones">
 <meta name="description" content="In this section, we’ll introduce you to some foundational probability theory that will be necessary for later models. We will do this in a way that is only semi-rigorous, with an emphasis on...">
-<meta name="generator" content="bookdown 0.43.2 with bs4_book()">
+<meta name="generator" content="bookdown 0.44.1 with bs4_book()">
 <meta property="og:title" content="Chapter 10 Intro to Probability | STAT 240 Revamp">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://bwu62.github.io/stat240-revamp/intro-to-probability.html">
@@ -20,8 +20,8 @@
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Roboto_Mono-0.4.10/font.css" rel="stylesheet">
 <script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
-<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="libs/plotly-binding-4.10.4/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
-<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="libs/plotly-binding-4.11.0/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
 <script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-E0YDB40HWY"></script><script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -362,8 +362,19 @@
 <p><span class="math display">\[Var(X)=(0\!-\!1)^2\!\cdot\!(0.4)+(1\!-\!1)^2\!\cdot\!(0.3)+(2\!-\!1)^2\!\cdot\!(0.2)+(3\!-\!1)^2\!\cdot\!(0.1)=1\]</span></p>
 <p>Thus, the variance is also <span class="math inline">\(\sigma^2=1\)</span>, and so is the standard deviation <span class="math inline">\(\sigma=1\)</span>.</p>
 </div>
-
 </div>
+</div>
+<div id="binomial-distribution" class="section level2" number="10.5">
+<h2>
+<span class="header-section-number">10.5</span> Binomial distribution<a class="anchor" aria-label="anchor" href="#binomial-distribution"><i class="fas fa-link"></i></a>
+</h2>
+<p>The <strong>binomial distribution</strong> is perhaps the most important example of a discrete random variable. It generalizes the idea of the <strong>sum of a sequence of independent, repeated, binary trials</strong>, e.g. the number of heads in a series of coin flips, or the number of patients who respond to an experimental treatment.</p>
+</div>
+<div id="normal-distribution" class="section level2" number="10.6">
+<h2>
+<span class="header-section-number">10.6</span> Normal distribution<a class="anchor" aria-label="anchor" href="#normal-distribution"><i class="fas fa-link"></i></a>
+</h2>
+
 </div>
 </div>
 
@@ -483,6 +494,8 @@ observer.observe(document.body, config);
 <li><a class="nav-link" href="#variance"><span class="header-section-number">10.4.2</span> Variance</a></li>
 </ul>
 </li>
+<li><a class="nav-link" href="#binomial-distribution"><span class="header-section-number">10.5</span> Binomial distribution</a></li>
+<li><a class="nav-link" href="#normal-distribution"><span class="header-section-number">10.6</span> Normal distribution</a></li>
 </ul>
 
       <div class="book-extra">
@@ -500,7 +513,7 @@ observer.observe(document.body, config);
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2025-06-30.</p>
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2025-09-16.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

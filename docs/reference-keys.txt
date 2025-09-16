@@ -163,6 +163,8 @@ continuous-rvs
 expectation-variance
 expected-value
 variance
+binomial-distribution
+normal-distribution
 inference
 proportions
 means

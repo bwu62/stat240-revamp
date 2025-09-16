@@ -286,7 +286,7 @@ We will NOT cover every option for every plot type, but occasionally, we may hig
 
 
 
- - You can set the `bins` argument to set that many total bins, which will be used to evenly divide up the range of the data. E.g. by default, `bins = 30` is used to draw 30 bins, which is generally agreed to be a sensible default, even though it can create bins with strange decimal bounds (like in this example, where the bins are (171.91,173.95], (173.95,175.98], ..., (230.91,232.95]).
+ - You can set the `bins` argument to set that many total bins, which will be used to evenly divide up the range of the data. E.g. by default, `bins = 30` is used to draw 30 bins, which is generally agreed to be a sensible default, even though it can create bins with strange decimal bounds (like in this example, where the bins are (170.98,173.02], (173.02,175.05], ..., (229.98,232.02]).
    - If your data is integer-valued (like flipper length is here), this default method can actually cause problems, where some bins contain more whole numbers than others, creating strange artifacts in your data. For example, if we had two consecutive bins (1.8,3.2] and (3.2,4.6], even though they are both 1.4 units wide, the first covers 2 whole numbers (2 and 3) whereas the second only covers 1 whole number (just 4) which will distort the histogram shape.
  - Alternatively, you can also set the `binwidth` and `boundary` arguments which will start at the given boundary and count up and down by the given binwidth to create all bins.
    - For example, if you want to make bins of (170,175], (175,180], ..., (230,235], you can set `binwidth = 5` and `boundary = 170` (or any other whole number divisible by 5).
@@ -703,7 +703,7 @@ glimpse(unemployment)
 ```
 
 ```
-Rows: 929
+Rows: 932
 Columns: 2
 $ observation_date <date> 1948-01-01, 1948-02-01, 1948-03-01, 1948-04-01, 1948-05-0…
 $ UNRATE           <dbl> 3.4, 3.8, 4.0, 3.9, 3.5, 3.6, 3.6, 3.9, 3.8, 3.7, 3.8, 4.0…

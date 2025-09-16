@@ -11,7 +11,7 @@ I want to start the modeling section with the following overview of what role mo
 Roughly speaking, data science can be divided into 3 phases:
 
  I.   In Phase I, you identify a research question, design an experiment, gather a sample, and collect some raw data. These steps correspond to the first row of the "life cycle".
- II.  In Phase II, you start with your raw data and clean it (this is probably where 60-90% of time is actually spent), explore it, and figure out the best way to model it. This is the second row.
+ II.  In Phase II, you start with your raw data and clean it (this is probably where 50-90% of time is actually spent), explore it, and figure out the best way to model it. This is the second row.
  III. In Phase III, you fine tune your model, double check all your work, and interpret the results, which may involve reporting estimates, computing tests/intervals, making predictions, etc. This is the third row.
 
 Usually, this is an iterative process; you start with a question, gather data, analyze it, then either modify the initial inquiry or ask a follow up question, and the cycle continues.

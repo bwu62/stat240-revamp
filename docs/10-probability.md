@@ -315,3 +315,12 @@ $$Var(X)=(0\!-\!1)^2\!\cdot\!(0.4)+(1\!-\!1)^2\!\cdot\!(0.3)+(2\!-\!1)^2\!\cdot\
 Thus, the variance is also $\sigma^2=1$, and so is the standard deviation $\sigma=1$.
 :::
 
+
+## Binomial distribution
+
+The **binomial distribution** is perhaps the most important example of a discrete random variable. It generalizes the idea of the **sum of a sequence of independent, repeated, binary trials**, e.g. the number of heads in a series of coin flips, or the number of patients who respond to an experimental treatment.
+
+
+
+
+## Normal distribution
