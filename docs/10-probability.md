@@ -10,7 +10,7 @@ Sets of possible outcomes are called **events**. Each event has some **probabili
 
 A **distribution** is any specification of both the outcomes and the associated probabilities of a random variable.
 
-::: eg
+:::{.eg}
 Let $X$ be the result of rolling a standard 6-sided die that is **fair**, i.e. the outcomes 1, 2, 3, 4, 5, and 6 all have equal probability. Here are few examples of events and their corresponding probabilities:
 
 -   Probability of getting a 1: $\p(X=1)=\frac16$
@@ -30,7 +30,7 @@ In math, **axioms** are basic rules which formally define an object and which ar
 3.  The probability of the **union** of **mutually exclusive** events is equal to the sum of the probabilities of each event.
     -   Mathematically, if $A\cap B$ is empty, then $\p(A\cup B)=\p(A)+\p(B)$
 
-::: def
+:::{.def}
 Let $A$ and $B$ be two events for some random variable.
 
 The **union** of $A$ and $B$, denoted $A\cup B$, is the event of observing $A$ OR $B$.
@@ -40,7 +40,7 @@ The **intersection** of $A$ and $B$, denoted $A\cap B$, is the event of observin
 $A$, $B$ are called **mutually exclusive** if they don't intersect, i.e. they have no outcomes in common.
 :::
 
-::: eg
+:::{.eg}
 Let's see these in an example. Let $X$ again be the result of rolling a fair, 6-sided die with outcomes $1,2,\ldots,6$.
 
 Let $A$ be the event of observing $X$ to be more than 4, and let $B$ be the event of observing $X$ to be an even number. Then, $A\cap B=\{6\}$ and $A\cup B=\{2,4,5,6\}$. Note that $1,3$ are in neither $A$ nor $B$.
@@ -63,7 +63,7 @@ These are not difficult to derive from the axioms, but we omit the proofs for br
 
 [^10-probability-1]: See [here](https://en.wikipedia.org/wiki/Probability_axioms#Consequences) for details.
 
-::: eg
+:::{.eg}
 Here's an example of how to use these axioms. Suppose in Nice Town, on an average day, there's a 70% chance it's sunny, and a 40% chance of a light breeze. Suppose there's a 20% chance of being neither sunny nor breezy. What's the probability it's both sunny and breezy?
 
 Let $S$ represent sunny, and $B$ represent breezy. Then, from the information given, we know $\p(S)=0.7$, $\p(B)=0.4$, and $\p(\text{neither \(S\) nor \(B\)})=0.2$.
@@ -77,7 +77,7 @@ By corollary 3, $\p(S\cup B)=\p(S)+\p(B)-\p(S\cap B)$. Rearranging the terms, we
 
 Generally, random variables are either **discrete** or **continuous**.
 
-::: def
+:::{.def}
 A **discrete** RV is one whose **outcomes can be listed out one-by-one**. The list is allowed to be infinite.[^10-probability-2]
 
 A **continuous** RV is the opposite, where **outcomes are in a continuous range** and not listable.
@@ -91,7 +91,7 @@ In practice, we usually use **discrete RVs to model integer valued outcomes**, e
 
 For discrete RVs, the distribution of outcomes and probabilities is specified with a **probability mass function** (PMF). Note the PMF must satisfy all rules of probability. In particular, all probabilities must be in $[0,1]$, and $\p(\Omega)=\sum_\text{k}\p(k)=1$ where $k$ represents each possible outcome.
 
-::: def
+:::{.def}
 Let $X$ be a discrete RV. The **probability mass function (PMF)** of $X$ is a function $P$ which, for each possible outcome $k$ in the sample space, specifies the probability that $X$ is observed to be $k$, denoted $\p(X\! =\!k)$, or sometimes $\p(k)$ for short.
 
 To be a valid PMF, $P$ must satisfy the probability axioms, namely it must always be **non-negative** and **sum to 1** across all possible outcomes in the sample space.
@@ -140,7 +140,7 @@ tibble(k = 0:3, p = (4:1)/10) %>%
 :::
 ::::
 
-:::: eg
+::::{.eg}
 For another example, let $X$ be the sum of rolling 2 ordinary, fair 6-sided dice (independently)[^10-probability-3]. What is the PMF of $X$?
 
 First, note the possible outcomes $k$ in the sample space are the integers $k=2,3,\ldots,12$. Next, since the dice are fair, we can find the probability of each outcome $k$ by counting the number of combinations that add to $k$. For example, for $k=5$ the outcomes are 14, 23, 32, and 41. Each outcome has probability 1/36 so summing them we get $\p(X=5)=4\cdot\frac1{36}=\frac19$
@@ -171,13 +171,13 @@ tibble(k = 2:12, p = (6-abs(k-7))/36) %>%
 
 For continuous RVs, distributions are specified with a **probability density function** (PDF). They are similar to PMFs but with a key distinction: **PDFs do NOT output probability of an outcome**, rather it denotes "density" which can be thought of as the rate of change of probability.
 
-::: def
+:::{.def}
 Let $X$ be a continuous RV. The **probability density function (PDF)** of $X$ is a function $P$ which, for each outcome $x$ in the sample space, specifies the density of probability around $x$.
 
 To be a valid PDF, $P$ must also satisfy the probability axioms, i.e. $P$ must always be **non-negative** and **integrate to 1** across the sample space.
 :::
 
-::: note
+:::{.note}
 This is important enough to warrant repeating: a continuous **PDF does NOT output a probability**! For continuous PDFs, **probabilities ALWAYS correspond to areas under the PDF**.
 
 Also note it's customary to use $k$ to represent possible outcomes of discrete PMFs, and $x$ to represent possible outcomes of continuous PDFs.
@@ -185,7 +185,7 @@ Also note it's customary to use $k$ to represent possible outcomes of discrete P
 
 PDFs are the continuous analog of PMFs, so whenever you might use PMFs in a summation $\sum$ expression, you would switch to a definite integral $\int$ for a PDF. In STAT 240, **we will NOT require you to evaluate these integrals** but we may occasionally show them to familiarize you with the notation. Computations with simple PMFs may be asked however.
 
-:::: eg
+::::{.eg}
 PDFs can feel strange at first, so here's an easy example to start. According to the [2011-12 National Health and Nutrition Examination Survey](https://wwwn.cdc.gov/Nchs/Nhanes/2011-2012/BMX_G.htm) (NHANES) by the CDC, US adult human height has an approximately normal distribution with mean 65.8 inches and standard deviation 3.98 inches. Below is a plot of the distribution:
 
 ::: {.fold .s}
@@ -218,7 +218,7 @@ Remember the density at $x$ is NOT the probability of $x$. Again, probabilities 
 This rule is called the **empirical rule**. For our distribution of heights, this means about 68% of people are between 62 and 70 inches, about 95% are between 58 and 74 inches, etc.
 ::::
 
-:::: eg
+::::{.eg}
 For another example, consider the **uniform distribution** on $(0,1)$. This distribution generalizes rolling a fair die to drawing a number from an interval, where every value inside the interval is equally likely to be selected. Below is a plot of the distribution:
 
 ::: {.fold .s}
@@ -286,7 +286,7 @@ where $\mu$ represents $\e(X)$. The variance is used as a measure of spread. The
 
 The **standard deviation** of $X$, often denoted $\sigma$, is then defined as the **square root of the variance**. This is often more convenient to use in calculations instead of the variance since it has the same units as the data. It can be thought of as the average distance of an observation from the mean.
 
-::: eg
+:::{.eg}
 Consider again the previous [single, fair 6-sided die example](#single-die). Find the variance and standard deviation of $X$.
 
 We found earlier that $\mu=\e(X)=3.5$. Applying the variance formula gives:
@@ -296,7 +296,7 @@ $$\var(X)=\sum_{k=1}^6(k\!-\!3.5)^2\cdot(1/6)=\frac16\big((1\!-\!3.5)^2+\cdots+(
 So, we found the variance $\sigma^2\approx2.92$, and thus the standard deviation $\sigma\approx1.71$.
 :::
 
-::: eg
+:::{.eg}
 Let's consider the [casino game example](#casino-game2) a final time. Find the variance and standard deviation of $X$.
 
 We found earlier $\mu=\e(X)=1$. Applying the variance formula gives:
@@ -314,7 +314,7 @@ The **binomial distribution** is perhaps the most important example of a discret
 
 Suppose you have $n$ independent trials, each of which has $p$ probability of producing $1$ (called a "success"), and $1-p$ probability of producing $0$ (called a "failure"). Then, the sum of these trials $X$ follows a binomial distribution with parameters $n,p$ or in other words $X\sim\bin(n,p)$.
 
-:::: eg
+::::{.eg}
 Suppose we flip a fair coin 10 times and let $X=$ **total number of heads**. Then we can see $X\sim\bin(10,0.5)$. Below shows a plot of this distribution:
 
 ::: {.fold .s}
@@ -378,7 +378,7 @@ choose(5, 2)
 
 This should help you understand the PMF shown above. The $n\choose k$ counts the number of ways those $k$ successes could have happened out of the $n$ total trials, whereas the $p^k$ and $(1-p)^{n-k}$ are respectively the probabilities of having exactly $k$ successes and $n-k$ failures.
 
-::: eg
+:::{.eg}
 Let $X\sim\bin(10,0.5)$ again. What is $\p(X=4)$, i.e. the probability of observing exactly 4 total heads?
 
 $$P(X=4)={10\choose4}0.5^4(1\!-\!0.5)^{10-4}=\frac{10\cdot9\cdot8\cdot7}{4\cdot3\cdot2}\cdot\frac1{2^{10}}=\frac{210}{1024}\approx20.5\%$$
@@ -401,7 +401,8 @@ $$
 \begin{aligned}
 P(X\le3)&=P(X\!=\!0)+P(X\!=\!1)+P(X\!=\!2)+P(X\!=\!3)\\
 &={\small{10\choose0}0.5^0(1\!-\!0.5)^{10-0}+\cdots+{10\choose3}0.5^3(1\!-\!0.5)^{10-3}}\\
-&=1+\frac{10}{1024}+\frac{45}{1024}+\frac{120}{1024}=\frac{176}{1024}\approx17.2%
+&=\frac{176}{1024}\\
+&\approx17.2%
 \end{aligned}
 $$
 
@@ -462,7 +463,50 @@ dbinom(4, 10, 0.5)
 
 ``` r
 # show the probability of every possible outcome
+# (this is how the PMF was plotted earlier)
+dbinom(0:10, 10, 0.5) %>% round(3)
 ```
+
+```
+ [1] 0.001 0.010 0.044 0.117 0.205 0.246 0.205 0.117 0.044 0.010 0.001
+```
+
+
+#### `pbinom()` (CDF)
+
+`pbinom()` is what's called the binomial's **cumulative distribution function** or **CDF**, which finds the probability of getting less than or equal to a given input. To find $\p(X\le k)$ for $X\sim\bin(n,p)$, you can do `pbinom(k, n, p)`.
+
+
+``` r
+# check the computation earlier for P(X≤3) where X~Bin(10,0.5)
+pbinom(3, 10, 0.5)
+```
+
+```
+[1] 0.171875
+```
+
+``` r
+# another way
+sum(dbinom(0:3, 10, 0.5))
+```
+
+```
+[1] 0.171875
+```
+
+Note that `1-pbinom(k, n, p)` can also give you $\p(X>k)$.
+
+
+``` r
+# example: find P(X>7) where X~Bin(10,0.5)
+1-pbinom(7, 10, 0.5)
+```
+
+```
+[1] 0.0546875
+```
+
 
 
 

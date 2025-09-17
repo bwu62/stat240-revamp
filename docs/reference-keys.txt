@@ -169,6 +169,7 @@ binom-pmf
 e-var
 binom-functions
 dbinom-pmf
+pbinom-cdf
 normal-distribution
 inference
 proportions
