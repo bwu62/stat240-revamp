@@ -6,15 +6,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 10 Intro to Probability | STAT 240 Revamp</title>
 <meta name="author" content="Bi Cheng Wu, with help from Bret Larget and Cameron Jones">
-<meta name="description" content="In this section, we’ll introduce you to some foundational probability theory that will be necessary for later models. We will do this in a way that is only semi-rigorous, with an emphasis on...">
+<meta name="description" content="\(   \def\e{\operatorname{E}}   \def\p{\operatorname{P}}   \def\var{\operatorname{Var}}   \def\bin{\operatorname{Bin}}  \)  In this section, we’ll introduce you to some foundational probability...">
 <meta name="generator" content="bookdown 0.44.1 with bs4_book()">
 <meta property="og:title" content="Chapter 10 Intro to Probability | STAT 240 Revamp">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://bwu62.github.io/stat240-revamp/intro-to-probability.html">
-<meta property="og:description" content="In this section, we’ll introduce you to some foundational probability theory that will be necessary for later models. We will do this in a way that is only semi-rigorous, with an emphasis on...">
+<meta property="og:description" content="\(   \def\e{\operatorname{E}}   \def\p{\operatorname{P}}   \def\var{\operatorname{Var}}   \def\bin{\operatorname{Bin}}  \)  In this section, we’ll introduce you to some foundational probability...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 10 Intro to Probability | STAT 240 Revamp">
-<meta name="twitter:description" content="In this section, we’ll introduce you to some foundational probability theory that will be necessary for later models. We will do this in a way that is only semi-rigorous, with an emphasis on...">
+<meta name="twitter:description" content="\(   \def\e{\operatorname{E}}   \def\p{\operatorname{P}}   \def\var{\operatorname{Var}}   \def\bin{\operatorname{Bin}}  \)  In this section, we’ll introduce you to some foundational probability...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Roboto_Mono-0.4.10/font.css" rel="stylesheet">
@@ -97,7 +97,15 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="intro-to-probability" class="section level1" number="10">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><p>
+  \(
+    \def\e{\operatorname{E}}
+    \def\p{\operatorname{P}}
+    \def\var{\operatorname{Var}}
+    \def\bin{\operatorname{Bin}}
+  \)
+</p>
+<div id="intro-to-probability" class="section level1" number="10">
 <h1>
 <span class="header-section-number">10</span> Intro to Probability<a class="anchor" aria-label="anchor" href="#intro-to-probability"><i class="fas fa-link"></i></a>
 </h1>
@@ -107,18 +115,18 @@
 <span class="header-section-number">10.1</span> Random variables (RVs)<a class="anchor" aria-label="anchor" href="#random-variables-rvs"><i class="fas fa-link"></i></a>
 </h2>
 <p>Suppose we have an <strong>experiment</strong> that produces an <strong>outcome</strong> each time it’s observed. This is modeled by a <strong>random variable</strong>, often denoted with a capital letter, e.g. <span class="math inline">\(X\)</span> or <span class="math inline">\(Y\)</span>. The set of all possible outcomes is called the <strong>sample space</strong> and often denoted <span class="math inline">\(\Omega\)</span>.</p>
-<p>Sets of possible outcomes are called <strong>events</strong>. Each event has some <strong>probability</strong> associated with it. The probability of some event is often denoted <span class="math inline">\(P(\text{event})\)</span>.</p>
+<p>Sets of possible outcomes are called <strong>events</strong>. Each event has some <strong>probability</strong> associated with it. The probability of some event is often denoted <span class="math inline">\(\p(\text{event})\)</span>.</p>
 <p>A <strong>distribution</strong> is any specification of both the outcomes and the associated probabilities of a random variable.</p>
 <div class="eg">
 <p>Let <span class="math inline">\(X\)</span> be the result of rolling a standard 6-sided die that is <strong>fair</strong>, i.e. the outcomes 1, 2, 3, 4, 5, and 6 all have equal probability. Here are few examples of events and their corresponding probabilities:</p>
 <ul>
-<li>Probability of getting a 1: <span class="math inline">\(P(X=1)=\frac16\)</span>
+<li>Probability of getting a 1: <span class="math inline">\(\p(X=1)=\frac16\)</span>
 </li>
-<li>Probability of getting more than 4: <span class="math inline">\(P(X&gt;4)=\frac13\)</span>
+<li>Probability of getting more than 4: <span class="math inline">\(\p(X&gt;4)=\frac13\)</span>
 </li>
-<li>Probability of getting an even number: <span class="math inline">\(P(X=2,4,\text{or }6)=\frac12\)</span>
+<li>Probability of getting an even number: <span class="math inline">\(\p(X=2,4,\text{or }6)=\frac12\)</span>
 </li>
-<li>Probability of getting a 7: <span class="math inline">\(P(X=7)=0\)</span>
+<li>Probability of getting a 7: <span class="math inline">\(\p(X=7)=0\)</span>
 </li>
 </ul>
 </div>
@@ -131,17 +139,17 @@
 <ol style="list-style-type: decimal">
 <li>The probability of an event is always non-negative.
 <ul>
-<li>Mathematically, <span class="math inline">\(P(E)\ge0\)</span> for any event <span class="math inline">\(E\)</span> of some random variable.</li>
+<li>Mathematically, <span class="math inline">\(\p(E)\ge0\)</span> for any event <span class="math inline">\(E\)</span> of some random variable.</li>
 </ul>
 </li>
 <li>The probability of the entire sample space is always 1.
 <ul>
-<li>Mathematically, <span class="math inline">\(P(\Omega)=1\)</span> for any random variable. Note 1 is equivalent to 100%.</li>
+<li>Mathematically, <span class="math inline">\(\p(\Omega)=1\)</span> for any random variable. Note 1 is equivalent to 100%.</li>
 </ul>
 </li>
 <li>The probability of the <strong>union</strong> of <strong>mutually exclusive</strong> events is equal to the sum of the probabilities of each event.
 <ul>
-<li>Mathematically, if <span class="math inline">\(A\cap B\)</span> is empty, then <span class="math inline">\(P(A\cup B)=P(A)+P(B)\)</span>
+<li>Mathematically, if <span class="math inline">\(A\cap B\)</span> is empty, then <span class="math inline">\(\p(A\cup B)=\p(A)+\p(B)\)</span>
 </li>
 </ul>
 </li>
@@ -165,27 +173,27 @@
 <ol style="list-style-type: decimal">
 <li>Probabilities are always between 0 and 1.
 <ul>
-<li>Mathematically, for any event <span class="math inline">\(E\)</span>, we have <span class="math inline">\(0\le P(E)\le1\)</span>
+<li>Mathematically, for any event <span class="math inline">\(E\)</span>, we have <span class="math inline">\(0\le \p(E)\le1\)</span>
 </li>
 </ul>
 </li>
 <li>To get the probability of the “opposite” event, subtract from 1.
 <ul>
-<li>Mathematically, for any event <span class="math inline">\(E\)</span>, we have <span class="math inline">\(P(\text{not }E)=1-P(E)\)</span>.</li>
+<li>Mathematically, for any event <span class="math inline">\(E\)</span>, we have <span class="math inline">\(\p(\text{not }E)=1-\p(E)\)</span>.</li>
 </ul>
 </li>
 <li>In general, for any <span class="math inline">\(A,B\)</span>, the probability of <span class="math inline">\(A\)</span> or <span class="math inline">\(B\)</span> is the probability of <span class="math inline">\(A\)</span> plus <span class="math inline">\(B\)</span> minus the intersection of <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>. This is the generalized form of the 3<sup>rd</sup> axiom.
 <ul>
-<li>Mathematically, <span class="math inline">\(P(A\cup B)=P(A)+P(B)-P(A\cap B)\)</span>.</li>
+<li>Mathematically, <span class="math inline">\(\p(A\cup B)=\p(A)+\p(B)-\p(A\cap B)\)</span>.</li>
 </ul>
 </li>
 </ol>
 <p>These are not difficult to derive from the axioms, but we omit the proofs for brevity.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;See &lt;a href="https://en.wikipedia.org/wiki/Probability_axioms#Consequences"&gt;here&lt;/a&gt; for details.&lt;/p&gt;'><sup>34</sup></a></p>
 <div class="eg">
 <p>Here’s an example of how to use these axioms. Suppose in Nice Town, on an average day, there’s a 70% chance it’s sunny, and a 40% chance of a light breeze. Suppose there’s a 20% chance of being neither sunny nor breezy. What’s the probability it’s both sunny and breezy?</p>
-<p>Let <span class="math inline">\(S\)</span> represent sunny, and <span class="math inline">\(B\)</span> represent breezy. Then, from the information given, we know <span class="math inline">\(P(S)=0.7\)</span>, <span class="math inline">\(P(B)=0.4\)</span>, and <span class="math inline">\(P(\text{neither \(S\) nor \(B\)})=0.2\)</span>.</p>
-<p>By corollary 2, <span class="math inline">\(P(\text{neither \(S\) nor \(B\)})=1-P(S\cup B)\)</span>, so we have <span class="math inline">\(P(S\cup B)=0.8\)</span>.</p>
-<p>By corollary 3, <span class="math inline">\(P(S\cup B)=P(S)+P(B)-P(S\cap B)\)</span>. Rearranging the terms, we get <span class="math inline">\(P(S\cap B)=P(S)+P(B)-P(S\cup B)=0.7+0.4-0.8=0.3\)</span>. Thus, there’s a 30% chance of it being both sunny and breezy.</p>
+<p>Let <span class="math inline">\(S\)</span> represent sunny, and <span class="math inline">\(B\)</span> represent breezy. Then, from the information given, we know <span class="math inline">\(\p(S)=0.7\)</span>, <span class="math inline">\(\p(B)=0.4\)</span>, and <span class="math inline">\(\p(\text{neither \(S\) nor \(B\)})=0.2\)</span>.</p>
+<p>By corollary 2, <span class="math inline">\(\p(\text{neither \(S\) nor \(B\)})=1-\p(S\cup B)\)</span>, so we have <span class="math inline">\(\p(S\cup B)=0.8\)</span>.</p>
+<p>By corollary 3, <span class="math inline">\(\p(S\cup B)=\p(S)+\p(B)-\p(S\cap B)\)</span>. Rearranging the terms, we get <span class="math inline">\(\p(S\cap B)=\p(S)+\p(B)-\p(S\cup B)=0.7+0.4-0.8=0.3\)</span>. Thus, there’s a 30% chance of it being both sunny and breezy.</p>
 </div>
 </div>
 </div>
@@ -199,13 +207,13 @@
 <p>A <strong>continuous</strong> RV is the opposite, where <strong>outcomes are in a continuous range</strong> and not listable.</p>
 </div>
 <p>In practice, we usually use <strong>discrete RVs to model integer valued outcomes</strong>, e.g. counts of something; and <strong>continuous RVs to model real number valued outcomes</strong>, e.g. lengths/weights/durations. These require slightly different mathematical notations/treatments.</p>
-<div id="discrete-rvs" class="section level3" number="10.3.1">
+<div id="discrete-pmfs" class="section level3" number="10.3.1">
 <h3>
-<span class="header-section-number">10.3.1</span> Discrete RVs<a class="anchor" aria-label="anchor" href="#discrete-rvs"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.3.1</span> Discrete (PMFs)<a class="anchor" aria-label="anchor" href="#discrete-pmfs"><i class="fas fa-link"></i></a>
 </h3>
-<p>For discrete RVs, the distribution of outcomes and probabilities is specified with a <strong>probability mass function</strong> (PMF). Note the PMF must satisfy all rules of probability. In particular, all probabilities must be in <span class="math inline">\([0,1]\)</span>, and <span class="math inline">\(P(\Omega)=\sum_\text{k}P(k)=1\)</span> where <span class="math inline">\(k\)</span> represents each possible outcome.</p>
+<p>For discrete RVs, the distribution of outcomes and probabilities is specified with a <strong>probability mass function</strong> (PMF). Note the PMF must satisfy all rules of probability. In particular, all probabilities must be in <span class="math inline">\([0,1]\)</span>, and <span class="math inline">\(\p(\Omega)=\sum_\text{k}\p(k)=1\)</span> where <span class="math inline">\(k\)</span> represents each possible outcome.</p>
 <div class="def">
-<p>Let <span class="math inline">\(X\)</span> be a discrete RV. The <strong>probability mass function (PMF)</strong> of <span class="math inline">\(X\)</span> is a function <span class="math inline">\(P\)</span> which, for each possible outcome <span class="math inline">\(k\)</span> in the sample space, specifies the probability that <span class="math inline">\(X\)</span> is observed to be <span class="math inline">\(k\)</span>, denoted <span class="math inline">\(P(X\! =\!k)\)</span>, or sometimes <span class="math inline">\(P(k)\)</span> for short.</p>
+<p>Let <span class="math inline">\(X\)</span> be a discrete RV. The <strong>probability mass function (PMF)</strong> of <span class="math inline">\(X\)</span> is a function <span class="math inline">\(P\)</span> which, for each possible outcome <span class="math inline">\(k\)</span> in the sample space, specifies the probability that <span class="math inline">\(X\)</span> is observed to be <span class="math inline">\(k\)</span>, denoted <span class="math inline">\(\p(X\! =\!k)\)</span>, or sometimes <span class="math inline">\(\p(k)\)</span> for short.</p>
 <p>To be a valid PMF, <span class="math inline">\(P\)</span> must satisfy the probability axioms, namely it must always be <strong>non-negative</strong> and <strong>sum to 1</strong> across all possible outcomes in the sample space.</p>
 </div>
 <p>PMFs can be specified using either a table, function, or plot.</p>
@@ -216,7 +224,7 @@
 <h4>Table:<a class="anchor" aria-label="anchor" href="#table"><i class="fas fa-link"></i></a>
 </h4>
 <center>
-<pre><code> k | P(k)
+<pre><code> k | \p(k)
 ---+-----
  0 | 0.4 
  1 | 0.3 
@@ -227,7 +235,7 @@
 <div id="function" class="section level4 unnumbered">
 <h4>Function:<a class="anchor" aria-label="anchor" href="#function"><i class="fas fa-link"></i></a>
 </h4>
-<p><span class="math display">\[P(X\! =\!k)=\begin{cases}\frac1{10}\big(4-k\big) &amp; k=0,1,2,3 \\ 0 &amp; \text{otherwise}\end{cases}\]</span></p>
+<p><span class="math display">\[\p(X\! =\!k)=\begin{cases}\frac1{10}\big(4-k\big) &amp; k=0,1,2,3 \\ 0 &amp; \text{otherwise}\end{cases}\]</span></p>
 </div>
 <div id="plot" class="section level4 unnumbered">
 <h4>Plot:<a class="anchor" aria-label="anchor" href="#plot"><i class="fas fa-link"></i></a>
@@ -244,9 +252,9 @@
 </div>
 <div class="eg">
 <p>For another example, let <span class="math inline">\(X\)</span> be the sum of rolling 2 ordinary, fair 6-sided dice (independently)<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="https://www.probabilitycourse.com/chapter1/1_4_1_independence.php"&gt;Independence&lt;/a&gt; has a formal probabilistic definition that’s beyond the scope of 240. You can simply think of it as rolling the dice in a way that doesn’t affect each other.&lt;/p&gt;'><sup>36</sup></a>. What is the PMF of <span class="math inline">\(X\)</span>?</p>
-<p>First, note the possible outcomes <span class="math inline">\(k\)</span> in the sample space are the integers <span class="math inline">\(k=2,3,\ldots,12\)</span>. Next, since the dice are fair, we can find the probability of each outcome <span class="math inline">\(k\)</span> by counting the number of combinations that add to <span class="math inline">\(k\)</span>. For example, for <span class="math inline">\(k=5\)</span> the outcomes are 14, 23, 32, and 41. Each outcome has probability 1/36 so summing them we get <span class="math inline">\(P(X=5)=4\cdot\frac1{36}=\frac19\)</span></p>
-<p>From this, you can show the probability for each <span class="math inline">\(k=2,3,\ldots,12\)</span> is <span class="math inline">\(P(X=k)=(6-|k-7|)/36\)</span>. Thus we can write the PMF as:</p>
-<p><span class="math display">\[P(X\! =\!k)=\begin{cases}\frac1{36}\big(6-|k-7|\big)&amp;k=2,3,\ldots,12\\0&amp;\text{otherwise}\end{cases}\]</span></p>
+<p>First, note the possible outcomes <span class="math inline">\(k\)</span> in the sample space are the integers <span class="math inline">\(k=2,3,\ldots,12\)</span>. Next, since the dice are fair, we can find the probability of each outcome <span class="math inline">\(k\)</span> by counting the number of combinations that add to <span class="math inline">\(k\)</span>. For example, for <span class="math inline">\(k=5\)</span> the outcomes are 14, 23, 32, and 41. Each outcome has probability 1/36 so summing them we get <span class="math inline">\(\p(X=5)=4\cdot\frac1{36}=\frac19\)</span></p>
+<p>From this, you can show the probability for each <span class="math inline">\(k=2,3,\ldots,12\)</span> is <span class="math inline">\(\p(X=k)=(6-|k-7|)/36\)</span>. Thus we can write the PMF as:</p>
+<p><span class="math display">\[\p(X\! =\!k)=\begin{cases}\frac1{36}\big(6-|k-7|\big)&amp;k=2,3,\ldots,12\\0&amp;\text{otherwise}\end{cases}\]</span></p>
 <p>You can easily check this PMF satisfies the probability axioms. Here’s a plot of this PMF:</p>
 <div class="fold s">
 <div class="sourceCode" id="cb826"><pre class="downlit sourceCode r">
@@ -259,9 +267,9 @@
 </div>
 </div>
 </div>
-<div id="continuous-rvs" class="section level3" number="10.3.2">
+<div id="continuous-pdfs" class="section level3" number="10.3.2">
 <h3>
-<span class="header-section-number">10.3.2</span> Continuous RVs<a class="anchor" aria-label="anchor" href="#continuous-rvs"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.3.2</span> Continuous (PDFs)<a class="anchor" aria-label="anchor" href="#continuous-pdfs"><i class="fas fa-link"></i></a>
 </h3>
 <p>For continuous RVs, distributions are specified with a <strong>probability density function</strong> (PDF). They are similar to PMFs but with a key distinction: <strong>PDFs do NOT output probability of an outcome</strong>, rather it denotes “density” which can be thought of as the rate of change of probability.</p>
 <div class="def">
@@ -321,24 +329,24 @@
 <h3>
 <span class="header-section-number">10.4.1</span> Expected value<a class="anchor" aria-label="anchor" href="#expected-value"><i class="fas fa-link"></i></a>
 </h3>
-<p><strong>Expected value</strong> refers to the <strong>average value</strong> of some random variable (or function thereof). For a discrete random variable <span class="math inline">\(X\)</span>, the expected value of <span class="math inline">\(X\)</span>—also called <span class="math inline">\(E(X)\)</span>, <span class="math inline">\(\mu\)</span>, or simply the mean of <span class="math inline">\(X\)</span>—is defined:</p>
-<p><span class="math display">\[\mu=E(X)=\sum_k\,k\cdot P(X\! =\!k)\]</span></p>
+<p><strong>Expected value</strong> refers to the <strong>average value</strong> of some random variable (or function thereof). For a discrete random variable <span class="math inline">\(X\)</span>, the expected value of <span class="math inline">\(X\)</span>—also called <span class="math inline">\(\e(X)\)</span>, <span class="math inline">\(\mu\)</span>, or simply the mean of <span class="math inline">\(X\)</span>—is defined:</p>
+<p><span class="math display">\[\mu=\e(X)=\sum_k\,k\cdot \p(X\! =\!k)\]</span></p>
 <p>The summation is performed over all possible outcomes <span class="math inline">\(k\)</span> in the sample space. In plain words, the mean is the sum of the product of each outcome with its probability (i.e. a weighted sum using the probabilities as weights). The formula for a continuous variable is similar but with an integral instead of a summation.</p>
 <p>The expected value of a function of a random variable <span class="math inline">\(f(X)\)</span> can also be defined, which represents the average value of <span class="math inline">\(f(X)\)</span> :</p>
-<p><span class="math display">\[E\big(f(X)\big)=\sum_k\,f(k)\cdot P(X\! =\!k)\]</span></p>
+<p><span class="math display">\[\e\big(f(X)\big)=\sum_k\,f(k)\cdot \p(X\! =\!k)\]</span></p>
 <div id="single-die" class="eg">
-<p>Again, as a simple example, consider <span class="math inline">\(X\)</span> being rolling a single fair, 6-sided die. Find <span class="math inline">\(E(X)\)</span>.</p>
-<p>If the die is fair, then <span class="math inline">\(P(X\! =\!k)=1/6\)</span> for all <span class="math inline">\(k=1,2,\ldots,6\)</span>. Then, we get</p>
-<p><span class="math display">\[E(X)=\sum_{k=1}^6\,k\cdot(1/6)=\frac16(1+2+\cdots+6)=\frac{21}6=3.5\]</span></p>
+<p>Again, as a simple example, consider <span class="math inline">\(X\)</span> being rolling a single fair, 6-sided die. Find <span class="math inline">\(\e(X)\)</span>.</p>
+<p>If the die is fair, then <span class="math inline">\(\p(X\! =\!k)=1/6\)</span> for all <span class="math inline">\(k=1,2,\ldots,6\)</span>. Then, we get</p>
+<p><span class="math display">\[\e(X)=\sum_{k=1}^6\,k\cdot(1/6)=\frac16(1+2+\cdots+6)=\frac{21}6=3.5\]</span></p>
 <p>This means the average value of a die roll is 3.5. Note that <strong>the average does NOT need to be a possible observation</strong>! Even though it’s impossible to roll a 3.5, the average of each roll over many rolls is in fact 3.5.</p>
-<p>Now consider <span class="math inline">\(f(x)=x^2\)</span>. What is <span class="math inline">\(E\big(f(X)\big)\)</span>, i.e. the average value of <span class="math inline">\(X^2\)</span>?</p>
-<p><span class="math display">\[E(X^2)=\sum_{k=1}^6\,k^2\cdot(1/6)=\frac16(1+4+\cdots+36)=\frac{91}6\approx15.17\]</span></p>
+<p>Now consider <span class="math inline">\(f(x)=x^2\)</span>. What is <span class="math inline">\(\e\big(f(X)\big)\)</span>, i.e. the average value of <span class="math inline">\(X^2\)</span>?</p>
+<p><span class="math display">\[\e(X^2)=\sum_{k=1}^6\,k^2\cdot(1/6)=\frac16(1+4+\cdots+36)=\frac{91}6\approx15.17\]</span></p>
 <p>Thus, the average of the square of a 6-sided die is about 15.17.</p>
 </div>
 <div id="casino-game2" class="eg">
 <p>Let’s reconsider the <a href="intro-to-probability.html#casino-example">casino game example</a> above, where <span class="math inline">\(X\)</span> is the average winnings per game. Find the expected value of <span class="math inline">\(X\)</span>.</p>
 <p>Recall the outcomes <span class="math inline">\(0,1,2,3\)</span> have corresponding probabilities <span class="math inline">\(0.4,0.3,0.2,0.1\)</span>. Using the formula, we get</p>
-<p><span class="math display">\[E(X)=0\!\cdot\!(0.4)+1\!\cdot\!(0.3)+2\!\cdot\!(0.2)+3\!\cdot\!(0.1)=0.3+0.4+0.3=1\]</span></p>
+<p><span class="math display">\[\e(X)=0\!\cdot\!(0.4)+1\!\cdot\!(0.3)+2\!\cdot\!(0.2)+3\!\cdot\!(0.1)=0.3+0.4+0.3=1\]</span></p>
 <p>Thus, each play on average wins $1. This means if a casino wants to not lose money, they need to charge at least $1 per play.</p>
 </div>
 </div>
@@ -346,20 +354,20 @@
 <h3>
 <span class="header-section-number">10.4.2</span> Variance<a class="anchor" aria-label="anchor" href="#variance"><i class="fas fa-link"></i></a>
 </h3>
-<p>The <strong>variance</strong> of a random variable—also called <span class="math inline">\(Var(X)\)</span> or <span class="math inline">\(\sigma^2\)</span>—can be thought of as the <strong>average squared distance from the mean</strong> and is defined as:</p>
-<p><span class="math display">\[\sigma^2=Var(X)=E\big((X-\mu)^2\big)=\sum_k\,(k\!-\!\mu)^2\cdot P(X\! =\!k)\]</span></p>
-<p>where <span class="math inline">\(\mu\)</span> represents <span class="math inline">\(E(X)\)</span>. The variance is used as a measure of spread. The higher the variance, the more “spread out” a RV is.</p>
+<p>The <strong>variance</strong> of a random variable—also called <span class="math inline">\(\var(X)\)</span> or <span class="math inline">\(\sigma^2\)</span>—can be thought of as the <strong>average squared distance from the mean</strong> and is defined as:</p>
+<p><span class="math display">\[\sigma^2=\var(X)=\e\big((X-\mu)^2\big)=\sum_k\,(k\!-\!\mu)^2\cdot \p(X\! =\!k)\]</span></p>
+<p>where <span class="math inline">\(\mu\)</span> represents <span class="math inline">\(\e(X)\)</span>. The variance is used as a measure of spread. The higher the variance, the more “spread out” a RV is.</p>
 <p>The <strong>standard deviation</strong> of <span class="math inline">\(X\)</span>, often denoted <span class="math inline">\(\sigma\)</span>, is then defined as the <strong>square root of the variance</strong>. This is often more convenient to use in calculations instead of the variance since it has the same units as the data. It can be thought of as the average distance of an observation from the mean.</p>
 <div class="eg">
 <p>Consider again the previous <a href="intro-to-probability.html#single-die">single, fair 6-sided die example</a>. Find the variance and standard deviation of <span class="math inline">\(X\)</span>.</p>
-<p>We found earlier that <span class="math inline">\(\mu=E(X)=3.5\)</span>. Applying the variance formula gives:</p>
-<p><span class="math display">\[Var(X)=\sum_{k=1}^6(k\!-\!3.5)^2\cdot(1/6)=\frac16\big((1\!-\!3.5)^2+\cdots+(6\!-\!3.5)^2\big)=\frac{35}{12}\approx2.92\]</span></p>
+<p>We found earlier that <span class="math inline">\(\mu=\e(X)=3.5\)</span>. Applying the variance formula gives:</p>
+<p><span class="math display">\[\var(X)=\sum_{k=1}^6(k\!-\!3.5)^2\cdot(1/6)=\frac16\big((1\!-\!3.5)^2+\cdots+(6\!-\!3.5)^2\big)=\frac{35}{12}\approx2.92\]</span></p>
 <p>So, we found the variance <span class="math inline">\(\sigma^2\approx2.92\)</span>, and thus the standard deviation <span class="math inline">\(\sigma\approx1.71\)</span>.</p>
 </div>
 <div class="eg">
 <p>Let’s consider the <a href="intro-to-probability.html#casino-game2">casino game example</a> a final time. Find the variance and standard deviation of <span class="math inline">\(X\)</span>.</p>
-<p>We found earlier <span class="math inline">\(\mu=E(X)=1\)</span>. Applying the variance formula gives:</p>
-<p><span class="math display">\[Var(X)=(0\!-\!1)^2\!\cdot\!(0.4)+(1\!-\!1)^2\!\cdot\!(0.3)+(2\!-\!1)^2\!\cdot\!(0.2)+(3\!-\!1)^2\!\cdot\!(0.1)=1\]</span></p>
+<p>We found earlier <span class="math inline">\(\mu=\e(X)=1\)</span>. Applying the variance formula gives:</p>
+<p><span class="math display">\[\var(X)=(0\!-\!1)^2\!\cdot\!(0.4)+(1\!-\!1)^2\!\cdot\!(0.3)+(2\!-\!1)^2\!\cdot\!(0.2)+(3\!-\!1)^2\!\cdot\!(0.1)=1\]</span></p>
 <p>Thus, the variance is also <span class="math inline">\(\sigma^2=1\)</span>, and so is the standard deviation <span class="math inline">\(\sigma=1\)</span>.</p>
 </div>
 </div>
@@ -369,6 +377,128 @@
 <span class="header-section-number">10.5</span> Binomial distribution<a class="anchor" aria-label="anchor" href="#binomial-distribution"><i class="fas fa-link"></i></a>
 </h2>
 <p>The <strong>binomial distribution</strong> is perhaps the most important example of a discrete random variable. It generalizes the idea of the <strong>sum of a sequence of independent, repeated, binary trials</strong>, e.g. the number of heads in a series of coin flips, or the number of patients who respond to an experimental treatment.</p>
+<div id="definition" class="section level3" number="10.5.1">
+<h3>
+<span class="header-section-number">10.5.1</span> Definition<a class="anchor" aria-label="anchor" href="#definition"><i class="fas fa-link"></i></a>
+</h3>
+<p>Suppose you have <span class="math inline">\(n\)</span> independent trials, each of which has <span class="math inline">\(p\)</span> probability of producing <span class="math inline">\(1\)</span> (called a “success”), and <span class="math inline">\(1-p\)</span> probability of producing <span class="math inline">\(0\)</span> (called a “failure”). Then, the sum of these trials <span class="math inline">\(X\)</span> follows a binomial distribution with parameters <span class="math inline">\(n,p\)</span> or in other words <span class="math inline">\(X\sim\bin(n,p)\)</span>.</p>
+<div class="eg">
+<p>Suppose we flip a fair coin 10 times and let <span class="math inline">\(X=\)</span> <strong>total number of heads</strong>. Then we can see <span class="math inline">\(X\sim\bin(10,0.5)\)</span>. Below shows a plot of this distribution:</p>
+<div class="fold s">
+<div class="sourceCode" id="cb829"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># use dbinom (the binomial PMF function) to plot distribution</span></span>
+<span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>k <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="fl">10</span>, p <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">dbinom</a></span><span class="op">(</span><span class="va">k</span>, <span class="fl">10</span>, <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">k</span>, y <span class="op">=</span> <span class="va">p</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">10</span>,<span class="fl">1</span><span class="op">)</span>, expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.25</span>, <span class="fl">0.05</span><span class="op">)</span>, limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.25</span><span class="op">)</span>,</span>
+<span>                     minor_breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.25</span>, <span class="fl">0.01</span><span class="op">)</span>, expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Binomial(10, 0.5) distribution (number of heads in 10 flips of a fair coin)"</span>,</span>
+<span>       x <span class="op">=</span> <span class="st">"x"</span>, y <span class="op">=</span> <span class="st">"probability"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="10-probability_files/figure-html/unnamed-chunk-5-1.svg" width="672" style="display: block; margin: auto;"></div>
+</div>
+</div>
+<p>The following assumptions in the acronym <strong><em>BINS</em></strong> must hold for a binomial distribution to apply:</p>
+<ul>
+<li>
+<strong><em>B</em></strong>inary outcomes: each individual trial must produce a 1 or 0</li>
+<li>
+<strong><em>I</em></strong>ndependence: each individual trial must be independent from others (i.e. neither affects nor affected by other trials)</li>
+<li>
+<strong><em>N</em></strong> fixed: the number of trials <span class="math inline">\(n\)</span> must be a fixed, predetermined quantity, NOT a variable/condition</li>
+<li>
+<strong><em>S</em></strong>ame probability: each trial must have the same probability <span class="math inline">\(p\)</span> of observing a 1</li>
+</ul>
+<p>If any of these criteria are not met, the resultant variable will NOT follow a binomial distribution.</p>
+</div>
+<div id="binom-pmf" class="section level3" number="10.5.2">
+<h3>
+<span class="header-section-number">10.5.2</span> PMF<a class="anchor" aria-label="anchor" href="#binom-pmf"><i class="fas fa-link"></i></a>
+</h3>
+<p>First, what is the formula for the PMF of <span class="math inline">\(X\sim\bin(n,p)\)</span>? It can be shown to be the following:</p>
+<p><span class="math display">\[\p(X\!=\!k)={n\choose k}p^k(1\!-\!p)^{n-k}\quad\text{for outcomes $k=0,1,\ldots,n$}\]</span></p>
+<p><span class="math display">\[\small\text{where}~~{n\choose k}=\dfrac{n!}{k!(n\!-\!k)!}~~~\text{and}~~n!=n\!\times\!(n\!-\!1)\!\times\cdots\!\times\!1\]</span></p>
+<ul>
+<li>
+<span class="math inline">\(n!\)</span> is called “<span class="math inline">\(n\)</span> <a href="https://en.wikipedia.org/wiki/Factorial">factorial</a>” and counts the number of permutations (i.e. ways of ordering) of <span class="math inline">\(n\)</span> distinct objects
+<ul>
+<li>Note: <span class="math inline">\(0!=1\)</span> by definition</li>
+</ul>
+</li>
+<li>
+<span class="math inline">\(n\choose k\)</span> is called “<span class="math inline">\(n\)</span> <a href="https://en.wikipedia.org/wiki/Combination">choose</a> <span class="math inline">\(k\)</span>” and counts the number of ways of choosing <span class="math inline">\(k\)</span> objects from <span class="math inline">\(n\)</span> distrinct objects (order of choice doesn’t matter)</li>
+</ul>
+<p>For example, if you have 5 objects, there are 5×4×3×2×1=120 ways to order them. If you want to choose 2 from the 5, there are 5 choose 2 or 10 different combinations possible.</p>
+<div class="sourceCode" id="cb830"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># using R, we can find 5!</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Special.html">factorial</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span></code></pre></div>
+<pre><code>[1] 120</code></pre>
+<div class="sourceCode" id="cb832"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># as well as 5 choose 2</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Special.html">choose</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<pre><code>[1] 10</code></pre>
+<p>This should help you understand the PMF shown above. The <span class="math inline">\(n\choose k\)</span> counts the number of ways those <span class="math inline">\(k\)</span> successes could have happened out of the <span class="math inline">\(n\)</span> total trials, whereas the <span class="math inline">\(p^k\)</span> and <span class="math inline">\((1-p)^{n-k}\)</span> are respectively the probabilities of having exactly <span class="math inline">\(k\)</span> successes and <span class="math inline">\(n-k\)</span> failures.</p>
+<div class="eg">
+<p>Let <span class="math inline">\(X\sim\bin(10,0.5)\)</span> again. What is <span class="math inline">\(\p(X=4)\)</span>, i.e. the probability of observing exactly 4 total heads?</p>
+<p><span class="math display">\[P(X=4)={10\choose4}0.5^4(1\!-\!0.5)^{10-4}=\frac{10\cdot9\cdot8\cdot7}{4\cdot3\cdot2}\cdot\frac1{2^{10}}=\frac{210}{1024}\approx20.5\%\]</span></p>
+<p>We can also use R to help us compute this:</p>
+<div class="sourceCode" id="cb834"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># apply the formula</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Special.html">choose</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">4</span><span class="op">)</span> <span class="op">*</span> <span class="fl">0.5</span><span class="op">^</span><span class="fl">4</span> <span class="op">*</span> <span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="fl">0.5</span><span class="op">)</span><span class="op">^</span><span class="fl">6</span></span></code></pre></div>
+<pre><code>[1] 0.2050781</code></pre>
+<p>This is consistent with the plot of the PMF we previously made. We could also ask what’s the probability of getting 3 or fewer heads total, i.e. <span class="math inline">\(\p(X\le3)\)</span>.</p>
+<p><span class="math display">\[
+\begin{aligned}
+P(X\le3)&amp;=P(X\!=\!0)+P(X\!=\!1)+P(X\!=\!2)+P(X\!=\!3)\\
+&amp;={\small{10\choose0}0.5^0(1\!-\!0.5)^{10-0}+\cdots+{10\choose3}0.5^3(1\!-\!0.5)^{10-3}}\\
+&amp;=1+\frac{10}{1024}+\frac{45}{1024}+\frac{120}{1024}=\frac{176}{1024}\approx17.2%
+\end{aligned}
+\]</span></p>
+<div class="sourceCode" id="cb836"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># compute P(X≤3) with vectorization</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/Special.html">choose</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">0</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span> <span class="op">*</span> <span class="fl">0.5</span><span class="op">^</span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span> <span class="op">*</span> <span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="fl">0.5</span><span class="op">)</span><span class="op">^</span><span class="op">(</span><span class="fl">10</span><span class="op">-</span><span class="fl">0</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<pre><code>[1] 0.171875</code></pre>
+</div>
+</div>
+<div id="e-var" class="section level3" number="10.5.3">
+<h3>
+<span class="header-section-number">10.5.3</span> E &amp; Var<a class="anchor" aria-label="anchor" href="#e-var"><i class="fas fa-link"></i></a>
+</h3>
+<p>Recall the general expectation and variance definitions from before:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\e(X)&amp;=\sum_k\,k\cdot \p(X\! =\!k)\\
+\var(X)&amp;=\sum_k\,(k\!-\!\mu)^2\cdot \p(X\! =\!k)
+\end{aligned}
+\]</span></p>
+<p>You can plug in the binomial PMF for <span class="math inline">\(\p(X\! =\!k)\)</span> and <a href="https://www.probabilisticworld.com/binomial-distribution-mean-variance-formulas-proof">derive</a> the following identities for the binomial distribution:</p>
+<p><span class="math display">\[
+\text{for binomial,}\quad
+\begin{aligned}
+\e(X)&amp;=np\\
+\var(X)&amp;=np(1\!-\!p)
+\end{aligned}
+\]</span></p>
+</div>
+<div id="binom-functions" class="section level3" number="10.5.4">
+<h3>
+<span class="header-section-number">10.5.4</span> <code>*binom()</code> functions<a class="anchor" aria-label="anchor" href="#binom-functions"><i class="fas fa-link"></i></a>
+</h3>
+<p>There are 4 main R functions for working with binomial distributions, <code><a href="https://rdrr.io/r/stats/Binomial.html">dbinom()</a></code>, <code><a href="https://rdrr.io/r/stats/Binomial.html">pbinom()</a></code>, <code><a href="https://rdrr.io/r/stats/Binomial.html">qbinom()</a></code>, and <code><a href="https://rdrr.io/r/stats/Binomial.html">rbinom()</a></code>. We will go over each below.</p>
+<div id="dbinom-pmf" class="section level4" number="10.5.4.1">
+<h4>
+<span class="header-section-number">10.5.4.1</span> <code>dbinom()</code> (PMF)<a class="anchor" aria-label="anchor" href="#dbinom-pmf"><i class="fas fa-link"></i></a>
+</h4>
+<p><code><a href="https://rdrr.io/r/stats/Binomial.html">dbinom()</a></code> simply implements the PMF equation shown in section <a href="intro-to-probability.html#binom-pmf">10.5.2</a>. In order to compute <span class="math inline">\(\p(X=k)\)</span> for <span class="math inline">\(X\sim\bin(n,p)\)</span>, simply do <code>dbinom(k, n, p)</code>.</p>
+<div class="sourceCode" id="cb838"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># check the computation earlier for P(X=4) where X~Bin(10,0.5)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">dbinom</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">10</span>, <span class="fl">0.5</span><span class="op">)</span></span></code></pre></div>
+<pre><code>[1] 0.2050781</code></pre>
+<div class="sourceCode" id="cb840"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># show the probability of every possible outcome</span></span></code></pre></div>
+</div>
+</div>
 </div>
 <div id="normal-distribution" class="section level2" number="10.6">
 <h2>
@@ -484,8 +614,8 @@ observer.observe(document.body, config);
 </li>
 <li>
 <a class="nav-link" href="#discrete-vs-continuous-rvs"><span class="header-section-number">10.3</span> Discrete vs Continuous RVs</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#discrete-rvs"><span class="header-section-number">10.3.1</span> Discrete RVs</a></li>
-<li><a class="nav-link" href="#continuous-rvs"><span class="header-section-number">10.3.2</span> Continuous RVs</a></li>
+<li><a class="nav-link" href="#discrete-pmfs"><span class="header-section-number">10.3.1</span> Discrete (PMFs)</a></li>
+<li><a class="nav-link" href="#continuous-pdfs"><span class="header-section-number">10.3.2</span> Continuous (PDFs)</a></li>
 </ul>
 </li>
 <li>
@@ -494,7 +624,14 @@ observer.observe(document.body, config);
 <li><a class="nav-link" href="#variance"><span class="header-section-number">10.4.2</span> Variance</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#binomial-distribution"><span class="header-section-number">10.5</span> Binomial distribution</a></li>
+<li>
+<a class="nav-link" href="#binomial-distribution"><span class="header-section-number">10.5</span> Binomial distribution</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#definition"><span class="header-section-number">10.5.1</span> Definition</a></li>
+<li><a class="nav-link" href="#binom-pmf"><span class="header-section-number">10.5.2</span> PMF</a></li>
+<li><a class="nav-link" href="#e-var"><span class="header-section-number">10.5.3</span> E &amp; Var</a></li>
+<li><a class="nav-link" href="#binom-functions"><span class="header-section-number">10.5.4</span> *binom() functions</a></li>
+</ul>
+</li>
 <li><a class="nav-link" href="#normal-distribution"><span class="header-section-number">10.6</span> Normal distribution</a></li>
 </ul>
 

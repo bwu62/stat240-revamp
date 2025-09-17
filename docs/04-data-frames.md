@@ -628,7 +628,7 @@ You can extract and manipulate subsets of a data frame along either dimension. M
 
 
 ``` r
-# extract the vei column
+# extract the duration column
 eruptions_recent$duration
 ```
 
