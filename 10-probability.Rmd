@@ -1,40 +1,36 @@
-
-
 # Intro to Probability
 
 In this section, we'll introduce you to some foundational probability theory that will be necessary for later models. We will do this in a way that is only semi-rigorous, with an emphasis on teaching the materials in an intuitive fashion.
-
 
 ## Random variables (RVs)
 
 Suppose we have an **experiment** that produces an **outcome** each time it's observed. This is modeled by a **random variable**, often denoted with a capital letter, e.g. $X$ or $Y$. The set of all possible outcomes is called the **sample space** and often denoted $\Omega$.
 
-Sets of possible outcomes are called **events**. Each event has some **probability** associated with it. The probability of some event is often denoted $P(\text{event})$.
+Sets of possible outcomes are called **events**. Each event has some **probability** associated with it. The probability of some event is often denoted $\p(\text{event})$.
 
 A **distribution** is any specification of both the outcomes and the associated probabilities of a random variable.
 
-:::{.eg}
+::: eg
 Let $X$ be the result of rolling a standard 6-sided die that is **fair**, i.e. the outcomes 1, 2, 3, 4, 5, and 6 all have equal probability. Here are few examples of events and their corresponding probabilities:
 
- - Probability of getting a 1: $P(X=1)=\frac16$
- - Probability of getting more than 4: $P(X>4)=\frac13$
- - Probability of getting an even number: $P(X=2,4,\text{or }6)=\frac12$
- - Probability of getting a 7: $P(X=7)=0$
+-   Probability of getting a 1: $\p(X=1)=\frac16$
+-   Probability of getting more than 4: $\p(X>4)=\frac13$
+-   Probability of getting an even number: $\p(X=2,4,\text{or }6)=\frac12$
+-   Probability of getting a 7: $\p(X=7)=0$
 :::
-
 
 ## Axioms of probability
 
 In math, **axioms** are basic rules which formally define an object and which are assumed to be true without proof. These form the basis on which everything else rests. These are the axioms of probability:
 
- 1. The probability of an event is always non-negative.
-    - Mathematically, $P(E)\ge0$ for any event $E$ of some random variable.
- 2. The probability of the entire sample space is always 1.
-    - Mathematically, $P(\Omega)=1$ for any random variable. Note 1 is equivalent to 100\%.
- 3. The probability of the **union** of **mutually exclusive** events is equal to the sum of the probabilities of each event.
-    - Mathematically, if $A\cap B$ is empty, then $P(A\cup B)=P(A)+P(B)$
+1.  The probability of an event is always non-negative.
+    -   Mathematically, $\p(E)\ge0$ for any event $E$ of some random variable.
+2.  The probability of the entire sample space is always 1.
+    -   Mathematically, $\p(\Omega)=1$ for any random variable. Note 1 is equivalent to 100%.
+3.  The probability of the **union** of **mutually exclusive** events is equal to the sum of the probabilities of each event.
+    -   Mathematically, if $A\cap B$ is empty, then $\p(A\cup B)=\p(A)+\p(B)$
 
-:::{.def}
+::: def
 Let $A$ and $B$ be two events for some random variable.
 
 The **union** of $A$ and $B$, denoted $A\cup B$, is the event of observing $A$ OR $B$.
@@ -44,7 +40,7 @@ The **intersection** of $A$ and $B$, denoted $A\cap B$, is the event of observin
 $A$, $B$ are called **mutually exclusive** if they don't intersect, i.e. they have no outcomes in common.
 :::
 
-:::{.eg}
+::: eg
 Let's see these in an example. Let $X$ again be the result of rolling a fair, 6-sided die with outcomes $1,2,\ldots,6$.
 
 Let $A$ be the event of observing $X$ to be more than 4, and let $B$ be the event of observing $X$ to be an even number. Then, $A\cap B=\{6\}$ and $A\cup B=\{2,4,5,6\}$. Note that $1,3$ are in neither $A$ nor $B$.
@@ -52,88 +48,89 @@ Let $A$ be the event of observing $X$ to be more than 4, and let $B$ be the even
 Since $A\cap B=\{6\}$ which is NOT empty, $A$ and $B$ are NOT mutually exclusive. Suppose we define a third event $C$ as observing $X$ to be either $1$ or $3$. Then, $C$ is mutually exclusive with both $A$ and $B$, since both $A\cap C$ and $B\cap C$ are empty.
 :::
 
-
 ### Corollaries
 
 From these axioms, we have a few important corollaries (i.e. derived statements) that are also true:
 
- 1. Probabilities are always between 0 and 1.
-    - Mathematically, for any event $E$, we have $0\le P(E)\le1$
- 2. To get the probability of the "opposite" event, subtract from 1.
-    - Mathematically, for any event $E$, we have $P(\text{not }E)=1-P(E)$.
- 3. In general, for any $A,B$, the probability of $A$ or $B$ is the probability of $A$ plus $B$ minus the intersection of $A$ and $B$. This is the generalized form of the 3^rd^ axiom.
-    - Mathematically, $P(A\cup B)=P(A)+P(B)-P(A\cap B)$.
+1.  Probabilities are always between 0 and 1.
+    -   Mathematically, for any event $E$, we have $0\le \p(E)\le1$
+2.  To get the probability of the "opposite" event, subtract from 1.
+    -   Mathematically, for any event $E$, we have $\p(\text{not }E)=1-\p(E)$.
+3.  In general, for any $A,B$, the probability of $A$ or $B$ is the probability of $A$ plus $B$ minus the intersection of $A$ and $B$. This is the generalized form of the 3^rd^ axiom.
+    -   Mathematically, $\p(A\cup B)=\p(A)+\p(B)-\p(A\cap B)$.
 
-These are not difficult to derive from the axioms, but we omit the proofs for brevity.^[See [here](https://en.wikipedia.org/wiki/Probability_axioms#Consequences) for details.] 
+These are not difficult to derive from the axioms, but we omit the proofs for brevity.[^10-probability-1]
 
+[^10-probability-1]: See [here](https://en.wikipedia.org/wiki/Probability_axioms#Consequences) for details.
 
-:::{.eg}
+::: eg
 Here's an example of how to use these axioms. Suppose in Nice Town, on an average day, there's a 70% chance it's sunny, and a 40% chance of a light breeze. Suppose there's a 20% chance of being neither sunny nor breezy. What's the probability it's both sunny and breezy?
 
-Let $S$ represent sunny, and $B$ represent breezy. Then, from the information given, we know $P(S)=0.7$, $P(B)=0.4$, and $P(\text{neither \(S\) nor \(B\)})=0.2$.
+Let $S$ represent sunny, and $B$ represent breezy. Then, from the information given, we know $\p(S)=0.7$, $\p(B)=0.4$, and $\p(\text{neither \(S\) nor \(B\)})=0.2$.
 
-By corollary 2, $P(\text{neither \(S\) nor \(B\)})=1-P(S\cup B)$, so we have $P(S\cup B)=0.8$.
+By corollary 2, $\p(\text{neither \(S\) nor \(B\)})=1-\p(S\cup B)$, so we have $\p(S\cup B)=0.8$.
 
-By corollary 3, $P(S\cup B)=P(S)+P(B)-P(S\cap B)$. Rearranging the terms, we get $P(S\cap B)=P(S)+P(B)-P(S\cup B)=0.7+0.4-0.8=0.3$. Thus, there's a 30% chance of it being both sunny and breezy.
+By corollary 3, $\p(S\cup B)=\p(S)+\p(B)-\p(S\cap B)$. Rearranging the terms, we get $\p(S\cap B)=\p(S)+\p(B)-\p(S\cup B)=0.7+0.4-0.8=0.3$. Thus, there's a 30% chance of it being both sunny and breezy.
 :::
-
 
 ## Discrete vs Continuous RVs
 
 Generally, random variables are either **discrete** or **continuous**.
 
-:::{.def}
-A **discrete** RV is one whose **outcomes can be listed out one-by-one**. The list is allowed to be infinite.^[Formally, $\Omega$ must be [countable](https://en.wikipedia.org/wiki/Countable_set).]
+::: def
+A **discrete** RV is one whose **outcomes can be listed out one-by-one**. The list is allowed to be infinite.[^10-probability-2]
 
 A **continuous** RV is the opposite, where **outcomes are in a continuous range** and not listable.
 :::
 
+[^10-probability-2]: Formally, $\Omega$ must be [countable](https://en.wikipedia.org/wiki/Countable_set).
+
 In practice, we usually use **discrete RVs to model integer valued outcomes**, e.g. counts of something; and **continuous RVs to model real number valued outcomes**, e.g. lengths/weights/durations. These require slightly different mathematical notations/treatments.
 
+### Discrete (PMFs)
 
-### Discrete RVs
+For discrete RVs, the distribution of outcomes and probabilities is specified with a **probability mass function** (PMF). Note the PMF must satisfy all rules of probability. In particular, all probabilities must be in $[0,1]$, and $\p(\Omega)=\sum_\text{k}\p(k)=1$ where $k$ represents each possible outcome.
 
-For discrete RVs, the distribution of outcomes and probabilities is specified with a **probability mass function** (PMF). Note the PMF must satisfy all rules of probability. In particular, all probabilities must be in $[0,1]$, and $P(\Omega)=\sum_\text{k}P(k)=1$ where $k$ represents each possible outcome.
-
-
-:::{.def}
-Let $X$ be a discrete RV. The **probability mass function (PMF)** of $X$ is a function $P$ which, for each possible outcome $k$ in the sample space, specifies the probability that $X$ is observed to be $k$, denoted $P(X\! =\!k)$, or sometimes $P(k)$ for short.
+::: def
+Let $X$ be a discrete RV. The **probability mass function (PMF)** of $X$ is a function $P$ which, for each possible outcome $k$ in the sample space, specifies the probability that $X$ is observed to be $k$, denoted $\p(X\! =\!k)$, or sometimes $\p(k)$ for short.
 
 To be a valid PMF, $P$ must satisfy the probability axioms, namely it must always be **non-negative** and **sum to 1** across all possible outcomes in the sample space.
 :::
 
-
 PMFs can be specified using either a table, function, or plot.
 
-:::{#casino-example .eg}
+:::: {#casino-example .eg}
 Let $X$ be the number of dollars you win from a new casino game where there's only 4 possible outcomes: you either win nothing with 40% chance, or you win \$1 with 30% chance, or you win \$2 with 20% chance, or you win \$3 with 10% chance.
 
 First, it's easy to see the axioms are satisfied, since all probabilities are in $[0,1]$ and $0.1+0.2+0.3+0.4=1$. Thus, this is a valid PMF. We can specify the PMF in any of the following equivalent ways:
 
-#### Table: {-}
+#### Table: {.unnumbered}
 
 <center>
 
-     k | P(k)
-    ---+-----
-     0 | 0.4 
-     1 | 0.3 
-     2 | 0.2 
-     3 | 0.1 
+```         
+ k | \p(k)
+---+-----
+ 0 | 0.4 
+ 1 | 0.3 
+ 2 | 0.2 
+ 3 | 0.1 
+```
 
 </center>
 
-#### Function: {-}
+#### Function: {.unnumbered}
 
-$$P(X\! =\!k)=\begin{cases}\frac1{10}\big(4-k\big) & k=0,1,2,3 \\ 0 & \text{otherwise}\end{cases}$$
+$$\p(X\! =\!k)=\begin{cases}\frac1{10}\big(4-k\big) & k=0,1,2,3 \\ 0 & \text{otherwise}\end{cases}$$
 
-#### Plot: {-}
+#### Plot: {.unnumbered}
 
-:::{.fold .s}
+::: {.fold .s}
 ```{r setup-all2,echo=F}
 library(tidyverse)
 source("ggplot_theme_options.R")
 ```
+
 ```{r,tidy=F}
 # remember to import tidyverse (and optionally, update theme options)
 tibble(k = 0:3, p = (4:1)/10) %>%
@@ -141,22 +138,20 @@ tibble(k = 0:3, p = (4:1)/10) %>%
   labs(title = "Distribution of X (winnings from made-up casino game)")
 ```
 :::
+::::
 
-:::
+:::: eg
+For another example, let $X$ be the sum of rolling 2 ordinary, fair 6-sided dice (independently)[^10-probability-3]. What is the PMF of $X$?
 
+First, note the possible outcomes $k$ in the sample space are the integers $k=2,3,\ldots,12$. Next, since the dice are fair, we can find the probability of each outcome $k$ by counting the number of combinations that add to $k$. For example, for $k=5$ the outcomes are 14, 23, 32, and 41. Each outcome has probability 1/36 so summing them we get $\p(X=5)=4\cdot\frac1{36}=\frac19$
 
-:::{.eg}
-For another example, let $X$ be the sum of rolling 2 ordinary, fair 6-sided dice (independently)^[[Independence](https://www.probabilitycourse.com/chapter1/1_4_1_independence.php) has a formal probabilistic definition that's beyond the scope of 240. You can simply think of it as rolling the dice in a way that doesn't affect each other.]. What is the PMF of $X$?
+From this, you can show the probability for each $k=2,3,\ldots,12$ is $\p(X=k)=(6-|k-7|)/36$. Thus we can write the PMF as:
 
-First, note the possible outcomes $k$ in the sample space are the integers $k=2,3,\ldots,12$. Next, since the dice are fair, we can find the probability of each outcome $k$ by counting the number of combinations that add to $k$. For example, for $k=5$ the outcomes are 14, 23, 32, and 41. Each outcome has probability 1/36 so summing them we get $P(X=5)=4\cdot\frac1{36}=\frac19$
-
-From this, you can show the probability for each $k=2,3,\ldots,12$ is $P(X=k)=(6-|k-7|)/36$. Thus we can write the PMF as:
-
-$$P(X\! =\!k)=\begin{cases}\frac1{36}\big(6-|k-7|\big)&k=2,3,\ldots,12\\0&\text{otherwise}\end{cases}$$
+$$\p(X\! =\!k)=\begin{cases}\frac1{36}\big(6-|k-7|\big)&k=2,3,\ldots,12\\0&\text{otherwise}\end{cases}$$
 
 You can easily check this PMF satisfies the probability axioms. Here's a plot of this PMF:
 
-:::{.fold .s}
+::: {.fold .s}
 ```{r,tidy=F}
 tibble(k = 2:12, p = (6-abs(k-7))/36) %>%
   ggplot(aes(x = k, y = p)) + geom_col() +
@@ -165,21 +160,21 @@ tibble(k = 2:12, p = (6-abs(k-7))/36) %>%
   scale_y_continuous(breaks = seq(0,.2,.02))
 ```
 :::
+::::
 
-:::
+[^10-probability-3]: [Independence](https://www.probabilitycourse.com/chapter1/1_4_1_independence.php) has a formal probabilistic definition that's beyond the scope of 240. You can simply think of it as rolling the dice in a way that doesn't affect each other.
 
-
-### Continuous RVs
+### Continuous (PDFs)
 
 For continuous RVs, distributions are specified with a **probability density function** (PDF). They are similar to PMFs but with a key distinction: **PDFs do NOT output probability of an outcome**, rather it denotes "density" which can be thought of as the rate of change of probability.
 
-:::{.def}
+::: def
 Let $X$ be a continuous RV. The **probability density function (PDF)** of $X$ is a function $P$ which, for each outcome $x$ in the sample space, specifies the density of probability around $x$.
 
 To be a valid PDF, $P$ must also satisfy the probability axioms, i.e. $P$ must always be **non-negative** and **integrate to 1** across the sample space.
 :::
 
-:::{.note}
+::: note
 This is important enough to warrant repeating: a continuous **PDF does NOT output a probability**! For continuous PDFs, **probabilities ALWAYS correspond to areas under the PDF**.
 
 Also note it's customary to use $k$ to represent possible outcomes of discrete PMFs, and $x$ to represent possible outcomes of continuous PDFs.
@@ -187,11 +182,10 @@ Also note it's customary to use $k$ to represent possible outcomes of discrete P
 
 PDFs are the continuous analog of PMFs, so whenever you might use PMFs in a summation $\sum$ expression, you would switch to a definite integral $\int$ for a PDF. In STAT 240, **we will NOT require you to evaluate these integrals** but we may occasionally show them to familiarize you with the notation. Computations with simple PMFs may be asked however.
 
-
-:::{.eg}
+:::: eg
 PDFs can feel strange at first, so here's an easy example to start. According to the [2011-12 National Health and Nutrition Examination Survey](https://wwwn.cdc.gov/Nchs/Nhanes/2011-2012/BMX_G.htm) (NHANES) by the CDC, US adult human height has an approximately normal distribution with mean 65.8 inches and standard deviation 3.98 inches. Below is a plot of the distribution:
 
-:::{.fold .s}
+::: {.fold .s}
 ```{r,tidy=F}
 # use geom_function to plot dnorm (the normal PDF function)
 # also plot the mean ± up to 3 standard deviations
@@ -211,17 +205,17 @@ You can easily see the density is non-negative, and with some careful math the a
 
 Remember the density at $x$ is NOT the probability of $x$. Again, probabilities of events correspond to areas under the curve. For example, one can show that for a normal distribution:
 
- - Approx. 68% of outcomes are between ±1 standard deviation,
- - Approx. 95% of outcomes are between ±2 standard deviations,
- - Approx. 99.7% of outcomes are between ±3 standard deviations.
+-   Approx. 68% of outcomes are between ±1 standard deviation,
+-   Approx. 95% of outcomes are between ±2 standard deviations,
+-   Approx. 99.7% of outcomes are between ±3 standard deviations.
 
 This rule is called the **empirical rule**. For our distribution of heights, this means about 68% of people are between 62 and 70 inches, about 95% are between 58 and 74 inches, etc.
-:::
+::::
 
-:::{.eg}
+:::: eg
 For another example, consider the **uniform distribution** on $(0,1)$. This distribution generalizes rolling a fair die to drawing a number from an interval, where every value inside the interval is equally likely to be selected. Below is a plot of the distribution:
 
-:::{.fold .s}
+::: {.fold .s}
 ```{r,fig.height=3.9,tidy=F}
 # use geom_function to plot dunif (the uniform PDF function)
 ggplot() + geom_function(fun = dunif, xlim = c(-.5, 1.5), n = 10001) +
@@ -231,92 +225,202 @@ ggplot() + geom_function(fun = dunif, xlim = c(-.5, 1.5), n = 10001) +
 :::
 
 One can also show percentiles are always uniformly distributed, so this is actually a very useful distribution (more on this in STAT 340).
-:::
-
+::::
 
 ## Expectation & Variance
 
 ### Expected value
 
-**Expected value** refers to the **average value** of some random variable (or function thereof). For a discrete random variable $X$, the expected value of $X$---also called $E(X)$, $\mu$, or simply the mean of $X$---is defined:
+**Expected value** refers to the **average value** of some random variable (or function thereof). For a discrete random variable $X$, the expected value of $X$---also called $\e(X)$, $\mu$, or simply the mean of $X$---is defined:
 
-$$\mu=E(X)=\sum_k\,k\cdot P(X\! =\!k)$$
+$$\mu=\e(X)=\sum_k\,k\cdot \p(X\! =\!k)$$
 
 The summation is performed over all possible outcomes $k$ in the sample space. In plain words, the mean is the sum of the product of each outcome with its probability (i.e. a weighted sum using the probabilities as weights). The formula for a continuous variable is similar but with an integral instead of a summation.
 
 The expected value of a function of a random variable $f(X)$ can also be defined, which represents the average value of $f(X)$ :
 
-$$E\big(f(X)\big)=\sum_k\,f(k)\cdot P(X\! =\!k)$$
+$$\e\big(f(X)\big)=\sum_k\,f(k)\cdot \p(X\! =\!k)$$
 
+::: {#single-die .eg}
+Again, as a simple example, consider $X$ being rolling a single fair, 6-sided die. Find $\e(X)$.
 
-:::{#single-die .eg}
-Again, as a simple example, consider $X$ being rolling a single fair, 6-sided die. Find $E(X)$.
+If the die is fair, then $\p(X\! =\!k)=1/6$ for all $k=1,2,\ldots,6$. Then, we get
 
-If the die is fair, then $P(X\! =\!k)=1/6$ for all $k=1,2,\ldots,6$. Then, we get
-
-$$E(X)=\sum_{k=1}^6\,k\cdot(1/6)=\frac16(1+2+\cdots+6)=\frac{21}6=3.5$$
+$$\e(X)=\sum_{k=1}^6\,k\cdot(1/6)=\frac16(1+2+\cdots+6)=\frac{21}6=3.5$$
 
 This means the average value of a die roll is 3.5. Note that **the average does NOT need to be a possible observation**! Even though it's impossible to roll a 3.5, the average of each roll over many rolls is in fact 3.5.
 
-Now consider $f(x)=x^2$. What is $E\big(f(X)\big)$, i.e. the average value of $X^2$?
+Now consider $f(x)=x^2$. What is $\e\big(f(X)\big)$, i.e. the average value of $X^2$?
 
-$$E(X^2)=\sum_{k=1}^6\,k^2\cdot(1/6)=\frac16(1+4+\cdots+36)=\frac{91}6\approx15.17$$
+$$\e(X^2)=\sum_{k=1}^6\,k^2\cdot(1/6)=\frac16(1+4+\cdots+36)=\frac{91}6\approx15.17$$
 
 Thus, the average of the square of a 6-sided die is about 15.17.
 :::
 
-:::{#casino-game2 .eg}
+::: {#casino-game2 .eg}
 Let's reconsider the [casino game example](#casino-example) above, where $X$ is the average winnings per game. Find the expected value of $X$.
 
 Recall the outcomes $0,1,2,3$ have corresponding probabilities $0.4,0.3,0.2,0.1$. Using the formula, we get
 
-$$E(X)=0\!\cdot\!(0.4)+1\!\cdot\!(0.3)+2\!\cdot\!(0.2)+3\!\cdot\!(0.1)=0.3+0.4+0.3=1$$
+$$\e(X)=0\!\cdot\!(0.4)+1\!\cdot\!(0.3)+2\!\cdot\!(0.2)+3\!\cdot\!(0.1)=0.3+0.4+0.3=1$$
 
 Thus, each play on average wins \$1. This means if a casino wants to not lose money, they need to charge at least \$1 per play.
 :::
 
-
 ### Variance
 
-The **variance** of a random variable---also called $Var(X)$ or $\sigma^2$---can be thought of as the **average squared distance from the mean** and is defined as:
+The **variance** of a random variable---also called $\var(X)$ or $\sigma^2$---can be thought of as the **average squared distance from the mean** and is defined as:
 
-$$\sigma^2=Var(X)=E\big((X-\mu)^2\big)=\sum_k\,(k\!-\!\mu)^2\cdot P(X\! =\!k)$$
+$$\sigma^2=\var(X)=\e\big((X-\mu)^2\big)=\sum_k\,(k\!-\!\mu)^2\cdot \p(X\! =\!k)$$
 
-where $\mu$ represents $E(X)$. The variance is used as a measure of spread. The higher the variance, the more "spread out" a RV is.
+where $\mu$ represents $\e(X)$. The variance is used as a measure of spread. The higher the variance, the more "spread out" a RV is.
 
 The **standard deviation** of $X$, often denoted $\sigma$, is then defined as the **square root of the variance**. This is often more convenient to use in calculations instead of the variance since it has the same units as the data. It can be thought of as the average distance of an observation from the mean.
 
-:::{.eg}
+::: eg
 Consider again the previous [single, fair 6-sided die example](#single-die). Find the variance and standard deviation of $X$.
 
-We found earlier that $\mu=E(X)=3.5$. Applying the variance formula gives:
+We found earlier that $\mu=\e(X)=3.5$. Applying the variance formula gives:
 
-$$Var(X)=\sum_{k=1}^6(k\!-\!3.5)^2\cdot(1/6)=\frac16\big((1\!-\!3.5)^2+\cdots+(6\!-\!3.5)^2\big)=\frac{35}{12}\approx2.92$$
+$$\var(X)=\sum_{k=1}^6(k\!-\!3.5)^2\cdot(1/6)=\frac16\big((1\!-\!3.5)^2+\cdots+(6\!-\!3.5)^2\big)=\frac{35}{12}\approx2.92$$
 
 So, we found the variance $\sigma^2\approx2.92$, and thus the standard deviation $\sigma\approx1.71$.
 :::
 
-:::{.eg}
+::: eg
 Let's consider the [casino game example](#casino-game2) a final time. Find the variance and standard deviation of $X$.
 
-We found earlier $\mu=E(X)=1$. Applying the variance formula gives:
+We found earlier $\mu=\e(X)=1$. Applying the variance formula gives:
 
-$$Var(X)=(0\!-\!1)^2\!\cdot\!(0.4)+(1\!-\!1)^2\!\cdot\!(0.3)+(2\!-\!1)^2\!\cdot\!(0.2)+(3\!-\!1)^2\!\cdot\!(0.1)=1$$
+$$\var(X)=(0\!-\!1)^2\!\cdot\!(0.4)+(1\!-\!1)^2\!\cdot\!(0.3)+(2\!-\!1)^2\!\cdot\!(0.2)+(3\!-\!1)^2\!\cdot\!(0.1)=1$$
 
 Thus, the variance is also $\sigma^2=1$, and so is the standard deviation $\sigma=1$.
 :::
-
 
 ## Binomial distribution
 
 The **binomial distribution** is perhaps the most important example of a discrete random variable. It generalizes the idea of the **sum of a sequence of independent, repeated, binary trials**, e.g. the number of heads in a series of coin flips, or the number of patients who respond to an experimental treatment.
 
-
 ### Definition
 
+Suppose you have $n$ independent trials, each of which has $p$ probability of producing $1$ (called a "success"), and $1-p$ probability of producing $0$ (called a "failure"). Then, the sum of these trials $X$ follows a binomial distribution with parameters $n,p$ or in other words $X\sim\bin(n,p)$.
+
+:::: eg
+Suppose we flip a fair coin 10 times and let $X=$ **total number of heads**. Then we can see $X\sim\bin(10,0.5)$. Below shows a plot of this distribution:
+
+::: {.fold .s}
+```{r,tidy=F}
+# use dbinom (the binomial PMF function) to plot distribution
+tibble(k = 0:10, p = dbinom(k, 10, 0.5)) %>% 
+ggplot(aes(x = k, y = p)) + geom_col() +
+  scale_x_continuous(breaks = seq(0,10,1), expand = c(0, 0)) +
+  scale_y_continuous(breaks = seq(0, 0.25, 0.05), limits = c(0, 0.25),
+                     minor_breaks = seq(0, 0.25, 0.01), expand = c(0, 0)) +
+  labs(title = "Binomial(10, 0.5) distribution (number of heads in 10 flips of a fair coin)",
+       x = "x", y = "probability")
+```
+:::
+::::
+
+The following assumptions in the acronym ***BINS*** must hold for a binomial distribution to apply:
+
+-   ***B***inary outcomes: each individual trial must produce a 1 or 0
+-   ***I***ndependence: each individual trial must be independent from others (i.e. neither affects nor affected by other trials)
+-   ***N*** fixed: the number of trials $n$ must be a fixed, predetermined quantity, NOT a variable/condition
+-   ***S***ame probability: each trial must have the same probability $p$ of observing a 1
+
+If any of these criteria are not met, the resultant variable will NOT follow a binomial distribution.
+
+### PMF {#binom-pmf}
+
+First, what is the formula for the PMF of $X\sim\bin(n,p)$? It can be shown to be the following:
+
+$$\p(X\!=\!k)={n\choose k}p^k(1\!-\!p)^{n-k}\quad\text{for outcomes $k=0,1,\ldots,n$}$$
+
+$$\small\text{where}~~{n\choose k}=\dfrac{n!}{k!(n\!-\!k)!}~~~\text{and}~~n!=n\!\times\!(n\!-\!1)\!\times\cdots\!\times\!1$$
+
+-   $n!$ is called "$n$ [factorial](https://en.wikipedia.org/wiki/Factorial)" and counts the number of permutations (i.e. ways of ordering) of $n$ distinct objects
+    -   Note: $0!=1$ by definition
+-   $n\choose k$ is called "$n$ [choose](https://en.wikipedia.org/wiki/Combination) $k$" and counts the number of ways of choosing $k$ objects from $n$ distrinct objects (order of choice doesn't matter)
+
+For example, if you have 5 objects, there are 5×4×3×2×1=120 ways to order them. If you want to choose 2 from the 5, there are 5 choose 2 or 10 different combinations possible.
+
+```{r}
+# using R, we can find 5!
+factorial(5)
+# as well as 5 choose 2
+choose(5, 2)
+```
+
+This should help you understand the PMF shown above. The $n\choose k$ counts the number of ways those $k$ successes could have happened out of the $n$ total trials, whereas the $p^k$ and $(1-p)^{n-k}$ are respectively the probabilities of having exactly $k$ successes and $n-k$ failures.
+
+::: eg
+Let $X\sim\bin(10,0.5)$ again. What is $\p(X=4)$, i.e. the probability of observing exactly 4 total heads?
+
+$$P(X=4)={10\choose4}0.5^4(1\!-\!0.5)^{10-4}=\frac{10\cdot9\cdot8\cdot7}{4\cdot3\cdot2}\cdot\frac1{2^{10}}=\frac{210}{1024}\approx20.5\%$$
+
+We can also use R to help us compute this:
+
+```{r,tidy=F}
+# apply the formula
+choose(10, 4) * 0.5^4 * (1-0.5)^6
+```
+
+This is consistent with the plot of the PMF we previously made. We could also ask what's the probability of getting 3 or fewer heads total, i.e. $\p(X\le3)$.
+
+$$
+\begin{aligned}
+P(X\le3)&=P(X\!=\!0)+P(X\!=\!1)+P(X\!=\!2)+P(X\!=\!3)\\
+&={\small{10\choose0}0.5^0(1\!-\!0.5)^{10-0}+\cdots+{10\choose3}0.5^3(1\!-\!0.5)^{10-3}}\\
+&=1+\frac{10}{1024}+\frac{45}{1024}+\frac{120}{1024}=\frac{176}{1024}\approx17.2%
+\end{aligned}
+$$
+
+```{r,tidy=F}
+# compute P(X≤3) with vectorization
+sum(
+  choose(10, 0:3) * 0.5^(0:3) * (1-0.5)^(10-0:3)
+)
+```
+:::
 
 
+### E & Var
 
+Recall the general expectation and variance definitions from before:
+
+$$
+\begin{aligned}
+\e(X)&=\sum_k\,k\cdot \p(X\! =\!k)\\
+\var(X)&=\sum_k\,(k\!-\!\mu)^2\cdot \p(X\! =\!k)
+\end{aligned}
+$$
+
+You can plug in the binomial PMF for $\p(X\! =\!k)$ and [derive](https://www.probabilisticworld.com/binomial-distribution-mean-variance-formulas-proof) the following identities for the binomial distribution:
+
+$$
+\text{for binomial,}\quad
+\begin{aligned}
+\e(X)&=np\\
+\var(X)&=np(1\!-\!p)
+\end{aligned}
+$$
+
+
+### `*binom()` functions
+
+There are 4 main R functions for working with binomial distributions, `dbinom()`, `pbinom()`, `qbinom()`, and `rbinom()`. We will go over each below.
+
+
+#### `dbinom()` (PMF)
+
+`dbinom()` simply implements the PMF equation shown in section \@ref(binom-pmf). In order to compute $\p(X=k)$ for $X\sim\bin(n,p)$, simply do `dbinom(k, n, p)`.
+
+```{r}
+# check the computation earlier for P(X=4) where X~Bin(10,0.5)
+dbinom(4, 10, 0.5)
+# show the probability of every possible outcome
+```
 
 
 
