@@ -354,7 +354,7 @@ choose(5, 2)
 
 This should help you understand the PMF shown above. The $n\choose k$ counts the number of ways those $k$ successes could have happened out of the $n$ total trials, whereas the $p^k$ and $(1-p)^{n-k}$ are respectively the probabilities of having exactly $k$ successes and $n-k$ failures.
 
-::: eg
+:::{.eg}
 Let $X\sim\bin(10,0.5)$ again. What is $\p(X=4)$, i.e. the probability of observing exactly 4 total heads?
 
 $$P(X=4)={10\choose4}0.5^4(1\!-\!0.5)^{10-4}=\frac{10\cdot9\cdot8\cdot7}{4\cdot3\cdot2}\cdot\frac1{2^{10}}=\frac{210}{1024}\approx20.5\%$$
