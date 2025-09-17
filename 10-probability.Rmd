@@ -421,7 +421,29 @@ There are 4 main R functions for working with binomial distributions, `dbinom()`
 # check the computation earlier for P(X=4) where X~Bin(10,0.5)
 dbinom(4, 10, 0.5)
 # show the probability of every possible outcome
+# (this is how the PMF was plotted earlier)
+dbinom(0:10, 10, 0.5) %>% round(3)
 ```
+
+
+#### `pbinom()` (CDF)
+
+`pbinom()` is what's called the binomial's **cumulative distribution function** or **CDF**, which finds the probability of getting less than or equal to a given input. To find $\p(X\le k)$ for $X\sim\bin(n,p)$, you can do `pbinom(k, n, p)`.
+
+```{r}
+# check the computation earlier for P(X≤3) where X~Bin(10,0.5)
+pbinom(3, 10, 0.5)
+# another way
+sum(dbinom(0:3, 10, 0.5))
+```
+
+Note that `1-pbinom(k, n, p)` can also give you $\p(X>k)$.
+
+```{r}
+# example: find P(X>7) where X~Bin(10,0.5)
+1-pbinom(7, 10, 0.5)
+```
+
 
 
 
