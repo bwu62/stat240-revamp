@@ -194,7 +194,7 @@ PDFs can feel strange at first, so here's an easy example to start. According to
 # use geom_function to plot dnorm (the normal PDF function)
 # also plot the mean ± up to 3 standard deviations
 ggplot(tibble(SDs = 65.8 + (-3:3)*3.98)) +
-  geom_function(fun = \(x) dnorm(x, 65.8, 3.98), xlim = c(52, 80), n = 1001) +
+  geom_function(fun = \(x) dnorm(x, 65.8, 3.98), xlim = c(52, 80), n = 1e3) +
   geom_segment(aes(x = SDs, xend = SDs, y = 0, yend = dnorm(SDs, 65.8, 3.98)),
                color = "red", linetype = "dashed", linewidth = 0.7) +
   scale_x_continuous(breaks = seq(52, 80, 2), expand = c(0, 0)) +
@@ -441,6 +441,46 @@ $$
 \end{aligned}
 $$
 
+:::{.eg}
+Consider $X\sim\bin(10,0.5)$ again. Compute the expectation & variance using thetheir definitions and check they agree with the identities given above.
+
+
+``` r
+# compute expectation using definition
+sum(0:10 * dbinom(0:10, 10, 0.5))
+```
+
+```
+[1] 5
+```
+
+``` r
+# compare with identity E=np
+10 * 0.5
+```
+
+```
+[1] 5
+```
+
+``` r
+# compute variance using definition
+sum((0:10 - 5)^2 * dbinom(0:10, 10, 0.5))
+```
+
+```
+[1] 2.5
+```
+
+``` r
+# compare with identity Var=np(1-p)
+10 * 0.5 * (1-0.5)
+```
+
+```
+[1] 2.5
+```
+:::
 
 ### `*binom()` functions
 
@@ -471,10 +511,28 @@ dbinom(0:10, 10, 0.5) %>% round(3)
  [1] 0.001 0.010 0.044 0.117 0.205 0.246 0.205 0.117 0.044 0.010 0.001
 ```
 
+Here's the plot of the PMF again for $n=10$, $p=0.5$.
+
+:::{.fold .s}
+
+``` r
+# use dbinom (the binomial PMF function) to plot distribution
+tibble(k = 0:10, p = dbinom(k, 10, 0.5)) %>% 
+ggplot(aes(x = k, y = p)) + geom_col() +
+  scale_x_continuous(breaks = seq(0,10,1), expand = c(0, 0)) +
+  scale_y_continuous(breaks = seq(0, 0.25, 0.05), limits = c(0, 0.25),
+                     minor_breaks = seq(0, 0.25, 0.01), expand = c(0, 0)) +
+  labs(title = "Binomial(10, 0.5) PMF",
+       x = "x", y = "probability")
+```
+
+<img src="10-probability_files/figure-html/unnamed-chunk-11-1.svg" width="672" style="display: block; margin: auto;" />
+:::
+
 
 #### `pbinom()` (CDF)
 
-`pbinom()` is what's called the binomial's **cumulative distribution function** or **CDF**, which finds the probability of getting less than or equal to a given input. To find $\p(X\le k)$ for $X\sim\bin(n,p)$, you can do `pbinom(k, n, p)`.
+`pbinom()` is what's called the binomial's **cumulative distribution function** or **CDF**, which finds the **probability of getting less than or equal to a given input**. To find $\p(X\le k)$ for $X\sim\bin(n,p)$, you can do `pbinom(k, n, p)`.
 
 
 ``` r
@@ -507,7 +565,154 @@ Note that `1-pbinom(k, n, p)` can also give you $\p(X>k)$.
 [1] 0.0546875
 ```
 
+Here's a plot of the binomial CDF for $n=10$, $p=0.5$. Note the stepwise nature of the function, since this is a discrete distribution and cumulative probabilities increase in discrete "steps" at the possible values of $k$.
 
+::: {.fold .s}
+
+``` r
+ggplot() + geom_function(fun = \(x) pbinom(x, 10, 0.5), xlim = c(0,10), n = 1e4) +
+  scale_x_continuous(breaks = seq(0,10,1), expand = c(0, 0)) +
+  scale_y_continuous(breaks = seq(0, 1, 0.1), expand = c(0, 0.005)) +
+  labs(title = "Binomial(10, 0.5) CDF", x = "k", y = "probability")
+```
+
+<img src="10-probability_files/figure-html/unnamed-chunk-14-1.svg" width="672" style="display: block; margin: auto;" />
+:::
+
+
+#### `qbinom()` (inverse CDF)
+
+`qbinom()` is the inverse function of the CDF, i.e. it does the opposite. For a given probability $p$, it finds the **smallest $k$** such that $\p(X\le k)\ge p$. It's also called the **quantile function** since it is used to compute what observation $k$ is at a given percentile $p$.
+
+
+``` r
+# what observation is at the 17.1%-ile of X~Bin(10,0.5)?
+qbinom(0.171, 10, 0.5)
+```
+
+```
+[1] 3
+```
+
+``` r
+# what if we "cross" the value of P(X≤3) and ask for the 17.2%-ile?
+qbinom(0.172, 10, 0.5)
+```
+
+```
+[1] 4
+```
+
+Here's a plot of the binomial inverse CDF for $n=10$, $p=0.5$; note it's the reflection of the CDF across the $y=x$ diagonal line. For discrete distributions, like the binomial the inverse CDF is also a stepwise function.
+
+::: {.fold .s}
+
+``` r
+ggplot() + geom_function(fun = \(x) qbinom(x, 10, 0.5), xlim = c(0,1), n = 1e4) +
+  scale_x_continuous(breaks = seq(0, 1, 0.1), expand = c(0, 0.005)) +
+  scale_y_continuous(breaks = seq(0,10,1), expand = c(0, 0)) +
+  labs(title = "Binomial(10, 0.5) inverse CDF", x = "probability", y = "k")
+```
+
+<img src="10-probability_files/figure-html/unnamed-chunk-16-1.svg" width="672" style="display: block; margin: auto;" />
+:::
+
+
+#### `rbinom()` (random generator)
+
+`rbinom()` is the random generator function, which allows to simulate drawing random samples from a binomial distribution. This can be useful in simulation studies, empirical computations, etc.
+
+
+``` r
+# draw a sample of size 100 from Bin(10,0.5)
+samp = rbinom(100, 10, 0.5)
+samp
+```
+
+```
+  [1] 4 4 5 7 4 7 7 6 6 3 4 4 6 5 6 5 6 9 5 6 7 4 6 3 4 5 2 5 7 4 5 5 5 4 6 6 6 3 6 5
+ [41] 6 6 6 5 5 6 2 5 6 6 5 7 5 4 3 3 4 5 6 5 7 4 5 4 6 4 5 6 3 7 4 7 4 4 5 7 7 5 6 8
+ [81] 5 6 5 4 6 4 6 3 4 3 4 3 6 7 6 6 5 5 6 5
+```
+
+``` r
+# what is the mean and variance in our sample?
+# these should be close to the theoretical E & Var
+mean(samp)
+```
+
+```
+[1] 5.14
+```
+
+``` r
+var(samp)
+```
+
+```
+[1] 1.75798
+```
+
+``` r
+# a histogram of our sample
+ggplot(tibble(samp), aes(x = samp)) +
+  geom_histogram(binwidth = 1, center = 0, color = "white") +
+  scale_x_continuous(breaks = seq(0,10,1), expand = c(0, 0)) +
+  scale_y_continuous(breaks = seq(0, 30, 5), limits = c(0, 30),
+                     minor_breaks = seq(0, 30, 1), expand = c(0, 0)) +
+  labs(title = "Histogram of 100 observations sampled from Bin(10,0.5)", x = "k")
+```
+
+<img src="10-probability_files/figure-html/unnamed-chunk-17-1.svg" width="672" style="display: block; margin: auto;" />
 
 
 ## Normal distribution
+
+The **normal distribution** is definitely the most important of the continuous distributions, and perhaps the most important in all of statistics. It's named "normal" due to it being ubiquitous throughout nature, showing up everywhere we look, hence it's the "normal" distribution we encounter.
+
+The specific circumstances which give rise to a normal distribution have to do with something called the [Central Limit Theorem](https://en.wikipedia.org/wiki/Central_limit_theorem) which is outside the scope of 240, but as an extremely oversimplified summary, normal distributions often appear when an observation can be viewed as the **sum or average of many smaller, independent processes**.
+
+
+### Definition & PDF
+
+The normal distribution is **parametrized** (i.e. specified) by two parameters: **the mean $\mu$ and the standard deviation $\sigma$**, which are so named because they are the mean and SD of the population. If $X$ follows such a distribution, we also write $X\sim\n(\mu,\sigma)$.
+
+Given these parameters, the PDF of the normal is given by the following equation:
+
+$$f(x) = \frac1{\sigma\sqrt{2\pi}}\,e^{-\frac12\left(\frac{x-\mu}\sigma\right)^2}$$
+
+This expression produces the familiarly shaped "bell curve" distribution we all know and love. For example, IQ scores are standardized to have mean 100 and SD 15 in the general population. Below is shown the corresponding normal curve for this distribution:
+
+:::{.fold .s}
+
+``` r
+ggplot() + geom_function(fun = \(x) dnorm(x, 100, 15), xlim = c(50, 150)) +
+  scale_x_continuous(breaks = seq(55, 145, 15), expand = c(0, 0),
+                     minor_breaks = NULL) +
+  scale_y_continuous(expand = c(0.004, 0)) +
+  labs(title = "N(100, 15) distribution (standardized IQ scores)",
+       x = "score", y = "probability density")
+```
+
+<img src="10-probability_files/figure-html/unnamed-chunk-18-1.svg" width="672" style="display: block; margin: auto;" />
+:::
+
+Recall from earlier that since this is a continuous random variable, the **PDF does NOT plot the probability, but rather the probability _density_**! Probabilities of events should instead always be interpreted as corresponding areas under the curve!
+
+
+### Empirical rule
+
+<!--
+
+For normal distributions, it can be
+
+
+:::{.eg}
+Using the $X\sim\n(100,15)$ model of IQ scores, approximately what percent of people would you
+
+:::
+
+
+### 
+
+-->

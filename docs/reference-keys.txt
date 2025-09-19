@@ -170,7 +170,11 @@ e-var
 binom-functions
 dbinom-pmf
 pbinom-cdf
+qbinom-inverse-cdf
+rbinom-random-generator
 normal-distribution
+definition-pdf
+empirical-rule
 inference
 proportions
 means
