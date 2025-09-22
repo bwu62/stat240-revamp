@@ -951,7 +951,6 @@ gridExtra::grid.arrange(p1, p2, p3, nrow = 1)
 
 A consequence of this is that **any problem involving an arbitrary normal distribution $X\sim\n(\mu,\sigma)$ can be turned into an _equivalent_ problem for the standard normal $Z\sim\n(0,1)$** by simply applying a transformation that converts $X$ into $Z$. This is called **standardization**, or computing a **Z-score**.
 
-<!--
 
 ### Z-score
 
@@ -959,6 +958,58 @@ Suppose you draw an observation $x$ from a normal population with mean $\mu$ and
 
 $$z=\frac{x-\mu}\sigma$$
 
-Then, solving the original problem
+Then, solving the same problem but using $z$ and the standard normal is equivalent to solving the original problem.
 
--->
+::::{.eg}
+Continuing with the IQ example, suppose you're asked to find the percent of the population with IQ score less than 115. In other words, you want to find $\p(X<115)$ where $X\sim\n(100,15)$. We can do the following:
+
+:::{.i6}
+
+``` r
+# use pnorm() to get area to the left of 115
+pnorm(115, 100, 15)
+```
+
+```
+[1] 0.8413447
+```
+
+``` r
+# showing this area on a quick plot
+ggplot() + geom_function(fun = \(x) dnorm(x, 100, 15), xlim = c(55, 145)) + 
+  stat_function(fun = \(x) dnorm(x, 100, 15), xlim = c(55, 115), geom = "area", fill = "red4") + 
+  labs(title = "Plot showing P(X<115) where X~N(100,15)")
+```
+
+<img src="10-probability_files/figure-html/unnamed-chunk-27-1.svg" width="672" style="display: block; margin: auto;" />
+:::
+
+Using the Z-score approach, we have
+
+$$z=\frac{x-\mu}\sigma=\frac{115-100}{15}=1$$
+
+Thus, this problem is equivalent to asking what's $\p(Z<1)$ where again $Z\sim\n(0,1)$ is the standard normal:
+
+:::{.i6}
+
+``` r
+# pnorm() defaults to mean 0 SD 1 if they're not specified
+pnorm(1)
+```
+
+```
+[1] 0.8413447
+```
+
+``` r
+# showing the same equivalent area on a plot
+ggplot() + geom_function(fun = dnorm, xlim = c(-3, 3)) + 
+  stat_function(fun = dnorm, xlim = c(-3, 1), geom = "area", fill = "red4") + 
+  labs(title = "Plot showing P(Z<1) where Z~N(0,1)")
+```
+
+<img src="10-probability_files/figure-html/unnamed-chunk-28-1.svg" width="672" style="display: block; margin: auto;" />
+:::
+
+Note how these two areas exactly correspond, so solving one solves the other.
+::::

@@ -827,18 +827,46 @@ P(X\le3)&amp;=P(X\!=\!0)+P(X\!=\!1)+P(X\!=\!2)+P(X\!=\!3)\\
 <div class="inline-figure"><img src="10-probability_files/figure-html/unnamed-chunk-26-1.svg" width="864" style="display: block; margin: auto;"></div>
 </div>
 <p>A consequence of this is that <strong>any problem involving an arbitrary normal distribution <span class="math inline">\(X\sim\n(\mu,\sigma)\)</span> can be turned into an <em>equivalent</em> problem for the standard normal <span class="math inline">\(Z\sim\n(0,1)\)</span></strong> by simply applying a transformation that converts <span class="math inline">\(X\)</span> into <span class="math inline">\(Z\)</span>. This is called <strong>standardization</strong>, or computing a <strong>Z-score</strong>.</p>
-<!--
+<div id="z-score" class="section level3" number="10.7.1">
+<h3>
+<span class="header-section-number">10.7.1</span> Z-score<a class="anchor" aria-label="anchor" href="#z-score"><i class="fas fa-link"></i></a>
+</h3>
+<p>Suppose you draw an observation <span class="math inline">\(x\)</span> from a normal population with mean <span class="math inline">\(\mu\)</span> and SD <span class="math inline">\(\sigma\)</span>. The Z-score of <span class="math inline">\(x\)</span> is defined as:</p>
+<p><span class="math display">\[z=\frac{x-\mu}\sigma\]</span></p>
+<p>Then, solving the same problem but using <span class="math inline">\(z\)</span> and the standard normal is equivalent to solving the original problem.</p>
+<div class="eg">
+<p>Continuing with the IQ example, suppose you’re asked to find the percent of the population with IQ score less than 115. In other words, you want to find <span class="math inline">\(\p(X&lt;115)\)</span> where <span class="math inline">\(X\sim\n(100,15)\)</span>. We can do the following:</p>
+<div class="i6">
+<div class="sourceCode" id="cb891"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># use pnorm() to get area to the left of 115</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="fl">115</span>, <span class="fl">100</span>, <span class="fl">15</span><span class="op">)</span></span></code></pre></div>
+<pre><code>[1] 0.8413447</code></pre>
+<div class="sourceCode" id="cb893"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># showing this area on a quick plot</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_function.html">geom_function</a></span><span class="op">(</span>fun <span class="op">=</span> \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">100</span>, <span class="fl">15</span><span class="op">)</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">55</span>, <span class="fl">145</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_function.html">stat_function</a></span><span class="op">(</span>fun <span class="op">=</span> \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">100</span>, <span class="fl">15</span><span class="op">)</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">55</span>, <span class="fl">115</span><span class="op">)</span>, geom <span class="op">=</span> <span class="st">"area"</span>, fill <span class="op">=</span> <span class="st">"red4"</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Plot showing P(X&lt;115) where X~N(100,15)"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="10-probability_files/figure-html/unnamed-chunk-27-1.svg" width="672" style="display: block; margin: auto;"></div>
+</div>
+<p>Using the Z-score approach, we have</p>
+<p><span class="math display">\[z=\frac{x-\mu}\sigma=\frac{115-100}{15}=1\]</span></p>
+<p>Thus, this problem is equivalent to asking what’s <span class="math inline">\(\p(Z&lt;1)\)</span> where again <span class="math inline">\(Z\sim\n(0,1)\)</span> is the standard normal:</p>
+<div class="i6">
+<div class="sourceCode" id="cb894"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># pnorm() defaults to mean 0 SD 1 if they're not specified</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<pre><code>[1] 0.8413447</code></pre>
+<div class="sourceCode" id="cb896"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># showing the same equivalent area on a plot</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_function.html">geom_function</a></span><span class="op">(</span>fun <span class="op">=</span> <span class="va">dnorm</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_function.html">stat_function</a></span><span class="op">(</span>fun <span class="op">=</span> <span class="va">dnorm</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">1</span><span class="op">)</span>, geom <span class="op">=</span> <span class="st">"area"</span>, fill <span class="op">=</span> <span class="st">"red4"</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Plot showing P(Z&lt;1) where Z~N(0,1)"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="10-probability_files/figure-html/unnamed-chunk-28-1.svg" width="672" style="display: block; margin: auto;"></div>
+</div>
+<p>Note how these two areas exactly correspond, so solving one solves the other.</p>
+</div>
 
-### Z-score
-
-Suppose you draw an observation $x$ from a normal population with mean $\mu$ and SD $\sigma$. The Z-score of $x$ is defined as:
-
-$$z=\frac{x-\mu}\sigma$$
-
-Then, solving the original problem
-
--->
-
+</div>
 </div>
 </div>
 
@@ -982,7 +1010,9 @@ observer.observe(document.body, config);
 <li><a class="nav-link" href="#rnorm-random-generator"><span class="header-section-number">10.6.8</span> rnorm() (random generator)</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#standard-normal-n01"><span class="header-section-number">10.7</span> Standard Normal \(\n(0,1)\)</a></li>
+<li>
+<a class="nav-link" href="#standard-normal-n01"><span class="header-section-number">10.7</span> Standard Normal \(\n(0,1)\)</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#z-score"><span class="header-section-number">10.7.1</span> Z-score</a></li></ul>
+</li>
 </ul>
 
       <div class="book-extra">
@@ -1000,7 +1030,7 @@ observer.observe(document.body, config);
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2025-09-21.</p>
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2025-09-22.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

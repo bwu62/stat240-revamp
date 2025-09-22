@@ -182,6 +182,7 @@ pnorm-cdf
 qnorm-inverse-cdf
 rnorm-random-generator
 standard-normal-n01
+z-score
 inference
 proportions
 means
