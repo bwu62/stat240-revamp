@@ -711,12 +711,12 @@ ggplot(penguins, aes(y = flipper_length_mm, fill = sex)) +
   scale_x_continuous(
     limits = c(0, 0.1),              # set limits
     breaks = seq(0, 0.08, 0.02),     # set breaks
-    expand = c(0, 0)                 # remove padding (extra spacing at either end)
+    expand = 0                       # remove padding (extra spacing at either end)
     # if you need to transform x, you can also set transform = something (see help!)
   ) +
   scale_y_continuous(
     minor_breaks = seq(170, 230, 2), # set minor breaks
-    expand = c(0, 0)                 # remove padding here as well
+    expand = 0                       # remove padding here as well
   ) +
   scale_fill_manual(
     values = c("red", "blue")        # set custom colors, full list of possible names:

@@ -193,7 +193,7 @@ ggplot(tibble(SDs = 65.8 + (-3:3)*3.98)) +
   geom_function(fun = \(x) dnorm(x, 65.8, 3.98), xlim = c(52, 80), n = 1e3) +
   geom_segment(aes(x = SDs, xend = SDs, y = 0, yend = dnorm(SDs, 65.8, 3.98)),
                color = "red", linetype = "dashed", linewidth = 0.7) +
-  scale_x_continuous(breaks = seq(52, 80, 2), expand = c(0, 0)) +
+  scale_x_continuous(breaks = seq(52, 80, 2), expand = 0) +
   scale_y_continuous(breaks = seq(0, 0.10, 0.01), expand = c(0, 0.001)) +
   labs(title = "US adult human height distribution",
        subtitle = '(approx normal w/ mean 65.8", SD 3.98"; SDs shown in dashed)',
@@ -313,9 +313,9 @@ Suppose we flip a fair coin 10 times and let $X=$ **total number of heads**. The
 # use dbinom (the binomial PMF function) to plot distribution
 tibble(k = 0:10, p = dbinom(k, 10, 0.5)) %>% 
 ggplot(aes(x = k, y = p)) + geom_col() +
-  scale_x_continuous(breaks = seq(0,10,1), expand = c(0, 0)) +
+  scale_x_continuous(breaks = seq(0,10,1), expand = 0) +
   scale_y_continuous(breaks = seq(0, 0.25, 0.05), limits = c(0, 0.25),
-                     minor_breaks = seq(0, 0.25, 0.01), expand = c(0, 0)) +
+                     minor_breaks = seq(0, 0.25, 0.01), expand = 0) +
   labs(title = "Binomial(10, 0.5) distribution (number of heads in 10 flips of a fair coin)",
        x = "x", y = "probability")
 ```
@@ -446,11 +446,11 @@ Here's the plot of the PMF again for $n=10$, $p=0.5$.
 # use dbinom (the binomial PMF function) to plot distribution
 tibble(k = 0:10, p = dbinom(k, 10, 0.5)) %>% 
 ggplot(aes(x = k, y = p)) + geom_col() +
-  scale_x_continuous(breaks = seq(0,10,1), expand = c(0, 0)) +
+  scale_x_continuous(breaks = seq(0,10,1), expand = 0) +
   scale_y_continuous(breaks = seq(0, 0.25, 0.05), limits = c(0, 0.25),
-                     minor_breaks = seq(0, 0.25, 0.01), expand = c(0, 0)) +
   labs(title = "Binomial(10, 0.5) PMF",
        x = "x", y = "probability")
+                     minor_breaks = seq(0, 0.25, 0.01), expand = 0) +
 ```
 :::
 
@@ -478,7 +478,7 @@ Here's a plot of the binomial CDF for $n=10$, $p=0.5$. Note the stepwise nature 
 ::: {.fold .s}
 ```{r}
 ggplot() + geom_function(fun = \(x) pbinom(x, 10, 0.5), xlim = c(0,10), n = 1e4) +
-  scale_x_continuous(breaks = seq(0,10,1), expand = c(0, 0)) +
+  scale_x_continuous(breaks = seq(0,10,1), expand = 0) +
   scale_y_continuous(breaks = seq(0, 1, 0.1), expand = c(0, 0.005)) +
   labs(title = "Binomial(10, 0.5) CDF", x = "k", y = "probability")
 ```
@@ -502,7 +502,7 @@ Here's a plot of the binomial inverse CDF for $n=10$, $p=0.5$; note it's the ref
 ```{r}
 ggplot() + geom_function(fun = \(x) qbinom(x, 10, 0.5), xlim = c(0,1), n = 1e4) +
   scale_x_continuous(breaks = seq(0, 1, 0.1), expand = c(0, 0.005)) +
-  scale_y_continuous(breaks = seq(0,10,1), expand = c(0, 0)) +
+  scale_y_continuous(breaks = seq(0,10,1), expand = 0) +
   labs(title = "Binomial(10, 0.5) inverse CDF", x = "probability", y = "k")
 ```
 :::
@@ -523,9 +523,9 @@ var(samp)
 # a histogram of our sample
 ggplot(tibble(samp), aes(x = samp)) +
   geom_histogram(binwidth = 1, center = 0, color = "white") +
-  scale_x_continuous(breaks = seq(0,10,1), expand = c(0, 0)) +
   scale_y_continuous(breaks = seq(0, 30, 5), limits = c(0, 30),
-                     minor_breaks = seq(0, 30, 1), expand = c(0, 0)) +
+  scale_x_continuous(breaks = seq(0, 10, 1), expand = 0) +
+  scale_y_continuous(breaks = seq(0, 30, 5), minor_breaks = 0:30, expand = 0) +
   labs(title = "Histogram of 100 observations sampled from Bin(10,0.5)", x = "k")
 ```
 
@@ -550,8 +550,8 @@ This expression produces the familiarly shaped "bell curve" distribution we all 
 :::{.fold .s}
 ```{r}
 ggplot() + geom_function(fun = \(x) dnorm(x, 100, 15), xlim = c(50, 150)) +
-  scale_x_continuous(breaks = seq(55, 145, 15), expand = c(0, 0),
                      minor_breaks = NULL) +
+  scale_x_continuous(breaks = seq(55, 145, 15), expand = 0, minor_breaks = NULL) +
   scale_y_continuous(expand = c(0.004, 0)) +
   labs(title = "N(100, 15) distribution (standardized IQ scores)",
        x = "score", y = "probability density")
