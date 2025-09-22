@@ -713,28 +713,41 @@ The standard normal is important because it serves as a **reference** distributi
 
 :::{.fold .s}
 ```{r}
-normals_plot <- ggplot() + geom_function(fun = dnorm, n = 1e3, color = "navy") + 
-  geom_function(fun = \(x) dnorm(x, -3, 0.5), n = 1e3, color = "red3") + 
-  geom_function(fun = \(x) dnorm(x, 4, 2), n = 1e3, color = "seagreen") + 
-  scale_x_continuous(breaks = -5:9, limits = c(-5, 9), expand = 0) + 
+normals_plot <- ggplot() + geom_function(fun = dnorm, n = 1e3, color = "red3") + 
+  geom_function(fun = \(x) dnorm(x, -3, 0.5), n = 1e3, color = "seagreen") + 
+  geom_function(fun = \(x) dnorm(x, 5, 2), n = 1e3, color = "navy") + 
+  scale_x_continuous(breaks = -5:10, limits = c(-5, 10), expand = 0) + 
   scale_y_continuous(expand = 0) + 
-  labs(title = "Plot of 3 normals: N(0,1), N(-3,0.5), N(4,2)",
+  labs(title = "Plot of 3 normals: N(0,1), N(-3,0.5), N(5,2)",
        y = "probability density")
 normals_plot
 ```
 :::
 
-However, if you take the exact same plot and simply zoom in to each curve, you can see in fact they are all similar, up to axes scaling.
+However, if you take the exact same plot and simply zoom in to each curve, you can see in fact they are all the exact same shape, up to axes scaling.
 
 :::{.i96 .fold .s}
 ```{r, fig.width=9, fig.height=3}
 p1 <- normals_plot + xlim(-4.5, -1.5) + ylim(0, dnorm(-3, -3, 0.5)) + 
-  labs(title = "Same plot, zoomed to N(-3,0.5)", y = NULL)
+  labs(title = "Same plot, zoomed to N(-3,0.5)", y = NULL, x = NULL)
 p2 <- normals_plot + xlim(-3, 3) + ylim(0, dnorm(0, 0, 1)) + 
-  labs(title = "Same plot, zoomed to N(0,1)", y = NULL)
-p3 <- normals_plot + xlim(-2, 10) + ylim(0, dnorm(4, 4, 2)) + 
-  labs(title = "Same plot, zoomed to N(4,2)", y = NULL)
+  labs(title = "Same plot, zoomed to N(0,1)", y = NULL, x = NULL)
+p3 <- normals_plot + xlim(-1, 11) + ylim(0, dnorm(5, 5, 2)) + 
+  labs(title = "Same plot, zoomed to N(5,2)", y = NULL, x = NULL)
 gridExtra::grid.arrange(p1, p2, p3, nrow = 1)
 ```
 :::
 
+A consequence of this is that **any problem involving an arbitrary normal distribution $X\sim\n(\mu,\sigma)$ can be turned into an _equivalent_ problem for the standard normal $Z\sim\n(0,1)$** by simply applying a transformation that converts $X$ into $Z$. This is called **standardization**, or computing a **Z-score**.
+
+<!--
+
+### Z-score
+
+Suppose you draw an observation $x$ from a normal population with mean $\mu$ and SD $\sigma$. The Z-score of $x$ is defined as:
+
+$$z=\frac{x-\mu}\sigma$$
+
+Then, solving the original problem
+
+-->
