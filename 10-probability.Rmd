@@ -565,17 +565,143 @@ Recall from earlier that since this is a continuous random variable, the **PDF d
 
 ### Empirical rule
 
-<!--
+For normal distributions, it can be shown that:
 
-For normal distributions, it can be
+ - About 68% of the values will be between ±1 SD of the mean,
+ - About 95% of the values will be between ±2 SDs of the mean,
+ - About 99.7% of the values will be between ±3 SDs of the mean.
 
+This is called the **empirical rule** of the normal and is useful for roughly approximating what you'd observe based on the parameters.
 
 :::{.eg}
-Using the $X\sim\n(100,15)$ model of IQ scores, approximately what percent of people would you
+Using the $X\sim\n(100,15)$ model of IQ scores, approximately what percent of people would you expect to score in the following ranges?
 
+ 1. 85 to 115
+ 2. 70 to 130
+ 3. 85 to 130
+ 4. Less than 70
+ 5. Greater than 145
+
+Using the empirical rule, we know 68% would fall between 85 to 115 (±1 SD), and 95% would fall between 70 to 130 (±2 SDs).
+
+Using symmetry, we know from 85-100 is 68%/2 or 34%, and 100-130 is 95%/2 or 47.5%. Thus, 85-130 covers about 81.5% of the distribution.
+
+We know 70-130 covers about 95% from the empirical rule, which means <70 or >130 must be 5%. By symmetry, <70 must be half that or 2.5%.
+
+Again using the empirical rule, we know 55 to 145 covers about 99.7%, which means <55 or >145 makes up about 0.3%. By symmetry again, we know that >145 must be around 0.15%.
 :::
 
 
-### 
+### E & Var
 
--->
+As you'd expect from definition, the expectation and variance are equal to $\mu$ and $\sigma^2$.
+
+$$
+\text{for normal,}\quad
+\begin{aligned}
+\e(X)&=\mu\\
+\var(X)&=\sigma^2\\
+\sd(X)&=\sqrt{\var(X)}=\sigma
+\end{aligned}
+$$
+
+
+### `*norm()` functions:
+
+There are also 4 main R functions for working with normal distributions, `dnorm()`, `pnorm()`, `qnorm()`, and `rnorm()`. They are each the continuous analogs of the `*binom()` functions.
+
+
+### `dnorm()` (PDF)
+
+`dnorm()` is the normal PDF (probability density function), which was plotted just above. Remember the PDF does NOT represent the probability of a certain outcome, but rather the *probability density*, which is akin to the rate of change of probability around that point. For us, the main use case of `dnorm()` is to show a plot of the PDF.
+
+```{r}
+# what's the density at the mean of N(100,15)?
+dnorm(100, 100, 15)
+# replot the N(100,15) PDF
+ggplot() + geom_function(fun = \(x) dnorm(x, 100, 15), xlim = c(50, 150)) +
+    scale_x_continuous(breaks = seq(55, 145, 15), minor_breaks = NULL) +
+  labs(title = "N(100, 15) PDF", x = "x", y = "probability density")
+```
+
+
+
+### `pnorm()` (CDF)
+
+`pnorm()` is the normal CDF (cumulate distribution function), which finds the **probability less than or equal to a given input**. This function is extremely useful for computing probabilities of ranges under the normal curve, e.g. to compute $\p(X\le k)$ when $X\sim\n(\mu,\sigma)$, simply do `pnorm(k, µ, σ)`.
+
+Note that to find the probability $\p(a<X\le b)$, we can do `pnorm(a, µ, σ) - pnorm(b, µ, σ)`. Together with remebering the area under the entire curve is 1 just like any other RV, we can check the probabilities of each range in the previous example:
+
+```{r}
+c(  # find the probability an observation from X~N(100,15) falls in each range:
+  pnorm(115, 100, 15) - pnorm(85, 100, 15),   # between 85-115
+  pnorm(130, 100, 15) - pnorm(70, 100, 15),   # between 70-130
+  pnorm(130, 100, 15) - pnorm(85, 100, 15),   # between 85-130
+  pnorm(70, 100, 15),                         # less than 70
+  1 - pnorm(145, 100, 15)                     # greater than 145
+) %>% round(4)
+```
+
+
+:::{.note}
+Due to the way probabilities work for continuous variables (they're always areas of ranges under the curve), you can show the probability of observing a single number^[or technically any other set with [measure](https://en.wikipedia.org/wiki/Lebesgue_measure) 0, or in other words having 0-length] has probability 0. More specifically, for any number $a$, $\p(X=a)=0$.
+
+This may seem strange, but if you try to imagine the area the single number $a$ "bounds" under the curve, it makes a line, which has no area. This does not mean $a$ is impossible to observe as an outcome^[technically, it's only ["almost impossible"](https://en.wikipedia.org/wiki/Almost_surely)], we just can't meaningfully assign a probability to it due to the way probabilities have to be defined for continuous RVs.
+
+A consequence of this is that for continuous variables, $<$ and $\le$ are interchangeable, as well as $>$ and $\ge$. In other words, you don't need to worry about counting or not counting "boundaries" of ranges when doing math with probabilities over different intervals.
+:::
+
+Below is a plot of the normal CDF for $\mu=100$, $\sigma=15$. Again note as you move from left to right, the CDF goes from 0 to 1 and never decreases.
+
+:::{.fold .s}
+```{r}
+ggplot() + geom_function(fun = \(x) pnorm(x, 100, 15), xlim = c(55, 145), n = 1e4) + 
+  scale_x_continuous(breaks = seq(55, 145, 15), minor_breaks = NULL, expand = 0) + 
+  scale_y_continuous(breaks = seq(0, 1, 0.2), expand = c(0, 0.002)) + 
+  labs(title = "N(100, 15) CDF", x = "x", y = "probability")
+```
+:::
+
+
+### `qnorm()` (inverse CDF)
+
+`qnorm()` is the inverse CDF or the quantile function for the normal. Since the normal distribution is continuous (unlike the binomial), the inverse CDF here works a little simpler. For a given probability $p$, it finds the $k$ such that $\p(X\le k)=p$.
+
+```{r}
+# what observation is at the 90%-ile of X~N(100,15)?
+qnorm(0.9, 100, 15)
+# we can also check that P(X≤119.2233) = 90% (up to rounding)
+pnorm(119.2233, 100, 15)
+```
+
+Below is a plot of the normal inverse CDF for $\mu=100$, $\sigma=15$, again note it's the reflection of the CDF across the $y=x$ diagonal line.
+
+:::{.fold .s}
+```{r}
+ggplot() + geom_function(fun = \(x) qnorm(x, 100, 15), xlim = c(0, 1), n = 1e4) + 
+  scale_x_continuous(breaks = seq(0, 1, 0.2), expand = c(0, 0.002)) + 
+  scale_y_continuous(breaks = seq(55, 145, 15), minor_breaks = NULL, expand = 0) + 
+  labs(title = "N(100, 15) inverse CDF", x = "probability", y = "x")
+```
+:::
+
+
+### `rnorm()` (random generator)
+
+`rnorm()` is the normal random generator function, which simulates drawing random samples from a normal distribution.
+
+```{r}
+# draw a sample of size 80 from N(100,15)
+samp = rnorm(80, 100, 15)
+samp
+# again, we can check our sample mean/sd are close to theory
+mean(samp)
+sd(samp)
+# a histogram of our sample
+ggplot(tibble(samp), aes(x = samp)) +
+  geom_histogram(binwidth = 5, boundary = 0, color = "white") +
+  scale_x_continuous(expand = 0) + scale_y_continuous(expand = 0) +
+  labs(title = "Histogram of 80 observations sampled from N(100,15)", x = "x")
+```
+
+
