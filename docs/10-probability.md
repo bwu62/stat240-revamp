@@ -197,7 +197,7 @@ ggplot(tibble(SDs = 65.8 + (-3:3)*3.98)) +
   geom_function(fun = \(x) dnorm(x, 65.8, 3.98), xlim = c(52, 80), n = 1e3) +
   geom_segment(aes(x = SDs, xend = SDs, y = 0, yend = dnorm(SDs, 65.8, 3.98)),
                color = "red", linetype = "dashed", linewidth = 0.7) +
-  scale_x_continuous(breaks = seq(52, 80, 2), expand = c(0, 0)) +
+  scale_x_continuous(breaks = seq(52, 80, 2), expand = 0) +
   scale_y_continuous(breaks = seq(0, 0.10, 0.01), expand = c(0, 0.001)) +
   labs(title = "US adult human height distribution",
        subtitle = '(approx normal w/ mean 65.8", SD 3.98"; SDs shown in dashed)',
@@ -323,11 +323,11 @@ Suppose we flip a fair coin 10 times and let $X=$ **total number of heads**. The
 # use dbinom (the binomial PMF function) to plot distribution
 tibble(k = 0:10, p = dbinom(k, 10, 0.5)) %>% 
 ggplot(aes(x = k, y = p)) + geom_col() +
-  scale_x_continuous(breaks = seq(0,10,1), expand = c(0, 0)) +
+  scale_x_continuous(breaks = seq(0,10,1), expand = 0) +
   scale_y_continuous(breaks = seq(0, 0.25, 0.05), limits = c(0, 0.25),
-                     minor_breaks = seq(0, 0.25, 0.01), expand = c(0, 0)) +
+                     minor_breaks = seq(0, 0.25, 0.01), expand = 0) +
   labs(title = "Binomial(10, 0.5) distribution (number of heads in 10 flips of a fair coin)",
-       x = "x", y = "probability")
+       x = "k", y = "probability")
 ```
 
 <img src="10-probability_files/figure-html/unnamed-chunk-5-1.svg" width="672" style="display: block; margin: auto;" />
@@ -437,7 +437,8 @@ $$
 \text{for binomial,}\quad
 \begin{aligned}
 \e(X)&=np\\
-\var(X)&=np(1\!-\!p)
+\var(X)&=np(1\!-\!p)\\
+\sd(X)&=\sqrt{\var(X)}=\sqrt{np(1\!-\!p)}
 \end{aligned}
 $$
 
@@ -482,12 +483,12 @@ sum((0:10 - 5)^2 * dbinom(0:10, 10, 0.5))
 ```
 :::
 
-### `*binom()` functions
+### `*binom()` functions:
 
 There are 4 main R functions for working with binomial distributions, `dbinom()`, `pbinom()`, `qbinom()`, and `rbinom()`. We will go over each below.
 
 
-#### `dbinom()` (PMF)
+### `dbinom()` (PMF)
 
 `dbinom()` simply implements the PMF equation shown in section \@ref(binom-pmf). In order to compute $\p(X=k)$ for $X\sim\bin(n,p)$, simply do `dbinom(k, n, p)`.
 
@@ -513,24 +514,21 @@ dbinom(0:10, 10, 0.5) %>% round(3)
 
 Here's the plot of the PMF again for $n=10$, $p=0.5$.
 
-:::{.fold .s}
 
 ``` r
 # use dbinom (the binomial PMF function) to plot distribution
 tibble(k = 0:10, p = dbinom(k, 10, 0.5)) %>% 
 ggplot(aes(x = k, y = p)) + geom_col() +
-  scale_x_continuous(breaks = seq(0,10,1), expand = c(0, 0)) +
+  scale_x_continuous(breaks = seq(0,10,1), expand = 0) +
   scale_y_continuous(breaks = seq(0, 0.25, 0.05), limits = c(0, 0.25),
-                     minor_breaks = seq(0, 0.25, 0.01), expand = c(0, 0)) +
-  labs(title = "Binomial(10, 0.5) PMF",
-       x = "x", y = "probability")
+                     minor_breaks = seq(0, 0.25, 0.01), expand = 0) +
+  labs(title = "Binomial(10, 0.5) PMF", x = "k", y = "probability")
 ```
 
 <img src="10-probability_files/figure-html/unnamed-chunk-11-1.svg" width="672" style="display: block; margin: auto;" />
-:::
 
 
-#### `pbinom()` (CDF)
+### `pbinom()` (CDF)
 
 `pbinom()` is what's called the binomial's **cumulative distribution function** or **CDF**, which finds the **probability of getting less than or equal to a given input**. To find $\p(X\le k)$ for $X\sim\bin(n,p)$, you can do `pbinom(k, n, p)`.
 
@@ -567,11 +565,13 @@ Note that `1-pbinom(k, n, p)` can also give you $\p(X>k)$.
 
 Here's a plot of the binomial CDF for $n=10$, $p=0.5$. Note the stepwise nature of the function, since this is a discrete distribution and cumulative probabilities increase in discrete "steps" at the possible values of $k$.
 
+Also note the CDF always goes from 0 on the left to 1 on the right, and can never decrease as you move from left to right; it can only increase or stay the same.^[this property is called **monotonically increasing**, see other properties of the CDF [here](https://www.geeksforgeeks.org/engineering-mathematics/cumulative-distribution-function/#properties-of-cumulative-distribution-function) if you want to learn more.]
+
 ::: {.fold .s}
 
 ``` r
 ggplot() + geom_function(fun = \(x) pbinom(x, 10, 0.5), xlim = c(0,10), n = 1e4) +
-  scale_x_continuous(breaks = seq(0,10,1), expand = c(0, 0)) +
+  scale_x_continuous(breaks = seq(0,10,1), expand = 0) +
   scale_y_continuous(breaks = seq(0, 1, 0.1), expand = c(0, 0.005)) +
   labs(title = "Binomial(10, 0.5) CDF", x = "k", y = "probability")
 ```
@@ -580,7 +580,7 @@ ggplot() + geom_function(fun = \(x) pbinom(x, 10, 0.5), xlim = c(0,10), n = 1e4)
 :::
 
 
-#### `qbinom()` (inverse CDF)
+### `qbinom()` (inverse CDF)
 
 `qbinom()` is the inverse function of the CDF, i.e. it does the opposite. For a given probability $p$, it finds the **smallest $k$** such that $\p(X\le k)\ge p$. It's also called the **quantile function** since it is used to compute what observation $k$ is at a given percentile $p$.
 
@@ -603,14 +603,14 @@ qbinom(0.172, 10, 0.5)
 [1] 4
 ```
 
-Here's a plot of the binomial inverse CDF for $n=10$, $p=0.5$; note it's the reflection of the CDF across the $y=x$ diagonal line. For discrete distributions, like the binomial the inverse CDF is also a stepwise function.
+Here's a plot of the binomial inverse CDF for $n=10$, $p=0.5$, note it's the reflection of the CDF across the $y=x$ diagonal line. For discrete distributions, like the binomial the inverse CDF is also a stepwise function.
 
 ::: {.fold .s}
 
 ``` r
 ggplot() + geom_function(fun = \(x) qbinom(x, 10, 0.5), xlim = c(0,1), n = 1e4) +
   scale_x_continuous(breaks = seq(0, 1, 0.1), expand = c(0, 0.005)) +
-  scale_y_continuous(breaks = seq(0,10,1), expand = c(0, 0)) +
+  scale_y_continuous(breaks = seq(0,10,1), expand = 0) +
   labs(title = "Binomial(10, 0.5) inverse CDF", x = "probability", y = "k")
 ```
 
@@ -618,7 +618,7 @@ ggplot() + geom_function(fun = \(x) qbinom(x, 10, 0.5), xlim = c(0,1), n = 1e4) 
 :::
 
 
-#### `rbinom()` (random generator)
+### `rbinom()` (random generator)
 
 `rbinom()` is the random generator function, which allows to simulate drawing random samples from a binomial distribution. This can be useful in simulation studies, empirical computations, etc.
 
@@ -636,8 +636,8 @@ samp
 ```
 
 ``` r
-# what is the mean and variance in our sample?
-# these should be close to the theoretical E & Var
+# what are the mean and SD in our sample?
+# these should be close to the theoretical E & SD
 mean(samp)
 ```
 
@@ -646,20 +646,19 @@ mean(samp)
 ```
 
 ``` r
-var(samp)
+sd(samp)
 ```
 
 ```
-[1] 1.75798
+[1] 1.325888
 ```
 
 ``` r
 # a histogram of our sample
 ggplot(tibble(samp), aes(x = samp)) +
   geom_histogram(binwidth = 1, center = 0, color = "white") +
-  scale_x_continuous(breaks = seq(0,10,1), expand = c(0, 0)) +
-  scale_y_continuous(breaks = seq(0, 30, 5), limits = c(0, 30),
-                     minor_breaks = seq(0, 30, 1), expand = c(0, 0)) +
+  scale_x_continuous(breaks = seq(0, 10, 1), expand = 0) +
+  scale_y_continuous(breaks = seq(0, 30, 5), minor_breaks = 0:30, expand = 0) +
   labs(title = "Histogram of 100 observations sampled from Bin(10,0.5)", x = "k")
 ```
 
@@ -686,11 +685,14 @@ This expression produces the familiarly shaped "bell curve" distribution we all 
 :::{.fold .s}
 
 ``` r
-ggplot() + geom_function(fun = \(x) dnorm(x, 100, 15), xlim = c(50, 150)) +
-  scale_x_continuous(breaks = seq(55, 145, 15), expand = c(0, 0),
-                     minor_breaks = NULL) +
+SDs = seq(55, 145, 15)
+ggplot() + geom_segment(aes(x = SDs, y = 0, yend = dnorm(SDs, 100, 15)),
+                        color = rep(c("red", "blue", "red"), times = c(3, 1, 3))) + 
+  geom_function(fun = \(x) dnorm(x, 100, 15), xlim = c(50, 150)) +
+  scale_x_continuous(breaks = seq(55, 145, 15), expand = 0, minor_breaks = NULL) +
   scale_y_continuous(expand = c(0.004, 0)) +
   labs(title = "N(100, 15) distribution (standardized IQ scores)",
+       subtitle = "(mean shown in blue, SDs shown in red)",
        x = "score", y = "probability density")
 ```
 
@@ -702,17 +704,209 @@ Recall from earlier that since this is a continuous random variable, the **PDF d
 
 ### Empirical rule
 
-<!--
+For normal distributions, it can be shown that:
 
-For normal distributions, it can be
+ - About 68% of the values will be between ±1 SD of the mean,
+ - About 95% of the values will be between ±2 SDs of the mean,
+ - About 99.7% of the values will be between ±3 SDs of the mean.
 
+This is called the **empirical rule** of the normal and is useful for roughly approximating what you'd observe based on the parameters.
 
 :::{.eg}
-Using the $X\sim\n(100,15)$ model of IQ scores, approximately what percent of people would you
+Using the $X\sim\n(100,15)$ model of IQ scores, approximately what percent of people would you expect to score in the following ranges?
 
+ 1. 85 to 115
+ 2. 70 to 130
+ 3. 85 to 130
+ 4. Less than 70
+ 5. Greater than 145
+
+Using the empirical rule, we know 68% would fall between 85 to 115 (±1 SD), and 95% would fall between 70 to 130 (±2 SDs).
+
+Using symmetry, we know from 85-100 is 68%/2 or 34%, and 100-130 is 95%/2 or 47.5%. Thus, 85-130 covers about 81.5% of the distribution.
+
+We know 70-130 covers about 95% from the empirical rule, which means <70 or >130 must be 5%. By symmetry, <70 must be half that or 2.5%.
+
+Again using the empirical rule, we know 55 to 145 covers about 99.7%, which means <55 or >145 makes up about 0.3%. By symmetry again, we know that >145 must be around 0.15%.
 :::
 
 
-### 
+### E & Var
 
--->
+As you'd expect from definition, the expectation and variance are equal to $\mu$ and $\sigma^2$.
+
+$$
+\text{for normal,}\quad
+\begin{aligned}
+\e(X)&=\mu\\
+\var(X)&=\sigma^2\\
+\sd(X)&=\sqrt{\var(X)}=\sigma
+\end{aligned}
+$$
+
+
+### `*norm()` functions:
+
+There are also 4 main R functions for working with normal distributions, `dnorm()`, `pnorm()`, `qnorm()`, and `rnorm()`. They are each the continuous analogs of the `*binom()` functions.
+
+
+### `dnorm()` (PDF)
+
+`dnorm()` is the normal PDF (probability density function), which was plotted just above. Remember the PDF does NOT represent the probability of a certain outcome, but rather the *probability density*, which is akin to the rate of change of probability around that point. For us, the main use case of `dnorm()` is to show a plot of the PDF.
+
+
+``` r
+# what's the density at the mean of N(100,15)?
+dnorm(100, 100, 15)
+```
+
+```
+[1] 0.02659615
+```
+
+``` r
+# replot the N(100,15) PDF
+ggplot() + geom_function(fun = \(x) dnorm(x, 100, 15), xlim = c(50, 150)) +
+    scale_x_continuous(breaks = seq(55, 145, 15), minor_breaks = NULL) +
+  labs(title = "N(100, 15) PDF", x = "x", y = "probability density")
+```
+
+<img src="10-probability_files/figure-html/unnamed-chunk-19-1.svg" width="672" style="display: block; margin: auto;" />
+
+
+
+### `pnorm()` (CDF)
+
+`pnorm()` is the normal CDF (cumulate distribution function), which finds the **probability less than or equal to a given input**. This function is extremely useful for computing probabilities of ranges under the normal curve, e.g. to compute $\p(X\le k)$ when $X\sim\n(\mu,\sigma)$, simply do `pnorm(k, µ, σ)`.
+
+Note that to find the probability $\p(a<X\le b)$, we can do `pnorm(a, µ, σ) - pnorm(b, µ, σ)`. Together with remebering the area under the entire curve is 1 just like any other RV, we can check the probabilities of each range in the previous example:
+
+
+``` r
+c(  # find the probability an observation from X~N(100,15) falls in each range:
+  pnorm(115, 100, 15) - pnorm(85, 100, 15),   # between 85-115
+  pnorm(130, 100, 15) - pnorm(70, 100, 15),   # between 70-130
+  pnorm(130, 100, 15) - pnorm(85, 100, 15),   # between 85-130
+  pnorm(70, 100, 15),                         # less than 70
+  1 - pnorm(145, 100, 15)                     # greater than 145
+) %>% round(4)
+```
+
+```
+[1] 0.6827 0.9545 0.8186 0.0228 0.0013
+```
+
+
+:::{.note}
+Due to the way probabilities work for continuous variables (they're always areas of ranges under the curve), you can show the probability of observing a single number^[or technically any other set with [measure](https://en.wikipedia.org/wiki/Lebesgue_measure) 0, or in other words having 0-length] has probability 0. More specifically, for any number $a$, $\p(X=a)=0$.
+
+This may seem strange, but if you try to imagine the area the single number $a$ "bounds" under the curve, it makes a line, which has no area. This does not mean $a$ is impossible to observe as an outcome^[technically, it's only ["almost impossible"](https://en.wikipedia.org/wiki/Almost_surely)], we just can't meaningfully assign a probability to it due to the way probabilities have to be defined for continuous RVs.
+
+A consequence of this is that for continuous variables, $<$ and $\le$ are interchangeable, as well as $>$ and $\ge$. In other words, you don't need to worry about counting or not counting "boundaries" of ranges when doing math with probabilities over different intervals.
+:::
+
+Below is a plot of the normal CDF for $\mu=100$, $\sigma=15$. Again note as you move from left to right, the CDF goes from 0 to 1 and never decreases.
+
+:::{.fold .s}
+
+``` r
+ggplot() + geom_function(fun = \(x) pnorm(x, 100, 15), xlim = c(55, 145), n = 1e4) + 
+  scale_x_continuous(breaks = seq(55, 145, 15), minor_breaks = NULL, expand = 0) + 
+  scale_y_continuous(breaks = seq(0, 1, 0.2), expand = c(0, 0.002)) + 
+  labs(title = "N(100, 15) CDF", x = "x", y = "probability")
+```
+
+<img src="10-probability_files/figure-html/unnamed-chunk-21-1.svg" width="672" style="display: block; margin: auto;" />
+:::
+
+
+### `qnorm()` (inverse CDF)
+
+`qnorm()` is the inverse CDF or the quantile function for the normal. Since the normal distribution is continuous (unlike the binomial), the inverse CDF here works a little simpler. For a given probability $p$, it finds the $k$ such that $\p(X\le k)=p$.
+
+
+``` r
+# what observation is at the 90%-ile of X~N(100,15)?
+qnorm(0.9, 100, 15)
+```
+
+```
+[1] 119.2233
+```
+
+``` r
+# we can also check that P(X≤119.2233) = 90% (up to rounding)
+pnorm(119.2233, 100, 15)
+```
+
+```
+[1] 0.9000003
+```
+
+Below is a plot of the normal inverse CDF for $\mu=100$, $\sigma=15$, again note it's the reflection of the CDF across the $y=x$ diagonal line.
+
+:::{.fold .s}
+
+``` r
+ggplot() + geom_function(fun = \(x) qnorm(x, 100, 15), xlim = c(0, 1), n = 1e4) + 
+  scale_x_continuous(breaks = seq(0, 1, 0.2), expand = c(0, 0.002)) + 
+  scale_y_continuous(breaks = seq(55, 145, 15), minor_breaks = NULL, expand = 0) + 
+  labs(title = "N(100, 15) inverse CDF", x = "probability", y = "x")
+```
+
+<img src="10-probability_files/figure-html/unnamed-chunk-23-1.svg" width="672" style="display: block; margin: auto;" />
+:::
+
+
+### `rnorm()` (random generator)
+
+`rnorm()` is the normal random generator function, which simulates drawing random samples from a normal distribution.
+
+
+``` r
+# draw a sample of size 80 from N(100,15)
+samp = rnorm(80, 100, 15)
+samp
+```
+
+```
+ [1] 105.97159  90.81960 105.11680  83.05955 121.49536 129.70600  94.49168  84.33798
+ [9] 108.54579  97.97418 136.02427  99.41140 110.34609 100.42003  88.85090 102.83188
+[17]  72.92562 121.98332 102.29880 132.58918 107.13264  89.35080 109.16090  85.98854
+[25]  81.19550 104.37169  93.35062 100.01658 101.11512  91.15719  91.46997  97.97232
+[33] 117.67130  77.14650 108.90919 104.99426 115.94650  95.43724 105.55028 104.00648
+[41]  91.86220 118.11802 117.40604 110.50320 123.80250 108.37730  80.85112  91.40102
+[49]  81.63081  92.89899  90.69450 100.63174  86.33618 102.37043  90.18123 126.50931
+[57] 110.75061 113.65261 105.76278 125.23264  90.46395  93.07533 121.48423  90.23955
+[65]  96.88929  94.10788  95.20011  95.81330 107.41282  97.34004  92.41064 120.14558
+[73]  96.78131  97.30665  98.49714 110.68999  98.89653  99.43549  89.77509  95.13595
+```
+
+``` r
+# again, we can check our sample mean/sd are close to theory
+mean(samp)
+```
+
+```
+[1] 101.5152
+```
+
+``` r
+sd(samp)
+```
+
+```
+[1] 13.28363
+```
+
+``` r
+# a histogram of our sample
+ggplot(tibble(samp), aes(x = samp)) +
+  geom_histogram(binwidth = 5, boundary = 0, color = "white") +
+  scale_x_continuous(expand = 0) + scale_y_continuous(expand = 0) +
+  labs(title = "Histogram of 80 observations sampled from N(100,15)", x = "x")
+```
+
+<img src="10-probability_files/figure-html/unnamed-chunk-24-1.svg" width="672" style="display: block; margin: auto;" />
+
+

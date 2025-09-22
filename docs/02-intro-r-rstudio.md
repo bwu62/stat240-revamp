@@ -731,7 +731,7 @@ all.equal(sqrt(2)^2, 2)
 ### Packages
 
 
-Now, let's briefly discuss packages. One of the best features of R is the ability for anyone to easily write and distribute packages on [CRAN](https://cran.r-project.org) (**C**omprehensive **R** **A**rchive **N**etwork). Currently, there are 22738 packages available on CRAN. There are also a further 2341 packages on the bioinformatics-specific package archive [Bioconductor](https://www.bioconductor.org), as well as countless more on [GitHub](https://github.com/topics/r-package).
+Now, let's briefly discuss packages. One of the best features of R is the ability for anyone to easily write and distribute packages on [CRAN](https://cran.r-project.org) (**C**omprehensive **R** **A**rchive **N**etwork). Currently, there are 22740 packages available on CRAN. There are also a further 2341 packages on the bioinformatics-specific package archive [Bioconductor](https://www.bioconductor.org), as well as countless more on [GitHub](https://github.com/topics/r-package).
 
 In this course, we will primarily make use of the [Tidyverse](https://www.tidyverse.org) suite of packages, which contains several important packages for data science: `readr` for reading in data, `ggplot2` for plotting data, `dplyr` and `tidyr` for cleaning data, and `lubridate` and `stringr` for working with dates and strings. We will learn each of these as the course progresses.
 
@@ -1126,10 +1126,10 @@ getwd()
 ```
 
 ```
-[1] "C:/Users/bi/Documents/stat240-revamp"
+[1] "C:/Users/bi/Desktop/stat240-revamp"
 ```
 
-You can see my current Rstudio session (while writing these notes) is running from the `` stat240-revamp `` directory which is itself located in `` C:/Users/bi/Documents ``.
+You can see my current Rstudio session (while writing these notes) is running from the `` stat240-revamp `` directory which is itself located in `` C:/Users/bi/Desktop ``.
 
 Generally, when you start a new Rstudio session, the working directory will default to `C:/Users/username/` for Windows and `/Users/username/` for Mac (or `/home/username/` for Linux), where `username` is your account name.
 

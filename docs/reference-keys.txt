@@ -175,6 +175,12 @@ rbinom-random-generator
 normal-distribution
 definition-pdf
 empirical-rule
+e-var-1
+norm-functions
+dnorm-pdf
+pnorm-cdf
+qnorm-inverse-cdf
+rnorm-random-generator
 inference
 proportions
 means

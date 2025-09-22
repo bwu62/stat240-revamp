@@ -6,15 +6,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 10 Intro to Probability | STAT 240 Revamp</title>
 <meta name="author" content="Bi Cheng Wu, with help from Bret Larget and Cameron Jones">
-<meta name="description" content="\(   \def\e{\operatorname{E}}   \def\p{\operatorname{P}}   \def\var{\operatorname{Var}}   \def\bin{\operatorname{Bin}}   \def\n{\operatorname{N}}  \)  In this section, we’ll introduce you to some...">
+<meta name="description" content="\(   \def\e{\operatorname{E}}   \def\p{\operatorname{P}}   \def\var{\operatorname{Var}}   \def\sd{\operatorname{SD}}   \def\bin{\operatorname{Bin}}   \def\n{\operatorname{N}}  \)  In this section,...">
 <meta name="generator" content="bookdown 0.44.1 with bs4_book()">
 <meta property="og:title" content="Chapter 10 Intro to Probability | STAT 240 Revamp">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://bwu62.github.io/stat240-revamp/intro-to-probability.html">
-<meta property="og:description" content="\(   \def\e{\operatorname{E}}   \def\p{\operatorname{P}}   \def\var{\operatorname{Var}}   \def\bin{\operatorname{Bin}}   \def\n{\operatorname{N}}  \)  In this section, we’ll introduce you to some...">
+<meta property="og:description" content="\(   \def\e{\operatorname{E}}   \def\p{\operatorname{P}}   \def\var{\operatorname{Var}}   \def\sd{\operatorname{SD}}   \def\bin{\operatorname{Bin}}   \def\n{\operatorname{N}}  \)  In this section,...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 10 Intro to Probability | STAT 240 Revamp">
-<meta name="twitter:description" content="\(   \def\e{\operatorname{E}}   \def\p{\operatorname{P}}   \def\var{\operatorname{Var}}   \def\bin{\operatorname{Bin}}   \def\n{\operatorname{N}}  \)  In this section, we’ll introduce you to some...">
+<meta name="twitter:description" content="\(   \def\e{\operatorname{E}}   \def\p{\operatorname{P}}   \def\var{\operatorname{Var}}   \def\sd{\operatorname{SD}}   \def\bin{\operatorname{Bin}}   \def\n{\operatorname{N}}  \)  In this section,...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Roboto_Mono-0.4.10/font.css" rel="stylesheet">
@@ -102,6 +102,7 @@
     \def\e{\operatorname{E}}
     \def\p{\operatorname{P}}
     \def\var{\operatorname{Var}}
+    \def\sd{\operatorname{SD}}
     \def\bin{\operatorname{Bin}}
     \def\n{\operatorname{N}}
   \)
@@ -292,7 +293,7 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_function.html">geom_function</a></span><span class="op">(</span>fun <span class="op">=</span> \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">65.8</span>, <span class="fl">3.98</span><span class="op">)</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">52</span>, <span class="fl">80</span><span class="op">)</span>, n <span class="op">=</span> <span class="fl">1e3</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_segment.html">geom_segment</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">SDs</span>, xend <span class="op">=</span> <span class="va">SDs</span>, y <span class="op">=</span> <span class="fl">0</span>, yend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">SDs</span>, <span class="fl">65.8</span>, <span class="fl">3.98</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>               color <span class="op">=</span> <span class="st">"red"</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span>, linewidth <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">52</span>, <span class="fl">80</span>, <span class="fl">2</span><span class="op">)</span>, expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">52</span>, <span class="fl">80</span>, <span class="fl">2</span><span class="op">)</span>, expand <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.10</span>, <span class="fl">0.01</span><span class="op">)</span>, expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.001</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"US adult human height distribution"</span>,</span>
 <span>       subtitle <span class="op">=</span> <span class="st">'(approx normal w/ mean 65.8", SD 3.98"; SDs shown in dashed)'</span>,</span>
@@ -390,11 +391,11 @@
 <code class="sourceCode R"><span><span class="co"># use dbinom (the binomial PMF function) to plot distribution</span></span>
 <span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>k <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="fl">10</span>, p <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">dbinom</a></span><span class="op">(</span><span class="va">k</span>, <span class="fl">10</span>, <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">k</span>, y <span class="op">=</span> <span class="va">p</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">10</span>,<span class="fl">1</span><span class="op">)</span>, expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">10</span>,<span class="fl">1</span><span class="op">)</span>, expand <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.25</span>, <span class="fl">0.05</span><span class="op">)</span>, limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.25</span><span class="op">)</span>,</span>
-<span>                     minor_breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.25</span>, <span class="fl">0.01</span><span class="op">)</span>, expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>                     minor_breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.25</span>, <span class="fl">0.01</span><span class="op">)</span>, expand <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Binomial(10, 0.5) distribution (number of heads in 10 flips of a fair coin)"</span>,</span>
-<span>       x <span class="op">=</span> <span class="st">"x"</span>, y <span class="op">=</span> <span class="st">"probability"</span><span class="op">)</span></span></code></pre></div>
+<span>       x <span class="op">=</span> <span class="st">"k"</span>, y <span class="op">=</span> <span class="st">"probability"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="10-probability_files/figure-html/unnamed-chunk-5-1.svg" width="672" style="display: block; margin: auto;"></div>
 </div>
 </div>
@@ -479,7 +480,8 @@ P(X\le3)&amp;=P(X\!=\!0)+P(X\!=\!1)+P(X\!=\!2)+P(X\!=\!3)\\
 \text{for binomial,}\quad
 \begin{aligned}
 \e(X)&amp;=np\\
-\var(X)&amp;=np(1\!-\!p)
+\var(X)&amp;=np(1\!-\!p)\\
+\sd(X)&amp;=\sqrt{\var(X)}=\sqrt{np(1\!-\!p)}
 \end{aligned}
 \]</span></p>
 <div class="eg">
@@ -504,13 +506,14 @@ P(X\le3)&amp;=P(X\!=\!0)+P(X\!=\!1)+P(X\!=\!2)+P(X\!=\!3)\\
 </div>
 <div id="binom-functions" class="section level3" number="10.5.4">
 <h3>
-<span class="header-section-number">10.5.4</span> <code>*binom()</code> functions<a class="anchor" aria-label="anchor" href="#binom-functions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.5.4</span> <code>*binom()</code> functions:<a class="anchor" aria-label="anchor" href="#binom-functions"><i class="fas fa-link"></i></a>
 </h3>
 <p>There are 4 main R functions for working with binomial distributions, <code><a href="https://rdrr.io/r/stats/Binomial.html">dbinom()</a></code>, <code><a href="https://rdrr.io/r/stats/Binomial.html">pbinom()</a></code>, <code><a href="https://rdrr.io/r/stats/Binomial.html">qbinom()</a></code>, and <code><a href="https://rdrr.io/r/stats/Binomial.html">rbinom()</a></code>. We will go over each below.</p>
-<div id="dbinom-pmf" class="section level4" number="10.5.4.1">
-<h4>
-<span class="header-section-number">10.5.4.1</span> <code>dbinom()</code> (PMF)<a class="anchor" aria-label="anchor" href="#dbinom-pmf"><i class="fas fa-link"></i></a>
-</h4>
+</div>
+<div id="dbinom-pmf" class="section level3" number="10.5.5">
+<h3>
+<span class="header-section-number">10.5.5</span> <code>dbinom()</code> (PMF)<a class="anchor" aria-label="anchor" href="#dbinom-pmf"><i class="fas fa-link"></i></a>
+</h3>
 <p><code><a href="https://rdrr.io/r/stats/Binomial.html">dbinom()</a></code> simply implements the PMF equation shown in section <a href="intro-to-probability.html#binom-pmf">10.5.2</a>. In order to compute <span class="math inline">\(\p(X=k)\)</span> for <span class="math inline">\(X\sim\bin(n,p)\)</span>, simply do <code>dbinom(k, n, p)</code>.</p>
 <div class="sourceCode" id="cb846"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># check the computation earlier for P(X=4) where X~Bin(10,0.5)</span></span>
@@ -522,23 +525,20 @@ P(X\le3)&amp;=P(X\!=\!0)+P(X\!=\!1)+P(X\!=\!2)+P(X\!=\!3)\\
 <span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">dbinom</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">10</span>, <span class="fl">10</span>, <span class="fl">0.5</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <pre><code> [1] 0.001 0.010 0.044 0.117 0.205 0.246 0.205 0.117 0.044 0.010 0.001</code></pre>
 <p>Here’s the plot of the PMF again for <span class="math inline">\(n=10\)</span>, <span class="math inline">\(p=0.5\)</span>.</p>
-<div class="fold s">
 <div class="sourceCode" id="cb850"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># use dbinom (the binomial PMF function) to plot distribution</span></span>
 <span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>k <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="fl">10</span>, p <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">dbinom</a></span><span class="op">(</span><span class="va">k</span>, <span class="fl">10</span>, <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">k</span>, y <span class="op">=</span> <span class="va">p</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">10</span>,<span class="fl">1</span><span class="op">)</span>, expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">10</span>,<span class="fl">1</span><span class="op">)</span>, expand <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.25</span>, <span class="fl">0.05</span><span class="op">)</span>, limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.25</span><span class="op">)</span>,</span>
-<span>                     minor_breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.25</span>, <span class="fl">0.01</span><span class="op">)</span>, expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Binomial(10, 0.5) PMF"</span>,</span>
-<span>       x <span class="op">=</span> <span class="st">"x"</span>, y <span class="op">=</span> <span class="st">"probability"</span><span class="op">)</span></span></code></pre></div>
+<span>                     minor_breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.25</span>, <span class="fl">0.01</span><span class="op">)</span>, expand <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Binomial(10, 0.5) PMF"</span>, x <span class="op">=</span> <span class="st">"k"</span>, y <span class="op">=</span> <span class="st">"probability"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="10-probability_files/figure-html/unnamed-chunk-11-1.svg" width="672" style="display: block; margin: auto;"></div>
 </div>
-</div>
-<div id="pbinom-cdf" class="section level4" number="10.5.4.2">
-<h4>
-<span class="header-section-number">10.5.4.2</span> <code>pbinom()</code> (CDF)<a class="anchor" aria-label="anchor" href="#pbinom-cdf"><i class="fas fa-link"></i></a>
-</h4>
+<div id="pbinom-cdf" class="section level3" number="10.5.6">
+<h3>
+<span class="header-section-number">10.5.6</span> <code>pbinom()</code> (CDF)<a class="anchor" aria-label="anchor" href="#pbinom-cdf"><i class="fas fa-link"></i></a>
+</h3>
 <p><code><a href="https://rdrr.io/r/stats/Binomial.html">pbinom()</a></code> is what’s called the binomial’s <strong>cumulative distribution function</strong> or <strong>CDF</strong>, which finds the <strong>probability of getting less than or equal to a given input</strong>. To find <span class="math inline">\(\p(X\le k)\)</span> for <span class="math inline">\(X\sim\bin(n,p)\)</span>, you can do <code>pbinom(k, n, p)</code>.</p>
 <div class="sourceCode" id="cb851"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># check the computation earlier for P(X≤3) where X~Bin(10,0.5)</span></span>
@@ -554,19 +554,20 @@ P(X\le3)&amp;=P(X\!=\!0)+P(X\!=\!1)+P(X\!=\!2)+P(X\!=\!3)\\
 <span><span class="fl">1</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">pbinom</a></span><span class="op">(</span><span class="fl">7</span>, <span class="fl">10</span>, <span class="fl">0.5</span><span class="op">)</span></span></code></pre></div>
 <pre><code>[1] 0.0546875</code></pre>
 <p>Here’s a plot of the binomial CDF for <span class="math inline">\(n=10\)</span>, <span class="math inline">\(p=0.5\)</span>. Note the stepwise nature of the function, since this is a discrete distribution and cumulative probabilities increase in discrete “steps” at the possible values of <span class="math inline">\(k\)</span>.</p>
+<p>Also note the CDF always goes from 0 on the left to 1 on the right, and can never decrease as you move from left to right; it can only increase or stay the same.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;this property is called &lt;strong&gt;monotonically increasing&lt;/strong&gt;, see other properties of the CDF &lt;a href="https://www.geeksforgeeks.org/engineering-mathematics/cumulative-distribution-function/#properties-of-cumulative-distribution-function"&gt;here&lt;/a&gt; if you want to learn more.&lt;/p&gt;'><sup>37</sup></a></p>
 <div class="fold s">
 <div class="sourceCode" id="cb857"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_function.html">geom_function</a></span><span class="op">(</span>fun <span class="op">=</span> \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">pbinom</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">10</span>, <span class="fl">0.5</span><span class="op">)</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">10</span><span class="op">)</span>, n <span class="op">=</span> <span class="fl">1e4</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">10</span>,<span class="fl">1</span><span class="op">)</span>, expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">10</span>,<span class="fl">1</span><span class="op">)</span>, expand <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0.1</span><span class="op">)</span>, expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.005</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Binomial(10, 0.5) CDF"</span>, x <span class="op">=</span> <span class="st">"k"</span>, y <span class="op">=</span> <span class="st">"probability"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="10-probability_files/figure-html/unnamed-chunk-14-1.svg" width="672" style="display: block; margin: auto;"></div>
 </div>
 </div>
-<div id="qbinom-inverse-cdf" class="section level4" number="10.5.4.3">
-<h4>
-<span class="header-section-number">10.5.4.3</span> <code>qbinom()</code> (inverse CDF)<a class="anchor" aria-label="anchor" href="#qbinom-inverse-cdf"><i class="fas fa-link"></i></a>
-</h4>
+<div id="qbinom-inverse-cdf" class="section level3" number="10.5.7">
+<h3>
+<span class="header-section-number">10.5.7</span> <code>qbinom()</code> (inverse CDF)<a class="anchor" aria-label="anchor" href="#qbinom-inverse-cdf"><i class="fas fa-link"></i></a>
+</h3>
 <p><code><a href="https://rdrr.io/r/stats/Binomial.html">qbinom()</a></code> is the inverse function of the CDF, i.e. it does the opposite. For a given probability <span class="math inline">\(p\)</span>, it finds the <strong>smallest <span class="math inline">\(k\)</span></strong> such that <span class="math inline">\(\p(X\le k)\ge p\)</span>. It’s also called the <strong>quantile function</strong> since it is used to compute what observation <span class="math inline">\(k\)</span> is at a given percentile <span class="math inline">\(p\)</span>.</p>
 <div class="sourceCode" id="cb858"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># what observation is at the 17.1%-ile of X~Bin(10,0.5)?</span></span>
@@ -576,20 +577,20 @@ P(X\le3)&amp;=P(X\!=\!0)+P(X\!=\!1)+P(X\!=\!2)+P(X\!=\!3)\\
 <code class="sourceCode R"><span><span class="co"># what if we "cross" the value of P(X≤3) and ask for the 17.2%-ile?</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">qbinom</a></span><span class="op">(</span><span class="fl">0.172</span>, <span class="fl">10</span>, <span class="fl">0.5</span><span class="op">)</span></span></code></pre></div>
 <pre><code>[1] 4</code></pre>
-<p>Here’s a plot of the binomial inverse CDF for <span class="math inline">\(n=10\)</span>, <span class="math inline">\(p=0.5\)</span>; note it’s the reflection of the CDF across the <span class="math inline">\(y=x\)</span> diagonal line. For discrete distributions, like the binomial the inverse CDF is also a stepwise function.</p>
+<p>Here’s a plot of the binomial inverse CDF for <span class="math inline">\(n=10\)</span>, <span class="math inline">\(p=0.5\)</span>, note it’s the reflection of the CDF across the <span class="math inline">\(y=x\)</span> diagonal line. For discrete distributions, like the binomial the inverse CDF is also a stepwise function.</p>
 <div class="fold s">
 <div class="sourceCode" id="cb862"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_function.html">geom_function</a></span><span class="op">(</span>fun <span class="op">=</span> \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">qbinom</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">10</span>, <span class="fl">0.5</span><span class="op">)</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span>, n <span class="op">=</span> <span class="fl">1e4</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0.1</span><span class="op">)</span>, expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.005</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">10</span>,<span class="fl">1</span><span class="op">)</span>, expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">10</span>,<span class="fl">1</span><span class="op">)</span>, expand <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Binomial(10, 0.5) inverse CDF"</span>, x <span class="op">=</span> <span class="st">"probability"</span>, y <span class="op">=</span> <span class="st">"k"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="10-probability_files/figure-html/unnamed-chunk-16-1.svg" width="672" style="display: block; margin: auto;"></div>
 </div>
 </div>
-<div id="rbinom-random-generator" class="section level4" number="10.5.4.4">
-<h4>
-<span class="header-section-number">10.5.4.4</span> <code>rbinom()</code> (random generator)<a class="anchor" aria-label="anchor" href="#rbinom-random-generator"><i class="fas fa-link"></i></a>
-</h4>
+<div id="rbinom-random-generator" class="section level3" number="10.5.8">
+<h3>
+<span class="header-section-number">10.5.8</span> <code>rbinom()</code> (random generator)<a class="anchor" aria-label="anchor" href="#rbinom-random-generator"><i class="fas fa-link"></i></a>
+</h3>
 <p><code><a href="https://rdrr.io/r/stats/Binomial.html">rbinom()</a></code> is the random generator function, which allows to simulate drawing random samples from a binomial distribution. This can be useful in simulation studies, empirical computations, etc.</p>
 <div class="sourceCode" id="cb863"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># draw a sample of size 100 from Bin(10,0.5)</span></span>
@@ -599,23 +600,21 @@ P(X\le3)&amp;=P(X\!=\!0)+P(X\!=\!1)+P(X\!=\!2)+P(X\!=\!3)\\
  [41] 6 6 6 5 5 6 2 5 6 6 5 7 5 4 3 3 4 5 6 5 7 4 5 4 6 4 5 6 3 7 4 7 4 4 5 7 7 5 6 8
  [81] 5 6 5 4 6 4 6 3 4 3 4 3 6 7 6 6 5 5 6 5</code></pre>
 <div class="sourceCode" id="cb865"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># what is the mean and variance in our sample?</span></span>
-<span><span class="co"># these should be close to the theoretical E &amp; Var</span></span>
+<code class="sourceCode R"><span><span class="co"># what are the mean and SD in our sample?</span></span>
+<span><span class="co"># these should be close to the theoretical E &amp; SD</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">samp</span><span class="op">)</span></span></code></pre></div>
 <pre><code>[1] 5.14</code></pre>
 <div class="sourceCode" id="cb867"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="va">samp</span><span class="op">)</span></span></code></pre></div>
-<pre><code>[1] 1.75798</code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">samp</span><span class="op">)</span></span></code></pre></div>
+<pre><code>[1] 1.325888</code></pre>
 <div class="sourceCode" id="cb869"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># a histogram of our sample</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span><span class="va">samp</span><span class="op">)</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">samp</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">1</span>, center <span class="op">=</span> <span class="fl">0</span>, color <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">10</span>,<span class="fl">1</span><span class="op">)</span>, expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">30</span>, <span class="fl">5</span><span class="op">)</span>, limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">30</span><span class="op">)</span>,</span>
-<span>                     minor_breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">30</span>, <span class="fl">1</span><span class="op">)</span>, expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span>, <span class="fl">1</span><span class="op">)</span>, expand <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">30</span>, <span class="fl">5</span><span class="op">)</span>, minor_breaks <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="fl">30</span>, expand <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Histogram of 100 observations sampled from Bin(10,0.5)"</span>, x <span class="op">=</span> <span class="st">"k"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="10-probability_files/figure-html/unnamed-chunk-17-1.svg" width="672" style="display: block; margin: auto;"></div>
-</div>
 </div>
 </div>
 <div id="normal-distribution" class="section level2" number="10.6">
@@ -634,11 +633,14 @@ P(X\le3)&amp;=P(X\!=\!0)+P(X\!=\!1)+P(X\!=\!2)+P(X\!=\!3)\\
 <p>This expression produces the familiarly shaped “bell curve” distribution we all know and love. For example, IQ scores are standardized to have mean 100 and SD 15 in the general population. Below is shown the corresponding normal curve for this distribution:</p>
 <div class="fold s">
 <div class="sourceCode" id="cb870"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_function.html">geom_function</a></span><span class="op">(</span>fun <span class="op">=</span> \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">100</span>, <span class="fl">15</span><span class="op">)</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">150</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">55</span>, <span class="fl">145</span>, <span class="fl">15</span><span class="op">)</span>, expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>,</span>
-<span>                     minor_breaks <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">+</span></span>
+<code class="sourceCode R"><span><span class="va">SDs</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">55</span>, <span class="fl">145</span>, <span class="fl">15</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_segment.html">geom_segment</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">SDs</span>, y <span class="op">=</span> <span class="fl">0</span>, yend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">SDs</span>, <span class="fl">100</span>, <span class="fl">15</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>                        color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"blue"</span>, <span class="st">"red"</span><span class="op">)</span>, times <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_function.html">geom_function</a></span><span class="op">(</span>fun <span class="op">=</span> \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">100</span>, <span class="fl">15</span><span class="op">)</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">150</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">55</span>, <span class="fl">145</span>, <span class="fl">15</span><span class="op">)</span>, expand <span class="op">=</span> <span class="fl">0</span>, minor_breaks <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.004</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"N(100, 15) distribution (standardized IQ scores)"</span>,</span>
+<span>       subtitle <span class="op">=</span> <span class="st">"(mean shown in blue, SDs shown in red)"</span>,</span>
 <span>       x <span class="op">=</span> <span class="st">"score"</span>, y <span class="op">=</span> <span class="st">"probability density"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="10-probability_files/figure-html/unnamed-chunk-18-1.svg" width="672" style="display: block; margin: auto;"></div>
 </div>
@@ -648,20 +650,150 @@ P(X\le3)&amp;=P(X\!=\!0)+P(X\!=\!1)+P(X\!=\!2)+P(X\!=\!3)\\
 <h3>
 <span class="header-section-number">10.6.2</span> Empirical rule<a class="anchor" aria-label="anchor" href="#empirical-rule"><i class="fas fa-link"></i></a>
 </h3>
-<!--
-
-For normal distributions, it can be
-
-
-:::{.eg}
-Using the $X\sim\n(100,15)$ model of IQ scores, approximately what percent of people would you
-
-:::
-
-
-### 
-
--->
+<p>For normal distributions, it can be shown that:</p>
+<ul>
+<li>About 68% of the values will be between ±1 SD of the mean,</li>
+<li>About 95% of the values will be between ±2 SDs of the mean,</li>
+<li>About 99.7% of the values will be between ±3 SDs of the mean.</li>
+</ul>
+<p>This is called the <strong>empirical rule</strong> of the normal and is useful for roughly approximating what you’d observe based on the parameters.</p>
+<div class="eg">
+<p>Using the <span class="math inline">\(X\sim\n(100,15)\)</span> model of IQ scores, approximately what percent of people would you expect to score in the following ranges?</p>
+<ol style="list-style-type: decimal">
+<li>85 to 115</li>
+<li>70 to 130</li>
+<li>85 to 130</li>
+<li>Less than 70</li>
+<li>Greater than 145</li>
+</ol>
+<p>Using the empirical rule, we know 68% would fall between 85 to 115 (±1 SD), and 95% would fall between 70 to 130 (±2 SDs).</p>
+<p>Using symmetry, we know from 85-100 is 68%/2 or 34%, and 100-130 is 95%/2 or 47.5%. Thus, 85-130 covers about 81.5% of the distribution.</p>
+<p>We know 70-130 covers about 95% from the empirical rule, which means &lt;70 or &gt;130 must be 5%. By symmetry, &lt;70 must be half that or 2.5%.</p>
+<p>Again using the empirical rule, we know 55 to 145 covers about 99.7%, which means &lt;55 or &gt;145 makes up about 0.3%. By symmetry again, we know that &gt;145 must be around 0.15%.</p>
+</div>
+</div>
+<div id="e-var-1" class="section level3" number="10.6.3">
+<h3>
+<span class="header-section-number">10.6.3</span> E &amp; Var<a class="anchor" aria-label="anchor" href="#e-var-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>As you’d expect from definition, the expectation and variance are equal to <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span>.</p>
+<p><span class="math display">\[
+\text{for normal,}\quad
+\begin{aligned}
+\e(X)&amp;=\mu\\
+\var(X)&amp;=\sigma^2\\
+\sd(X)&amp;=\sqrt{\var(X)}=\sigma
+\end{aligned}
+\]</span></p>
+</div>
+<div id="norm-functions" class="section level3" number="10.6.4">
+<h3>
+<span class="header-section-number">10.6.4</span> <code>*norm()</code> functions:<a class="anchor" aria-label="anchor" href="#norm-functions"><i class="fas fa-link"></i></a>
+</h3>
+<p>There are also 4 main R functions for working with normal distributions, <code><a href="https://rdrr.io/r/stats/Normal.html">dnorm()</a></code>, <code><a href="https://rdrr.io/r/stats/Normal.html">pnorm()</a></code>, <code><a href="https://rdrr.io/r/stats/Normal.html">qnorm()</a></code>, and <code><a href="https://rdrr.io/r/stats/Normal.html">rnorm()</a></code>. They are each the continuous analogs of the <code>*binom()</code> functions.</p>
+</div>
+<div id="dnorm-pdf" class="section level3" number="10.6.5">
+<h3>
+<span class="header-section-number">10.6.5</span> <code>dnorm()</code> (PDF)<a class="anchor" aria-label="anchor" href="#dnorm-pdf"><i class="fas fa-link"></i></a>
+</h3>
+<p><code><a href="https://rdrr.io/r/stats/Normal.html">dnorm()</a></code> is the normal PDF (probability density function), which was plotted just above. Remember the PDF does NOT represent the probability of a certain outcome, but rather the <em>probability density</em>, which is akin to the rate of change of probability around that point. For us, the main use case of <code><a href="https://rdrr.io/r/stats/Normal.html">dnorm()</a></code> is to show a plot of the PDF.</p>
+<div class="sourceCode" id="cb871"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># what's the density at the mean of N(100,15)?</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">100</span>, <span class="fl">15</span><span class="op">)</span></span></code></pre></div>
+<pre><code>[1] 0.02659615</code></pre>
+<div class="sourceCode" id="cb873"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># replot the N(100,15) PDF</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_function.html">geom_function</a></span><span class="op">(</span>fun <span class="op">=</span> \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">100</span>, <span class="fl">15</span><span class="op">)</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">150</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">55</span>, <span class="fl">145</span>, <span class="fl">15</span><span class="op">)</span>, minor_breaks <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"N(100, 15) PDF"</span>, x <span class="op">=</span> <span class="st">"x"</span>, y <span class="op">=</span> <span class="st">"probability density"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="10-probability_files/figure-html/unnamed-chunk-19-1.svg" width="672" style="display: block; margin: auto;"></div>
+</div>
+<div id="pnorm-cdf" class="section level3" number="10.6.6">
+<h3>
+<span class="header-section-number">10.6.6</span> <code>pnorm()</code> (CDF)<a class="anchor" aria-label="anchor" href="#pnorm-cdf"><i class="fas fa-link"></i></a>
+</h3>
+<p><code><a href="https://rdrr.io/r/stats/Normal.html">pnorm()</a></code> is the normal CDF (cumulate distribution function), which finds the <strong>probability less than or equal to a given input</strong>. This function is extremely useful for computing probabilities of ranges under the normal curve, e.g. to compute <span class="math inline">\(\p(X\le k)\)</span> when <span class="math inline">\(X\sim\n(\mu,\sigma)\)</span>, simply do <code>pnorm(k, µ, σ)</code>.</p>
+<p>Note that to find the probability <span class="math inline">\(\p(a&lt;X\le b)\)</span>, we can do <code>pnorm(a, µ, σ) - pnorm(b, µ, σ)</code>. Together with remebering the area under the entire curve is 1 just like any other RV, we can check the probabilities of each range in the previous example:</p>
+<div class="sourceCode" id="cb874"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>  <span class="co"># find the probability an observation from X~N(100,15) falls in each range:</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="fl">115</span>, <span class="fl">100</span>, <span class="fl">15</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="fl">85</span>, <span class="fl">100</span>, <span class="fl">15</span><span class="op">)</span>,   <span class="co"># between 85-115</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="fl">130</span>, <span class="fl">100</span>, <span class="fl">15</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="fl">70</span>, <span class="fl">100</span>, <span class="fl">15</span><span class="op">)</span>,   <span class="co"># between 70-130</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="fl">130</span>, <span class="fl">100</span>, <span class="fl">15</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="fl">85</span>, <span class="fl">100</span>, <span class="fl">15</span><span class="op">)</span>,   <span class="co"># between 85-130</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="fl">70</span>, <span class="fl">100</span>, <span class="fl">15</span><span class="op">)</span>,                         <span class="co"># less than 70</span></span>
+<span>  <span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="fl">145</span>, <span class="fl">100</span>, <span class="fl">15</span><span class="op">)</span>                     <span class="co"># greater than 145</span></span>
+<span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fl">4</span><span class="op">)</span></span></code></pre></div>
+<pre><code>[1] 0.6827 0.9545 0.8186 0.0228 0.0013</code></pre>
+<div class="note">
+<p>Due to the way probabilities work for continuous variables (they’re always areas of ranges under the curve), you can show the probability of observing a single number<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;or technically any other set with &lt;a href="https://en.wikipedia.org/wiki/Lebesgue_measure"&gt;measure&lt;/a&gt; 0, or in other words having 0-length&lt;/p&gt;'><sup>38</sup></a> has probability 0. More specifically, for any number <span class="math inline">\(a\)</span>, <span class="math inline">\(\p(X=a)=0\)</span>.</p>
+<p>This may seem strange, but if you try to imagine the area the single number <span class="math inline">\(a\)</span> “bounds” under the curve, it makes a line, which has no area. This does not mean <span class="math inline">\(a\)</span> is impossible to observe as an outcome<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;technically, it’s only &lt;a href="https://en.wikipedia.org/wiki/Almost_surely"&gt;“almost impossible”&lt;/a&gt;&lt;/p&gt;'><sup>39</sup></a>, we just can’t meaningfully assign a probability to it due to the way probabilities have to be defined for continuous RVs.</p>
+<p>A consequence of this is that for continuous variables, <span class="math inline">\(&lt;\)</span> and <span class="math inline">\(\le\)</span> are interchangeable, as well as <span class="math inline">\(&gt;\)</span> and <span class="math inline">\(\ge\)</span>. In other words, you don’t need to worry about counting or not counting “boundaries” of ranges when doing math with probabilities over different intervals.</p>
+</div>
+<p>Below is a plot of the normal CDF for <span class="math inline">\(\mu=100\)</span>, <span class="math inline">\(\sigma=15\)</span>. Again note as you move from left to right, the CDF goes from 0 to 1 and never decreases.</p>
+<div class="fold s">
+<div class="sourceCode" id="cb876"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_function.html">geom_function</a></span><span class="op">(</span>fun <span class="op">=</span> \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">100</span>, <span class="fl">15</span><span class="op">)</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">55</span>, <span class="fl">145</span><span class="op">)</span>, n <span class="op">=</span> <span class="fl">1e4</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">55</span>, <span class="fl">145</span>, <span class="fl">15</span><span class="op">)</span>, minor_breaks <span class="op">=</span> <span class="cn">NULL</span>, expand <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0.2</span><span class="op">)</span>, expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.002</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"N(100, 15) CDF"</span>, x <span class="op">=</span> <span class="st">"x"</span>, y <span class="op">=</span> <span class="st">"probability"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="10-probability_files/figure-html/unnamed-chunk-21-1.svg" width="672" style="display: block; margin: auto;"></div>
+</div>
+</div>
+<div id="qnorm-inverse-cdf" class="section level3" number="10.6.7">
+<h3>
+<span class="header-section-number">10.6.7</span> <code>qnorm()</code> (inverse CDF)<a class="anchor" aria-label="anchor" href="#qnorm-inverse-cdf"><i class="fas fa-link"></i></a>
+</h3>
+<p><code><a href="https://rdrr.io/r/stats/Normal.html">qnorm()</a></code> is the inverse CDF or the quantile function for the normal. Since the normal distribution is continuous (unlike the binomial), the inverse CDF here works a little simpler. For a given probability <span class="math inline">\(p\)</span>, it finds the <span class="math inline">\(k\)</span> such that <span class="math inline">\(\p(X\le k)=p\)</span>.</p>
+<div class="sourceCode" id="cb877"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># what observation is at the 90%-ile of X~N(100,15)?</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="fl">0.9</span>, <span class="fl">100</span>, <span class="fl">15</span><span class="op">)</span></span></code></pre></div>
+<pre><code>[1] 119.2233</code></pre>
+<div class="sourceCode" id="cb879"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># we can also check that P(X≤119.2233) = 90% (up to rounding)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="fl">119.2233</span>, <span class="fl">100</span>, <span class="fl">15</span><span class="op">)</span></span></code></pre></div>
+<pre><code>[1] 0.9000003</code></pre>
+<p>Below is a plot of the normal inverse CDF for <span class="math inline">\(\mu=100\)</span>, <span class="math inline">\(\sigma=15\)</span>, again note it’s the reflection of the CDF across the <span class="math inline">\(y=x\)</span> diagonal line.</p>
+<div class="fold s">
+<div class="sourceCode" id="cb881"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_function.html">geom_function</a></span><span class="op">(</span>fun <span class="op">=</span> \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">100</span>, <span class="fl">15</span><span class="op">)</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, n <span class="op">=</span> <span class="fl">1e4</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0.2</span><span class="op">)</span>, expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.002</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">55</span>, <span class="fl">145</span>, <span class="fl">15</span><span class="op">)</span>, minor_breaks <span class="op">=</span> <span class="cn">NULL</span>, expand <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"N(100, 15) inverse CDF"</span>, x <span class="op">=</span> <span class="st">"probability"</span>, y <span class="op">=</span> <span class="st">"x"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="10-probability_files/figure-html/unnamed-chunk-23-1.svg" width="672" style="display: block; margin: auto;"></div>
+</div>
+</div>
+<div id="rnorm-random-generator" class="section level3" number="10.6.8">
+<h3>
+<span class="header-section-number">10.6.8</span> <code>rnorm()</code> (random generator)<a class="anchor" aria-label="anchor" href="#rnorm-random-generator"><i class="fas fa-link"></i></a>
+</h3>
+<p><code><a href="https://rdrr.io/r/stats/Normal.html">rnorm()</a></code> is the normal random generator function, which simulates drawing random samples from a normal distribution.</p>
+<div class="sourceCode" id="cb882"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># draw a sample of size 80 from N(100,15)</span></span>
+<span><span class="va">samp</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">80</span>, <span class="fl">100</span>, <span class="fl">15</span><span class="op">)</span></span>
+<span><span class="va">samp</span></span></code></pre></div>
+<pre><code> [1] 105.97159  90.81960 105.11680  83.05955 121.49536 129.70600  94.49168  84.33798
+ [9] 108.54579  97.97418 136.02427  99.41140 110.34609 100.42003  88.85090 102.83188
+[17]  72.92562 121.98332 102.29880 132.58918 107.13264  89.35080 109.16090  85.98854
+[25]  81.19550 104.37169  93.35062 100.01658 101.11512  91.15719  91.46997  97.97232
+[33] 117.67130  77.14650 108.90919 104.99426 115.94650  95.43724 105.55028 104.00648
+[41]  91.86220 118.11802 117.40604 110.50320 123.80250 108.37730  80.85112  91.40102
+[49]  81.63081  92.89899  90.69450 100.63174  86.33618 102.37043  90.18123 126.50931
+[57] 110.75061 113.65261 105.76278 125.23264  90.46395  93.07533 121.48423  90.23955
+[65]  96.88929  94.10788  95.20011  95.81330 107.41282  97.34004  92.41064 120.14558
+[73]  96.78131  97.30665  98.49714 110.68999  98.89653  99.43549  89.77509  95.13595</code></pre>
+<div class="sourceCode" id="cb884"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># again, we can check our sample mean/sd are close to theory</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">samp</span><span class="op">)</span></span></code></pre></div>
+<pre><code>[1] 101.5152</code></pre>
+<div class="sourceCode" id="cb886"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">samp</span><span class="op">)</span></span></code></pre></div>
+<pre><code>[1] 13.28363</code></pre>
+<div class="sourceCode" id="cb888"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># a histogram of our sample</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span><span class="va">samp</span><span class="op">)</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">samp</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">5</span>, boundary <span class="op">=</span> <span class="fl">0</span>, color <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>expand <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>expand <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Histogram of 80 observations sampled from N(100,15)"</span>, x <span class="op">=</span> <span class="st">"x"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="10-probability_files/figure-html/unnamed-chunk-24-1.svg" width="672" style="display: block; margin: auto;"></div>
 
 </div>
 </div>
@@ -788,13 +920,23 @@ observer.observe(document.body, config);
 <li><a class="nav-link" href="#definition"><span class="header-section-number">10.5.1</span> Definition</a></li>
 <li><a class="nav-link" href="#binom-pmf"><span class="header-section-number">10.5.2</span> PMF</a></li>
 <li><a class="nav-link" href="#e-var"><span class="header-section-number">10.5.3</span> E &amp; Var</a></li>
-<li><a class="nav-link" href="#binom-functions"><span class="header-section-number">10.5.4</span> *binom() functions</a></li>
+<li><a class="nav-link" href="#binom-functions"><span class="header-section-number">10.5.4</span> *binom() functions:</a></li>
+<li><a class="nav-link" href="#dbinom-pmf"><span class="header-section-number">10.5.5</span> dbinom() (PMF)</a></li>
+<li><a class="nav-link" href="#pbinom-cdf"><span class="header-section-number">10.5.6</span> pbinom() (CDF)</a></li>
+<li><a class="nav-link" href="#qbinom-inverse-cdf"><span class="header-section-number">10.5.7</span> qbinom() (inverse CDF)</a></li>
+<li><a class="nav-link" href="#rbinom-random-generator"><span class="header-section-number">10.5.8</span> rbinom() (random generator)</a></li>
 </ul>
 </li>
 <li>
 <a class="nav-link" href="#normal-distribution"><span class="header-section-number">10.6</span> Normal distribution</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#definition-pdf"><span class="header-section-number">10.6.1</span> Definition &amp; PDF</a></li>
 <li><a class="nav-link" href="#empirical-rule"><span class="header-section-number">10.6.2</span> Empirical rule</a></li>
+<li><a class="nav-link" href="#e-var-1"><span class="header-section-number">10.6.3</span> E &amp; Var</a></li>
+<li><a class="nav-link" href="#norm-functions"><span class="header-section-number">10.6.4</span> *norm() functions:</a></li>
+<li><a class="nav-link" href="#dnorm-pdf"><span class="header-section-number">10.6.5</span> dnorm() (PDF)</a></li>
+<li><a class="nav-link" href="#pnorm-cdf"><span class="header-section-number">10.6.6</span> pnorm() (CDF)</a></li>
+<li><a class="nav-link" href="#qnorm-inverse-cdf"><span class="header-section-number">10.6.7</span> qnorm() (inverse CDF)</a></li>
+<li><a class="nav-link" href="#rnorm-random-generator"><span class="header-section-number">10.6.8</span> rnorm() (random generator)</a></li>
 </ul>
 </li>
 </ul>
@@ -814,7 +956,7 @@ observer.observe(document.body, config);
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2025-09-18.</p>
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2025-09-21.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
