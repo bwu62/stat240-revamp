@@ -317,7 +317,7 @@ ggplot(aes(x = k, y = p)) + geom_col() +
   scale_y_continuous(breaks = seq(0, 0.25, 0.05), limits = c(0, 0.25),
                      minor_breaks = seq(0, 0.25, 0.01), expand = 0) +
   labs(title = "Binomial(10, 0.5) distribution (number of heads in 10 flips of a fair coin)",
-       x = "x", y = "probability")
+       x = "k", y = "probability")
 ```
 :::
 ::::
@@ -403,7 +403,8 @@ $$
 \text{for binomial,}\quad
 \begin{aligned}
 \e(X)&=np\\
-\var(X)&=np(1\!-\!p)
+\var(X)&=np(1\!-\!p)\\
+\sd(X)&=\sqrt{\var(X)}=\sqrt{np(1\!-\!p)}
 \end{aligned}
 $$
 
@@ -422,12 +423,12 @@ sum((0:10 - 5)^2 * dbinom(0:10, 10, 0.5))
 ```
 :::
 
-### `*binom()` functions
+### `*binom()` functions:
 
 There are 4 main R functions for working with binomial distributions, `dbinom()`, `pbinom()`, `qbinom()`, and `rbinom()`. We will go over each below.
 
 
-#### `dbinom()` (PMF)
+### `dbinom()` (PMF)
 
 `dbinom()` simply implements the PMF equation shown in section \@ref(binom-pmf). In order to compute $\p(X=k)$ for $X\sim\bin(n,p)$, simply do `dbinom(k, n, p)`.
 
@@ -441,21 +442,18 @@ dbinom(0:10, 10, 0.5) %>% round(3)
 
 Here's the plot of the PMF again for $n=10$, $p=0.5$.
 
-:::{.fold .s}
 ```{r}
 # use dbinom (the binomial PMF function) to plot distribution
 tibble(k = 0:10, p = dbinom(k, 10, 0.5)) %>% 
 ggplot(aes(x = k, y = p)) + geom_col() +
   scale_x_continuous(breaks = seq(0,10,1), expand = 0) +
   scale_y_continuous(breaks = seq(0, 0.25, 0.05), limits = c(0, 0.25),
-  labs(title = "Binomial(10, 0.5) PMF",
-       x = "x", y = "probability")
                      minor_breaks = seq(0, 0.25, 0.01), expand = 0) +
+  labs(title = "Binomial(10, 0.5) PMF", x = "k", y = "probability")
 ```
-:::
 
 
-#### `pbinom()` (CDF)
+### `pbinom()` (CDF)
 
 `pbinom()` is what's called the binomial's **cumulative distribution function** or **CDF**, which finds the **probability of getting less than or equal to a given input**. To find $\p(X\le k)$ for $X\sim\bin(n,p)$, you can do `pbinom(k, n, p)`.
 
@@ -475,6 +473,8 @@ Note that `1-pbinom(k, n, p)` can also give you $\p(X>k)$.
 
 Here's a plot of the binomial CDF for $n=10$, $p=0.5$. Note the stepwise nature of the function, since this is a discrete distribution and cumulative probabilities increase in discrete "steps" at the possible values of $k$.
 
+Also note the CDF always goes from 0 on the left to 1 on the right, and can never decrease as you move from left to right; it can only increase or stay the same.^[this property is called **monotonically increasing**, see other properties of the CDF [here](https://www.geeksforgeeks.org/engineering-mathematics/cumulative-distribution-function/#properties-of-cumulative-distribution-function) if you want to learn more.]
+
 ::: {.fold .s}
 ```{r}
 ggplot() + geom_function(fun = \(x) pbinom(x, 10, 0.5), xlim = c(0,10), n = 1e4) +
@@ -485,7 +485,7 @@ ggplot() + geom_function(fun = \(x) pbinom(x, 10, 0.5), xlim = c(0,10), n = 1e4)
 :::
 
 
-#### `qbinom()` (inverse CDF)
+### `qbinom()` (inverse CDF)
 
 `qbinom()` is the inverse function of the CDF, i.e. it does the opposite. For a given probability $p$, it finds the **smallest $k$** such that $\p(X\le k)\ge p$. It's also called the **quantile function** since it is used to compute what observation $k$ is at a given percentile $p$.
 
@@ -496,7 +496,7 @@ qbinom(0.171, 10, 0.5)
 qbinom(0.172, 10, 0.5)
 ```
 
-Here's a plot of the binomial inverse CDF for $n=10$, $p=0.5$; note it's the reflection of the CDF across the $y=x$ diagonal line. For discrete distributions, like the binomial the inverse CDF is also a stepwise function.
+Here's a plot of the binomial inverse CDF for $n=10$, $p=0.5$, note it's the reflection of the CDF across the $y=x$ diagonal line. For discrete distributions, like the binomial the inverse CDF is also a stepwise function.
 
 ::: {.fold .s}
 ```{r}
@@ -508,7 +508,7 @@ ggplot() + geom_function(fun = \(x) qbinom(x, 10, 0.5), xlim = c(0,1), n = 1e4) 
 :::
 
 
-#### `rbinom()` (random generator)
+### `rbinom()` (random generator)
 
 `rbinom()` is the random generator function, which allows to simulate drawing random samples from a binomial distribution. This can be useful in simulation studies, empirical computations, etc.
 
@@ -516,14 +516,13 @@ ggplot() + geom_function(fun = \(x) qbinom(x, 10, 0.5), xlim = c(0,1), n = 1e4) 
 # draw a sample of size 100 from Bin(10,0.5)
 samp = rbinom(100, 10, 0.5)
 samp
-# what is the mean and variance in our sample?
-# these should be close to the theoretical E & Var
+# what are the mean and SD in our sample?
+# these should be close to the theoretical E & SD
 mean(samp)
-var(samp)
+sd(samp)
 # a histogram of our sample
 ggplot(tibble(samp), aes(x = samp)) +
   geom_histogram(binwidth = 1, center = 0, color = "white") +
-  scale_y_continuous(breaks = seq(0, 30, 5), limits = c(0, 30),
   scale_x_continuous(breaks = seq(0, 10, 1), expand = 0) +
   scale_y_continuous(breaks = seq(0, 30, 5), minor_breaks = 0:30, expand = 0) +
   labs(title = "Histogram of 100 observations sampled from Bin(10,0.5)", x = "k")
@@ -549,11 +548,14 @@ This expression produces the familiarly shaped "bell curve" distribution we all 
 
 :::{.fold .s}
 ```{r}
-ggplot() + geom_function(fun = \(x) dnorm(x, 100, 15), xlim = c(50, 150)) +
-                     minor_breaks = NULL) +
+SDs = seq(55, 145, 15)
+ggplot() + geom_segment(aes(x = SDs, y = 0, yend = dnorm(SDs, 100, 15)),
+                        color = rep(c("red", "blue", "red"), times = c(3, 1, 3))) + 
+  geom_function(fun = \(x) dnorm(x, 100, 15), xlim = c(50, 150)) +
   scale_x_continuous(breaks = seq(55, 145, 15), expand = 0, minor_breaks = NULL) +
   scale_y_continuous(expand = c(0.004, 0)) +
   labs(title = "N(100, 15) distribution (standardized IQ scores)",
+       subtitle = "(mean shown in blue, SDs shown in red)",
        x = "score", y = "probability density")
 ```
 :::
