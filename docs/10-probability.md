@@ -556,7 +556,7 @@ Note that `1-pbinom(k, n, p)` can also give you $\p(X>k)$.
 
 ``` r
 # example: find P(X>7) where X~Bin(10,0.5)
-1-pbinom(7, 10, 0.5)
+1 - pbinom(7, 10, 0.5)
 ```
 
 ```
@@ -625,7 +625,7 @@ ggplot() + geom_function(fun = \(x) qbinom(x, 10, 0.5), xlim = c(0,1), n = 1e4) 
 
 ``` r
 # draw a sample of size 100 from Bin(10,0.5)
-samp = rbinom(100, 10, 0.5)
+samp <- rbinom(100, 10, 0.5)
 samp
 ```
 
@@ -685,7 +685,7 @@ This expression produces the familiarly shaped "bell curve" distribution we all 
 :::{.fold .s}
 
 ``` r
-SDs = seq(55, 145, 15)
+SDs <- seq(55, 145, 15)
 ggplot() + geom_segment(aes(x = SDs, y = 0, yend = dnorm(SDs, 100, 15)),
                         color = rep(c("red", "blue", "red"), times = c(3, 1, 3))) + 
   geom_function(fun = \(x) dnorm(x, 100, 15), xlim = c(50, 150)) +
@@ -865,7 +865,7 @@ ggplot() + geom_function(fun = \(x) qnorm(x, 100, 15), xlim = c(0, 1), n = 1e4) 
 
 ``` r
 # draw a sample of size 80 from N(100,15)
-samp = rnorm(80, 100, 15)
+samp <- rnorm(80, 100, 15)
 samp
 ```
 
@@ -910,3 +910,55 @@ ggplot(tibble(samp), aes(x = samp)) +
 <img src="10-probability_files/figure-html/unnamed-chunk-24-1.svg" width="672" style="display: block; margin: auto;" />
 
 
+## Standard Normal $\n(0,1)$
+
+An important member of the normal family is the **standard normal**, which is usually denoted $Z$ and has mean $\mu=0$ and SD $\sigma=1$. In other words, $Z\sim\n(0,1)$.
+
+The standard normal is important because it serves as a **reference** distribution, to which all other normal distributions can be compared. This is because it turns out **every normal distribution is _similar_ to each other**, i.e. has the same shape, up to axes scaling. For example, in the plot below, the 3 distributions appear to have different shapes:
+
+:::{.fold .s}
+
+``` r
+normals_plot <- ggplot() + geom_function(fun = dnorm, n = 1e3, color = "red3") + 
+  geom_function(fun = \(x) dnorm(x, -3, 0.5), n = 1e3, color = "seagreen") + 
+  geom_function(fun = \(x) dnorm(x, 5, 2), n = 1e3, color = "navy") + 
+  scale_x_continuous(breaks = -5:10, limits = c(-5, 10), expand = 0) + 
+  scale_y_continuous(expand = 0) + 
+  labs(title = "Plot of 3 normals: N(0,1), N(-3,0.5), N(5,2)",
+       y = "probability density")
+normals_plot
+```
+
+<img src="10-probability_files/figure-html/unnamed-chunk-25-1.svg" width="672" style="display: block; margin: auto;" />
+:::
+
+However, if you take the exact same plot and simply zoom in to each curve, you can see in fact they are all the exact same shape, up to axes scaling.
+
+:::{.i96 .fold .s}
+
+``` r
+p1 <- normals_plot + xlim(-4.5, -1.5) + ylim(0, dnorm(-3, -3, 0.5)) + 
+  labs(title = "Same plot, zoomed to N(-3,0.5)", y = NULL, x = NULL)
+p2 <- normals_plot + xlim(-3, 3) + ylim(0, dnorm(0, 0, 1)) + 
+  labs(title = "Same plot, zoomed to N(0,1)", y = NULL, x = NULL)
+p3 <- normals_plot + xlim(-1, 11) + ylim(0, dnorm(5, 5, 2)) + 
+  labs(title = "Same plot, zoomed to N(5,2)", y = NULL, x = NULL)
+gridExtra::grid.arrange(p1, p2, p3, nrow = 1)
+```
+
+<img src="10-probability_files/figure-html/unnamed-chunk-26-1.svg" width="864" style="display: block; margin: auto;" />
+:::
+
+A consequence of this is that **any problem involving an arbitrary normal distribution $X\sim\n(\mu,\sigma)$ can be turned into an _equivalent_ problem for the standard normal $Z\sim\n(0,1)$** by simply applying a transformation that converts $X$ into $Z$. This is called **standardization**, or computing a **Z-score**.
+
+<!--
+
+### Z-score
+
+Suppose you draw an observation $x$ from a normal population with mean $\mu$ and SD $\sigma$. The Z-score of $x$ is defined as:
+
+$$z=\frac{x-\mu}\sigma$$
+
+Then, solving the original problem
+
+-->

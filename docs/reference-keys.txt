@@ -181,6 +181,7 @@ dnorm-pdf
 pnorm-cdf
 qnorm-inverse-cdf
 rnorm-random-generator
+standard-normal-n01
 inference
 proportions
 means
