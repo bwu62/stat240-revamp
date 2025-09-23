@@ -783,3 +783,16 @@ ggplot() + geom_function(fun = dnorm, xlim = c(-3, 3)) +
 
 Note how these two areas exactly correspond, so solving one solves the other.
 ::::
+
+
+Since we have R, we won't need to rely on Z-scores as much, however it's an important concept to normal curves, and also shows up later when discussing inference, e.g. test statistics during hypothesis testing.
+
+
+<!--
+
+future ideas: add
+
+ - normal approx to binomial
+ - brief CLT??
+
+-->
