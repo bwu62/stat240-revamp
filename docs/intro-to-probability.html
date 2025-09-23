@@ -844,7 +844,8 @@ P(X\le3)&amp;=P(X\!=\!0)+P(X\!=\!1)+P(X\!=\!2)+P(X\!=\!3)\\
 <div class="sourceCode" id="cb893"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># showing this area on a quick plot</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_function.html">geom_function</a></span><span class="op">(</span>fun <span class="op">=</span> \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">100</span>, <span class="fl">15</span><span class="op">)</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">55</span>, <span class="fl">145</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_function.html">stat_function</a></span><span class="op">(</span>fun <span class="op">=</span> \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">100</span>, <span class="fl">15</span><span class="op">)</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">55</span>, <span class="fl">115</span><span class="op">)</span>, geom <span class="op">=</span> <span class="st">"area"</span>, fill <span class="op">=</span> <span class="st">"red4"</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_function.html">stat_function</a></span><span class="op">(</span>fun <span class="op">=</span> \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">100</span>, <span class="fl">15</span><span class="op">)</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">55</span>, <span class="fl">115</span><span class="op">)</span>,</span>
+<span>                geom <span class="op">=</span> <span class="st">"area"</span>, fill <span class="op">=</span> <span class="st">"red4"</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Plot showing P(X&lt;115) where X~N(100,15)"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="10-probability_files/figure-html/unnamed-chunk-27-1.svg" width="672" style="display: block; margin: auto;"></div>
 </div>
@@ -853,7 +854,7 @@ P(X\le3)&amp;=P(X\!=\!0)+P(X\!=\!1)+P(X\!=\!2)+P(X\!=\!3)\\
 <p>Thus, this problem is equivalent to asking what’s <span class="math inline">\(\p(Z&lt;1)\)</span> where again <span class="math inline">\(Z\sim\n(0,1)\)</span> is the standard normal:</p>
 <div class="i6">
 <div class="sourceCode" id="cb894"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># pnorm() defaults to mean 0 SD 1 if they're not specified</span></span>
+<code class="sourceCode R"><span><span class="co"># pnorm() defaults to mean 0 SD 1, i.e. standard normal, if not specified</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <pre><code>[1] 0.8413447</code></pre>
 <div class="sourceCode" id="cb896"><pre class="downlit sourceCode r">
@@ -865,6 +866,15 @@ P(X\le3)&amp;=P(X\!=\!0)+P(X\!=\!1)+P(X\!=\!2)+P(X\!=\!3)\\
 </div>
 <p>Note how these two areas exactly correspond, so solving one solves the other.</p>
 </div>
+<p>Since we have R, we won’t need to rely on Z-scores as much, however it’s an important concept to normal curves, and also shows up later when discussing inference, e.g. test statistics during hypothesis testing.</p>
+<!--
+
+future ideas: add
+
+ - normal approx to binomial
+ - brief CLT??
+
+-->
 
 </div>
 </div>

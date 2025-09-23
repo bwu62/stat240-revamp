@@ -977,7 +977,8 @@ pnorm(115, 100, 15)
 ``` r
 # showing this area on a quick plot
 ggplot() + geom_function(fun = \(x) dnorm(x, 100, 15), xlim = c(55, 145)) + 
-  stat_function(fun = \(x) dnorm(x, 100, 15), xlim = c(55, 115), geom = "area", fill = "red4") + 
+  stat_function(fun = \(x) dnorm(x, 100, 15), xlim = c(55, 115),
+                geom = "area", fill = "red4") + 
   labs(title = "Plot showing P(X<115) where X~N(100,15)")
 ```
 
@@ -993,7 +994,7 @@ Thus, this problem is equivalent to asking what's $\p(Z<1)$ where again $Z\sim\n
 :::{.i6}
 
 ``` r
-# pnorm() defaults to mean 0 SD 1 if they're not specified
+# pnorm() defaults to mean 0 SD 1, i.e. standard normal, if not specified
 pnorm(1)
 ```
 
@@ -1013,3 +1014,16 @@ ggplot() + geom_function(fun = dnorm, xlim = c(-3, 3)) +
 
 Note how these two areas exactly correspond, so solving one solves the other.
 ::::
+
+
+Since we have R, we won't need to rely on Z-scores as much, however it's an important concept to normal curves, and also shows up later when discussing inference, e.g. test statistics during hypothesis testing.
+
+
+<!--
+
+future ideas: add
+
+ - normal approx to binomial
+ - brief CLT??
+
+-->
