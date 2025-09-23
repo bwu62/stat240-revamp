@@ -1,3 +1,5 @@
+
+
 # Intro to Probability
 
 In this section, we'll introduce you to some foundational probability theory that will be necessary for later models. We will do this in a way that is only semi-rigorous, with an emphasis on teaching the materials in an intuitive fashion.
