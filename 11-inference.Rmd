@@ -2,4 +2,10 @@
 
 # Inference
 
-*To be updated very soon*
+In this chapter we'll discuss the concept of **inference**, where you use your observations in a sample to try to infer underlying facts about the broader population.
+
+
+## Probability models vs Statistical inference
+
+
+
