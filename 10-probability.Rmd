@@ -758,7 +758,8 @@ Continuing with the IQ example, suppose you're asked to find the percent of the 
 pnorm(115, 100, 15)
 # showing this area on a quick plot
 ggplot() + geom_function(fun = \(x) dnorm(x, 100, 15), xlim = c(55, 145)) + 
-  stat_function(fun = \(x) dnorm(x, 100, 15), xlim = c(55, 115), geom = "area", fill = "red4") + 
+  stat_function(fun = \(x) dnorm(x, 100, 15), xlim = c(55, 115),
+                geom = "area", fill = "red4") + 
   labs(title = "Plot showing P(X<115) where X~N(100,15)")
 ```
 :::
@@ -771,7 +772,7 @@ Thus, this problem is equivalent to asking what's $\p(Z<1)$ where again $Z\sim\n
 
 :::{.i6}
 ```{r}
-# pnorm() defaults to mean 0 SD 1 if they're not specified
+# pnorm() defaults to mean 0 SD 1, i.e. standard normal, if not specified
 pnorm(1)
 # showing the same equivalent area on a plot
 ggplot() + geom_function(fun = dnorm, xlim = c(-3, 3)) + 
