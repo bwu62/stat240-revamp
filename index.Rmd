@@ -1,4 +1,4 @@
---- 
+---
 title: "STAT 240 Revamp"
 author: "Bi Cheng Wu, with help from Bret Larget and Cameron Jones"
 date: "`r Sys.Date()`"
