@@ -184,6 +184,11 @@ rnorm-random-generator
 standard-normal-n01
 z-score
 inference
+population-vs-sample-1
+sampling-distributions
+example-coin-flips
+heads-v.-n
+heads-v.-n-1
 proportions
 means
 regression
