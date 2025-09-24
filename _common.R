@@ -3,7 +3,8 @@
 list.of.packages = c(
   "devtools", "rmarkdown", "tidyverse",
   "downlit", "DescTools", "sn",
-  "palmerpenguins", "GGally", "plotly", "diagram"
+  "palmerpenguins", "GGally", "plotly",
+  "diagram", "latex2exp"
 )
 
 # make sure to use my fork of
