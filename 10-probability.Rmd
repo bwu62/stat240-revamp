@@ -448,7 +448,7 @@ Here's the plot of the PMF again for $n=10$, $p=0.5$.
 # use dbinom (the binomial PMF function) to plot distribution
 tibble(k = 0:10, p = dbinom(k, 10, 0.5)) %>% 
 ggplot(aes(x = k, y = p)) + geom_col() +
-  scale_x_continuous(breaks = seq(0,10,1), expand = 0) +
+  scale_x_continuous(breaks = seq(0, 10, 1), expand = 0) +
   scale_y_continuous(breaks = seq(0, 0.25, 0.05), limits = c(0, 0.25),
                      minor_breaks = seq(0, 0.25, 0.01), expand = 0) +
   labs(title = "Binomial(10, 0.5) PMF", x = "k", y = "probability")
@@ -480,7 +480,7 @@ Also note the CDF always goes from 0 on the left to 1 on the right, and can neve
 ::: {.fold .s}
 ```{r}
 ggplot() + geom_function(fun = \(x) pbinom(x, 10, 0.5), xlim = c(0,10), n = 1e4) +
-  scale_x_continuous(breaks = seq(0,10,1), expand = 0) +
+  scale_x_continuous(breaks = seq(0, 10, 1), expand = 0) +
   scale_y_continuous(breaks = seq(0, 1, 0.1), expand = c(0, 0.005)) +
   labs(title = "Binomial(10, 0.5) CDF", x = "k", y = "probability")
 ```
@@ -504,7 +504,7 @@ Here's a plot of the binomial inverse CDF for $n=10$, $p=0.5$, note it's the ref
 ```{r}
 ggplot() + geom_function(fun = \(x) qbinom(x, 10, 0.5), xlim = c(0,1), n = 1e4) +
   scale_x_continuous(breaks = seq(0, 1, 0.1), expand = c(0, 0.005)) +
-  scale_y_continuous(breaks = seq(0,10,1), expand = 0) +
+  scale_y_continuous(breaks = seq(0, 10, 1), expand = 0) +
   labs(title = "Binomial(10, 0.5) inverse CDF", x = "probability", y = "k")
 ```
 :::
