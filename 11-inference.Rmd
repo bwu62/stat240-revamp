@@ -2,10 +2,145 @@
 
 # Inference
 
-In this chapter we'll discuss the concept of **inference**, where you use your observations in a sample to try to infer underlying facts about the broader population.
+In the previous chapter, we introduced the basics of probability theory and discussed some basic random variable models. These form the basis of our inference techniques in the rest of the notes.
+
+In this chapter we'll discuss the concept of **inference**, where you use your observations in a sample to try to infer underlying facts about the broader population. In the process, we will make extensive use of our probability concepts and random variable models from the previous chapter.
 
 
-## Probability models vs Statistical inference
+## Population vs sample
 
+Recall the idea of population vs sample. Usually we imagine that the **population has some fixed distribution with unknown but constant parameters**. We draw some sample from the population and **observe some sample statistics**. Based on our sample as well as possibly some other **reasonable assumptions we can make**, we identify a potential model that can be applied to the population.
+
+Once we have our sample and our intended model, there are two common methods of inference that we can pursue; they are conceptually related, but have subtle differences:
+
+ - We can run a **hypothesis test**, where we test models against the data to determine which explains the results better.
+ - Or we can find **confidence intervals** for the underlying parameters of interest in the model, producing a range in which we are quite certain the true value lies.
+
+These methods are not mutually exclusive and you can certainly do both, but most problems only call for one method. We will discuss both shortly, but first let's briefly discuss sampling distributions.
+
+
+## Sampling distributions
+
+Why is inference even necessary in the first place? The main reason is this: **samples are random**! This may sound trivially obvious, but the implications are worth examining more closely.
+
+
+### Example: Coin flips
+
+Imagine we have a **perfectly fair coin**, i.e. Heads (H) and Tails (T) have the exact same probability (and you can't land on the edge). Also assume you have good throwing technique and flip the coin a good many times in the air, so that past throws don't affect subsequent throws, i.e. the **throws are all mutually independent**. This is of course an idealized model, but it usually turns out to be quite practical.
+
+### \# Heads v. $n$
+
+Suppose you flip the coin 10 times and define $X$ as the number of total heads. Note that we can model $X\sim\bin(10,0.5)$. What is the probably of getting exactly 5? Or how about some other number? In fact we've already seen this exact distribution function last chapter:
+
+:::{.fold .s}
+```{r setup-all2,echo=F}
+library(tidyverse)
+source("ggplot_theme_options.R")
+```
+```{r,tidy=F}
+# remember to import tidyverse (and optionally, update theme options)
+# also importing latex2exp to write math in plot annotations
+library(latex2exp)
+tibble(k = 0:10, p = dbinom(k, 10, 0.5)) %>% 
+ggplot(aes(x = k, y = p)) + geom_col() +
+  scale_x_continuous(breaks = seq(0, 10, 1), expand = 0) +
+  scale_y_continuous(breaks = seq(0, 0.25, 0.05), limits = c(0, 0.25),
+                     minor_breaks = seq(0, 0.25, 0.01), expand = 0) +
+  labs(title = TeX("Binomial(10, 0.5) PMF    [ $\\mu=(10)(0.5)=5$,  $\\sigma
+                   =\\sqrt{(10)(0.5)(1-0.5)}\\approx 1.58$ ]"),
+       x = "k", y = "probability")
+```
+:::
+
+You can see that even though 5 is more likely than any other outcome, there's actually over 75% chance that you'd observe something else entirely.
+
+Now suppose you keep going until you get to 100 flips, and again consider the total number of heads $X\sim\bin(100,0.5)$. Here's the distribution:
+
+:::{.fold .s}
+```{r}
+tibble(k = 0:100, p = dbinom(k, 100, 0.5)) %>% 
+ggplot(aes(x = k, y = p)) + geom_col(color = "white") +
+  scale_x_continuous(breaks = seq(0, 100, 10), expand = 0) +
+  scale_y_continuous(breaks = seq(0, 0.08, 0.01), limits = c(0, 0.08), expand = 0) +
+  labs(title = TeX("Binomial(100, 0.5) PMF    [ $\\mu=(100)(0.5)=50$,  $
+                   \\sigma=\\sqrt{(100)(0.5)(1-0.5)}=5$ ]"),
+       x = "k", y = "probability")
+```
+:::
+
+One thing is immediately apparent: even though the raw SD has increased from 1.58 to 5, the **range of likely outcomes has narrowed compared to $\Omega$**, i.e. compared to $n$, you're unlikely to deviate by as much when the total number of flips is higher. If we continue on to 1000 flips, this becomes even more evident:
+
+:::{.fold .s}
+```{r}
+tibble(k = 0:1000, p = dbinom(k, 1000, 0.5)) %>% 
+    ggplot(aes(x = k, y = p)) + geom_col(color = "gray35") +
+    scale_x_continuous(breaks = seq(0, 1000, 100), expand = 0) +
+    scale_y_continuous(breaks = seq(0, 0.025, 0.005), expand = 0,
+                       minor_breaks = seq(0, 0.025, 0.001)) +
+  labs(title = TeX("Binomial(1000, 0.5) PMF    [ $\\mu=(1000)(0.5)=500$,  $
+                   \\sigma=\\sqrt{(1000)(0.5)(1-0.5)}\\approx 15.8$ ]"),
+       x = "k", y = "probability") + theme(plot.title = element_text(size=12))
+```
+:::
+
+
+### \% Heads v. $n$
+
+We've just seen that as $n$ increases, the range of values for $X$ (number of heads) we are likely to observe **narrows with respect to the total range** of 0 to $n$.
+
+Let's see this fact in a different way. Let's **actually simulate a sequence of 1000 flips** according to this model, then make a plot showing the **proportion of heads as we go along** after each flip.
+
+:::{.fold .s}
+```{r}
+# use rbinom to explicitly generate 1000 individual flips
+# enframe wraps the vector in a data frame for ggplot
+# cumsum computes the cumulative sum, i.e. "how many heads so far"
+samp <- rbinom(1000, 1, 0.5)
+samp %>% enframe("n", "x") %>% ggplot(aes(x = n, y = cumsum(x)/n)) +
+  geom_hline(yintercept = 0.5, color = "blue", linetype = "dashed") +
+  geom_line() + labs(title = "Running proportion of heads vs n", y = "proportion",
+                     subtitle = TeX("(blue dashed line shows theoretical $p=0.5$)"))
+```
+:::
+
+Let's also increase the sample size to $n=10^{5}$ and show $n$ on a logarithmic scale, which improves readability (generally whenever a column is *always positive* and also *covers several orders of magnitude*, this can significantly help improve readability).
+
+:::{.fold .s}
+```{r}
+# extend experiment out to 1e5 flips
+# scales::comma suppresses scientific notation
+samp <- c(samp, rbinom(1e5-length(samp), 1, 0.5))
+samp %>% enframe("n", "x") %>% ggplot(aes(x = n, y = cumsum(x)/n)) +
+  geom_hline(yintercept = 0.5, color = "blue", linetype = "dashed") +
+  geom_line() + scale_x_log10(breaks = 10^(0:5), labels = scales::comma) +
+  scale_y_continuous(breaks = scales::pretty_breaks(n = 10)) +
+  labs(title = "Running proportion of heads vs n", y = "proportion",
+       subtitle = TeX("(blue dashed line shows theoretical $p=0.5$)"))
+```
+:::
+
+Let's make a final addition to our plot and add 2 additional runs where the entire experiment is repeated, as well as 2 pairs of dashed gray curves showing the ±1 and ±2 SD for each $n$.
+
+:::{.i96 .fold .s}
+```{r}
+p <- tibble(run1 = cumsum(samp), run2 = cumsum(rbinom(1e5, 1, 0.5)),
+            run3 = cumsum(rbinom(1e5, 1, 0.5)), n = 1:1e5) %>%
+  pivot_longer(1:3, names_to = "Run", values_to = "x") %>%
+  ggplot(aes(x = n, y = x/n, color = Run))
+for(i in -2:2) p <- p + geom_function(fun = \(x, i) 0.5*(1+i/sqrt(x)),
+                                      args = list(i = i), color = "black",
+                                      linetype = "dashed", alpha = 0.7)
+p <- p + geom_line(size = 0.8) +
+  scale_x_log10(breaks = 10^(0:5), labels = scales::comma, expand = 0) +
+  scale_y_continuous(breaks = scales::pretty_breaks(n = 10), expand = 0) +
+  labs(title = "Running proportion of heads vs n  (3 runs)", y = "proportion",
+       subtitle = TeX("(dashed lines show theoretical $p=0.5$ and ±1, ±2 SD curves)"))
+p
+```
+:::
+
+Now we see a remarkable phenomenon: not only do the runs all converge to the true value of $p=0.5$, but their rates of convergence all fall reasonably within an "envelope" that's proportional to the SD-vs-n curves.
+
+This is a simulated demonstration of a principle called the [**law of large numbers**](https://en.wikipedia.org/wiki/Law_of_large_numbers) (LLN), which essentially states that certain statistics like the sample proportion are guaranteed to converge to their true values.
 
 
