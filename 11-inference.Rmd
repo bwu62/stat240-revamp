@@ -129,8 +129,8 @@ p <- tibble(run1 = cumsum(samp), run2 = cumsum(rbinom(1e5, 1, 0.5)),
   ggplot(aes(x = n, y = x/n, color = Run))
 for(i in -2:2) p <- p + geom_function(fun = \(x, i) 0.5*(1+i/sqrt(x)),
                                       args = list(i = i), color = "black",
-                                      linetype = "dashed", alpha = 0.7)
-p <- p + geom_line(size = 0.8) +
+                                      linetype = "dashed", alpha = 0.5)
+p <- p + geom_line(linewidth = 0.7) +
   scale_x_log10(breaks = 10^(0:5), labels = scales::comma, expand = 0) +
   scale_y_continuous(breaks = scales::pretty_breaks(n = 10), expand = 0) +
   labs(title = "Running proportion of heads vs n  (3 runs)", y = "proportion",
