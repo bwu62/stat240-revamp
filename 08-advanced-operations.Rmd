@@ -311,10 +311,14 @@ Here's a bonus [plotly choropleth](https://plotly.com/r/choropleth-maps) just fo
 :::{.fold .s}
 ```{r choropleth,tidy=F,fig.width=7.2,fig.height=4.45}
 library(plotly)
+a <- min(fertility$rate)
+b <- max(fertility$rate)
 plot_ly(fertility, type = "choropleth", locations = ~code, z = ~rate,
-        text = ~country, frame = ~year, zmin = 0.7, zmax = 8.9, colorscale = list(
-        c(0, "rgb(255,0,0)"), c(0.1707, "rgb(255,255,255)"), c(1, "rgb(0,0,255)"))) %>%
-  layout(margin = list(l = 10, r = 10, b = 10, t = 35)) %>% animation_opts(frame = 100)
+        text = ~country, frame = ~year, zmin = a, zmax = b, colorscale =
+          list(c(0, "red"), c((2.1-a)/(b-a), "white"), c(1, "blue"))) %>%
+  layout(margin = list(l = 10, r = 10, b = 10, t = 35),
+         geo = list(resolution = 50, projection = list(type = "robinson"))) %>%
+  animation_opts(frame = 100)
 ```
 :::
 
