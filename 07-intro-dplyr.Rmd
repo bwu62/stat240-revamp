@@ -595,6 +595,9 @@ df.demo %>% filter(is.na(y) & !is.na(x))
 # get rows where ANY variable is missing
 # this uses if_any() which checks if any given cols satisfy a condition
 df.demo %>% filter(if_any(everything(), is.na))
+# an alternative method in base R that's maybe slightly simpler
+# complete.cases() gives a TRUE/FALSE vector of which rows are complete (no NA)
+df.demo[!complete.cases(df.demo),]
 ```
 
 One more thing, did you notice there's actually another form of missingness in `df.demo`? This data frame appears to contain daily observations, but `"2024-01-05"` appears to be missing completely from the data frame. This sneaky situation of data missing by not existing in the data frame completely is surprisingly common and can sometimes be hard to identify (since there's no NAs in the date column to detect).
