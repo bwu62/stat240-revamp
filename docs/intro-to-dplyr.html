@@ -1093,9 +1093,19 @@ https://rstudio.github.io/cheatsheets/data-transformation.pdf
 1 2024-01-01 &lt;NA&gt;     NA NA   
 2 2024-01-04 A        NA NA   
 3 2024-01-06 B         3 NA   </code></pre>
+<div class="sourceCode" id="cb711"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># an alternative method in base R that's maybe slightly simpler</span></span>
+<span><span class="co"># complete.cases() gives a TRUE/FALSE vector of which rows are complete (no NA)</span></span>
+<span><span class="va">df.demo</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/stats/complete.cases.html">complete.cases</a></span><span class="op">(</span><span class="va">df.demo</span><span class="op">)</span>,<span class="op">]</span></span></code></pre></div>
+<pre><code># A tibble: 3 × 4
+  date       x         y z    
+  &lt;date&gt;     &lt;chr&gt; &lt;dbl&gt; &lt;lgl&gt;
+1 2024-01-01 &lt;NA&gt;     NA NA   
+2 2024-01-04 A        NA NA   
+3 2024-01-06 B         3 NA   </code></pre>
 <p>One more thing, did you notice there’s actually another form of missingness in <code>df.demo</code>? This data frame appears to contain daily observations, but <code>"2024-01-05"</code> appears to be missing completely from the data frame. This sneaky situation of data missing by not existing in the data frame completely is surprisingly common and can sometimes be hard to identify (since there’s no NAs in the date column to detect).</p>
 <p>One easy way to fix this is to use <code><a href="https://tidyr.tidyverse.org/reference/complete.html">complete()</a></code> and <code><a href="https://tidyr.tidyverse.org/reference/full_seq.html">full_seq()</a></code> from <a href="https://tidyr.tidyverse.org">tidyr</a>, yet another core Tidyverse package. This combination can be used to generate a <code><a href="https://tidyr.tidyverse.org/reference/complete.html">complete()</a></code> data frame by generating a <code><a href="https://tidyr.tidyverse.org/reference/full_seq.html">full_seq()</a></code>–uence of values for some specified column. Other columns are filled with NAs by default. Example:</p>
-<div class="sourceCode" id="cb711"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb713"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># this generates a full sequence of dates</span></span>
 <span><span class="co"># the argument 1 indicates the sequence increases by 1 each observation</span></span>
 <span><span class="va">df.demo</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/complete.html">complete</a></span><span class="op">(</span>date <span class="op">=</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/full_seq.html">full_seq</a></span><span class="op">(</span><span class="va">date</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -1108,7 +1118,7 @@ https://rstudio.github.io/cheatsheets/data-transformation.pdf
 4 2024-01-04 A        NA NA   
 5 2024-01-05 &lt;NA&gt;     NA NA   
 6 2024-01-06 B         3 NA   </code></pre>
-<div class="sourceCode" id="cb713"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb715"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># to show ONLY rows that were added using this operation,</span></span>
 <span><span class="co"># we can first create a dummy column filled with some value,</span></span>
 <span><span class="co"># complete the data frame, then filter to where the dummy column is NA</span></span>
@@ -1126,7 +1136,7 @@ https://rstudio.github.io/cheatsheets/data-transformation.pdf
 <span class="header-section-number">7.6.4</span> Dropping NAs<a class="anchor" aria-label="anchor" href="#dropping-nas"><i class="fas fa-link"></i></a>
 </h3>
 <p>As mentioned before, for the limited scope of this class, usually rows with NAs can just be dropped for simplicity. The easiest way is to use <code>drop_na(col1, col2, ...)</code> where <code>col1</code>, <code>col2</code>, … are the columns we care about dropping NAs in. If left empty, <code><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na()</a></code> will drop rows where ANY column contains NA. Examples:</p>
-<div class="sourceCode" id="cb715"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb717"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># drop only rows where x is missing</span></span>
 <span><span class="va">df.demo</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
 <pre><code># A tibble: 4 × 4
@@ -1136,7 +1146,7 @@ https://rstudio.github.io/cheatsheets/data-transformation.pdf
 2 2024-01-03 B         2 FALSE
 3 2024-01-04 A        NA NA   
 4 2024-01-06 B         3 NA   </code></pre>
-<div class="sourceCode" id="cb717"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb719"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># drop rows where x and y are missing</span></span>
 <span><span class="va">df.demo</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span></span></code></pre></div>
 <pre><code># A tibble: 3 × 4
@@ -1145,7 +1155,7 @@ https://rstudio.github.io/cheatsheets/data-transformation.pdf
 1 2024-01-02 A         1 TRUE 
 2 2024-01-03 B         2 FALSE
 3 2024-01-06 B         3 NA   </code></pre>
-<div class="sourceCode" id="cb719"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb721"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># drop rows where ANY values are missing</span></span>
 <span><span class="va">df.demo</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code># A tibble: 2 × 4
@@ -1163,7 +1173,7 @@ https://rstudio.github.io/cheatsheets/data-transformation.pdf
 <span class="header-section-number">7.6.5</span> Replacing NAs<a class="anchor" aria-label="anchor" href="#replacing-nas"><i class="fas fa-link"></i></a>
 </h3>
 <p>In some <em>rare</em> circumstances, you may want to replace NAs with other values. Of course you can do any kind of conditional replacement using <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> and <code><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when()</a></code>, but you can also use <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> and the specialized tidyr function <code><a href="https://tidyr.tidyverse.org/reference/replace_na.html">replace_na()</a></code>. Examples of both:</p>
-<div class="sourceCode" id="cb721"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb723"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># suppose we need to replace NAs in y column with 0</span></span>
 <span><span class="co"># using mutate and case_when:</span></span>
 <span><span class="va">df.demo</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
@@ -1180,7 +1190,7 @@ https://rstudio.github.io/cheatsheets/data-transformation.pdf
 3 2024-01-03 B         2 FALSE
 4 2024-01-04 A         0 NA   
 5 2024-01-06 B         3 NA   </code></pre>
-<div class="sourceCode" id="cb723"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb725"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># same thing but using replace_na instead of case_when:</span></span>
 <span><span class="va">df.demo</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/replace_na.html">replace_na</a></span><span class="op">(</span><span class="va">y</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code># A tibble: 5 × 4
@@ -1192,7 +1202,7 @@ https://rstudio.github.io/cheatsheets/data-transformation.pdf
 4 2024-01-04 A         0 NA   
 5 2024-01-06 B         3 NA   </code></pre>
 <p>In some datasets, NAs may be coded using certain obviously invalid values, e.g. -9999. These can of course also be mutated using <code><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when()</a></code>, but there’s a special function <code><a href="https://dplyr.tidyverse.org/reference/na_if.html">na_if()</a></code> for just this purpose:</p>
-<div class="sourceCode" id="cb725"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb727"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df.demo</span> <span class="op">&lt;-</span> <span class="va">df.demo</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>w <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">9999</span>, <span class="op">-</span><span class="fl">9999</span>, <span class="fl">20</span>, <span class="fl">30</span>, <span class="op">-</span><span class="fl">9999</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">df.demo</span></span></code></pre></div>
 <pre><code># A tibble: 5 × 5
@@ -1203,7 +1213,7 @@ https://rstudio.github.io/cheatsheets/data-transformation.pdf
 3 2024-01-03 B         2 FALSE    20
 4 2024-01-04 A        NA NA       30
 5 2024-01-06 B         3 NA    -9999</code></pre>
-<div class="sourceCode" id="cb727"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb729"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df.demo</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>w <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/na_if.html">na_if</a></span><span class="op">(</span><span class="va">w</span>, <span class="op">-</span><span class="fl">9999</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code># A tibble: 5 × 5
   date       x         y z         w

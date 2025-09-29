@@ -1330,6 +1330,21 @@ df.demo %>% filter(if_any(everything(), is.na))
 3 2024-01-06 B         3 NA   
 ```
 
+``` r
+# an alternative method in base R that's maybe slightly simpler
+# complete.cases() gives a TRUE/FALSE vector of which rows are complete (no NA)
+df.demo[!complete.cases(df.demo),]
+```
+
+```
+# A tibble: 3 × 4
+  date       x         y z    
+  <date>     <chr> <dbl> <lgl>
+1 2024-01-01 <NA>     NA NA   
+2 2024-01-04 A        NA NA   
+3 2024-01-06 B         3 NA   
+```
+
 One more thing, did you notice there's actually another form of missingness in `df.demo`? This data frame appears to contain daily observations, but `"2024-01-05"` appears to be missing completely from the data frame. This sneaky situation of data missing by not existing in the data frame completely is surprisingly common and can sometimes be hard to identify (since there's no NAs in the date column to detect).
 
 One easy way to fix this is to use `complete()` and `full_seq()` from [tidyr](https://tidyr.tidyverse.org), yet another core Tidyverse package. This combination can be used to generate a `complete()` data frame by generating a `full_seq()`--uence of values for some specified column. Other columns are filled with NAs by default. Example:
