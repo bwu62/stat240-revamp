@@ -553,7 +553,7 @@ df.demo <- tibble(
 df.demo
 ```
 
-A common rudimentary of checking missingness is with the aforementioned `summary()` function from section \@ref(basic-df). Note this is the base R `summary()`, NOT the Tidyverse `summarize()` we just covered above. Note however it only reports NAs for some columns, depending on type.
+A common rudimentary way of checking missingness is with the aforementioned `summary()` function from section \@ref(basic-df). Note this is the base R `summary()`, NOT the Tidyverse `summarize()` we just covered above. Note however it only reports NAs for some columns, depending on type.
 
 ```{r summary-df}
 summary(df.demo)

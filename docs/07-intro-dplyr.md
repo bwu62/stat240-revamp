@@ -1217,7 +1217,7 @@ df.demo
 5 2024-01-06 B         3 NA   
 ```
 
-A common rudimentary of checking missingness is with the aforementioned `summary()` function from section \@ref(basic-df). Note this is the base R `summary()`, NOT the Tidyverse `summarize()` we just covered above. Note however it only reports NAs for some columns, depending on type.
+A common rudimentary way of checking missingness is with the aforementioned `summary()` function from section \@ref(basic-df). Note this is the base R `summary()`, NOT the Tidyverse `summarize()` we just covered above. Note however it only reports NAs for some columns, depending on type.
 
 
 ``` r
