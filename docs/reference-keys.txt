@@ -189,6 +189,9 @@ sampling-distributions
 example-coin-flips
 heads-v.-n
 heads-v.-n-1
+law-of-large-numbers-lln
+confidence-intervals-ci
+interpretation-of-ci
 proportions
 means
 regression
