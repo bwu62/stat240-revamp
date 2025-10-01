@@ -351,3 +351,10 @@ This shows again, as we already learned, that the median is more robust vs the m
 :::{.note}
 Visually, the mode is always the "peak", the median splits the distribution into 2 equal areas, and the mean is the center of mass of the shape along the horizontal axis (i.e. its "balancing point").
 :::
+
+
+<!--
+
+add correlation??
+
+-->
