@@ -103,7 +103,7 @@ samp %>% enframe("n", "x") %>% ggplot(aes(x = n, y = cumsum(x)/n)) +
 ```
 :::
 
-Let's also increase the sample size to $n=10^{5}$ and show $n$ on a logarithmic scale, which improves readability (generally whenever a column is *always positive* and also *covers several orders of magnitude*, this can significantly help improve readability).
+Let's increase the sample size to $n=10^{5}$ and show $n$ on a logarithmic scale, which improves readability (generally whenever a column is *always positive* and *covers several orders of magnitude*, this can significantly help improve readability).
 
 :::{.fold .s}
 ```{r}
@@ -132,7 +132,7 @@ for(i in -2:2) p <- p + geom_function(fun = \(x, i) 0.5*(1+i/sqrt(x)),
                                       linetype = "dashed", alpha = 0.5)
 p <- p + geom_line(linewidth = 0.7) +
   scale_x_log10(breaks = 10^(0:5), labels = scales::comma, expand = 0) +
-  scale_y_continuous(breaks = scales::pretty_breaks(n = 10), expand = 0) +
+  scale_y_continuous(breaks = scales::pretty_breaks(n = 10), limits = c(0, 1), expand = .01) +
   labs(title = "Running proportion of heads vs n  (3 runs)", y = "proportion",
        subtitle = TeX("(dashed lines show theoretical $p=0.5$ and ±1, ±2 SD curves)"))
 p
@@ -141,6 +141,81 @@ p
 
 Now we see a remarkable phenomenon: not only do the runs all converge to the true value of $p=0.5$, but their rates of convergence all fall reasonably within an "envelope" that's proportional to the SD-vs-n curves.
 
-This is a simulated demonstration of a principle called the [**law of large numbers**](https://en.wikipedia.org/wiki/Law_of_large_numbers) (LLN), which essentially states that certain statistics like the sample proportion are guaranteed to converge to their true values.
+
+### Law of large numbers (LLN)
+
+The previous plots show a simulated demonstration of what's called the [**law of large numbers**](https://en.wikipedia.org/wiki/Law_of_large_numbers) (LLN), which essentially states that certain statistics are guaranteed to converge to their true values as you increase your sample size.
+
+Specifically, the LLN guarantees for a sample of independently drawn observations, **as $n\to\infty$, any statistic computed as an _average_ of some expression _will_ converge to the true theoretical average value as long as it exists** (i.e. has a well-defined, finite value). This is an oversimplification of course, but it serves our purposes. Note however there's no statement of the rate of convergence, i.e. how fast it converges, merely that it's inevitable.
+
+Examples of some statistics that will converge under the LLN:
+
+$$
+\begin{align}
+\text{(sample mean)}&&\bar{x}=\frac1n\sum_{i=1}^nx_i~~&\longrightarrow~\mu=\e(X)&&\text{(expected value)}\\
+\text{(sample variance)}&&s^2=\frac{\sum_{i=1}^n(x_i-\bar{x})^2}{n-1}~~&\longrightarrow~\sigma^2=\e\big((X-\mu)^2\big)&&\text{(variance)}
+\end{align}
+$$
+
+where $x_i$ are a sample of [**independent and identically distributed** (iid)](https://en.wikipedia.org/wiki/Independent_and_identically_distributed_random_variables) observations drawn from a population represented by the random variable $X$.
+
+There are many other statistics that also converge (e.g. correlation, skew, etc...) but these two are the most important to us right now. Note the **sample variance also converges to the true variance**, since it can be thought of as the **average squared distance** from the mean (if you factor out a $\frac{n}{n-1}$ correction factor term (as long the $\sigma^2$ exists).
+
+Also note the proportion of heads we saw in the last example can be thought of as the **average of a sample of 1s and 0s** where 1 denotes H and 0 denotes T, so it also **converges to the true probability of heads** by LLN.
+
+The LLN forms the basis of the inference topics which we are about to embark on.
+
+
+## Confidence intervals (CI)
+
+If you look again at the last plot from the coin flips example but in a different way, since each run stays within a fairly predictable margin of the true probability, for any given sample size we can use our sample proportion to find a range of reasonable values for the true probability. This is what we call a **confidence interval**.
+
+A confidence interval usually has the following form:
+
+$$
+\text{$C\%$ confidence interval}~=~(\text{estimate})~\pm~(\text{crit. value})\cdot(\text{std. error})
+$$
+
+ - **$C$** is the level of confidence requested. Most commonly, a 95%-level confidence is reported by convention, but this can be any number betweeo 0-100% (not inclusive).
+ - **Estimate** is your best guess of the true value based on your sample. For example, if you're trying to estimate the probability of heads, you'd use the proportion of heads in your sample.
+ - **Critical value** is a multiplier that depends on $C$, the level of confidence. If you want higher confidence, you must cover more values. For a standard 95% CI, this value is usually approximately 2.
+ - **Standard error** is what we call an estimate of the true SD using our sample. In out last plot, this would be an estimate of how far the inner gray lines are from the true probability $p=0.5$.
+
+We'll cover in detail how to compute each of the above quantities for different experiments in the next few chapters, but for now let's do a quick visual example to help build more intuition.
+
+:::{.eg}
+Using the last plot, give an approximate 95% confidence interval for the true probability of heads $p$ based on just the first $n=10$ flips from the "run1" experiment.
+
+Looking at a vertical slice along $n=10$, we can see that "run1" had a sample proportion of 0.6, which implies 6 of the first 10 flips were heads. Thus, our sample estimate is 0.6.
+
+We can also see at that point, the 1-SD-above line is at approximately 0.65, which is 0.15 away from the true value, implying the standard error would be close to 0.15.
+
+Using the approximate critical value of 2, our 95% confidence interval for $p$ is $0.6\pm2\cdot0.15=(0.3,0.9)$.
+
+Put it a different way, based on the sample thus far (6/10 heads), we are **95% confident the true probability of heads $p$ is between 30-90%**.
+:::
+
+Below is a plot of how the 95% CI updates as the run1 experiment progresses one flip at a time. You can see at any given point in time, we usually do cover the true probability of heads $p=0.5$, as we expect to.
+
+:::{.fold .s}
+```{r}
+# compute and plot 95% CI as experiment progresses
+# this will be covered in detail later, but SE is computed by sqrt(p*(1-p)/n)
+# where here p refers to the running sample proportion of % of heads out of n
+# pmin & pmax are used to ensure the CI bounds for the true p don't exceed [0,1]
+tibble(n = 1:1e5, p = cumsum(samp)/n, se = sqrt(p*(1-p)/n)) %>%
+  ggplot(aes(x = n, y = p)) +
+  geom_ribbon(aes(ymin = pmax(0, p-2*se), ymax = pmin(1, p+2*se)), alpha = 0.2) +
+  geom_hline(yintercept = 0.5, color = "black", alpha = 0.5) + geom_line(aes(color = "run1")) +
+  scale_x_log10(breaks = 10^(0:5), labels = scales::comma, expand = 0) +
+  scale_y_continuous(breaks = scales::pretty_breaks(n = 10), limits = c(0, 1), expand = .01) +
+  labs(title = "95% confidence interval for p vs n for run1", y = "proportion")
+```
+:::
+
+
+### Interpretation of CI
+
+Let's briefly examine the interpretation of CIs more closely.
 
 
