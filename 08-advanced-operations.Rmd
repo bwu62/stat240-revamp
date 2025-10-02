@@ -37,7 +37,7 @@ penguins %>%
     sd_mass     = sd(body_mass_g),
     n           = n()
   )
-# we can also group by multiple, e.g. group by spcies + sex
+# we can also group by multiple, e.g. group by species + sex
 penguins %>%
   group_by(species, sex) %>%
   summarize(
