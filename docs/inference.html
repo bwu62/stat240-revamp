@@ -265,7 +265,7 @@
 \]</span></p>
 <ul>
 <li>
-<strong><span class="math inline">\(C\)</span></strong> is the level of confidence requested. Most commonly, a 95%-level confidence is reported by convention, but this can be any number betweeo 0-100% (not inclusive).</li>
+<strong><span class="math inline">\(C\)</span></strong> is the <strong>level of confidence</strong> desired. Most commonly, a 95%-level confidence is reported by convention, but this can be any number betweeo 0-100% (not inclusive).</li>
 <li>
 <strong>Estimate</strong> is your best guess of the true value based on your sample. For example, if you’re trying to estimate the probability of heads, you’d use the proportion of heads in your sample.</li>
 <li>
@@ -316,12 +316,55 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">0.5</span>, color <span class="op">=</span> <span class="st">"black"</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span>, alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html">geom_pointrange</a></span><span class="op">(</span>linewidth <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"black"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>axis.text.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>family <span class="op">=</span> <span class="st">"mono"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
-<span>    y <span class="op">=</span> <span class="cn">NULL</span>, title <span class="op">=</span> <span class="st">"Repeated 95% confidence intervals for p vs true probability p=0.5"</span><span class="op">)</span></span></code></pre></div>
+<span>    y <span class="op">=</span> <span class="cn">NULL</span>, title <span class="op">=</span> <span class="st">"Repeated 95% CIs for p vs true p=0.5"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="11-inference_files/figure-html/unnamed-chunk-9-1.svg" width="672" style="display: block; margin: auto;"></div>
 </div>
-<p>Remember that in the real-world, you don’t know what the true probability of heads is, and you only have a single experiment’s dataset, so you don’t know if your interval captures the true value or not, but you can be 95% confident that it does.</p>
-
+<p>Remember that in a real-world example, you don’t know what the true probability of heads is, and you only have data from a single experiment, so you don’t know if your interval captures the true value or not, but you can be 95% confident that it does.</p>
 </div>
+</div>
+<div id="hypothesis-testing" class="section level2" number="11.4">
+<h2>
+<span class="header-section-number">11.4</span> Hypothesis testing<a class="anchor" aria-label="anchor" href="#hypothesis-testing"><i class="fas fa-link"></i></a>
+</h2>
+<p>If instead of estimating a parameter, your primary goal is to test if a certain value for it agrees with the data, then you probably want to perform a <strong>hypothesis test</strong>.</p>
+<p>A hypothesis test usually starts with specifying a pair of <strong>competing hypotheses</strong> of the following form:</p>
+<p><span class="math display">\[
+\begin{align}
+H_0&amp;:\text{parameter}~\theta=\theta_0\\
+H_a&amp;:\text{parameter}~\theta\left.\begin{cases}&amp;&lt;\theta_0\\\text{one of}\!\!&amp;\neq\theta_0\\&amp;&gt;\theta_0\end{cases}\right\rbrace
+\end{align}
+\]</span></p>
+<ul>
+<li>
+<span class="math inline">\(H_0\)</span> is called the <strong>null hypothesis</strong> and represents your starting assumption, i.e. we begin by assuming <span class="math inline">\(H_0\)</span> to be true with the goal of rejecting it if it differs too much from the data.</li>
+<li>
+<span class="math inline">\(H_a\)</span> is called the <strong>alternative hypothesis</strong> and is exactly what it sounds like: the alternative explanation we settle on if we reject the null.</li>
+</ul>
+<p>The actual decision of whether to reject the null is made by computing a <strong>p-value</strong>, which is simply the <strong>probability of observing our dataset <em>if the null was actually true</em></strong>, i.e. the likeliness of the data under <span class="math inline">\(H_0\)</span>. If this probability is small enough, it means our null doesn’t fit the data, leading to its rejection. The threshold we use for our p-value (i.e. where we begin to reject the null) is called the <strong>significance level <span class="math inline">\(\alpha\)</span></strong> and is commonly set to 0.05 by convention.</p>
+<p>In summary, here’s the steps involved for a typical hypothesis test:</p>
+<ol style="list-style-type: decimal">
+<li>Specify <span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_a\)</span>, and set your desired significance level <span class="math inline">\(\alpha\)</span>.</li>
+<li>Assuming <span class="math inline">\(H_0\)</span> is true, find the likeliness of your data, i.e. the p-value.</li>
+<li>If your p-value <span class="math inline">\(&lt;\alpha\)</span>, reject <span class="math inline">\(H_0\)</span> in favor of <span class="math inline">\(H_a\)</span>. Otherwise, stay with <span class="math inline">\(H_0\)</span>.</li>
+<li>Interpret the results clearly in the context of the original problem.</li>
+</ol>
+<p>This probably all feels very new and nebulous, so let’s ground ourselves with a concrete example.</p>
+<div class="eg">
+<p>You suspect a given coin is weighted to come up heads more often than not. You decide to flip it 10 times and observe a total of 7 heads. At the common <span class="math inline">\(\alpha=0.05\)</span>, can you conclude the coin is biased?</p>
+<p>Let <span class="math inline">\(p\)</span> represent the true underlying probability of heads for this coin. Then our null <span class="math inline">\(H_0:p=0.5\)</span> (i.e. the coin is fair), and our alternative <span class="math inline">\(H_a:p&gt;0.5\)</span> (i.e. the coin is biasing heads).</p>
+<p>Next, we assume the null to be true and compute our p-value. Note that under the null assumption, we can model the number of heads <span class="math inline">\(X\sim\bin(10,p=0.5)\)</span>. For reasons which will be explained soon, our “likeliness of data” for the p-value is actually defined as <span class="math inline">\(P(X\geq7)\)</span>. We can find this using <code><a href="https://rdrr.io/r/stats/Binomial.html">pbinom()</a></code>.</p>
+<div class="sourceCode" id="cb907"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># recall pbinom gives ≤ the input, so for ≥7, we need:</span></span>
+<span><span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">pbinom</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">10</span>, <span class="fl">0.5</span><span class="op">)</span></span></code></pre></div>
+<pre><code>[1] 0.171875</code></pre>
+<div class="sourceCode" id="cb909"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># another way using dbinom instead:</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">dbinom</a></span><span class="op">(</span><span class="fl">7</span><span class="op">:</span><span class="fl">10</span>, <span class="fl">10</span>, <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>[1] 0.171875</code></pre>
+<p>Thus, our p-value is about 0.17, which does not pass our threshold of <span class="math inline">\(\alpha=0.05\)</span>, so we do not reject the null. In other words, <strong>our data is not strong enough to conclude the coin is biased</strong> for heads.</p>
+</div>
+<p>The result of the previous example may seem surprising, but is simply a reflection of that fact that 7/10 heads is not that unusual even for a perfectly fair coin, so <strong>our data did not exceed threshold of disbelief <span class="math inline">\(\alpha\)</span></strong>. If instead of 7 we had observed 9/10 heads, you can check we would’ve rejected <span class="math inline">\(H_0\)</span>.</p>
+
 </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@xiee/utils/js/external-link.min.js" defer></script><script>
@@ -436,6 +479,7 @@ observer.observe(document.body, config);
 <li>
 <a class="nav-link" href="#confidence-intervals-ci"><span class="header-section-number">11.3</span> Confidence intervals (CI)</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#interpretation-of-ci"><span class="header-section-number">11.3.1</span> Interpretation of CI</a></li></ul>
 </li>
+<li><a class="nav-link" href="#hypothesis-testing"><span class="header-section-number">11.4</span> Hypothesis testing</a></li>
 </ul>
 
       <div class="book-extra">

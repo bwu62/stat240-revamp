@@ -192,6 +192,7 @@ heads-v.-n-1
 law-of-large-numbers-lln
 confidence-intervals-ci
 interpretation-of-ci
+hypothesis-testing
 proportions
 means
 regression
