@@ -216,19 +216,30 @@ tibble(n = 1:1e5, p = cumsum(samp)/n, se = sqrt(p*(1-p)/n)) %>%
 
 ### Interpretation of CI
 
-Let's briefly examine the interpretation of CIs more closely.
+Let's briefly examine the interpretation of CIs more closely. What does it mean exactly when we say "95% confidence"?
+
+Briefly, a 95% CI means if we repeat the exact same experiment over and over again, each time performing the exact same 95% CI calculation, on average we would expect about 95% of the reps to result in a CI that does in fact contain the true $p=0.5$. The plot below shows a simulation of this fact.
 
 ```{r,include=F}
 set.seed(4)
 ```
+
+:::{.fold .s}
 ```{r}
 N = 20 ; n = 10  # number of repetitions / number of flips in each rep
 tibble(flips = rbinom(N*n, 1, 0.5),
        run = rep(1:20,each=10) %>% str_pad(2,pad="0") %>% paste0("run",.)) %>% 
-  group_by(run) %>% summarize(run = unique(run), heads = sum(flips),
-                              flips = str_flatten(ifelse(flips,"H","T"))) %>% 
-  mutate(p=heads/n, se=sqrt(p*(1-p)/n), ci1=pmax(0,p-2*se), ci2=pmin(1,p+2*se),
-         capture = ci1<=0.5 & 0.5<=ci2)
+  group_by(run) %>%
+  summarize(heads = sum(flips), flips = str_flatten(ifelse(flips,"H","T"))) %>% 
+  mutate(p = heads/n, se = sqrt(p*(1-p)/n), ci1 = pmax(0,p-2*se), ci2 = pmin(1,p+2*se),
+         capture = ci1<=0.5 & 0.5<=ci2) %>% 
+  ggplot(aes(y = fct_rev(paste(run,flips)), x = p, xmin = ci1, xmax = ci2, color = capture)) +
+  geom_vline(xintercept = 0.5, color = "black", linetype = "dashed", alpha = 0.5) +
+  geom_pointrange(linewidth = 0.8) + scale_color_manual(values = c("red", "black")) +
+  theme(axis.text.y = element_text(family = "mono")) + labs(
+    y = NULL, title = "Repeated 95% confidence intervals for p vs true probability p=0.5")
 ```
+:::
 
+Remember that in the real-world, you don't know what the true probability of heads is, and you only have a single experiment's dataset, so you don't know if your interval captures the true value or not, but you can be 95% confident that it does.
 
