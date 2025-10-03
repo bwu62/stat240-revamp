@@ -319,6 +319,18 @@ sum(dbinom(7:10, 10, 0.5))
 Thus, our p-value is about 0.17, which does not pass our threshold of $\alpha=0.05$, so we do not reject the null. In other words, **our data is not strong enough to conclude the coin is biased** for heads.
 :::
 
-The result of the previous example may seem surprising, but is simply a reflection of that fact that 7/10 heads is not that unusual even for a perfectly fair coin, so **our data did not exceed threshold of disbelief $\alpha$**. If instead of 7 we had observed 9/10 heads, you can check we would've rejected $H_0$.
+The result of the previous example may seem surprising, but is simply a reflection of that fact that 7/10 heads is not that unusual even for a perfectly fair coin, so the **data did not exceed our threshold of disbelief $\alpha$**. If instead of 7 we had observed 9/10 heads, you can check we would've rejected $H_0$ and be able to conclude bias in the coin.
 
+:::{.note}
+The interpretations in the previous example are very carefully worded. In hypothesis testing, the mental model you should always have is **does the data disagree strongly enough with the null to reject it or not**. In particular, the following are some common pitfalls of hypothesis testing:
+
+ - The choice is always to **reject or not reject** the null, never "accept" the null.
+ - If you reject the null, it does not mean the null is in fact false (you could have made an incorrect rejection).
+ - Similarly if you do not reject the null, it does not mean the null is true (your inability to reject could also have been incorrect).
+ - Failing to reject the null should be thought of as the evidence not rising to a high enough standard to prefer the alternative.
+ - The **p-value is a true probability** and obeys all the usual laws of probability.
+:::
+
+
+### $H_a$ directions
 

@@ -363,8 +363,23 @@ H_a&amp;:\text{parameter}~\theta\left.\begin{cases}&amp;&lt;\theta_0\\\text{one 
 <pre><code>[1] 0.171875</code></pre>
 <p>Thus, our p-value is about 0.17, which does not pass our threshold of <span class="math inline">\(\alpha=0.05\)</span>, so we do not reject the null. In other words, <strong>our data is not strong enough to conclude the coin is biased</strong> for heads.</p>
 </div>
-<p>The result of the previous example may seem surprising, but is simply a reflection of that fact that 7/10 heads is not that unusual even for a perfectly fair coin, so <strong>our data did not exceed threshold of disbelief <span class="math inline">\(\alpha\)</span></strong>. If instead of 7 we had observed 9/10 heads, you can check we would’ve rejected <span class="math inline">\(H_0\)</span>.</p>
+<p>The result of the previous example may seem surprising, but is simply a reflection of that fact that 7/10 heads is not that unusual even for a perfectly fair coin, so the <strong>data did not exceed our threshold of disbelief <span class="math inline">\(\alpha\)</span></strong>. If instead of 7 we had observed 9/10 heads, you can check we would’ve rejected <span class="math inline">\(H_0\)</span> and be able to conclude bias in the coin.</p>
+<div class="note">
+<p>The interpretations in the previous example are very carefully worded. In hypothesis testing, the mental model you should always have is <strong>does the data disagree strongly enough with the null to reject it or not</strong>. In particular, the following are some common pitfalls of hypothesis testing:</p>
+<ul>
+<li>The choice is always to <strong>reject or not reject</strong> the null, never “accept” the null.</li>
+<li>If you reject the null, it does not mean the null is in fact false (you could have made an incorrect rejection).</li>
+<li>Similarly if you do not reject the null, it does not mean the null is true (your inability to reject could also have been incorrect).</li>
+<li>Failing to reject the null should be thought of as the evidence not rising to a high enough standard to prefer the alternative.</li>
+<li>The <strong>p-value is a true probability</strong> and obeys all the usual laws of probability.</li>
+</ul>
+</div>
+<div id="h_a-directions" class="section level3" number="11.4.1">
+<h3>
+<span class="header-section-number">11.4.1</span> <span class="math inline">\(H_a\)</span> directions<a class="anchor" aria-label="anchor" href="#h_a-directions"><i class="fas fa-link"></i></a>
+</h3>
 
+</div>
 </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@xiee/utils/js/external-link.min.js" defer></script><script>
@@ -479,7 +494,9 @@ observer.observe(document.body, config);
 <li>
 <a class="nav-link" href="#confidence-intervals-ci"><span class="header-section-number">11.3</span> Confidence intervals (CI)</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#interpretation-of-ci"><span class="header-section-number">11.3.1</span> Interpretation of CI</a></li></ul>
 </li>
-<li><a class="nav-link" href="#hypothesis-testing"><span class="header-section-number">11.4</span> Hypothesis testing</a></li>
+<li>
+<a class="nav-link" href="#hypothesis-testing"><span class="header-section-number">11.4</span> Hypothesis testing</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#h_a-directions"><span class="header-section-number">11.4.1</span> \(H_a\) directions</a></li></ul>
+</li>
 </ul>
 
       <div class="book-extra">

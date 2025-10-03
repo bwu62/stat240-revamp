@@ -193,6 +193,7 @@ law-of-large-numbers-lln
 confidence-intervals-ci
 interpretation-of-ci
 hypothesis-testing
+h_a-directions
 proportions
 means
 regression
