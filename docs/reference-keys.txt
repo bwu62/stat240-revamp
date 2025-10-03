@@ -183,7 +183,7 @@ qnorm-inverse-cdf
 rnorm-random-generator
 standard-normal-n01
 z-score
-inference
+sampling-inference
 population-vs-sample-1
 sampling-distributions
 example-coin-flips
@@ -194,6 +194,7 @@ confidence-intervals-ci
 interpretation-of-ci
 hypothesis-testing
 h_a-directions
+rejection-regions
 proportions
 means
 regression
