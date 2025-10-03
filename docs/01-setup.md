@@ -41,7 +41,7 @@ First, we will install the latest R release, **version 4.5.1 released on Jun 13,
 
  1. Download [R-4.5.1-win.exe](https://cloud.r-project.org/bin/windows/base/old/4.5.1/R-4.5.1-win.exe) and run it, accepting all default settings.
  
- 2. Download [Rstudio-latest.exe](	https://rstudio.org/download/latest/stable/desktop/windows/RStudio-latest.exe) and run it, again accepting all default settings.
+ 2. Download [Rstudio-latest.exe](https://rstudio.org/download/latest/stable/desktop/windows/RStudio-latest.exe) and run it, again accepting all default settings.
  
  3. Sometimes, R may need to recompile a package during installation, which will require the Rtools utility. To download the right version, check your system's [about page](ms-settings:about) and look at the "System type" line.
     - If it shows "... x64-based processor", download this [Rtools installer](https://cran.r-project.org/bin/windows/Rtools/rtools44/files/rtools44-6459-6401.exe) and run it, accepting all default settings.
