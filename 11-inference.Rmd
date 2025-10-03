@@ -228,7 +228,7 @@ set.seed(4)
 ```{r}
 N = 20 ; n = 10  # number of repetitions / number of flips in each rep
 tibble(flips = rbinom(N*n, 1, 0.5),
-       run = rep(1:20,each=10) %>% str_pad(2,pad="0") %>% paste0("run",.)) %>% 
+       run = rep(1:N,each=n) %>% str_pad(2,pad="0") %>% paste0("run",.)) %>% 
   group_by(run) %>%
   summarize(heads = sum(flips), flips = str_flatten(ifelse(flips,"H","T"))) %>% 
   mutate(p = heads/n, se = sqrt(p*(1-p)/n), ci1 = pmax(0,p-2*se), ci2 = pmin(1,p+2*se),
