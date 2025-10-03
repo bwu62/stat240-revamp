@@ -176,7 +176,7 @@ $$
 \text{$C\%$ confidence interval}~=~(\text{estimate})~\pm~(\text{crit. value})\cdot(\text{std. error})
 $$
 
- - **$C$** is the level of confidence requested. Most commonly, a 95%-level confidence is reported by convention, but this can be any number betweeo 0-100% (not inclusive).
+ - **$C$** is the **level of confidence** desired. Most commonly, a 95%-level confidence is reported by convention, but this can be any number betweeo 0-100% (not inclusive).
  - **Estimate** is your best guess of the true value based on your sample. For example, if you're trying to estimate the probability of heads, you'd use the proportion of heads in your sample.
  - **Critical value** is a multiplier that depends on $C$, the level of confidence. If you want higher confidence, you must cover more values. For a standard 95% CI, this value is usually approximately 2.
  - **Standard error** is what we call an estimate of the true SD using our sample. In out last plot, this would be an estimate of how far the inner gray lines are from the true probability $p=0.5$.
@@ -237,9 +237,56 @@ tibble(flips = rbinom(N*n, 1, 0.5),
   geom_vline(xintercept = 0.5, color = "black", linetype = "dashed", alpha = 0.5) +
   geom_pointrange(linewidth = 0.8) + scale_color_manual(values = c("red", "black")) +
   theme(axis.text.y = element_text(family = "mono")) + labs(
-    y = NULL, title = "Repeated 95% confidence intervals for p vs true probability p=0.5")
+    y = NULL, title = "Repeated 95% CIs for p vs true p=0.5")
 ```
 :::
 
-Remember that in the real-world, you don't know what the true probability of heads is, and you only have a single experiment's dataset, so you don't know if your interval captures the true value or not, but you can be 95% confident that it does.
+Remember that in a real-world example, you don't know what the true probability of heads is, and you only have data from a single experiment, so you don't know if your interval captures the true value or not, but you can be 95% confident that it does.
+
+
+## Hypothesis testing
+
+If instead of estimating a parameter, your primary goal is to test if a certain value for it agrees with the data, then you probably want to perform a **hypothesis test**.
+
+A hypothesis test usually starts with specifying a pair of **competing hypotheses** of the following form:
+
+$$
+\begin{align}
+H_0&:\text{parameter}~\theta=\theta_0\\
+H_a&:\text{parameter}~\theta\left.\begin{cases}&<\theta_0\\\text{one of}\!\!&\neq\theta_0\\&>\theta_0\end{cases}\right\rbrace
+\end{align}
+$$
+
+ - $H_0$ is called the **null hypothesis** and represents your starting assumption, i.e. we begin by assuming $H_0$ to be true with the goal of rejecting it if it differs too much from the data.
+ - $H_a$ is called the **alternative hypothesis** and is exactly what it sounds like: the alternative explanation we settle on if we reject the null.
+
+The actual decision of whether to reject the null is made by computing a **p-value**, which is simply the **probability of observing our dataset _if the null was actually true_**, i.e. the likeliness of the data under $H_0$. If this probability is small enough, it means our null doesn't fit the data, leading to its rejection. The threshold we use for our p-value (i.e. where we begin to reject the null) is called the **significance level $\alpha$** and is commonly set to 0.05 by convention.
+
+In summary, here's the steps involved for a typical hypothesis test:
+
+ 1. Specify $H_0$ and $H_a$, and set your desired significance level $\alpha$.
+ 2. Assuming $H_0$ is true, find the likeliness of your data, i.e. the p-value.
+ 3. If your p-value $<\alpha$, reject $H_0$ in favor of $H_a$. Otherwise, stay with $H_0$.
+ 4. Interpret the results clearly in the context of the original problem.
+
+This probably all feels very new and nebulous, so let's ground ourselves with a concrete example.
+
+:::{.eg}
+You suspect a given coin is weighted to come up heads more often than not. You decide to flip it 10 times and observe a total of 7 heads. At the common $\alpha=0.05$, can you conclude the coin is biased?
+
+Let $p$ represent the true underlying probability of heads for this coin. Then our null $H_0:p=0.5$ (i.e. the coin is fair), and our alternative $H_a:p>0.5$ (i.e. the coin is biasing heads).
+
+Next, we assume the null to be true and compute our p-value. Note that under the null assumption, we can model the number of heads $X\sim\bin(10,p=0.5)$. For reasons which will be explained soon, our "likeliness of data" for the p-value is actually defined as $P(X\geq7)$. We can find this using `pbinom()`.
+
+```{r}
+# recall pbinom gives ≤ the input, so for ≥7, we need:
+1 - pbinom(6, 10, 0.5)
+# another way using dbinom instead:
+sum(dbinom(7:10, 10, 0.5))
+```
+
+Thus, our p-value is about 0.17, which does not pass our threshold of $\alpha=0.05$, so we do not reject the null. In other words, **our data is not strong enough to conclude the coin is biased** for heads.
+:::
+
+The result of the previous example may seem surprising, but is simply a reflection of that fact that 7/10 heads is not that unusual even for a perfectly fair coin, so **our data did not exceed threshold of disbelief $\alpha$**. If instead of 7 we had observed 9/10 heads, you can check we would've rejected $H_0$.
 
