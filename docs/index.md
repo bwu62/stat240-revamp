@@ -1,7 +1,7 @@
 ---
 title: "STAT 240 Revamp"
 author: "Bi Cheng Wu, with help from Bret Larget and Cameron Jones"
-date: "2025-10-02"
+date: "2025-10-06"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -134,6 +134,10 @@ dataset ideas (note: should prioritize datasets most students would find interes
  - climate
  - something economic
  - SSA names
+ - chess openings/results (prop W v B, elo diff v win)
+ - tully fisher regression
+ - earthquake regression
+ - superbowl flips
 
 other notes to self:
 

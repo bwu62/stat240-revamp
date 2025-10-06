@@ -68,7 +68,7 @@
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Welcome!</a></li>
 <li><a class="" href="setup.html"><span class="header-section-number">1</span> Setup</a></li>
-<li class="book-part">R crash course</li>
+<li class="book-part">R Crash Course</li>
 <li><a class="" href="rstudio-intro.html"><span class="header-section-number">2</span> Intro to R/Rstudio</a></li>
 <li><a class="" href="data-vectors.html"><span class="header-section-number">3</span> Data Vectors</a></li>
 <li><a class="active" href="data-frames.html"><span class="header-section-number">4</span> Data Frames</a></li>
@@ -81,8 +81,8 @@
 <li><a class="" href="data-modeling.html">Data Modeling</a></li>
 <li><a class="" href="overview.html"><span class="header-section-number">9</span> Overview</a></li>
 <li><a class="" href="intro-to-probability.html"><span class="header-section-number">10</span> Intro to Probability</a></li>
-<li><a class="" href="inference.html"><span class="header-section-number">11</span> Inference</a></li>
-<li><a class="" href="inference-types.html">Inference types</a></li>
+<li><a class="" href="sampling-inference.html"><span class="header-section-number">11</span> Sampling &amp; Inference</a></li>
+<li><a class="" href="inference-types.html">Inference Types</a></li>
 <li><a class="" href="proportions.html"><span class="header-section-number">12</span> Proportions</a></li>
 <li><a class="" href="means.html"><span class="header-section-number">13</span> Means</a></li>
 <li><a class="" href="regression.html"><span class="header-section-number">14</span> Regression</a></li>
@@ -129,7 +129,7 @@
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
 <span>  name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Alice"</span>, <span class="st">"Bob"</span>, <span class="st">"Charlie"</span><span class="op">)</span>,</span>
 <span>  sex <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"F"</span>, <span class="st">"M"</span>, <span class="st">"M"</span><span class="op">)</span>,</span>
-<span>  date_of_birth <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html">mdy</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1/1/04"</span>, <span class="st">"7/4/99"</span>, <span class="st">"10/31/06"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  date_of_birth <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html">mdy</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1/5/04"</span>, <span class="st">"7/4/99"</span>, <span class="st">"10/31/06"</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">floor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/now.html">today</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">date_of_birth</span><span class="op">)</span> <span class="op">/</span> <span class="fl">365.24</span><span class="op">)</span>,</span>
 <span>  declared_major <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>,</span>
 <span>  school <span class="op">=</span> <span class="st">"UW-Madison"</span></span>
@@ -139,7 +139,7 @@
 <pre><code># A tibble: 3 × 6
   name    sex   date_of_birth   age declared_major school    
   &lt;chr&gt;   &lt;chr&gt; &lt;date&gt;        &lt;dbl&gt; &lt;lgl&gt;          &lt;chr&gt;     
-1 Alice   F     2004-10-01       21 TRUE           UW-Madison
+1 Alice   F     2004-10-05       21 TRUE           UW-Madison
 2 Bob     M     1999-07-04       26 TRUE           UW-Madison
 3 Charlie M     2006-10-31       18 FALSE          UW-Madison</code></pre>
 <p>Note the following:</p>
@@ -935,7 +935,7 @@ observer.observe(document.body, config);
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2025-10-02.</p>
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2025-10-06.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

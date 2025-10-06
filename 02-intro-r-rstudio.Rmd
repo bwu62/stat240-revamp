@@ -1,6 +1,6 @@
 
 
-# (PART) R crash course {.unnumbered}
+# (PART) R Crash Course {.unnumbered}
 
 
 # Intro to R/Rstudio {#rstudio-intro}

@@ -141,6 +141,10 @@ dataset ideas (note: should prioritize datasets most students would find interes
  - climate
  - something economic
  - SSA names
+ - chess openings/results (prop W v B, elo diff v win)
+ - tully fisher regression
+ - earthquake regression
+ - superbowl flips
 
 other notes to self:
 

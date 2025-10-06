@@ -4,17 +4,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Inference types | STAT 240 Revamp</title>
+<title>Inference Types | STAT 240 Revamp</title>
 <meta name="author" content="Bi Cheng Wu, with help from Bret Larget and Cameron Jones">
-<meta name="description" content="\(   \def\e{\operatorname{E}}   \def\p{\operatorname{P}}   \def\var{\operatorname{Var}}   \def\sd{\operatorname{SD}}   \def\bin{\operatorname{Bin}}   \def\n{\operatorname{N}}  \)  To be updated...">
+<meta name="description" content="\(   \def\e{\operatorname{E}}   \def\p{\operatorname{P}}   \def\var{\operatorname{Var}}   \def\sd{\operatorname{SD}}   \def\bin{\operatorname{Bin}}   \def\n{\operatorname{N}}  \)  In this next...">
 <meta name="generator" content="bookdown 0.44.1 with bs4_book()">
-<meta property="og:title" content="Inference types | STAT 240 Revamp">
+<meta property="og:title" content="Inference Types | STAT 240 Revamp">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://bwu62.github.io/stat240-revamp/inference-types.html">
-<meta property="og:description" content="\(   \def\e{\operatorname{E}}   \def\p{\operatorname{P}}   \def\var{\operatorname{Var}}   \def\sd{\operatorname{SD}}   \def\bin{\operatorname{Bin}}   \def\n{\operatorname{N}}  \)  To be updated...">
+<meta property="og:description" content="\(   \def\e{\operatorname{E}}   \def\p{\operatorname{P}}   \def\var{\operatorname{Var}}   \def\sd{\operatorname{SD}}   \def\bin{\operatorname{Bin}}   \def\n{\operatorname{N}}  \)  In this next...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Inference types | STAT 240 Revamp">
-<meta name="twitter:description" content="\(   \def\e{\operatorname{E}}   \def\p{\operatorname{P}}   \def\var{\operatorname{Var}}   \def\sd{\operatorname{SD}}   \def\bin{\operatorname{Bin}}   \def\n{\operatorname{N}}  \)  To be updated...">
+<meta name="twitter:title" content="Inference Types | STAT 240 Revamp">
+<meta name="twitter:description" content="\(   \def\e{\operatorname{E}}   \def\p{\operatorname{P}}   \def\var{\operatorname{Var}}   \def\sd{\operatorname{SD}}   \def\bin{\operatorname{Bin}}   \def\n{\operatorname{N}}  \)  In this next...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Roboto_Mono-0.4.10/font.css" rel="stylesheet">
@@ -68,7 +68,7 @@
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Welcome!</a></li>
 <li><a class="" href="setup.html"><span class="header-section-number">1</span> Setup</a></li>
-<li class="book-part">R crash course</li>
+<li class="book-part">R Crash Course</li>
 <li><a class="" href="rstudio-intro.html"><span class="header-section-number">2</span> Intro to R/Rstudio</a></li>
 <li><a class="" href="data-vectors.html"><span class="header-section-number">3</span> Data Vectors</a></li>
 <li><a class="" href="data-frames.html"><span class="header-section-number">4</span> Data Frames</a></li>
@@ -81,8 +81,8 @@
 <li><a class="" href="data-modeling.html">Data Modeling</a></li>
 <li><a class="" href="overview.html"><span class="header-section-number">9</span> Overview</a></li>
 <li><a class="" href="intro-to-probability.html"><span class="header-section-number">10</span> Intro to Probability</a></li>
-<li><a class="" href="inference.html"><span class="header-section-number">11</span> Inference</a></li>
-<li><a class="active" href="inference-types.html">Inference types</a></li>
+<li><a class="" href="sampling-inference.html"><span class="header-section-number">11</span> Sampling &amp; Inference</a></li>
+<li><a class="active" href="inference-types.html">Inference Types</a></li>
 <li><a class="" href="proportions.html"><span class="header-section-number">12</span> Proportions</a></li>
 <li><a class="" href="means.html"><span class="header-section-number">13</span> Means</a></li>
 <li><a class="" href="regression.html"><span class="header-section-number">14</span> Regression</a></li>
@@ -108,10 +108,14 @@
   \)
 </span>
 <div id="inference-types" class="section level1 unnumbered">
-<h1>Inference types<a class="anchor" aria-label="anchor" href="#inference-types"><i class="fas fa-link"></i></a>
+<h1>Inference Types<a class="anchor" aria-label="anchor" href="#inference-types"><i class="fas fa-link"></i></a>
 </h1>
-<p><em>To be updated very soon</em></p>
-
+<p>In this next section, we will synthesize everything we’ve learned thus far about data and probability and see some real world examples of inference in each specific type of data/question that is covered in 240:</p>
+<ul>
+<li><p><strong>Proportions</strong> inference: samples modeled after a binomial distribution, where we use the sample proportion to infer about the underlying probability parameter of the population.</p></li>
+<li><p><strong>Means</strong> inference: samples modeled after a normal distribution, where we use the sample mean to infer about the underlying mean parameter of the population. This is also where we introduce the t-distribution.</p></li>
+<li><p><strong>Regression</strong> inference: where we introduce linear regression to model the relationship between two numeric variables.</p></li>
+</ul>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@xiee/utils/js/external-link.min.js" defer></script><script>
   $(function(){
@@ -207,11 +211,11 @@ var config = {
 
 observer.observe(document.body, config);
 </script><div class="chapter-nav">
-<div class="prev"><a href="inference.html"><span class="header-section-number">11</span> Inference</a></div>
+<div class="prev"><a href="sampling-inference.html"><span class="header-section-number">11</span> Sampling &amp; Inference</a></div>
 <div class="next"><a href="proportions.html"><span class="header-section-number">12</span> Proportions</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#inference-types">Inference types</a></li></ul>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#inference-types">Inference Types</a></li></ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
@@ -228,7 +232,7 @@ observer.observe(document.body, config);
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2025-10-02.</p>
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2025-10-06.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

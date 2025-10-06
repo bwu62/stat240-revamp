@@ -183,7 +183,7 @@ qnorm-inverse-cdf
 rnorm-random-generator
 standard-normal-n01
 z-score
-inference
+sampling-inference
 population-vs-sample-1
 sampling-distributions
 example-coin-flips
@@ -192,6 +192,9 @@ heads-v.-n-1
 law-of-large-numbers-lln
 confidence-intervals-ci
 interpretation-of-ci
+hypothesis-testing
+h_a-directions
+rejection-regions
 proportions
 means
 regression
@@ -226,9 +229,3 @@ ggplot2-1
 dplyr
 tidyr
 additional-resources
-cover-image-path-to-the-social-sharing-image-like-imagescover.jpg
-scrape-volcanoes-info
-process-volcano-info
-write-out-volcanoes-info
-inspect-volcanoes-info
-augment-eruptions
