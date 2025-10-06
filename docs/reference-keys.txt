@@ -226,3 +226,9 @@ ggplot2-1
 dplyr
 tidyr
 additional-resources
+cover-image-path-to-the-social-sharing-image-like-imagescover.jpg
+scrape-volcanoes-info
+process-volcano-info
+write-out-volcanoes-info
+inspect-volcanoes-info
+augment-eruptions
