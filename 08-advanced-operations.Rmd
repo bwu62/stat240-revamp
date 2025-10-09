@@ -589,6 +589,7 @@ Before we move on, let's demonstrate one more usage for `pivot_wider()`. This fu
 # regroup by region to compute percentages,
 # remove the n count column, and print
 region_income_pct <- fertility %>%
+  filter(year == max(year)) %>%
   count(region, income_group) %>%
   group_by(region) %>%
   mutate(pct = round(100 * n / sum(n), 1)) %>%
