@@ -83,7 +83,8 @@ tibble(k = 0:1000, p = dbinom(k, 1000, 0.5)) %>%
                        minor_breaks = seq(0, 0.025, 0.001)) +
   labs(title = TeX("Binomial(1000, 0.5) PMF    [ $\\mu=(1000)(0.5)=500$,  $
                    \\sigma=\\sqrt{(1000)(0.5)(1-0.5)}\\approx 15.8$ ]"),
-       x = "k", y = "probability") + theme(plot.title = element_text(size=12))
+       x = "k", y = "probability") + theme(plot.title = element_text(size=12),
+                                           plot.margin = margin(6,10,6,6))
 ```
 
 <img src="11-inference_files/figure-html/unnamed-chunk-3-1.svg" width="672" style="display: block; margin: auto;" />
@@ -174,7 +175,7 @@ $$
 
 where $x_i$ are a sample of [**independent and identically distributed** (iid)](https://en.wikipedia.org/wiki/Independent_and_identically_distributed_random_variables) observations drawn from a population represented by the random variable $X$.
 
-There are many other statistics that also converge (e.g. correlation, skew, etc...) but these two are the most important to us right now. Note the **sample variance also converges to the true variance**, since it can be thought of as the **average squared distance** from the mean (if you factor out a $\frac{n}{n-1}$ correction factor term (as long the $\sigma^2$ exists).
+There are many other statistics that also converge (e.g. correlation, skew, etc...) but these two are the most important to us right now. Note the **sample variance also converges to the true variance**, since it can be thought of as the **average squared distance** from the mean if you factor out a $\frac{n}{n-1}$ correction factor term (as long the $\sigma^2$ exists).
 
 Also note the proportion of heads we saw in the last example can be thought of as the **average of a sample of 1s and 0s** where 1 denotes H and 0 denotes T, so it also **converges to the true probability of heads** by LLN.
 
