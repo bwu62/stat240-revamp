@@ -180,6 +180,12 @@ ul+p,ol+p{
 }
 
 
+/*improve alert boxes text color contrast*/
+.alert-warning{
+  color: #392b02 !important;
+}
+
+
 /* tweak code+output style */
 div.sourceCode{
   margin-left: 0rem !important;
