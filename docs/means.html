@@ -207,6 +207,16 @@ var config = {
 };
 
 observer.observe(document.body, config);
+</script><script>
+  $(function() {
+  $('[data-toggle="popover"]').popover()
+})
+
+$('body')
+  .on('mousedown', '.popover', function(e) {
+    console.log("clicked inside popover")
+    e.preventDefault()
+  });
 </script><div class="chapter-nav">
 <div class="prev"><a href="proportions.html"><span class="header-section-number">12</span> Proportions</a></div>
 <div class="next"><a href="regression.html"><span class="header-section-number">14</span> Regression</a></div>
@@ -229,7 +239,7 @@ observer.observe(document.body, config);
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2025-10-06.</p>
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2025-10-09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
