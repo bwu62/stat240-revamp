@@ -106,3 +106,17 @@ var config = {
 
 observer.observe(document.body, config);
 </script>
+
+
+<!--https://stackoverflow.com/a/49025957-->
+<script>
+  $(function() {
+  $('[data-toggle="popover"]').popover()
+})
+
+$('body')
+  .on('mousedown', '.popover', function(e) {
+    console.log("clicked inside popover")
+    e.preventDefault()
+  });
+</script>
