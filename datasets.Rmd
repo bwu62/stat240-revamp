@@ -16,7 +16,6 @@ Also, since this is mostly for me to keep track of datasets and processing scrip
 ```{r}
 library(tidyverse)
 library(rvest)
-library(lubridate)
 library(xlsx)
 library(magrittr)
 ```
