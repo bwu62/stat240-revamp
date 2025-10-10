@@ -100,7 +100,7 @@ In this section, we will give you a brief introduction to working with R. No pri
 ### Running R code {#r-running}
 
 
-The main way to run R code is to type or copy into the console. Comments can be written after a hashtag `#` and will not be run. If there is output, it will be displayed either in the console directly if it's text, or in the plot window if it's visual. In these notes, output is shown in a separate box below, starting with `##` .
+The main way to run R code is to type or copy into the console. Comments can be written after a hashtag `#` and will not be run. If there is output, it will be displayed either in the console directly if it's text, or in the plot window if it's visual. In these notes, output is shown in a separate box below.
 
 Try running these examples below in your console and observe the output:
 
