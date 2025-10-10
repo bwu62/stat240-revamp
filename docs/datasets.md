@@ -15,7 +15,6 @@ Also, since this is mostly for me to keep track of datasets and processing scrip
 ``` r
 library(tidyverse)
 library(rvest)
-library(lubridate)
 library(xlsx)
 library(magrittr)
 ```
@@ -514,5 +513,23 @@ write_csv(fertility, "data/fertility.csv")
 ``` r
 fertility
 ```
+
+<!--
+## Superbowl coin tosses
+
+For the proportions inference section, I wanted a small, simple, but interesting dataset to start with. The [Superbowl coin tosses](https://www.oddsshark.com/nfl/super-bowl/props/coin-toss) dataset seemed suitable.
+
+
+``` r
+library(RSelenium)
+rD <- rsDriver(browser="firefox", port=4549L, chromever = NULL, phantomver = NULL)
+remDr <- rD[["client"]]
+remDr$navigate("https://www.oddsshark.com/nfl/super-bowl/props/coin-toss")
+html <- remDr$getPageSource()[[1]]
+remDr$close()
+html %>% read_html %>% html_node(xpath="(//table)[last()]") %>% html_table %>% 
+  setNames(c("number","scores","coin_toss","coin_winner","game_winner")) -> sbcoins
+```
+-->
 
 

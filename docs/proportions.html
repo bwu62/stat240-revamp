@@ -6,15 +6,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 12 Proportions | STAT 240 Revamp</title>
 <meta name="author" content="Bi Cheng Wu, with help from Bret Larget and Cameron Jones">
-<meta name="description" content="\(   \def\e{\operatorname{E}}   \def\p{\operatorname{P}}   \def\var{\operatorname{Var}}   \def\sd{\operatorname{SD}}   \def\bin{\operatorname{Bin}}   \def\n{\operatorname{N}}  \)  To be updated...">
+<meta name="description" content="\(   \def\e{\operatorname{E}}   \def\p{\operatorname{P}}   \def\var{\operatorname{Var}}   \def\sd{\operatorname{SD}}   \def\bin{\operatorname{Bin}}   \def\n{\operatorname{N}}  \)  Let’s look...">
 <meta name="generator" content="bookdown 0.44.1 with bs4_book()">
 <meta property="og:title" content="Chapter 12 Proportions | STAT 240 Revamp">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://bwu62.github.io/stat240-revamp/proportions.html">
-<meta property="og:description" content="\(   \def\e{\operatorname{E}}   \def\p{\operatorname{P}}   \def\var{\operatorname{Var}}   \def\sd{\operatorname{SD}}   \def\bin{\operatorname{Bin}}   \def\n{\operatorname{N}}  \)  To be updated...">
+<meta property="og:description" content="\(   \def\e{\operatorname{E}}   \def\p{\operatorname{P}}   \def\var{\operatorname{Var}}   \def\sd{\operatorname{SD}}   \def\bin{\operatorname{Bin}}   \def\n{\operatorname{N}}  \)  Let’s look...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 12 Proportions | STAT 240 Revamp">
-<meta name="twitter:description" content="\(   \def\e{\operatorname{E}}   \def\p{\operatorname{P}}   \def\var{\operatorname{Var}}   \def\sd{\operatorname{SD}}   \def\bin{\operatorname{Bin}}   \def\n{\operatorname{N}}  \)  To be updated...">
+<meta name="twitter:description" content="\(   \def\e{\operatorname{E}}   \def\p{\operatorname{P}}   \def\var{\operatorname{Var}}   \def\sd{\operatorname{SD}}   \def\bin{\operatorname{Bin}}   \def\n{\operatorname{N}}  \)  Let’s look...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Roboto_Mono-0.4.10/font.css" rel="stylesheet">
@@ -111,8 +111,48 @@
 <h1>
 <span class="header-section-number">12</span> Proportions<a class="anchor" aria-label="anchor" href="#proportions"><i class="fas fa-link"></i></a>
 </h1>
-<p><em>To be updated very soon</em></p>
+<p>Let’s look specifically at proportions-type inference setups, where we apply a <strong>binomial model</strong> to sample proportions to infer about an underlying <strong>probability</strong> in the population. We will divide this into two scenarios:</p>
+<ul>
+<li>One-proportion scenario, where there is a single population with a single probability parameter of interest, and</li>
+<li>Two-proportions scenario, where there are two populations, each with its own probability parameter, which we seek to compare.</li>
+</ul>
+<div class="note">
+<p>A proportions-type inference approach using a binomial model is <strong>only appropriate</strong> if your sample consists of either 1 or 2 samples where, for each sample, your data looks like <strong>counts across two categories</strong>, one of which we consider “success” and the other “failure” (e.g. heads/tails, true/false, etc.).</p>
+<p>In these setups, the probability parameter of the binomial model <strong>always corresponds to the probability of the <em>success</em> category</strong> by convention. Make sure to define the category whose probability is of primary interest as “success”.</p>
+</div>
+<div id="one-proportion" class="section level2" number="12.1">
+<h2>
+<span class="header-section-number">12.1</span> One proportion<a class="anchor" aria-label="anchor" href="#one-proportion"><i class="fas fa-link"></i></a>
+</h2>
+<div id="model-notation" class="section level3" number="12.1.1">
+<h3>
+<span class="header-section-number">12.1.1</span> Model notation<a class="anchor" aria-label="anchor" href="#model-notation"><i class="fas fa-link"></i></a>
+</h3>
+<p>In the one-proportion scenario, suppose we draw a <strong>fixed sample size of <span class="math inline">\(n\)</span></strong> observations, each of which we model as <strong>independent</strong> and having some constant underlying <strong>true probability <span class="math inline">\(p\)</span> of being a success</strong>, and <span class="math inline">\(1-p\)</span> probability of being a failure (and there’s no other possible outcomes).</p>
+<p>Let lower-case <strong><span class="math inline">\(x\)</span> be the observed number of successes in our sample</strong>, and note that we must have <span class="math inline">\(0\le x\le n\)</span>. Let <span class="math inline">\(\hat p=x/n\)</span> denote then the <strong>sample proportion of successes</strong> in our sample.</p>
+<p>It’s customary to also use upper-case <span class="math inline">\(X\)</span> to represent our model of the true distribution of <span class="math inline">\(x\)</span>, which here we choose to be <span class="math inline">\(X\sim\bin(n,p)\)</span>.</p>
+<p>Under these assumptions, <span class="math inline">\(\hat p\)</span> is a natural <strong>point estimate</strong> for <span class="math inline">\(p\)</span>, i.e. our <strong>sample proportion of successes estimates the true underlying probability of success <span class="math inline">\(p\)</span></strong>, since the LLN guarantees <span class="math inline">\(\hat p\to p\)</span> as <span class="math inline">\(n\to\infty\)</span>.</p>
+<div class="note">
+<p>Note several things:</p>
+<ul>
+<li>
+<span class="math inline">\(n\)</span> must be a fixed, predetermined sample size,</li>
+<li>trials must be able to be reasonably modeled as independent,</li>
+<li>there must only be 2 possible outcomes (success &amp; failure) for each trial,</li>
+<li>
+<span class="math inline">\(p\)</span> is always the probability of the “success” category, however it’s defined,</li>
+<li>
+<span class="math inline">\(x\)</span> usually represents the actual “observed” number of successes in your sample out of <span class="math inline">\(n\)</span> trials,</li>
+<li>
+<span class="math inline">\(X\)</span> usually represents the theoretical random variable model we choose to apply to the sample’s observed <span class="math inline">\(x\)</span>.</li>
+</ul>
+</div>
+<div class="eg">
+<p>Let’s see all this in the context of an example.</p>
+</div>
 
+</div>
+</div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@xiee/utils/js/external-link.min.js" defer></script><script>
   $(function(){
@@ -222,7 +262,12 @@ $('body')
 <div class="next"><a href="means.html"><span class="header-section-number">13</span> Means</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#proportions"><span class="header-section-number">12</span> Proportions</a></li></ul>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#proportions"><span class="header-section-number">12</span> Proportions</a></li>
+<li>
+<a class="nav-link" href="#one-proportion"><span class="header-section-number">12.1</span> One proportion</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#model-notation"><span class="header-section-number">12.1.1</span> Model notation</a></li></ul>
+</li>
+</ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">

@@ -116,7 +116,6 @@
 <div class="sourceCode" id="cb914"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rvest.tidyverse.org/">rvest</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://lubridate.tidyverse.org">lubridate</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/colearendt/xlsx">xlsx</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org">magrittr</a></span><span class="op">)</span></span></code></pre></div>
 <div id="datasets-list" class="section level2" number="15.1">
@@ -230,7 +229,7 @@
 <span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html">write_csv</a></span><span class="op">(</span><span class="va">eruptions_recent</span>,file<span class="op">=</span><span class="st">"data/eruptions_recent.csv"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html">write_tsv</a></span><span class="op">(</span><span class="va">eruptions_recent</span>,file<span class="op">=</span><span class="st">"data/eruptions_recent.tsv"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html">write_delim</a></span><span class="op">(</span><span class="va">eruptions_recent</span>,file<span class="op">=</span><span class="st">"data/eruptions_recent.delim"</span>,delim<span class="op">=</span><span class="st">"|"</span>,na<span class="op">=</span><span class="st">""</span><span class="op">)</span></span>
-<span><span class="va">eruptions_recent</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">as.data.frame</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">write.xlsx</span><span class="op">(</span>file<span class="op">=</span><span class="st">"data/eruptions_recent.xlsx"</span>,row.names<span class="op">=</span><span class="cn">F</span>,showNA<span class="op">=</span><span class="cn">F</span><span class="op">)</span></span>
+<span><span class="va">eruptions_recent</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">as.data.frame</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/xlsx/man/write.xlsx.html">write.xlsx</a></span><span class="op">(</span>file<span class="op">=</span><span class="st">"data/eruptions_recent.xlsx"</span>,row.names<span class="op">=</span><span class="cn">F</span>,showNA<span class="op">=</span><span class="cn">F</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># originally line below was b/c I wanted to prep example for read_table but turns out</span></span>
 <span><span class="co"># its behavior changed recentlyish https://www.tidyverse.org/blog/2021/07/readr-2-0-0/</span></span>
@@ -581,6 +580,23 @@ options(width=80)
 </h3>
 <div class="sourceCode" id="cb935"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fertility</span></span></code></pre></div>
+<!--
+## Superbowl coin tosses
+
+For the proportions inference section, I wanted a small, simple, but interesting dataset to start with. The [Superbowl coin tosses](https://www.oddsshark.com/nfl/super-bowl/props/coin-toss) dataset seemed suitable.
+
+
+``` r
+library(RSelenium)
+rD <- rsDriver(browser="firefox", port=4549L, chromever = NULL, phantomver = NULL)
+remDr <- rD[["client"]]
+remDr$navigate("https://www.oddsshark.com/nfl/super-bowl/props/coin-toss")
+html <- remDr$getPageSource()[[1]]
+remDr$close()
+html %>% read_html %>% html_node(xpath="(//table)[last()]") %>% html_table %>% 
+  setNames(c("number","scores","coin_toss","coin_winner","game_winner")) -> sbcoins
+```
+-->
 
 </div>
 </div>

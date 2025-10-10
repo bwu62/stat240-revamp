@@ -196,6 +196,8 @@ hypothesis-testing
 h_a-directions
 rejection-regions
 proportions
+one-proportion
+model-notation
 means
 regression
 datasets
