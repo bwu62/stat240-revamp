@@ -21,7 +21,7 @@ In these setups, the probability parameter of the binomial model **always corres
 
 In the one-proportion scenario, suppose we draw a **fixed sample size of $n$** observations, each of which we model as **independent** and having some constant underlying **true probability $p$ of being a success**, and $1-p$ probability of being a failure (and there's no other possible outcomes).
 
-Let lower-case **$x$ be the observed number of successes in our sample**, and note that we must have $0\le x\le n$. Let $\hat p=x/n$ denote then the **sample proportion of successes** in our sample.
+Let lower-case **$x$ be the observed number of successes in our sample**, and note that we must have $0\le x\le n$. Let $\hat p=x/n$ denote then the **proportion of successes in our sample**.
 
 It's customary to also use upper-case $X$ to represent our model of the true distribution of $x$, which here we choose to be $X\sim\bin(n,p)$.
 
@@ -39,8 +39,6 @@ Note several things:
 :::
 
 :::{.eg}
-Let's see all this in the context of an example.
-
-
+Let's see all this in the context of an example. 
 
 :::

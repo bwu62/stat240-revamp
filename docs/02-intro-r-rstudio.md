@@ -100,7 +100,7 @@ In this section, we will give you a brief introduction to working with R. No pri
 ### Running R code {#r-running}
 
 
-The main way to run R code is to type or copy into the console. Comments can be written after a hashtag `#` and will not be run. If there is output, it will be displayed either in the console directly if it's text, or in the plot window if it's visual. In these notes, output is shown in a separate box below, starting with `##` .
+The main way to run R code is to type or copy into the console. Comments can be written after a hashtag `#` and will not be run. If there is output, it will be displayed either in the console directly if it's text, or in the plot window if it's visual. In these notes, output is shown in a separate box below.
 
 Try running these examples below in your console and observe the output:
 
@@ -731,7 +731,7 @@ all.equal(sqrt(2)^2, 2)
 ### Packages
 
 
-Now, let's briefly discuss packages. One of the best features of R is the ability for anyone to easily write and distribute packages on [CRAN](https://cran.r-project.org) (**C**omprehensive **R** **A**rchive **N**etwork). Currently, there are 22875 packages available on CRAN. There are also a further 2341 packages on the bioinformatics-specific package archive [Bioconductor](https://www.bioconductor.org), as well as countless more on [GitHub](https://github.com/topics/r-package).
+Now, let's briefly discuss packages. One of the best features of R is the ability for anyone to easily write and distribute packages on [CRAN](https://cran.r-project.org) (**C**omprehensive **R** **A**rchive **N**etwork). Currently, there are 22887 packages available on CRAN. There are also a further 2341 packages on the bioinformatics-specific package archive [Bioconductor](https://www.bioconductor.org), as well as countless more on [GitHub](https://github.com/topics/r-package).
 
 In this course, we will primarily make use of the [Tidyverse](https://www.tidyverse.org) suite of packages, which contains several important packages for data science: `readr` for reading in data, `ggplot2` for plotting data, `dplyr` and `tidyr` for cleaning data, and `lubridate` and `stringr` for working with dates and strings. We will learn each of these as the course progresses.
 
