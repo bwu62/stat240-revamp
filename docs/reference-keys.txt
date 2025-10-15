@@ -183,6 +183,8 @@ qnorm-inverse-cdf
 rnorm-random-generator
 standard-normal-n01
 z-score
+normal-approx.-of-binomial
+continuity-correction
 sampling-inference
 population-vs-sample-1
 sampling-distributions

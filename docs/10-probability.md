@@ -111,7 +111,7 @@ First, it's easy to see the axioms are satisfied, since all probabilities are in
 <center>
 
 ```         
- k | \p(k)
+ k | p(k)
 ---+-----
  0 | 0.4 
  1 | 0.3 
@@ -1021,11 +1021,173 @@ Note how these two areas exactly correspond, so solving one solves the other.
 Since we have R, we won't need to rely on Z-scores as much, however it's an important concept to normal curves, and also shows up later when discussing inference, e.g. test statistics during hypothesis testing.
 
 
+## Normal approx. of binomial
+
+One more topic before chapter end; **under certain circumstances, the binomial distribution is considered to be well-approximated by the normal**. Before computers, this was extremely useful since areas under the normal curve are much easier to find with a normal table than summing many bars on a binomial ditribution, especially for large $n$. These days, it's still useful as a teaching exercise as well as an example of the [central limit theorem](https://en.wikipedia.org/wiki/Central_limit_theorem).
+
+Usually, the condition for this approximation to be considered good enough is that **$np$ and $n(1\!-\!p)$ must be $>5$**. Note this implies we must also at least have $n>10$, otherwise it's impossible for both $np,\,n(1\!-\!p)\,>5$.
+
+If the condition is satisfied, we approximate $X\sim\bin(n,p)$ by picking a normal with the same $\mu=np$ and $\sigma=\sqrt{np(1\!-\!p)}$.
+
+For example, suppose $n=15$, $p=0.4$. One can check $np=6$, $n(1\!-\!p)=9$ so the approximation should hold well here. We pick a normal with $\mu=6$ and $\sigma\approx1.9$ to match the binomial:
+
+:::{.fold .s}
+
+``` r
+n = 15 ; p = 0.4
+tibble(x = 0:15, p = dbinom(x,n,p)) %>%
+  ggplot(aes(x,p)) + geom_col(width=1, fill=NA, color="black", linewidth=1) +
+  geom_function(fun = \(x)dnorm(x,n*p,sqrt(n*p*(1-p))), color="red", linewidth=1.2) +
+  labs(title = "Approximation of Bin(15,0.4) using N(6,1.9) which has same µ,σ")
+```
+
+<img src="10-probability_files/figure-html/unnamed-chunk-29-1.svg" width="672" style="display: block; margin: auto;" />
+:::
+
+This approximation only gets better and better the higher $n$ is (assuming $p$ isn't extremely close to 0 or 1). For another example, suppose $n=150$, $p=0.75$. It should be obvious the condition is more than satisfied here. We pick a normal with $\mu=105$ and $\sigma=5.6$ to match the binomial and observe this approximation is an even better fit than the previous example:
+
+:::{.fold .s}
+
+``` r
+n = 150 ; p = 0.7
+tibble(x = 80:130, p = dbinom(x,n,p)) %>%
+  ggplot(aes(x,p)) + geom_col(width=1, fill=NA, color="black", linewidth=.8) +
+  geom_function(fun = \(x)dnorm(x,n*p,sqrt(n*p*(1-p))), color="red", linewidth=1) +
+  labs(title = "Approximation of Bin(150,0.7) using N(105,5.6) which has same µ,σ")
+```
+
+<img src="10-probability_files/figure-html/unnamed-chunk-30-1.svg" width="672" style="display: block; margin: auto;" />
+:::
+
+### Continuity correction
+
+Again, before computers, the normal approximation was extremely useful here for computing areas under the binomial distribution. Suppose we consider again $X\sim\bin(15,0.4)$ and suppose we're interested in computing $\p(X\le5)$ using our normal approximation $X\;\approx\;Y\!\sim\!\n(6,1.9)$. In other words, we're interested in finding the light blue area:
+
+:::{.fold .s}
+
+``` r
+n = 15 ; p = 0.4 ; mu = n*p ; sigma = sqrt(n*p*(1-p))
+tibble(x = 0:15, p = dbinom(x,n,p), c = rep(c(F,T),c(6,10))) %>%
+  ggplot(aes(x,p)) + geom_col(aes(fill=c), width=1, color="black", linewidth=1, alpha=.4) +
+  scale_fill_manual(values = c("blue","white")) +
+  geom_function(fun = \(x)dnorm(x,mu,sigma), color="red", linewidth=1.2) +
+  labs(title = "P(X≤5) where X~Bin(15,0.4), i.e. probability of 5 or fewer successes") + theme(legend.position="none")
+```
+
+<img src="10-probability_files/figure-html/unnamed-chunk-31-1.svg" width="672" style="display: block; margin: auto;" />
+:::
+
+Note that in order to approximate this light blue area well, we should actually find $\p(Y<5.5)$ i.e. this light red area:
+
+:::{.fold .s}
+
+``` r
+tibble(x = 0:15, p = dbinom(x,n,p)) %>%
+  ggplot(aes(x,p)) + geom_col(width=1, fill=NA, color="black", linewidth=1) +
+  geom_function(fun = \(x)dnorm(x,mu,sigma), color="red", linewidth=1.2) +
+  stat_function(fun = \(x)dnorm(x,mu,sigma), geom="area", xlim=c(0,5.5), fill="red", alpha=.4) +
+  labs(title = "Approximate P(X≤5) where X~Bin(15,0.4) with P(Y<5.5) where Y~N(6,1.9)")
+```
+
+<img src="10-probability_files/figure-html/unnamed-chunk-32-1.svg" width="672" style="display: block; margin: auto;" />
+:::
+
+This is called the **continuity correction**, where we adjust our evaluation region under the normal by $\pm0.5$ based on if we're counting the bars towards the left or right side (if we're starting somewhere and counting bars towards the left, we $+0.5$ to our bound; otherwise if we're starting somewhere and counting bars towards the right, we $-0.5$ to our bound, e.g. for $\p(X\ge5)$, we'd find $\p(Y>4.5)$).
+
+We can easily check this correction significantly improves our approximation:
+
+
+``` r
+# exact area P(X≤5)
+pbinom(5,n,p)
+```
+
+```
+[1] 0.4032156
+```
+
+``` r
+# normal approx P(Y<5) without continuity correction (~26% error)
+pnorm(5,mu,sigma)
+```
+
+```
+[1] 0.2990807
+```
+
+``` r
+# normal approx P(Y<5.5) with continuity correction (~2% error)
+pnorm(5.5,mu,sigma)
+```
+
+```
+[1] 0.3960737
+```
+
+As a final example, keeping the same $X,Y$, suppose we wish to find $\p(5\le X\le9)$, i.e. this blue area:
+
+:::{.fold .s}
+
+``` r
+tibble(x = 0:15, p = dbinom(x,n,p), c = rep(c(T,F,T),c(5,5,6))) %>%
+  ggplot(aes(x,p)) + geom_col(aes(fill=c), width=1, color="black", linewidth=1, alpha=.4) +
+  scale_fill_manual(values = c("blue","white")) +
+  geom_function(fun = \(x)dnorm(x,mu,sigma), color="red", linewidth=1.2) +
+  labs(title = "P(5≤X≤9) where X~Bin(15,0.4)") + theme(legend.position="none")
+```
+
+<img src="10-probability_files/figure-html/unnamed-chunk-34-1.svg" width="672" style="display: block; margin: auto;" />
+:::
+
+Applying the continuity correction on either side, we see we need to find $\p(4.5\le Y\le 9.5)$, i.e. this red area:
+
+:::{.fold .s}
+
+``` r
+n = 15 ; p = 0.4
+tibble(x = 0:15, p = dbinom(x,n,p)) %>%
+  ggplot(aes(x,p)) + geom_col(width=1, fill=NA, color="black", linewidth=1) +
+  geom_function(fun = \(x)dnorm(x,mu,sigma), color="red", linewidth=1.2) +
+  stat_function(fun = \(x)dnorm(x,mu,sigma), geom="area", xlim=c(4.5,9.5), fill="red", alpha=.4) +
+  labs(title = "Approximate P(5≤X≤9) where X~Bin(15,0.4) with P(4.5<Y<9.5) where Y~N(6,1.9)")
+```
+
+<img src="10-probability_files/figure-html/unnamed-chunk-35-1.svg" width="672" style="display: block; margin: auto;" />
+:::
+
+
+``` r
+# exact area P(5≤X≤9)
+pbinom(9,n,p) - pbinom(4,n,p)
+```
+
+```
+[1] 0.748889
+```
+
+``` r
+# normal approx P(5<Y<9) without continuity correction (~14% error)
+pnorm(9,mu,sigma) - pnorm(5,mu,sigma)
+```
+
+```
+[1] 0.6439961
+```
+
+``` r
+# normal approx P(4.5<Y<9.5) with continuity correction (~0.5% error)
+pnorm(9.5,mu,sigma) - pnorm(4.5,mu,sigma)
+```
+
+```
+[1] 0.752859
+```
+
+
 <!--
 
 future ideas: add
 
- - normal approx to binomial
  - brief CLT??
 
 -->
