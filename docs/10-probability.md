@@ -1139,7 +1139,7 @@ tibble(x = 0:15, p = dbinom(x,n,p), c = rep(c(T,F,T),c(5,5,6))) %>%
 <img src="10-probability_files/figure-html/unnamed-chunk-34-1.svg" width="672" style="display: block; margin: auto;" />
 :::
 
-Applying the continuity correction on either side, we see we need to find $\p(4.5\le Y\le 9.5)$, i.e. this red area:
+Applying the continuity correction on either side, we see we need $\p(4.5\le Y\le 9.5)$, i.e. this red area:
 
 :::{.fold .s}
 
