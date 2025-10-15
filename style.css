@@ -378,6 +378,21 @@ div.html-widget{
 }
 
 
+/* slightly tighten up pre/img when source hidden */
+
+pre.downlit.sourceCode.r:has(code[style="display: none;"]){
+  padding:.1em .5em 0;
+}
+
+pre.downlit.sourceCode.r:has(code[style="display: none;"])+button.btn.btn-copy{
+  padding: 0 .75em;
+}
+
+div.sourceCode:has(code[style="display: none;"])+div.inline-figure{
+  margin-top:0;
+}
+
+
 /* add some bottom space */
 main > div[class*="section level1"] {
     padding-bottom: 100px;
