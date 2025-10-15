@@ -342,6 +342,8 @@ ul.book-toc > li:not(:has(span.header-section-number)) {
 .showopt {
   background-color: #004c93;
   color: #FFFFFF; 
+  /* background-color: #9b0000;
+  color: #FFFFFF; */
   width: 100px;
   height: 20px;
   text-align: center;
@@ -354,6 +356,8 @@ ul.book-toc > li:not(:has(span.header-section-number)) {
 .showopt:hover {
     background-color: #dfe4f2;
     color: #004c93;
+    /* background-color: #e0baba;
+    color: #600000; */
 }
 
 pre.plot {
