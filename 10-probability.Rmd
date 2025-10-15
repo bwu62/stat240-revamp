@@ -111,7 +111,7 @@ First, it's easy to see the axioms are satisfied, since all probabilities are in
 <center>
 
 ```         
- k | \p(k)
+ k | p(k)
 ---+-----
  0 | 0.4 
  1 | 0.3 
