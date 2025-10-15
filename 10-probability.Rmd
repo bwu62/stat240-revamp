@@ -553,7 +553,7 @@ This expression produces the familiarly shaped "bell curve" distribution we all 
 SDs <- seq(55, 145, 15)
 ggplot() + geom_segment(aes(x = SDs, y = 0, yend = dnorm(SDs, 100, 15)),
                         color = rep(c("red", "blue", "red"), times = c(3, 1, 3))) + 
-  geom_function(fun = \(x) dnorm(x, 100, 15), xlim = c(50, 150)) +
+  geom_function(fun = \(x) dnorm(x, 100, 15), n = 1e3, xlim = c(50, 150)) +
   scale_x_continuous(breaks = seq(55, 145, 15), expand = 0, minor_breaks = NULL) +
   scale_y_continuous(expand = c(0.004, 0)) +
   labs(title = "N(100, 15) distribution (standardized IQ scores)",
