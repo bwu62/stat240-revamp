@@ -792,9 +792,9 @@ Since we have R, we won't need to rely on Z-scores as much, however it's an impo
 
 ## Normal approx. of binomial
 
-One more topic before chapter end; **under certain circumstances, the binomial distribution is considered to be well-approximated by the normal**. Before computers, this was extremely useful since areas under the normal curve are much easier to find with a normal table than summing many bars on a binomial ditribution, especially for large $n$. These days, it's still useful as a teaching exercise as well as an example of the [central limit theorem](https://en.wikipedia.org/wiki/Central_limit_theorem).
+One more topic before chapter end; **under certain circumstances, the binomial distribution is well-approximated by the normal**. Before computers, this was extremely useful since areas under the normal curve are much easier to find with a normal table than summing many bars on a binomial ditribution, especially for large $n$. These days, it's still useful as a teaching exercise as well as an example of the [central limit theorem](https://en.wikipedia.org/wiki/Central_limit_theorem).
 
-Usually, the condition for this approximation to be considered good enough is that **$np$ and $n(1\!-\!p)$ must be $>5$**. Note this implies we must also at least have $n>10$, otherwise it's impossible for both $np,\,n(1\!-\!p)\,>5$.
+Usually, the condition for this approximation to be considered good enough is that **both $np$ and $n(1\!-\!p)$ must be $>5$**. Note this necessarily implies $n>10$, otherwise it's impossible for both to be true.
 
 If the condition is satisfied, we approximate $X\sim\bin(n,p)$ by picking a normal with the same $\mu=np$ and $\sigma=\sqrt{np(1\!-\!p)}$.
 
@@ -883,12 +883,12 @@ tibble(x = 0:15, p = dbinom(x,n,p)) %>%
   ggplot(aes(x,p)) + geom_col(width=1, fill=NA, color="black", linewidth=1) +
   geom_function(fun = \(x)dnorm(x,mu,sigma), color="red", linewidth=1.2) +
   stat_function(fun = \(x)dnorm(x,mu,sigma), geom="area", xlim=c(4.5,9.5), fill="red", alpha=.4) +
-  labs(title = "Approximate P(5≤X≤9) where X~Bin(15,0.4) with P(4.5<Y<9.5) where Y~N(6,1.9)")
+  labs(title = "Approx. P(5≤X≤9) where X~Bin(15,0.4) with P(4.5<Y<9.5) where Y~N(6,1.9)")
 ```
 :::
 
 ```{r}
-# exact area P(5≤X≤9)
+# exact area P(5≤X≤9) = P(X≤9)-P(X≤4)
 pbinom(9,n,p) - pbinom(4,n,p)
 # normal approx P(5<Y<9) without continuity correction (~14% error)
 pnorm(9,mu,sigma) - pnorm(5,mu,sigma)

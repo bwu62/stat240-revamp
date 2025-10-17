@@ -568,13 +568,13 @@ ggplot(penguins, aes(y = flipper_length_mm, x = bill_depth_mm,
 
 <img src="06-data-visualization_files/figure-html/smoothed-curve-1.svg" width="672" style="display: block; margin: auto;" />
 
-This is clearly not right here; the data shows strong signs of linearity. We can force `geom_smooth()` to fit and plot linear regression models to each species by setting `method = "lm"`. We can also turn off the unnecessarily cluttering gray error margins with `se = FALSE` and get this much improved plot:
+This is clearly not right here; the data shows strong signs of linearity. We can force `geom_smooth()` to fit and plot linear regression models to each species by setting `method = lm`. We can also turn off the unnecessarily cluttering gray error margins with `se = FALSE` and get this much improved plot:
 
 
 ``` r
 ggplot(penguins, aes(y = flipper_length_mm, x = bill_depth_mm,
                      color = species, shape = species)) +
-  geom_point(size = 2) + geom_smooth(method = "lm", se = FALSE) +
+  geom_point(size = 2) + geom_smooth(method = lm, se = FALSE) +
   labs(x = "Bill depth (mm)", y = "Flipper length (mm)",
        color = "Species", shape = "Species",
        title = "Flipper length vs bill depth by species for Palmer penguins sample")
@@ -596,7 +596,7 @@ For example, suppose we each species to have points of differing color and shape
 ``` r
 ggplot(penguins, aes(y = flipper_length_mm, x = bill_depth_mm)) +
   geom_point(aes(color = species, shape = species), size = 2) +
-  geom_smooth(method = "lm", se = FALSE) +
+  geom_smooth(method = lm, se = FALSE) +
   labs(x = "Bill depth (mm)", y = "Flipper length (mm)",
        color = "Species", shape = "Species",
        title = "Flipper length vs bill depth by species for Palmer penguins")
@@ -671,7 +671,7 @@ We can see that since the late 70's, college enrollment of female students has c
 
 
 :::{.note}
-For the purposes of this course, "line plot" or "trace plot" refer to `geom_line()`, and "smoothed line" or "trend line" or "straight line" refer to `geom_smooth(method = "lm")`. Take care not to mix these up!
+For the purposes of this course, "line plot" or "trace plot" refer to `geom_line()`, and "smoothed line" or "trend line" or "straight line" refer to `geom_smooth(method = lm)`. Take care not to mix these up!
 :::
 
 
