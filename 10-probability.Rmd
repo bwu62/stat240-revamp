@@ -343,7 +343,7 @@ $$\small\text{where}~~{n\choose k}=\dfrac{n!}{k!(n\!-\!k)!}~~~\text{and}~~n!=n\!
 
 -   $n!$ is called "$n$ [factorial](https://en.wikipedia.org/wiki/Factorial)" and counts the number of permutations (i.e. ways of ordering) of $n$ distinct objects
     -   Note: $0!=1$ by definition
--   $n\choose k$ is called "$n$ [choose](https://en.wikipedia.org/wiki/Combination) $k$" and counts the number of ways of choosing $k$ objects from $n$ distrinct objects (order of choice doesn't matter)
+-   $n\choose k$ is called "$n$ [choose](https://en.wikipedia.org/wiki/Combination) $k$" and counts the number of ways of choosing $k$ objects from $n$ distinct objects (order of choice doesn't matter)
 
 For example, if you have 5 objects, there are 5×4×3×2×1=120 ways to order them. If you want to choose 2 from the 5, there are 5 choose 2 or 10 different combinations possible.
 
