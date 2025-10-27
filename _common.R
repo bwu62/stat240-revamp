@@ -23,8 +23,10 @@ tryCatch({
 }, error = function(e) {
   #install.packages("gdtools")
   #install.packages("https://cran.r-project.org/src/contrib/Archive/Rttf2pt1/Rttf2pt1_1.3.12.tar.gz",type="source")
+  #install.packages("https://cran.r-project.org/src/contrib/extrafontdb_1.1.tar.gz",type="source")
   #install.packages("https://cran.r-project.org/src/contrib/Archive/extrafont/extrafont_0.19.tar.gz",type="source")
   #install.packages("https://cran.r-project.org/src/contrib/Archive/hrbrthemes/hrbrthemes_0.8.7.tar.gz",type="source")
+  #install.packages("https://cran.r-project.org/src/contrib/git2r_0.36.2.tar.gz",type="source")
   devtools::install_github("gadenbuie/grkmisc")
 })
 
