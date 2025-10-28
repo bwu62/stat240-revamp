@@ -707,6 +707,20 @@ ggplot(tibble(samp), aes(x = samp)) +
 ```
 
 
+#### Aside: Normality & QQ-plots
+
+Sometimes you may wish to evalute the normality of a given sample, i.e. see if the normal distribution is a good "fit" for your data. A very common and easy way to do this is to make what's called a quantile-quantile plot or **QQ plot**. Basically, you plot the quantiles in your sample vs theoretical normal quantiles^[For more details, see [this page](https://www.r-bloggers.com/2020/08/q-q-plots-and-worm-plots-from-scratch)]. This is one of the few plots I prefer to make using base R, since it's significantly easier.
+
+:::{.i6}
+```{r,fig.width=5}
+qqnorm(samp)
+```
+:::
+
+The interpretation is also simple: **the more linear the QQ plot, the more normal the sample**. With smaller samples, you of course expect more variation than larger samples. Often you can even tell in what way is the sample non-normal, see [this post](https://stats.stackexchange.com/a/101290) for a more in-depth discussion on how to read QQ plots.
+
+
+
 ## Standard Normal $\n(0,1)$
 
 An important member of the normal family is the **standard normal**, which is usually denoted $Z$ and has mean $\mu=0$ and SD $\sigma=1$. In other words, $Z\sim\n(0,1)$.
