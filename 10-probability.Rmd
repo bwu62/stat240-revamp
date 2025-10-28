@@ -630,7 +630,7 @@ ggplot() + geom_function(fun = \(x) dnorm(x, 100, 15), xlim = c(50, 150)) +
 
 ### `pnorm()` (CDF)
 
-`pnorm()` is the normal CDF (cumulate distribution function), which finds the **probability less than or equal to a given input**. This function is extremely useful for computing probabilities of ranges under the normal curve, e.g. to compute $\p(X\le k)$ when $X\sim\n(\mu,\sigma)$, simply do `pnorm(k, µ, σ)`.
+`pnorm()` is the normal CDF (cumulative distribution function), which finds the **probability less than or equal to a given input**. This function is extremely useful for computing probabilities of ranges under the normal curve, e.g. to compute $\p(X\le k)$ when $X\sim\n(\mu,\sigma)$, simply do `pnorm(k, µ, σ)`.
 
 Note that to find the probability $\p(a<X\le b)$, we can do `pnorm(a, µ, σ) - pnorm(b, µ, σ)`. Together with remebering the area under the entire curve is 1 just like any other RV, we can check the probabilities of each range in the previous example:
 
