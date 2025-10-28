@@ -77,7 +77,7 @@ One thing is immediately apparent: even though the raw SD has increased from 1.5
 
 ``` r
 tibble(k = 0:1000, p = dbinom(k, 1000, 0.5)) %>% 
-    ggplot(aes(x = k, y = p)) + geom_col(color = "gray35") +
+    ggplot(aes(x = k, y = p)) + geom_area(color="gray35", fill="gray35") +
     scale_x_continuous(breaks = seq(0, 1000, 100), expand = 0) +
     scale_y_continuous(breaks = seq(0, 0.025, 0.005), expand = 0,
                        minor_breaks = seq(0, 0.025, 0.001)) +
@@ -121,7 +121,9 @@ Let's increase the sample size to $n=10^{5}$ and show $n$ on a logarithmic scale
 # extend experiment out to 1e5 flips
 # scales::comma suppresses scientific notation
 samp <- c(samp, rbinom(1e5-length(samp), 1, 0.5))
-samp %>% enframe("n", "x") %>% ggplot(aes(x = n, y = cumsum(x)/n)) +
+log.indices <- unique(round(10^seq(0,5,length.out=10001)))
+samp %>% enframe("n", "x") %>% mutate(p = cumsum(x)/n) %>% slice(log.indices) %>%
+  ggplot(aes(x = n, y = p)) +
   geom_hline(yintercept = 0.5, color = "blue", linetype = "dashed") +
   geom_line() + scale_x_log10(breaks = 10^(0:5), labels = scales::comma) +
   scale_y_continuous(breaks = scales::pretty_breaks(n = 10)) +
@@ -137,10 +139,12 @@ Let's make a final addition to our plot and add 2 additional runs where the enti
 :::{.i96 .fold .s}
 
 ``` r
-p <- tibble(run1 = cumsum(samp), run2 = cumsum(rbinom(1e5, 1, 0.5)),
-            run3 = cumsum(rbinom(1e5, 1, 0.5)), n = 1:1e5) %>%
-  pivot_longer(1:3, names_to = "Run", values_to = "x") %>%
-  ggplot(aes(x = n, y = x/n, color = Run))
+p <- tibble(n = 1:1e5, run1 = cumsum(samp)/n,
+            run2 = cumsum(rbinom(1e5, 1, 0.5))/n,
+            run3 = cumsum(rbinom(1e5, 1, 0.5))/n) %>%
+  slice(log.indices) %>%
+  pivot_longer(contains("run"), names_to = "Run", values_to = "x") %>%
+  ggplot(aes(x = n, y = x, color = Run))
 for(i in -2:2) p <- p + geom_function(fun = \(x, i) 0.5*(1+i/sqrt(x)),
                                       args = list(i = i), color = "black",
                                       linetype = "dashed", alpha = 0.5)
@@ -221,6 +225,7 @@ Below is a plot of how the 95% CI updates as the run1 experiment progresses one 
 # where here p refers to the running sample proportion of % of heads out of n
 # pmin & pmax are used to ensure the CI bounds for the true p don't exceed [0,1]
 tibble(n = 1:1e5, p = cumsum(samp)/n, se = sqrt(p*(1-p)/n)) %>%
+  slice(log.indices) %>%
   ggplot(aes(x = n, y = p)) +
   geom_ribbon(aes(ymin = pmax(0, p-2*se), ymax = pmin(1, p+2*se)), alpha = 0.2) +
   geom_hline(yintercept = 0.5, color = "black", alpha = 0.5) + geom_line(aes(color = "run1")) +
