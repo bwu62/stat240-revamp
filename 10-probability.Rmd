@@ -535,7 +535,7 @@ ggplot(tibble(samp), aes(x = samp)) +
 
 The **normal distribution** is definitely the most important of the continuous distributions, and perhaps the most important in all of statistics. It's named "normal" due to it being ubiquitous throughout nature, showing up everywhere we look, hence it's the "normal" distribution we encounter.
 
-The specific circumstances which give rise to a normal distribution have to do with something called the [Central Limit Theorem](https://en.wikipedia.org/wiki/Central_limit_theorem) which is outside the scope of 240, but as an extremely oversimplified summary, normal distributions often appear when an observation can be viewed as the **sum or average of many smaller, independent processes**.
+The specific circumstances which give rise to a normal distribution have to do with something called the [Central Limit Theorem](https://en.wikipedia.org/wiki/Central_limit_theorem) which we will revisit later, but as an extremely oversimplified summary, normal distributions often appear when an observation can be viewed as the **sum or average of many smaller, independent processes**.
 
 
 ### Definition & PDF
@@ -888,7 +888,7 @@ tibble(x = 0:15, p = dbinom(x,n,p), c = rep(c(T,F,T),c(5,5,6))) %>%
 ```
 :::
 
-Applying the continuity correction on either side, we see we need $\p(4.5\le Y\le 9.5)$, i.e. this red area:
+Applying the continuity correction on either side, we see we need $\p(4.5<Y<9.5)$, i.e. this red area:
 
 :::{.fold .s}
 ```{r}
