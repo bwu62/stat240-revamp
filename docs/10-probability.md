@@ -912,7 +912,7 @@ ggplot(tibble(samp), aes(x = samp)) +
 <img src="10-probability_files/figure-html/unnamed-chunk-24-1.svg" width="672" style="display: block; margin: auto;" />
 
 
-#### Aside: Normality & QQ-plots
+### Aside: Normality & QQ-plots
 
 Sometimes you may wish to evalute the normality of a given sample, i.e. see if the normal distribution is a good "fit" for your data. A very common and easy way to do this is to make what's called a quantile-quantile plot or **QQ plot**. Basically, you plot the quantiles in your sample vs theoretical normal quantiles^[For more details, see [this page](https://www.r-bloggers.com/2020/08/q-q-plots-and-worm-plots-from-scratch)]. This is one of the few plots I prefer to make using base R, since it's significantly easier.
 
