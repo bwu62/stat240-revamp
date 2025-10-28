@@ -35,7 +35,7 @@ Note several things:
  - there must only be 2 possible outcomes (success & failure) for each trial,
  - $p$ is always the probability of the "success" category, however it's defined,
  - $x$ usually represents the actual "observed" number of successes in your sample out of $n$ trials,
- - $X$ usually represents the theoretical random variable model we choose to apply to the sample's observed $x$.
+ - $X$ usually represents the theoretical RV model we choose to apply to the sample's observed $x$.
 :::
 
 :::{.eg}
@@ -57,14 +57,14 @@ x = sum(rolls>=4)
 options(width = 80)
 ```
 
-Let's see all this in the context of an example. The following are $n=`r n`$ rolls of a purportedly fair 5-sided die I bought online (yes, I really sat in my office and rolled this die `r n` times).
+Let's see all this in the context of an example. Below are $n=`r n`$ rolls of a purportedly fair 5-sided die I bought online (yes, I really sat in my office and rolled it `r n` times).
 
 ![](d5.jpg){.i3}
 
 ```{r reuse-rolls-chunk,ref.label=I('d5-rolls'),include=T}
 ```
 ```{r}
-# quick table + plot of results using base R
+# quick table + bar plot of results using base R
 table(rolls)
 ```
 ```{r,eval=F}
@@ -78,8 +78,10 @@ barplot(table(rolls))
 ```
 :::
 
-Suppose my question of interest is whether or not this specific die design does in fact give fair results. There are different ways of testing this^[the most [powerful](https://www.scribbr.com/statistics/statistical-power) method is probably a [chi-squared test](https://www.scribbr.com/statistics/chi-square-tests).], but a simple way using a proportions-type setup is to ask **whether the two triangular-shaped faces** (which are 4 and 5) **are observed 2/5 or 40% of the time**.
+Suppose my question of interest is whether this specific die design is in fact fair. There are different ways of testing this^[the most [powerful](https://www.scribbr.com/statistics/statistical-power) method is probably a [chi-squared test](https://www.scribbr.com/statistics/chi-square-tests).], but a simple way using a proportions-type setup is to ask **whether the two triangular-shaped faces** (which are 4 and 5) **are observed 2/5 or 40% of the time**.
 
-In this setup, we can define "success" as getting 4 or 5, which has theoretical probability $p=0.4$. Our RV model for $X$ where $X$ is the number of successes (4s & 5s) is then $X\sim\bin(n=`r n`,p=0.4)$. In our sample, we observed $x=`r x4`+`r x5`=`r x`$ times this occured, which gives us a sample proportion of $\hat p=x/n=`r x`/`r n`=`r x/n`$.
+In this setup, we can define "success" as getting 4 or 5, which has theoretical probability $p=0.4$. Our RV model for $X$, i.e. the number of successes (4s & 5s), is then $X\sim\bin(`r n`,0.4)$.
+
+In our sample, we observed $x=`r x4`+`r x5`=`r x`$ times this actually occured, which gives us a sample proportion of $\hat p=x/n=`r x`/`r n`=`r x/n`$.
 :::
 
