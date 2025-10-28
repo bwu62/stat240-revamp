@@ -1,7 +1,7 @@
 ---
 title: "STAT 240 Revamp"
 author: "Bi Cheng Wu, with help from Bret Larget and Cameron Jones"
-date: "2025-10-17"
+date: "2025-10-28"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -109,7 +109,7 @@ We work hard to avoid errors, but alas nothing is perfect! If you notice any err
 
 
 
-This is a good time to acknowledge people that have made contributions. Bret Larget is the original creator of STAT 240 and author of the first set of STAT 240 notes, which is a primary source of inspiration for many aspects of these notes. Cameron Jones has also agreed to help write some practice materials as these notes evolve. Beyond that, thanks also to [\@jennamotto1](https://github.com/jennamotto1), [\@Soham109](https://github.com/Soham109) for also contributing to the repo (make a successful PR to get your name on this list!).
+This is a good time to acknowledge people that have made contributions. Bret Larget is the original creator of STAT 240 and author of the first set of STAT 240 notes, which is a primary source of inspiration for many aspects of these notes. Cameron Jones has also agreed to help write some practice materials as these notes evolve. Beyond that, thanks also to [\@jennamotto1](https://github.com/jennamotto1), [\@isis-plesnikova](https://github.com/isis-plesnikova), [\@Soham109](https://github.com/Soham109), [\@mrschmidt9](https://github.com/mrschmidt9) for also contributing to the repo (make a successful PR to get your name on this list!).
 
 
 ## Future ideas {-}

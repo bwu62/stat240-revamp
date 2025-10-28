@@ -181,6 +181,7 @@ dnorm-pdf
 pnorm-cdf
 qnorm-inverse-cdf
 rnorm-random-generator
+aside-normality-qq-plots
 standard-normal-n01
 z-score
 normal-approx.-of-binomial
