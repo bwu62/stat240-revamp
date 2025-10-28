@@ -123,7 +123,7 @@ Let's increase the sample size to $n=10^{5}$ and show $n$ on a logarithmic scale
 # which significantly improves performance at no cost to visual fidelity
 # scales::comma suppresses scientific notation
 samp <- c(samp, rbinom(1e5-length(samp), 1, 0.5))
-log.indices <- unique(round(10^seq(0,5,length.out=10001)))
+log.indices <- unique(round(10^seq(0,5,length.out=1e3)))
 samp %>% enframe("n", "x") %>% mutate(p = cumsum(x)/n) %>% slice(log.indices) %>%
   ggplot(aes(x = n, y = p)) +
   geom_hline(yintercept = 0.5, color = "blue", linetype = "dashed") +

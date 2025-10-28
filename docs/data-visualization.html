@@ -862,7 +862,7 @@ https://rstudio.github.io/cheatsheets/data-visualization.pdf
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_function.html">geom_function</a></span><span class="op">(</span></span>
 <span>  fun <span class="op">=</span> \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="va">x</span><span class="op">^</span><span class="fl">2</span> <span class="op">+</span> <span class="fl">1</span>,      <span class="co"># define x²+1</span></span>
 <span>  xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>,         <span class="co"># set limits</span></span>
-<span>  n <span class="op">=</span> <span class="fl">1001</span>                 <span class="co"># increase number of points used in drawing</span></span>
+<span>  n <span class="op">=</span> <span class="fl">1e3</span>                  <span class="co"># increase number of points used in drawing</span></span>
 <span><span class="op">)</span>                          <span class="co"># (improves smoothness of resulting curve)</span></span></code></pre></div>
 <div class="inline-figure"><img src="06-data-visualization_files/figure-html/geom-function1-1.svg" width="672" style="display: block; margin: auto;"></div>
 <p>If the function exists, but you need to modify the arguments, you can use <code>args = list(...)</code> any arguments specified inside will be directly passed to the chose function, for example:</p>
@@ -872,7 +872,7 @@ https://rstudio.github.io/cheatsheets/data-visualization.pdf
 <span>  fun <span class="op">=</span> <span class="va">dnorm</span>,                     <span class="co"># dnorm() is the normal distribution function</span></span>
 <span>  args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fl">10</span>, sd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>,  <span class="co"># set mean and sd arguments inside dnorm()</span></span>
 <span>  xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">16</span><span class="op">)</span>,                 <span class="co"># set limits</span></span>
-<span>  n <span class="op">=</span> <span class="fl">1001</span>                         <span class="co"># increase number of points</span></span>
+<span>  n <span class="op">=</span> <span class="fl">1e3</span>                          <span class="co"># increase number of points</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="06-data-visualization_files/figure-html/geom-function2-1.svg" width="672" style="display: block; margin: auto;"></div>
 </div>

@@ -955,7 +955,7 @@ If the function isn't predefined, you can easily define it with `\(x) ...` for e
 ggplot() + geom_function(
   fun = \(x) x^2 + 1,      # define x²+1
   xlim = c(-2, 2),         # set limits
-  n = 1001                 # increase number of points used in drawing
+  n = 1e3                  # increase number of points used in drawing
 )                          # (improves smoothness of resulting curve)
 ```
 
@@ -970,7 +970,7 @@ ggplot() + geom_function(
   fun = dnorm,                     # dnorm() is the normal distribution function
   args = list(mean = 10, sd = 2),  # set mean and sd arguments inside dnorm()
   xlim = c(4, 16),                 # set limits
-  n = 1001                         # increase number of points
+  n = 1e3                          # increase number of points
 )
 ```
 

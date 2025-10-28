@@ -227,7 +227,7 @@ For another example, consider the **uniform distribution** on $(0,1)$. This dist
 
 ``` r
 # use geom_function to plot dunif (the uniform PDF function)
-ggplot() + geom_function(fun = dunif, xlim = c(-.5, 1.5), n = 10001) +
+ggplot() + geom_function(fun = dunif, xlim = c(-.5, 1.5), n = 1e4) +
   labs(title = "Uniform distribution between 0 and 1",
        x = "x", y = "probability density")
 ```
@@ -812,7 +812,7 @@ Below is a plot of the normal CDF for $\mu=100$, $\sigma=15$. Again note as you 
 :::{.fold .s}
 
 ``` r
-ggplot() + geom_function(fun = \(x) pnorm(x, 100, 15), xlim = c(55, 145), n = 1e4) + 
+ggplot() + geom_function(fun = \(x) pnorm(x, 100, 15), xlim = c(55, 145), n = 1e3) + 
   scale_x_continuous(breaks = seq(55, 145, 15), minor_breaks = NULL, expand = 0) + 
   scale_y_continuous(breaks = seq(0, 1, 0.2), expand = c(0, 0.002)) + 
   labs(title = "N(100, 15) CDF", x = "x", y = "probability")
@@ -850,7 +850,7 @@ Below is a plot of the normal inverse CDF for $\mu=100$, $\sigma=15$, again note
 :::{.fold .s}
 
 ``` r
-ggplot() + geom_function(fun = \(x) qnorm(x, 100, 15), xlim = c(0, 1), n = 1e4) + 
+ggplot() + geom_function(fun = \(x) qnorm(x, 100, 15), xlim = c(0, 1), n = 1e3) + 
   scale_x_continuous(breaks = seq(0, 1, 0.2), expand = c(0, 0.002)) + 
   scale_y_continuous(breaks = seq(55, 145, 15), minor_breaks = NULL, expand = 0) + 
   labs(title = "N(100, 15) inverse CDF", x = "probability", y = "x")
