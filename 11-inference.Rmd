@@ -109,6 +109,8 @@ Let's increase the sample size to $n=10^{5}$ and show $n$ on a logarithmic scale
 :::{.fold .s}
 ```{r}
 # extend experiment out to 1e5 flips
+# log.indices used to slice out indices evenly spaced on a log scale,
+# which significantly improves performance at no cost to visual fidelity
 # scales::comma suppresses scientific notation
 samp <- c(samp, rbinom(1e5-length(samp), 1, 0.5))
 log.indices <- unique(round(10^seq(0,5,length.out=10001)))
