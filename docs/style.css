@@ -2,6 +2,14 @@ a{
   color:#800000;
 }
 
+/*improve alert boxes text color contrast*/
+.alert-warning{
+  color: #352801;
+}
+.alert-secondary{
+  color: #212427;
+}
+
 p.caption {
   color: #777;
   margin-top: 10px;
@@ -179,13 +187,6 @@ ul+p,ol+p{
   margin-top:1.2rem;
 }
 
-
-/*improve alert boxes text color contrast*/
-.alert-warning{
-  color: #392b02 !important;
-}
-
-
 /* tweak code+output style */
 div.sourceCode{
   margin-left: 0rem !important;
@@ -227,7 +228,6 @@ div.sourceCode + div.sourceCode{
 p:has(+ul),p:has(+ol){
   margin-bottom:.5rem;
 }
-
 
 pre.message,pre.warning{
   background-color: unset !important;

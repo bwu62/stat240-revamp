@@ -919,10 +919,11 @@ Sometimes you may wish to evalute the normality of a given sample, i.e. see if t
 :::{.i6}
 
 ``` r
-qqnorm(samp)
+# pch=20 is the dumb base R way of using dots as point markers,
+# see https://r-charts.com/base-r/pch-symbols for more info
+qqnorm(samp,pch=20)
 ```
-
-<img src="10-probability_files/figure-html/unnamed-chunk-25-1.svg" width="480" style="display: block; margin: auto;" />
+<img src="10-probability_files/figure-html/unnamed-chunk-26-1.svg" width="480" style="display: block; margin: auto;" />
 :::
 
 The interpretation is also simple: **the more linear the QQ plot, the more normal the sample**. With smaller samples, you of course expect more variation than larger samples. Often you can even tell in what way is the sample non-normal, see [this post](https://stats.stackexchange.com/a/101290) for a more in-depth discussion on how to read QQ plots.
@@ -948,7 +949,7 @@ normals_plot <- ggplot() + geom_function(fun = dnorm, n = 1e3, color = "red3") +
 normals_plot
 ```
 
-<img src="10-probability_files/figure-html/unnamed-chunk-26-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="10-probability_files/figure-html/unnamed-chunk-27-1.svg" width="672" style="display: block; margin: auto;" />
 :::
 
 However, if you take the exact same plot and simply zoom in to each curve, you can see in fact they are all the exact same shape, up to axes scaling.
@@ -965,7 +966,7 @@ p3 <- normals_plot + xlim(-1, 11) + ylim(0, dnorm(5, 5, 2)) +
 gridExtra::grid.arrange(p1, p2, p3, nrow = 1)
 ```
 
-<img src="10-probability_files/figure-html/unnamed-chunk-27-1.svg" width="864" style="display: block; margin: auto;" />
+<img src="10-probability_files/figure-html/unnamed-chunk-28-1.svg" width="864" style="display: block; margin: auto;" />
 :::
 
 A consequence of this is that **any problem involving an arbitrary normal distribution $X\sim\n(\mu,\sigma)$ can be turned into an _equivalent_ problem for the standard normal $Z\sim\n(0,1)$** by simply applying a transformation that converts $X$ into $Z$. This is called **standardization**, or computing a **Z-score**.
@@ -1001,7 +1002,7 @@ ggplot() + geom_function(fun = \(x) dnorm(x, 100, 15), xlim = c(55, 145)) +
   labs(title = "Plot showing P(X<115) where X~N(100,15)")
 ```
 
-<img src="10-probability_files/figure-html/unnamed-chunk-28-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="10-probability_files/figure-html/unnamed-chunk-29-1.svg" width="672" style="display: block; margin: auto;" />
 :::
 
 Using the Z-score approach, we have
@@ -1028,7 +1029,7 @@ ggplot() + geom_function(fun = dnorm, xlim = c(-3, 3)) +
   labs(title = "Plot showing P(Z<1) where Z~N(0,1)")
 ```
 
-<img src="10-probability_files/figure-html/unnamed-chunk-29-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="10-probability_files/figure-html/unnamed-chunk-30-1.svg" width="672" style="display: block; margin: auto;" />
 :::
 
 Note how these two areas exactly correspond, so solving one solves the other.
@@ -1058,7 +1059,7 @@ tibble(x = 0:15, p = dbinom(x,n,p)) %>%
   labs(title = "Approximation of Bin(15,0.4) using N(6,1.9) which has same µ,σ")
 ```
 
-<img src="10-probability_files/figure-html/unnamed-chunk-30-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="10-probability_files/figure-html/unnamed-chunk-31-1.svg" width="672" style="display: block; margin: auto;" />
 :::
 
 This approximation only gets better and better the higher $n$ is (assuming $p$ isn't extremely close to 0 or 1). For another example, suppose $n=150$, $p=0.75$. It should be obvious the condition is more than satisfied here. We pick a normal with $\mu=105$ and $\sigma=5.6$ to match the binomial and observe this approximation is an even better fit than the previous example:
@@ -1073,7 +1074,7 @@ tibble(x = 80:130, p = dbinom(x,n,p)) %>%
   labs(title = "Approximation of Bin(150,0.7) using N(105,5.6) which has same µ,σ")
 ```
 
-<img src="10-probability_files/figure-html/unnamed-chunk-31-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="10-probability_files/figure-html/unnamed-chunk-32-1.svg" width="672" style="display: block; margin: auto;" />
 :::
 
 ### Continuity correction
@@ -1091,7 +1092,7 @@ tibble(x = 0:15, p = dbinom(x,n,p), c = rep(c(F,T),c(6,10))) %>%
   labs(title = "P(X≤5) where X~Bin(15,0.4), i.e. probability of 5 or fewer successes") + theme(legend.position="none")
 ```
 
-<img src="10-probability_files/figure-html/unnamed-chunk-32-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="10-probability_files/figure-html/unnamed-chunk-33-1.svg" width="672" style="display: block; margin: auto;" />
 :::
 
 Note that in order to approximate this light blue area well, we should actually find $\p(Y<5.5)$ i.e. this light red area:
@@ -1106,7 +1107,7 @@ tibble(x = 0:15, p = dbinom(x,n,p)) %>%
   labs(title = "Approximate P(X≤5) where X~Bin(15,0.4) with P(Y<5.5) where Y~N(6,1.9)")
 ```
 
-<img src="10-probability_files/figure-html/unnamed-chunk-33-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="10-probability_files/figure-html/unnamed-chunk-34-1.svg" width="672" style="display: block; margin: auto;" />
 :::
 
 This is called the **continuity correction**, where we adjust our evaluation region under the normal by $\pm0.5$ based on if we're counting the bars towards the left or right side (if we're starting somewhere and counting bars towards the left, we $+0.5$ to our bound; otherwise if we're starting somewhere and counting bars towards the right, we $-0.5$ to our bound, e.g. for $\p(X\ge5)$, we'd find $\p(Y>4.5)$).
@@ -1153,7 +1154,7 @@ tibble(x = 0:15, p = dbinom(x,n,p), c = rep(c(T,F,T),c(5,5,6))) %>%
   labs(title = "P(5≤X≤9) where X~Bin(15,0.4)") + theme(legend.position="none")
 ```
 
-<img src="10-probability_files/figure-html/unnamed-chunk-35-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="10-probability_files/figure-html/unnamed-chunk-36-1.svg" width="672" style="display: block; margin: auto;" />
 :::
 
 Applying the continuity correction on either side, we see we need $\p(4.5<Y<9.5)$, i.e. this red area:
@@ -1169,7 +1170,7 @@ tibble(x = 0:15, p = dbinom(x,n,p)) %>%
   labs(title = "Approx. P(5≤X≤9) where X~Bin(15,0.4) with P(4.5<Y<9.5) where Y~N(6,1.9)")
 ```
 
-<img src="10-probability_files/figure-html/unnamed-chunk-36-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="10-probability_files/figure-html/unnamed-chunk-37-1.svg" width="672" style="display: block; margin: auto;" />
 :::
 
 

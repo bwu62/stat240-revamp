@@ -128,7 +128,7 @@
 <h3>
 <span class="header-section-number">12.1.1</span> Model notation<a class="anchor" aria-label="anchor" href="#model-notation"><i class="fas fa-link"></i></a>
 </h3>
-<p>In the one-proportion scenario, suppose we draw a <strong>fixed sample size of <span class="math inline">\(n\)</span></strong> observations, each of which we model as <strong>independent</strong> and having some constant underlying <strong>true probability <span class="math inline">\(p\)</span> of being a success</strong>, and <span class="math inline">\(1-p\)</span> probability of being a failure (and there’s no other possible outcomes).</p>
+<p>In the one-proportion scenario, suppose we draw a <strong>fixed sample size of <span class="math inline">\(n\)</span></strong> observations, each of which we model as <strong>independent</strong> and having some constant underlying <strong>true probability <span class="math inline">\(p\)</span> of being a success</strong>, and <span class="math inline">\(1-p\)</span> of being a failure (and there’s no other possible outcome).</p>
 <p>Let lower-case <strong><span class="math inline">\(x\)</span> be the observed number of successes in our sample</strong>, and note that we must have <span class="math inline">\(0\le x\le n\)</span>. Let <span class="math inline">\(\hat p=x/n\)</span> denote then the <strong>proportion of successes in our sample</strong>.</p>
 <p>It’s customary to also use upper-case <span class="math inline">\(X\)</span> to represent our model of the true distribution of <span class="math inline">\(x\)</span>, which here we choose to be <span class="math inline">\(X\sim\bin(n,p)\)</span>.</p>
 <p>Under these assumptions, <span class="math inline">\(\hat p\)</span> is a natural <strong>point estimate</strong> for <span class="math inline">\(p\)</span>, i.e. our <strong>sample proportion of successes estimates the true underlying probability of success <span class="math inline">\(p\)</span></strong>, since the LLN guarantees <span class="math inline">\(\hat p\to p\)</span> as <span class="math inline">\(n\to\infty\)</span>.</p>
@@ -148,12 +148,41 @@
 </ul>
 </div>
 <div class="eg">
-<p>Let’s see all this in the context of an example.</p>
+<p>Let’s see all this in the context of an example. The following are <span class="math inline">\(n=200\)</span> rolls of a purportedly fair 5-sided die I bought online (yes, I really sat in my office and rolled this die 200 times).</p>
+<div class="inline-figure"><img src="d5.jpg" class="i3"></div>
+<div class="sourceCode" id="cb933"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># combine 50-roll chunks of data, split, then parse to numeric vector</span></span>
+<span><span class="va">rolls</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"21252134521555355115322514314333142113433335345333"</span>,</span>
+<span>                <span class="st">"43242443535423223523352541521331244241531554241354"</span>,</span>
+<span>                <span class="st">"34244524112155254341541335443433245314125431131335"</span>,</span>
+<span>                <span class="st">"43114331251421521112234535251142334354341123345541"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/strsplit.html">strsplit</a></span><span class="op">(</span><span class="st">""</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">unlist</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">as.numeric</span></span>
+<span><span class="va">rolls</span></span></code></pre></div>
+<pre><code>  [1] 2 1 2 5 2 1 3 4 5 2 1 5 5 5 3 5 5 1 1 5 3 2 2 5 1 4 3 1 4 3 3 3 1 4 2 1 1
+ [38] 3 4 3 3 3 3 5 3 4 5 3 3 3 4 3 2 4 2 4 4 3 5 3 5 4 2 3 2 2 3 5 2 3 3 5 2 5
+ [75] 4 1 5 2 1 3 3 1 2 4 4 2 4 1 5 3 1 5 5 4 2 4 1 3 5 4 3 4 2 4 4 5 2 4 1 1 2
+[112] 1 5 5 2 5 4 3 4 1 5 4 1 3 3 5 4 4 3 4 3 3 2 4 5 3 1 4 1 2 5 4 3 1 1 3 1 3
+[149] 3 5 4 3 1 1 4 3 3 1 2 5 1 4 2 1 5 2 1 1 1 2 2 3 4 5 3 5 2 5 1 1 4 2 3 3 4
+[186] 3 5 4 3 4 1 1 2 3 3 4 5 5 4 1</code></pre>
+<div class="sourceCode" id="cb935"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># quick table + plot of results using base R</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">rolls</span><span class="op">)</span></span></code></pre></div>
+<pre><code>rolls
+ 1  2  3  4  5 
+39 32 50 41 38 </code></pre>
+<div class="sourceCode" id="cb937"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">rolls</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="i6">
+<div class="inline-figure"><img src="12-proportions_files/figure-html/unnamed-chunk-4-1.svg" width="672" style="display: block; margin: auto;"></div>
+</div>
+<p>Suppose my question of interest is whether or not this specific die design does in fact give fair results. There are different ways of testing this<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;the most &lt;a href="https://www.scribbr.com/statistics/statistical-power"&gt;powerful&lt;/a&gt; method is probably a &lt;a href="https://www.scribbr.com/statistics/chi-square-tests"&gt;chi-squared test&lt;/a&gt;.&lt;/p&gt;'><sup>41</sup></a>, but a simple way using a proportions-type setup is to ask <strong>whether the two triangular-shaped faces</strong> (which are 4 and 5) <strong>are observed 2/5 or 40% of the time</strong>.</p>
+<p>In this setup, we can define “success” as getting 4 or 5, which has theoretical probability <span class="math inline">\(p=0.4\)</span>. Our RV model for <span class="math inline">\(X\)</span> where <span class="math inline">\(X\)</span> is the number of successes (4s &amp; 5s) is then <span class="math inline">\(X\sim\bin(n=200,p=0.4)\)</span>. In our sample, we observed <span class="math inline">\(x=41+38=79\)</span> times this occured, which gives us a sample proportion of <span class="math inline">\(\hat p=x/n=79/200=0.395\)</span>.</p>
 </div>
 
 </div>
 </div>
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/@xiee/utils/js/external-link.min.js" defer></script><script>
   $(function(){
     $(".note").addClass("alert alert-warning");
