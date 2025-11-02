@@ -183,10 +183,10 @@ $$
 \text{$C\%$ confidence interval}~=~(\text{estimate})~\pm~(\text{crit. value})\cdot(\text{std. error})
 $$
 
- - **$C$** is the **level of confidence** desired. Most commonly, a 95%-level confidence is reported by convention, but this can be any number betweeo 0-100% (not inclusive).
+ - **$C$** is the **level of confidence** desired. Most commonly, a 95%-level confidence is reported by convention, but this can be any number between 0-100% (not inclusive).
  - **Estimate** is your best guess of the true value based on your sample. For example, if you're trying to estimate the probability of heads, you'd use the proportion of heads in your sample.
  - **Critical value** is a multiplier that depends on $C$, the level of confidence. If you want higher confidence, you must cover more values. For a standard 95% CI, this value is usually approximately 2.
- - **Standard error** is what we call an estimate of the true SD using our sample. In out last plot, this would be an estimate of how far the inner gray lines are from the true probability $p=0.5$.
+ - **Standard error** is what we call an estimate of the true SD using our sample. In our last plot, this would be an estimate of how far the inner gray lines are from the true probability $p=0.5$.
 
 We'll cover in detail how to compute each of the above quantities for different experiments in the next few chapters, but for now let's do a quick visual example to help build more intuition.
 
