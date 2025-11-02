@@ -313,7 +313,7 @@ The interpretations in the previous example are very carefully worded. In hypoth
 
 ### $H_a$ directions
 
-Why did we compute the p-value earlier as $\p(X\ge7)$? One way of thinking about it is the "likeliness" of our dataset here must be found by comparing it with all other possible outcomes for our dataset and ranking it again them. Our p-value of 0.17 earlier basically means it ranks in the top 17% of possible datasets when using total number of heads as a statistic.
+Why did we compute the p-value earlier as $\p(X\ge7)$? One way of thinking about it is the "likeliness" of our dataset here must be found by comparing it with all other possible outcomes for our dataset and ranking it against them. Our p-value of 0.17 earlier basically means it ranks in the top 17% of possible datasets when using total number of heads as a statistic.
 
 Here's a follow-up question then, why do we want to find here the "top percentage" value here by number of heads? The reason for this is that our alternative $H_a:p>0.5$. In order to disprove $H_0$ and support $H_a$, our dataset must get more heads than we would expect vs fair. If instead our alternative hypothesis had been $H_a:p<0.5$, we would've instead computed $\p(X\le7)$, which would have been a much larger value (i.e. much closer to 1 than 0).
 
