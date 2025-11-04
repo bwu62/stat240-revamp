@@ -33,7 +33,7 @@ Imagine we have a **perfectly fair coin**, i.e. Heads (H) and Tails (T) have the
 Suppose you flip the coin 10 times and define $X$ as the number of total heads. Note that we can model $X\sim\bin(10,0.5)$. What is the probably of getting exactly 5? Or how about some other number? In fact we've already seen this exact distribution function last chapter:
 
 :::{.fold .s}
-```{r setup-all2,echo=F}
+```{r setup-all,echo=F}
 library(tidyverse)
 source("ggplot_theme_options.R")
 ```
@@ -368,7 +368,7 @@ This time, instead of simulating or specifying an actual sample, let's just broa
     ```
     </div>
 
-Thus, in order to properly compute the p-value of a given sample, we need to evalute different "tail" areas depending on our $H_a$. Suppose your parameter is $\theta$, your hypothesized value under the null is $\theta_0$, and your sample observed statistic is $\theta_s$. Then:
+Thus, in order to properly compute the p-value of a given sample, we need to evaluate different "tail" areas depending on our $H_a$. Suppose your parameter is $\theta$, your hypothesized value under the null is $\theta_0$, and your sample observed statistic is $\theta_s$. Then:
 
  - For one-sided hypotheses, simply take the corresponding "tail" area on that side,
 
@@ -384,4 +384,12 @@ Thus, in order to properly compute the p-value of a given sample, we need to eva
 
    - Furthermore, if the distribution is not only symmetric but also centered around 0 (as in the example above), the two-sided p-value expression is often written $\p(|\theta|\!\ge\!|\theta_s|)$.
 
+:::{.note}
+Here's a quick summary of choosing a direction for $H_a$ and how it impacts the p-value computation:
 
+ - If you suspect $\theta>\theta_0$, choose $H_a:\theta>\theta_0$ and take the **right side** of your sample statistic.
+
+ - If you suspect $\theta<\theta_0$, choose $H_a:\theta<\theta_0$ and take the **left side** of your sample statistic.
+
+ - If you have no suspected side OR if you want to keep both options open, choose $H_a:\theta\ne\theta_0$ and take the **two outer tails** of your sample statistic.
+:::
