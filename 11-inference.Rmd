@@ -387,9 +387,9 @@ Thus, in order to properly compute the p-value of a given sample, we need to eva
 :::{.note}
 Here's a quick summary of choosing a direction for $H_a$ and how it impacts the p-value computation:
 
- - If you suspect $\theta>\theta_0$, choose $H_a:\theta>\theta_0$ and take the **right side** of your sample statistic.
+ - If you suspect $\theta>\theta_0$, and thus only wish to reject $H_0$ if the observed sample statistic $\theta_s$ is too high compared to $\theta_0$, choose $H_a:\theta>\theta_0$ and take the **right side** of the observed sample statistic.
 
- - If you suspect $\theta<\theta_0$, choose $H_a:\theta<\theta_0$ and take the **left side** of your sample statistic.
+ - If you suspect $\theta<\theta_0$, and thus only wish to reject $H_0$ if the observed sample statistic $\theta_s$ is too low compared to $\theta_0$, choose $H_a:\theta<\theta_0$ and take the **left side** of the observed sample statistic.
 
- - If you have no suspected side OR if you want to keep both options open, choose $H_a:\theta\ne\theta_0$ and take the **two outer tails** of your sample statistic.
+ - If you have no suspected side OR if you want to keep both options open, and thus wish to reject $H_0$ if the observed sample statistic $\theta_s$ is either too low OR too high compared to $\theta_0$, choose $H_a:\theta\ne\theta_0$ and take the **two outer tails** of your observed sample statistic.
 :::
