@@ -33,9 +33,10 @@ Note several things:
  - $n$ must be a fixed, predetermined sample size,
  - trials must be able to be reasonably modeled as independent,
  - there must only be 2 possible outcomes (success & failure) for each trial,
- - $p$ is always the probability of the "success" category, however it's defined,
- - $x$ usually represents the actual "observed" number of successes in your sample out of $n$ trials,
- - $X$ usually represents the theoretical RV model we choose to apply to the sample's observed $x$.
+ - $p$ is always the TRUE probability of the "success" category, however it's defined,
+ - $\hat p$ is the observed sample proportion, which can estimate the true $p$ by LLN,
+ - $X$ represents the theoretical RV model we choose to apply to the sample's observed $x$,
+ - $x$ represents the actual observed number of successes in your sample out of $n$ trials.
 :::
 
 :::{.eg}
@@ -84,4 +85,81 @@ In this setup, we can define "success" as getting 4 or 5, which has theoretical 
 
 In our sample, we observed $x=`r x4`+`r x5`=`r x`$ times this actually occured, which gives us a sample proportion of $\hat p=x/n=`r x`/`r n`=`r x/n`$.
 :::
+
+### Confidence interval
+
+For a one proportion type setup, the confidence interval has the following form:
+
+$$
+\text{$C\%$ or $(1\!-\!\alpha)$ interval}~=~\hat p~\pm~z_{\alpha/2}\cdot\sqrt{\frac{\hat p(1-\hat p)}{n}},~\text{ where}
+$$
+
+ - $\alpha$ is **implicitly defined as 100% – C%**, e.g. for a 95% confidence interval, $\alpha=1-0.95=0.05$,
+ 
+ - $\hat p=x/n$, the sample proportion of successes, is the **point estimate** for the true probability $p$,
+ 
+ - $z_{\alpha/2}$ is the **$\alpha$-level normal critical value** such that $\p(|Z|>|z_{\alpha/2}|)=\p(Z>z_{\alpha/2})+\p(Z<-z_{\alpha/2})=\alpha$, in other words the observation on the standard normal such that the two "outer-tails" defined by it and its mirror image sum to $\alpha$ together.
+   
+   ::::{.i5 .fold .s}
+   ```{r setup-all,echo=F}
+   library(tidyverse)
+   source("ggplot_theme_options.R")
+   ```
+   ```{r,fig.width=3.7,fig.height=2.6}
+   library(latex2exp)
+   ggplot() + geom_function(fun=dnorm, xlim=c(-4,4)) +
+     stat_function(fun=dnorm, geom="area", xlim=c(-4,qnorm(.025)), fill="red") +
+     stat_function(fun=dnorm, geom="area", xlim=c(qnorm(.975),4), fill="red") +
+     scale_x_continuous(breaks=qnorm(c(.025,.5,.975)), minor_breaks=NULL, expand=0,
+                        labels=TeX(c("$-z_{\\alpha/2}$","0","$z_{\\alpha/2}$"))) +
+     scale_y_continuous(expand=0, breaks=NULL) + theme(axis.text.x = element_text(size=13)) +
+     labs(x=NULL, y=NULL, title=TeX("$z_{\\alpha/2}$ critical value for Z (red areas sum to $\\alpha$)"))
+   ```
+   ::::
+   
+   This value is called $z_{\alpha/2}$ since by convention the subscript denotes the area of only the right-corner, which is $\alpha/2$ by symmetry. To compute $\alpha/2$ for a C% interval, you need to ask `qnorm()` for the $(1-\alpha/2)$--percentile, e.g. for a 95% confidence interval, we seek the 97.5%-tile:
+   
+   ```{r}
+   # for a given α, e.g.
+   alpha <- 0.05
+   # compute the 1-α/2 percentile as the z_α/2 critical value
+   1-alpha/2
+   qnorm(0.975)  # often approximated as 1.96 or simply 2
+   ```
+ 
+ - and finally $\se(\hat p)=\sqrt{\hat p(1-\hat p)/n}$ is the **estimated standard error of $\hat p$**, which can be thought of as dividing the binomial SD by $n$ then substituting $p\to\hat p$ everywhere.
+
+:::{.eg}
+Continuing the example above, a 95% confidence interval for $p$ based on `r x` successes out of `r n` trials can be computed as:
+
+```{r}
+# define x, n
+x <- sum(rolls>=4) ; n <- length(rolls)
+# define p-hat
+phat <- x/n   # alternative shortcut: phat <- mean(rolls>=4)
+phat
+# 95% confidence interval, using c(-1,1) as a shorcut for ±
+phat + c(-1,1) * qnorm(0.975) * sqrt(phat*(1-phat)/n)
+```
+
+Thus, a 95% confidence interval for $p$, i.e. the true probability of 4 or 5, is `r ci(c <- phat + c(-1,1) * qnorm(0.975) * sqrt(phat*(1-phat)/n))`, or in other words, **we are 95% confident the true $p$ is between `r round(c[1],2)` and `r round(c[2],2)`**.
+
+If a different level of confidence is desired, simply change the argument to `qnorm()`:
+
+```{r}
+# e.g. for 90% interval, implied alpha=0.10 so we want qnorm of (1-0.1/2)=0.95
+phat + c(-1,1) * qnorm(0.95) * sqrt(phat*(1-phat)/n)
+# a shortcut is to take the midpoint between the confidence level and 1
+# another example, for a 99% interval, we want qnorm of 0.995
+phat + c(-1,1) * qnorm(0.995) * sqrt(phat*(1-phat)/n)
+```
+
+Note the lower the confidence desired the smaller the interval, and vice versa the higher the confidence desired the larger the interval.
+:::
+
+### Hypothesis testing
+
+We saw in our sample $\hat p=`r phat`$ was quite close to what we expected under a fair die of $p=0.4$. Let's formally test this using a hypothesis test.
+
+Recall from the previous section if we have no
 
