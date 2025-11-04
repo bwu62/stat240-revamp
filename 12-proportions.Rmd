@@ -159,7 +159,13 @@ Note the lower the confidence desired the smaller the interval, and vice versa t
 
 ### Hypothesis testing
 
-We saw in our sample $\hat p=`r phat`$ was quite close to what we expected under a fair die of $p=0.4$. Let's formally test this using a hypothesis test.
+We saw in our sample $\hat p=`r phat`$ was quite close to what we expected under a fair die of $0.4$. Let's formally test this using a hypothesis test.
 
-Recall from the previous section if we have no
+Recall from the previous section if we wish to reject $H_0$ if our sample statistic is too high OR too low, we choose the two-sided alternative. This applies here, since if $\hat p$ is too low or too high vs $0.4$, we should reject. Thus, we choose $p_0=0.4$, and our hypotheses are:
 
+$$
+H_0:p=0.4\\
+H_a:p\ne0.4
+$$
+
+What does the distribution of
