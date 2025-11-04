@@ -127,6 +127,9 @@ page.find = function(url,pattern,md=F,n=1){
   }
 }
 
+ci = function(x,n=2){
+  paste0("(",paste(round(x,2),collapse=","),")")
+}
 
 # ## make STAT240 folder for downloading
 # dirs.vec = stringr::str_c(
