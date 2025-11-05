@@ -168,4 +168,11 @@ H_0:p=0.4\\
 H_a:p\ne0.4
 $$
 
-What does the distribution of
+Now we ask the key question for hypothesis testing: **what is the distribution of $X$ under the null hypothesis?**. Well under the null, we know $X\sim\bin(`r n`,0.4)$. This has the following distribution:
+
+:::{.fold .s}
+```{r}
+tibble(k=50:110,p=dbinom(k,n,0.4)) %>% ggplot(aes(x=k,y=p)) + geom_col() +
+  ggtitle("Distribution of X under null hypothesis, i.e. Bin(200,0.4)")
+```
+:::
