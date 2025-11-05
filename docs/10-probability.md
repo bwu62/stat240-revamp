@@ -1116,6 +1116,8 @@ We can easily check this correction significantly improves our approximation:
 
 
 ``` r
+# define parameters and mu,sigma
+n = 15 ; p = 0.4 ; mu = n*p ; sigma = sqrt(n*p*(1-p))
 # exact area P(X≤5)
 pbinom(5,n,p)
 ```

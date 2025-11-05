@@ -6,15 +6,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 11 Sampling &amp; Inference | STAT 240 Revamp</title>
 <meta name="author" content="Bi Cheng Wu, with help from Bret Larget and Cameron Jones">
-<meta name="description" content="\(   \def\e{\operatorname{E}}   \def\p{\operatorname{P}}   \def\var{\operatorname{Var}}   \def\sd{\operatorname{SD}}   \def\bin{\operatorname{Bin}}   \def\n{\operatorname{N}}  \)  In the previous...">
+<meta name="description" content="\(   \def\e{\operatorname{E}}   \def\p{\operatorname{P}}   \def\var{\operatorname{Var}}   \def\sd{\operatorname{SD}}   \def\bin{\operatorname{Bin}}   \def\n{\operatorname{N}}  ...">
 <meta name="generator" content="bookdown 0.45 with bs4_book()">
 <meta property="og:title" content="Chapter 11 Sampling &amp; Inference | STAT 240 Revamp">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://bwu62.github.io/stat240-revamp/sampling-inference.html">
-<meta property="og:description" content="\(   \def\e{\operatorname{E}}   \def\p{\operatorname{P}}   \def\var{\operatorname{Var}}   \def\sd{\operatorname{SD}}   \def\bin{\operatorname{Bin}}   \def\n{\operatorname{N}}  \)  In the previous...">
+<meta property="og:description" content="\(   \def\e{\operatorname{E}}   \def\p{\operatorname{P}}   \def\var{\operatorname{Var}}   \def\sd{\operatorname{SD}}   \def\bin{\operatorname{Bin}}   \def\n{\operatorname{N}}  ...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 11 Sampling &amp; Inference | STAT 240 Revamp">
-<meta name="twitter:description" content="\(   \def\e{\operatorname{E}}   \def\p{\operatorname{P}}   \def\var{\operatorname{Var}}   \def\sd{\operatorname{SD}}   \def\bin{\operatorname{Bin}}   \def\n{\operatorname{N}}  \)  In the previous...">
+<meta name="twitter:description" content="\(   \def\e{\operatorname{E}}   \def\p{\operatorname{P}}   \def\var{\operatorname{Var}}   \def\sd{\operatorname{SD}}   \def\bin{\operatorname{Bin}}   \def\n{\operatorname{N}}  ...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Roboto_Mono-0.4.10/font.css" rel="stylesheet">
@@ -105,6 +105,7 @@
     \def\sd{\operatorname{SD}}
     \def\bin{\operatorname{Bin}}
     \def\n{\operatorname{N}}
+    \def\se{\operatorname{SE}}
   \)
 </span>
 <div id="sampling-inference" class="section level1" number="11">
@@ -272,13 +273,13 @@
 \]</span></p>
 <ul>
 <li>
-<strong><span class="math inline">\(C\)</span></strong> is the <strong>level of confidence</strong> desired. Most commonly, a 95%-level confidence is reported by convention, but this can be any number betweeo 0-100% (not inclusive).</li>
+<strong><span class="math inline">\(C\)</span></strong> is the <strong>level of confidence</strong> desired. Most commonly, a 95%-level confidence is reported by convention, but this can be any number between 0-100% (not inclusive).</li>
 <li>
 <strong>Estimate</strong> is your best guess of the true value based on your sample. For example, if you’re trying to estimate the probability of heads, you’d use the proportion of heads in your sample.</li>
 <li>
 <strong>Critical value</strong> is a multiplier that depends on <span class="math inline">\(C\)</span>, the level of confidence. If you want higher confidence, you must cover more values. For a standard 95% CI, this value is usually approximately 2.</li>
 <li>
-<strong>Standard error</strong> is what we call an estimate of the true SD using our sample. In out last plot, this would be an estimate of how far the inner gray lines are from the true probability <span class="math inline">\(p=0.5\)</span>.</li>
+<strong>Standard error</strong> is what we call an estimate of the true SD using our sample. In our last plot, this would be an estimate of how far the inner gray lines are from the true probability <span class="math inline">\(p=0.5\)</span>.</li>
 </ul>
 <p>We’ll cover in detail how to compute each of the above quantities for different experiments in the next few chapters, but for now let’s do a quick visual example to help build more intuition.</p>
 <div class="eg">
@@ -390,7 +391,7 @@ H_a&amp;:\text{parameter}~\theta\left.\begin{cases}&amp;&lt;\theta_0\\\text{one 
 <h3>
 <span class="header-section-number">11.4.1</span> <span class="math inline">\(H_a\)</span> directions<a class="anchor" aria-label="anchor" href="#h_a-directions"><i class="fas fa-link"></i></a>
 </h3>
-<p>Why did we compute the p-value earlier as <span class="math inline">\(\p(X\ge7)\)</span>? One way of thinking about it is the “likeliness” of our dataset here must be found by comparing it with all other possible outcomes for our dataset and ranking it again them. Our p-value of 0.17 earlier basically means it ranks in the top 17% of possible datasets when using total number of heads as a statistic.</p>
+<p>Why did we compute the p-value earlier as <span class="math inline">\(\p(X\ge7)\)</span>? One way of thinking about it is the “likeliness” of our dataset here must be found by comparing it with all other possible outcomes for our dataset and ranking it against them. Our p-value of 0.17 earlier basically means it ranks in the top 17% of possible datasets when using total number of heads as a statistic.</p>
 <p>Here’s a follow-up question then, why do we want to find here the “top percentage” value here by number of heads? The reason for this is that our alternative <span class="math inline">\(H_a:p&gt;0.5\)</span>. In order to disprove <span class="math inline">\(H_0\)</span> and support <span class="math inline">\(H_a\)</span>, our dataset must get more heads than we would expect vs fair. If instead our alternative hypothesis had been <span class="math inline">\(H_a:p&lt;0.5\)</span>, we would’ve instead computed <span class="math inline">\(\p(X\le7)\)</span>, which would have been a much larger value (i.e. much closer to 1 than 0).</p>
 <p>What if instead of suspecting the coin to be biasing heads, we only suspected it was unfair but were unsure of the direction (i.e. it could bias heads or tails)? In this case, we’d set <span class="math inline">\(H_a:p\ne0.5\)</span>. As for our p-value, we need to compute <span class="math inline">\(\p(X\ge7)+\p(X\le3)\)</span>. The first term represents the “top percentage” comparing to other possible outcomes with even more heads, and the second term represents if the situation had been reversed and we instead had 7 tails and 3 heads and the “likeliness” under that scenario or the “bottom percentage” there comparing to other possible outcomes with even fewer heads.</p>
 <p>That might seem strange, but it’ll make sense if we think about test results in a different way.</p>
@@ -443,7 +444,7 @@ H_a&amp;:\text{parameter}~\theta\left.\begin{cases}&amp;&lt;\theta_0\\\text{one 
 </div>
 </li>
 </ol>
-<p>Thus, in order to properly compute the p-value of a given sample, we need to evalute different “tail” areas depending on our <span class="math inline">\(H_a\)</span>. Suppose your parameter is <span class="math inline">\(\theta\)</span>, your hypothesized value under the null is <span class="math inline">\(\theta_0\)</span>, and your sample observed statistic is <span class="math inline">\(\theta_s\)</span>. Then:</p>
+<p>Thus, in order to properly compute the p-value of a given sample, we need to evaluate different “tail” areas depending on our <span class="math inline">\(H_a\)</span>. Suppose your parameter is <span class="math inline">\(\theta\)</span>, your hypothesized value under the null is <span class="math inline">\(\theta_0\)</span>, and your sample observed statistic is <span class="math inline">\(\theta_s\)</span>. Then:</p>
 <ul>
 <li>
 <p>For one-sided hypotheses, simply take the corresponding “tail” area on that side,</p>
@@ -461,6 +462,15 @@ H_a&amp;:\text{parameter}~\theta\left.\begin{cases}&amp;&lt;\theta_0\\\text{one 
 </ul>
 </li>
 </ul>
+<div class="note">
+<p>Here’s a quick summary of choosing a direction for <span class="math inline">\(H_a\)</span> and how it impacts the p-value computation:</p>
+<ul>
+<li><p>If you suspect <span class="math inline">\(\theta&gt;\theta_0\)</span>, and thus only wish to reject <span class="math inline">\(H_0\)</span> if the observed sample statistic <span class="math inline">\(\theta_s\)</span> is too high compared to <span class="math inline">\(\theta_0\)</span>, choose <span class="math inline">\(H_a:\theta&gt;\theta_0\)</span> and take the <strong>right side</strong> of the observed sample statistic.</p></li>
+<li><p>If you suspect <span class="math inline">\(\theta&lt;\theta_0\)</span>, and thus only wish to reject <span class="math inline">\(H_0\)</span> if the observed sample statistic <span class="math inline">\(\theta_s\)</span> is too low compared to <span class="math inline">\(\theta_0\)</span>, choose <span class="math inline">\(H_a:\theta&lt;\theta_0\)</span> and take the <strong>left side</strong> of the observed sample statistic.</p></li>
+<li><p>If you have no suspected side OR if you want to keep both options open, and thus wish to reject <span class="math inline">\(H_0\)</span> if the observed sample statistic <span class="math inline">\(\theta_s\)</span> is either too low OR too high compared to <span class="math inline">\(\theta_0\)</span>, choose <span class="math inline">\(H_a:\theta\ne\theta_0\)</span> and take the <strong>two outer tails</strong> of your observed sample statistic.</p></li>
+</ul>
+</div>
+
 </div>
 </div>
 </div>
@@ -609,7 +619,7 @@ $('body')
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2025-10-28.</p>
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2025-11-05.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

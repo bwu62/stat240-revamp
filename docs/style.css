@@ -157,6 +157,11 @@ img.i6,div.i6 img{
   margin-left:20%!important;
   margin-right:20%!important;
 }
+img.i5,div.i5 img{
+  width:50%!important;
+  margin-left:25%!important;
+  margin-right:25%!important;
+}
 img.i4,div.i4 img{
   width:40%!important;
   margin-left:30%!important;

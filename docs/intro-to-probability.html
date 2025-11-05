@@ -6,15 +6,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 10 Intro to Probability | STAT 240 Revamp</title>
 <meta name="author" content="Bi Cheng Wu, with help from Bret Larget and Cameron Jones">
-<meta name="description" content="\(   \def\e{\operatorname{E}}   \def\p{\operatorname{P}}   \def\var{\operatorname{Var}}   \def\sd{\operatorname{SD}}   \def\bin{\operatorname{Bin}}   \def\n{\operatorname{N}}  \)  In this section,...">
+<meta name="description" content="\(   \def\e{\operatorname{E}}   \def\p{\operatorname{P}}   \def\var{\operatorname{Var}}   \def\sd{\operatorname{SD}}   \def\bin{\operatorname{Bin}}   \def\n{\operatorname{N}}  ...">
 <meta name="generator" content="bookdown 0.45 with bs4_book()">
 <meta property="og:title" content="Chapter 10 Intro to Probability | STAT 240 Revamp">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://bwu62.github.io/stat240-revamp/intro-to-probability.html">
-<meta property="og:description" content="\(   \def\e{\operatorname{E}}   \def\p{\operatorname{P}}   \def\var{\operatorname{Var}}   \def\sd{\operatorname{SD}}   \def\bin{\operatorname{Bin}}   \def\n{\operatorname{N}}  \)  In this section,...">
+<meta property="og:description" content="\(   \def\e{\operatorname{E}}   \def\p{\operatorname{P}}   \def\var{\operatorname{Var}}   \def\sd{\operatorname{SD}}   \def\bin{\operatorname{Bin}}   \def\n{\operatorname{N}}  ...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 10 Intro to Probability | STAT 240 Revamp">
-<meta name="twitter:description" content="\(   \def\e{\operatorname{E}}   \def\p{\operatorname{P}}   \def\var{\operatorname{Var}}   \def\sd{\operatorname{SD}}   \def\bin{\operatorname{Bin}}   \def\n{\operatorname{N}}  \)  In this section,...">
+<meta name="twitter:description" content="\(   \def\e{\operatorname{E}}   \def\p{\operatorname{P}}   \def\var{\operatorname{Var}}   \def\sd{\operatorname{SD}}   \def\bin{\operatorname{Bin}}   \def\n{\operatorname{N}}  ...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Roboto_Mono-0.4.10/font.css" rel="stylesheet">
@@ -105,6 +105,7 @@
     \def\sd{\operatorname{SD}}
     \def\bin{\operatorname{Bin}}
     \def\n{\operatorname{N}}
+    \def\se{\operatorname{SE}}
   \)
 </span>
 <div id="intro-to-probability" class="section level1" number="10">
@@ -938,7 +939,9 @@ P(X\le3)&amp;=P(X\!=\!0)+P(X\!=\!1)+P(X\!=\!2)+P(X\!=\!3)\\
 <p>This is called the <strong>continuity correction</strong>, where we adjust our evaluation region under the normal by <span class="math inline">\(\pm0.5\)</span> based on if we’re counting the bars towards the left or right side (if we’re starting somewhere and counting bars towards the left, we <span class="math inline">\(+0.5\)</span> to our bound; otherwise if we’re starting somewhere and counting bars towards the right, we <span class="math inline">\(-0.5\)</span> to our bound, e.g. for <span class="math inline">\(\p(X\ge5)\)</span>, we’d find <span class="math inline">\(\p(Y&gt;4.5)\)</span>).</p>
 <p>We can easily check this correction significantly improves our approximation:</p>
 <div class="sourceCode" id="cb904"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># exact area P(X≤5)</span></span>
+<code class="sourceCode R"><span><span class="co"># define parameters and mu,sigma</span></span>
+<span><span class="va">n</span> <span class="op">=</span> <span class="fl">15</span> ; <span class="va">p</span> <span class="op">=</span> <span class="fl">0.4</span> ; <span class="va">mu</span> <span class="op">=</span> <span class="va">n</span><span class="op">*</span><span class="va">p</span> ; <span class="va">sigma</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">n</span><span class="op">*</span><span class="va">p</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">p</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co"># exact area P(X≤5)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">pbinom</a></span><span class="op">(</span><span class="fl">5</span>,<span class="va">n</span>,<span class="va">p</span><span class="op">)</span></span></code></pre></div>
 <pre><code>[1] 0.4032156</code></pre>
 <div class="sourceCode" id="cb906"><pre class="downlit sourceCode r">
@@ -1168,7 +1171,7 @@ $('body')
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2025-10-28.</p>
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2025-11-05.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

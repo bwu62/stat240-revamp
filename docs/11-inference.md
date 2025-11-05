@@ -198,10 +198,10 @@ $$
 \text{$C\%$ confidence interval}~=~(\text{estimate})~\pm~(\text{crit. value})\cdot(\text{std. error})
 $$
 
- - **$C$** is the **level of confidence** desired. Most commonly, a 95%-level confidence is reported by convention, but this can be any number betweeo 0-100% (not inclusive).
+ - **$C$** is the **level of confidence** desired. Most commonly, a 95%-level confidence is reported by convention, but this can be any number between 0-100% (not inclusive).
  - **Estimate** is your best guess of the true value based on your sample. For example, if you're trying to estimate the probability of heads, you'd use the proportion of heads in your sample.
  - **Critical value** is a multiplier that depends on $C$, the level of confidence. If you want higher confidence, you must cover more values. For a standard 95% CI, this value is usually approximately 2.
- - **Standard error** is what we call an estimate of the true SD using our sample. In out last plot, this would be an estimate of how far the inner gray lines are from the true probability $p=0.5$.
+ - **Standard error** is what we call an estimate of the true SD using our sample. In our last plot, this would be an estimate of how far the inner gray lines are from the true probability $p=0.5$.
 
 We'll cover in detail how to compute each of the above quantities for different experiments in the next few chapters, but for now let's do a quick visual example to help build more intuition.
 
@@ -344,7 +344,7 @@ The interpretations in the previous example are very carefully worded. In hypoth
 
 ### $H_a$ directions
 
-Why did we compute the p-value earlier as $\p(X\ge7)$? One way of thinking about it is the "likeliness" of our dataset here must be found by comparing it with all other possible outcomes for our dataset and ranking it again them. Our p-value of 0.17 earlier basically means it ranks in the top 17% of possible datasets when using total number of heads as a statistic.
+Why did we compute the p-value earlier as $\p(X\ge7)$? One way of thinking about it is the "likeliness" of our dataset here must be found by comparing it with all other possible outcomes for our dataset and ranking it against them. Our p-value of 0.17 earlier basically means it ranks in the top 17% of possible datasets when using total number of heads as a statistic.
 
 Here's a follow-up question then, why do we want to find here the "top percentage" value here by number of heads? The reason for this is that our alternative $H_a:p>0.5$. In order to disprove $H_0$ and support $H_a$, our dataset must get more heads than we would expect vs fair. If instead our alternative hypothesis had been $H_a:p<0.5$, we would've instead computed $\p(X\le7)$, which would have been a much larger value (i.e. much closer to 1 than 0).
 
@@ -408,7 +408,7 @@ This time, instead of simulating or specifying an actual sample, let's just broa
     <img src="11-inference_files/figure-html/unnamed-chunk-13-1.svg" width="672" style="display: block; margin: auto;" />
     </div>
 
-Thus, in order to properly compute the p-value of a given sample, we need to evalute different "tail" areas depending on our $H_a$. Suppose your parameter is $\theta$, your hypothesized value under the null is $\theta_0$, and your sample observed statistic is $\theta_s$. Then:
+Thus, in order to properly compute the p-value of a given sample, we need to evaluate different "tail" areas depending on our $H_a$. Suppose your parameter is $\theta$, your hypothesized value under the null is $\theta_0$, and your sample observed statistic is $\theta_s$. Then:
 
  - For one-sided hypotheses, simply take the corresponding "tail" area on that side,
 
@@ -424,4 +424,12 @@ Thus, in order to properly compute the p-value of a given sample, we need to eva
 
    - Furthermore, if the distribution is not only symmetric but also centered around 0 (as in the example above), the two-sided p-value expression is often written $\p(|\theta|\!\ge\!|\theta_s|)$.
 
+:::{.note}
+Here's a quick summary of choosing a direction for $H_a$ and how it impacts the p-value computation:
 
+ - If you suspect $\theta>\theta_0$, and thus only wish to reject $H_0$ if the observed sample statistic $\theta_s$ is too high compared to $\theta_0$, choose $H_a:\theta>\theta_0$ and take the **right side** of the observed sample statistic.
+
+ - If you suspect $\theta<\theta_0$, and thus only wish to reject $H_0$ if the observed sample statistic $\theta_s$ is too low compared to $\theta_0$, choose $H_a:\theta<\theta_0$ and take the **left side** of the observed sample statistic.
+
+ - If you have no suspected side OR if you want to keep both options open, and thus wish to reject $H_0$ if the observed sample statistic $\theta_s$ is either too low OR too high compared to $\theta_0$, choose $H_a:\theta\ne\theta_0$ and take the **two outer tails** of your observed sample statistic.
+:::

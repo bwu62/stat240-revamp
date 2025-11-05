@@ -201,6 +201,8 @@ rejection-regions
 proportions
 one-proportion
 model-notation
+confidence-interval
+hypothesis-testing-1
 means
 regression
 datasets
