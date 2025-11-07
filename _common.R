@@ -2,7 +2,7 @@
 # ensure necessary packages are installed
 list.of.packages = c(
   "devtools", "rmarkdown", "tidyverse",
-  "downlit", "DescTools", "sn",
+  "downlit", "DescTools", "sn", "xlsx",
   "palmerpenguins", "GGally", "plotly",
   "diagram", "latex2exp", "gridExtra"
 )
