@@ -280,7 +280,7 @@ A hypothesis test usually starts with specifying a pair of **competing hypothese
 $$
 \begin{align}
 H_0&:\text{parameter}~\theta=\theta_0\\
-H_a&:\text{parameter}~\theta\left.\begin{cases}&<\theta_0\\\text{one of}\!\!&\neq\theta_0\\&>\theta_0\end{cases}\right\rbrace
+H_a&:\text{parameter}~\theta\left.\begin{cases}&<\theta_0\\\text{one of}\!\!&\ne\theta_0\\&>\theta_0\end{cases}\right\rbrace
 \end{align}
 $$
 
