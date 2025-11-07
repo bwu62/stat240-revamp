@@ -2,6 +2,8 @@
 
 # Proportions
 
+
+
 Let's look specifically at proportions-type inference setups, where we apply a **binomial model** to sample proportions to infer about an underlying **probability** in the population. We will divide this into two scenarios:
 
  - One-proportion scenario, where there is a single population with a single probability parameter of interest, and
@@ -84,7 +86,7 @@ barplot(table(rolls))
 ```
 
 :::{.i6}
-<img src="12-proportions_files/figure-html/unnamed-chunk-4-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="12-proportions_files/figure-html/unnamed-chunk-5-1.svg" width="672" style="display: block; margin: auto;" />
 :::
 
 Suppose my question of interest is whether this specific die design is in fact fair. There are different ways of testing this^[the most [powerful](https://www.scribbr.com/statistics/statistical-power) method is probably a [chi-squared test](https://www.scribbr.com/statistics/chi-square-tests).], but a simple way using a proportions-type setup is to ask **whether the two triangular-shaped faces** (which are 4 and 5) **are observed 2/5 or 40% of the time**.
@@ -122,7 +124,7 @@ $$
      labs(x=NULL, y=NULL, title=TeX("$z_{\\alpha/2}$ critical value for Z (red areas sum to $\\alpha$)"))
    ```
    
-   <img src="12-proportions_files/figure-html/unnamed-chunk-5-1.svg" width="355.2" style="display: block; margin: auto;" />
+   <img src="12-proportions_files/figure-html/unnamed-chunk-6-1.svg" width="355.2" style="display: block; margin: auto;" />
    ::::
    
    This value is called $z_{\alpha/2}$ since by convention the subscript denotes the area of only the right-corner, which is $\alpha/2$ by symmetry. To compute $\alpha/2$ for a C% interval, you need to ask `qnorm()` for the $(1-\alpha/2)$--percentile, e.g. for a 95% confidence interval, we seek the 97.5%-tile:
@@ -252,7 +254,7 @@ tibble(k=floor(mu-3*sd):ceiling(mu+3*sd),p=dbinom(k,n,0.4)) %>%
   ggtitle(str_glue("Distribution of X under null hypothesis, i.e. Bin({n},0.4)"))
 ```
 
-<img src="12-proportions_files/figure-html/unnamed-chunk-9-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="12-proportions_files/figure-html/unnamed-chunk-10-1.svg" width="672" style="display: block; margin: auto;" />
 :::
 
 Recall for a two-sided alternative, we take the "outer-tail" corresponding to our observed statistic and multiply by 2 to get our final p-value. Here, this means we look for $2\cdot\p(X\le79)$ where $X\sim\bin(200,0.4)$.
@@ -441,5 +443,64 @@ This time, the p-values are exactly what we found previously (up to rounding).
 
 ### Model notation
 
-In the two-proportions scenario, 
+In the two-proportions scenario, suppose we draw **samples of size $n_1$, $n_2$ from two different populations**, and we again assume everything is independent (both within and between the two samples). Suppose the populations have **true probabilities $p_1$, $p_2$ of succeeding** for each trial, and again these are treated as true unknown constants.
+
+Let **$x_1$, $x_2$ be observed numbers of successes in our samples** where $0\le x_1\le n_1$ and $0\le x_2\le n_2$ and define **$\hat p_1=x_1/n_1$, $\hat p_2=x_2/n_2$ as the corresponding proportions of successes in our samples**.
+
+Then, our models for the true distributions are $X_1\sim\bin(n_1,p_1)$ and $X_2\sim\bin(n_2,p_2)$. Again, we know from the LLN that $\hat p_1\to p_1$ and $\hat p_2\to p_2$ so we take **$\hat p_1$, $\hat p_2$ as our point estimates for $p_1$, $p_2$**.
+
+So far it's all pretty intuitive.
+
+:::{.eg}
+Again, let's see all this in the context of an example. Let's use this dataset of [thoracic surgery data](https://archive.ics.uci.edu/dataset/277/thoracic+surgery+data) from the Wroclaw Thoracic Surgery Centre at the [University of Wroclaw](https://uwr.edu.pl/en). A slightly cleaned version can be found here: [`thoracic.csv`](data/thoracic.csv).
+
+
+```
+# A tibble: 470 × 17
+  dgn     fvc  fev1 perf  pain  haem  dysp  cough weak  size  type2dm mi6  
+  <chr> <dbl> <dbl> <chr> <lgl> <lgl> <lgl> <lgl> <lgl> <chr> <lgl>   <lgl>
+1 DGN2   2.88  2.16 PRZ1  FALSE FALSE FALSE TRUE  TRUE  OC14  FALSE   FALSE
+2 DGN3   3.4   1.88 PRZ0  FALSE FALSE FALSE FALSE FALSE OC12  FALSE   FALSE
+3 DGN3   2.76  2.08 PRZ1  FALSE FALSE FALSE TRUE  FALSE OC11  FALSE   FALSE
+4 DGN3   3.68  3.04 PRZ0  FALSE FALSE FALSE FALSE FALSE OC11  FALSE   FALSE
+5 DGN3   2.44  0.96 PRZ2  FALSE TRUE  FALSE TRUE  TRUE  OC11  FALSE   FALSE
+# ℹ 465 more rows
+# ℹ 5 more variables: pad <lgl>, smoker <lgl>, asthma <lgl>, age <dbl>,
+#   survive1 <lgl>
+```
+
+``` r
+# remember to load packages and set any desired options
+thoracic <- read_csv("https://bwu62.github.io/stat240-revamp/data/thoracic.csv")
+print(thoracic)
+```
+
+There are a lot of columns here we can use (see linked page for explanations of all variables), but just to keep the example simple, suppose we want to see if patients who are smokers have worse 1-year survival rates than non-smokers (spoiler: they do).
+
+Let's consider population 1 to be smokers and population 2 to be non-smokers. For each population, we can use `dplyr` to calculate the number of 1-year survivors in each sample ($x_1$, $x_2$) and divide by the total number of smokers and non-smokers ($n_1$, $n_2$) to get the 1-year survival rates for each group ($\hat p_1$, $\hat p_2$).
+
+
+``` r
+thoracic_smoker_summary <- thoracic %>% 
+  count(smoker, survive1, name="x") %>% 
+  group_by(smoker) %>% 
+  mutate(n=sum(x)) %>% 
+  summarise(x=last(x), n=last(n), phat=x/n) %>% 
+  arrange(desc(smoker))
+thoracic_smoker_summary
+```
+
+```
+# A tibble: 2 × 4
+  smoker     x     n  phat
+  <lgl>  <int> <int> <dbl>
+1 TRUE     323   386 0.837
+2 FALSE     77    84 0.917
+```
+
+
+We can see now that $x_1=323$, $x_2=77$, $n_1=386$, $n_2=84$, $\hat p_1=0.837$, $\hat p_2=0.917$.
+
+We can now take this dataset and proceed to find a confidence interval or conduct a hypothesis test.
+:::
 
