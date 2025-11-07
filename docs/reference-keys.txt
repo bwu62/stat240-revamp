@@ -203,6 +203,7 @@ one-proportion
 model-notation
 confidence-interval
 hypothesis-testing-1
+r-method
 means
 regression
 datasets

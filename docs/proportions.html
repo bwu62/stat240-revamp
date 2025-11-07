@@ -187,7 +187,7 @@
 <h3>
 <span class="header-section-number">12.1.2</span> Confidence interval<a class="anchor" aria-label="anchor" href="#confidence-interval"><i class="fas fa-link"></i></a>
 </h3>
-<p>For a one proportion type setup, the confidence interval has the following form:</p>
+<p>For a one-proportion scenario, the confidence interval has the following form:</p>
 <p><span class="math display">\[
 \text{$C\%$ or $(1\!-\!\alpha)$ interval}~=~\hat p~\pm~z_{\alpha/2}\cdot\sqrt{\frac{\hat p(1-\hat p)}{n}},~\text{ where}
 \]</span></p>
@@ -226,21 +226,27 @@
 <div class="sourceCode" id="cb943"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># define x, n</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">rolls</span><span class="op">&gt;=</span><span class="fl">4</span><span class="op">)</span> ; <span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">rolls</span><span class="op">)</span></span>
-<span><span class="co"># define p-hat</span></span>
+<span><span class="va">x</span></span></code></pre></div>
+<pre><code>[1] 79</code></pre>
+<div class="sourceCode" id="cb945"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">n</span></span></code></pre></div>
+<pre><code>[1] 200</code></pre>
+<div class="sourceCode" id="cb947"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># define p-hat</span></span>
 <span><span class="va">phat</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">/</span><span class="va">n</span>   <span class="co"># alternative shortcut: phat &lt;- mean(rolls&gt;=4)</span></span>
 <span><span class="va">phat</span></span></code></pre></div>
 <pre><code>[1] 0.395</code></pre>
-<div class="sourceCode" id="cb945"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb949"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 95% confidence interval, using c(-1,1) as a shorcut for ±</span></span>
 <span><span class="va">phat</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="fl">0.975</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">phat</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">phat</span><span class="op">)</span><span class="op">/</span><span class="va">n</span><span class="op">)</span></span></code></pre></div>
 <pre><code>[1] 0.32725 0.46275</code></pre>
 <p>Thus, a 95% confidence interval for <span class="math inline">\(p\)</span>, i.e. the true probability of 4 or 5, is (0.33,0.46), or in other words, <strong>we are 95% confident the true <span class="math inline">\(p\)</span> is between 0.33 and 0.46</strong>.</p>
 <p>If a different level of confidence is desired, simply change the argument to <code><a href="https://rdrr.io/r/stats/Normal.html">qnorm()</a></code>:</p>
-<div class="sourceCode" id="cb947"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb951"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># e.g. for 90% interval, implied alpha=0.10 so we want qnorm of (1-0.1/2)=0.95</span></span>
 <span><span class="va">phat</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="fl">0.95</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">phat</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">phat</span><span class="op">)</span><span class="op">/</span><span class="va">n</span><span class="op">)</span></span></code></pre></div>
 <pre><code>[1] 0.3381424 0.4518576</code></pre>
-<div class="sourceCode" id="cb949"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb953"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># a shortcut is to take the midpoint between the confidence level and 1</span></span>
 <span><span class="co"># another example, for a 99% interval, we want qnorm of 0.995</span></span>
 <span><span class="va">phat</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="fl">0.995</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">phat</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">phat</span><span class="op">)</span><span class="op">/</span><span class="va">n</span><span class="op">)</span></span></code></pre></div>
@@ -252,18 +258,139 @@
 <h3>
 <span class="header-section-number">12.1.3</span> Hypothesis testing<a class="anchor" aria-label="anchor" href="#hypothesis-testing-1"><i class="fas fa-link"></i></a>
 </h3>
-<p>We saw in our sample <span class="math inline">\(\hat p=0.395\)</span> was quite close to what we expected under a fair die of <span class="math inline">\(0.4\)</span>. Let’s formally test this using a hypothesis test.</p>
-<p>Recall from the previous section if we wish to reject <span class="math inline">\(H_0\)</span> if our sample statistic is too high OR too low, we choose the two-sided alternative. This applies here, since if <span class="math inline">\(\hat p\)</span> is too low or too high vs <span class="math inline">\(0.4\)</span>, we should reject. Thus, we choose <span class="math inline">\(p_0=0.4\)</span>, and our hypotheses are:</p>
+<p>For a one-proportion scenario, where you wish to test the following hypotheses:</p>
+<p><span class="math display">\[
+H_0:p=p_0~~~~~~~~\\
+~~~~~~~~H_a:p&lt;,\,\ne,\,\text{or}&gt; p_0
+\]</span></p>
+<p>You start, as always, by <strong>assuming the null</strong>, i.e. suppose that <span class="math inline">\(X\sim\bin(n,p_0)\)</span>. Note this means your sample observation <span class="math inline">\(x\)</span> is drawn from this distribution.</p>
+<p>For the p-value, simply <strong>compute the appropriate tail area of <span class="math inline">\(x\)</span> corresponding to the alternative</strong>. Remember the rule is for one-sided take the corresponding side tail, and for two-sided take the two outer tails (or take one outer tail and double it).</p>
+<p>Then finally, compare with <span class="math inline">\(\alpha\)</span> and make a conclusion.</p>
+<div class="eg">
+<p>Continuing with the die example, we saw in our sample <span class="math inline">\(\hat p=0.395\)</span> was quite close to what we expected under a fair die of <span class="math inline">\(p_0=0.4\)</span>. Let’s formally test this. Recall from the previous section if we wish to reject <span class="math inline">\(H_0\)</span> if our sample statistic is too high OR too low, we choose the two-sided alternative. This applies here, since if <span class="math inline">\(\hat p\)</span> is too low or too high vs <span class="math inline">\(0.4\)</span>, we should reject. Thus, we choose:</p>
 <p><span class="math display">\[
 H_0:p=0.4\\
 H_a:p\ne0.4
 \]</span></p>
-<p>Now we ask the key question for hypothesis testing: <strong>what is the distribution of <span class="math inline">\(X\)</span> under the null hypothesis?</strong>. Well under the null, we know <span class="math inline">\(X\sim\bin(200,0.4)\)</span>. This has the following distribution:</p>
+<p>Next, under the null we have <span class="math inline">\(X\sim\bin(200,0.4)\)</span>. This distribution is shown below, along with a red line at our observed sample <span class="math inline">\(x=79\)</span>.</p>
 <div class="fold s">
-<div class="sourceCode" id="cb951"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>k<span class="op">=</span><span class="fl">50</span><span class="op">:</span><span class="fl">110</span>,p<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">dbinom</a></span><span class="op">(</span><span class="va">k</span>,<span class="va">n</span>,<span class="fl">0.4</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">k</span>,y<span class="op">=</span><span class="va">p</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"Distribution of X under null hypothesis, i.e. Bin(200,0.4)"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb955"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mu</span> <span class="op">=</span> <span class="va">n</span><span class="op">*</span><span class="fl">.4</span> ; <span class="va">sd</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">n</span><span class="op">*</span><span class="fl">.4</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="fl">.4</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>k<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">floor</a></span><span class="op">(</span><span class="va">mu</span><span class="op">-</span><span class="fl">3</span><span class="op">*</span><span class="va">sd</span><span class="op">)</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">ceiling</a></span><span class="op">(</span><span class="va">mu</span><span class="op">+</span><span class="fl">3</span><span class="op">*</span><span class="va">sd</span><span class="op">)</span>,p<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">dbinom</a></span><span class="op">(</span><span class="va">k</span>,<span class="va">n</span>,<span class="fl">0.4</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">k</span>,y<span class="op">=</span><span class="va">p</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept<span class="op">=</span><span class="va">x</span>, color<span class="op">=</span><span class="st">"red"</span>, linewidth<span class="op">=</span><span class="fl">1.5</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_glue.html">str_glue</a></span><span class="op">(</span><span class="st">"Distribution of X under null hypothesis, i.e. Bin({n},0.4)"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="12-proportions_files/figure-html/unnamed-chunk-9-1.svg" width="672" style="display: block; margin: auto;"></div>
+</div>
+<p>Recall for a two-sided alternative, we take the “outer-tail” corresponding to our observed statistic and multiply by 2 to get our final p-value. Here, this means we look for <span class="math inline">\(2\cdot\p(X\le79)\)</span> where <span class="math inline">\(X\sim\bin(200,0.4)\)</span>.</p>
+<div class="sourceCode" id="cb956"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># our two-sided p-value here</span></span>
+<span><span class="fl">2</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">pbinom</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">n</span>, <span class="fl">0.4</span><span class="op">)</span></span></code></pre></div>
+<pre><code>[1] 0.9463115</code></pre>
+<p><strong>Important note: if our sample <span class="math inline">\(x\)</span> were on the <em>RIGHT</em> half of the curve instead of the left, then the “outer-tail” here would be the <em>RIGHT</em> side tail, </strong>i.e. <span class="math inline">\(\p(X\ge x)\)</span>.</p>
+<p>If instead our alternative had been <span class="math inline">\(&lt;\)</span> or <span class="math inline">\(&gt;\)</span>, then instead the p-value here would be <span class="math inline">\(\p(X\le79)\)</span> or <span class="math inline">\(\p(X\ge79)\)</span> respectively.</p>
+<div class="sourceCode" id="cb958"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># p-value if Ha had been p&lt;0.4</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">pbinom</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">n</span>, <span class="fl">0.4</span><span class="op">)</span></span></code></pre></div>
+<pre><code>[1] 0.4731557</code></pre>
+<div class="sourceCode" id="cb960"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># p-value if Ha had been p&gt;0.4 (note the -1 to include the bar at x)</span></span>
+<span><span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">pbinom</a></span><span class="op">(</span><span class="va">x</span><span class="op">-</span><span class="fl">1</span>, <span class="va">n</span>, <span class="fl">0.4</span><span class="op">)</span></span></code></pre></div>
+<pre><code>[1] 0.5838754</code></pre>
+<p>In any of these cases, we see the p-value is quite large compared to <span class="math inline">\(\alpha\)</span>. This means our experimental result of <span class="math inline">\(x=79\)</span> was in fact close to our expectations, so there’s no evidence to refute the null. Thus, we do not reject the null, and we conclude the die appears to be fair.</p>
+</div>
+</div>
+<div id="r-method" class="section level3" number="12.1.4">
+<h3>
+<span class="header-section-number">12.1.4</span> R method<a class="anchor" aria-label="anchor" href="#r-method"><i class="fas fa-link"></i></a>
+</h3>
+<p>Of course, you can also use R to compute the interval or do the testing. This is a good way to check your manual calculations to make sure you did it right. The function for both is <code><a href="https://rdrr.io/r/stats/binom.test.html">binom.test()</a></code>. It accepts several arguments:</p>
+<ul>
+<li><p><code>x</code> is the observed sample count <span class="math inline">\(x\)</span></p></li>
+<li><p><code>n</code> is the sample size <code>n</code></p></li>
+<li><p><code>p</code> (defaults to 0.5) is the hypothesized proportion under the null <span class="math inline">\(p_0\)</span></p></li>
+<li><p><code>alternative</code> (defaults to <code>"two.sided"</code>) controls the direction of the alternative and can be set instead to either <code>"greater"</code> or <code>"less"</code></p></li>
+<li><p><code>conf.level</code> (defaults to 0.95) controls the desired confidence level</p></li>
+</ul>
+<p>Important note: setting a one-sided alternative will generate a one-sided confidence interval with one end at <span class="math inline">\(\pm\infty\)</span>, which is generally not what we desire, so if you want a standard confidence interval as well as a one-sided test, you should run the function twice.</p>
+<div class="eg">
+<p>Continuing with the die example, recall we still have <code>x</code>, <code>n</code> defined</p>
+<div class="sourceCode" id="cb962"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">n</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>[1]  79 200</code></pre>
+<p>Let’s compute a 95% confidence interval for our problem:</p>
+<div class="sourceCode" id="cb964"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">n</span>, p<span class="op">=</span><span class="fl">0.4</span><span class="op">)</span></span></code></pre></div>
+<pre><code>
+    Exact binomial test
+
+data:  x and n
+number of successes = 79, number of trials = 200, p-value = 0.9425
+alternative hypothesis: true probability of success is not equal to 0.4
+95 percent confidence interval:
+ 0.3267650 0.4663964
+sample estimates:
+probability of success 
+                 0.395 </code></pre>
+<p>Note this interval is very slightly wider than our computation, since it uses a modified method called the <a href="https://en.wikipedia.org/wiki/Binomial_proportion_confidence_interval#Clopper%E2%80%93Pearson_interval">Clopper-Pearson</a> formula, which is technically slightly better than our method which is called the <a href="https://en.wikipedia.org/wiki/Binomial_proportion_confidence_interval#Problems_with_using_a_normal_approximation_or_%22Wald_interval%22">Wald</a> interval, but this is beyond the scope of STAT240. For our purposes we will prefer the simpler Wald method.</p>
+<p>We can also compute a 90% or 99% interval:</p>
+<div class="sourceCode" id="cb966"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">n</span>, p<span class="op">=</span><span class="fl">0.4</span>, conf.level<span class="op">=</span><span class="fl">0.90</span><span class="op">)</span></span></code></pre></div>
+<pre><code>
+    Exact binomial test
+
+data:  x and n
+number of successes = 79, number of trials = 200, p-value = 0.9425
+alternative hypothesis: true probability of success is not equal to 0.4
+90 percent confidence interval:
+ 0.3371018 0.4552518
+sample estimates:
+probability of success 
+                 0.395 </code></pre>
+<div class="sourceCode" id="cb968"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">n</span>, p<span class="op">=</span><span class="fl">0.4</span>, conf.level<span class="op">=</span><span class="fl">0.99</span><span class="op">)</span></span></code></pre></div>
+<pre><code>
+    Exact binomial test
+
+data:  x and n
+number of successes = 79, number of trials = 200, p-value = 0.9425
+alternative hypothesis: true probability of success is not equal to 0.4
+99 percent confidence interval:
+ 0.3069060 0.4882182
+sample estimates:
+probability of success 
+                 0.395 </code></pre>
+<p>For a hypothesis test, note the previous outputs all show that the two-sided p-value is 0.9425. This is once again very slightly different from our computation, since it uses a slightly more exact method where instead of doing <span class="math inline">\(2\cdot\p(X\le79)\)</span>, it computes <span class="math inline">\(\p(X\le79)+\p(X\ge81)\)</span>.</p>
+<div class="sourceCode" id="cb970"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">pbinom</a></span><span class="op">(</span><span class="fl">79</span>,<span class="fl">200</span>,<span class="fl">0.4</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">pbinom</a></span><span class="op">(</span><span class="fl">80</span>,<span class="fl">200</span>,<span class="fl">.4</span><span class="op">)</span></span></code></pre></div>
+<pre><code>[1] 0.9424936</code></pre>
+<p>Again, we can feel free to continue doubling the outer tail area on one side as an approximation, which should usually be fairly accurate. We can also run one-sided tests if we wish:</p>
+<div class="sourceCode" id="cb972"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">n</span>, p<span class="op">=</span><span class="fl">0.4</span>, alternative<span class="op">=</span><span class="st">"less"</span><span class="op">)</span></span></code></pre></div>
+<pre><code>
+    Exact binomial test
+
+data:  x and n
+number of successes = 79, number of trials = 200, p-value = 0.4732
+alternative hypothesis: true probability of success is less than 0.4
+95 percent confidence interval:
+ 0.0000000 0.4552518
+sample estimates:
+probability of success 
+                 0.395 </code></pre>
+<div class="sourceCode" id="cb974"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">n</span>, p<span class="op">=</span><span class="fl">0.4</span>, alternative<span class="op">=</span><span class="st">"greater"</span><span class="op">)</span></span></code></pre></div>
+<pre><code>
+    Exact binomial test
+
+data:  x and n
+number of successes = 79, number of trials = 200, p-value = 0.5839
+alternative hypothesis: true probability of success is greater than 0.4
+95 percent confidence interval:
+ 0.3371018 1.0000000
+sample estimates:
+probability of success 
+                 0.395 </code></pre>
+<p>This time, the p-values are exactly what we found previously (up to rounding).</p>
 </div>
 
 </div>
@@ -385,6 +512,7 @@ $('body')
 <li><a class="nav-link" href="#model-notation"><span class="header-section-number">12.1.1</span> Model notation</a></li>
 <li><a class="nav-link" href="#confidence-interval"><span class="header-section-number">12.1.2</span> Confidence interval</a></li>
 <li><a class="nav-link" href="#hypothesis-testing-1"><span class="header-section-number">12.1.3</span> Hypothesis testing</a></li>
+<li><a class="nav-link" href="#r-method"><span class="header-section-number">12.1.4</span> R method</a></li>
 </ul>
 </li>
 </ul>
