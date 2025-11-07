@@ -470,3 +470,38 @@ html %>% read_html %>% html_node(xpath="(//table)[last()]") %>% html_table %>%
 -->
 
 
+## Thoracic Surgery
+
+For the two proportions section I found this dataset of [thoracic surgery outcomes](https://archive.ics.uci.edu/dataset/277/thoracic+surgery+data) from the Wroclaw Thoracic Surgery Centre at the University of Wroclaw. Worked perfectly for the example I had in mind.
+
+### Process data
+
+```{r}
+temp_path <- tempfile()
+download.file("https://archive.ics.uci.edu/static/public/277/thoracic+surgery+data.zip", destfile=temp_path)
+unzip(temp_path)
+filename <- list.files(".","Tho.*arff")
+thoracic <- read_csv(filename,skip=21,col_names=c(
+  "dgn","fvc","fev1","perf","pain","haem","dysp","cough","weak",
+  "size","type2dm","mi6","pad","smoking","asthma","age","survive1")) %>%
+  mutate(survive1 = !survive1) # properly recode survival column
+
+# remove temp file
+unlink(filename)
+```
+
+### Write out data
+
+```{r}
+write_csv(thoracic, "data/thoracic.csv")
+```
+```{r,eval=T,include=F}
+thoracic <- read_csv("data/thoracic.csv")
+```
+
+### Inspect data
+
+```{r}
+thoracic
+```
+
