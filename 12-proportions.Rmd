@@ -329,3 +329,21 @@ We can see now that $x_1=`r th[1,2]`$, $x_2=`r th[2,2]`$, $n_1=`r th[1,3]`$, $n_
 We can now take this dataset and proceed to find a confidence interval or conduct a hypothesis test.
 :::
 
+### Confidence interval
+
+In a two-proportions scenario, generally our goal is to run inference on the **difference of the underlying population probabilities $p_1-p_2$**. We think of this as our parameter of interest.
+
+For this parameter, our point estimate naturally is the **difference of our sample proportions $\hat p_1-\hat p_2$**. Then, our interval takes the form:
+
+$$
+\text{$C\%$ or $(1\!-\!\alpha)$ interval}~=~(\hat p_1-\hat p_2)~\pm~z_{\alpha/2}\cdot\sqrt{\frac{\hat p_1(1-\hat p_1)}{n_1}+\frac{\hat p_2(1-\hat p_2)}{n_2}},~\text{ where}
+$$
+
+- $\hat p_1-\hat p_2$ is our point estimate,
+
+- $z_{\alpha/2}$ is the same critical value,
+
+- $\sqrt{\frac{\hat p_1(1-\hat p_1)}{n_1}+\frac{\hat p_2(1-\hat p_2)}{n_2}}$ is the **standard error of the difference of our sample proportions**, i.e. $\se(\hat p_1-\hat p_2)$.
+  - This formula comes from the fact that for independent $X$, $Y$, $\var(X\pm Y)=\var(X)+\var(Y)$
+
+
