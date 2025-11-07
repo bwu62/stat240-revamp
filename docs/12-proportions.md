@@ -436,3 +436,10 @@ probability of success
 This time, the p-values are exactly what we found previously (up to rounding).
 :::
 
+
+## Two proportions
+
+### Model notation
+
+In the two-proportions scenario, 
+

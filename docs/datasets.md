@@ -33,6 +33,7 @@ Here's a convenient list of all dataset files generated. Note that **not ALL fil
  - [`fertility_meta.csv`](data/fertility_meta.csv)
  - [`fertility_raw.csv`](data/fertility_raw.csv)
  - [`penguins.csv`](data/penguins.csv)
+ - [`thoracic.csv`](data/thoracic.csv)
 
 Alternatively, you can also run the following line, which will **download ALL files above to your current working directory**. It's recommended to first set your working directory to an appropriate place before running this, e.g. to the `data/` directory in your `STAT240/` course folder.
 
@@ -532,4 +533,40 @@ html %>% read_html %>% html_node(xpath="(//table)[last()]") %>% html_table %>%
 ```
 -->
 
+
+## Thoracic Surgery
+
+For the two proportions section I found this dataset of [thoracic surgery outcomes](https://archive.ics.uci.edu/dataset/277/thoracic+surgery+data) from the Wroclaw Thoracic Surgery Centre at the University of Wroclaw. Worked perfectly for the example I had in mind.
+
+### Process data
+
+
+``` r
+temp_path <- tempfile()
+download.file("https://archive.ics.uci.edu/static/public/277/thoracic+surgery+data.zip", destfile=temp_path)
+unzip(temp_path)
+filename <- list.files(".","Tho.*arff")
+thoracic <- read_csv(filename,skip=21,col_names=c(
+  "dgn","fvc","fev1","perf","pain","haem","dysp","cough","weak",
+  "size","type2dm","mi6","pad","smoking","asthma","age","survive1")) %>%
+  mutate(survive1 = !survive1) # properly recode survival column
+
+# remove temp file
+unlink(filename)
+```
+
+### Write out data
+
+
+``` r
+write_csv(thoracic, "data/thoracic.csv")
+```
+
+
+### Inspect data
+
+
+``` r
+thoracic
+```
 

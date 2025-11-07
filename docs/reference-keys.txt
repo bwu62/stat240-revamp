@@ -204,6 +204,8 @@ model-notation
 confidence-interval
 hypothesis-testing-1
 r-method
+two-proportions
+model-notation-1
 means
 regression
 datasets
@@ -226,6 +228,10 @@ write-out-raw-data
 process-more-tidy-version
 write-out-tidy-data
 inspect-data-3
+thoracic-surgery
+process-data-3
+write-out-data-3
+inspect-data-4
 cheat-sheets
 rstudio-ide
 base-r

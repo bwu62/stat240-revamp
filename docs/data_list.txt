@@ -7,3 +7,4 @@ https://bwu62.github.io/stat240-revamp/data/fertility.csv
 https://bwu62.github.io/stat240-revamp/data/fertility_meta.csv
 https://bwu62.github.io/stat240-revamp/data/fertility_raw.csv
 https://bwu62.github.io/stat240-revamp/data/penguins.csv
+https://bwu62.github.io/stat240-revamp/data/thoracic.csv

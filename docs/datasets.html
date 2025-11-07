@@ -134,6 +134,7 @@
 <li><a href="data/fertility_meta.csv"><code>fertility_meta.csv</code></a></li>
 <li><a href="data/fertility_raw.csv"><code>fertility_raw.csv</code></a></li>
 <li><a href="data/penguins.csv"><code>penguins.csv</code></a></li>
+<li><a href="data/thoracic.csv"><code>thoracic.csv</code></a></li>
 </ul>
 <p>Alternatively, you can also run the following line, which will <strong>download ALL files above to your current working directory</strong>. It’s recommended to first set your working directory to an appropriate place before running this, e.g. to the <code>data/</code> directory in your <code>STAT240/</code> course folder.</p>
 <div class="sourceCode" id="cb977"><pre class="downlit sourceCode r">
@@ -230,7 +231,7 @@
 <span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html">write_csv</a></span><span class="op">(</span><span class="va">eruptions_recent</span>,file<span class="op">=</span><span class="st">"data/eruptions_recent.csv"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html">write_tsv</a></span><span class="op">(</span><span class="va">eruptions_recent</span>,file<span class="op">=</span><span class="st">"data/eruptions_recent.tsv"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html">write_delim</a></span><span class="op">(</span><span class="va">eruptions_recent</span>,file<span class="op">=</span><span class="st">"data/eruptions_recent.delim"</span>,delim<span class="op">=</span><span class="st">"|"</span>,na<span class="op">=</span><span class="st">""</span><span class="op">)</span></span>
-<span><span class="va">eruptions_recent</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">as.data.frame</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">write.xlsx</span><span class="op">(</span>file<span class="op">=</span><span class="st">"data/eruptions_recent.xlsx"</span>,row.names<span class="op">=</span><span class="cn">F</span>,showNA<span class="op">=</span><span class="cn">F</span><span class="op">)</span></span>
+<span><span class="va">eruptions_recent</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">as.data.frame</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/xlsx/man/write.xlsx.html">write.xlsx</a></span><span class="op">(</span>file<span class="op">=</span><span class="st">"data/eruptions_recent.xlsx"</span>,row.names<span class="op">=</span><span class="cn">F</span>,showNA<span class="op">=</span><span class="cn">F</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># originally line below was b/c I wanted to prep example for read_table but turns out</span></span>
 <span><span class="co"># its behavior changed recentlyish https://www.tidyverse.org/blog/2021/07/readr-2-0-0/</span></span>
@@ -598,6 +599,43 @@ html %>% read_html %>% html_node(xpath="(//table)[last()]") %>% html_table %>%
   setNames(c("number","scores","coin_toss","coin_winner","game_winner")) -> sbcoins
 ```
 -->
+</div>
+</div>
+<div id="thoracic-surgery" class="section level2" number="15.6">
+<h2>
+<span class="header-section-number">A.6</span> Thoracic Surgery<a class="anchor" aria-label="anchor" href="#thoracic-surgery"><i class="fas fa-link"></i></a>
+</h2>
+<p>For the two proportions section I found this dataset of <a href="https://archive.ics.uci.edu/dataset/277/thoracic+surgery+data">thoracic surgery outcomes</a> from the Wroclaw Thoracic Surgery Centre at the University of Wroclaw. Worked perfectly for the example I had in mind.</p>
+<div id="process-data-3" class="section level3" number="15.6.1">
+<h3>
+<span class="header-section-number">A.6.1</span> Process data<a class="anchor" aria-label="anchor" href="#process-data-3"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb998"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">temp_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span><span class="op">(</span><span class="st">"https://archive.ics.uci.edu/static/public/277/thoracic+surgery+data.zip"</span>, destfile<span class="op">=</span><span class="va">temp_path</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/unzip.html">unzip</a></span><span class="op">(</span><span class="va">temp_path</span><span class="op">)</span></span>
+<span><span class="va">filename</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="st">"."</span>,<span class="st">"Tho.*arff"</span><span class="op">)</span></span>
+<span><span class="va">thoracic</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="va">filename</span>,skip<span class="op">=</span><span class="fl">21</span>,col_names<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
+<span>  <span class="st">"dgn"</span>,<span class="st">"fvc"</span>,<span class="st">"fev1"</span>,<span class="st">"perf"</span>,<span class="st">"pain"</span>,<span class="st">"haem"</span>,<span class="st">"dysp"</span>,<span class="st">"cough"</span>,<span class="st">"weak"</span>,</span>
+<span>  <span class="st">"size"</span>,<span class="st">"type2dm"</span>,<span class="st">"mi6"</span>,<span class="st">"pad"</span>,<span class="st">"smoking"</span>,<span class="st">"asthma"</span>,<span class="st">"age"</span>,<span class="st">"survive1"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>survive1 <span class="op">=</span> <span class="op">!</span><span class="va">survive1</span><span class="op">)</span> <span class="co"># properly recode survival column</span></span>
+<span></span>
+<span><span class="co"># remove temp file</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html">unlink</a></span><span class="op">(</span><span class="va">filename</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="write-out-data-3" class="section level3" number="15.6.2">
+<h3>
+<span class="header-section-number">A.6.2</span> Write out data<a class="anchor" aria-label="anchor" href="#write-out-data-3"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb999"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html">write_csv</a></span><span class="op">(</span><span class="va">thoracic</span>, <span class="st">"data/thoracic.csv"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="inspect-data-4" class="section level3" number="15.6.3">
+<h3>
+<span class="header-section-number">A.6.3</span> Inspect data<a class="anchor" aria-label="anchor" href="#inspect-data-4"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb1000"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">thoracic</span></span></code></pre></div>
 
 </div>
 </div>
@@ -741,6 +779,13 @@ $('body')
 <li><a class="nav-link" href="#process-more-tidy-version"><span class="header-section-number">A.5.3</span> Process more (tidy version)</a></li>
 <li><a class="nav-link" href="#write-out-tidy-data"><span class="header-section-number">A.5.4</span> Write out tidy data</a></li>
 <li><a class="nav-link" href="#inspect-data-3"><span class="header-section-number">A.5.5</span> Inspect data</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#thoracic-surgery"><span class="header-section-number">A.6</span> Thoracic Surgery</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#process-data-3"><span class="header-section-number">A.6.1</span> Process data</a></li>
+<li><a class="nav-link" href="#write-out-data-3"><span class="header-section-number">A.6.2</span> Write out data</a></li>
+<li><a class="nav-link" href="#inspect-data-4"><span class="header-section-number">A.6.3</span> Inspect data</a></li>
 </ul>
 </li>
 </ul>
