@@ -206,6 +206,7 @@ hypothesis-testing-1
 r-method
 two-proportions
 model-notation-1
+confidence-interval-1
 means
 regression
 datasets

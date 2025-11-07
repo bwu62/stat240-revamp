@@ -441,7 +441,27 @@ probability of success
 <p>We can see now that <span class="math inline">\(x_1=323\)</span>, <span class="math inline">\(x_2=77\)</span>, <span class="math inline">\(n_1=386\)</span>, <span class="math inline">\(n_2=84\)</span>, <span class="math inline">\(\hat p_1=0.837\)</span>, <span class="math inline">\(\hat p_2=0.917\)</span>.</p>
 <p>We can now take this dataset and proceed to find a confidence interval or conduct a hypothesis test.</p>
 </div>
-
+</div>
+<div id="confidence-interval-1" class="section level3" number="12.2.2">
+<h3>
+<span class="header-section-number">12.2.2</span> Confidence interval<a class="anchor" aria-label="anchor" href="#confidence-interval-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>In a two-proportions scenario, generally our goal is to run inference on the <strong>difference of the underlying population probabilities <span class="math inline">\(p_1-p_2\)</span></strong>. We think of this as our parameter of interest.</p>
+<p>For this parameter, our point estimate naturally is the <strong>difference of our sample proportions <span class="math inline">\(\hat p_1-\hat p_2\)</span></strong>. Then, our interval takes the form:</p>
+<p><span class="math display">\[
+\text{$C\%$ or $(1\!-\!\alpha)$ interval}~=~(\hat p_1-\hat p_2)~\pm~z_{\alpha/2}\cdot\sqrt{\frac{\hat p_1(1-\hat p_1)}{n_1}+\frac{\hat p_2(1-\hat p_2)}{n_2}},~\text{ where}
+\]</span></p>
+<ul>
+<li><p><span class="math inline">\(\hat p_1-\hat p_2\)</span> is our point estimate,</p></li>
+<li><p><span class="math inline">\(z_{\alpha/2}\)</span> is the same critical value,</p></li>
+<li>
+<p><span class="math inline">\(\sqrt{\frac{\hat p_1(1-\hat p_1)}{n_1}+\frac{\hat p_2(1-\hat p_2)}{n_2}}\)</span> is the <strong>standard error of the difference of our sample proportions</strong>, i.e. <span class="math inline">\(\se(\hat p_1-\hat p_2)\)</span>.</p>
+<ul>
+<li>This formula comes from the fact that for independent <span class="math inline">\(X\)</span>, <span class="math inline">\(Y\)</span>, <span class="math inline">\(\var(X\pm Y)=\var(X)+\var(Y)\)</span>
+</li>
+</ul>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -565,7 +585,10 @@ $('body')
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#two-proportions"><span class="header-section-number">12.2</span> Two proportions</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#model-notation-1"><span class="header-section-number">12.2.1</span> Model notation</a></li></ul>
+<a class="nav-link" href="#two-proportions"><span class="header-section-number">12.2</span> Two proportions</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#model-notation-1"><span class="header-section-number">12.2.1</span> Model notation</a></li>
+<li><a class="nav-link" href="#confidence-interval-1"><span class="header-section-number">12.2.2</span> Confidence interval</a></li>
+</ul>
 </li>
 </ul>
 
