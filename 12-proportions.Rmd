@@ -2,6 +2,12 @@
 
 # Proportions
 
+```{r,include=F}
+library(tidyverse)
+options(pillar.print_min = 5, readr.show_col_types = FALSE)
+source("ggplot_theme_options.R")
+```
+
 Let's look specifically at proportions-type inference setups, where we apply a **binomial model** to sample proportions to infer about an underlying **probability** in the population. We will divide this into two scenarios:
 
  - One-proportion scenario, where there is a single population with a single probability parameter of interest, and
@@ -280,5 +286,46 @@ This time, the p-values are exactly what we found previously (up to rounding).
 
 ### Model notation
 
-In the two-proportions scenario, 
+In the two-proportions scenario, suppose we draw **samples of size $n_1$, $n_2$ from two different populations**, and we again assume everything is independent (both within and between the two samples). Suppose the populations have **true probabilities $p_1$, $p_2$ of succeeding** for each trial, and again these are treated as true unknown constants.
+
+Let **$x_1$, $x_2$ be observed numbers of successes in our samples** where $0\le x_1\le n_1$ and $0\le x_2\le n_2$ and define **$\hat p_1=x_1/n_1$, $\hat p_2=x_2/n_2$ as the corresponding proportions of successes in our samples**.
+
+Then, our models for the true distributions are $X_1\sim\bin(n_1,p_1)$ and $X_2\sim\bin(n_2,p_2)$. Again, we know from the LLN that $\hat p_1\to p_1$ and $\hat p_2\to p_2$ so we take **$\hat p_1$, $\hat p_2$ as our point estimates for $p_1$, $p_2$**.
+
+So far it's all pretty intuitive.
+
+:::{.eg}
+Again, let's see all this in the context of an example. Let's use this dataset of [thoracic surgery data](https://archive.ics.uci.edu/dataset/277/thoracic+surgery+data) from the Wroclaw Thoracic Surgery Centre at the [University of Wroclaw](https://uwr.edu.pl/en). A slightly cleaned version can be found here: [`thoracic.csv`](data/thoracic.csv).
+
+```{r import-penguins2,echo=F}
+thoracic <- read_csv("data/thoracic.csv")
+print(thoracic)
+```
+```{r,eval=F}
+# remember to load packages and set any desired options
+thoracic <- read_csv("https://bwu62.github.io/stat240-revamp/data/thoracic.csv")
+print(thoracic)
+```
+
+There are a lot of columns here we can use (see linked page for explanations of all variables), but just to keep the example simple, suppose we want to see if patients who are smokers have worse 1-year survival rates than non-smokers (spoiler: they do).
+
+Let's consider population 1 to be smokers and population 2 to be non-smokers. For each population, we can use `dplyr` to calculate the number of 1-year survivors in each sample ($x_1$, $x_2$) and divide by the total number of smokers and non-smokers ($n_1$, $n_2$) to get the 1-year survival rates for each group ($\hat p_1$, $\hat p_2$).
+
+```{r}
+thoracic_smoker_summary <- thoracic %>% 
+  count(smoker, survive1, name="x") %>% 
+  group_by(smoker) %>% 
+  mutate(n=sum(x)) %>% 
+  summarise(x=last(x), n=last(n), phat=x/n) %>% 
+  arrange(desc(smoker))
+thoracic_smoker_summary
+```
+```{r,include=F}
+th <- thoracic_smoker_summary
+```
+
+We can see now that $x_1=`r th[1,2]`$, $x_2=`r th[2,2]`$, $n_1=`r th[1,3]`$, $n_2=`r th[2,3]`$, $\hat p_1=`r round(th[1,4],3)`$, $\hat p_2=`r round(th[2,4],3)`$.
+
+We can now take this dataset and proceed to find a confidence interval or conduct a hypothesis test.
+:::
 
