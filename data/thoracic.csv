@@ -1,4 +1,4 @@
-dgn,fvc,fev1,perf,pain,haem,dysp,cough,weak,size,type2dm,mi6,pad,smoking,asthma,age,survive1
+dgn,fvc,fev1,perf,pain,haem,dysp,cough,weak,size,type2dm,mi6,pad,smoker,asthma,age,survive1
 DGN2,2.88,2.16,PRZ1,FALSE,FALSE,FALSE,TRUE,TRUE,OC14,FALSE,FALSE,FALSE,TRUE,FALSE,60,TRUE
 DGN3,3.4,1.88,PRZ0,FALSE,FALSE,FALSE,FALSE,FALSE,OC12,FALSE,FALSE,FALSE,TRUE,FALSE,51,TRUE
 DGN3,2.76,2.08,PRZ1,FALSE,FALSE,FALSE,TRUE,FALSE,OC11,FALSE,FALSE,FALSE,TRUE,FALSE,59,TRUE

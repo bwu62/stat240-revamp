@@ -483,7 +483,7 @@ unzip(temp_path)
 filename <- list.files(".","Tho.*arff")
 thoracic <- read_csv(filename,skip=21,col_names=c(
   "dgn","fvc","fev1","perf","pain","haem","dysp","cough","weak",
-  "size","type2dm","mi6","pad","smoking","asthma","age","survive1")) %>%
+  "size","type2dm","mi6","pad","smoker","asthma","age","survive1")) %>%
   mutate(survive1 = !survive1) # properly recode survival column
 
 # remove temp file
