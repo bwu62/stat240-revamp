@@ -112,7 +112,7 @@ $$
      stat_function(fun=dnorm, geom="area", xlim=c(qnorm(.975),4), fill="red") +
      scale_x_continuous(breaks=qnorm(c(.025,.5,.975)), minor_breaks=NULL, expand=0,
                         labels=TeX(c("$-z_{\\alpha/2}$","0","$z_{\\alpha/2}$"))) +
-     scale_y_continuous(expand=0, breaks=NULL) + theme(axis.text.x = element_text(size=13)) +
+     scale_y_continuous(breaks=NULL, limits=c(0,.4), expand=0) + theme(axis.text.x=element_text(size=13)) +
      labs(x=NULL, y=NULL, title=TeX("$z_{\\alpha/2}$ critical value for Z (red areas sum to $\\alpha$)"))
    ```
    ::::
