@@ -202,11 +202,14 @@ proportions
 one-proportion
 model-notation
 confidence-interval
-hypothesis-testing-1
+hypothesis-test
+approximate-z-test
 r-method
 two-proportions
 model-notation-1
 confidence-interval-1
+hypothesis-test-1
+r-method-1
 means
 regression
 datasets

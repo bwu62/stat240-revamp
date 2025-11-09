@@ -27,7 +27,7 @@ library(lubridate)
 df <- tibble(
   name = c("Alice", "Bob", "Charlie"),
   sex = c("F", "M", "M"),
-  date_of_birth = mdy(c("11/7/04", "7/4/99", "10/31/06")),
+  date_of_birth = mdy(c("11/8/04", "7/4/99", "10/31/06")),
   age = floor(as.numeric(today() - date_of_birth) / 365.24),
   declared_major = c(TRUE, TRUE, FALSE),
   school = "UW-Madison"
@@ -40,7 +40,7 @@ df
 # A tibble: 3 × 6
   name    sex   date_of_birth   age declared_major school    
   <chr>   <chr> <date>        <dbl> <lgl>          <chr>     
-1 Alice   F     2004-11-07       21 TRUE           UW-Madison
+1 Alice   F     2004-11-08       21 TRUE           UW-Madison
 2 Bob     M     1999-07-04       26 TRUE           UW-Madison
 3 Charlie M     2006-10-31       19 FALSE          UW-Madison
 ```

@@ -106,6 +106,8 @@
     \def\bin{\operatorname{Bin}}
     \def\n{\operatorname{N}}
     \def\se{\operatorname{SE}}
+    \def\asim{\mathrel{\dot\sim}}
+    \def\obs{\text{obs}}
   \)
 </span>
 <div id="proportions" class="section level1" number="12">
@@ -254,20 +256,21 @@
 <p>Note the lower the confidence desired the smaller the interval, and vice versa the higher the confidence desired the larger the interval.</p>
 </div>
 </div>
-<div id="hypothesis-testing-1" class="section level3" number="12.1.3">
+<div id="hypothesis-test" class="section level3" number="12.1.3">
 <h3>
-<span class="header-section-number">12.1.3</span> Hypothesis testing<a class="anchor" aria-label="anchor" href="#hypothesis-testing-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.1.3</span> Hypothesis test<a class="anchor" aria-label="anchor" href="#hypothesis-test"><i class="fas fa-link"></i></a>
 </h3>
-<p>For a one-proportion scenario, where you wish to test the following hypotheses:</p>
+<p>For a one-proportion scenario, you wish to test the following hypotheses:</p>
 <p><span class="math display">\[
-H_0:p=p_0~~~~~~~~\\
-~~~~~~~~H_a:p&lt;,\,\ne,\,\text{or}&gt; p_0
+H_0:p~=~p_0~~~~~~~\\
+~~~~~~~~H_a:p~&lt;,\,\ne,\,\text{or}&gt;~p_0
 \]</span></p>
+<p>where <span class="math inline">\(p_0\)</span> is your hypothesized true probability under the null.</p>
 <p>You start, as always, by <strong>assuming the null</strong>, i.e. suppose that <span class="math inline">\(X\sim\bin(n,p_0)\)</span>. Note this means your sample observation <span class="math inline">\(x\)</span> is drawn from this distribution.</p>
 <p>For the p-value, simply <strong>compute the appropriate tail area of <span class="math inline">\(x\)</span> corresponding to the alternative</strong>. Remember the rule is for one-sided take the corresponding side tail, and for two-sided take the two outer tails (or take one outer tail and double it).</p>
 <p>Then finally, compare with <span class="math inline">\(\alpha\)</span> and make a conclusion.</p>
 <div class="eg">
-<p>Continuing with the die example, we saw in our sample <span class="math inline">\(\hat p=0.395\)</span> was quite close to what we expected under a fair die of <span class="math inline">\(p_0=0.4\)</span>. Let’s formally test this. Recall from the previous section if we wish to reject <span class="math inline">\(H_0\)</span> if our sample statistic is too high OR too low, we choose the two-sided alternative. This applies here, since if <span class="math inline">\(\hat p\)</span> is too low or too high vs <span class="math inline">\(0.4\)</span>, we should reject. Thus, we choose:</p>
+<p>Continuing with the die example, we saw in our sample <span class="math inline">\(\hat p=0.395\)</span> was close to what we expect for a fair die where <span class="math inline">\(p_0=0.4\)</span>. Let’s formally test this. Recall from last chapter if we wish to reject <span class="math inline">\(H_0\)</span> if our sample statistic is too high OR too low, we choose the two-sided alternative. This applies here, since if <span class="math inline">\(\hat p\)</span> is too low or too high vs <span class="math inline">\(0.4\)</span>, we should reject. Thus, we choose:</p>
 <p><span class="math display">\[
 H_0:p=0.4\\
 H_a:p\ne0.4
@@ -299,9 +302,37 @@ H_a:p\ne0.4
 <p>In any of these cases, we see the p-value is quite large compared to <span class="math inline">\(\alpha\)</span>. This means our experimental result of <span class="math inline">\(x=79\)</span> was in fact close to our expectations, so there’s no evidence to refute the null. Thus, we do not reject the null, and we conclude the die appears to be fair.</p>
 </div>
 </div>
-<div id="r-method" class="section level3" number="12.1.4">
+<div id="approximate-z-test" class="section level3" number="12.1.4">
 <h3>
-<span class="header-section-number">12.1.4</span> R method<a class="anchor" aria-label="anchor" href="#r-method"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.1.4</span> Approximate Z-test<a class="anchor" aria-label="anchor" href="#approximate-z-test"><i class="fas fa-link"></i></a>
+</h3>
+<p>Alternatively, a normal approximation can also be used—assuming the approximation is valid—resulting in a <strong>normal or Z-test</strong> for one proportion. Different sources list different conditions, but commonly the approximation is considered valid if you have at least 5 successes and 5 failures in your sample.</p>
+<p>Under the null, the sample proportion <span class="math inline">\(\hat p\)</span> has an approximate normal distribution:</p>
+<p><span class="math display">\[
+\hat p\asim\n\left(p_0~,\sqrt{p_0(1-p_0)/n}\right)
+\]</span></p>
+<p>Thus, we can find the corresponding p-value by computing a <span class="math inline">\(z_\obs\)</span> test statistic:</p>
+<p><span class="math display">\[
+z_\obs=\frac{\hat p-p_0}{\sqrt{p_0(1-p_0)/n}}
+\]</span></p>
+<p>then finding the appropriate tail area. For additional accuracy, a continuity correction of <span class="math inline">\(\pm0.5/n\)</span> can be added/subtracted onto <span class="math inline">\(\hat p\)</span> depending on the direction of the tail.</p>
+<div class="eg">
+<p>For the die example, this would look like:</p>
+<div class="sourceCode" id="cb962"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># compute z_obs test statistic with continuity correction</span></span>
+<span><span class="va">z</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">phat</span> <span class="op">+</span> <span class="fl">0.5</span><span class="op">/</span><span class="va">n</span> <span class="op">-</span> <span class="fl">0.4</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fl">0.4</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="fl">0.4</span><span class="op">)</span><span class="op">/</span><span class="va">n</span><span class="op">)</span></span>
+<span><span class="va">z</span></span></code></pre></div>
+<pre><code>[1] -0.07216878</code></pre>
+<div class="sourceCode" id="cb964"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># compute 2-sided p-value for our earlier test</span></span>
+<span><span class="fl">2</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="va">z</span><span class="op">)</span></span></code></pre></div>
+<pre><code>[1] 0.9424676</code></pre>
+<p>The result is comparable to our earlier p-value.</p>
+</div>
+</div>
+<div id="r-method" class="section level3" number="12.1.5">
+<h3>
+<span class="header-section-number">12.1.5</span> R method<a class="anchor" aria-label="anchor" href="#r-method"><i class="fas fa-link"></i></a>
 </h3>
 <p>Of course, you can also use R to compute the interval or do the testing. This is a good way to check your manual calculations to make sure you did it right. The function for both is <code><a href="https://rdrr.io/r/stats/binom.test.html">binom.test()</a></code>. It accepts several arguments:</p>
 <ul>
@@ -311,14 +342,14 @@ H_a:p\ne0.4
 <li><p><code>alternative</code> (defaults to <code>"two.sided"</code>) controls the direction of the alternative and can be set instead to either <code>"greater"</code> or <code>"less"</code></p></li>
 <li><p><code>conf.level</code> (defaults to 0.95) controls the desired confidence level</p></li>
 </ul>
-<p>Important note: setting a one-sided alternative will generate a one-sided confidence interval with one end at <span class="math inline">\(\pm\infty\)</span>, which is generally not what we desire, so if you want a standard confidence interval as well as a one-sided test, you should run the function twice.</p>
+<p>Important note: setting a one-sided alternative will generate a one-sided confidence interval with one end at 0 or 1, which is generally not what we desire, so if you want a standard confidence interval as well as a one-sided test, you should run the function twice.</p>
 <div class="eg">
 <p>Continuing with the die example, recall we still have <code>x</code>, <code>n</code> defined</p>
-<div class="sourceCode" id="cb962"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb966"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">n</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>[1]  79 200</code></pre>
 <p>Let’s compute a 95% confidence interval for our problem:</p>
-<div class="sourceCode" id="cb964"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb968"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">n</span>, p<span class="op">=</span><span class="fl">0.4</span><span class="op">)</span></span></code></pre></div>
 <pre><code>
     Exact binomial test
@@ -333,7 +364,7 @@ probability of success
                  0.395 </code></pre>
 <p>Note this interval is very slightly wider than our computation, since it uses a modified method called the <a href="https://en.wikipedia.org/wiki/Binomial_proportion_confidence_interval#Clopper%E2%80%93Pearson_interval">Clopper-Pearson</a> formula, which is technically slightly better than our method which is called the <a href="https://en.wikipedia.org/wiki/Binomial_proportion_confidence_interval#Problems_with_using_a_normal_approximation_or_%22Wald_interval%22">Wald</a> interval, but this is beyond the scope of STAT240. For our purposes we will prefer the simpler Wald method.</p>
 <p>We can also compute a 90% or 99% interval:</p>
-<div class="sourceCode" id="cb966"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb970"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">n</span>, p<span class="op">=</span><span class="fl">0.4</span>, conf.level<span class="op">=</span><span class="fl">0.90</span><span class="op">)</span></span></code></pre></div>
 <pre><code>
     Exact binomial test
@@ -346,7 +377,7 @@ alternative hypothesis: true probability of success is not equal to 0.4
 sample estimates:
 probability of success 
                  0.395 </code></pre>
-<div class="sourceCode" id="cb968"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb972"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">n</span>, p<span class="op">=</span><span class="fl">0.4</span>, conf.level<span class="op">=</span><span class="fl">0.99</span><span class="op">)</span></span></code></pre></div>
 <pre><code>
     Exact binomial test
@@ -360,17 +391,17 @@ sample estimates:
 probability of success 
                  0.395 </code></pre>
 <p>If you demand an R method for our simpler Wald interval (e.g. to check your own computation), the <a href="https://rdrr.io/cran/DescTools/man/BinomCI.html"><code>BinomCI()</code></a> function from the <code>DescTools</code> package works:</p>
-<div class="sourceCode" id="cb970"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb974"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># compute wald interval to check our work</span></span>
 <span><span class="fu">DescTools</span><span class="fu">::</span><span class="fu"><a href="https://andrisignorell.github.io/DescTools/reference/BinomCI.html">BinomCI</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">n</span>, <span class="fl">0.95</span>, method<span class="op">=</span><span class="st">"wald"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>       est  lwr.ci  upr.ci
 [1,] 0.395 0.32725 0.46275</code></pre>
 <p>For a hypothesis test, note the previous outputs all show that the two-sided p-value is 0.9425. This is once again very slightly different from our computation, since it uses a slightly more exact method where instead of doing <span class="math inline">\(2\cdot\p(X\le79)\)</span>, it computes <span class="math inline">\(\p(X\le79)+\p(X\ge81)\)</span>.</p>
-<div class="sourceCode" id="cb972"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb976"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">pbinom</a></span><span class="op">(</span><span class="fl">79</span>,<span class="fl">200</span>,<span class="fl">0.4</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">pbinom</a></span><span class="op">(</span><span class="fl">80</span>,<span class="fl">200</span>,<span class="fl">.4</span><span class="op">)</span></span></code></pre></div>
 <pre><code>[1] 0.9424936</code></pre>
 <p>Again, we can feel free to continue doubling the outer tail area on one side as an approximation, which should usually be fairly accurate. We can also run one-sided tests if we wish:</p>
-<div class="sourceCode" id="cb974"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb978"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">n</span>, p<span class="op">=</span><span class="fl">0.4</span>, alternative<span class="op">=</span><span class="st">"less"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>
     Exact binomial test
@@ -383,7 +414,7 @@ alternative hypothesis: true probability of success is less than 0.4
 sample estimates:
 probability of success 
                  0.395 </code></pre>
-<div class="sourceCode" id="cb976"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb980"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">n</span>, p<span class="op">=</span><span class="fl">0.4</span>, alternative<span class="op">=</span><span class="st">"greater"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>
     Exact binomial test
@@ -414,6 +445,10 @@ probability of success
 <p>So far it’s all pretty intuitive.</p>
 <div class="eg">
 <p>Again, let’s see all this in the context of an example. Let’s use this dataset of <a href="https://archive.ics.uci.edu/dataset/277/thoracic+surgery+data">thoracic surgery outcomes</a> for lung cancer patients from the Wroclaw Thoracic Surgery Centre at the <a href="https://uwr.edu.pl/en">University of Wroclaw</a>. A slightly cleaned version can be found here: <a href="data/thoracic.csv"><code>thoracic.csv</code></a>.</p>
+<div class="sourceCode" id="cb982"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># remember to load packages and set any desired options</span></span>
+<span><span class="va">thoracic</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"https://bwu62.github.io/stat240-revamp/data/thoracic.csv"</span><span class="op">)</span></span>
+<span><span class="va">thoracic</span></span></code></pre></div>
 <pre><code># A tibble: 470 × 17
   dgn     fvc  fev1 perf  pain  haem  dysp  cough weak  size  type2dm mi6  
   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;lgl&gt; &lt;lgl&gt; &lt;lgl&gt; &lt;lgl&gt; &lt;lgl&gt; &lt;chr&gt; &lt;lgl&gt;   &lt;lgl&gt;
@@ -425,13 +460,9 @@ probability of success
 # ℹ 465 more rows
 # ℹ 5 more variables: pad &lt;lgl&gt;, smoker &lt;lgl&gt;, asthma &lt;lgl&gt;, age &lt;dbl&gt;,
 #   survive1 &lt;lgl&gt;</code></pre>
-<div class="sourceCode" id="cb979"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># remember to load packages and set any desired options</span></span>
-<span><span class="va">thoracic</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"https://bwu62.github.io/stat240-revamp/data/thoracic.csv"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">thoracic</span><span class="op">)</span></span></code></pre></div>
 <p>There are a lot of columns here we can use (see linked page for explanations of all variables), but just to keep the example simple, suppose we want to see if patients who are smokers have worse 1-year survival rates than non-smokers (spoiler: they do).</p>
 <p>Let’s consider population 1 to be non-smokers and population 2 to be smokers. For each population, we can use <code>dplyr</code> to calculate the number of 1-year survivors in each sample (<span class="math inline">\(x_1\)</span>, <span class="math inline">\(x_2\)</span>) and divide by the total number of smokers and non-smokers (<span class="math inline">\(n_1\)</span>, <span class="math inline">\(n_2\)</span>) to get the 1-year survival rates for each group (<span class="math inline">\(\hat p_1\)</span>, <span class="math inline">\(\hat p_2\)</span>).</p>
-<div class="sourceCode" id="cb980"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb984"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">thoracic_smoker_summary</span> <span class="op">&lt;-</span> <span class="va">thoracic</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">smoker</span>, <span class="va">survive1</span>, name<span class="op">=</span><span class="st">"x"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">smoker</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -451,7 +482,7 @@ probability of success
 <h3>
 <span class="header-section-number">12.2.2</span> Confidence interval<a class="anchor" aria-label="anchor" href="#confidence-interval-1"><i class="fas fa-link"></i></a>
 </h3>
-<p>In a two-proportions scenario, generally our goal is to run inference on the <strong>difference of the underlying population probabilities <span class="math inline">\(p_1-p_2\)</span></strong>. We think of this as our parameter of interest.</p>
+<p>For a two-proportions scenario, generally our goal is to run inference on the <strong>difference of the underlying population probabilities <span class="math inline">\(p_1-p_2\)</span></strong>. We think of this as our parameter of interest.</p>
 <p>For this parameter, our point estimate naturally is the <strong>difference of our sample proportions <span class="math inline">\(\hat p_1-\hat p_2\)</span></strong>. Then, our interval takes the form:</p>
 <p><span class="math display">\[
 \text{$C\%$ or $(1\!-\!\alpha)$ interval}~=~(\hat p_1-\hat p_2)~\pm~z_{\alpha/2}\cdot\sqrt{\frac{\hat p_1(1-\hat p_1)}{n_1}+\frac{\hat p_2(1-\hat p_2)}{n_2}},~\text{ where}
@@ -462,8 +493,8 @@ probability of success
 <li><p><span class="math inline">\(\sqrt{\frac{\hat p_1(1-\hat p_1)}{n_1}+\frac{\hat p_2(1-\hat p_2)}{n_2}}\)</span> is the <strong>standard error of the difference of our sample proportions</strong>, i.e. <span class="math inline">\(\se(\hat p_1-\hat p_2)\)</span>. This formula comes from the fact that for independent <span class="math inline">\(X\)</span>, <span class="math inline">\(Y\)</span>, <span class="math inline">\(\var(X\pm Y)=\var(X)+\var(Y)\)</span></p></li>
 </ul>
 <div class="eg">
-<p>Continuing with the thoracic example, let’s compute the 95% confidence interval for the true difference of survival probability <span class="math inline">\(p_1-p_2\)</span> between smokers and non-smokers</p>
-<div class="sourceCode" id="cb982"><pre class="downlit sourceCode r">
+<p>Continuing with the thoracic surgery example, let’s compute the 95% confidence interval for the true difference of survival probability <span class="math inline">\(p_1-p_2\)</span> between smokers and non-smokers</p>
+<div class="sourceCode" id="cb986"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># starting with summary, mutate to add se contribution from each group</span></span>
 <span><span class="co"># then summarize to get the point estimate, combined se, and interval bounds</span></span>
 <span><span class="co"># note -diff() is necessary to get row1-row2</span></span>
@@ -474,7 +505,148 @@ probability of success
    p1mp2     se lower95 upper95
    &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
 1 0.0799 0.0355  0.0102   0.150</code></pre>
-<p>Thus we can see our 95% confidence interval for the true difference in probabilities is (0.010,0.15). In other words, based on the data, we’re 95% confident non-smokeing lung cancer patients are between 1.0% and 15% more likely to survive for at least 1 year after receiving thoracic surgery.</p>
+<p>Thus we can see our 95% confidence interval for the true difference in probabilities is (0.010,0.15). In other words, based on the data, we’re 95% confident lung cancer patients who don’t smoke are between 1.0% and 15% more likely to survive for at least 1 year after receiving thoracic surgery than those who do smoke.</p>
+</div>
+</div>
+<div id="hypothesis-test-1" class="section level3" number="12.2.3">
+<h3>
+<span class="header-section-number">12.2.3</span> Hypothesis test<a class="anchor" aria-label="anchor" href="#hypothesis-test-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>Again, for a two-proportions scenario, we’re usually interested on inference for the <strong>difference of the underlying population probabilities <span class="math inline">\(p_1-p_2\)</span></strong>. The hypotheses are:</p>
+<p><span class="math display">\[
+H_0:p_1-p_2~=~p_0~~~~~~~\\
+~~~~~~~~H_a:p_1-p_2~&lt;,\,\ne,\,\text{or}&gt;~p_0
+\]</span></p>
+<p>where <span class="math inline">\(p_0\)</span> is your hypothesized true difference in the populations’ probabilities under the null.</p>
+<p>A common case is <span class="math inline">\(p_0=0\)</span> which means we end up testing <span class="math inline">\(p_1\!=\!p_2\)</span> vs <span class="math inline">\(p_1\!&lt;,\,\ne,\text{or}\!&gt;\!p_2\)</span>, but you can choose to test whatever difference you desire.</p>
+<p>For two proportions we must resort to the approximate normal or Z-test, which is typically considered a valid approximation as long as you have <strong>at least 5 successes and 5 failures in each sample</strong>.</p>
+<p>Under the null assumption, where the two populations have the same probability and any observed differences in sample proportion are due to random chance, we must compute a “pooled” sample proportion estimate <span class="math inline">\(\bar p\)</span>, since it doesn’t make sense to have two different sample proportion estimates.</p>
+<p><span class="math display">\[
+\bar p=\frac{x_1+x_2}{n_1+n_2}
+\]</span></p>
+<p>Then, we compute our <span class="math inline">\(z_\obs\)</span> test statistic as:</p>
+<p><span class="math display">\[
+z_\obs=\frac{(\hat p_1-\hat p_2)-p_0}{\sqrt{\bar p(1-\bar p)\left(\frac1{n_1}+\frac1{n_2}\right)}}
+\]</span></p>
+<p>Finally, we compute our p-value by taking the appropriate tail area.</p>
+<div class="eg">
+<p>Continuing with the thoracic surgery example, where we defined sample 1 as non-smokers and sample 2 as smokers, it makes sense to ask if non-smokers have higher rates of 1-year survival than smokers. Thus, we choose these hypotheses:</p>
+<p><span class="math display">\[
+H_0:p_1-p_2=0\\
+H_a:p_1-p_2&gt;0
+\]</span></p>
+<p>or in other words,</p>
+<p><span class="math display">\[
+H_0:p_1=p_2\\
+H_a:p_1&gt;p_2
+\]</span></p>
+<p>Then, applying the above formulae, we obtain:</p>
+<div class="sourceCode" id="cb988"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">thoracic_smoker_summary</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>p1mp2 <span class="op">=</span> <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span><span class="op">(</span><span class="va">phat</span><span class="op">)</span>, pbar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>,</span>
+<span>            z <span class="op">=</span> <span class="va">p1mp2</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">pbar</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">pbar</span><span class="op">)</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="va">n</span><span class="op">)</span><span class="op">)</span>, pval <span class="op">=</span> <span class="fl">1</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="va">z</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code># A tibble: 1 × 4
+   p1mp2  pbar     z   pval
+   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+1 0.0799 0.851  1.86 0.0312</code></pre>
+<p>Our test statistic <span class="math inline">\(z_\obs=1.86\)</span> gives us an upper-tail p-value of <span class="math inline">\(0.0312\)</span> which is less than the standard <span class="math inline">\(\alpha=0.05\)</span>, so we can reject the null here.</p>
+<p>In summary, at the <span class="math inline">\(\alpha=0.05\)</span> significance level, the data suggests lung cancer patients who don’t smoke are significantly more likely to survive for at least 1 year after receiving thoracic surgery than those who do smoke.</p>
+</div>
+</div>
+<div id="r-method-1" class="section level3" number="12.2.4">
+<h3>
+<span class="header-section-number">12.2.4</span> R method<a class="anchor" aria-label="anchor" href="#r-method-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>The R method for analyzing two proportions is <code><a href="https://rdrr.io/r/stats/prop.test.html">prop.test()</a></code>, unlike <code><a href="https://rdrr.io/r/stats/binom.test.html">binom.test()</a></code> which can only handle one proportion. The arguments are similar (see help page for details), except for <code>x</code> and <code>n</code> we input a vector of success counts and sample sizes corresponding to our two samples. Note the alternative, if one-sided, indicates if the first sample is less/greater than the second sample.</p>
+<p>Note the print-out of <code><a href="https://rdrr.io/r/stats/prop.test.html">prop.test()</a></code> actually references a <span class="math inline">\(\chi^2\)</span>-test instead of a normal-based test, but they are equivalent formulations of the same methodology and will produce the exact same intervals and p-values, as we’ll see in the example below.</p>
+<div class="eg">
+<p>Continuing with the thoracic surgery example, recall we have the following sample statistics:</p>
+<div class="sourceCode" id="cb990"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">thoracic_smoker_summary</span></span></code></pre></div>
+<pre><code># A tibble: 2 × 4
+  smoker     x     n  phat
+  &lt;lgl&gt;  &lt;int&gt; &lt;int&gt; &lt;dbl&gt;
+1 FALSE     77    84 0.917
+2 TRUE     323   386 0.837</code></pre>
+<p>For both interval and testing approaches, we must give the <code>x</code> and <code>n</code> columns to <code><a href="https://rdrr.io/r/stats/prop.test.html">prop.test()</a></code>. The other arguments depend on exactly what we wish to do.</p>
+<p>To compute a proper 95% confidence interval for the true probability difference, we must always use the default two-sided alternative:</p>
+<div class="sourceCode" id="cb992"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/prop.test.html">prop.test</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">77</span>,<span class="fl">323</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">84</span>,<span class="fl">386</span><span class="op">)</span>, conf.level <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span></span></code></pre></div>
+<pre><code>
+    2-sample test for equality of proportions with continuity correction
+
+data:  th$x out of th$n
+X-squared = 2.8711, df = 1, p-value = 0.09018
+alternative hypothesis: two.sided
+95 percent confidence interval:
+ 0.002970985 0.156787219
+sample estimates:
+   prop 1    prop 2 
+0.9166667 0.8367876 </code></pre>
+<p>Note by default this also applies a continuity correction, which is generally recommended, where each of the upper and lower bounds are adjusted by <span class="math inline">\(\pm0.5(1/n_1+1/n_2)\)</span> such that overall the interval is widened by <span class="math inline">\((1/n_1+1/n_2)\)</span>. We can verify this with a quick modification to our earlier computation:</p>
+<div class="sourceCode" id="cb994"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">thoracic_smoker_summary</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>se <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">phat</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">phat</span><span class="op">)</span><span class="op">/</span><span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>p1mp2 <span class="op">=</span> <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span><span class="op">(</span><span class="va">phat</span><span class="op">)</span>, se <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">se</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>            lower95 <span class="op">=</span> <span class="va">p1mp2</span><span class="op">-</span><span class="fl">1.96</span><span class="op">*</span><span class="va">se</span>, upper95 <span class="op">=</span> <span class="va">p1mp2</span><span class="op">+</span><span class="fl">1.96</span><span class="op">*</span><span class="va">se</span>,</span>
+<span>            lower95_cor <span class="op">=</span> <span class="va">lower95</span> <span class="op">-</span> <span class="fl">0.5</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="va">n</span><span class="op">)</span>, upper95_cor <span class="op">=</span> <span class="va">upper95</span> <span class="op">+</span> <span class="fl">0.5</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="va">n</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code># A tibble: 1 × 6
+   p1mp2     se lower95 upper95 lower95_cor upper95_cor
+   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
+1 0.0799 0.0355  0.0102   0.150     0.00297       0.157</code></pre>
+<p>To forgo the continuity correction, simply add the argument <code>correct = FALSE</code>.</p>
+<div class="sourceCode" id="cb996"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/prop.test.html">prop.test</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">77</span>,<span class="fl">323</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">84</span>,<span class="fl">386</span><span class="op">)</span>, conf.level <span class="op">=</span> <span class="fl">0.95</span>, correct <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<pre><code>
+    2-sample test for equality of proportions without continuity correction
+
+data:  th$x out of th$n
+X-squared = 3.4727, df = 1, p-value = 0.06239
+alternative hypothesis: two.sided
+95 percent confidence interval:
+ 0.0102187 0.1495395
+sample estimates:
+   prop 1    prop 2 
+0.9166667 0.8367876 </code></pre>
+<p>To run a hypothesis instead, we must remember to set the correct alternative hypothesis direction. Here we want <code>"greater"</code> since group 1 is non-smokers, which we believe should have greater survival probability than non-smokers which are group 2.</p>
+<div class="sourceCode" id="cb998"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/prop.test.html">prop.test</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">77</span>,<span class="fl">323</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">84</span>,<span class="fl">386</span><span class="op">)</span>, alternative <span class="op">=</span> <span class="st">"greater"</span><span class="op">)</span></span></code></pre></div>
+<pre><code>
+    2-sample test for equality of proportions with continuity correction
+
+data:  th$x out of th$n
+X-squared = 2.8711, df = 1, p-value = 0.04509
+alternative hypothesis: greater
+95 percent confidence interval:
+ 0.01417053 1.00000000
+sample estimates:
+   prop 1    prop 2 
+0.9166667 0.8367876 </code></pre>
+<p>Again, this includes by default the continuity correction, which is applied by <span class="math inline">\(\pm0.5(1/n_1+1/n_2)\)</span> onto <span class="math inline">\((\hat p_1-\hat p_2)\)</span> such that the absolute value is lowered, effectively slightly “shrinking” the observed difference in sample proportions. We can also verify this with a quick modification to our earlier computation:</p>
+<div class="sourceCode" id="cb1000"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">thoracic_smoker_summary</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>p1mp2 <span class="op">=</span> <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span><span class="op">(</span><span class="va">phat</span><span class="op">)</span>, pbar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>,</span>
+<span>            z <span class="op">=</span> <span class="va">p1mp2</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">pbar</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">pbar</span><span class="op">)</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="va">n</span><span class="op">)</span><span class="op">)</span>, pval <span class="op">=</span> <span class="fl">1</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="va">z</span><span class="op">)</span>,</span>
+<span>            z_cor <span class="op">=</span> <span class="op">(</span><span class="va">p1mp2</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/sign.html">sign</a></span><span class="op">(</span><span class="va">p1mp2</span><span class="op">)</span><span class="op">*</span><span class="fl">0.5</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="va">n</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">pbar</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">pbar</span><span class="op">)</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="va">n</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>            pval_cor <span class="op">=</span> <span class="fl">1</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="va">z_cor</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code># A tibble: 1 × 6
+   p1mp2  pbar     z   pval z_cor pval_cor
+   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;
+1 0.0799 0.851  1.86 0.0312  1.69   0.0451</code></pre>
+<p>Again, if this is not desired, turn it off with <code>correct = FALSE</code></p>
+<div class="sourceCode" id="cb1002"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/prop.test.html">prop.test</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">77</span>,<span class="fl">323</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">84</span>,<span class="fl">386</span><span class="op">)</span>, alternative <span class="op">=</span> <span class="st">"greater"</span>, correct <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<pre><code>
+    2-sample test for equality of proportions without continuity correction
+
+data:  th$x out of th$n
+X-squared = 3.4727, df = 1, p-value = 0.03119
+alternative hypothesis: greater
+95 percent confidence interval:
+ 0.02141825 1.00000000
+sample estimates:
+   prop 1    prop 2 
+0.9166667 0.8367876 </code></pre>
+<p>In either case, we can see everything matches perfectly and we are content.</p>
 </div>
 
 </div>
@@ -595,14 +767,17 @@ $('body')
 <a class="nav-link" href="#one-proportion"><span class="header-section-number">12.1</span> One proportion</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#model-notation"><span class="header-section-number">12.1.1</span> Model notation</a></li>
 <li><a class="nav-link" href="#confidence-interval"><span class="header-section-number">12.1.2</span> Confidence interval</a></li>
-<li><a class="nav-link" href="#hypothesis-testing-1"><span class="header-section-number">12.1.3</span> Hypothesis testing</a></li>
-<li><a class="nav-link" href="#r-method"><span class="header-section-number">12.1.4</span> R method</a></li>
+<li><a class="nav-link" href="#hypothesis-test"><span class="header-section-number">12.1.3</span> Hypothesis test</a></li>
+<li><a class="nav-link" href="#approximate-z-test"><span class="header-section-number">12.1.4</span> Approximate Z-test</a></li>
+<li><a class="nav-link" href="#r-method"><span class="header-section-number">12.1.5</span> R method</a></li>
 </ul>
 </li>
 <li>
 <a class="nav-link" href="#two-proportions"><span class="header-section-number">12.2</span> Two proportions</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#model-notation-1"><span class="header-section-number">12.2.1</span> Model notation</a></li>
 <li><a class="nav-link" href="#confidence-interval-1"><span class="header-section-number">12.2.2</span> Confidence interval</a></li>
+<li><a class="nav-link" href="#hypothesis-test-1"><span class="header-section-number">12.2.3</span> Hypothesis test</a></li>
+<li><a class="nav-link" href="#r-method-1"><span class="header-section-number">12.2.4</span> R method</a></li>
 </ul>
 </li>
 </ul>
@@ -622,7 +797,7 @@ $('body')
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2025-11-08.</p>
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2025-11-09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

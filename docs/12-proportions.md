@@ -220,14 +220,16 @@ phat + c(-1,1) * qnorm(0.995) * sqrt(phat*(1-phat)/n)
 Note the lower the confidence desired the smaller the interval, and vice versa the higher the confidence desired the larger the interval.
 :::
 
-### Hypothesis testing
+### Hypothesis test
 
-For a one-proportion scenario, where you wish to test the following hypotheses:
+For a one-proportion scenario, you wish to test the following hypotheses:
 
 $$
-H_0:p=p_0~~~~~~~~\\
-~~~~~~~~H_a:p<,\,\ne,\,\text{or}> p_0
+H_0:p~=~p_0~~~~~~~\\
+~~~~~~~~H_a:p~<,\,\ne,\,\text{or}>~p_0
 $$
+
+where $p_0$ is your hypothesized true probability under the null.
 
 You start, as always, by **assuming the null**, i.e. suppose that $X\sim\bin(n,p_0)$. Note this means your sample observation $x$ is drawn from this distribution.
 
@@ -237,7 +239,7 @@ Then finally, compare with $\alpha$ and make a conclusion.
 
 
 :::{.eg}
-Continuing with the die example, we saw in our sample $\hat p=0.395$ was quite close to what we expected under a fair die of $p_0=0.4$. Let's formally test this. Recall from the previous section if we wish to reject $H_0$ if our sample statistic is too high OR too low, we choose the two-sided alternative. This applies here, since if $\hat p$ is too low or too high vs $0.4$, we should reject. Thus, we choose:
+Continuing with the die example, we saw in our sample $\hat p=0.395$ was close to what we expect for a fair die where $p_0=0.4$. Let's formally test this. Recall from last chapter if we wish to reject $H_0$ if our sample statistic is too high OR too low, we choose the two-sided alternative. This applies here, since if $\hat p$ is too low or too high vs $0.4$, we should reject. Thus, we choose:
 
 $$
 H_0:p=0.4\\
@@ -296,6 +298,49 @@ pbinom(x, n, 0.4)
 In any of these cases, we see the p-value is quite large compared to $\alpha$. This means our experimental result of $x=79$ was in fact close to our expectations, so there's no evidence to refute the null. Thus, we do not reject the null, and we conclude the die appears to be fair.
 :::
 
+### Approximate Z-test
+
+Alternatively, a normal approximation can also be used---assuming the approximation is valid---resulting in a **normal or Z-test** for one proportion. Different sources list different conditions, but commonly the approximation is considered valid if you have at least 5 successes and 5 failures in your sample.
+
+Under the null, the sample proportion $\hat p$ has an approximate normal distribution:
+
+$$
+\hat p\asim\n\left(p_0~,\sqrt{p_0(1-p_0)/n}\right)
+$$
+
+Thus, we can find the corresponding p-value by computing a $z_\obs$ test statistic:
+
+$$
+z_\obs=\frac{\hat p-p_0}{\sqrt{p_0(1-p_0)/n}}
+$$
+
+then finding the appropriate tail area. For additional accuracy, a continuity correction of $\pm0.5/n$ can be added/subtracted onto $\hat p$ depending on the direction of the tail.
+
+:::{.eg}
+For the die example, this would look like:
+
+
+``` r
+# compute z_obs test statistic with continuity correction
+z <- (phat + 0.5/n - 0.4)/sqrt(0.4*(1-0.4)/n)
+z
+```
+
+```
+[1] -0.07216878
+```
+
+``` r
+# compute 2-sided p-value for our earlier test
+2 * pnorm(z)
+```
+
+```
+[1] 0.9424676
+```
+
+The result is comparable to our earlier p-value.
+:::
 
 ### R method
 
@@ -311,7 +356,7 @@ Of course, you can also use R to compute the interval or do the testing. This is
  
  - `conf.level` (defaults to 0.95) controls the desired confidence level
 
-Important note: setting a one-sided alternative will generate a one-sided confidence interval with one end at $\pm\infty$, which is generally not what we desire, so if you want a standard confidence interval as well as a one-sided test, you should run the function twice.
+Important note: setting a one-sided alternative will generate a one-sided confidence interval with one end at 0 or 1, which is generally not what we desire, so if you want a standard confidence interval as well as a one-sided test, you should run the function twice.
 
 :::{.eg}
 Continuing with the die example, recall we still have `x`, `n` defined
@@ -469,6 +514,12 @@ So far it's all pretty intuitive.
 Again, let's see all this in the context of an example. Let's use this dataset of [thoracic surgery outcomes](https://archive.ics.uci.edu/dataset/277/thoracic+surgery+data) for lung cancer patients from the Wroclaw Thoracic Surgery Centre at the [University of Wroclaw](https://uwr.edu.pl/en). A slightly cleaned version can be found here: [`thoracic.csv`](data/thoracic.csv).
 
 
+``` r
+# remember to load packages and set any desired options
+thoracic <- read_csv("https://bwu62.github.io/stat240-revamp/data/thoracic.csv")
+thoracic
+```
+
 ```
 # A tibble: 470 × 17
   dgn     fvc  fev1 perf  pain  haem  dysp  cough weak  size  type2dm mi6  
@@ -481,12 +532,6 @@ Again, let's see all this in the context of an example. Let's use this dataset o
 # ℹ 465 more rows
 # ℹ 5 more variables: pad <lgl>, smoker <lgl>, asthma <lgl>, age <dbl>,
 #   survive1 <lgl>
-```
-
-``` r
-# remember to load packages and set any desired options
-thoracic <- read_csv("https://bwu62.github.io/stat240-revamp/data/thoracic.csv")
-print(thoracic)
 ```
 
 There are a lot of columns here we can use (see linked page for explanations of all variables), but just to keep the example simple, suppose we want to see if patients who are smokers have worse 1-year survival rates than non-smokers (spoiler: they do).
@@ -519,7 +564,7 @@ We can now take this dataset and proceed to find a confidence interval or conduc
 
 ### Confidence interval
 
-In a two-proportions scenario, generally our goal is to run inference on the **difference of the underlying population probabilities $p_1-p_2$**. We think of this as our parameter of interest.
+For a two-proportions scenario, generally our goal is to run inference on the **difference of the underlying population probabilities $p_1-p_2$**. We think of this as our parameter of interest.
 
 For this parameter, our point estimate naturally is the **difference of our sample proportions $\hat p_1-\hat p_2$**. Then, our interval takes the form:
 
@@ -534,7 +579,7 @@ $$
 - $\sqrt{\frac{\hat p_1(1-\hat p_1)}{n_1}+\frac{\hat p_2(1-\hat p_2)}{n_2}}$ is the **standard error of the difference of our sample proportions**, i.e. $\se(\hat p_1-\hat p_2)$. This formula comes from the fact that for independent $X$, $Y$, $\var(X\pm Y)=\var(X)+\var(Y)$
 
 :::{.eg}
-Continuing with the thoracic example, let's compute the 95% confidence interval for the true difference of survival probability $p_1-p_2$ between smokers and non-smokers
+Continuing with the thoracic surgery example, let's compute the 95% confidence interval for the true difference of survival probability $p_1-p_2$ between smokers and non-smokers
 
 
 ``` r
@@ -554,5 +599,213 @@ thoracic_smoker_summary %>% mutate(se = sqrt(phat*(1-phat)/n)) %>%
 ```
 
 
-Thus we can see our 95% confidence interval for the true difference in probabilities is (0.010,0.15). In other words, based on the data, we're 95% confident non-smokeing lung cancer patients are between 1.0% and 15% more likely to survive for at least 1 year after receiving thoracic surgery.
+Thus we can see our 95% confidence interval for the true difference in probabilities is (0.010,0.15). In other words, based on the data, we're 95% confident lung cancer patients who don't smoke are between 1.0% and 15% more likely to survive for at least 1 year after receiving thoracic surgery than those who do smoke.
+:::
+
+### Hypothesis test
+
+Again, for a two-proportions scenario, we're usually interested on inference for the **difference of the underlying population probabilities $p_1-p_2$**. The hypotheses are:
+
+$$
+H_0:p_1-p_2~=~p_0~~~~~~~\\
+~~~~~~~~H_a:p_1-p_2~<,\,\ne,\,\text{or}>~p_0
+$$
+
+where $p_0$ is your hypothesized true difference in the populations' probabilities under the null.
+
+A common case is $p_0=0$ which means we end up testing $p_1\!=\!p_2$ vs $p_1\!<,\,\ne,\text{or}\!>\!p_2$, but you can choose to test whatever difference you desire.
+
+For two proportions we must resort to the approximate normal or Z-test, which is typically considered a valid approximation as long as you have **at least 5 successes and 5 failures in each sample**.
+
+Under the null assumption, where the two populations have the same probability and any observed differences in sample proportion are due to random chance, we must compute a "pooled" sample proportion estimate $\bar p$, since it doesn't make sense to have two different sample proportion estimates.
+
+$$
+\bar p=\frac{x_1+x_2}{n_1+n_2}
+$$
+
+Then, we compute our $z_\obs$ test statistic as:
+
+$$
+z_\obs=\frac{(\hat p_1-\hat p_2)-p_0}{\sqrt{\bar p(1-\bar p)\left(\frac1{n_1}+\frac1{n_2}\right)}}
+$$
+
+Finally, we compute our p-value by taking the appropriate tail area.
+
+:::{.eg}
+Continuing with the thoracic surgery example, where we defined sample 1 as non-smokers and sample 2 as smokers, it makes sense to ask if non-smokers have higher rates of 1-year survival than smokers. Thus, we choose these hypotheses:
+
+$$
+H_0:p_1-p_2=0\\
+H_a:p_1-p_2>0
+$$
+
+or in other words,
+
+$$
+H_0:p_1=p_2\\
+H_a:p_1>p_2
+$$
+
+Then, applying the above formulae, we obtain:
+
+
+``` r
+thoracic_smoker_summary %>%
+  summarise(p1mp2 = -diff(phat), pbar = sum(x)/sum(n),
+            z = p1mp2/sqrt(pbar*(1-pbar)*sum(1/n)), pval = 1-pnorm(z))
+```
+
+```
+# A tibble: 1 × 4
+   p1mp2  pbar     z   pval
+   <dbl> <dbl> <dbl>  <dbl>
+1 0.0799 0.851  1.86 0.0312
+```
+
+
+Our test statistic $z_\obs=1.86$ gives us an upper-tail p-value of $0.0312$ which is less than the standard $\alpha=0.05$, so we can reject the null here.
+
+In summary, at the $\alpha=0.05$ significance level, the data suggests lung cancer patients who don't smoke are significantly more likely to survive for at least 1 year after receiving thoracic surgery than those who do smoke.
+:::
+
+### R method
+
+The R method for analyzing two proportions is `prop.test()`, unlike `binom.test()` which can only handle one proportion. The arguments are similar (see help page for details), except for `x` and `n` we input a vector of success counts and sample sizes corresponding to our two samples. Note the alternative, if one-sided, indicates if the first sample is less/greater than the second sample.
+
+Note the print-out of `prop.test()` actually references a $\chi^2$-test instead of a normal-based test, but they are equivalent formulations of the same methodology and will produce the exact same intervals and p-values, as we'll see in the example below.
+
+:::{.eg}
+Continuing with the thoracic surgery example, recall we have the following sample statistics:
+
+
+``` r
+thoracic_smoker_summary
+```
+
+```
+# A tibble: 2 × 4
+  smoker     x     n  phat
+  <lgl>  <int> <int> <dbl>
+1 FALSE     77    84 0.917
+2 TRUE     323   386 0.837
+```
+
+For both interval and testing approaches, we must give the `x` and `n` columns to `prop.test()`. The other arguments depend on exactly what we wish to do.
+
+To compute a proper 95% confidence interval for the true probability difference, we must always use the default two-sided alternative:
+
+``` r
+prop.test(c(77,323), c(84,386), conf.level = 0.95)
+```
+
+```
+
+	2-sample test for equality of proportions with continuity correction
+
+data:  th$x out of th$n
+X-squared = 2.8711, df = 1, p-value = 0.09018
+alternative hypothesis: two.sided
+95 percent confidence interval:
+ 0.002970985 0.156787219
+sample estimates:
+   prop 1    prop 2 
+0.9166667 0.8367876 
+```
+
+Note by default this also applies a continuity correction, which is generally recommended, where each of the upper and lower bounds are adjusted by $\pm0.5(1/n_1+1/n_2)$ such that overall the interval is widened by $(1/n_1+1/n_2)$. We can verify this with a quick modification to our earlier computation:
+
+
+``` r
+thoracic_smoker_summary %>% mutate(se = sqrt(phat*(1-phat)/n)) %>%
+  summarize(p1mp2 = -diff(phat), se = sqrt(sum(se^2)),
+            lower95 = p1mp2-1.96*se, upper95 = p1mp2+1.96*se,
+            lower95_cor = lower95 - 0.5*sum(1/n), upper95_cor = upper95 + 0.5*sum(1/n))
+```
+
+```
+# A tibble: 1 × 6
+   p1mp2     se lower95 upper95 lower95_cor upper95_cor
+   <dbl>  <dbl>   <dbl>   <dbl>       <dbl>       <dbl>
+1 0.0799 0.0355  0.0102   0.150     0.00297       0.157
+```
+
+To forgo the continuity correction, simply add the argument `correct = FALSE`.
+
+``` r
+prop.test(c(77,323), c(84,386), conf.level = 0.95, correct = FALSE)
+```
+
+```
+
+	2-sample test for equality of proportions without continuity correction
+
+data:  th$x out of th$n
+X-squared = 3.4727, df = 1, p-value = 0.06239
+alternative hypothesis: two.sided
+95 percent confidence interval:
+ 0.0102187 0.1495395
+sample estimates:
+   prop 1    prop 2 
+0.9166667 0.8367876 
+```
+
+To run a hypothesis instead, we must remember to set the correct alternative hypothesis direction. Here we want `"greater"` since group 1 is non-smokers, which we believe should have greater survival probability than non-smokers which are group 2.
+
+``` r
+prop.test(c(77,323), c(84,386), alternative = "greater")
+```
+
+```
+
+	2-sample test for equality of proportions with continuity correction
+
+data:  th$x out of th$n
+X-squared = 2.8711, df = 1, p-value = 0.04509
+alternative hypothesis: greater
+95 percent confidence interval:
+ 0.01417053 1.00000000
+sample estimates:
+   prop 1    prop 2 
+0.9166667 0.8367876 
+```
+
+Again, this includes by default the continuity correction, which is applied by $\pm0.5(1/n_1+1/n_2)$ onto $(\hat p_1-\hat p_2)$ such that the absolute value is lowered, effectively slightly "shrinking" the observed difference in sample proportions. We can also verify this with a quick modification to our earlier computation:
+
+
+``` r
+thoracic_smoker_summary %>%
+  summarise(p1mp2 = -diff(phat), pbar = sum(x)/sum(n),
+            z = p1mp2/sqrt(pbar*(1-pbar)*sum(1/n)), pval = 1-pnorm(z),
+            z_cor = (p1mp2-sign(p1mp2)*0.5*sum(1/n))/sqrt(pbar*(1-pbar)*sum(1/n)),
+            pval_cor = 1-pnorm(z_cor))
+```
+
+```
+# A tibble: 1 × 6
+   p1mp2  pbar     z   pval z_cor pval_cor
+   <dbl> <dbl> <dbl>  <dbl> <dbl>    <dbl>
+1 0.0799 0.851  1.86 0.0312  1.69   0.0451
+```
+
+Again, if this is not desired, turn it off with `correct = FALSE`
+
+``` r
+prop.test(c(77,323), c(84,386), alternative = "greater", correct = FALSE)
+```
+
+```
+
+	2-sample test for equality of proportions without continuity correction
+
+data:  th$x out of th$n
+X-squared = 3.4727, df = 1, p-value = 0.03119
+alternative hypothesis: greater
+95 percent confidence interval:
+ 0.02141825 1.00000000
+sample estimates:
+   prop 1    prop 2 
+0.9166667 0.8367876 
+```
+
+In either case, we can see everything matches perfectly and we are content.
 :::
