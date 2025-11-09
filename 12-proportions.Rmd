@@ -372,5 +372,5 @@ C <- thoracic_smoker_summary %>% mutate(se = sqrt(phat*(1-phat)/n)) %>%
   unlist(use.names=F) %>% .[3:4]
 ```
 
-Thus we can see our 95% confidence interval for the true difference in probabilities is `r ci(C)`. In other words, based on the data, we're 95% confident non-smokeing lung cancer patients are between `r sf(C[1]*100,2)`% and `r sf(C[2]*100,1)`% more likely to survive for at least 1 year after receiving thoracic surgery.
+Thus we can see our 95% confidence interval for the true difference in probabilities is `r ci(C)`. In other words, based on the data, we're 95% confident non-smokeing lung cancer patients are between `r sf(C[1]*100,2)`% and `r sf(C[2]*100,2)`% more likely to survive for at least 1 year after receiving thoracic surgery.
 :::

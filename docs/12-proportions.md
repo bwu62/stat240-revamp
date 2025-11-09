@@ -554,5 +554,5 @@ thoracic_smoker_summary %>% mutate(se = sqrt(phat*(1-phat)/n)) %>%
 ```
 
 
-Thus we can see our 95% confidence interval for the true difference in probabilities is (0.010,0.15). In other words, based on the data, we're 95% confident non-smokeing lung cancer patients are between 1.0% and 10% more likely to survive for at least 1 year after receiving thoracic surgery.
+Thus we can see our 95% confidence interval for the true difference in probabilities is (0.010,0.15). In other words, based on the data, we're 95% confident non-smokeing lung cancer patients are between 1.0% and 15% more likely to survive for at least 1 year after receiving thoracic surgery.
 :::
