@@ -192,6 +192,7 @@ phat + c(-1,1) * qnorm(0.975) * sqrt(phat*(1-phat)/n)
 [1] 0.32725 0.46275
 ```
 
+
 Thus, a 95% confidence interval for $p$, i.e. the true probability of 4 or 5, is (0.33,0.46), or in other words, **we are 95% confident the true $p$ is between 0.33 and 0.46**.
 
 If a different level of confidence is desired, simply change the argument to `qnorm()`:
@@ -254,7 +255,7 @@ tibble(k=floor(mu-3*sd):ceiling(mu+3*sd),p=dbinom(k,n,0.4)) %>%
   ggtitle(str_glue("Distribution of X under null hypothesis, i.e. Bin({n},0.4)"))
 ```
 
-<img src="12-proportions_files/figure-html/unnamed-chunk-10-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="12-proportions_files/figure-html/unnamed-chunk-11-1.svg" width="672" style="display: block; margin: auto;" />
 :::
 
 Recall for a two-sided alternative, we take the "outer-tail" corresponding to our observed statistic and multiply by 2 to get our final p-value. Here, this means we look for $2\cdot\p(X\le79)$ where $X\sim\bin(200,0.4)$.
@@ -386,6 +387,19 @@ probability of success
                  0.395 
 ```
 
+If you demand an R method for our simpler Wald interval (e.g. to check your own computation), the [`BinomCI()`](https://rdrr.io/cran/DescTools/man/BinomCI.html) function from the `DescTools` package works:
+
+
+``` r
+# compute wald interval to check our work
+DescTools::BinomCI(x, n, 0.95, method="wald")
+```
+
+```
+       est  lwr.ci  upr.ci
+[1,] 0.395 0.32725 0.46275
+```
+
 For a hypothesis test, note the previous outputs all show that the two-sided p-value is 0.9425. This is once again very slightly different from our computation, since it uses a slightly more exact method where instead of doing $2\cdot\p(X\le79)$, it computes $\p(X\le79)+\p(X\ge81)$.
 
 ``` r
@@ -452,7 +466,7 @@ Then, our models for the true distributions are $X_1\sim\bin(n_1,p_1)$ and $X_2\
 So far it's all pretty intuitive.
 
 :::{.eg}
-Again, let's see all this in the context of an example. Let's use this dataset of [thoracic surgery data](https://archive.ics.uci.edu/dataset/277/thoracic+surgery+data) from the Wroclaw Thoracic Surgery Centre at the [University of Wroclaw](https://uwr.edu.pl/en). A slightly cleaned version can be found here: [`thoracic.csv`](data/thoracic.csv).
+Again, let's see all this in the context of an example. Let's use this dataset of [thoracic surgery outcomes](https://archive.ics.uci.edu/dataset/277/thoracic+surgery+data) for lung cancer patients from the Wroclaw Thoracic Surgery Centre at the [University of Wroclaw](https://uwr.edu.pl/en). A slightly cleaned version can be found here: [`thoracic.csv`](data/thoracic.csv).
 
 
 ```
@@ -477,7 +491,7 @@ print(thoracic)
 
 There are a lot of columns here we can use (see linked page for explanations of all variables), but just to keep the example simple, suppose we want to see if patients who are smokers have worse 1-year survival rates than non-smokers (spoiler: they do).
 
-Let's consider population 1 to be smokers and population 2 to be non-smokers. For each population, we can use `dplyr` to calculate the number of 1-year survivors in each sample ($x_1$, $x_2$) and divide by the total number of smokers and non-smokers ($n_1$, $n_2$) to get the 1-year survival rates for each group ($\hat p_1$, $\hat p_2$).
+Let's consider population 1 to be non-smokers and population 2 to be smokers. For each population, we can use `dplyr` to calculate the number of 1-year survivors in each sample ($x_1$, $x_2$) and divide by the total number of smokers and non-smokers ($n_1$, $n_2$) to get the 1-year survival rates for each group ($\hat p_1$, $\hat p_2$).
 
 
 ``` r
@@ -485,8 +499,7 @@ thoracic_smoker_summary <- thoracic %>%
   count(smoker, survive1, name="x") %>% 
   group_by(smoker) %>% 
   mutate(n=sum(x)) %>% 
-  summarise(x=last(x), n=last(n), phat=x/n) %>% 
-  arrange(desc(smoker))
+  summarise(x=last(x), n=last(n), phat=x/n)
 thoracic_smoker_summary
 ```
 
@@ -494,12 +507,12 @@ thoracic_smoker_summary
 # A tibble: 2 × 4
   smoker     x     n  phat
   <lgl>  <int> <int> <dbl>
-1 TRUE     323   386 0.837
-2 FALSE     77    84 0.917
+1 FALSE     77    84 0.917
+2 TRUE     323   386 0.837
 ```
 
 
-We can see now that $x_1=323$, $x_2=77$, $n_1=386$, $n_2=84$, $\hat p_1=0.837$, $\hat p_2=0.917$.
+We can see now that $x_1=77$, $x_2=323$, $n_1=84$, $n_2=386$, $\hat p_1=0.917$, $\hat p_2=0.837$.
 
 We can now take this dataset and proceed to find a confidence interval or conduct a hypothesis test.
 :::
@@ -514,11 +527,32 @@ $$
 \text{$C\%$ or $(1\!-\!\alpha)$ interval}~=~(\hat p_1-\hat p_2)~\pm~z_{\alpha/2}\cdot\sqrt{\frac{\hat p_1(1-\hat p_1)}{n_1}+\frac{\hat p_2(1-\hat p_2)}{n_2}},~\text{ where}
 $$
 
-- $\hat p_1-\hat p_2$ is our point estimate,
+- $\hat p_1-\hat p_2$ is our point estimate of the true difference $p_1-p_2$,
 
-- $z_{\alpha/2}$ is the same critical value,
+- $z_{\alpha/2}$ is the same $\alpha$-level normal critical value,
 
-- $\sqrt{\frac{\hat p_1(1-\hat p_1)}{n_1}+\frac{\hat p_2(1-\hat p_2)}{n_2}}$ is the **standard error of the difference of our sample proportions**, i.e. $\se(\hat p_1-\hat p_2)$.
-  - This formula comes from the fact that for independent $X$, $Y$, $\var(X\pm Y)=\var(X)+\var(Y)$
+- $\sqrt{\frac{\hat p_1(1-\hat p_1)}{n_1}+\frac{\hat p_2(1-\hat p_2)}{n_2}}$ is the **standard error of the difference of our sample proportions**, i.e. $\se(\hat p_1-\hat p_2)$. This formula comes from the fact that for independent $X$, $Y$, $\var(X\pm Y)=\var(X)+\var(Y)$
+
+:::{.eg}
+Continuing with the thoracic example, let's compute the 95% confidence interval for the true difference of survival probability $p_1-p_2$ between smokers and non-smokers
 
 
+``` r
+# starting with summary, mutate to add se contribution from each group
+# then summarize to get the point estimate, combined se, and interval bounds
+# note -diff() is necessary to get row1-row2
+thoracic_smoker_summary %>% mutate(se = sqrt(phat*(1-phat)/n)) %>%
+  summarize(p1mp2 = -diff(phat), se = sqrt(sum(se^2)),
+            lower95 = p1mp2-1.96*se, upper95 = p1mp2+1.96*se)
+```
+
+```
+# A tibble: 1 × 4
+   p1mp2     se lower95 upper95
+   <dbl>  <dbl>   <dbl>   <dbl>
+1 0.0799 0.0355  0.0102   0.150
+```
+
+
+Thus we can see our 95% confidence interval for the true difference in probabilities is (0.010,0.15). In other words, based on the data, we're 95% confident non-smokeing lung cancer patients are between 1.0% and 10% more likely to survive for at least 1 year after receiving thoracic surgery.
+:::
