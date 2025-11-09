@@ -717,9 +717,9 @@ Note by default this also applies a continuity correction, which is generally re
 
 ``` r
 thoracic_smoker_summary %>% mutate(se = sqrt(phat*(1-phat)/n)) %>%
-  summarize(p1mp2 = -diff(phat), se = sqrt(sum(se^2)),
-            lower95 = p1mp2-1.96*se, upper95 = p1mp2+1.96*se,
-            lower95_cor = lower95 - 0.5*sum(1/n), upper95_cor = upper95 + 0.5*sum(1/n))
+ summarize(p1mp2 = -diff(phat), se = sqrt(sum(se^2)),
+           lower95 = p1mp2-1.96*se, upper95 = p1mp2+1.96*se,
+           lower95_cor = lower95-0.5*sum(1/n), upper95_cor = upper95+0.5*sum(1/n))
 ```
 
 ```
