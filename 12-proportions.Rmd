@@ -477,7 +477,7 @@ The R method for analyzing two proportions is `prop.test()`, unlike `binom.test(
 Note the print-out of `prop.test()` actually references a $\chi^2$-test instead of a normal-based test, but they are equivalent formulations of the same methodology and will produce the exact same intervals and p-values, as we'll see in the example below.
 
 :::{.eg}
-Continuing with the thoracic surgery example, recall we have the following sample statistics:
+Continuing with the thoracic surgery example, recall our sample statistics:
 
 ```{r}
 thoracic_smoker_summary
@@ -496,13 +496,13 @@ prop.test(c({th[1,2]},{th[2,2]}), c({th[1,3]},{th[2,3]}), conf.level = 0.95)
 prop.test(th$x, th$n, conf.level = 0.95)
 ```
 
-Note by default this also applies a continuity correction, which is generally recommended, where each of the upper and lower bounds are adjusted by $\pm0.5(1/n_1+1/n_2)$ such that overall the interval is widened by $(1/n_1+1/n_2)$. We can verify this with a quick modification to our earlier computation:
+Note by default this also applies a continuity correction, which is generally recommended, where the interval is slightly widened by adjusting both upper and lower bounds by $\pm0.5(1/n_1\!+\!1/n_2)$. We can verify this with a quick modification to our earlier computation:
 
 ```{r}
 thoracic_smoker_summary %>% mutate(se = sqrt(phat*(1-phat)/n)) %>%
-  summarize(p1mp2 = -diff(phat), se = sqrt(sum(se^2)),
-            lower95 = p1mp2-1.96*se, upper95 = p1mp2+1.96*se,
-            lower95_cor = lower95 - 0.5*sum(1/n), upper95_cor = upper95 + 0.5*sum(1/n))
+ summarize(p1mp2 = -diff(phat), se = sqrt(sum(se^2)),
+           lower95 = p1mp2-1.96*se, upper95 = p1mp2+1.96*se,
+           lower95_cor = lower95-0.5*sum(1/n), upper95_cor = upper95+0.5*sum(1/n))
 ```
 
 To forgo the continuity correction, simply add the argument `correct = FALSE`.
@@ -527,7 +527,7 @@ prop.test(c({th[1,2]},{th[2,2]}), c({th[1,3]},{th[2,3]}), alternative = "greater
 prop.test(th$x, th$n, alternative = "greater")
 ```
 
-Again, this includes by default the continuity correction, which is applied by $\pm0.5(1/n_1+1/n_2)$ onto $(\hat p_1-\hat p_2)$ such that the absolute value is lowered, effectively slightly "shrinking" the observed difference in sample proportions. We can also verify this with a quick modification to our earlier computation:
+Again, this includes by default the continuity correction, which is applied by $\pm0.5(1/n_1\!+\!1/n_2)$ onto $(\hat p_1\!-\!\hat p_2)$ such that the absolute value is lowered in the $z_\obs$ equation, effectively slightly "shrinking" the observed difference in sample proportions. We can also verify this with a quick modification to our earlier computation:
 
 ```{r}
 thoracic_smoker_summary %>%
