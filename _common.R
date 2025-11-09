@@ -127,8 +127,15 @@ page.find = function(url,pattern,md=F,n=1){
   }
 }
 
+# better sig fig printing function from https://stackoverflow.com/a/35280610
+sf = function(x,n){
+  if(is.list(x)) x = unlist(x,use.names=F)
+  gsub("\\.$","",formatC(signif(x,digits=n),digits=n,format="fg",flag="#"))
+}
+
+# function for nicely printing vector of CI values
 ci = function(x,n=2){
-  paste0("(",paste(round(x,2),collapse=","),")")
+  paste0("(",paste(sf(x,2),collapse=","),")")
 }
 
 # ## make STAT240 folder for downloading
