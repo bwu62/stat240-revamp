@@ -433,3 +433,7 @@ Here's a quick summary of choosing a direction for $H_a$ and how it impacts the 
 
  - If you have no suspected side OR if you want to keep both options open, and thus wish to reject $H_0$ if the observed sample statistic $\theta_s$ is either too low OR too high compared to $\theta_0$, choose $H_a:\theta\ne\theta_0$ and take the **two outer tails** of your observed sample statistic.
 :::
+
+:::{.def}
+Commonly, we also say the test was **significant** if p-val $<\alpha$ and we reject the null, and **insignificant** if we could not reject the null
+:::
