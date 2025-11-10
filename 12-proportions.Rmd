@@ -89,7 +89,7 @@ Suppose my question of interest is whether this specific die design is in fact f
 
 In this setup, we can define "success" as getting 4 or 5, which has theoretical probability $p=0.4$. Our RV model for $X$, i.e. the number of successes (4s & 5s), is then $X\sim\bin(`r n`,0.4)$.
 
-In our sample, we observed $x=`r x4`+`r x5`=`r x`$ times this actually occured, which gives us a sample proportion of $\hat p=x/n=`r x`/`r n`=`r x/n`$.
+In our sample, we observed $x=`r x4`+`r x5`=`r x`$ times this actually occurred, which gives us a sample proportion of $\hat p=x/n=`r x`/`r n`=`r x/n`$.
 :::
 
 ### Confidence interval
