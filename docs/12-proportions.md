@@ -93,7 +93,7 @@ Suppose my question of interest is whether this specific die design is in fact f
 
 In this setup, we can define "success" as getting 4 or 5, which has theoretical probability $p=0.4$. Our RV model for $X$, i.e. the number of successes (4s & 5s), is then $X\sim\bin(200,0.4)$.
 
-In our sample, we observed $x=41+38=79$ times this actually occured, which gives us a sample proportion of $\hat p=x/n=79/200=0.395$.
+In our sample, we observed $x=41+38=79$ times this actually occurred, which gives us a sample proportion of $\hat p=x/n=79/200=0.395$.
 :::
 
 ### Confidence interval
