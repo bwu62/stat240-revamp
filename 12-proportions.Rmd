@@ -410,20 +410,21 @@ Thus we can see our 95% confidence interval for the true difference in probabili
 
 ### Hypothesis test
 
-Again, for a two-proportions scenario, we're usually interested on inference for the **difference of the underlying population probabilities $p_1-p_2$**. The hypotheses are:
+Again, for a two-proportions scenario, we're usually interested on inference for the **difference of the underlying population probabilities $p_1-p_2$**. For two proportions we must resort to the approximate normal or Z-test, which is typically considered a valid approximation as long as you have **at least 5 successes and 5 failures in each sample**. The hypotheses are:
 
 $$
-H_0:p_1-p_2~=~p_0~~~~~~~\\
-~~~~~~~~H_a:p_1-p_2~<,\,\ne,\,\text{or}>~p_0
+H_0:p_1-p_2~=~d~~~~~~~\\
+~~~~~~~~H_a:p_1-p_2~<,\,\ne,\,\text{or}>~d
 $$
 
-where $p_0$ is your hypothesized true difference in the populations' probabilities under the null.
+where $d$ is your hypothesized true difference in the populations' probabilities under the null. By far the most common case is $d=0$ which means we end up testing the following:
 
-A common case is $p_0=0$ which means we end up testing $p_1\!=\!p_2$ vs $p_1\!<,\,\ne,\text{or}\!>\!p_2$, but you can choose to test whatever difference you desire.
+$$
+H_0:p_1~=~p_2~~~~~~~~\\
+~~~~~~~H_a:p_1~<,\,\ne,\,\text{or}>~p_2
+$$
 
-For two proportions we must resort to the approximate normal or Z-test, which is typically considered a valid approximation as long as you have **at least 5 successes and 5 failures in each sample**.
-
-Under the null assumption, where the two populations have the same probability and any observed differences in sample proportion are due to random chance, we must compute a "pooled" sample proportion estimate $\bar p$, since it doesn't make sense to have two different sample proportion estimates.
+For STAT240 we will focus on this $d=0$ case^[the case where $d\ne0$ becomes quite complicated if you wish to keep using the [score test](https://en.wikipedia.org/wiki/Score_test), which is what we've been doing, and which is generally recommended due to good performance], where under the null the two populations have the same probability and any observed differences in sample proportion are due to random chance, and we must compute a "pooled" sample proportion estimate $\bar p$, since it doesn't make sense to have two different sample proportion estimates.
 
 $$
 \bar p=\frac{x_1+x_2}{n_1+n_2}
@@ -432,7 +433,7 @@ $$
 Then, we compute our $z_\obs$ test statistic as:
 
 $$
-z_\obs=\frac{(\hat p_1-\hat p_2)-p_0}{\sqrt{\bar p(1-\bar p)\left(\frac1{n_1}+\frac1{n_2}\right)}}
+z_\obs=\frac{(\hat p_1-\hat p_2)-0}{\sqrt{\bar p(1-\bar p)\left(\frac1{n_1}+\frac1{n_2}\right)}}
 $$
 
 Finally, we compute our p-value by taking the appropriate tail area.

@@ -512,21 +512,23 @@ probability of success
 <h3>
 <span class="header-section-number">12.2.3</span> Hypothesis test<a class="anchor" aria-label="anchor" href="#hypothesis-test-1"><i class="fas fa-link"></i></a>
 </h3>
-<p>Again, for a two-proportions scenario, we’re usually interested on inference for the <strong>difference of the underlying population probabilities <span class="math inline">\(p_1-p_2\)</span></strong>. The hypotheses are:</p>
+<p>Again, for a two-proportions scenario, we’re usually interested on inference for the <strong>difference of the underlying population probabilities <span class="math inline">\(p_1-p_2\)</span></strong>. For two proportions we must resort to the approximate normal or Z-test, which is typically considered a valid approximation as long as you have <strong>at least 5 successes and 5 failures in each sample</strong>. The hypotheses are:</p>
 <p><span class="math display">\[
-H_0:p_1-p_2~=~p_0~~~~~~~\\
-~~~~~~~~H_a:p_1-p_2~&lt;,\,\ne,\,\text{or}&gt;~p_0
+H_0:p_1-p_2~=~d~~~~~~~\\
+~~~~~~~~H_a:p_1-p_2~&lt;,\,\ne,\,\text{or}&gt;~d
 \]</span></p>
-<p>where <span class="math inline">\(p_0\)</span> is your hypothesized true difference in the populations’ probabilities under the null.</p>
-<p>A common case is <span class="math inline">\(p_0=0\)</span> which means we end up testing <span class="math inline">\(p_1\!=\!p_2\)</span> vs <span class="math inline">\(p_1\!&lt;,\,\ne,\text{or}\!&gt;\!p_2\)</span>, but you can choose to test whatever difference you desire.</p>
-<p>For two proportions we must resort to the approximate normal or Z-test, which is typically considered a valid approximation as long as you have <strong>at least 5 successes and 5 failures in each sample</strong>.</p>
-<p>Under the null assumption, where the two populations have the same probability and any observed differences in sample proportion are due to random chance, we must compute a “pooled” sample proportion estimate <span class="math inline">\(\bar p\)</span>, since it doesn’t make sense to have two different sample proportion estimates.</p>
+<p>where <span class="math inline">\(d\)</span> is your hypothesized true difference in the populations’ probabilities under the null. By far the most common case is <span class="math inline">\(d=0\)</span> which means we end up testing the following:</p>
+<p><span class="math display">\[
+H_0:p_1~=~p_2~~~~~~~~\\
+~~~~~~~H_a:p_1~&lt;,\,\ne,\,\text{or}&gt;~p_2
+\]</span></p>
+<p>For STAT240 we will focus on this <span class="math inline">\(d=0\)</span> case<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;the case where &lt;span class="math inline"&gt;\(d\ne0\)&lt;/span&gt; becomes quite complicated if you wish to keep using the &lt;a href="https://en.wikipedia.org/wiki/Score_test"&gt;score test&lt;/a&gt;, which is what we’ve been doing, and which is generally recommended due to good performance&lt;/p&gt;'><sup>42</sup></a>, where under the null the two populations have the same probability and any observed differences in sample proportion are due to random chance, and we must compute a “pooled” sample proportion estimate <span class="math inline">\(\bar p\)</span>, since it doesn’t make sense to have two different sample proportion estimates.</p>
 <p><span class="math display">\[
 \bar p=\frac{x_1+x_2}{n_1+n_2}
 \]</span></p>
 <p>Then, we compute our <span class="math inline">\(z_\obs\)</span> test statistic as:</p>
 <p><span class="math display">\[
-z_\obs=\frac{(\hat p_1-\hat p_2)-p_0}{\sqrt{\bar p(1-\bar p)\left(\frac1{n_1}+\frac1{n_2}\right)}}
+z_\obs=\frac{(\hat p_1-\hat p_2)-0}{\sqrt{\bar p(1-\bar p)\left(\frac1{n_1}+\frac1{n_2}\right)}}
 \]</span></p>
 <p>Finally, we compute our p-value by taking the appropriate tail area.</p>
 <div class="eg">
