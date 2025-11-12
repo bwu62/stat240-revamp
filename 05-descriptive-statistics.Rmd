@@ -21,7 +21,7 @@ There are MANY statistics that aim to quantify the "center" of a sample. These a
 :::
 
 
-### Mean
+### Mean {#sample-mean}
 
 The arithmetic mean of a sample, commonly referred to as just "mean", is what most people think of when they hear "average". It is the **sum of a sample divided by the sample size**. Formally, given a sample $x_1,x_2,\dots,x_n$ the mean $\bar{x}$ is defined as:
 
@@ -187,7 +187,7 @@ Unlike measures of central tendency, measures of spread are typically location-a
 
 
 
-### Variance (and standard deviation)
+### Variance (and standard deviation) {#sample-var-sd}
 
 Let's get the easy one out of the way first. **Standard deviation is always defined as the (positive) square root of variance**. So what's the variance then? The **variance of a sample is defined as**:
 
