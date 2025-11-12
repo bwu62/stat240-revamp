@@ -27,9 +27,9 @@ In these setups, the probability parameter of the binomial model **always corres
 
 In the one-proportion scenario, suppose we draw a **fixed sample size of $n$** observations, each of which we model as **independent** and having some constant underlying **true probability $p$ of being a success**, and $1-p$ of being a failure (and there's no other possible outcome).
 
-Let lower-case **$x$ be the observed number of successes in our sample**, and note that we must have $0\le x\le n$. Let $\hat p=x/n$ denote then the **proportion of successes in our sample**.
+It's customary to use upper-case $X$ to represent our model of the true distribution of $x$, which here we choose to be $X\sim\bin(n,p)$.
 
-It's customary to also use upper-case $X$ to represent our model of the true distribution of $x$, which here we choose to be $X\sim\bin(n,p)$.
+Let lower-case **$x$ be the observed number of successes in our sample**, and note that we must have $0\le x\le n$. Let $\hat p=x/n$ denote then the **proportion of successes in our sample**.
 
 Under these assumptions, $\hat p$ is a natural **point estimate** for $p$, i.e. our **sample proportion of successes estimates the true underlying probability of success $p$**, since the LLN guarantees $\hat p\to p$ as $n\to\infty$.
 
@@ -331,9 +331,11 @@ This time, the p-values are exactly what we found previously (up to rounding).
 
 In the two-proportions scenario, suppose we draw **samples of size $n_1$, $n_2$ from two different populations**, and we again assume everything is independent (both within and between the two samples). Suppose the populations have **true probabilities $p_1$, $p_2$ of succeeding** for each trial, and again these are treated as true unknown constants.
 
+Then, our models for the true distributions are $X_1\sim\bin(n_1,p_1)$ and $X_2\sim\bin(n_2,p_2)$.
+
 Let **$x_1$, $x_2$ be observed numbers of successes in our samples** where $0\le x_1\le n_1$ and $0\le x_2\le n_2$ and define **$\hat p_1=x_1/n_1$, $\hat p_2=x_2/n_2$ as the corresponding proportions of successes in our samples**.
 
-Then, our models for the true distributions are $X_1\sim\bin(n_1,p_1)$ and $X_2\sim\bin(n_2,p_2)$. Again, we know from the LLN that $\hat p_1\to p_1$ and $\hat p_2\to p_2$ so we take **$\hat p_1$, $\hat p_2$ as our point estimates for $p_1$, $p_2$**.
+Again, we know from the LLN that $\hat p_1\to p_1$ and $\hat p_2\to p_2$ so we take **$\hat p_1$, $\hat p_2$ as our point estimates for $p_1$, $p_2$**.
 
 So far it's all pretty intuitive.
 
