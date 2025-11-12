@@ -128,7 +128,101 @@ $$
    qt(1-alpha/2, n-1)
    ```
    
-   - and finally $SE(\bar x)=s/\sqrt n$ is the **estimated standard error of $\bar x$**. In a perfect world where we know $\sigma$ we could use that instead of $s$, which reverts the reference distribution back to a normal instead of t--, but this is not usually the case.
+   - and finally, $SE(\bar x)=s/\sqrt n$ is the **estimated standard error of $\bar x$**. In a perfect world where we know $\sigma$ we could use that instead of $s$, which reverts the reference distribution back to a normal instead of t--, but this is not usually the case.
 
+:::{.eg}
+Suppose we have the following dataset of $n=`r (n=15)`$ masses in grams of ball bearings manufactured by a factory machine that should be calibrated to a mean mass of $\mu=12$ grams.
 
+```{r,include=F}
+set.seed(11)
+bearings = round(sample(rnorm(15,12,.15)),2)
+t.test(bearings,mu=12)
+```
+```{r,echo=F,results='asis'}
+cat(glue::glue('``` r
+bearings <- c({toString(sf(bearings[1:8],4))},
+              {toString(sf(bearings[9:15],4))})
+bearings
+```'))
+```
+```{r,echo=F}
+bearings
+```
+```{r}
+n <- length(bearings)  # define our sample size
+```
+
+Since we have $n=`r n`$ observations, we require a t-distribution with $\nu=`r n-1`$ degrees of freedom; we can also compute our sample mean and SD:
+
+```{r}
+mean(bearings)
+sd(bearings)
+```
+```{r,echo=F,results='asis'}
+cat(glue::glue('``` r
+qt(0.975, df={n-1})
+```'))
+```
+```{r,echo=F}
+qt(0.975, df=n-1)
+```
+
+Putting it all together, here's out 95% confidence interval for the true mean $\mu$ based on our sample:
+
+```{r}
+mean(bearings) + c(-1,1) * qt(0.975, df=n-1) * sd(bearings)/sqrt(n)
+```
+```{r,include=F}
+C <- mean(bearings) + c(-1,1) * qt(0.975, df=n-1) * sd(bearings)/sqrt(n)
+```
+
+Thus, our 95% interval for the true mean is `r ci(C,4)`. In other words, we are 95% confident the true mean mass of ball bearings produced by this machine is between `r sf(C[1],4)` and `r sf(C[2],4)` grams.
+:::
+
+### T-test
+
+The one-mean hypothesis test, more commonly simply called the **t-test**, starts with the following familiar form of hypotheses:
+
+$$
+H_0:\mu~=~\mu_0\,~~~~~~~\\
+~~~~~~~\,H_a:\mu~<,\,\ne,\,\text{or}>~\mu_0
+$$
+
+where $\mu_0$ is the hypothesized true mean under the null. Under the null, the sample mean $\bar x$ is distributed normally:
+
+$$
+\bar x\sim N(\mu,\sigma/\!\sqrt n)
+$$
+
+As discussed previously, we estimate $s\to\sigma$ out of necessity, which means the following test statistic $t_\obs$ adopts a t-distribution with $\nu=n-1$ degrees of freedom:
+
+$$
+t_\obs=\frac{\bar x-\mu_0}{s/\!\sqrt n}~\sim~T_{n-1}
+$$
+
+Then, again, it's simply a matter of taking the appropriate tail area.
+
+:::{.eg}
+Continuing with the ball bearing example above, suppose we wish to test if the machine is properly calibrated for $\mu=12$ grams. Let's use the two-sided hypothesis here, since if it's miscalibrated on either side (too high or too low), we probably want to recalibrate it.
+
+$$
+H_0:\mu=\mu_0\\
+\,H_a:\mu\ne\mu_0
+$$
+
+We can compute our test statistic:
+
+```{r}
+t_obs <- (mean(bearings) - 12) / (sd(bearings) / sqrt(n))
+t_obs
+```
+
+Then, we compute our p-value, remembering to take twice the outer tail:
+
+```{r}
+2 * pt(t_obs, df=n-1)
+```
+
+We can see our p-value here is not less than the standard $\alpha=0.05$, so here we do not reject the null. In other words, there's insufficient evidence to suggest the machine is miscalibrated, so there's no need to recalibrate it.
+:::
 
