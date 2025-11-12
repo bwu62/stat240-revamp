@@ -126,9 +126,9 @@
 <div class="note">
 <p><strong>“Average” can refer to ANY measure of central tendency</strong>, i.e. average can refer to either mean, median, or mode (or any of these <a href="https://en.wikipedia.org/wiki/Central_tendency#Measures">other measures</a>). Thus, it’s generally recommended to specify which measure you’re referring to and avoid using the word “average” (unless you’re being strategically ambiguous).</p>
 </div>
-<div id="mean" class="section level3" number="5.1.1">
+<div id="sample-mean" class="section level3" number="5.1.1">
 <h3>
-<span class="header-section-number">5.1.1</span> Mean<a class="anchor" aria-label="anchor" href="#mean"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.1.1</span> Mean<a class="anchor" aria-label="anchor" href="#sample-mean"><i class="fas fa-link"></i></a>
 </h3>
 <p>The arithmetic mean of a sample, commonly referred to as just “mean”, is what most people think of when they hear “average”. It is the <strong>sum of a sample divided by the sample size</strong>. Formally, given a sample <span class="math inline">\(x_1,x_2,\dots,x_n\)</span> the mean <span class="math inline">\(\bar{x}\)</span> is defined as:</p>
 <p><span class="math display">\[\bar{x}=\frac1n\sum_{i=1}^nx_i=\frac{x_1+x_2+\cdots+x_n}n\]</span></p>
@@ -282,9 +282,9 @@ attr(,"freq")
 </h2>
 <p>Arguably the next most important set of summary statistics after measures of central tendency are <strong>measures of spread</strong>, which aim to quantify how “spread out” a dataset is. <strong>Variance</strong> and <strong>standard deviation</strong> are by far the most common measures, but the <strong>IQR</strong> and <strong>range</strong> are also sometimes useful.</p>
 <p>Unlike measures of central tendency, measures of spread are typically location-agnostic, i.e. they don’t change if the entire dataset is shifted up or down by a constant. Formally, a sample <span class="math inline">\(x_1,\dots,x_n\)</span> and a sample <span class="math inline">\(x_1+c,\,\dots,\,x_n+c\)</span> have the same spread for all <span class="math inline">\(c\)</span>.</p>
-<div id="variance-and-standard-deviation" class="section level3" number="5.2.1">
+<div id="sample-var-sd" class="section level3" number="5.2.1">
 <h3>
-<span class="header-section-number">5.2.1</span> Variance (and standard deviation)<a class="anchor" aria-label="anchor" href="#variance-and-standard-deviation"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.2.1</span> Variance (and standard deviation)<a class="anchor" aria-label="anchor" href="#sample-var-sd"><i class="fas fa-link"></i></a>
 </h3>
 <p>Let’s get the easy one out of the way first. <strong>Standard deviation is always defined as the (positive) square root of variance</strong>. So what’s the variance then? The <strong>variance of a sample is defined as</strong>:</p>
 <p><span class="math display">\[s^2=\frac1{n-1}\sum_{i=1}^n(x_i-\bar{x})^2=\frac{(x_1-\bar{x})^2+\cdots+(x_n-\bar{x})^2}{n-1}\]</span></p>
@@ -498,7 +498,7 @@ $('body')
 <li><a class="nav-link" href="#descriptive"><span class="header-section-number">5</span> Descriptive Statistics</a></li>
 <li>
 <a class="nav-link" href="#measures-of-central-tendency"><span class="header-section-number">5.1</span> Measures of central tendency</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#mean"><span class="header-section-number">5.1.1</span> Mean</a></li>
+<li><a class="nav-link" href="#sample-mean"><span class="header-section-number">5.1.1</span> Mean</a></li>
 <li><a class="nav-link" href="#median"><span class="header-section-number">5.1.2</span> Median</a></li>
 <li><a class="nav-link" href="#mode"><span class="header-section-number">5.1.3</span> Mode</a></li>
 <li><a class="nav-link" href="#modality"><span class="header-section-number">5.1.4</span> Aside: Modality</a></li>
@@ -508,7 +508,7 @@ $('body')
 </li>
 <li>
 <a class="nav-link" href="#measures-of-spread"><span class="header-section-number">5.2</span> Measures of spread</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#variance-and-standard-deviation"><span class="header-section-number">5.2.1</span> Variance (and standard deviation)</a></li>
+<li><a class="nav-link" href="#sample-var-sd"><span class="header-section-number">5.2.1</span> Variance (and standard deviation)</a></li>
 <li><a class="nav-link" href="#iqr"><span class="header-section-number">5.2.2</span> Interquartile range</a></li>
 <li><a class="nav-link" href="#percentiles"><span class="header-section-number">5.2.3</span> Percentiles</a></li>
 <li><a class="nav-link" href="#range"><span class="header-section-number">5.2.4</span> Range</a></li>
@@ -533,7 +533,7 @@ $('body')
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2025-11-10.</p>
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget and Cameron Jones. It was last built on 2025-11-12.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

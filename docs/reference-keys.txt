@@ -74,14 +74,14 @@ basic-df
 subsetting-data-frames
 descriptive
 measures-of-central-tendency
-mean
+sample-mean
 median
 mode
 modality
 aside-2-visualizing-meanmedianmode
 other-measures
 measures-of-spread
-variance-and-standard-deviation
+sample-var-sd
 iqr
 percentiles
 range
@@ -211,6 +211,9 @@ confidence-interval-1
 hypothesis-test-1
 r-method-1
 means
+t-distribution
+one-mean
+confidence-interval-2
 regression
 datasets
 datasets-list
