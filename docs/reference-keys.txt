@@ -215,6 +215,7 @@ t-distribution
 one-mean
 confidence-interval-2
 t-test
+r-method-2
 regression
 datasets
 datasets-list
