@@ -59,7 +59,7 @@ A few key facts that hopefully are intuitive after examining the plot:
 
  - Similar to the normal, it's bell-ish shaped and is symmetric about its center 0
  
- - For $\nu>2$ it has $\sigma^2=\nu/(\nu-2)$
+ - For $\nu>2$ it has variance $\sigma^2=\nu/(\nu-2)$
  
  - The R functions for working with the t-distribution are `dt()`, `pt()`, `qt()`, `rt()`, just as you'd expect.
  
@@ -74,7 +74,7 @@ Thus, our model for the population is $X\sim\n(\mu,\sigma)$ for some unknown, co
 
 Let **$\bar x$ be the sample mean**, and **$s$ be the sample standard deviation** (as defined in sections \@ref(sample-mean) and \@ref(sample-var-sd)). By the LLN, we know $\bar x\to\mu$ and $s\to\sigma$, so these are naturally our point estimates.
 
-:::{.eg}
+:::{.note}
 A few notes here that are importants:
 
 - Technically the population is required to be normal, however in practice the t-based mean inference methods we're learning are considered to be quite **robust against non-normality**, i.e. even moderate departures from normality are often not considered problematic.
