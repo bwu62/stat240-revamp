@@ -214,6 +214,7 @@ means
 t-distribution
 one-mean
 confidence-interval-2
+t-test
 regression
 datasets
 datasets-list

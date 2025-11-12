@@ -320,12 +320,12 @@ z_\obs=\frac{\hat p-p_0}{\sqrt{p_0(1-p_0)/n}}
 <p>For the die example, this would look like:</p>
 <div class="sourceCode" id="cb962"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># compute z_obs test statistic with continuity correction</span></span>
-<span><span class="va">z</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">phat</span> <span class="op">+</span> <span class="fl">0.5</span><span class="op">/</span><span class="va">n</span> <span class="op">-</span> <span class="fl">0.4</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fl">0.4</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="fl">0.4</span><span class="op">)</span><span class="op">/</span><span class="va">n</span><span class="op">)</span></span>
-<span><span class="va">z</span></span></code></pre></div>
+<span><span class="va">z_obs</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">phat</span> <span class="op">+</span> <span class="fl">0.5</span><span class="op">/</span><span class="va">n</span> <span class="op">-</span> <span class="fl">0.4</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fl">0.4</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="fl">0.4</span><span class="op">)</span><span class="op">/</span><span class="va">n</span><span class="op">)</span></span>
+<span><span class="va">z_obs</span></span></code></pre></div>
 <pre><code>[1] -0.07216878</code></pre>
 <div class="sourceCode" id="cb964"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># compute 2-sided p-value for our earlier test</span></span>
-<span><span class="fl">2</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="va">z</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fl">2</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="va">z_obs</span><span class="op">)</span></span></code></pre></div>
 <pre><code>[1] 0.9424676</code></pre>
 <p>The result is comparable to our earlier p-value.</p>
 </div>
