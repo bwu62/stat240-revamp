@@ -226,3 +226,23 @@ Then, we compute our p-value, remembering to take twice the outer tail:
 We can see our p-value here is not less than the standard $\alpha=0.05$, so here we do not reject the null. In other words, there's insufficient evidence to suggest the machine is miscalibrated, so there's no need to recalibrate it.
 :::
 
+### R method
+
+In R, you can compute both the one-mean interval and t-test using the `t.test()` function, which has the following important arguments:
+
+ - `x` is the vector of observations,
+ 
+ - `alternative` is the alternative direction (if doing a t-test), and again can be either `"two.sided"` (the default) or `"greater"` or `"less"`
+ 
+ - `mu` is the hypothesized $\mu_0$ under the null
+ 
+ - `conf.level` is the desired confidence (if doing an interval) which also defaults to 95%.
+
+:::{.eg}
+Continuing again with the ball bearings example, below are teh 95% confidence interval for the true mean, as well as the t-test for testing $\mu=12$ vs $\mu\ne12$.
+```{r}
+t.test(bearings, mu=12, conf.level=0.95)
+```
+
+We can see both the interval and p-value match our earlier computations
+:::
