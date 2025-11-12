@@ -249,10 +249,10 @@ For the die example, this would look like:
 
 ```{r}
 # compute z_obs test statistic with continuity correction
-z <- (phat + 0.5/n - 0.4)/sqrt(0.4*(1-0.4)/n)
-z
+z_obs <- (phat + 0.5/n - 0.4)/sqrt(0.4*(1-0.4)/n)
+z_obs
 # compute 2-sided p-value for our earlier test
-2 * pnorm(z)
+2 * pnorm(z_obs)
 ```
 
 The result is comparable to our earlier p-value.
