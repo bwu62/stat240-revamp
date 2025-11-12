@@ -135,7 +135,7 @@ sf = function(x,n){
 
 # function for nicely printing vector of CI values
 ci = function(x,n=2){
-  paste0("(",paste(sf(x,2),collapse=","),")")
+  paste0("(",paste(sf(x,n),collapse=","),")")
 }
 
 # ## make STAT240 folder for downloading
