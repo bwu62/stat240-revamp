@@ -2,7 +2,7 @@
 
 # Means
 
-Now let's look at a means-type inteference setup, where we apply a **normal model** to sample means to infer about an underlying **true mean** in the population. We will divide this into two broad scenarios again:
+Now let's look at a means-type interference setup, where we apply a **normal model** to sample means to infer about an underlying **true mean** in the population. We will divide this into two broad scenarios again:
 
 - One-mean scenario, where there is a single mean of interest from a single population, and
 
@@ -25,7 +25,7 @@ In the proportions inference section, recall we generally know $n$ and only need
 
 For normal distributions, you generally start off not knowing either $\mu$ or $\sigma$, and furthermore it can be shown that the corresponding sample statistics $\bar x$ and $s$ are in fact totally statistically independent of each other ^[this comes from [Basu's theorem](https://en.wikipedia.org/wiki/Basu%27s_theorem)].
 
-The implication of this is even though usually we're primarily interested on doing **inference on just mean(s)**, we also need to **separately estimate the standard deviation** in order to "pin down" a specific vesion of the normal. In other words, we generally **use LLN to both estimate $\bar x\to\mu$ and $s\to\sigma$**.
+The implication of this is even though usually we're primarily interested on doing **inference on just mean(s)**, we also need to **separately estimate the standard deviation** in order to "pin down" a specific version of the normal. In other words, we generally **use LLN to both estimate $\bar x\to\mu$ and $s\to\sigma$**.
 
 However, this leads to another problem, which is sometimes $s$ will underestimate $\sigma$ (and sometimes it may overestimate), and this distorts the result reference distribution (use for both intervals and testing) slightly away from the standard normal, **especially for small samples**. Instead, we use a different **reference distribution: the t-distribution**.
 
@@ -82,7 +82,7 @@ Thus, our model for the population is $X\sim\n(\mu,\sigma)$ for some unknown, co
 Let **$\bar x$ be the sample mean**, and **$s$ be the sample standard deviation** (as defined in sections \@ref(sample-mean) and \@ref(sample-var-sd)). By the LLN, we know $\bar x\to\mu$ and $s\to\sigma$, so these are naturally our point estimates.
 
 :::{.note}
-A few notes here that are importants:
+A few notes here that are important:
 
 - Technically the population is required to be normal, however in practice the t-based mean inference methods we're learning are considered to be quite **robust against non-normality**, i.e. even moderate departures from normality are often not considered problematic.
 
@@ -246,7 +246,7 @@ In R, you can compute both the one-mean interval and t-test using the `t.test()`
  - `conf.level` is the desired confidence (if doing an interval) which also defaults to 95%.
 
 :::{.eg}
-Continuing again with the ball bearings example, below are teh 95% confidence interval for the true mean, as well as the t-test for testing $\mu=12$ vs $\mu\ne12$.
+Continuing again with the ball bearings example, below are the 95% confidence interval for the true mean, as well as the t-test for testing $\mu=12$ vs $\mu\ne12$.
 ```{r}
 t.test(bearings, mu=12, conf.level=0.95)
 ```
@@ -377,7 +377,7 @@ These days, the generally recommended method of inference is the **Welch method*
 
 Again, it's **now generally recommended to default to the Welch method**, which is presented below.
 
-The Welch method models uses a t-based method to model the sample difference in means. The main equation of interest here is the degre of freedom equation, known as the Satterthwaite approximation:
+The Welch method models uses a t-based method to model the sample difference in means. The main equation of interest here is the degree of freedom equation, known as the Satterthwaite approximation:
 
 $$
 \nu=\frac{\left(s_1^2/n_1+s_2^2/n_2\right)^2}{\frac{(s_1^2/n_1)^2}{n_1-1}+\frac{(s_2^2/n_2)^2}{n_2-1}}
@@ -397,14 +397,14 @@ $$
 
 - and $\se(\bar x_1-\bar x_2)=\sqrt{s_1^2/n_1+s_2^2/n_2}$ is the standard error for the difference in sample means.
 
-In a similar fashion, for the Welch t-test, we test the following hypothese:
+In a similar fashion, for the Welch t-test, we test the following hypotheses:
 
 $$
 H_0:\mu_1-\mu_2~=~d~~~~~~~\\
 ~~~~~~~~H_a:\mu_1-\mu_2~<,\,\ne,\,\text{or}>~d
 $$
 
-The test statistic is compputed as:
+The test statistic is computed as:
 
 $$
 t_\obs=\frac{(\bar x_1-\bar x_2)-d}{\sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}}~\sim~T_\nu
