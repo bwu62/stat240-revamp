@@ -184,7 +184,7 @@ phat
 ```
 
 ``` r
-# 95% confidence interval, using c(-1,1) as a shorcut for ±
+# 95% confidence interval, using c(-1,1) as a shortcut for ±
 phat + c(-1,1) * qnorm(0.975) * sqrt(phat*(1-phat)/n)
 ```
 

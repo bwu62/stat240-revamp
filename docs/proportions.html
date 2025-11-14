@@ -239,7 +239,7 @@
 <span><span class="va">phat</span></span></code></pre></div>
 <pre><code>[1] 0.395</code></pre>
 <div class="sourceCode" id="cb949"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># 95% confidence interval, using c(-1,1) as a shorcut for ±</span></span>
+<code class="sourceCode R"><span><span class="co"># 95% confidence interval, using c(-1,1) as a shortcut for ±</span></span>
 <span><span class="va">phat</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="fl">0.975</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">phat</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">phat</span><span class="op">)</span><span class="op">/</span><span class="va">n</span><span class="op">)</span></span></code></pre></div>
 <pre><code>[1] 0.32725 0.46275</code></pre>
 <p>Thus, a 95% confidence interval for <span class="math inline">\(p\)</span>, i.e. the true probability of 4 or 5, is (0.33,0.46), or in other words, <strong>we are 95% confident the true <span class="math inline">\(p\)</span> is between 0.33 and 0.46</strong>.</p>
