@@ -213,8 +213,8 @@ Then, again, it's simply a matter of taking the appropriate tail area.
 Continuing with the ball bearing example above, suppose we wish to test if the machine is properly calibrated for $\mu=12$ grams. Let's use the two-sided hypothesis here, since if it's miscalibrated on either side (too high or too low), we probably want to recalibrate it.
 
 $$
-H_0:\mu=\mu_0\\
-H_a:\mu\ne\mu_0
+H_0:\mu=12\\
+H_a:\mu\ne12
 $$
 
 We can compute our test statistic:
