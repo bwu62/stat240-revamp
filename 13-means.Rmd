@@ -255,7 +255,7 @@ We can see both the interval and p-value match our earlier computations.
 :::
 
 
-## Two means -- Paired
+## Two samples -- Paired
 
 For the two-means scenario, we start by considering the paired case.
 
@@ -324,7 +324,7 @@ Either way, we can see everything agrees.
 :::
 
 
-## Two means -- Unpaired
+## Two samples -- Unpaired
 
 Next, we consider the unpaired case, also called the **two independent samples** case.
 
@@ -334,26 +334,81 @@ For this case, suppose we draw **samples of size $n_1$, $n_2$ from two different
 
 Thus our models for the two populations are $X_1\sim\n(\mu_1,\sigma_1)$, $X_2\sim\n(\mu_2,\sigma_2)$ where all the mean & SD parameters are unknown constants.
 
-Let $\bar x_1$, $\bar x_2$ be the sample means and $s_1$, $s_2$ be the sample SDs. Again by the LLN, we know $\bar x_i\to\mu_i$ and $s_i\to\sigma_i$ so these are naturally our point estimates.
+Let $\bar x_1$, $\bar x_2$ be the sample means and $s_1$, $s_2$ be the sample SDs. Again by the LLN, we know $\bar x_i\to\mu_i$ and $s_i\to\sigma_i$.
+
+For a two-means scenario, generally our goal is to run inference on the **difference of the underlying population means $\mu_1-\mu_2$**. We think of this as our parameter of interest.
+
+For this parameter, our point estimate naturally is the **difference of our sample means $\bar x_1-\bar x_2$**.
 
 :::{.note}
 Similar to the one-mean scenario, this scenario is not sensitive to non-normality in the data, and the t-distribution will be necessary again since we estimate $s_i\to\sigma_i$
 :::
 
-<!--
+:::{.eg}
+For an example dataset here, let's use this dataset from Kevin Young's 2004 Science [article](https://www.science.org/doi/10.1126/science.1094790) on the [flat-tailed horned lizard](https://en.wikipedia.org/wiki/Flat-tail_horned_lizard). In a study, scientists collected two samples: lizards of the species who were alive, and those that were killed by [loggerhead shrikes](https://en.wikipedia.org/wiki/Loggerhead_shrike), a common predator. In each sample, lizard horn lengths were measured to see if there was evidence that longer horns provided better defense and thus chances of survival against the shrikes. The data is in [`lizards.tsv`](https://bwu62.github.io/stat240-revamp/data/lizards.tsv).
 
-### Confidence interval
+```{r,eval=F}
+# remember to load packages and set any desired options
+# read in data and summarize to groups (lengths are in mm)
+lizards <- read_tsv("https://bwu62.github.io/stat240-revamp/data/lizards.tsv")
+lizards
+```
+```{r,echo=F}
+lizards <- read_tsv("https://bwu62.github.io/stat240-revamp/data/lizards.tsv")
+lizards
+```
+```{r}
+lizards_summary <- lizards %>% 
+  group_by(survival) %>%
+  summarize(n = n(), mean = mean(hornLength), sd = sd(hornLength))
+lizards_summary
+```
+```{r,include=F}
+L <- lizards_summary
+```
 
-For a two-means scenario, generally our goal is to run inference on the **difference of the underlying population means $\mu_1-\mu_2$**. We think of this as our parameter of interest.
+Let sample 1 be the shrike-killed lizards, and sample 2 be the living lizards. Then we have $n_1=`r L[1,2]`$, $n_2=`r L[2,2]`$, $\bar x_1=`r sf(L[1,3],3)`$, $\bar x_2=`r sf(L[2,3],3)`$, $s_1=`r sf(L[1,4],3)`$, $s_2=`r sf(L[2,4],3)`$.
+:::
 
-For this parameter, our point estimate naturally is the **difference of our sample means $\bar x_1-\bar x_2$**. Then, our interval takes the form:
+
+### Welch method
+
+These days, the generally recommended method of inference is the **Welch method** for interval and testing, also sometimes called the **unequal variance** method, although this is a slight misnomer. The Welch method doesn't assume $\sigma_1$, $\sigma_2$ are unequal, it just doesn't assume they are equal. This is opposed to the now outdated recommendation to look at $s_1$, $s_2$ and choose between this and the equal-variance method, also called the two-sample t-test, which does assume equality of variances (more on this later).
+
+Again, it's **now generally recommended to default to the Welch method**, which is presented below.
+
+The Welch method models uses a t-based method to model the sample difference in means. The main equation of interest here is the degre of freedom equation, known as the Satterthwaite approximation:
 
 $$
-\text{$C\%$ or $(1\!-\!\alpha)$ interval}~=~(\bar x_1-\bar x_2)~\pm~t_{\alpha/2,n-1}\cdot\sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}},~\text{ where}
+\nu=\frac{\left(s_1^2/n_1+s_2^2/n_2\right)^2}{\frac{(s_1^2/n_1)^2}{n_1-1}+\frac{(s_2^2/n_2)^2}{n_2-1}}
+$$
+
+This gives the approximate degrees of freedom that are relevant for both the Welch-based interval and t-test. Note this result is generally not an integer, which is perfectly fine to use in R, however if you ever need to round it to an integer (e.g. to use with a table), it must always be rounded *down* not up.
+
+With this in hand, the confidence interval equation is:
+
+$$
+\text{$C\%$ or $(1\!-\!\alpha)$ interval}~=~(\bar x_1-\bar x_2)~\pm~t_{\alpha/2,\,\nu}\cdot\sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}},~\text{ where}
 $$
 
 - $\bar x_1-\bar x_2$ is our point estimate of the true difference $\mu_1-\mu_2$,
 
-- $t_{\alpha/2,n-1}$
+- $t_{\alpha/2,\,\nu}$ is the **$\alpha$-level critical value for a t-distribution with $\nu$ degrees of freedom**,
 
--->
+- and $\se(\bar x_1-\bar x_2)=\sqrt{s_1^2/n_1+s_2^2/n_2}$ is the standard error for the difference in sample means.
+
+In a similar fashion, for the Welch t-test, we test the following hypothese:
+
+$$
+H_0:\mu_1-\mu_2~=~d~~~~~~~\\
+~~~~~~~~H_a:\mu_1-\mu_2~<,\,\ne,\,\text{or}>~d
+$$
+
+The test statistic is compputed as:
+
+$$
+t_\obs=\frac{(\bar x_1-\bar x_2)-d}{\sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}}~\sim~T_\nu
+$$
+
+which follows a t-distribution again with $\nu$ degrees of freedom.
+
