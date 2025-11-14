@@ -213,9 +213,13 @@ r-method-1
 means
 t-distribution
 one-mean
+model-notation-2
 confidence-interval-2
 t-test
 r-method-2
+two-means-paired
+two-means-unpaired
+model-notation-3
 regression
 datasets
 datasets-list
