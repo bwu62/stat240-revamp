@@ -32,6 +32,7 @@ Here's a convenient list of all dataset files generated. Note that **not ALL fil
  - [`fertility.csv`](data/fertility.csv)
  - [`fertility_meta.csv`](data/fertility_meta.csv)
  - [`fertility_raw.csv`](data/fertility_raw.csv)
+ - [`lizards.tsv`](data/lizards.tsv)
  - [`penguins.csv`](data/penguins.csv)
  - [`thoracic.csv`](data/thoracic.csv)
 

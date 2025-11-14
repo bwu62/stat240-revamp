@@ -217,9 +217,10 @@ model-notation-2
 confidence-interval-2
 t-test
 r-method-2
-two-means-paired
-two-means-unpaired
+two-samples-paired
+two-samples-unpaired
 model-notation-3
+welch-method
 regression
 datasets
 datasets-list
