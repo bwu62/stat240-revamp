@@ -248,7 +248,7 @@ In R, you can compute both the one-mean interval and t-test using the `t.test()`
 :::{.eg}
 Continuing again with the ball bearings example, below are the 95% confidence interval for the true mean, as well as the t-test for testing $\mu=12$ vs $\mu\ne12$.
 ```{r}
-t.test(bearings, mu=12, conf.level=0.95)
+t.test(bearings, mu=12, conf.level=0.95, alternative="two.sided")
 ```
 
 We can see both the interval and p-value match our earlier computations.
@@ -383,7 +383,7 @@ $$
 \nu=\frac{\left(s_1^2/n_1+s_2^2/n_2\right)^2}{\frac{(s_1^2/n_1)^2}{n_1-1}+\frac{(s_2^2/n_2)^2}{n_2-1}}
 $$
 
-This gives the approximate degrees of freedom that are relevant for both the Welch-based interval and t-test. Note this result is generally not an integer, which is perfectly fine to use in R, however if you ever need to round it to an integer (e.g. to use with a table), it must always be rounded *down* not up.
+This gives the approximate degrees of freedom that are relevant for both the Welch-based interval and t-test. Note this result is generally not an integer, which is perfectly fine to use in R, however if you ever need to round it to an integer (e.g. to use with a t-table), it must always be rounded *down* not up.
 
 With this in hand, the confidence interval equation is:
 
@@ -393,15 +393,15 @@ $$
 
 - $\bar x_1-\bar x_2$ is our point estimate of the true difference $\mu_1-\mu_2$,
 
-- $t_{\alpha/2,\,\nu}$ is the **$\alpha$-level critical value for a t-distribution with $\nu$ degrees of freedom**,
+- $t_{\alpha/2,\,\nu}$ is the $\alpha$-level t-distribution critical value with $\nu$ degrees of freedom,
 
 - and $\se(\bar x_1-\bar x_2)=\sqrt{s_1^2/n_1+s_2^2/n_2}$ is the standard error for the difference in sample means.
 
 In a similar fashion, for the Welch t-test, we test the following hypotheses:
 
 $$
-H_0:\mu_1-\mu_2~=~d~~~~~~~\\
-~~~~~~~~H_a:\mu_1-\mu_2~<,\,\ne,\,\text{or}>~d
+H_0:\mu_1-\mu_2~=~d\,~~~~~~~\\
+~~~~~~~\,H_a:\mu_1-\mu_2~<,\,\ne,\,\text{or}>~d
 $$
 
 The test statistic is computed as:
@@ -412,3 +412,49 @@ $$
 
 which follows a t-distribution again with $\nu$ degrees of freedom.
 
+:::{.eg}
+Continuing with the lizards example from earlier, let's compute a 95% confidence interval for the true difference $\mu_1-\mu_2$, and also run an $\alpha=0.05$ level test to see if indeed the living lizards tended to have longer horn lengths. Recall the earlier data summary:
+
+```{r}
+lizards_summary
+```
+
+Let's start by computing $\nu$:
+
+```{r}
+n1 <- lizards_summary$n[1]  ; n2 <- lizards_summary$n[2]
+s1 <- lizards_summary$sd[1] ; s2 <- lizards_summary$sd[2]
+df <- (s1^2/n1+s2^2/n2)^2 / ((s1^2/n1)^2/(n1-1)+(s2^2/n2)^2/(n2-1))
+df
+```
+
+Now we can compute the 95% confidence interval:
+
+```{r}
+-diff(lizards_summary$mean) + c(-1,1) * qt(0.975, df) * sqrt(s1^2/n1+s2^2/n2)
+```
+```{r,include=F}
+C <- -diff(lizards_summary$mean) + c(-1,1) * qt(0.975, df) * sqrt(s1^2/n1+s2^2/n2)
+```
+
+For the hypothesis test, it makes sense here to choose $H_0:\mu_1=\mu_2$ vs $H_a:\mu_1<\mu_2$. Then, we can compute our test statistic and p-value:
+
+```{r}
+t_obs <- (-diff(lizards_summary$mean)-0)/sqrt(s1^2/n1+s2^2/n2)
+t_obs
+pt(t_obs, df)
+```
+
+So it seems like the killed lizards do have significantly shorter horns than the alive ones. We can also check all of these using `t.test()`, simply give both vectors to the function with the appropriate additional arguments if necessary.
+
+```{r}
+# extract two samples as vectors
+killed <- lizards %>% filter(survival == "Killed") %>% pull(hornLength)
+living <- lizards %>% filter(survival == "Living") %>% pull(hornLength)
+
+# 95% confidence interval
+t.test(killed, living, conf.level=0.95)
+# α=0.05 hypothesis test
+t.test(killed, living, alternative="less")
+```
+:::
