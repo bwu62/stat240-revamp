@@ -221,6 +221,7 @@ two-samples-paired
 two-samples-unpaired
 model-notation-3
 welch-method
+two-sample-t-test
 regression
 datasets
 datasets-list
