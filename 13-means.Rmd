@@ -486,10 +486,10 @@ The formula for $s_p$ essentially adds the corresponding sum-squared-differences
 With these in hand, the confidence interval equation is:
 
 $$
-\text{$C\%$ or $(1\!-\!\alpha)$ interval}~=~(\bar x_1-\bar x_2)~\pm~t_{\alpha/2,\,\nu}\cdot s_p\sqrt{\frac1{n_1}+\frac1{n_2}},~\text{ where}
+\text{$C\%$ or $(1\!-\!\alpha)$ interval}~=~(\bar x_1-\bar x_2)~\pm~t_{\alpha/2,\,\nu}\cdot s_p\sqrt{\frac1{n_1}+\frac1{n_2}}
 $$
 
-And the test statistic for $H_0:\mu_1-\mu_2=d$ vs $H_a:\mu_1-\mu_2<,\ne,\text{or}>d$ is:
+And the test statistic for $~H_0\!:\!\mu_1\!-\!\mu_2\!=\!d~$ vs $~H_a\!:\!\mu_1\!-\!\mu_2\!<,\ne,>\!d~$ is:
 
 $$
 t_\obs=\frac{(\bar x_1-\bar x_2)-d}{s_p\sqrt{\frac1{n_1}+\frac1{n_2}}}~\sim~T_\nu
