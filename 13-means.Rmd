@@ -478,7 +478,7 @@ However, what we gain in simplicity therein is lost again in the more complex fo
 
 $$
 \se(\bar x_1-\bar x_2)=s_p\sqrt{\frac1{n_1}+\frac1{n_2}}~,~~\text{where}\\
-\text{“pooled” SD}~s_p=\sqrt{\frac{s^2_1(n_1-1)+s^2_2(n_2-1)}{n_1+n_2-2}}
+~~\text{“pooled” SD}~s_p=\sqrt{\frac{s^2_1(n_1-1)+s^2_2(n_2-1)}{n_1+n_2-2}}
 $$
 
 The formula for $s_p$ essentially adds the corresponding sum-squared-differences of each observation from its own sample mean $s^2_i(n_i-1)$, before re-dividing by the combined degrees of freedom across both samples $n_1+n_2-2$, then taking the root to get a combined or "pooled" SD estimate across both samples, which makes sense since we assumed $\sigma_1=\sigma_2$, so it doesn't make sense to have two separate SD estimates for the samples.
