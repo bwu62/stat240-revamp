@@ -302,7 +302,7 @@ mean(diff) + c(-1,1) * qt(0.975, df=n-1) * sd(diff)/sqrt(n)
 t.test(diff, conf.level=0.95)
 ```
 
-For a hypothesis test, we choose $H_0:\mu=0$ vs $H_a:\mu<0$ where $\mu$ represents the true average change in cholesterol levels resulting from the diet. Then, we can compute out t-statistic and p-value, and also check using R:
+For a hypothesis test, we choose $~H_0\!:\!\mu\!=\!0~$ vs $~H_a\!:\!\mu\!<\!0~$ where $\mu$ represents the true average change in cholesterol levels resulting from the diet. Then, we can compute out t-statistic and p-value, and also check using R:
 
 ```{r}
 t_obs <- (mean(diff)-0) / (sd(diff)/sqrt(n))
@@ -330,7 +330,7 @@ Next, we consider the unpaired case, also called the **two independent samples**
 
 ### Model notation
 
-For this case, suppose we draw **samples of size $n_1$, $n_2$ from two different normal populations with means $\mu_1$, $\mu_2$ and SDs $\sigma_1\sigma_2$**, and again we assume everything is independent (both within and between the two samples).
+For this case, suppose we draw **samples of size $n_1$, $n_2$ from two different normal populations with means $\mu_1$, $\mu_2$ and SDs $\sigma_1$, $\sigma_2$**, and again we assume everything is independent (both within and between the two samples).
 
 Thus our models for the two populations are $X_1\sim\n(\mu_1,\sigma_1)$, $X_2\sim\n(\mu_2,\sigma_2)$ where all the mean & SD parameters are unknown constants.
 
@@ -354,6 +354,7 @@ lizards <- read_tsv("https://bwu62.github.io/stat240-revamp/data/lizards.tsv")
 lizards
 ```
 ```{r,echo=F}
+options(pillar.print_min = 5)
 lizards <- read_tsv("https://bwu62.github.io/stat240-revamp/data/lizards.tsv")
 lizards
 ```
@@ -440,7 +441,7 @@ Now we can compute the 95% confidence interval:
 -diff(lizards_summary$mean) + c(-1,1) * qt(0.975, df) * sqrt(s1^2/n1+s2^2/n2)
 ```
 
-For the hypothesis test, it makes sense here to choose $H_0:\mu_1=\mu_2$ vs $H_a:\mu_1<\mu_2$. Then, we can compute our test statistic and p-value:
+For the hypothesis test, it makes sense here to choose $~H_0\!:\!\mu_1\!=\!\mu_2~$ vs $~H_a\!:\!\mu_1\!<\!\mu_2~$. Then, we can compute our test statistic and p-value:
 
 ```{r}
 t_obs <- (-diff(lizards_summary$mean)-0)/sqrt(s1^2/n1+s2^2/n2)
