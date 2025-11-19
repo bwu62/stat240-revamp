@@ -25,7 +25,7 @@ $$
 
 Note similar to the definitions of $s_x$, $s_y$, the numerator also use $n-1$ instead of $n$ for its averaging.
 
-It's easy to show that both $\rho$, $r$ always belong in the range $[-1,1]$, i.e. the **correlation coefficient must always have absolute value $<1$**.
+It's easy to show that both $\rho$, $r$ always belong in the range $[-1,1]$, i.e. the **correlation coefficient must always have absolute value $\le1$**.
 
 Below shows a series of simulated [jointly-normal](https://en.wikipedia.org/wiki/Multivariate_normal_distribution) $x_i$, $y_i$ observations drawn from $X$, $Y$ both with mean 0 and SD 1 but with various population correlation coefficient values:
 
