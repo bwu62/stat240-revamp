@@ -226,4 +226,22 @@ $$
 \hat\beta_0~=~\bar y-\hat\beta_1\bar x
 $$
 
+Here's a visualization of the squared errors for the line of best fit with coefficients $\hat\beta_0,\hat\beta_1$ that minimize the loss function:
+
+:::{.fold .s}
+```{r,fig.width=6,fig.height=4.8}
+bh1 <- cor(x,y)*sd(y)/sd(x)
+bh0 <- mean(y)-bh1*mean(x)
+ggplot(tibble(x,y), aes(x=x,y=y)) + geom_point() +
+  stat_smooth(aes(color="fitted line"), method=lm, se=F, fullrange=T) + 
+  geom_rect(aes(xmin=x, ymin=y, ymax=x*bh1+bh0, xmax=x+(y-(x*bh1+bh0))*if_else(x>18,-1,1),
+                color="squared errors"), alpha=.1) + 
+  scale_x_continuous(breaks=c(seq(10,20,2),x[i]), labels=c(seq(10,20,2),"xi"),
+                     limits=c(10,20), expand=0, minor_breaks=10:20) + 
+  scale_y_continuous(breaks=c(seq(0,10,1)[-5],y[i]), labels=c(seq(0,10,1)[-5],"yi"),
+                     limits=c(0,10), expand=0, minor_breaks=NULL) + 
+  labs(color = "Legend", title = "Least squares visualized for best fit line")
+```
+:::
+
 
