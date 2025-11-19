@@ -31,6 +31,9 @@ Below shows a series of simulated [jointly-normal](https://en.wikipedia.org/wiki
 
 :::{.fold .s}
 ```{r,include=F}
+library(tidyverse)
+options(pillar.print_min = 5)
+source("ggplot_theme_options.R")
 set.seed(3)
 ```
 ```{r,}
@@ -62,5 +65,141 @@ From this, several things should be clear:
 
  - Correlation **equal or close to 0 indicates little or no relationship** (flat cloud of points)
 
+
+### Caveats
+
+The correlation coefficient has a major caveat: **it only measures the linear component of the relationship**. If the relationship is non-linear, it may not be useful at all!
+
+To be even more clear, the **correlation coefficient can NOT be used to check linearity**! This is why it's important to **plot your data** first to make sure it's linear before directly jumping into regression.
+
+Below is a famous example of this know as the Anscombe's quartet, which is built-in to R. This is a set of 4 $x_i$, $y_i$ datasets, each of which can be checked to have the same mean and SD in both $x$ and $y$, as well as the same correlation coefficient of about $0.816$.
+
+```{r}
+anscombe
+anscombe %>%
+  pivot_longer(everything(), names_to=c(".value","set"), names_pattern="(.)(.)") %>% 
+  group_by(set) %>% summarize(xbar = mean(x), ybar = mean(y), sx = sd(x),
+                              sy = sd(y), r = cor(x,y))
+```
+
+And yet, when plotted it's clear that these are 4 extremely different datasets, only one of which is actually appropriate for a linear regression model:
+
+:::{.i96 .fold .s}
+```{r}
+anscombe %>%
+  pivot_longer(everything(), names_to=c(".value","set"), names_pattern="(.)(.)") %>% 
+  mutate(set = paste("set",set)) %>% 
+  ggplot(aes(x=x,y=y)) + geom_point() + geom_smooth(method=lm, se=F) +
+  facet_wrap(~set, scales="free") + ggtitle("Anscombe's quartet datasets, each r ≈ 0.816")
+```
+:::
+
+As an even more extreme example, here's 4 datasets I cooked up, each of which has 0 correlation. Again, only one of which is actually appropriate for a linear regression model:
+
+:::{.i96 .fold .s}
+```{r}
+# pick seed where rmvnorm generates dataset with especially low r
+set.seed(841)
+n <- 12
+rmvnorm(n,c(0,0),matrix(c(1,0,0,1),ncol=2)) %>% as.data.frame %>% setNames(c("x1","y1")) %>% 
+  add_column(
+    x2 = cos(seq(0, 2*pi*(1-1/n), length.out=n)),
+    y2 = sin(seq(0, 2*pi*(1-1/n), length.out=n)),
+    x3 = seq(-1, 1, length.out=n),
+    y3 = x3^2-1,
+    x4 = x3,
+    y4 = abs(sin(x4*pi))) %>%
+  pivot_longer(everything(), names_to=c(".value","set"), names_pattern="(.)(.)") %>% 
+  group_by(set) %>% mutate(x = (x-mean(x))/sd(x), y = (y-mean(y))/sd(y)) %>% 
+  ggplot(aes(x=x,y=y)) + geom_point() + geom_smooth(method=lm, se=F) +
+  facet_wrap(~set, scales="free") + ggtitle("Additional quartet of datasets, each r = 0")
+
+```
+:::
+
+:::{.note}
+All this is to demonstrate that the **correlation should NOT be used to determine if linear regression is appropriate**. It can ONLY be used to assess the strength of the relationship AFTER you've already visually checked the dataset is in fact linear by plotting!
+:::
+
+## Model notation
+
+Now, let's move on to the actual modeling notation used. Again, let's suppose we draw a **sample of $n$ pairs $(x_i,y_i)$ from some population variables $X,Y$**, and suppose we've visually identified a linear regression model as appropriate, based on graphically assessing the degree of linearity, as well as possibly checking the correlation coefficient.
+
+Our theoretical linear model is then the following:
+
+$$
+y_i=\beta_0+\beta_1x_i+\ep_i
+$$
+
+ - $x_i$, $y_i$ are the actual **data points** in our sample,
+ 
+ - $\beta_0$ is the **theoretical intercept** of the line,
+ 
+ - $\beta_1$ is the **theoretical slope** of the line,
+ 
+ - $\ep_i$ are the individual **prediction errors** of each point.
+ 
+   - Note $\ep_i\sim\n(0,\sigma)$, i.e. the errors are always modeled as being:
+   
+     i)   Normal,
+     ii)  Mean zero,
+     iii) Constant variance.
+
+:::{.eg}
+At this point, it's important to take note of the following:
+
+ - Here, $\beta_0$, $\beta_1$ represent the **true underlying intercept & slope** values that generate the data, NOT a best fit line based on a sample.
+
+ - $x_i$, $y_i$, $\ep_i$ all have $i$ indices since they vary for each point, but $\beta_0$, $\beta_1$ do NOT have indices, since the points are supposed to all fall on ONE line with some true slope and intercept.
+ 
+ - The $x_i$ are actually treated as constants, just like $\beta_0$, $\beta_1$, which means the only variable on the right hand side is $\ep_i$.
+ 
+ - The assumptions on $\ep_i$ mean that the $y_i$ points are **distributed normally _about_ the regression line**. In other words, within every vertical slice along the line, the points follow a normal distribution along the y-axis.
+:::
+
+### Simulated demo
+
+```{r,include=F}
+set.seed(1)
+b0 <- -3; b1 <- 0.5 ; n <- 10; m <- 10 ; M <- 20 ; sigma <- 2
+```
+
+As a quick demo of this setup and notation, suppose we pick true coefficients $\beta_0=`r b0`$, $\beta_1=`r b1`$. Using this, let's generate $n=`r n`$ observations where $x_i$ are uniformly sampled from $[`r m`,`r M`]$, and $\sigma=`r sigma`$.
+
+Using these values, we can simulate one possible sample of $x_i$, $y_i$ values drawn from $X,Y$ with:
+
+```{r,echo=F,results='asis'}
+cat(glue::glue('``` r
+# define values for simulation demo
+b0 <- {b0} ; b1 <- {b1} ; n <- {n} ; m <- {m} ; M <- {M} ; sigma <- {sigma}
+```'))
+```
+```{r}
+# generate dataset for demo
+x <- runif(n, m, M)
+e <- rnorm(n, 0, sigma)
+y <- b0 + b1*x + e
+```
+
+:::{.i96 .fold .s}
+```{r}
+# pick a convenient point in quadrant IV as example
+i <- which.min((scale(x)[,1]-.5)^2+(scale(y)[,1])^2)
+
+ggplot(tibble(x,y), aes(x=x,y=y)) + geom_point() +
+  geom_segment(aes(color="yi",x=x[i],y=0,yend=y[i])) + 
+  geom_segment(aes(color="xi",y=y[i],x=10,xend=x[i])) + 
+  geom_segment(aes(color="εi",x=x[i],y=y[i],yend=(b0+b1*x[i]))) + 
+  geom_point(aes(color="i-th point",x=x[i],y=y[i]),size=3) + 
+  geom_smooth(aes(color="fitted line"),method=lm, se=F, linetype="dotted") +
+  geom_abline(aes(color="true line", slope=b1, intercept=b0),size=1) + 
+  scale_x_continuous(breaks=c(seq(10,20,2),x[i]), labels=c(seq(10,20,2),"xi"),
+                     limits=c(10,20), expand=0, minor_breaks=NULL) + 
+  scale_y_continuous(breaks=c(seq(0,10,1)[-5],y[i]), labels=c(seq(0,10,1)[-5],"yi"),
+                     limits=c(0,10), expand=0, minor_breaks=NULL) + 
+  scale_color_discrete(breaks=c("i-th point","true line","fitted line","xi","yi","εi")) + 
+  labs(color = "Legend", title = "Simulated linear model demo")
+```
+:::
 
 
