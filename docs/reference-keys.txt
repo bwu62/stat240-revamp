@@ -227,6 +227,7 @@ correlation-coefficient
 caveats
 model-notation-4
 simulated-demo
+fitting-process
 datasets
 datasets-list
 eruptions
