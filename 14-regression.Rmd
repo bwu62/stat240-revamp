@@ -137,13 +137,11 @@ $$
  
  - $\beta_1$ is the **theoretical slope** of the line,
  
- - $\ep_i$ are the individual **prediction errors** of each point.
- 
-   - Note $\ep_i\sim\n(0,\sigma)$, i.e. the errors are always modeled as being:
+ - $\ep_i$ are the **errors** of each point, which model the random fluctuations inherent to every measurement. These are assumed to be distributed $\ep_i\sim\n(0,\sigma)$, i.e. they are modeled as:
    
-     i)   Normal,
-     ii)  Mean zero,
-     iii) Constant variance.
+   i)   Normally distributed, with
+   ii)  Mean zero, and
+   iii) Constant variance.
 
 :::{.eg}
 At this point, it's important to take note of the following:
@@ -181,8 +179,8 @@ e <- rnorm(n, 0, sigma)
 y <- b0 + b1*x + e
 ```
 
-:::{.i96 .fold .s}
-```{r}
+:::{.fold .s}
+```{r,fig.width=5,fig.height=4}
 # pick a convenient point in quadrant IV as example
 i <- which.min((scale(x)[,1]-.5)^2+(scale(y)[,1])^2)
 
@@ -194,12 +192,38 @@ ggplot(tibble(x,y), aes(x=x,y=y)) + geom_point() +
   geom_smooth(aes(color="fitted line"),method=lm, se=F, linetype="dotted") +
   geom_abline(aes(color="true line", slope=b1, intercept=b0),size=1) + 
   scale_x_continuous(breaks=c(seq(10,20,2),x[i]), labels=c(seq(10,20,2),"xi"),
-                     limits=c(10,20), expand=0, minor_breaks=NULL) + 
+                     limits=c(10,20), expand=0, minor_breaks=10:20) + 
   scale_y_continuous(breaks=c(seq(0,10,1)[-5],y[i]), labels=c(seq(0,10,1)[-5],"yi"),
                      limits=c(0,10), expand=0, minor_breaks=NULL) + 
   scale_color_discrete(breaks=c("i-th point","true line","fitted line","xi","yi","εi")) + 
   labs(color = "Legend", title = "Simulated linear model demo")
 ```
 :::
+
+## Fitting process
+
+Without going into too much detail, the typical fitting method, called **Ordinary Least Squares** (OLS) involves **finding the line that minimizes the _sum of squared errors_ vs the data points**.
+
+Suppose we "test out" a hypothetical line with coefficients $\beta_0',\beta_1'$. The sum of the squared errors vs the data points, also called the **loss function $\ell(\beta_0',\beta_1')$**, is defined as:
+
+$$
+\ell(\beta_0',\beta_1')=\sum_{i=1}^n(y_i-(\beta_0'+\beta_1'x_i))^2
+$$
+
+Note this is a function of $\beta_0',\beta_1'$, i.e. we can "test out" different possible values of the coefficients, and evaluated the "loss" of each guess---i.e. how "bad" the guess is---by plugging it into the function to get the sum-squared-errors. To find the coefficients that give the best fit to the data, we solve for the $\beta_0',\beta_1'$ that would minimize the above function, which is done by **solving for the local minimum** where the **partial derivatives with respect to $\beta_0',\beta_1'$ both vanish**:
+
+$$
+\text{solve}\quad
+\frac{\partial\ell(\beta_0',\beta_1')}{\partial\beta_0'}=0
+\quad\text{and}\quad
+\frac{\partial\ell(\beta_0',\beta_1')}{\partial\beta_1'}=0
+$$
+
+This is not extremely difficult to solve but we omit the [details](https://statproofbook.github.io/P/slr-ols.html). One can show that the best-fit coefficients $\hat\beta_0,\hat\beta_1$ that minimize the loss function are:
+
+$$
+\hat\beta_1~=~r\cdot\frac{s_y}{s_x}~~~~\\
+\hat\beta_0~=~\bar y-\hat\beta_1\bar x
+$$
 
 
