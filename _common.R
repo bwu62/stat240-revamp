@@ -4,7 +4,8 @@ list.of.packages = c(
   "devtools", "rmarkdown", "tidyverse",
   "downlit", "DescTools", "sn", "xlsx",
   "palmerpenguins", "GGally", "plotly",
-  "diagram", "latex2exp", "gridExtra"
+  "diagram", "latex2exp", "gridExtra",
+  "mvtnorm"
 )
 
 # make sure to use my fork of
