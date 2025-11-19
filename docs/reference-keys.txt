@@ -223,6 +223,7 @@ model-notation-3
 welch-method
 two-sample-t-test
 regression
+correlation-coefficient
 datasets
 datasets-list
 eruptions
