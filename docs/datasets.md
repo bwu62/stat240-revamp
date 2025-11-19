@@ -24,6 +24,7 @@ library(magrittr)
 
 Here's a convenient list of all dataset files generated. Note that **not ALL files are used in the notes!**. These are primarily for my own record keeping purposes. Also note that some files may automatically open a download prompt while others may not. To force download, right click on a file link and choose "Save link as".
 
+ - [`co2_acidity.csv`](data/co2_acidity.csv)
  - [`enrollment.csv`](data/enrollment.csv)
  - [`eruptions_recent.csv`](data/eruptions_recent.csv)
  - [`eruptions_recent.delim`](data/eruptions_recent.delim)
@@ -571,3 +572,40 @@ write_csv(thoracic, "data/thoracic.csv")
 thoracic
 ```
 
+
+## Atmospheric CO~2~ + Ocean aciditiy data
+
+For the regression section I thought it would be nice to bring back the atmospheric CO~2~ and ocean aciditiy datasets previously used in a tidyverse cleaning homework. There is some seasonality in the scatter plot, but it's not too bad, and the dataset is quite interesting and the right sample size for a first demonstration. The linear trend is also quite strong, and it's nice to see this emerge from the combination of these data from two very different sources.
+
+### Process data
+
+
+``` r
+co2 <- read_table("https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_weekly_mlo.txt",
+                 na="-999.99", comment="#", show_col_types=F,col_names=c(
+                   "year","month","day","year.decimal","ppm","n.days","yr-1-ago","yr-10-ago","increase.1800")) %>%
+  select(year, month, day, ppm) %>% drop_na() %>%
+  mutate(date=ymd(paste(year,month,day)), month=month(date,label=TRUE)) %>%
+  filter(year>1988 & year<2024)
+ph <- read_table("https://hahana.soest.hawaii.edu/hot/hotco2/HOT_surface_CO2.txt",skip=8,na="-999",show_col_types=F) %>%
+  rename(ph=pHcalc_25C) %>% select(date, ph) %>% drop_na() %>%
+  mutate(date=dmy(date), year=year(date), month=month(date,label=TRUE)) %>%
+  filter(year>1988 & year<2024)
+co2_acidity <- co2 %>% group_by(year) %>% summarise(co2_avg_ppm = mean(ppm)) %>% 
+  inner_join(ph %>% group_by(year) %>% summarise(acidity_avg_ph = mean(ph)))
+```
+
+### Write out data
+
+
+``` r
+write_csv(co2_acidity, "data/co2_acidity.csv")
+```
+
+
+### Inspect data
+
+
+``` r
+co2_acidity
+```
