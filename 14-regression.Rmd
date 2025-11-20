@@ -9,7 +9,7 @@ Regression is a broad class of methods where predictor variables are used to pre
 
 First, a brief aside on the correlation coefficient. Suppose we have a sample of pairs of observations $x_i$, $y_i$ drawn from $X$, $Y$ where each pair is independent from other pairs. Note however no assumption of independence is made between the variables, only between different pairs.
 
-Similar to other statistics like mean or variance, there are both theoretical---i.e. population---and sample versions of the correlation coefficient definition. One is the underlying true value and the other is what you observe in your real dataset. The population correlation coefficient is defined as:
+Similar to other statistics like mean or variance, there are both theoretical---i.e. population---and sample versions of the correlation coefficient definition. One is the underlying true value and the other is what you observe in your real dataset. The population correlation coefficient $\rho$ is defined as:
 
 $$
 \rho=\frac{\e\big[(X-\mu_X)(Y-\mu_Y)\big]}{\sigma_X\sigma_Y}
@@ -17,13 +17,13 @@ $$
 
 where the numerator, also called the covariance of $X$ and $Y$, represents how much on average $X$ and $Y$ change together when compared to their means, and the denominator normalizes it by the product of their standard deviations.
 
-Compare this with the definition of the sample correlation coefficient:
+Compare this with the sample correlation coefficient $r$ which is defined as:
 
 $$
 r=\frac{\frac1{n-1}\sum(x_i-\bar x)(y_i-\bar y)}{s_xs_y}
 $$
 
-Note similar to the definitions of $s_x$, $s_y$, the numerator also use $n-1$ instead of $n$ for its averaging.
+Note similar to the definitions of $s_x$, $s_y$, the numerator also use $n-1$ instead of $n$ for its averaging. Also note that since these both involve a kind of averaging, the LLN assures us that $r\to\rho$ as our sample size increases.
 
 It's easy to show that both $\rho$, $r$ always belong in the range $[-1,1]$, i.e. the **correlation coefficient must always have absolute value $\le1$**.
 
@@ -110,6 +110,8 @@ rmvnorm(n,c(0,0),matrix(c(1,0,0,1),ncol=2)) %>% as.data.frame %>% setNames(c("x1
     x4 = x3,
     y4 = abs(sin(x4*pi))) %>%
   pivot_longer(everything(), names_to=c(".value","set"), names_pattern="(.)(.)") %>% 
+  mutate(set = case_match(set, "1"~"set 1: no correlation", "2"~"set 2: circle",
+                          "3"~"set 3: parabola", "4"~"set 4: McDonald's")) %>% 
   group_by(set) %>% mutate(x = (x-mean(x))/sd(x), y = (y-mean(y))/sd(y)) %>% 
   ggplot(aes(x=x,y=y)) + geom_point() + geom_smooth(method=lm, se=F) +
   facet_wrap(~set, scales="free") + ggtitle("Additional quartet of datasets, each r = 0")
@@ -120,6 +122,24 @@ rmvnorm(n,c(0,0),matrix(c(1,0,0,1),ncol=2)) %>% as.data.frame %>% setNames(c("x1
 :::{.note}
 All this is to demonstrate that the **correlation should NOT be used to determine if linear regression is appropriate**. It can ONLY be used to assess the strength of the relationship AFTER you've already visually checked the dataset is in fact linear by plotting!
 :::
+
+
+## Correlation in R
+
+In R, the sample correlation coefficient $r$ is computed using the `cor()` function, which takes two vectors of the $x_i$, $y_i$ observations. The order of input does not matter.
+
+```{r}
+# continuing with set 1 from Anscombe's quartet
+cor(anscombe$x1, anscombe$y1)
+# of course can also use inside tidyverse
+anscombe %>% summarize(r = cor(x1, y1))
+# manual computation if desired
+anscombe %>%
+  summarize(r = sum((x1-mean(x1))*(y1-mean(y1)))/(length(x1)-1)/sd(x1)/sd(y1))
+```
+
+There are additional optional arguments like `use` which can specify which observations to use if there are missing values, or `method` which can be set to compute other related statistics such as [Kendall's](https://en.wikipedia.org/wiki/Kendall_rank_correlation_coefficient) or [Spearman's](https://en.wikipedia.org/wiki/Spearman%27s_rank_correlation_coefficient) correlation coefficients which are beyond our scope (our method above, which is the default, is called [Pearson's](https://en.wikipedia.org/wiki/Pearson_correlation_coefficient) correlation coefficient).
+
 
 ## Model notation
 
@@ -212,23 +232,9 @@ $$
 \ell(\beta_0',\beta_1')=\sum_{i=1}^n(y_i-(\beta_0'+\beta_1'x_i))^2
 $$
 
-Note this is a function of $\beta_0',\beta_1'$, i.e. we can "test out" different possible values of the coefficients, and evaluated the "loss" of each guess---i.e. how "bad" the guess is---by plugging it into the function to get the sum-squared-errors. To find the coefficients that give the best fit to the data, we solve for the $\beta_0',\beta_1'$ that would minimize the above function, which is done by **solving for the local minimum** where the **partial derivatives with respect to $\beta_0',\beta_1'$ both vanish**:
+Note this is a function of $\beta_0',\beta_1'$, i.e. we can "test out" different possible values of the coefficients, and evaluated the "loss" of each guess---i.e. how "bad" the guess is---by plugging it into the function to get the sum-squared-errors.
 
-$$
-\text{solve}\quad
-\frac{\partial\ell(\beta_0',\beta_1')}{\partial\beta_0'}=0
-\quad\text{and}\quad
-\frac{\partial\ell(\beta_0',\beta_1')}{\partial\beta_1'}=0
-$$
-
-This is not extremely difficult to solve but we omit the [details](https://statproofbook.github.io/P/slr-ols.html). One can show that the best-fit coefficients $\hat\beta_0,\hat\beta_1$ that minimize the loss function are:
-
-$$
-\hat\beta_1~=~r\cdot\frac{s_y}{s_x}~~~~\\
-\hat\beta_0~=~\bar y-\hat\beta_1\bar x
-$$
-
-Here's a visualization of the squared errors for the line of best fit with coefficients $\hat\beta_0,\hat\beta_1$ that minimize the loss function:
+Visually, this looks like taking the vertical error bars from each data point to the "test" line and building a square with that as one side, then adding up the areas of each square to get the total sum-squared-errors. Then, the best fit line is the line that minimizes these sum-squared-errors:
 
 :::{.i9 .fold .s}
 ```{r,fig.width=6,fig.height=4.6}
@@ -249,5 +255,27 @@ ggplot(tibble(x,y), aes(x=x,y=y)) +
   labs(color = "Legend", title = "Least squares visualized for best fit line")
 ```
 :::
+
+To find this best fit line, we **solve for the local minimum of the loss function**, where we know the **partial derivatives with respect to $\beta_0',\beta_1'$ must both vanish**:
+
+$$
+\text{solve}\quad
+\frac{\partial\ell(\beta_0',\beta_1')}{\partial\beta_0'}=0
+\quad\text{and}\quad
+\frac{\partial\ell(\beta_0',\beta_1')}{\partial\beta_1'}=0
+$$
+
+This is not extremely difficult to solve but we omit the [details](https://statproofbook.github.io/P/slr-ols.html).
+
+## Fitted coefficients
+
+One can show that the best-fit coefficients $\hat\beta_0$, $\hat\beta_1$ that minimize the loss function are:
+
+$$
+\hat\beta_1~=~r\cdot\frac{s_y}{s_x}~~~~\\
+\hat\beta_0~=~\bar y-\hat\beta_1\bar x
+$$
+
+Note this is purely a function of our sample statistics and fairly straightforward to compute.
 
 
