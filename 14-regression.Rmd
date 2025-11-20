@@ -276,6 +276,6 @@ $$
 \hat\beta_0~=~\bar y-\hat\beta_1\bar x
 $$
 
-Note this is purely a function of the sample statistics $\bar x$, $\bar y$, $s_x$, $s_y$, and $r$, and fairly straightforward to compute.
+Note these are purely functions of the sample statistics $\bar x$, $\bar y$, $s_x$, $s_y$, $r$, and straightforward to compute.
 
 
