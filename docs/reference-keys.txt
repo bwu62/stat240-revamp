@@ -225,9 +225,11 @@ two-sample-t-test
 regression
 correlation-coefficient
 caveats
+correlation-in-r
 model-notation-4
 simulated-demo
 fitting-process
+fitted-coefficients
 datasets
 datasets-list
 eruptions
