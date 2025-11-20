@@ -133,9 +133,9 @@ $$
 
  - $x_i$, $y_i$ are the actual **data points** in our sample,
  
- - $\beta_0$ is the **theoretical intercept** of the line,
+ - $\beta_0$ is the **true intercept** of the line,
  
- - $\beta_1$ is the **theoretical slope** of the line,
+ - $\beta_1$ is the **true slope** of the line,
  
  - $\ep_i$ are the **errors** of each point, which model the random fluctuations inherent to every measurement. These are assumed to be distributed $\ep_i\sim\n(0,\sigma)$, i.e. they are modeled as:
    
@@ -146,7 +146,7 @@ $$
 :::{.eg}
 At this point, it's important to take note of the following:
 
- - Here, $\beta_0$, $\beta_1$ represent the **true underlying intercept & slope** values that generate the data, NOT a best fit line based on a sample.
+ - Here, $\beta_0$, $\beta_1$ represent the **true underlying intercept & slope** values that generate the data (assuming the data is in fact linear), NOT a best fit line based on a sample.
 
  - $x_i$, $y_i$, $\ep_i$ all have $i$ indices since they vary for each point, but $\beta_0$, $\beta_1$ do NOT have indices, since the points are supposed to all fall on ONE line with some true slope and intercept.
  
@@ -179,23 +179,25 @@ e <- rnorm(n, 0, sigma)
 y <- b0 + b1*x + e
 ```
 
-:::{.fold .s}
-```{r,fig.width=5,fig.height=4}
+:::{.i9 .fold .s}
+```{r,fig.width=6,fig.height=4.6}
 # pick a convenient point in quadrant IV as example
 i <- which.min((scale(x)[,1]-.5)^2+(scale(y)[,1])^2)
 
 ggplot(tibble(x,y), aes(x=x,y=y)) + geom_point() +
-  geom_segment(aes(color="yi",x=x[i],y=0,yend=y[i])) + 
-  geom_segment(aes(color="xi",y=y[i],x=10,xend=x[i])) + 
-  geom_segment(aes(color="εi",x=x[i],y=y[i],yend=(b0+b1*x[i]))) + 
-  geom_point(aes(color="i-th point",x=x[i],y=y[i]),size=3) + 
-  geom_smooth(aes(color="fitted line"),method=lm, se=F, linetype="dotted") +
-  geom_abline(aes(color="true line", slope=b1, intercept=b0),size=1) + 
+  geom_segment(aes(color="xi",x=x[i],y=0,yend=y[i]),linewidth=.7) + 
+  geom_segment(aes(color="yi",y=y[i],x=10,xend=x[i]),linewidth=.7) + 
+  geom_segment(aes(color="εi",x=x[i],y=y[i],yend=(b0+b1*x[i])),linewidth=.7) + 
+  geom_point(aes(color="i-th point",x=x[i],y=y[i]),size=3,shape="square") + 
+  stat_smooth(aes(color="fitted line"),method=lm,se=F,linewidth=1,linetype="dashed",fullrange=T) +
+  geom_abline(aes(color="true line", slope=b1, intercept=b0),linewidth=1,key_glyph="path") + 
   scale_x_continuous(breaks=c(seq(10,20,2),x[i]), labels=c(seq(10,20,2),"xi"),
                      limits=c(10,20), expand=0, minor_breaks=10:20) + 
   scale_y_continuous(breaks=c(seq(0,10,1)[-5],y[i]), labels=c(seq(0,10,1)[-5],"yi"),
                      limits=c(0,10), expand=0, minor_breaks=NULL) + 
-  scale_color_discrete(breaks=c("i-th point","true line","fitted line","xi","yi","εi")) + 
+  scale_color_manual(breaks=c("fitted line","true line","i-th point","εi","yi","xi"),
+                     values=c("#7570B3FF","#1B9E77FF","#666666FF","#E6AB02FF","#E7298AFF","#A6761DFF")) + 
+  theme(legend.key.width=unit(2.1,"line")) +
   labs(color = "Legend", title = "Simulated linear model demo")
 ```
 :::
@@ -228,18 +230,22 @@ $$
 
 Here's a visualization of the squared errors for the line of best fit with coefficients $\hat\beta_0,\hat\beta_1$ that minimize the loss function:
 
-:::{.fold .s}
-```{r,fig.width=6,fig.height=4.8}
+:::{.i9 .fold .s}
+```{r,fig.width=6,fig.height=4.6}
 bh1 <- cor(x,y)*sd(y)/sd(x)
 bh0 <- mean(y)-bh1*mean(x)
-ggplot(tibble(x,y), aes(x=x,y=y)) + geom_point() +
-  stat_smooth(aes(color="fitted line"), method=lm, se=F, fullrange=T) + 
-  geom_rect(aes(xmin=x, ymin=y, ymax=x*bh1+bh0, xmax=x+(y-(x*bh1+bh0))*if_else(x>18,-1,1),
-                color="squared errors"), alpha=.1) + 
-  scale_x_continuous(breaks=c(seq(10,20,2),x[i]), labels=c(seq(10,20,2),"xi"),
+ggplot(tibble(x,y), aes(x=x,y=y)) +
+  geom_rect(aes(xmin=x,xmax=x+(y-(x*bh1+bh0))*if_else(x>16.5|y>1&y<3,-1,1),
+                ymin=y,ymax=x*bh1+bh0,color="squared errors"),alpha=.1) + 
+  geom_segment(aes(x=x, y=y, yend=x*bh1+bh0, color="errors"),linewidth=1) +
+  stat_smooth(aes(color="fitted line"),method=lm,se=F,fullrange=T,linewidth=1) + 
+  geom_point(size=2) +
+  scale_x_continuous(breaks=seq(10,20,2), labels=seq(10,20,2),
                      limits=c(10,20), expand=0, minor_breaks=10:20) + 
-  scale_y_continuous(breaks=c(seq(0,10,1)[-5],y[i]), labels=c(seq(0,10,1)[-5],"yi"),
+  scale_y_continuous(breaks=seq(0,10,1), labels=seq(0,10,1),
                      limits=c(0,10), expand=0, minor_breaks=NULL) + 
+  scale_color_manual(breaks=c("fitted line","errors","squared errors"),
+                     values=c("#7570B3FF","#E6AB02FF","#666666FF")) +
   labs(color = "Legend", title = "Least squares visualized for best fit line")
 ```
 :::
