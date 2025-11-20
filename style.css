@@ -152,6 +152,11 @@ img.i96,div.i96 img{
   margin-left:2%!important;
   margin-right:2%!important;
 }
+img.i9,div.i9 img{
+  width:90%!important;
+  margin-left:5%!important;
+  margin-right:5%!important;
+}
 img.i6,div.i6 img{
   width:60%!important;
   margin-left:20%!important;
