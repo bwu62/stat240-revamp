@@ -254,10 +254,6 @@ thoracic-surgery
 process-data-3
 write-out-data-3
 inspect-data-4
-atmospheric-co2-ocean-aciditiy-data
-process-data-4
-write-out-data-4
-inspect-data-5
 cheat-sheets
 rstudio-ide
 base-r

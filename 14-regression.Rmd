@@ -124,7 +124,7 @@ All this is to demonstrate that the **correlation should NOT be used to determin
 :::
 
 
-## Correlation in R
+### Correlation in R
 
 In R, the sample correlation coefficient $r$ is computed using the `cor()` function, which takes two vectors of the $x_i$, $y_i$ observations. The order of input does not matter.
 
@@ -222,7 +222,7 @@ ggplot(tibble(x,y), aes(x=x,y=y)) + geom_point() +
 ```
 :::
 
-## Fitting process
+### Fitting process
 
 Without going into too much detail, the typical fitting method, called **Ordinary Least Squares** (OLS) involves **finding the line that minimizes the _sum of squared errors_ vs the data points**.
 
@@ -269,13 +269,13 @@ This is not extremely difficult to solve but we omit the [details](https://statp
 
 ## Fitted coefficients
 
-One can show that the best-fit coefficients $\hat\beta_0$, $\hat\beta_1$ that minimize the loss function are:
+One can show that the best fit coefficients $\hat\beta_0$, $\hat\beta_1$ that minimize the loss function are:
 
 $$
 \hat\beta_1~=~r\cdot\frac{s_y}{s_x}~~~~\\
 \hat\beta_0~=~\bar y-\hat\beta_1\bar x
 $$
 
-Note this is purely a function of our sample statistics and fairly straightforward to compute.
+Note this is purely a function of the sample statistics $\bar x$, $\bar y$, $s_x$, $s_y$, and $r$, and fairly straightforward to compute.
 
 

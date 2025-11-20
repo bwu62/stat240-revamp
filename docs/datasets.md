@@ -24,7 +24,6 @@ library(magrittr)
 
 Here's a convenient list of all dataset files generated. Note that **not ALL files are used in the notes!**. These are primarily for my own record keeping purposes. Also note that some files may automatically open a download prompt while others may not. To force download, right click on a file link and choose "Save link as".
 
- - [`co2_acidity.csv`](data/co2_acidity.csv)
  - [`enrollment.csv`](data/enrollment.csv)
  - [`eruptions_recent.csv`](data/eruptions_recent.csv)
  - [`eruptions_recent.delim`](data/eruptions_recent.delim)
@@ -572,6 +571,7 @@ write_csv(thoracic, "data/thoracic.csv")
 thoracic
 ```
 
+<!--
 
 ## Atmospheric CO~2~ + Ocean aciditiy data
 
@@ -595,17 +595,5 @@ co2_acidity <- co2 %>% group_by(year) %>% summarise(co2_avg_ppm = mean(ppm)) %>%
   inner_join(ph %>% group_by(year) %>% summarise(acidity_avg_ph = mean(ph)))
 ```
 
-### Write out data
+-->
 
-
-``` r
-write_csv(co2_acidity, "data/co2_acidity.csv")
-```
-
-
-### Inspect data
-
-
-``` r
-co2_acidity
-```
