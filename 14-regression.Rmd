@@ -350,3 +350,72 @@ lm1
 summary(lm1)
 ```
 
+There's a lot of info here to unpack, some of which we'll get to later and some of which are beyond our scope, but for now we can see the results match our manual computation, and we have $\hat\beta_1=`r coef(lm1)[2]`$, $\hat\beta_0=`r coef(lm1)[1]`$.
+
+
+## Model validation
+
+A very important step at this stage is to do **model validation**, which means **check the fit makes sense** and nothing unusual or unexpected is happening with your fit. This is usually done by analyzing the residuals of the fit.
+
+
+### Residuals
+
+Recall the best fit line is determined by minimizing the sum-squared-errors. Once the best fit line is found, taking the difference between $y_i$ and the best-fit predictions $\hat y_i$ gives our sample estimate of the errors, which we call $\hat\ep_i$ or the **residuals** of the fit and are defined:
+
+$$
+\hat\ep_i=y_i-\hat y_i=y_i-\left(\hat\beta_0+\hat\beta_1x_i\right)
+$$
+
+These $\hat\ep_i$ are treated as a sample of $\ep_i$ which remember we assumed to have distribution $\ep_i\sim\n(0,\sigma)$.
+
+The reason this assumption is made is simply that **pure random noise is generally normal, mean 0, and constant variance**, so if our model is correct and we have correctly captured the underlying linear relationship, whatever is leftover after our fit should look like pure noise!
+
+These assumptions are usually checked by examining the **residual vs fitted** and **QQ** plots for the fit.
+
+
+### Plotting residuals
+
+Let's first compute the model's residuals for each data point:
+
+```{r}
+# recall we still have best fit coefficients b1, b0 defined from earlier
+icecream <- icecream %>% mutate(residuals = consumption - (b0 + b1*temperature))
+icecream
+# check our residuals using R's built-in residuals() function
+icecream$residuals
+residuals(lm1) %>% unname  # remove names from vector, which are added by default
+# plot residuals (note: since residuals=response-predicted, predicted=response-residuals)
+ggplot(icecream, aes(x=temperature, y=consumption)) +
+  geom_segment(aes(yend=consumption-residuals), color="orange") + geom_point() +
+  geom_abline(slope=b1, intercept=b0, color="red") + labs(y="Consumption (pints per capita)",
+  x="Mean temperature (F)", title="Ice cream consumption vs temperature (with residuals)")
+```
+
+These can then be directly plotted both against the predicted $\hat y_i$ and in a QQ plot using methods we've learned before (exercise left to reader). Alternatively, there's also the rare slick base R shortcut here:
+
+```{r,eval=F}
+plot(lm1, 1)
+```
+```{r,echo=F}
+par(mar=c(4,3,1.5,.5),mgp=c(2,.6,0))
+plot(lm1, 1)
+```
+
+```{r,eval=F}
+plot(lm1, 2)
+```
+```{r,echo=F}
+par(mar=c(4,3,1.5,.5),mgp=c(2,.6,0))
+plot(lm1, 2)
+```
+
+From these plots here we can see indeed the residuals appear to be **normal, 0-mean, and constant-variance** so everything looks good. For examples of bad residual plots, see [this page](https://online.stat.psu.edu/stat462/node/124) or [this page](https://scales.arabpsychology.com/stats/what-is-considered-a-good-vs-bad-residual-plot).
+
+
+<!--
+## prediction
+
+## inference on coefficients
+
+## intervals for prediction
+-->
