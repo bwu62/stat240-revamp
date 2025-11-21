@@ -409,7 +409,7 @@ par(mar=c(4,3,1.5,.5),mgp=c(2,.6,0))
 plot(lm1, 2)
 ```
 
-From these plots here we can see indeed the residuals appear to be **normal, 0-mean, and constant-variance** so everything looks good. For examples of bad residual plots, see [this page](https://online.stat.psu.edu/stat462/node/124) or [this page](https://scales.arabpsychology.com/stats/what-is-considered-a-good-vs-bad-residual-plot).
+From these plots we can see the residuals do appear to be **normal, 0-mean, and constant-variance**, so everything looks good. For examples of bad residual plots, see [this page](https://online.stat.psu.edu/stat462/node/124) or [this page](https://scales.arabpsychology.com/stats/what-is-considered-a-good-vs-bad-residual-plot).
 
 
 <!--
