@@ -418,4 +418,8 @@ From these plots here we can see indeed the residuals appear to be **normal, 0-m
 ## inference on coefficients
 
 ## intervals for prediction
+
+## fitting other relations
+
+### exponential, power law, etc.
 -->
