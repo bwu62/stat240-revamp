@@ -233,6 +233,9 @@ fitted-coefficients
 data-example-1
 fit-manually
 fit-with-lm
+model-validation
+residuals
+plotting-residuals
 datasets
 datasets-list
 eruptions
