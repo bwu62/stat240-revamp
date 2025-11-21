@@ -353,13 +353,13 @@ The formula specification is always in order of **`response ~ predictor`**, i.e.
 
 ```{r}
 # fit the model, saving the output object which will be useful later
-lm1 <- lm(consumption ~ temperature, data = icecream)
-lm1
+lm_icecream <- lm(consumption ~ temperature, data = icecream)
+lm_icecream
 # print a more complete summary output of the model
-summary(lm1)
+summary(lm_icecream)
 ```
 
-There's a lot of info here to unpack, some of which we'll get to later and some of which are beyond our scope, but for now we can see the results match our manual computation, and we have $\hat\beta_1=`r coef(lm1)[2]`$, $\hat\beta_0=`r coef(lm1)[1]`$.
+There's a lot of info here to unpack, some of which we'll get to later and some of which are beyond our scope, but for now we can see the results match our manual computation, and we have $\hat\beta_1=`r coef(lm_icecream)[2]`$, $\hat\beta_0=`r coef(lm_icecream)[1]`$.
 
 
 ## Model validation
@@ -392,7 +392,7 @@ icecream <- icecream %>% mutate(residuals = consumption - (b0 + b1*temperature))
 icecream
 # check our residuals using R's built-in residuals() function
 icecream$residuals
-residuals(lm1) %>% unname  # remove names from vector, which are added by default
+residuals(lm_icecream) %>% unname  # remove names from vector, which are added by default
 # plot residuals (note: since residuals=response-predicted, predicted=response-residuals)
 ggplot(icecream, aes(x=temperature, y=consumption)) +
   geom_segment(aes(yend=consumption-residuals), color="orange") + geom_point() +
@@ -403,19 +403,19 @@ ggplot(icecream, aes(x=temperature, y=consumption)) +
 These can then be directly plotted both against the predicted $\hat y_i$ and in a QQ plot using methods we've learned before (exercise left to reader). Alternatively, there's also the rare slick base R shortcut here:
 
 ```{r,eval=F}
-plot(lm1, 1)
+plot(lm_icecream, 1)
 ```
 ```{r,echo=F}
 par(mar=c(4,3,1.5,.5),mgp=c(2,.6,0))
-plot(lm1, 1)
+plot(lm_icecream, 1)
 ```
 
 ```{r,eval=F}
-plot(lm1, 2)
+plot(lm_icecream, 2)
 ```
 ```{r,echo=F}
 par(mar=c(4,3,1.5,.5),mgp=c(2,.6,0))
-plot(lm1, 2)
+plot(lm_icecream, 2)
 ```
 
 From these plots we can see the residuals do appear to be **normal, 0-mean, and constant-variance**, so everything looks good. For examples of bad residual plots, see [this page](https://online.stat.psu.edu/stat462/node/124) or [this page](https://scales.arabpsychology.com/stats/what-is-considered-a-good-vs-bad-residual-plot).
@@ -431,4 +431,11 @@ From these plots we can see the residuals do appear to be **normal, 0-mean, and 
 ## fitting other relations
 
 ### exponential, power law, etc.
+
+
+## bonus: list of all lm object functions
+```{r}
+# get all stats::: functions implementing .lm method
+# sort(grep("\\.lm",unclass(lsf.str(envir = asNamespace("stats"), all = T)),value = T))
+```
 -->
