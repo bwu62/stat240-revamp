@@ -145,7 +145,7 @@ There are additional optional arguments like `use` which can specify which obser
 
 Now, let's move on to the actual modeling notation used. Again, let's suppose we draw a **sample of $n$ pairs $(x_i,y_i)$ from some population variables $X,Y$**, and suppose we've visually identified a linear regression model as appropriate, based on graphically assessing the degree of linearity, as well as possibly checking the correlation coefficient.
 
-Our theoretical linear model is then the following:
+Our theoretical **linear model equation** is then the following:
 
 $$
 y_i=\beta_0+\beta_1x_i+\ep_i
@@ -160,10 +160,11 @@ $$
  - $\ep_i$ are the **errors** of each point, which model the random fluctuations inherent to every measurement. These are assumed to be distributed $\ep_i\sim\n(0,\sigma)$, i.e. they are modeled as:
    
    i)   Normally distributed, with
-   ii)  Mean zero, and
-   iii) Constant variance.
+   ii)  Mean zero,
+   iii) Constant variance, and
+   iV)  Independent from one another.
 
-:::{.eg}
+:::{.note}
 At this point, it's important to take note of the following:
 
  - Here, $\beta_0$, $\beta_1$ represent the **true underlying intercept & slope** values that generate the data (assuming the data is in fact linear), NOT a best fit line based on a sample.
@@ -279,6 +280,12 @@ $$
 
 Note these are purely functions of the sample statistics $\bar x$, $\bar y$, $s_x$, $s_y$, $r$, and straightforward to compute.
 
+Also note the second equation implies the following key fact: **the best fit line _always_ passes through the point $(\bar x,\bar y)$, since this point clearly satisfied $\bar y=\hat\beta_0+\hat\beta_1\bar x$.
+
+Another way of thinking about it, the best fit intercept $\hat\beta_0$ is determined automatically by seeing where the line with slope $\hat\beta_1$ that goes through $(\bar x,\bar y)$ intersects the y-axis.
+
+It can be shown that theoretically the best fit coefficients $\hat\beta_0$, $\hat\beta_1$ as defined above are not only **unbiased**, i.e. no systematic deviation from the true value, but also **least variance** (among linear estimators), i.e. in some sense the most "precise" estimation of the true values $\beta_0$, $\beta_1$, and that as your sample size grows, we'll have $\hat\beta_0\to\beta_0$ and $\hat\beta_1\to\beta_1$.^[This result is known as the [Gauss–Markov theorem](https://en.wikipedia.org/wiki/Gauss%E2%80%93Markov_theorem)]
+
 
 ## Data example
 
@@ -363,7 +370,7 @@ A very important step at this stage is to do **model validation**, which means *
 Recall the best fit line is determined by minimizing the sum-squared-errors. Once the best fit line is found, taking the difference between $y_i$ and the best-fit predictions $\hat y_i$ gives our sample estimate of the errors, which we call $\hat\ep_i$ or the **residuals** of the fit and are defined:
 
 $$
-\hat\ep_i=y_i-\hat y_i=y_i-\left(\hat\beta_0+\hat\beta_1x_i\right)
+\hat\ep_i~=~y_i-\hat y_i~=~y_i-\left(\hat\beta_0+\hat\beta_1x_i\right)
 $$
 
 These $\hat\ep_i$ are treated as a sample of $\ep_i$ which remember we assumed to have distribution $\ep_i\sim\n(0,\sigma)$.
