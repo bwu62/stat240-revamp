@@ -392,12 +392,13 @@ icecream <- icecream %>% mutate(residuals = consumption - (b0 + b1*temperature))
 icecream
 # check our residuals using R's built-in residuals() function
 icecream$residuals
-residuals(lm_icecream) %>% unname  # remove names from vector, which are added by default
-# plot residuals (note: since residuals=response-predicted, predicted=response-residuals)
+residuals(lm_icecream) %>% unname  # remove names from vector (added by default)
+# plot residuals (since residuals=response-predicted, predicted=response-residuals)
 ggplot(icecream, aes(x=temperature, y=consumption)) +
-  geom_segment(aes(yend=consumption-residuals), color="orange") + geom_point() +
-  geom_abline(slope=b1, intercept=b0, color="red") + labs(y="Consumption (pints per capita)",
-  x="Mean temperature (F)", title="Ice cream consumption vs temperature (with residuals)")
+  geom_segment(aes(yend=consumption-residuals), color="#E6AB02FF") + geom_point() +
+  geom_abline(slope=b1, intercept=b0, color="red") +
+  labs(title="Ice cream consumption vs temperature (with residuals)",
+  x="Mean temperature (F)", y="Consumption (pints per capita)")
 ```
 
 These can then be directly plotted both against the predicted $\hat y_i$ and in a QQ plot using methods we've learned before (exercise left to reader). Alternatively, there's also the rare slick base R shortcut here:
