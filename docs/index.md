@@ -1,7 +1,7 @@
 ---
 title: "STAT 240 Revamp"
 author: "Bi Cheng Wu, with help from Bret Larget and Cameron Jones"
-date: "2025-11-19"
+date: "2025-11-20"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -139,6 +139,15 @@ dataset ideas (note: should prioritize datasets most students would find interes
  - earthquake regression
  - superbowl flips
 
+regression dataset ideas:
+
+ - ice cream (KOTESWARA RAO KADIYALA)
+ - bodyfat
+ - faraway: twins, cathedrals
+ - boston (ISLR2)
+ - slump (uci)
+ - heartrate
+
 other notes to self:
 
  - use [params](https://bookdown.org/yihui/rmarkdown/params-declare.html) to control:
@@ -157,6 +166,12 @@ other notes to self:
  - conditional stratified sample of papers based on distribution of grades in group
  - after paring down samples, ask Derek & Cameron to help with grading evaluation for calibrating papers
  - pare down more, use focused sample to calibrate TAs/instructors if needed?
+ - bonus topics ideas:
+   - chi sq
+   - nonlinear regression
+   - string/text analysis
+   - bootstrap?
+   - circular data vis/analysis??
 
 -->
 

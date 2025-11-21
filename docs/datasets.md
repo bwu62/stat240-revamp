@@ -32,6 +32,7 @@ Here's a convenient list of all dataset files generated. Note that **not ALL fil
  - [`fertility.csv`](data/fertility.csv)
  - [`fertility_meta.csv`](data/fertility_meta.csv)
  - [`fertility_raw.csv`](data/fertility_raw.csv)
+ - [`icecream.csv`](data/icecream.csv)
  - [`lizards.tsv`](data/lizards.tsv)
  - [`penguins.csv`](data/penguins.csv)
  - [`thoracic.csv`](data/thoracic.csv)
@@ -575,6 +576,8 @@ thoracic
 
 ## Atmospheric CO~2~ + Ocean aciditiy data
 
+DEPRECATED: turns out joined dataset is completely dominated by the ocean acidity dataset, check by comparing joint data frame with plots of each separately vs time
+
 For the regression section I thought it would be nice to bring back the atmospheric CO~2~ and ocean aciditiy datasets previously used in a tidyverse cleaning homework. There is some seasonality in the scatter plot, but it's not too bad, and the dataset is quite interesting and the right sample size for a first demonstration. The linear trend is also quite strong, and it's nice to see this emerge from the combination of these data from two very different sources.
 
 ### Process data
@@ -596,4 +599,20 @@ co2_acidity <- co2 %>% group_by(year) %>% summarise(co2_avg_ppm = mean(ppm)) %>%
 ```
 
 -->
+
+## Ice cream consumption data
+
+For a small simple linear regression dataset to introduce the section, I decided after much deliberation on the ice cream consumption dataset referenced in [Kadiyala's 1970](https://www.jstor.org/stable/1909244) paper on testing residual independence. The original source is from [Hildreth, Lu 1960](https://www.cabidigitallibrary.org/doi/full/10.5555/19611801752) but I can't find a copy online.
+
+The dataset has several advantages: it's a real dataset from the literature that's nice and linear, small enough to be easy to work with and effectively show the importance of the t-distribution during inference, and has high enough error variance to make the output more "interesting" to show and discuss.
+
+For data processing, this was just copied from the pdf into a csv file.
+
+### Read & inspect data
+
+
+``` r
+icecream <- read_csv("data/icecream.csv", comment="#")
+icecream
+```
 

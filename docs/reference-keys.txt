@@ -230,6 +230,9 @@ model-notation-4
 simulated-demo
 fitting-process
 fitted-coefficients
+data-example-1
+fit-manually
+fit-with-lm
 datasets
 datasets-list
 eruptions
@@ -254,6 +257,8 @@ thoracic-surgery
 process-data-3
 write-out-data-3
 inspect-data-4
+ice-cream-consumption-data
+read-inspect-data
 cheat-sheets
 rstudio-ide
 base-r
