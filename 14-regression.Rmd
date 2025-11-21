@@ -267,6 +267,7 @@ $$
 
 This is not extremely difficult to solve but we omit the [details](https://statproofbook.github.io/P/slr-ols.html).
 
+
 ## Fitted coefficients
 
 One can show that the best fit coefficients $\hat\beta_0$, $\hat\beta_1$ that minimize the loss function are:
@@ -278,4 +279,74 @@ $$
 
 Note these are purely functions of the sample statistics $\bar x$, $\bar y$, $s_x$, $s_y$, $r$, and straightforward to compute.
 
+
+## Data example
+
+For a first data example, let's example a historic ice cream consumption dataset provided by Kadiyala.^[https://doi.org/10.2307/1909244] The data, found in [`icecream.csv`](data/icecream.csv) reports ice cream consumption per capita in pints vs mean temperature in Farenheit over a series of 4-week periods between 1951-53 in a region in Michigan.
+
+```{r,eval=F}
+# set comment="# to ignore description lines at top of file,
+# then select main columns of interest
+icecream <- read_csv("https://bwu62.github.io/stat240-revamp/data/icecream.csv",
+                     comment="#") %>% select(consumption, temperature)
+icecream
+```
+```{r,echo=F}
+icecream <- read_csv("data/icecream.csv", comment="#") %>% select(consumption, temperature)
+icecream
+```
+```{r}
+ggplot(icecream,aes(x=temperature, y=consumption)) + geom_point() +
+  geom_smooth(method=lm, se=F) + labs(y="Consumption (pints per capita)",
+  x="Mean temperature (F)", title="Ice cream consumption vs temperature")
+```
+
+We can see this dataset looks quite linear. We can also compute the correlation:
+
+```{r}
+icecream %>% summarize(r = cor(consumption, temperature))
+```
+
+All signs suggest this is a good candidate for linear regression.
+
+
+### Fit manually
+
+We can use the expressions shown earlier to manually compute the best fit slope and intercept $\hat\beta_1$, $\hat\beta_0$.
+
+```{r}
+# <<- is a dirty R trick to globally assign a variable from anywhere
+icecream %>% summarize(
+  b1 = (b1 <<- cor(consumption,temperature) * sd(consumption) / sd(temperature)),
+  b0 = (b0 <<- mean(consumption) - b1 * mean(temperature)))
+# check our fit by manually replotting the best fit line
+ggplot(icecream, aes(x=temperature, y=consumption)) + geom_point() +
+  geom_abline(slope=b1, intercept=b0, color="red") + labs(x="Mean temperature (F)",
+  y="Consumption (pints per capita)", title="Ice cream consumption vs temperature")
+```
+
+
+## Fit with `lm()`
+
+Of course we can also fit using R. The function to use is `lm()`, which is short for **L**inear **M**odel. There are many advanced arguments, but minimally these should always be specified:
+
+ - `formula`, the 1^st^ argument, expects an R "formula" object, which is a special object with its own syntax created with the `~` character and which specifies a dependency structure for variables (see [this page](https://www.econometrics.blog/post/the-r-formula-cheatsheet) for details)
+ 
+   - For simple linear regression, this formula will be `response ~ predictor` where `response` and `predictor` are **column names of the $Y$ and $X$ variables in your data frame**
+
+ - `data`, the 2^nd^ argument, expects the **data frame with your variables**
+
+You can also use two vectors directly for the formula specification instead of using columns in a data frame, but this is generally not recommended since this precludes certain additional useful features down the road. **For best results, _always_ use `lm()` with columns from a data frame!**
+
+:::{.note}
+The formula specification is always in order of **`response ~ predictor`**, i.e. **`Y ~ X`**, and NOT the other way around; the order of variables here is not interchangeable!
+:::
+
+```{r}
+# fit the model, saving the output object which will be useful later
+lm1 <- lm(consumption ~ temperature, data=icecream)
+lm1
+# print a more complete summary output of the model
+summary(lm1)
+```
 
