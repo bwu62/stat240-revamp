@@ -243,7 +243,7 @@ bh0 <- mean(y)-bh1*mean(x)
 ggplot(tibble(x,y), aes(x=x,y=y)) +
   geom_rect(aes(xmin=x,xmax=x+(y-(x*bh1+bh0))*if_else(x>16.5|y>1&y<3,-1,1),
                 ymin=y,ymax=x*bh1+bh0,color="squared errors"),alpha=.1) + 
-  geom_segment(aes(x=x, y=y, yend=x*bh1+bh0, color="errors"),linewidth=1) +
+  geom_segment(aes(yend=x*bh1+bh0, color="errors"),linewidth=1) +
   stat_smooth(aes(color="fitted line"),method=lm,se=F,fullrange=T,linewidth=1) + 
   geom_point(size=2) +
   scale_x_continuous(breaks=seq(10,20,2), labels=seq(10,20,2),
@@ -344,7 +344,7 @@ The formula specification is always in order of **`response ~ predictor`**, i.e.
 
 ```{r}
 # fit the model, saving the output object which will be useful later
-lm1 <- lm(consumption ~ temperature, data=icecream)
+lm1 <- lm(consumption ~ temperature, data = icecream)
 lm1
 # print a more complete summary output of the model
 summary(lm1)
