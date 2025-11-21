@@ -167,12 +167,14 @@ $$
 :::{.note}
 At this point, it's important to take note of the following:
 
+ - The statement of this model equation here implicitly involves an **assumption that the underlying process between $X,Y$ is truly linear**. Again, this linearity assumption can NOT be checked with the correlation coefficient; it must be visually assessed by plotting the data.
+
  - Here, $\beta_0$, $\beta_1$ represent the **true underlying intercept & slope** values that generate the data (assuming the data is in fact linear), NOT a best fit line based on a sample.
 
  - $x_i$, $y_i$, $\ep_i$ all have $i$ indices since they vary for each point, but $\beta_0$, $\beta_1$ do NOT have indices, since the points are supposed to all fall on ONE line with some true slope and intercept.
- 
+
  - The $x_i$ are actually treated as constants, just like $\beta_0$, $\beta_1$, which means the only variable on the right hand side is $\ep_i$.
- 
+
  - The assumptions on $\ep_i$ mean that the $y_i$ points are **distributed normally _about_ the regression line**. In other words, within every vertical slice along the line, the points follow a normal distribution along the y-axis.
 :::
 
