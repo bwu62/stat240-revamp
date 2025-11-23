@@ -36,20 +36,41 @@ options(pillar.print_min = 5)
 source("ggplot_theme_options.R")
 set.seed(3)
 ```
-```{r,}
-library(tidyverse) ; library(mvtnorm) ; library(plotly)
-n <- 200
+```{r,eval=F}
+library(mvtnorm) ; library(plotly) ; n <- 200
 cor_dfs <- do.call(rbind, lapply(
-  c(-20:20/20), \(r) rmvnorm(n,c(0,0),matrix(c(1,r,r,1),ncol=2)) %>% round(3) %>% 
-    as.data.frame %>% setNames(c("x","y")) %>% cbind(r=r))) %>% arrange(r,x)
-plot_ly(cor_dfs, type = "scatter", x = ~x, y = ~y, frame = ~r, mode = "markers", height=600) %>%
-  config(displayModeBar = FALSE) %>% animation_opts(frame = 100, transition = 0) %>% 
-  layout(title = list(text = "Simulated X,Y with various correlation coefficients r", x = .15),
-         xaxis = list(range = list(-3,3)), yaxis = list(range = list(-3,3)),
-         margin = list(l = 140, r = 140, b = 50, t = 50), dragmode=FALSE) %>%
-  animation_slider(currentvalue = list(font = list(color = "#444444")))
+  c(-20:20/20), \(r) rmvnorm(n,c(0,0), matrix(c(1,r,r,1), ncol=2)) %>% round(3) %>% 
+    as.data.frame %>% setNames(c("x","y")) %>% cbind(r=r))) %>% arrange(r, x)
+plot_ly(cor_dfs, type="scatter", x=~x, y=~y, frame=~r, mode="markers", height=600) %>%
+  config(displayModeBar=FALSE) %>% animation_opts(frame=100, transition=0) %>% 
+  layout(title = list(text="Simulated X,Y with various correlation coefficients r", x=.15),
+         xaxis = list(range=list(-3,3)), yaxis = list(range=list(-3,3)),
+         margin = list(l=0, r=10, b=135, t=50, automargin=FALSE), dragmode=FALSE) %>%
+  animation_slider(currentvalue = list(font = list(color="#444444")))
 ```
 :::
+
+<style>
+@media (min-width: 992px){
+  #cor-app{max-width:75%;}
+}
+</style>
+<center><div id="cor-app">
+
+```{r,echo=F}
+library(mvtnorm) ; library(plotly) ; n <- 200
+cor_dfs <- do.call(rbind, lapply(
+  c(-20:20/20), \(r) rmvnorm(n,c(0,0), matrix(c(1,r,r,1), ncol=2)) %>% round(3) %>% 
+    as.data.frame %>% setNames(c("x","y")) %>% cbind(r=r))) %>% arrange(r, x)
+plot_ly(cor_dfs, type="scatter", x=~x, y=~y, frame=~r, mode="markers", height=600) %>%
+  config(displayModeBar=FALSE) %>% animation_opts(frame=100, transition=0) %>% 
+  layout(title = list(text="Simulated X,Y with various correlation coefficients r", x=.15),
+         xaxis = list(range=list(-3,3)), yaxis = list(range=list(-3,3)),
+         margin = list(l=0, r=10, b=135, t=50, automargin=FALSE), dragmode=FALSE) %>%
+  animation_slider(currentvalue = list(font = list(color="#444444")))
+```
+
+</div></center>
 
 From this, several things should be clear:
 
