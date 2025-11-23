@@ -64,7 +64,7 @@ cor_dfs <- do.call(rbind, lapply(
     as.data.frame %>% setNames(c("x","y")) %>% cbind(r=r))) %>% arrange(r, x)
 plot_ly(cor_dfs, type="scatter", x=~x, y=~y, frame=~r, mode="markers", height=600) %>%
   config(displayModeBar=FALSE) %>% animation_opts(frame=100, transition=0) %>% 
-  layout(title = list(text="Simulated X,Y with various correlation coefficients r", x=.15),
+  layout(title = list(text="Simulated X,Y with various correlation coefficients r", x=.08),
          xaxis = list(range=list(-3,3)), yaxis = list(range=list(-3,3)),
          margin = list(l=0, r=10, b=135, t=50, automargin=FALSE), dragmode=FALSE) %>%
   animation_slider(currentvalue = list(font = list(color="#444444")))
