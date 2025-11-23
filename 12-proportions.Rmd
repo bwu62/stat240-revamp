@@ -296,7 +296,7 @@ binom.test(x, n, p=0.4, conf.level=0.90)
 binom.test(x, n, p=0.4, conf.level=0.99)
 ```
 
-If you demand an R method for our simpler Wald interval (e.g. to check your own computation), the [`BinomCI()`](https://rdrr.io/cran/DescTools/man/BinomCI.html) function from the `DescTools` package works:
+If you demand an R method for our simpler Wald interval (e.g. to check your own computation), the <code><a href="https://rdrr.io/cran/DescTools/man/BinomCI.html" title="https://rdrr.io/cran/DescTools/man/BinomCI.html" target="_blank">BinomCI()</a></code> function from the `DescTools` package works:
 
 ```{r}
 # compute wald interval to check our work

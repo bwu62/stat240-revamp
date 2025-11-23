@@ -694,7 +694,7 @@ A code chunk has this basic structure:
     > ```{embed demo.setup, file="demo.Rmd", echo=8:13, class.source="wrapCode"}
     > ```
     
-    The function [`knitr::opts_chunk$set()`](https://rdrr.io/cran/knitr/man/opts_chunk.html) here can be used to set default chunk options for ALL chunks in that document, e.g. you can center all figures by adding `fig.align = "center"` here instead of copying it to every chunk header.
+    The function <code><a href="https://rdrr.io/cran/knitr/man/opts_chunk.html" title="https://rdrr.io/cran/knitr/man/opts_chunk.html" target="_blank">knitr::opts_chunk$set()</a></code> here can be used to set default chunk options for ALL chunks in that document, e.g. you can center all figures by adding `fig.align = "center"` here instead of copying it to every chunk header.
     
  4. After closing the header with `}` and starting a new line, you can now put whatever code you want inside the chunk. All code here gets run one line at a time and output displayed.
  5. At the end, the chunk is closed by another set of ```` ``` ````.
