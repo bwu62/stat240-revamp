@@ -229,7 +229,7 @@ correlation-in-r
 model-notation-4
 simulated-demo
 fitting-process
-fitted-coefficients
+best-fit-coefficients
 data-example-1
 fit-manually
 fit-with-lm
@@ -237,8 +237,11 @@ model-validation
 residuals
 plotting-residuals
 inference
+t-distribution-1
+hypothesis-test-2
+confidence-interval-3
 prediction
-prediction-intervals
+more-intervals
 datasets
 datasets-list
 eruptions
