@@ -360,7 +360,7 @@ ggplot(icecream, aes(x=temperature, y=consumption)) + geom_point() +
 
 Of course we can also fit using R. The function to use is `lm()`, which is short for **L**inear **M**odel. There are many advanced arguments, but minimally these should always be specified:
 
- - `formula`, the 1^st^ argument, expects an R "formula" object, which is a special object with its own syntax created with the `~` character and which specifies a dependency structure for variables (see [this page](https://www.econometrics.blog/post/the-r-formula-cheatsheet) for details)
+ - `formula`, the 1^st^ argument, expects an R "formula", which is a special object created with the `~` character and which specifies a dependency structure for variables (see [this page](https://www.econometrics.blog/post/the-r-formula-cheatsheet) for details)
  
    - For simple linear regression, this formula will be `response ~ predictor` where `response` and `predictor` are **column names of the $Y$ and $X$ variables in your data frame**
 
@@ -379,8 +379,11 @@ lm_icecream
 # print a more complete summary output of the model
 summary(lm_icecream)
 ```
+```{r,include=F}
+B <- coef(lm_icecream)
+```
 
-There's a lot of info here to unpack, some of which we'll get to later and some of which are beyond our scope, but for now we can see the results match our manual computation, and we have $\hat\beta_1=`r coef(lm_icecream)[2]`$, $\hat\beta_0=`r coef(lm_icecream)[1]`$.
+There's a lot here to unpack, some of which we'll get to later, but for now we can see the results match our manual computation, and we have $\hat\beta_0=`r sf(B[1],4)`$, $\hat\beta_1=`r tr(B[2],6)`$.
 
 
 ## Model validation
