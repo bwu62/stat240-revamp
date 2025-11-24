@@ -183,7 +183,7 @@ $$
    i)   Normally distributed, with
    ii)  Mean zero,
    iii) Constant variance, and
-   iV)  Independent from one another.
+   iv)  Independent from one another.
 
 :::{.note}
 At this point, it's important to take note of the following:
