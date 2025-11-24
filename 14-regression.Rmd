@@ -445,11 +445,105 @@ plot(lm_icecream, 2)
 
 From these plots we can see the residuals do appear to be **normal, 0-mean, and constant-variance**, so everything looks good. For examples of bad residual plots, see [this page](https://online.stat.psu.edu/stat462/node/124) or [this page](https://scales.arabpsychology.com/stats/what-is-considered-a-good-vs-bad-residual-plot).
 
+:::{.tip}
+In R, when a ["generic"](https://www.stat.umn.edu/geyer/3701/notes/generic.html) function like `plot()` or `summary()` is used with objects of special classes like the output of `lm()`, they actually redirect and call the functions <code><a href="https://rdrr.io/r/stats/plot.lm.html" title="https://rdrr.io/r/stats/plot.lm.html" target="_blank">plot.lm()</a></code> or `summary.lm()`, which are specific implementations of the generic function for that class.
+
+This means you need to search for those specific functions' help pages if you want additional details on how they work.
+:::
+
+
+## Inference
+
+Of course, inference is also possible for regression. We can easily construct **confidence intervals for $\hat\beta_0$, $\hat\beta_1$** or perform **hypothesis tests for $\beta_0$, $\beta_1$**.
+
+Generally, the most common inference questions to ask is **if the data shows a significant _linear_ relationship**, and this is usually answered by either computing an interval for $\hat\beta_1$, or trying to reject $\beta_1=0$, since these will affirm the significance of the $\beta_1x_i$ term in the linear model equation. Much less commonly, inference may also be done on the intercept.
+
+In both cases, for either slope or intercept, the process of inference is straightforward: **use a T-distribution with $\nu=n-2$ degrees of freedom**, with the corresponding **standard errors**:
+
+$$
+\text{(intercept)}~~\se(\hat\beta_0)=\hat\sigma\cdot\sqrt{\frac1n+\frac{\bar x^2}{s_x^2(n-1)}}~,\\
+\text{(slope)}~~\se(\hat\beta_1)=\hat\sigma\cdot\sqrt{\frac1{s_x^2(n-1)}}~,\,~\\
+~~~~~~~\text{where}~~\hat\sigma=\sqrt{\frac1{n-2}\sum\hat\ep_i^2}
+$$
+
+We can use these to compute the standard errors for our example:
+
+```{r}
+icecream %>% summarize(
+  sigma_hat = sqrt(1/(n()-2) * sum(residuals^2)),
+  se_b0 = sigma_hat * sqrt(1/n() + mean(temperature)^2 / (sd(temperature)^2*(n()-1))),
+  se_b1 = sigma_hat * sqrt(1 / (sd(temperature)^2*(n()-1)))
+)
+```
+
+For the purposes of 240, **you can always read these from the `summary()` output**, which will either be provided for you or easily computed in R whenever regression inference is involved.
+
+Once again, here's the output of `summary()`
+
+```{r}
+summary(lm_icecream)
+```
+```{r,include=F}
+SE <- sqrt(diag(vcov(lm_icecream)))
+```
+
+ - Under the `Std. Error` column, we can see $\se(\hat\beta_0)=`r sf(SE[1],4)`$, $\se(\hat\beta_1)=`r sf(SE[2],4)`$.
+ 
+ - Below that, next to `Residual standard error`, we can see $\hat\sigma=`r sf(summary(lm_icecream)[["sigma"]],4)`$, which is our estimate of $\sigma$, i.e. the standard deviation of the $\ep_i$ errors.
+
+ - Additionally, we see $\nu=n-2=27$ which is the degrees of freedom needed for our t-distribution.
+
+Now, we can do all the inference we desire. Suppose we want to see **if there is a significant linear relationship**. In other words, we test the following hypotheses:
+
+$$
+H_0:\beta_1=0\\
+H_a:\beta_1\ne0
+$$
+
+We compute our t-statistic and p-value similar to the one-sample t-test:
+
+$$
+t_\obs~=~\frac{\hat\beta_1-0}{\se(\hat\beta_1)}~=~\frac{`r sf(B[2],4)`}{`r sf(SE[2],4)`}~=~`r sf(B[2]/SE[2],4)`~\sim~T_{n-2}
+$$
+
+```{r,echo=F,results='asis'}
+cat(glue::glue('``` r
+# since t_obs is positive, take twice the upper tail are
+2 * (1 - pt({sf(summary(lm_icecream)$coefficients[2,3],4)}, df={summary(lm_icecream)$df[2]}))
+```'))
+```
+```{r,echo=F}
+2 * (1 - pt(signif(summary(lm_icecream)$coefficients[2,3],4), df=summary(lm_icecream)$df[2]))
+```
+
+These all match the summary, and we can conclude there's very strong evidence to suggest a significant linear relationship exists. We can also compute a 95% confidence interval for $\hat\beta_1$
+
+$$
+\text{$C\%$ or $(1\!-\!\alpha)$ interval}~=~\hat\beta_1~\pm~t_{\alpha/2,\,n-2}\cdot\se(\hat\beta_1)
+$$
+
+```{r,echo=F,results='asis'}
+cat(glue::glue('``` r
+# get fitted slope and SE from summary output
+{sf(B[2],5)} + c(-1,1) * qt(0.975, df={summary(lm_icecream)$df[2]}) * {sf(SE[2],4)}
+```'))
+```
+```{r,echo=F}
+signif(B[2],5) + c(-1,1) * qt(0.975, df=summary(lm_icecream)$df[2]) * signif(SE[2],4)
+```
+
+We can check this with the `confint()` function:
+
+```{r}
+confint(lm_icecream, level = 0.95)
+```
+
+Again, everything agrees and we are satisfied. Our 95% confidence interval for the true slope $\beta_1$ is $`r ci(confint(lm_icecream, level = 0.95)[2,])`$.
+
+
 
 <!--
 ## prediction
-
-## inference on coefficients
 
 ## intervals for prediction
 
