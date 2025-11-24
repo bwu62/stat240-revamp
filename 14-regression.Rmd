@@ -233,13 +233,13 @@ ggplot(tibble(x,y), aes(x=x,y=y)) + geom_point() +
   geom_segment(aes(color="xi",y=y[i],x=10,xend=x[i]),linewidth=.7) + 
   geom_segment(aes(color="εi",x=x[i],y=y[i],yend=(b0+b1*x[i])),linewidth=.7) + 
   geom_point(aes(color="i-th point",x=x[i],y=y[i]),size=3,shape="square") + 
-  stat_smooth(aes(color="fitted line"),method=lm,se=F,linewidth=1,linetype="dashed",fullrange=T) +
+  stat_smooth(aes(color="best fit line"),method=lm,se=F,linewidth=1,linetype="dashed",fullrange=T) +
   geom_abline(aes(color="true line", slope=b1, intercept=b0),linewidth=1,key_glyph="path") + 
   scale_x_continuous(breaks=seq(10,20,2), labels=seq(10,20,2),
                      limits=c(10,20), expand=0, minor_breaks=10:20) + 
   scale_y_continuous(breaks=seq(0,10,1), labels=seq(0,10,1),
                      limits=c(0,10), expand=0, minor_breaks=NULL) + 
-  scale_color_manual(breaks=c("fitted line","true line","i-th point","εi","yi","xi"),
+  scale_color_manual(breaks=c("best fit line","true line","i-th point","εi","yi","xi"),
                      values=c("#7570B3FF","#1B9E77FF","#666666FF","#E6AB02FF","#A6761DFF","#E7298AFF")) + 
   theme(legend.key.width=unit(2.1,"line")) +
   labs(color = "Legend", title = "Simulated linear model demo")
@@ -268,13 +268,13 @@ ggplot(tibble(x,y), aes(x=x,y=y)) +
   geom_rect(aes(xmin=x,xmax=x+(y-(x*bh1+bh0))*if_else(x>16.5|y>1&y<3,-1,1),
                 ymin=y,ymax=x*bh1+bh0,color="squared errors"),alpha=.1) + 
   geom_segment(aes(yend=x*bh1+bh0, color="errors"),linewidth=1) +
-  stat_smooth(aes(color="fitted line"),method=lm,se=F,fullrange=T,linewidth=1) + 
+  stat_smooth(aes(color="best fit line"),method=lm,se=F,fullrange=T,linewidth=1) + 
   geom_point(size=2) +
   scale_x_continuous(breaks=seq(10,20,2), labels=seq(10,20,2),
                      limits=c(10,20), expand=0, minor_breaks=10:20) + 
   scale_y_continuous(breaks=seq(0,10,1), labels=seq(0,10,1),
                      limits=c(0,10), expand=0, minor_breaks=NULL) + 
-  scale_color_manual(breaks=c("fitted line","errors","squared errors"),
+  scale_color_manual(breaks=c("best fit line","errors","squared errors"),
                      values=c("#7570B3FF","#E6AB02FF","#666666FF")) +
   labs(color = "Legend", title = "Least squares visualized for best fit line")
 ```
@@ -292,7 +292,7 @@ $$
 This is not extremely difficult to solve but we omit the [details](https://statproofbook.github.io/P/slr-ols.html).
 
 
-## Fitted coefficients
+## Best fit coefficients
 
 One can show that the best fit coefficients $\hat\beta_0$, $\hat\beta_1$ that minimize the loss function are:
 
@@ -460,6 +460,8 @@ Of course, inference is also possible for regression. We can easily construct **
 
 Generally, the most common inference questions to ask is **if the data shows a significant _linear_ relationship**, and this is usually answered by either computing an interval for $\hat\beta_1$, or trying to reject $\beta_1=0$, since these will affirm the significance of the $\beta_1x_i$ term in the linear model equation. Much less commonly, inference may also be done on the intercept.
 
+### T-distribution
+
 In both cases, for either slope or intercept, the process of inference is straightforward: **use a T-distribution with $\nu=n-2$ degrees of freedom**, with the corresponding **standard errors**:
 
 $$
@@ -495,6 +497,8 @@ summary(lm_icecream)
 
  - Additionally, we see $\nu=n-2=`r n-2`$ which is the degrees of freedom needed for our t-distribution.
 
+### Hypothesis test
+
 Now, we can do all the inference we desire. Suppose we want to see **if there is a significant linear relationship**. In other words, we test the following hypotheses:
 
 $$
@@ -514,7 +518,11 @@ $$
 2 * (1 - pt(b1/s1, df=n-2))
 ```
 
-These all match the summary, and we can conclude there's very strong evidence to suggest a significant linear relationship exists. We can also compute a 95% confidence interval for $\hat\beta_1$
+These all match the summary, and we can conclude there's very strong evidence to suggest a significant linear relationship exists.
+
+### Confidence interval
+
+We can also compute a 95% confidence interval for $\hat\beta_1$
 
 $$
 \text{$C\%$ or $(1\!-\!\alpha)$ interval}~=~\hat\beta_1~\pm~t_{\alpha/2,\,n-2}\cdot\se(\hat\beta_1)
@@ -572,7 +580,7 @@ ggplot(icecream, aes(x=temperature, y=consumption)) + geom_point() +
 :::
 
 
-### Prediction intervals
+### More intervals
 
 We can also augment our new prediction with one of two new kinds of confidence intervals:
 
