@@ -236,6 +236,7 @@ fit-with-lm
 model-validation
 residuals
 plotting-residuals
+inference
 datasets
 datasets-list
 eruptions

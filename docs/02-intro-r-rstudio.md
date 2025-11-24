@@ -731,7 +731,7 @@ all.equal(sqrt(2)^2, 2)
 ### Packages
 
 
-Now, let's briefly discuss packages. One of the best features of R is the ability for anyone to easily write and distribute packages on [CRAN](https://cran.r-project.org) (**C**omprehensive **R** **A**rchive **N**etwork). Currently, there are 23063 packages available on CRAN. There are also a further 2361 packages on the bioinformatics-specific package archive [Bioconductor](https://www.bioconductor.org), as well as countless more on [GitHub](https://github.com/topics/r-package).
+Now, let's briefly discuss packages. One of the best features of R is the ability for anyone to easily write and distribute packages on [CRAN](https://cran.r-project.org) (**C**omprehensive **R** **A**rchive **N**etwork). Currently, there are 23064 packages available on CRAN. There are also a further 2361 packages on the bioinformatics-specific package archive [Bioconductor](https://www.bioconductor.org), as well as countless more on [GitHub](https://github.com/topics/r-package).
 
 In this course, we will primarily make use of the [Tidyverse](https://www.tidyverse.org) suite of packages, which contains several important packages for data science: `readr` for reading in data, `ggplot2` for plotting data, `dplyr` and `tidyr` for cleaning data, and `lubridate` and `stringr` for working with dates and strings. We will learn each of these as the course progresses.
 
@@ -1064,7 +1064,7 @@ A code chunk has this basic structure:
     > ```
     > ````
     
-    The function [`knitr::opts_chunk$set()`](https://rdrr.io/cran/knitr/man/opts_chunk.html) here can be used to set default chunk options for ALL chunks in that document, e.g. you can center all figures by adding `fig.align = "center"` here instead of copying it to every chunk header.
+    The function <code><a href="https://rdrr.io/cran/knitr/man/opts_chunk.html" title="https://rdrr.io/cran/knitr/man/opts_chunk.html" target="_blank">knitr::opts_chunk$set()</a></code> here can be used to set default chunk options for ALL chunks in that document, e.g. you can center all figures by adding `fig.align = "center"` here instead of copying it to every chunk header.
     
  4. After closing the header with `}` and starting a new line, you can now put whatever code you want inside the chunk. All code here gets run one line at a time and output displayed.
  5. At the end, the chunk is closed by another set of ```` ``` ````.

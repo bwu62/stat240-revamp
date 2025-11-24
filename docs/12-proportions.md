@@ -432,7 +432,7 @@ probability of success
                  0.395 
 ```
 
-If you demand an R method for our simpler Wald interval (e.g. to check your own computation), the [`BinomCI()`](https://rdrr.io/cran/DescTools/man/BinomCI.html) function from the `DescTools` package works:
+If you demand an R method for our simpler Wald interval (e.g. to check your own computation), the <code><a href="https://rdrr.io/cran/DescTools/man/BinomCI.html" title="https://rdrr.io/cran/DescTools/man/BinomCI.html" target="_blank">BinomCI()</a></code> function from the `DescTools` package works:
 
 
 ``` r

@@ -391,7 +391,7 @@ alternative hypothesis: true probability of success is not equal to 0.4
 sample estimates:
 probability of success 
                  0.395 </code></pre>
-<p>If you demand an R method for our simpler Wald interval (e.g. to check your own computation), the <a href="https://rdrr.io/cran/DescTools/man/BinomCI.html"><code>BinomCI()</code></a> function from the <code>DescTools</code> package works:</p>
+<p>If you demand an R method for our simpler Wald interval (e.g. to check your own computation), the <code><a href="https://rdrr.io/cran/DescTools/man/BinomCI.html" title="https://rdrr.io/cran/DescTools/man/BinomCI.html" target="_blank">BinomCI()</a></code> function from the <code>DescTools</code> package works:</p>
 <div class="sourceCode" id="cb974"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># compute wald interval to check our work</span></span>
 <span><span class="fu">DescTools</span><span class="fu">::</span><span class="fu"><a href="https://andrisignorell.github.io/DescTools/reference/BinomCI.html">BinomCI</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">n</span>, <span class="fl">0.95</span>, method<span class="op">=</span><span class="st">"wald"</span><span class="op">)</span></span></code></pre></div>
