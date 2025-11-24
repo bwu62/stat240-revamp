@@ -303,7 +303,7 @@ $$
 
 Note these are purely functions of the sample statistics $\bar x$, $\bar y$, $s_x$, $s_y$, $r$, and straightforward to compute.
 
-Also note the second equation implies the following key fact: **the best fit line _always_ passes through the point $(\bar x,\bar y)$, since this point clearly satisfied $\bar y=\hat\beta_0+\hat\beta_1\bar x$.
+Also note the second equation implies the following key fact: **the best fit line _always_ passes through the point $(\bar x,\bar y)$**, since this point clearly satisfied $\bar y=\hat\beta_0+\hat\beta_1\bar x$.
 
 Another way of thinking about it, the best fit intercept $\hat\beta_0$ is determined automatically by seeing where the line with slope $\hat\beta_1$ that goes through $(\bar x,\bar y)$ intersects the y-axis.
 
@@ -355,10 +355,12 @@ icecream %>% summarize(
   b1   = (b1   <<- r * sy / sx),
   b0   = (b0   <<- ybar - b1 * xbar))
 # check fit by manually plotting best fit line (cross added at xbar, ybar)
+library(latex2exp)
 ggplot(icecream, aes(x=temperature, y=consumption)) + geom_point() +
-  geom_point(aes(xbar,ybar), shape="+", size=6) +
-  geom_abline(slope=b1, intercept=b0, color="red") + labs(x="Mean temperature (F)",
-  y="Consumption (pints per capita)", title="Ice cream consumption vs temperature")
+  geom_point(aes(x=xbar, y=ybar), shape=3, size=6) +
+  geom_abline(slope=b1, intercept=b0, color="red") +
+  labs(x="Mean temperature (F)", y="Consumption (pints per capita)", title=TeX(
+    "Ice cream consumption vs temperature (cross shows $\\bar{x},\\bar{y}$)"))
 ```
 
 
