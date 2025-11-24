@@ -131,12 +131,13 @@ page.find = function(url,pattern,md=F,n=1){
 # better sig fig printing function from https://stackoverflow.com/a/35280610
 sf = function(x,n){
   if(is.list(x)) x = unlist(x,use.names=F)
-  gsub("\\.$","",formatC(signif(x,digits=n),digits=n,format="fg",flag="#"))
+  gsub("\\.$","",formatC(signif(x,digits=n),digits=n,format="fg",flag="#")) %>% unname
 }
 
 # function for truncating at n digits
 tr = function(x,n){
-  trunc(x*10^n)/10^n
+  if(is.list(x)) x = unlist(x,use.names=F)
+  trunc(x*10^n)/10^n %>% unname
 }
 
 # function for nicely printing vector of CI values
