@@ -134,6 +134,11 @@ sf = function(x,n){
   gsub("\\.$","",formatC(signif(x,digits=n),digits=n,format="fg",flag="#"))
 }
 
+# function for truncating at n digits
+tr = function(x,n){
+  trunc(x*10^n)/10^n
+}
+
 # function for nicely printing vector of CI values
 ci = function(x,n=2){
   paste0("(",paste(sf(x,n),collapse=","),")")
