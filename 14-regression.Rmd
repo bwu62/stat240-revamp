@@ -522,7 +522,7 @@ These all match the summary, and we can conclude there's very strong evidence to
 
 ### Confidence interval
 
-We can also compute a 95% confidence interval for $\hat\beta_1$
+We can also compute a 95% confidence interval for $\beta_1$
 
 $$
 \text{$C\%$ or $(1\!-\!\alpha)$ interval}~=~\hat\beta_1~\pm~t_{\alpha/2,\,n-2}\cdot\se(\hat\beta_1)
