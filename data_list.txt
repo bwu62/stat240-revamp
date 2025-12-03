@@ -1,3 +1,4 @@
+https://bwu62.github.io/stat240-revamp/data/bmr.csv
 https://bwu62.github.io/stat240-revamp/data/enrollment.csv
 https://bwu62.github.io/stat240-revamp/data/eruptions_recent.csv
 https://bwu62.github.io/stat240-revamp/data/eruptions_recent.delim
