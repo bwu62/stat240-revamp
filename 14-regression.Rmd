@@ -745,6 +745,12 @@ ggplot(bmr,aes(mass_g,bmr_kjph)) + geom_point() + geom_smooth(method=lm,se=F) +
     x = "Body mass (g)", y = "BMR (kJ/h)")
 ```
 
+On a log-log scale, the data has the following correlation:
+
+```{r}
+bmr %>% summarize(r = cor(log10(mass_g),log10(bmr_kjph)))
+```
+
 :::{.note}
 Remember on a log-log plot, equal steps along axes represent **constant multiples** of values, NOT constant additions, and axes go from **$0$ on the infinite left/down side** to $\infty$ on the infinite right/top side!
 :::
@@ -759,7 +765,7 @@ lm_bmr <- lm(log10(bmr_kjph) ~ log10(mass_g), data=bmr)
 summary(lm_bmr)
 ```
 
-From this, we can see the intercept, which represents $\log_{10}(a)$, has been fitted as $\hat\beta_0\approx`r sf(coef(lm_bmr)[1],5)`$ which means $a\approx0.06843$; and the slope, which represents the exponent $b$, has been fitted as $\hat\beta_1\approx`r sf(coef(lm_bmr)[2],4)`$. If we go back and remake the last super zoomed in linear-scale plot of the raw data with this fitted power law added in, we can see it clearly also fits the raw data quite well:
+From this, we can see the intercept, which represents $\log_{10}(a)$, has been fitted as $\hat\beta_0\approx`r tr(coef(lm_bmr)[1],4)`$ which means $a\approx0.06843$; and the slope, which represents the exponent $b$, has been fitted as $\hat\beta_1\approx`r sf(coef(lm_bmr)[2],4)`$. If we go back and remake the last super zoomed in linear-scale plot of the raw data with this fitted power law added in, we can see it clearly also fits the raw data quite well:
 
 ```{r}
 # use coef() to extract and define best fit coefficients
@@ -767,18 +773,151 @@ coef(lm_bmr)
 b0 <- coef(lm_bmr)[1] ; b1 <- coef(lm_bmr)[2]
 # replot zoomed in linear-scale plot with fitted power law
 ggplot(bmr,aes(x=mass_g,y=bmr_kjph)) + geom_point() +
-  geom_function(fun=\(x) 10^b0 * x^b1, color="blue", size=1) +
+  geom_function(fun=\(x) 10^b0 * x^b1, color="blue", linewidth=1) +
   xlim(c(0,1000)) + ylim(c(0,15)) + labs(
     title = "BMR vs body mass of various mammalian species (zoomed + power law)",
     x = "Body mass (g)", y = "BMR (kJ/h)")
 ```
 
 
+### Model validation
+
+After fitting, it's important to remember to check the residuals for assumption violations. We make our usual residual v. fitted and QQ plots:
+
+```{r,eval=F}
+plot(lm_bmr, 1)
+```
+```{r,echo=F}
+par(mar=c(4,3,1.5,.5),mgp=c(2,.6,0))
+plot(lm_bmr, 1)
+```
+
+```{r,eval=F}
+plot(lm_bmr, 2)
+```
+```{r,echo=F}
+par(mar=c(4,3,1.5,.5),mgp=c(2,.6,0))
+plot(lm_bmr, 2)
+```
+
+There does appear to exact perhaps some slight non-linearity and non-normality to the residuals, but it seems limited to a handful of points near the edges of the X-range. Generally linear regression shouldn't be too sensitive to slight deviations to the assumptions, so this is probably not of significant concern. Overall, the model appears to be fairly well fit and we proceed to inference.
+
+
+### Inference
+
+Let's look again at the summary output:
+
+```{r}
+summary(lm_bmr)
+```
+
+Recall that the t-statistics and p-values presented therein always correspond to testing vs 0, whereas for a power law we typically wish to test the slope vs 1. Therefore, to assess significance here we must compute our own test statistics. Our hypotheses are:
+
+$$
+H_0:b=1\\
+H_a:b\ne1
+$$
+
+where $b=\beta_1$ is the true exponent in the power law or the true slope of the log-log line. Then, our test statistic is
+
+```{r,include=F}
+s1 <- sqrt(vcov(lm_bmr)[2,2])
+```
+$$
+t_\obs~=~\frac{\hat\beta_1-1}{\se(\hat\beta_1)}~=~\frac{`r sf(b1,4)`-1}{`r sf(s1,4)`}~=~`r sf((b1-1)/s1,5)`~\sim~T_{n-2}
+$$
+
+Remember since we have a large sample (n=637), this statistic is essentially normally distributed, and a z-score of `r tr((b1-1)/s1,3)` is infinitesimally small, so we can conclude the power law model is statistically a much better fit vs a linear alternative.
+
+Perhaps a more interesting question here, especially since Kleiber's law provides a theoretical exponent of ¾ for its model, we can test the data for adherence to this model. Let's retest with the following hypotheses:
+
+$$
+H_0:b=\tfrac34\\
+H_a:b\ne\tfrac34
+$$
+
+This gives us the following statistic:
+
+$$
+t_\obs~=~\frac{\hat\beta_1-\frac34}{\se(\hat\beta_1)}~=~\frac{`r sf(b1,4)`-\frac34}{`r sf(s1,4)`}~=~`r sf((b1-3/4)/s1,5)`~\sim~T_{n-2}
+$$
+
+which results in the following p-value:
+
+```{r,echo=F,results='asis'}
+cat(glue::glue('``` r
+2 * pt({sf((b1-3/4)/s1,5)}, df={nrow(bmr)-2})
+```'))
+```
+```{r,echo=F}
+2 * pt(as.numeric(sf((unname(b1)-3/4)/s1,5)), df=nrow(bmr)-2)
+```
+
+Interestingly, our large sample is actually able to detect a small but statistically significant deviation from Kleiber's law of $Y=aX^{3/4}$. We can also formalize this by computing 95% confidence intervals for the coefficients:
+
+```{r}
+confint(lm_bmr, level = 0.95)
+```
+
+So we are 95% confident our true exponent is between $`r ci(confint(lm_bmr, level = 0.95)[2,],3)`$.
+
+This was later expanded on in a Nature paper by [Ballesteros et al (2018)](https://doi.org/10.1038/s41598-018-19853-6) where an alternative model was proposed and fitted combining both a power-law component as well as a pure linear component, which appeared to result in a better fit.
+
+## Bonus: fitting arbitrary functions
+
+As a slight bonus topic, let's also explore Ballesteros's proposed alternative model and see how we can fit it ourselves. From the paper, a power-law + linear combination of the form:
+
+$$
+Y = aX+bX^{2/3}
+$$
+
+was fitted to the data and compared to a pure power law fit:
+
+![](ballesteros.jpg){.i6}
+
+In R, arbitrary relations can be fit to the data using the `nls()` function, which stands for **N**onlinear **L**east **S**quares and extends the least squares method to general function forms. Here, there's no closed form solutions, and the optimal fit is found via numeric optimization (i.e. basically fancy guessing-and-checking). An optional `start=list(...)` argument can be set to pick initial starting guesses for the parameters.
+
+```{r}
+nls_bmr <- nls(bmr_kjph ~ a*mass_g + b*mass_g^(2/3), data=bmr, start=list(a=1,b=1))
+summary(nls_bmr)
+```
+
+We can check this fit against our previous pure power law by extracting the coefficients from this new model and plotting both side by side:
+
+:::{.i96}
+```{r,fig.width=8}
+coef(nls_bmr)
+a <- coef(nls_bmr)[1] ; b <- coef(nls_bmr)[2]
+ggplot(bmr,aes(mass_g,bmr_kjph)) + geom_point(size=.7,alpha=.5) +
+  geom_smooth(aes(color="power law"), method=lm,se=F, linewidth=.7) +
+  geom_function(aes(color="power-linear\ncombination"),
+                fun=\(x)a*x+b*x^(2/3), linewidth=.7) +
+  scale_x_log10(labels=scales::label_log()) + scale_y_log10() +
+  scale_color_manual(breaks=c("power law","power-linear\ncombination"),
+                     values=c("blue","red")) +
+  labs(x = "Body mass (g)", y = "BMR (kJ/h)",
+       title = "Log-log plot BMR vs body mass of various mammalian species")
+```
+:::
+
+This time, we must manually plot the residuals to view them properly:
+
+```{r}
+bmr <- bmr %>% mutate(log_residuals = log10(bmr_kjph)-log10(a*mass_g+b*mass_g^(2/3)))
+ggplot(bmr, aes(mass_g,log_residuals)) + geom_point() +
+  scale_x_log10()
+qqnorm(bmr$log_residuals)
+```
+
+We can also compute likelihood-based confidence intervals here with `confint()`, though this time they're not based on t-distributions:
+
+```{r}
+confint(nls_bmr, level = 0.95)
+```
+
+It's not immediately obvious here which model is superior; both seem to fit the data reasonably well.
+
 <!--
-## fitting other relations
-
-### exponential, power law, etc.
-
 ## bonus: list of all lm object functions
 ```{r}
 # get all stats::: functions implementing .lm method
