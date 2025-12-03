@@ -664,6 +664,116 @@ ggplot(icecream, aes(x=temperature, y=consumption)) + geom_point() +
 ```
 :::
 
+
+## Power law
+
+Linear regression can also sometimes be used to fit non-linear relationships, if it can be linearized with a transformation. There are lots of examples of these, e.g. exponential, polynomial, etc. We're going to examine just one example: power law relations.
+
+**Power laws** are defined by the following equation between $Y$ and $X$
+
+$$
+Y = aX^b
+$$
+
+where $a$, $b$ are constants. Power laws are quite common across many disciplines and so worth examining more closely. Note that applying a **log transformation to both sides**---valid since it's an equation---results in the following **linear relationship** between $\log(Y)$ and $\log(X)$
+
+$$
+\log(Y)=\log(aX^b)=\log(a)+b\cdot\log(X)
+$$
+
+where $\log(a)$, $b$ become the intercept and slope. Note that this is of course **only valid if $X,Y>0$ is always true**, since otherwise log does not return a real value. Also note the **choice of base doesn't matter**, so we are free to choose any convenient base (usually base 10 is preferred for interpretability).
+
+This power law relation is often confirmed by plotting the data on a **log-log plot**, where both $Y$ and $X$ are log transformed, to check for linearity, in the same way you'd check linearity graphically before fitting an ordinary linear model. Then, the logged variables can simply be regressed, and we can estimate the coefficients and do inference just like any other linear model.
+
+The only other difference to note is power law **significance is usually checked by testing $b=1$ vs $b\ne1$**, since a power of one results in a simple linear equation, which is typically interpreted as there not being a significant power law relationship.
+
+
+### Data example
+
+In [allometry](https://en.wikipedia.org/wiki/Allometry), it's been found that [basal metabolic rate](https://en.wikipedia.org/wiki/Basal_metabolic_rate) (BMR) and body mass have a power law relationship; this is known as [Kleiber's law](https://en.wikipedia.org/wiki/Kleiber%27s_law). Empirically, the law was found to have exponent ¾, which can be explained by modeling the scaling rate of capillary count vs total blood volume in circulatory systems of different sizes ^[for more details, see [West, Brown, and Enquist](https://doi.org/10.1038%2F25977)]. A table of BMR values for 638 different mammalian species provided by [McNab (2008)](https://doi.org/10.1016/j.cbpa.2008.05.008) has been saved in [`bmr.csv`](data/bmr.csv).
+
+```{r,eval=F}
+# set comment="#" to ignore description lines at top of file
+bmr <- read_csv("https://bwu62.github.io/stat240-revamp/data/bmr.csv",
+                comment="#")
+bmr
+```
+```{r,echo=F}
+bmr <- read_csv("data/bmr.csv",comment="#")
+bmr
+```
+
+
+### Log-log plot
+
+Let's consider BMR as the response and body mass as the predictor. We can begin by attempting to make a simple BMR vs mass plot on an ordinary linear scale:
+
+```{r}
+ggplot(bmr,aes(x=mass_g,y=bmr_kjph)) + geom_point() + labs(
+  title = "BMR vs body mass of various mammalian species",
+  x = "Body mass (g)", y = "BMR (kJ/h)")
+```
+
+Looking at this plot, this is clearly not just an ordinary linear relationship. It looks like the points are all clustered together in the bottom corner. It may be tempting to think this is just a zoom issue, and that we can fix it by zooming in to the corner, but this is wrong and easily disproven:
+
+```{r}
+# zoom into bottom left corner (note some points are cut off)
+ggplot(bmr,aes(x=mass_g,y=bmr_kjph)) + geom_point() +
+  xlim(c(0,1e5)) + ylim(c(0,700)) + labs(
+    title = "BMR vs body mass of various mammalian species (zoomed in)",
+    x = "Body mass (g)", y = "BMR (kJ/h)")
+```
+
+We again see the same pattern. But surely zooming in more will fix it?
+
+```{r}
+# zoom even MORE into bottom left corner (many points are now cut off)
+ggplot(bmr,aes(x=mass_g,y=bmr_kjph)) + geom_point() +
+  xlim(c(0,1000)) + ylim(c(0,15)) + labs(
+    title = "BMR vs body mass of various mammalian species (even more zoomed in)",
+    x = "Body mass (g)", y = "BMR (kJ/h)")
+```
+
+We can clearly see now that the level of zoom is not the issue here; the data simply is not evenly spread out on a linear scale. Turns out data that follow a power law always exhibit this fractal-like self-similarity effect. The correct approach here is to use a log-log plot instead:
+
+```{r}
+# log-log plot + best fit line; can be done by directly logging variables,
+# or modifying the scale, which I prefer for ease & interpretability
+ggplot(bmr,aes(mass_g,bmr_kjph)) + geom_point() + geom_smooth(method=lm,se=F) +
+  scale_x_log10(labels=scales::label_log()) + scale_y_log10() + labs(
+    title = "Log-log plot of BMR vs body mass of various mammalian species",
+    x = "Body mass (g)", y = "BMR (kJ/h)")
+```
+
+:::{.note}
+Remember on a log-log plot, equal steps along axes represent **constant multiples** of values, NOT constant additions, and axes go from **$0$ on the infinite left/down side** to $\infty$ on the infinite right/top side!
+:::
+
+
+### Fitting
+
+Fitting is simple, we can simply add the necessary function transformation to `lm()` in the formula expression. Again, we are free to choose our favorite base, but commonly base 10 is used for interpretability.
+
+```{r}
+lm_bmr <- lm(log10(bmr_kjph) ~ log10(mass_g), data=bmr) 
+summary(lm_bmr)
+```
+
+From this, we can see the intercept, which represents $\log_{10}(a)$, has been fitted as $\hat\beta_0\approx`r sf(coef(lm_bmr)[1],5)`$ which means $a\approx0.06843$; and the slope, which represents the exponent $b$, has been fitted as $\hat\beta_1\approx`r sf(coef(lm_bmr)[2],4)`$. If we go back and remake the last super zoomed in linear-scale plot of the raw data with this fitted power law added in, we can see it clearly also fits the raw data quite well:
+
+```{r}
+# use coef() to extract and define best fit coefficients
+coef(lm_bmr)
+b0 <- coef(lm_bmr)[1] ; b1 <- coef(lm_bmr)[2]
+# replot zoomed in linear-scale plot with fitted power law
+ggplot(bmr,aes(x=mass_g,y=bmr_kjph)) + geom_point() +
+  geom_function(fun=\(x) 10^b0 * x^b1, color="blue", size=1) +
+  xlim(c(0,1000)) + ylim(c(0,15)) + labs(
+    title = "BMR vs body mass of various mammalian species (zoomed + power law)",
+    x = "Body mass (g)", y = "BMR (kJ/h)")
+```
+
+
 <!--
 ## fitting other relations
 
