@@ -315,7 +315,7 @@ It can be shown that theoretically the best fit coefficients $\hat\beta_0$, $\ha
 For a first data example, let's example a historic ice cream consumption dataset provided by Kadiyala.^[https://doi.org/10.2307/1909244] The data, found in [`icecream.csv`](data/icecream.csv) reports ice cream consumption per capita in pints vs mean temperature in Farenheit over a series of 4-week periods between 1951-53 in a region in Michigan.
 
 ```{r,eval=F}
-# set comment="# to ignore description lines at top of file,
+# set comment="#" to ignore description lines at top of file,
 # then select main columns of interest
 icecream <- read_csv("https://bwu62.github.io/stat240-revamp/data/icecream.csv",
                      comment="#") %>% select(consumption, temperature)
@@ -418,9 +418,9 @@ Let's first compute the model's residuals for each data point:
 # recall we still have best fit coefficients b1, b0 defined from earlier
 icecream <- icecream %>% mutate(residuals = consumption - (b0 + b1*temperature))
 icecream
-# check our residuals using R's built-in residuals() function
+# check our residuals using R's built-in resid() function
 icecream$residuals
-residuals(lm_icecream) %>% unname  # remove names from vector (added by default)
+resid(lm_icecream) %>% unname  # remove names from vector (added by default)
 # plot residuals (since residuals=response-predicted, predicted=response-residuals)
 ggplot(icecream, aes(x=temperature, y=consumption)) +
   geom_segment(aes(yend=consumption-residuals), color="#E6AB02FF") + geom_point() +
