@@ -242,6 +242,10 @@ hypothesis-test-2
 confidence-interval-3
 prediction
 more-intervals
+power-law
+data-example-2
+log-log-plot
+fitting
 datasets
 datasets-list
 eruptions
@@ -268,6 +272,8 @@ write-out-data-3
 inspect-data-4
 ice-cream-consumption-data
 read-inspect-data
+mammalian-bmr-data
+read-inspect-data-1
 cheat-sheets
 rstudio-ide
 base-r

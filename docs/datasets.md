@@ -24,6 +24,7 @@ library(magrittr)
 
 Here's a convenient list of all dataset files generated. Note that **not ALL files are used in the notes!**. These are primarily for my own record keeping purposes. Also note that some files may automatically open a download prompt while others may not. To force download, right click on a file link and choose "Save link as".
 
+ - [`bmr.csv`](data/bmr.csv)
  - [`enrollment.csv`](data/enrollment.csv)
  - [`eruptions_recent.csv`](data/eruptions_recent.csv)
  - [`eruptions_recent.delim`](data/eruptions_recent.delim)
@@ -616,3 +617,18 @@ icecream <- read_csv("data/icecream.csv", comment="#")
 icecream
 ```
 
+## Mammalian BMR data
+
+For an additional regression topic, I needed a good power-law dataset, and I found this excellent [paper by McNab (2008)](https://doi.org/10.1016/j.cbpa.2008.05.008) collecting the basal metabolic rates of 638 species of mammals, which is known to follow a power law.
+
+Due to processing difficulty & time constraints, I omitted the order & family table insert rows for now and simply retained the genus & species level info. These can be easily added back later, e.g. using the [ENA](https://ena-docs.readthedocs.io/en/latest/retrieval/programmatic-access/taxon-api.html) taxonomy database, to allow for order & family level subgroup comparisons.
+
+This dataset was easy to copy and then minimally preprocess by hand.
+
+### Read & inspect data
+
+
+``` r
+bmr <- read_csv("data/bmr.csv", comment="#")
+bmr
+```
