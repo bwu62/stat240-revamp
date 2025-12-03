@@ -549,7 +549,7 @@ icecream
 
 ## Mammalian BMR data
 
-For an additional regression topic, I needed a good power-law dataset, and I found this excellent [paper by McNab (2008)](https://doi.org/10.1016/j.cbpa.2008.05.008) collecting the basal metabolic rates of 638 species of mammals, which is known to follow a power law.
+For an additional regression topic, I needed a good power-law dataset, and I found this excellent [paper by McNab (2008)](https://doi.org/10.1016/j.cbpa.2008.05.008) collecting the basal metabolic rates of 637 species of mammals, which is known to follow a power law.
 
 Due to processing difficulty & time constraints, I omitted the order & family table insert rows for now and simply retained the genus & species level info. These can be easily added back later, e.g. using the [ENA](https://ena-docs.readthedocs.io/en/latest/retrieval/programmatic-access/taxon-api.html) taxonomy database, to allow for order & family level subgroup comparisons.
 

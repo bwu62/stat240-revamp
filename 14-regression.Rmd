@@ -690,7 +690,7 @@ The only other difference to note is power law **significance is usually checked
 
 ### Data example
 
-In [allometry](https://en.wikipedia.org/wiki/Allometry), it's been found that [basal metabolic rate](https://en.wikipedia.org/wiki/Basal_metabolic_rate) (BMR) and body mass have a power law relationship; this is known as [Kleiber's law](https://en.wikipedia.org/wiki/Kleiber%27s_law). Empirically, the law was found to have exponent ¾, which can be explained by modeling the scaling rate of capillary count vs total blood volume in circulatory systems of different sizes ^[for more details, see [West, Brown, and Enquist](https://doi.org/10.1038%2F25977)]. A table of BMR values for 638 different mammalian species provided by [McNab (2008)](https://doi.org/10.1016/j.cbpa.2008.05.008) has been saved in [`bmr.csv`](data/bmr.csv).
+In [allometry](https://en.wikipedia.org/wiki/Allometry), it's been found that [basal metabolic rate](https://en.wikipedia.org/wiki/Basal_metabolic_rate) (BMR) and body mass have a power law relationship; this is known as [Kleiber's law](https://en.wikipedia.org/wiki/Kleiber%27s_law). Empirically, the law was found to have exponent ¾, which can be explained by modeling the scaling rate of capillary count vs total blood volume in circulatory systems of different sizes ^[for more details, see [West, Brown, and Enquist](https://doi.org/10.1038%2F25977)]. A table of BMR values for 637 different mammalian species provided by [McNab (2008)](https://doi.org/10.1016/j.cbpa.2008.05.008) has been saved in [`bmr.csv`](data/bmr.csv).
 
 ```{r,eval=F}
 # set comment="#" to ignore description lines at top of file
