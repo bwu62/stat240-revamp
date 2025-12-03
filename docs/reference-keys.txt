@@ -246,6 +246,9 @@ power-law
 data-example-2
 log-log-plot
 fitting
+model-validation-1
+inference-1
+bonus-fitting-arbitrary-functions
 datasets
 datasets-list
 eruptions
