@@ -59,8 +59,7 @@ Note the following:
    - number of rows and columns (displayed as rows x cols),
    - and the type of each column (dbl, chr, lgl, date, or others beyond our scope).
  - You can create a column of constants by recycling a single value.
-   - Note: by design, `tibble()` will ONLY recycle length-1 vectors. 
-   - This is to help avoid errors and improve syntax legibility.
+   - Note: by design, `tibble()` will ONLY recycle length-1 vectors (this is to help avoid errors and improve syntax legibility).
 
 
 
