@@ -675,7 +675,9 @@ $$
 Y = aX^b
 $$
 
-where $a$, $b$ are constants. Power laws are quite common across many disciplines and so worth examining more closely. Note that applying a **log transformation to both sides**---valid since it's an equation---results in the following **linear relationship** between $\log(Y)$ and $\log(X)$
+where $a$, $b$ are constants, and $a>0$ must be positive but $b$ can be positive or negative. Note if $b=1$ we'd simply have a line which is not generally considered a power law, or if $b=0$ we'd have a constant which is also not considered a power law.
+
+Power laws are quite common across many disciplines and so worth examining more closely. Note that applying a **log transformation to both sides**---valid since it's an equation---results in the following **linear relationship** between $\log(Y)$ and $\log(X)$
 
 $$
 \log(Y)=\log(aX^b)=\log(a)+b\cdot\log(X)
@@ -690,12 +692,11 @@ The only other difference to note is power law **significance is usually checked
 
 ### Data example
 
-In [allometry](https://en.wikipedia.org/wiki/Allometry), it's been found that [basal metabolic rate](https://en.wikipedia.org/wiki/Basal_metabolic_rate) (BMR) and body mass have a power law relationship; this is known as [Kleiber's law](https://en.wikipedia.org/wiki/Kleiber%27s_law). Empirically, the law was found to have exponent ¾, which can be explained by modeling the scaling rate of capillary count vs total blood volume in circulatory systems of different sizes ^[for more details, see [West, Brown, and Enquist](https://doi.org/10.1038%2F25977)]. A table of BMR values for 637 different mammalian species provided by [McNab (2008)](https://doi.org/10.1016/j.cbpa.2008.05.008) has been saved in [`bmr.csv`](data/bmr.csv).
+In [allometry](https://en.wikipedia.org/wiki/Allometry), it's been found that [basal metabolic rate](https://en.wikipedia.org/wiki/Basal_metabolic_rate) (BMR) and body mass have a power law relationship; this is known as [Kleiber's law](https://en.wikipedia.org/wiki/Kleiber%27s_law). Empirically, the law was found to have exponent ¾, which can be explained by modeling the scaling rate of capillary count vs total blood volume in circulatory systems of different sizes^[for more details, see [West, Brown, and Enquist](https://doi.org/10.1038%2F25977)]. A table of BMR values for 637 different mammalian species provided by [McNab (2008)](https://doi.org/10.1016/j.cbpa.2008.05.008) has been saved in [`bmr.csv`](data/bmr.csv).
 
 ```{r,eval=F}
 # set comment="#" to ignore description lines at top of file
-bmr <- read_csv("https://bwu62.github.io/stat240-revamp/data/bmr.csv",
-                comment="#")
+bmr <- read_csv("https://bwu62.github.io/stat240-revamp/data/bmr.csv", comment="#")
 bmr
 ```
 ```{r,echo=F}
