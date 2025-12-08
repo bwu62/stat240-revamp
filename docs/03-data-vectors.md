@@ -1157,6 +1157,7 @@ Note however that nothingness, i.e. the absence of a character (such as when a s
 ```
 
 ``` r
+# remember: these have NO numberic meaning, so "-" is just a character
 "-3.00" < "-3.14"
 ```
 

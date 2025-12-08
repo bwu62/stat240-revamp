@@ -448,7 +448,7 @@ fertility <- read_csv("data/fertility.csv")
 
 ### Inspect data
 
-```{r}
+```{r,eval=T}
 fertility
 ```
 
@@ -501,7 +501,7 @@ thoracic <- read_csv("data/thoracic.csv")
 
 ### Inspect data
 
-```{r}
+```{r,eval=T}
 thoracic
 ```
 
@@ -542,7 +542,7 @@ For data processing, this was just copied from the pdf into a csv file.
 
 ### Read & inspect data
 
-```{r}
+```{r,eval=T}
 icecream <- read_csv("data/icecream.csv", comment="#")
 icecream
 ```
@@ -557,7 +557,7 @@ This dataset was easy to copy and then minimally preprocess by hand.
 
 ### Read & inspect data
 
-```{r}
+```{r,eval=T}
 bmr <- read_csv("data/bmr.csv", comment="#")
 bmr
 ```

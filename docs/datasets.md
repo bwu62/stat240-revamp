@@ -518,6 +518,23 @@ write_csv(fertility, "data/fertility.csv")
 fertility
 ```
 
+```
+# A tibble: 13,792 × 6
+   code  country     region     income_group  year  rate
+   <chr> <chr>       <chr>      <chr>        <dbl> <dbl>
+ 1 AFG   Afghanistan South Asia Low           1960  7.28
+ 2 AFG   Afghanistan South Asia Low           1961  7.28
+ 3 AFG   Afghanistan South Asia Low           1962  7.29
+ 4 AFG   Afghanistan South Asia Low           1963  7.30
+ 5 AFG   Afghanistan South Asia Low           1964  7.30
+ 6 AFG   Afghanistan South Asia Low           1965  7.30
+ 7 AFG   Afghanistan South Asia Low           1966  7.32
+ 8 AFG   Afghanistan South Asia Low           1967  7.34
+ 9 AFG   Afghanistan South Asia Low           1968  7.36
+10 AFG   Afghanistan South Asia Low           1969  7.39
+# ℹ 13,782 more rows
+```
+
 <!--
 ## Superbowl coin tosses
 
@@ -573,6 +590,24 @@ write_csv(thoracic, "data/thoracic.csv")
 thoracic
 ```
 
+```
+# A tibble: 470 × 17
+   dgn     fvc  fev1 perf  pain  haem  dysp  cough weak  size  type2dm mi6   pad  
+   <chr> <dbl> <dbl> <chr> <lgl> <lgl> <lgl> <lgl> <lgl> <chr> <lgl>   <lgl> <lgl>
+ 1 DGN2   2.88  2.16 PRZ1  FALSE FALSE FALSE TRUE  TRUE  OC14  FALSE   FALSE FALSE
+ 2 DGN3   3.4   1.88 PRZ0  FALSE FALSE FALSE FALSE FALSE OC12  FALSE   FALSE FALSE
+ 3 DGN3   2.76  2.08 PRZ1  FALSE FALSE FALSE TRUE  FALSE OC11  FALSE   FALSE FALSE
+ 4 DGN3   3.68  3.04 PRZ0  FALSE FALSE FALSE FALSE FALSE OC11  FALSE   FALSE FALSE
+ 5 DGN3   2.44  0.96 PRZ2  FALSE TRUE  FALSE TRUE  TRUE  OC11  FALSE   FALSE FALSE
+ 6 DGN3   2.48  1.88 PRZ1  FALSE FALSE FALSE TRUE  FALSE OC11  FALSE   FALSE FALSE
+ 7 DGN3   4.36  3.28 PRZ1  FALSE FALSE FALSE TRUE  FALSE OC12  TRUE    FALSE FALSE
+ 8 DGN2   3.19  2.5  PRZ1  FALSE FALSE FALSE TRUE  FALSE OC11  FALSE   FALSE TRUE 
+ 9 DGN3   3.16  2.64 PRZ2  FALSE FALSE FALSE TRUE  TRUE  OC11  FALSE   FALSE FALSE
+10 DGN3   2.32  2.16 PRZ1  FALSE FALSE FALSE TRUE  FALSE OC11  FALSE   FALSE FALSE
+# ℹ 460 more rows
+# ℹ 4 more variables: smoker <lgl>, asthma <lgl>, age <dbl>, survive1 <lgl>
+```
+
 <!--
 
 ## Atmospheric CO~2~ + Ocean aciditiy data
@@ -617,6 +652,23 @@ icecream <- read_csv("data/icecream.csv", comment="#")
 icecream
 ```
 
+```
+# A tibble: 29 × 5
+       n consumption price income temperature
+   <dbl>       <dbl> <dbl>  <dbl>       <dbl>
+ 1     1       0.386 0.27      78          41
+ 2     2       0.374 0.282     79          56
+ 3     3       0.393 0.277     81          63
+ 4     4       0.425 0.28      80          68
+ 5     5       0.406 0.272     76          69
+ 6     6       0.344 0.262     78          65
+ 7     7       0.327 0.275     82          61
+ 8     8       0.288 0.267     79          47
+ 9     9       0.269 0.265     76          32
+10    10       0.256 0.277     79          24
+# ℹ 19 more rows
+```
+
 ## Mammalian BMR data
 
 For an additional regression topic, I needed a good power-law dataset, and I found this excellent [paper by McNab (2008)](https://doi.org/10.1016/j.cbpa.2008.05.008) collecting the basal metabolic rates of 637 species of mammals, which is known to follow a power law.
@@ -631,4 +683,22 @@ This dataset was easy to copy and then minimally preprocess by hand.
 ``` r
 bmr <- read_csv("data/bmr.csv", comment="#")
 bmr
+```
+
+```
+# A tibble: 637 × 11
+   species   mass_g bmr_kjph food  climate habitat substrate torpor islands mountains
+   <chr>      <dbl>    <dbl> <chr> <chr>   <chr>   <chr>     <chr>  <chr>   <chr>    
+ 1 Tachyglo…   2140     5.63 A/T   T/TR    W       B         N      N       N        
+ 2 Zaglossu…  10300    24.4  W     TR      M       B         N      Y       Y        
+ 3 Ornithor…   1300     9.4  V/IV  T       FW      AQ        N      N       N        
+ 4 Caluromy…    357     4.09 F     TR      M       TR        N      N       N        
+ 5 Marmosa …     13     0.38 I/F   T       M       T/TR      Y      N       N        
+ 6 Thylamys…     40     0.86 I     T       M       T/TR      HIB    N       Y        
+ 7 Monodelp…    104     1.21 I     TR      X       T         N      N       N        
+ 8 Monodelp…    111     1.52 I     TR      M       T         Y      N       N        
+ 9 Marmosa …    122     1.96 I/F   TR      M       T         Y      N       N        
+10 Metachir…    336     4.12 I/F   TR      M       T/TR      N      N       N        
+# ℹ 627 more rows
+# ℹ 1 more variable: reference <chr>
 ```

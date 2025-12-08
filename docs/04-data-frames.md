@@ -27,7 +27,7 @@ library(lubridate)
 df <- tibble(
   name = c("Alice", "Bob", "Charlie"),
   sex = c("F", "M", "M"),
-  date_of_birth = mdy(c("12/4/04", "7/4/99", "10/31/06")),
+  date_of_birth = mdy(c("12/7/04", "7/4/99", "10/31/06")),
   age = floor(as.numeric(today() - date_of_birth) / 365.24),
   declared_major = c(TRUE, TRUE, FALSE),
   school = "UW-Madison"
@@ -40,7 +40,7 @@ df
 # A tibble: 3 × 6
   name    sex   date_of_birth   age declared_major school    
   <chr>   <chr> <date>        <dbl> <lgl>          <chr>     
-1 Alice   F     2004-12-04       21 TRUE           UW-Madison
+1 Alice   F     2004-12-07       21 TRUE           UW-Madison
 2 Bob     M     1999-07-04       26 TRUE           UW-Madison
 3 Charlie M     2006-10-31       19 FALSE          UW-Madison
 ```
@@ -51,12 +51,12 @@ Note the following:
  - The vectors do not have to be pre-created; you can create them as you go along.
  - You can reference another column immediately after creating it inside the function, e.g. `date_of_birth` was created, and then immediately used on the next line to help create `age` (by the way `age` here is approximately computed as number of days since birth divided by 365.24, the approximate number of days in a year, then rounded down following convention).
  - Data frames can, and almost always do contain many columns each with a different type. However, as usual a single column---which is still a vector!---can only contain a SINGLE type of data inside it, e.g. you cannot have a column with both numbers and characters simultaneously.
- - Printing the df by either just writing it on a new line, or with the `print()` function (same thing) will show not only the first few rows, but also other info like
+ - Printing the df by either just writing it on a new line, or with the `print()` function (same thing), will show not only the first few rows, but also other info like:
    - column (and row) names,
    - number of rows and columns (displayed as rows x cols),
-   - and the type of each column (dbl, chr, lgl, date, or others beyond our scope)
- - You can create a column of constants by recycling a single value
-   - Note: by design, `tibble()` will ONLY recycle length-1 vectors. This is to help avoid errors and improve syntax legibility.
+   - and the type of each column (dbl, chr, lgl, date, or others beyond our scope).
+ - You can create a column of constants by recycling a single value.
+   - Note: by design, `tibble()` will ONLY recycle length-1 vectors (this is to help avoid errors and improve syntax legibility).
 
 
 
