@@ -2,7 +2,7 @@
 
 # Intro to dplyr
 
-[dplyr](https://dplyr.tidyverse.org) is the core Tidyverse package for transforming and your raw datasets into a clean and usable format ([link to cheat sheet](misc/data-transformation.pdf)). Its functions are versatile, performant, and have a consistent and user friendly syntax. These traits make it highly suitable for data science at all levels.
+[dplyr](https://dplyr.tidyverse.org) is the core Tidyverse package for transforming your raw datasets into a clean and usable format ([link to cheat sheet](misc/data-transformation.pdf)). Its functions are versatile, performant, and have a consistent and user friendly syntax. These traits make it highly suitable for data science at all levels.
 
 <!--original:
 https://rstudio.github.io/cheatsheets/data-transformation.pdf
