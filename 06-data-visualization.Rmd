@@ -660,7 +660,7 @@ ggplot(penguins, aes(x = flipper_length_mm, fill = species)) +
        title = "Flipper length densities of species in Palmer penguins")
 ```
 
-Suppose we want to also add sex in as a variable of interest, but we also want to more closely scrutinize the distributions. One way this can be done is to add the faceting layer `facet_grid()` with the argument `sex ~ species` which will construct a matrix of plots with one row for each sex and one column for each species:
+Suppose we want to add sex in as a variable of interest, but we also want to more closely scrutinize the distributions. One way this can be done is to add the faceting layer `facet_grid()` with the argument `sex ~ species` which will construct a matrix of plots with one row for each sex and one column for each species:
 
 ```{r facet-grid-progression2,tidy=F}
 ggplot(penguins, aes(x = flipper_length_mm)) + geom_density() +
