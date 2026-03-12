@@ -5,7 +5,7 @@ list.of.packages = c(
   "downlit", "DescTools", "sn", "xlsx",
   "palmerpenguins", "GGally", "plotly",
   "diagram", "latex2exp", "gridExtra",
-  "mvtnorm"
+  "mvtnorm", "rversions"
 )
 
 # make sure to use my fork of
@@ -70,23 +70,30 @@ r.date = dplyr::case_when(
   season=="Spring"~"1-19",
   season=="Summer"~"6-14",
   TRUE~"9-2"
-) %>% paste(lubridate::year(today)) %>% 
+) %>% paste(lubridate::year(today)) %>%
   lubridate::mdy() %>% min(today)
 
-r.releases = 
-  paste0("https://en.wikipedia.org/",
-         "wiki/R_(programming_language)") %>% 
-  rvest::read_html() %>% 
-  rvest::html_nodes(
-    xpath=
-      "//table[contains(caption,'codenames')]"
-    )%>%
-  {rvest::html_table(.)[[1]][1:2]} %>% 
-  setNames(c("version","date")) %>% 
-  head(10) %>% 
-  dplyr::mutate(date=lubridate::ymd(date))
+# r.releases = 
+#   paste0("https://en.wikipedia.org/",
+#          "wiki/R_(programming_language)") %>% 
+#   rvest::read_html() %>% 
+#   rvest::html_nodes(
+#     xpath=
+#       "//table[contains(caption,'codenames')]"
+#     )%>%
+#   {rvest::html_table(.)[[1]][1:2]} %>% 
+#   setNames(c("version","date")) %>% 
+#   head(10) %>% 
+#   dplyr::mutate(date=lubridate::ymd(date))
+# 
+# r.latest = r.releases %>% 
+#   dplyr::filter(date<=r.date) %>% 
+#   dplyr::slice_max(date,n=1)
+# 
+# r.version = r.latest$version
+# r.date = r.latest$date
 
-r.latest = r.releases %>% 
+r.latest = rversions::r_versions() %>% 
   dplyr::filter(date<=r.date) %>% 
   dplyr::slice_max(date,n=1)
 
