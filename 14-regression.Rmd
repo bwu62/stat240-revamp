@@ -261,7 +261,7 @@ Note this is a function of $\beta_0',\beta_1'$, i.e. we can "test out" different
 Visually, this looks like taking the vertical error bars from each data point to the "test" line and building a square with that as one side, then adding up the areas of each square to get the total sum-squared-errors. Then, the best fit line is the line that minimizes these sum-squared-errors:
 
 :::{.i9 .fold .s}
-```{r,fig.width=6,fig.height=4.6}
+```{r ols-visualized,fig.width=6,fig.height=4.6}
 bh1 <- cor(x,y)*sd(y)/sd(x)
 bh0 <- mean(y)-bh1*mean(x)
 ggplot(tibble(x,y), aes(x=x,y=y)) +
@@ -645,7 +645,7 @@ predict(lm_icecream, newdata=tibble(temperature=3:7*10), interval="prediction")
 Finally, let's visualize the 95% confidence and prediction intervals for each $x_\new$ along the
 
 :::{.i96 .fold .s}
-```{r,fig.width=8.2}
+```{r prediction-intervals,fig.width=8.2}
 ggplot(icecream, aes(x=temperature, y=consumption)) + geom_point() +
   geom_abline(aes(slope=b1,intercept=b0,color="\nbest fit line\n"),key_glyph="path",linewidth=1) +
   stat_function(aes(color="confidence\ninterval"),linewidth=1,linetype="dashed",
