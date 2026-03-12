@@ -86,7 +86,7 @@ barplot(table(rolls))
 ```
 
 :::{.i6}
-<img src="12-proportions_files/figure-html/unnamed-chunk-5-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="12-proportions_files/figure-html/unnamed-chunk-5-1.svg" alt="" width="672" style="display: block; margin: auto;" />
 :::
 
 Suppose my question of interest is whether this specific die design is in fact fair. There are different ways of testing this^[the most [powerful](https://www.scribbr.com/statistics/statistical-power) method is probably a [chi-squared test](https://www.scribbr.com/statistics/chi-square-tests).], but a simple way using a proportions-type setup is to ask **whether the two triangular-shaped faces** (which are 4 and 5) **are observed 2/5 or 40% of the time**.
@@ -124,7 +124,7 @@ $$
      labs(x=NULL, y=NULL, title=TeX("$z_{\\alpha/2}$ critical value for Z (red areas sum to $\\alpha$)"))
    ```
    
-   <img src="12-proportions_files/figure-html/unnamed-chunk-6-1.svg" width="355.2" style="display: block; margin: auto;" />
+   <img src="12-proportions_files/figure-html/unnamed-chunk-6-1.svg" alt="" width="355.2" style="display: block; margin: auto;" />
    ::::
    
    This value is called $z_{\alpha/2}$ since by convention the subscript denotes the area of only the right-corner, which is $\alpha/2$ by symmetry. To compute $\alpha/2$ for a C% interval, you need to ask `qnorm()` for the $(1-\alpha/2)$--percentile, e.g. for a 95% confidence interval, we seek the 97.5%-tile:
@@ -257,7 +257,7 @@ tibble(k=floor(mu-3*sd):ceiling(mu+3*sd),p=dbinom(k,n,0.4)) %>%
   ggtitle(str_glue("Distribution of X under null hypothesis, i.e. Bin({n},0.4)"))
 ```
 
-<img src="12-proportions_files/figure-html/unnamed-chunk-11-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="12-proportions_files/figure-html/unnamed-chunk-11-1.svg" alt="" width="672" style="display: block; margin: auto;" />
 :::
 
 Recall for a two-sided alternative, we take the "outer-tail" corresponding to our observed statistic and multiply by 2 to get our final p-value. Here, this means we look for $2\cdot\p(X\le79)$ where $X\sim\bin(200,0.4)$.

@@ -831,7 +831,7 @@ penguins %>%
   coord_fixed(.0067) # make the plot window a square
 ```
 
-<img src="07-intro-dplyr_files/figure-html/filter2-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="07-intro-dplyr_files/figure-html/filter2-1.svg" alt="" width="672" style="display: block; margin: auto;" />
 
 
 ### `slice()`

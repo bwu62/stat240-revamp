@@ -44,12 +44,11 @@ ggplot(aes(x = k, y = p)) + geom_col() +
   scale_x_continuous(breaks = seq(0, 10, 1), expand = 0) +
   scale_y_continuous(breaks = seq(0, 0.25, 0.05), limits = c(0, 0.25),
                      minor_breaks = seq(0, 0.25, 0.01), expand = 0) +
-  labs(title = TeX("Binomial(10, 0.5) PMF    [ $\\mu=(10)(0.5)=5$,  $\\sigma
-                   =\\sqrt{(10)(0.5)(1-0.5)}\\approx 1.58$ ]"),
+  labs(title = TeX("Binomial(10, 0.5) PMF    [ $\\mu=(10)(0.5)=5$,  $\\sigma=\\sqrt{(10)(0.5)(1-0.5)}\\approx 1.58$ ]"),
        x = "k", y = "probability")
 ```
 
-<img src="11-inference_files/figure-html/unnamed-chunk-1-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="11-inference_files/figure-html/unnamed-chunk-1-1.svg" alt="" width="672" style="display: block; margin: auto;" />
 :::
 
 You can see that even though 5 is more likely than any other outcome, there's actually over 75% chance that you'd observe something else entirely.
@@ -63,12 +62,11 @@ tibble(k = 0:100, p = dbinom(k, 100, 0.5)) %>%
 ggplot(aes(x = k, y = p)) + geom_col(color = "white") +
   scale_x_continuous(breaks = seq(0, 100, 10), expand = 0) +
   scale_y_continuous(breaks = seq(0, 0.08, 0.01), limits = c(0, 0.08), expand = 0) +
-  labs(title = TeX("Binomial(100, 0.5) PMF    [ $\\mu=(100)(0.5)=50$,  $
-                   \\sigma=\\sqrt{(100)(0.5)(1-0.5)}=5$ ]"),
+  labs(title = TeX("Binomial(100, 0.5) PMF    [ $\\mu=(100)(0.5)=50$,  $\\sigma=\\sqrt{(100)(0.5)(1-0.5)}=5$ ]"),
        x = "k", y = "probability")
 ```
 
-<img src="11-inference_files/figure-html/unnamed-chunk-2-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="11-inference_files/figure-html/unnamed-chunk-2-1.svg" alt="" width="672" style="display: block; margin: auto;" />
 :::
 
 One thing is immediately apparent: even though the raw SD has increased from 1.58 to 5, the **range of likely outcomes has narrowed compared to $\Omega$**, i.e. compared to $n$, you're unlikely to deviate by as much when the total number of flips is higher. If we continue on to 1000 flips, this becomes even more evident:
@@ -81,13 +79,12 @@ tibble(k = 0:1000, p = dbinom(k, 1000, 0.5)) %>%
     scale_x_continuous(breaks = seq(0, 1000, 100), expand = 0) +
     scale_y_continuous(breaks = seq(0, 0.025, 0.005), expand = 0,
                        minor_breaks = seq(0, 0.025, 0.001)) +
-  labs(title = TeX("Binomial(1000, 0.5) PMF    [ $\\mu=(1000)(0.5)=500$,  $
-                   \\sigma=\\sqrt{(1000)(0.5)(1-0.5)}\\approx 15.8$ ]"),
+  labs(title = TeX("Binomial(1000, 0.5) PMF    [ $\\mu=(1000)(0.5)=500$,  $\\sigma=\\sqrt{(1000)(0.5)(1-0.5)}\\approx 15.8$ ]"),
        x = "k", y = "probability") + theme(plot.title = element_text(size=12),
                                            plot.margin = margin(6,10,6,6))
 ```
 
-<img src="11-inference_files/figure-html/unnamed-chunk-3-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="11-inference_files/figure-html/unnamed-chunk-3-1.svg" alt="" width="672" style="display: block; margin: auto;" />
 :::
 
 
@@ -110,7 +107,7 @@ samp %>% enframe("n", "x") %>% ggplot(aes(x = n, y = cumsum(x)/n)) +
                      subtitle = TeX("(blue dashed line shows theoretical $p=0.5$)"))
 ```
 
-<img src="11-inference_files/figure-html/unnamed-chunk-4-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="11-inference_files/figure-html/unnamed-chunk-4-1.svg" alt="" width="672" style="display: block; margin: auto;" />
 :::
 
 Let's increase the sample size to $n=10^{5}$ and show $n$ on a logarithmic scale, which improves readability (generally whenever a column is *always positive* and *covers several orders of magnitude*, this can significantly help improve readability).
@@ -133,7 +130,7 @@ samp %>% enframe("n", "x") %>% mutate(p = cumsum(x)/n) %>% slice(log.indices) %>
        subtitle = TeX("(blue dashed line shows theoretical $p=0.5$)"))
 ```
 
-<img src="11-inference_files/figure-html/unnamed-chunk-5-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="11-inference_files/figure-html/unnamed-chunk-5-1.svg" alt="" width="672" style="display: block; margin: auto;" />
 :::
 
 Let's make a final addition to our plot and add 2 additional runs where the entire experiment is repeated, as well as 2 pairs of dashed gray curves showing the ±1 and ±2 SD for each $n$.
@@ -158,7 +155,7 @@ p <- p + geom_line(linewidth = 0.7) +
 p
 ```
 
-<img src="11-inference_files/figure-html/unnamed-chunk-6-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="11-inference_files/figure-html/unnamed-chunk-6-1.svg" alt="" width="672" style="display: block; margin: auto;" />
 :::
 
 Now we see a remarkable phenomenon: not only do the runs all converge to the true value of $p=0.5$, but their rates of convergence all fall reasonably within an "envelope" that's proportional to the SD-vs-n curves.
@@ -236,7 +233,7 @@ tibble(n = 1:1e5, p = cumsum(samp)/n, se = sqrt(p*(1-p)/n)) %>%
   labs(title = "95% confidence interval for p vs n for run1", y = "proportion")
 ```
 
-<img src="11-inference_files/figure-html/unnamed-chunk-7-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="11-inference_files/figure-html/unnamed-chunk-7-1.svg" alt="" width="672" style="display: block; margin: auto;" />
 :::
 
 
@@ -265,7 +262,7 @@ tibble(flips = rbinom(N*n, 1, 0.5),
     y = NULL, title = "Repeated 95% CIs for p vs true p=0.5")
 ```
 
-<img src="11-inference_files/figure-html/unnamed-chunk-9-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="11-inference_files/figure-html/unnamed-chunk-9-1.svg" alt="" width="672" style="display: block; margin: auto;" />
 :::
 
 Remember that in a real-world example, you don't know what the true probability of heads is, and you only have data from a single experiment, so you don't know if your interval captures the true value or not, but you can be 95% confident that it does.
@@ -372,7 +369,7 @@ This time, instead of simulating or specifying an actual sample, let's just broa
         title=TeX("$H_a\\,:\\,\\mu>0$ one-sided rejection region ($\\alpha=0.05$)"))
     ```
     
-    <img src="11-inference_files/figure-html/unnamed-chunk-11-1.svg" width="672" style="display: block; margin: auto;" />
+    <img src="11-inference_files/figure-html/unnamed-chunk-11-1.svg" alt="" width="672" style="display: block; margin: auto;" />
     </div>
 
 2. If $H_a:\mu<0$, then conversely in order to reject $H_0$ in favor of $H_a$, our sample would need to have a sample mean $\bar{x}$ so low that it lands in the bottom $\alpha$, or bottom 5% of all possible datasets. If it does, we'd again have p-value $<\alpha$ and we'd reject $H_0$. This forms the **left-side one-tailed rejection region**:
@@ -388,7 +385,7 @@ This time, instead of simulating or specifying an actual sample, let's just broa
         title=TeX("$H_a\\,:\\,\\mu<0$ one-sided rejection region ($\\alpha=0.05$)"))
     ```
     
-    <img src="11-inference_files/figure-html/unnamed-chunk-12-1.svg" width="672" style="display: block; margin: auto;" />
+    <img src="11-inference_files/figure-html/unnamed-chunk-12-1.svg" alt="" width="672" style="display: block; margin: auto;" />
     </div>
 
 3. Finally, if $H_a:\mu\ne0$, then a **sample mean $\bar{x}$ either too high OR too low** should result in rejecting $H_0$ in favor of $H_a$. Here, we'd need our rejection region to cover together the $\alpha$ or 5% **most extreme possible datasets on either side**. In other words, we want both the $\alpha/2$ or 2.5% top AND bottom corners. This forms the **two-sided rejection region**:
@@ -405,7 +402,7 @@ This time, instead of simulating or specifying an actual sample, let's just broa
         title=TeX("$H_a\\,:\\,\\mu{\\ne}0$ two-sided rejection region ($\\alpha=0.05$)"))
     ```
     
-    <img src="11-inference_files/figure-html/unnamed-chunk-13-1.svg" width="672" style="display: block; margin: auto;" />
+    <img src="11-inference_files/figure-html/unnamed-chunk-13-1.svg" alt="" width="672" style="display: block; margin: auto;" />
     </div>
 
 Thus, in order to properly compute the p-value of a given sample, we need to evaluate different "tail" areas depending on our $H_a$. Suppose your parameter is $\theta$, your hypothesized value under the null is $\theta_0$, and your sample observed statistic is $\theta_s$. Then:

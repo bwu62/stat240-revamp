@@ -28,7 +28,7 @@ R and Rstudio are two different programs that both need to be installed! Also, i
 :::
 
 
-First, we will install the latest R release, **version 4.5.1 released on Jun 13, 2025**; then we will install Rstudio. The instructions below are separated by operating system, depending on if you have a [Windows](#setup-win) or [Mac](#setup-mac) machine.
+First, we will install the latest R release, **version 4.5.2 released on Oct 31, 2025**; then we will install Rstudio. The instructions below are separated by operating system, depending on if you have a [Windows](#setup-win) or [Mac](#setup-mac) machine.
 
  - If you have a Linux system, follow one of the linked instructions [here](https://cloud.r-project.org/bin/linux).
  - If you have a Chromebook, try [these steps](https://levente.littvay.hu/chromebook).
@@ -39,7 +39,7 @@ First, we will install the latest R release, **version 4.5.1 released on Jun 13,
 ### Windows instructions {#setup-win}
 
 
- 1. Download [R-4.5.1-win.exe](https://cloud.r-project.org/bin/windows/base/old/4.5.1/R-4.5.1-win.exe) and run it, accepting all default settings.
+ 1. Download [R-4.5.2-win.exe](https://cloud.r-project.org/bin/windows/base/old/4.5.2/R-4.5.2-win.exe) and run it, accepting all default settings.
  
  2. Download [Rstudio-latest.exe](https://rstudio.org/download/latest/stable/desktop/windows/RStudio-latest.exe) and run it, again accepting all default settings.
  
@@ -58,8 +58,8 @@ If you get a window that looks [like this](https://i.imgur.com/qmt5IHj.png), you
 
 
  1. First, we need to determine the right R installer file for your specific machine. Open the Apple menu in the top left corner of your screen and open ["About this mac"](https://upload.wikimedia.org/wikipedia/en/a/a6/Apple_menu_screenshot.png).
-    - If it shows "Chip: Apple M1/M2/M3", download [R-4.5.1-arm64.pkg](https://cloud.r-project.org/bin/macosx/big-sur-arm64/base/R-4.5.1-arm64.pkg) and run it, accepting all default settings.
-    - If it shows "Processor: ...Intel Core", download [R-4.5.1-x86_64.pkg](https://cloud.r-project.org/bin/macosx/big-sur-x86_64/base/R-4.5.1-x86_64.pkg) and run it, accepting all default settings.
+    - If it shows "Chip: Apple M1/M2/M3", download [R-4.5.2-arm64.pkg](https://cloud.r-project.org/bin/macosx/big-sur-arm64/base/R-4.5.2-arm64.pkg) and run it, accepting all default settings.
+    - If it shows "Processor: ...Intel Core", download [R-4.5.2-x86_64.pkg](https://cloud.r-project.org/bin/macosx/big-sur-x86_64/base/R-4.5.2-x86_64.pkg) and run it, accepting all default settings.
     - If you get an error, check your OS version in the About window. If it's older (i.e. <11) you may need to either upgrade your OS or download an older version [here](https://cloud.r-project.org/bin/macosx).
     
  2. Now, download [Rstudio-latest.dmg](https://rstudio.org/download/latest/stable/desktop/mac/RStudio-latest.dmg) and install it. Note this is a dmg or virtual disk image file, so you need to follow these steps to install it:
@@ -89,7 +89,7 @@ If you get a window that looks [like this](https://i.imgur.com/qmt5IHj.png), you
 
 
 ::: {.note}
-Before continuing, make sure that you can [open Rstudio](https://i.imgur.com/qmt5IHj.png) and have the correct version (R-4.5.1) installed!
+Before continuing, make sure that you can [open Rstudio](https://i.imgur.com/qmt5IHj.png) and have the correct version (R-4.5.2) installed!
 :::
 
 Next, we will install some necessary packages and configure some recommended options to improve workflow.

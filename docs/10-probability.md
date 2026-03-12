@@ -138,7 +138,7 @@ tibble(k = 0:3, p = (4:1)/10) %>%
   labs(title = "Distribution of X (winnings from made-up casino game)")
 ```
 
-<img src="10-probability_files/figure-html/unnamed-chunk-1-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="10-probability_files/figure-html/unnamed-chunk-1-1.svg" alt="" width="672" style="display: block; margin: auto;" />
 :::
 ::::
 
@@ -163,7 +163,7 @@ tibble(k = 2:12, p = (6-abs(k-7))/36) %>%
   scale_y_continuous(breaks = seq(0,.2,.02))
 ```
 
-<img src="10-probability_files/figure-html/unnamed-chunk-2-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="10-probability_files/figure-html/unnamed-chunk-2-1.svg" alt="" width="672" style="display: block; margin: auto;" />
 :::
 ::::
 
@@ -206,7 +206,7 @@ ggplot(tibble(SDs = 65.8 + (-3:3)*3.98)) +
        x = "height (inches)", y = "probability density")
 ```
 
-<img src="10-probability_files/figure-html/unnamed-chunk-3-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="10-probability_files/figure-html/unnamed-chunk-3-1.svg" alt="" width="672" style="display: block; margin: auto;" />
 :::
 
 You can easily see the density is non-negative, and with some careful math the area can be shown to be 1. Thus it satisfies the probability axioms.
@@ -232,7 +232,7 @@ ggplot() + geom_function(fun = dunif, xlim = c(-.5, 1.5), n = 1e4) +
        x = "x", y = "probability density")
 ```
 
-<img src="10-probability_files/figure-html/unnamed-chunk-4-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="10-probability_files/figure-html/unnamed-chunk-4-1.svg" alt="" width="672" style="display: block; margin: auto;" />
 :::
 
 One can also show percentiles are always uniformly distributed, so this is actually a very useful distribution (more on this in STAT 340).
@@ -332,7 +332,7 @@ ggplot(aes(x = k, y = p)) + geom_col() +
        x = "k", y = "probability")
 ```
 
-<img src="10-probability_files/figure-html/unnamed-chunk-5-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="10-probability_files/figure-html/unnamed-chunk-5-1.svg" alt="" width="672" style="display: block; margin: auto;" />
 :::
 ::::
 
@@ -527,7 +527,7 @@ ggplot(aes(x = k, y = p)) + geom_col() +
   labs(title = "Binomial(10, 0.5) PMF", x = "k", y = "probability")
 ```
 
-<img src="10-probability_files/figure-html/unnamed-chunk-11-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="10-probability_files/figure-html/unnamed-chunk-11-1.svg" alt="" width="672" style="display: block; margin: auto;" />
 
 
 ### `pbinom()` (CDF)
@@ -578,7 +578,7 @@ ggplot() + geom_function(fun = \(x) pbinom(x, 10, 0.5), xlim = c(0,10), n = 1e4)
   labs(title = "Binomial(10, 0.5) CDF", x = "k", y = "probability")
 ```
 
-<img src="10-probability_files/figure-html/unnamed-chunk-14-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="10-probability_files/figure-html/unnamed-chunk-14-1.svg" alt="" width="672" style="display: block; margin: auto;" />
 :::
 
 
@@ -616,7 +616,7 @@ ggplot() + geom_function(fun = \(x) qbinom(x, 10, 0.5), xlim = c(0,1), n = 1e4) 
   labs(title = "Binomial(10, 0.5) inverse CDF", x = "probability", y = "k")
 ```
 
-<img src="10-probability_files/figure-html/unnamed-chunk-16-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="10-probability_files/figure-html/unnamed-chunk-16-1.svg" alt="" width="672" style="display: block; margin: auto;" />
 :::
 
 
@@ -664,7 +664,7 @@ ggplot(tibble(samp), aes(x = samp)) +
   labs(title = "Histogram of 100 observations sampled from Bin(10,0.5)", x = "k")
 ```
 
-<img src="10-probability_files/figure-html/unnamed-chunk-17-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="10-probability_files/figure-html/unnamed-chunk-17-1.svg" alt="" width="672" style="display: block; margin: auto;" />
 
 
 ## Normal distribution
@@ -698,7 +698,7 @@ ggplot() + geom_segment(aes(x = SDs, y = 0, yend = dnorm(SDs, 100, 15)),
        x = "score", y = "probability density")
 ```
 
-<img src="10-probability_files/figure-html/unnamed-chunk-18-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="10-probability_files/figure-html/unnamed-chunk-18-1.svg" alt="" width="672" style="display: block; margin: auto;" />
 :::
 
 Recall from earlier that since this is a continuous random variable, the **PDF does NOT plot the probability, but rather the probability _density_**! Probabilities of events should instead always be interpreted as corresponding areas under the curve!
@@ -773,7 +773,7 @@ ggplot() + geom_function(fun = \(x) dnorm(x, 100, 15), xlim = c(50, 150)) +
   labs(title = "N(100, 15) PDF", x = "x", y = "probability density")
 ```
 
-<img src="10-probability_files/figure-html/unnamed-chunk-19-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="10-probability_files/figure-html/unnamed-chunk-19-1.svg" alt="" width="672" style="display: block; margin: auto;" />
 
 
 
@@ -818,7 +818,7 @@ ggplot() + geom_function(fun = \(x) pnorm(x, 100, 15), xlim = c(55, 145), n = 1e
   labs(title = "N(100, 15) CDF", x = "x", y = "probability")
 ```
 
-<img src="10-probability_files/figure-html/unnamed-chunk-21-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="10-probability_files/figure-html/unnamed-chunk-21-1.svg" alt="" width="672" style="display: block; margin: auto;" />
 :::
 
 
@@ -856,7 +856,7 @@ ggplot() + geom_function(fun = \(x) qnorm(x, 100, 15), xlim = c(0, 1), n = 1e3) 
   labs(title = "N(100, 15) inverse CDF", x = "probability", y = "x")
 ```
 
-<img src="10-probability_files/figure-html/unnamed-chunk-23-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="10-probability_files/figure-html/unnamed-chunk-23-1.svg" alt="" width="672" style="display: block; margin: auto;" />
 :::
 
 
@@ -909,7 +909,7 @@ ggplot(tibble(samp), aes(x = samp)) +
   labs(title = "Histogram of 80 observations sampled from N(100,15)", x = "x")
 ```
 
-<img src="10-probability_files/figure-html/unnamed-chunk-24-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="10-probability_files/figure-html/unnamed-chunk-24-1.svg" alt="" width="672" style="display: block; margin: auto;" />
 
 
 ### Aside: Normality & QQ-plots
@@ -923,7 +923,7 @@ Sometimes you may wish to evalute the normality of a given sample, i.e. see if t
 # see https://r-charts.com/base-r/pch-symbols for more info
 qqnorm(samp,pch=20)
 ```
-<img src="10-probability_files/figure-html/unnamed-chunk-26-1.svg" width="480" style="display: block; margin: auto;" />
+<img src="10-probability_files/figure-html/unnamed-chunk-26-1.svg" alt="" width="480" style="display: block; margin: auto;" />
 :::
 
 The interpretation is also simple: **the more linear the QQ plot, the more normal the sample**. With smaller samples, you of course expect more variation than larger samples. Often you can even tell in what way is the sample non-normal, see [this post](https://stats.stackexchange.com/a/101290) for a more in-depth discussion on how to read QQ plots.
@@ -949,7 +949,7 @@ normals_plot <- ggplot() + geom_function(fun = dnorm, n = 1e3, color = "red3") +
 normals_plot
 ```
 
-<img src="10-probability_files/figure-html/unnamed-chunk-27-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="10-probability_files/figure-html/unnamed-chunk-27-1.svg" alt="" width="672" style="display: block; margin: auto;" />
 :::
 
 However, if you take the exact same plot and simply zoom in to each curve, you can see in fact they are all the exact same shape, up to axes scaling.
@@ -966,7 +966,7 @@ p3 <- normals_plot + xlim(-1, 11) + ylim(0, dnorm(5, 5, 2)) +
 gridExtra::grid.arrange(p1, p2, p3, nrow = 1)
 ```
 
-<img src="10-probability_files/figure-html/unnamed-chunk-28-1.svg" width="864" style="display: block; margin: auto;" />
+<img src="10-probability_files/figure-html/unnamed-chunk-28-1.svg" alt="" width="864" style="display: block; margin: auto;" />
 :::
 
 A consequence of this is that **any problem involving an arbitrary normal distribution $X\sim\n(\mu,\sigma)$ can be turned into an _equivalent_ problem for the standard normal $Z\sim\n(0,1)$** by simply applying a transformation that converts $X$ into $Z$. This is called **standardization**, or computing a **Z-score**.
@@ -1002,7 +1002,7 @@ ggplot() + geom_function(fun = \(x) dnorm(x, 100, 15), xlim = c(55, 145)) +
   labs(title = "Plot showing P(X<115) where X~N(100,15)")
 ```
 
-<img src="10-probability_files/figure-html/unnamed-chunk-29-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="10-probability_files/figure-html/unnamed-chunk-29-1.svg" alt="" width="672" style="display: block; margin: auto;" />
 :::
 
 Using the Z-score approach, we have
@@ -1029,7 +1029,7 @@ ggplot() + geom_function(fun = dnorm, xlim = c(-3, 3)) +
   labs(title = "Plot showing P(Z<1) where Z~N(0,1)")
 ```
 
-<img src="10-probability_files/figure-html/unnamed-chunk-30-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="10-probability_files/figure-html/unnamed-chunk-30-1.svg" alt="" width="672" style="display: block; margin: auto;" />
 :::
 
 Note how these two areas exactly correspond, so solving one solves the other.
@@ -1059,7 +1059,7 @@ tibble(x = 0:15, p = dbinom(x,n,p)) %>%
   labs(title = "Approximation of Bin(15,0.4) using N(6,1.9) which has same µ,σ")
 ```
 
-<img src="10-probability_files/figure-html/unnamed-chunk-31-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="10-probability_files/figure-html/unnamed-chunk-31-1.svg" alt="" width="672" style="display: block; margin: auto;" />
 :::
 
 This approximation only gets better and better the higher $n$ is (assuming $p$ isn't extremely close to 0 or 1). For another example, suppose $n=150$, $p=0.75$. It should be obvious the condition is more than satisfied here. We pick a normal with $\mu=105$ and $\sigma=5.6$ to match the binomial and observe this approximation is an even better fit than the previous example:
@@ -1074,7 +1074,7 @@ tibble(x = 80:130, p = dbinom(x,n,p)) %>%
   labs(title = "Approximation of Bin(150,0.7) using N(105,5.6) which has same µ,σ")
 ```
 
-<img src="10-probability_files/figure-html/unnamed-chunk-32-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="10-probability_files/figure-html/unnamed-chunk-32-1.svg" alt="" width="672" style="display: block; margin: auto;" />
 :::
 
 ### Continuity correction
@@ -1092,7 +1092,7 @@ tibble(x = 0:15, p = dbinom(x,n,p), c = rep(c(F,T),c(6,10))) %>%
   labs(title = "P(X≤5) where X~Bin(15,0.4), i.e. probability of 5 or fewer successes") + theme(legend.position="none")
 ```
 
-<img src="10-probability_files/figure-html/unnamed-chunk-33-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="10-probability_files/figure-html/unnamed-chunk-33-1.svg" alt="" width="672" style="display: block; margin: auto;" />
 :::
 
 Note that in order to approximate this light blue area well, we should actually find $\p(Y<5.5)$ i.e. this light red area:
@@ -1107,7 +1107,7 @@ tibble(x = 0:15, p = dbinom(x,n,p)) %>%
   labs(title = "Approximate P(X≤5) where X~Bin(15,0.4) with P(Y<5.5) where Y~N(6,1.9)")
 ```
 
-<img src="10-probability_files/figure-html/unnamed-chunk-34-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="10-probability_files/figure-html/unnamed-chunk-34-1.svg" alt="" width="672" style="display: block; margin: auto;" />
 :::
 
 This is called the **continuity correction**, where we adjust our evaluation region under the normal by $\pm0.5$ based on if we're counting the bars towards the left or right side (if we're starting somewhere and counting bars towards the left, we $+0.5$ to our bound; otherwise if we're starting somewhere and counting bars towards the right, we $-0.5$ to our bound, e.g. for $\p(X\ge5)$, we'd find $\p(Y>4.5)$).
@@ -1156,7 +1156,7 @@ tibble(x = 0:15, p = dbinom(x,n,p), c = rep(c(T,F,T),c(5,5,6))) %>%
   labs(title = "P(5≤X≤9) where X~Bin(15,0.4)") + theme(legend.position="none")
 ```
 
-<img src="10-probability_files/figure-html/unnamed-chunk-36-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="10-probability_files/figure-html/unnamed-chunk-36-1.svg" alt="" width="672" style="display: block; margin: auto;" />
 :::
 
 Applying the continuity correction on either side, we see we need $\p(4.5<Y<9.5)$, i.e. this red area:
@@ -1172,7 +1172,7 @@ tibble(x = 0:15, p = dbinom(x,n,p)) %>%
   labs(title = "Approx. P(5≤X≤9) where X~Bin(15,0.4) with P(4.5<Y<9.5) where Y~N(6,1.9)")
 ```
 
-<img src="10-probability_files/figure-html/unnamed-chunk-37-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="10-probability_files/figure-html/unnamed-chunk-37-1.svg" alt="" width="672" style="display: block; margin: auto;" />
 :::
 
 
