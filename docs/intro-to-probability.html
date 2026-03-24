@@ -718,7 +718,7 @@ P(X\le3)&amp;=P(X\!=\!0)+P(X\!=\!1)+P(X\!=\!2)+P(X\!=\!3)\\
 <span class="header-section-number">10.6.6</span> <code>pnorm()</code> (CDF)<a class="anchor" aria-label="anchor" href="#pnorm-cdf"><i class="fas fa-link"></i></a>
 </h3>
 <p><code><a href="https://rdrr.io/r/stats/Normal.html">pnorm()</a></code> is the normal CDF (cumulative distribution function), which finds the <strong>probability less than or equal to a given input</strong>. This function is extremely useful for computing probabilities of ranges under the normal curve, e.g. to compute <span class="math inline">\(\p(X\le k)\)</span> when <span class="math inline">\(X\sim\n(\mu,\sigma)\)</span>, simply do <code>pnorm(k, µ, σ)</code>.</p>
-<p>Note that to find the probability <span class="math inline">\(\p(a&lt;X\le b)\)</span>, we can do <code>pnorm(a, µ, σ) - pnorm(b, µ, σ)</code>. Together with remebering the area under the entire curve is 1 just like any other RV, we can check the probabilities of each range in the previous example:</p>
+<p>Note that to find the probability <span class="math inline">\(\p(a&lt;X\le b)\)</span>, we can do <code>pnorm(b, µ, σ) - pnorm(a, µ, σ)</code>. Together with remebering the area under the entire curve is 1 just like any other RV, we can check the probabilities of each range in the previous example:</p>
 <div class="sourceCode" id="cb876"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>  <span class="co"># find the probability an observation from X~N(100,15) falls in each range:</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="fl">115</span>, <span class="fl">100</span>, <span class="fl">15</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="fl">85</span>, <span class="fl">100</span>, <span class="fl">15</span><span class="op">)</span>,   <span class="co"># between 85-115</span></span>
@@ -1175,7 +1175,7 @@ $('body')
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget. It was last built on 2026-03-12.</p>
+    <p>"<strong>STAT 240 Revamp</strong>" was written by Bi Cheng Wu, with help from Bret Larget. It was last built on 2026-03-23.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
